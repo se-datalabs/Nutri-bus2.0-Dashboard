@@ -402,7 +402,74 @@
         "sex": "Male",
         "quote": "Elder men must allow boys to collect firewood instead of leaving this heavy burden only to mothers and girls."
       }
-    ]
+    ],
+    "partner_networks_engagement": {
+      "question": "Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?",
+      "engaged": true,
+      "pct": "100.0%",
+      "list_the_partners": {
+        "question": "List the partners",
+        "categories": [
+          "UNAC (Uganda National Action on Childhood Disability)",
+          "Afi (Action for Inclusion)",
+          "District Education Offices",
+          "Health Centre Parish Focal Persons",
+          "Other"
+        ],
+        "values": [
+          6,
+          6,
+          6,
+          5,
+          2
+        ],
+        "pct": [
+          "100.0%",
+          "100.0%",
+          "100.0%",
+          "83.3%",
+          "33.3%"
+        ],
+        "other_specified": [
+          "Local LC1 Council Leadership",
+          "Sub-County Community Development Officer (CDO)"
+        ]
+      },
+      "how_were_partners_involved": {
+        "question": "How were the partners involved",
+        "categories": [
+          "Joint facilitation",
+          "Mentorship on tool rollout",
+          "Sustainability planning",
+          "Other"
+        ],
+        "values": [
+          6,
+          5,
+          6,
+          2
+        ],
+        "pct": [
+          "100.0%",
+          "83.3%",
+          "100.0%",
+          "33.3%"
+        ],
+        "other_specified": "Community kraal mobilization and inclusive PWD translation"
+      }
+    },
+    "physical_tools_disseminated": {
+      "categories": [
+        "Metu Handbooks & Cooking Manuals",
+        "Climate-Smart One-Pager Manuals",
+        "Toll-Free Feedback Display Boards"
+      ],
+      "values": [
+        384,
+        512,
+        128
+      ]
+    }
   },
   "three_visit_contact": {
     "pipeline_funnel": {
@@ -610,6 +677,34 @@
           1630
         ],
         "total": 3350
+      },
+      "tollfree_helpdesk_awareness": {
+        "question": "Is the WFP toll-free hotline or school help desk actively known and referenced by pupils/teachers?",
+        "categories": [
+          "Yes",
+          "No"
+        ],
+        "values": [
+          60,
+          4
+        ],
+        "pct": "93.8%"
+      },
+      "helpdesk_queries_logged": {
+        "metric": "Number of feedback queries or help-desk logs recorded",
+        "total": 142,
+        "categories": [
+          "School feeding timing & cups",
+          "Water point & borehole access",
+          "NutriChart home replacement",
+          "Club meeting scheduling"
+        ],
+        "values": [
+          58,
+          38,
+          28,
+          18
+        ]
       }
     },
     "visit2": {
@@ -917,7 +1012,7 @@
         },
         {
           "respondent_id": "Learner 3",
-          "role_age_band": "Lower Primary (ECD\u2013P2)",
+          "role_age_band": "Lower Primary (ECD–P2)",
           "sex": "Female",
           "porridge_rating": "Gives a general/vague idea; lacks a concrete action",
           "porridge_words": "Put yellow pumpkin and green leaves from mum to grow big and run fast.",
@@ -925,6 +1020,17 @@
           "chores_words": "Big brother helps bring the water bucket so mummy smiles and we run together.",
           "slogan_rating": "Partly demonstrated (vague or needed prompting)",
           "slogan_words": "The bus that came with music and good porridge for everyone."
+        },
+        {
+          "respondent_id": "Learner 4",
+          "role_age_band": "Upper Primary (P5–P7)",
+          "sex": "Male",
+          "porridge_rating": "Explains a specific, actionable practice without prompting",
+          "porridge_words": "Boil cowpeas and pound them into the warm sorghum porridge with a spoon of shea butter or simsim.",
+          "chores_rating": "States that boys and girls share water/wood chores equally before leaving",
+          "chores_words": "I sweep the compound and release the goats early so my sister and I can wash our faces and run to school on time.",
+          "slogan_rating": "Demonstrated (explained clearly and accurately without prompting)",
+          "slogan_words": "It means the bus unites the whole village and school so everyone eats strong and learns."
         },
         {
           "respondent_id": "Adult 1",
@@ -950,7 +1056,7 @@
         }
       ],
       "post_session_scenario": {
-        "sample_size": 24,
+        "sample_size": 36,
         "porridge_recall": {
           "title": "Local greens/food to add to plain porridge at home",
           "categories": [
@@ -959,9 +1065,9 @@
             "Incorrect, silences, or names unavailable foods"
           ],
           "values": [
-            19,
-            4,
-            1
+            29,
+            5,
+            2
           ]
         },
         "chore_sharing_recall": {
@@ -972,9 +1078,9 @@
             "Says girls should stay home or doesn't know"
           ],
           "values": [
-            20,
-            3,
-            1
+            30,
+            4,
+            2
           ]
         },
         "slogan_recall": {
@@ -985,9 +1091,9 @@
             "Not yet (incorrect, silent, or unaware)"
           ],
           "values": [
-            18,
-            5,
-            1
+            27,
+            7,
+            2
           ]
         }
       },
@@ -1016,7 +1122,28 @@
           "one_adaptation": "Engage lead local language teacher as co-facilitator alongside WFP NutriBus coordinator.",
           "school_commitment": "Acegeretolim school management and parents commit to monitor morning girl-child attendance and enforce equal chore allocation at household kraals."
         }
-      ]
+      ],
+      "metu_uptake_barriers": {
+        "question": "Despite cash support or purchasing power, what is the primary reason for low uptake or lack of know-how regarding preparing WFP's Metu porridge?",
+        "categories": [
+          "Lack of preparation confidence/skills",
+          "Taste preference barriers",
+          "Ingredients not prioritized at household level",
+          "Other"
+        ],
+        "values": [
+          35,
+          13,
+          9,
+          3
+        ],
+        "pct": [
+          58.3,
+          21.7,
+          15.0,
+          5.0
+        ]
+      }
     },
     "visit3": {
       "charts_issued": 1840,
@@ -1212,7 +1339,78 @@
           "serving_shifted": "Yes",
           "verbatim_comments": "We now serve the youngest toddler first with porridge mixed with dried cowpea leaves. She has stopped crying from hunger and her weight has improved."
         }
-      ]
+      ],
+      "pillar1_school_feeding_impact": {
+        "question": "Pillar 1: How directly did the school feeding protection and meal routines influence student presence this cycle?",
+        "categories": [
+          "High impact - meals kept children in school",
+          "Moderate impact",
+          "Low impact due to external food shortages"
+        ],
+        "values": [
+          50,
+          12,
+          2
+        ],
+        "pct": [
+          78.1,
+          18.8,
+          3.1
+        ]
+      },
+      "pillar2_plate_sharing_shift": {
+        "question": "Pillar 2: Did households report a shift in fair plate-sharing practices (specifically stopping the practice of young ones/girls eating last)?",
+        "categories": [
+          "Yes - Practiced consistently",
+          "Partly - Some resistance from elders",
+          "No change"
+        ],
+        "values": [
+          52,
+          10,
+          2
+        ],
+        "pct": [
+          81.2,
+          15.6,
+          3.1
+        ]
+      },
+      "pr_social_media_highlights": {
+        "question": "Were school-level media highlights, photos, or student success stories captured for social media PR reporting today?",
+        "categories": [
+          "Yes",
+          "No"
+        ],
+        "values": [
+          56,
+          8
+        ],
+        "pct": "87.5%",
+        "sample_stories": [
+          "P5 girl and boy leaders demonstrating fair plate sharing and morning water duty rebalance on camera.",
+          "Headteacher and cook showcasing newly constructed firewood-saving institutional stove with covered pots.",
+          "NutriClub assembly demonstration on porridge fortification using fresh local amaranth greens."
+        ]
+      },
+      "radio_broadcast_tracking": {
+        "question": "Did teachers or learners report hearing the Nutribus campaign radio spots this week?",
+        "categories": [
+          "Yes",
+          "No",
+          "Unsure"
+        ],
+        "values": [
+          58,
+          4,
+          2
+        ],
+        "pct": [
+          90.6,
+          6.3,
+          3.1
+        ]
+      }
     }
   },
   "community_demonstrations": {
@@ -1225,7 +1423,35 @@
       "pwd_participants": 34,
       "hands_on_cooking_pct": 90.0,
       "metu_fortification_pct": 100.0,
-      "local_sourcing_compliance_pct": 96.7
+      "local_sourcing_compliance_pct": 96.7,
+      "partner_cofacilitation_pct": 90.0
+    },
+    "partner_cofacilitation": {
+      "question": "Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?",
+      "present": {
+        "categories": ["Yes", "No"],
+        "values": [54, 6],
+        "pct": "90.0%"
+      },
+      "specified_partners": {
+        "question": "If yes, specify partner name",
+        "categories": ["UNAC", "AFI", "Other"],
+        "values": [48, 45, 14],
+        "pct": ["80.0%", "75.0%", "23.3%"],
+        "other_specified": "Local LC1 Executive & Parish Community Development Officer (CDO)"
+      },
+      "partner_role_observed": {
+        "question": "Partner role observed",
+        "categories": [
+          "Co-facilitating clean cooking/gender dialogue",
+          "Mentoring local VHTs/Elders",
+          "Observing for sustainability tracking",
+          "Other"
+        ],
+        "values": [52, 49, 46, 12],
+        "pct": ["86.7%", "81.7%", "76.7%", "20.0%"],
+        "other_specified": "Specialized Ngakarimojong sign interpretation & mobility support for PWD caregivers"
+      }
     },
     "headcount_breakdown": {
       "categories": [
@@ -1427,6 +1653,74 @@
       "community_agreement_words": "We the village of Lomorunyankori agree that our weaning children under 2 will receive enriched Metu porridge first, and our boys will fetch morning borehole water so girls never miss school.",
       "responsible_body": "VHT Lead Coordinator & LC1 Elders Council",
       "main_debate_point": "Elder kraal leaders objected that male boys carrying water jars is culturally forbidden; consensus was reached when the Headteacher and VHT explained that girls' school performance and family health require mutual domestic burden sharing."
+    },
+    "pillar3_clean_cooking": {
+      "question": "Pillar 3: Was clean/smart cooking demonstrated to protect the environment and lead to better harvests?",
+      "categories": [
+        "Yes",
+        "No"
+      ],
+      "values": [
+        59,
+        1
+      ],
+      "pct": "98.3%"
+    },
+    "clean_cooking_commitment": {
+      "question": "Observed community commitment to clean cooking practices:",
+      "categories": [
+        "Adopted fuel-saving stoves/pots",
+        "Continued traditional 3-stone fire",
+        "Needs further VHT guidance"
+      ],
+      "values": [
+        47,
+        9,
+        4
+      ],
+      "pct": [
+        78.3,
+        15.0,
+        6.7
+      ]
+    },
+    "gender_dialogues_execution": {
+      "question": "Were gender dialogues led by senior women, senior men, and VHTs successfully executed?",
+      "categories": [
+        "Yes",
+        "No"
+      ],
+      "values": [
+        56,
+        4
+      ],
+      "pct": "93.3%"
+    },
+    "community_pr_media_highlights": {
+      "question": "Were community media highlights or clean cooking/gender dialogue photos captured for social media PR reporting?",
+      "categories": [
+        "Yes",
+        "No"
+      ],
+      "values": [
+        55,
+        5
+      ],
+      "pct": "91.7%",
+      "sample_highlight": "Elder council chairman publicly tasting fortified Metu porridge and pledging that young children and mothers are served first at kraal manyattas."
+    },
+    "community_radio_feedback": {
+      "question": "Did community members mention or give feedback on the campaign radio broadcasts during the gathering?",
+      "categories": [
+        "Yes",
+        "No"
+      ],
+      "values": [
+        53,
+        7
+      ],
+      "pct": "88.3%",
+      "summary": "Listeners affirmed tuning into Nenah FM and Radio Pacis Ngakarimojong broadcasts; mothers noted the radio songs reinforced what VHTs demonstrated in village cooking circles."
     }
   },
   "msc_stories": {

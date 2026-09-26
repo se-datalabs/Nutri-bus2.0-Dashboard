@@ -361,25 +361,41 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- 6. Total PWDs -->
+        <!-- 6. 3 Core Pillars & Turnout Compliance -->
         <div class="bg-white rounded-xl p-3 sm:p-4 border border-slate-200/80 card-shadow transition hover:border-wfp-blue/50 flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 truncate">Total PWDs</span>
-            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-blue-50 text-wfp-blue flex items-center justify-center text-xs shrink-0">
-              <i class="fa-solid fa-wheelchair"></i>
+          <div class="flex items-start justify-between gap-1.5 mb-1.5 min-h-[28px]">
+            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 leading-tight">3 Pillars &amp; Turnout</span>
+            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs shrink-0">
+              <i class="fa-solid fa-seedling"></i>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-pwd" class="text-2xl sm:text-3xl font-extrabold text-wfp-blue leading-none">248</span>
-            <span class="text-[10px] sm:text-xs text-blue-500 font-medium whitespace-nowrap">PWDs</span>
+            <span class="text-2xl sm:text-3xl font-extrabold text-emerald-700 leading-none">83.3%</span>
+            <span class="text-[10px] sm:text-xs text-emerald-600 font-medium whitespace-nowrap">Adoption</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div class="bg-wfp-blue h-1.5 rounded-full" style="width: 100%"></div>
+            <div class="bg-emerald-600 h-1.5 rounded-full" style="width: 83.3%"></div>
           </div>
-          <div class="text-[10px] sm:text-[11px] font-semibold text-wfp-blue flex items-center justify-between gap-1">
-            <span id="sub-pwd-learners" class="truncate">Learners: 146</span>
-            <span id="sub-pwd-adults" class="text-slate-500 font-normal shrink-0">Adults: 102</span>
+          <div class="text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-between gap-1">
+            <span class="truncate">Feeding · Equity · Clean Stoves</span>
+            <span class="text-emerald-700 shrink-0 font-bold">&ge;80 Turnout</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Secondary Demographic Data Strip (Re-prioritized PWD Inclusivity) -->
+      <div class="mt-2.5 px-3.5 py-2 bg-blue-50/70 border border-blue-200/80 rounded-xl flex flex-wrap items-center justify-between gap-2 text-xs text-slate-700">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-[10px] shrink-0 font-bold">
+            <i class="fa-solid fa-users"></i>
+          </span>
+          <span>
+            <strong>Secondary demographic data:</strong> <span id="banner-pwd-total">248</span> Persons with Disabilities recorded across Karamoja (<span id="banner-pwd-learners">146</span> learners, <span id="banner-pwd-adults">102</span> adults · 4.6% inclusion).
+          </span>
+        </div>
+        <div class="flex items-center gap-2 text-[11px] font-semibold text-wfp-blue">
+          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Learners: <span id="sub-pwd-learners">146</span></span>
+          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Adults: <span id="sub-pwd-adults">102</span></span>
         </div>
       </div>
     </section>
@@ -484,8 +500,8 @@ html_code = f"""<!DOCTYPE html>
       <!-- Subheading -->
       <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-bold text-wfp-dark">Campaign overview and PWD inclusion</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Live operational metrics and inclusive PWD reach aggregated across all 9 Karamoja districts from verified field monitoring.</p>
+          <h3 class="text-sm font-bold text-wfp-dark">Campaign overview and demographic tracking</h3>
+          <p class="text-xs text-slate-600 mt-0.5">Live operational metrics and secondary demographic tracking (PWD inclusion) aggregated across all 9 Karamoja districts from verified field monitoring.</p>
         </div>
         <span id="activeDistrictBadge" class="text-xs bg-white text-wfp-blue font-bold px-3 py-1 rounded-full border border-blue-200 shadow-sm">
           All 9 Karamoja Districts
@@ -512,34 +528,36 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Inclusive PWD Reach Breakdown Horizontal Bar Chart -->
+        <!-- Core Pillars Adoption Status Horizontal Bar Chart -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex items-center justify-between mb-3">
-            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-universal-access text-wfp-blue"></i>
-              <span>Total PWD breakdown</span>
-            </h4>
-            <span id="pwdTotalBadge" class="text-[11px] font-bold text-wfp-blue bg-blue-50 px-2.5 py-0.5 rounded">248 PWDs</span>
+            <div>
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-shapes text-wfp-blue"></i>
+                <span>Programmatic Adoption by the 3 Core Pillars</span>
+              </h4>
+              <p class="text-[10px] text-slate-500">Verified field practice &amp; behavior shift rates</p>
+            </div>
+            <span id="pillarAvgBadge" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">83.3% Avg Adoption</span>
           </div>
           <div class="h-72">
-            <canvas id="chart-pwd-breakdown"></canvas>
+            <canvas id="chart-pillar-stats"></canvas>
           </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-4 gap-2 text-center text-xs">
-            <div class="p-1.5 rounded bg-blue-50">
-              <div id="pwd-card-boys" class="font-bold text-wfp-blue">78</div>
-              <div class="text-[10px] text-slate-500">Boys with PWD</div>
+          <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="p-2 rounded bg-emerald-50 border border-emerald-100">
+              <div class="font-bold text-emerald-800 text-sm">84.0%</div>
+              <div class="text-[10px] text-slate-600 font-medium">Pillar 1: School Feeding</div>
+              <div class="text-[9px] text-emerald-700">Porridge Fortification</div>
             </div>
-            <div class="p-1.5 rounded bg-blue-50">
-              <div id="pwd-card-girls" class="font-bold text-wfp-blue">68</div>
-              <div class="text-[10px] text-slate-500">Girls with PWD</div>
+            <div class="p-2 rounded bg-blue-50 border border-blue-100">
+              <div class="font-bold text-wfp-blue text-sm">85.0%</div>
+              <div class="text-[10px] text-slate-600 font-medium">Pillar 2: Gender Dynamics</div>
+              <div class="text-[9px] text-blue-700">Equitable Chore Sharing</div>
             </div>
-            <div class="p-1.5 rounded bg-blue-50">
-              <div id="pwd-card-vhts" class="font-bold text-wfp-blue">36</div>
-              <div class="text-[10px] text-slate-500">VHTs with PWD</div>
-            </div>
-            <div class="p-1.5 rounded bg-blue-50">
-              <div id="pwd-card-adults" class="font-bold text-wfp-blue">66</div>
-              <div class="text-[10px] text-slate-500">Adults with PWD</div>
+            <div class="p-2 rounded bg-amber-50 border border-amber-100">
+              <div class="font-bold text-amber-800 text-sm">83.3%</div>
+              <div class="text-[10px] text-slate-600 font-medium">Pillar 3: Clean Cooking</div>
+              <div class="text-[9px] text-amber-700">Fuel-Saving Cookstoves</div>
             </div>
           </div>
         </div>
@@ -710,6 +728,108 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
             <span class="truncate block">Forms, Posters, Manuals, Games, Toll-Free Boards, Calendars, Handbooks, Cooking Manuals, Pledge Cards</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partner Network Collaboration & Disseminated Physical Tools Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Partner Network Collaboration -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">100% Yes (6/6 Schools)</span>
+              <span class="text-xs text-slate-500 font-medium">Orientation pp. 9–10</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800 mb-1">Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</h4>
+            <p class="text-xs text-slate-500 mb-3">Structured partner collaboration for inclusive reach and institutional sustainability</p>
+            
+            <div class="space-y-3">
+              <!-- List the partners (with Option of Other) -->
+              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs font-bold text-slate-800">List the partners:</span>
+                  <span class="text-[10px] text-slate-500 font-medium">Multi-select verification</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-700">
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
+                    <span>UNAC (Uganda National Action on Childhood Disability)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                  </div>
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
+                    <span>Afi (Action for Inclusion)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                  </div>
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
+                    <span>District Education Offices</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                  </div>
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
+                    <span>Health Centre Parish Focal Persons</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">83.3% (5/6)</span>
+                  </div>
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
+                    <span class="font-semibold text-wfp-blue">Other</span>
+                    <span class="font-bold text-wfp-blue bg-blue-50 px-2 py-0.5 rounded text-[11px]">33.3% (2/6)</span>
+                  </div>
+                </div>
+                <div class="mt-2 p-2 bg-blue-50/60 rounded border border-blue-200 text-[11px] text-slate-700">
+                  <strong class="text-wfp-blue">Other specify:</strong> Local LC1 Council Leadership, Sub-County Community Development Officer (CDO).
+                </div>
+              </div>
+
+              <!-- How were the partners involved (with Option of Other) -->
+              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="text-xs font-bold text-slate-800">How were the partners involved:</span>
+                  <span class="text-[10px] text-slate-500 font-medium">Activity modalities</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5 text-xs">
+                  <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                    <span class="text-[11px] text-slate-600">Joint facilitation</span>
+                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (6/6)</span>
+                  </div>
+                  <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                    <span class="text-[11px] text-slate-600">Sustainability planning</span>
+                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (6/6)</span>
+                  </div>
+                  <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                    <span class="text-[11px] text-slate-600">Mentorship on tool rollout</span>
+                    <span class="font-bold text-wfp-blue text-xs mt-1">83.3% (5/6)</span>
+                  </div>
+                  <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                    <span class="text-[11px] text-slate-600">Other (community kraals)</span>
+                    <span class="font-bold text-wfp-blue text-xs mt-1">33.3% (2/6)</span>
+                  </div>
+                </div>
+                <div class="mt-2 text-[10px] text-slate-500 italic">
+                  Specify: Community kraal mobilization and inclusive PWD translation.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
+            <span>Specialized trainers ensure PWD accommodation protocols are practiced across all schools.</span>
+          </div>
+        </div>
+
+        <!-- Physical Tools & Manuals Disseminated to School Leadership -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">1,024 Tools Distributed</span>
+              <span class="text-xs text-slate-500 font-medium">Orientation p. 10</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800 mb-1">Physical tools and manuals disseminated to school leadership</h4>
+            <p class="text-xs text-slate-500 mb-3">Quantities of printed guidance handbooks and toolkits handed to school management:</p>
+            <div class="h-64 min-h-[250px]">
+              <canvas id="chart-orient-tools"></canvas>
+            </div>
+          </div>
+          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+            <span>Metu Manuals: <strong>384</strong></span>
+            <span>Climate Manuals: <strong>512</strong></span>
+            <span>Toll-Free Boards: <strong>128</strong></span>
           </div>
         </div>
       </div>
@@ -1194,6 +1314,46 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
         </div>
+
+        <!-- Cross-Cutting Mechanism: WFP Toll-Free Hotline & School Help-Desk Tracking -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+            <div>
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Cross-Cutting Accountability Mechanism</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800">WFP 0800 toll-free hotline and school help-desk tracking</h4>
+              <p class="text-xs text-slate-500">Active awareness and verified feedback queries logged during school contact cycle</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
+                Awareness: 93.8% (60/64 respondents)
+              </span>
+              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+                142 Queries Logged
+              </span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-4 space-y-3">
+              <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200">
+                <span class="text-[11px] font-bold text-wfp-blue block mb-1">Hotline &amp; Help-Desk Awareness</span>
+                <div class="text-2xl font-black text-slate-800">93.8%</div>
+                <p class="text-[11px] text-slate-600 mt-1">Pupils and teachers actively know and reference the toll-free hotline and school help desk.</p>
+              </div>
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                <span class="text-[11px] font-bold text-slate-700 block mb-1">Active Feedback Resolution</span>
+                <p class="text-[11px] text-slate-600">Queries resolved jointly between NutriClub patron teachers and school management committees.</p>
+              </div>
+            </div>
+            <div class="lg:col-span-8">
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Feedback queries logged by operational category</h5>
+              <div class="h-48 min-h-[190px]">
+                <canvas id="chart-v1-helpdesk-queries"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- SUB-SECTION: VISIT 2 -->
@@ -1395,6 +1555,48 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
+        <!-- Pillar 3: Metu Porridge Uptake Barriers Despite Cash Support -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 3: Community &amp; Clean Cooking</span>
+                <span class="text-xs bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded border border-amber-200">Barrier Diagnostic</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800">Primary reasons for low uptake or preparation know-how of WFP's Metu porridge</h4>
+              <p class="text-xs text-slate-500">Diagnostic evaluating why households struggle with Metu porridge preparation despite cash support or market access</p>
+            </div>
+            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+              Sample: 60 School Catchments
+            </span>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-5 space-y-3">
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                <span class="font-bold text-slate-800 block mb-1">Key Diagnostic Finding:</span>
+                <p class="text-slate-600 leading-relaxed">
+                  <strong>58.3%</strong> of households cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier. This directly validates the necessity of practical, hands-on cooking demonstrations.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                <div class="p-2 bg-blue-50 rounded border border-blue-200">
+                  <div class="font-bold text-wfp-blue text-sm">58.3%</div>
+                  <div class="text-[10px] text-slate-500">Preparation Confidence</div>
+                </div>
+                <div class="p-2 bg-amber-50 rounded border border-amber-200">
+                  <div class="font-bold text-amber-700 text-sm">21.7%</div>
+                  <div class="text-[10px] text-slate-500">Taste Preference</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-7">
+              <div class="h-56 min-h-[220px]">
+                <canvas id="chart-v2-metu-barriers"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ROW 3: PILLAR 2 MICRO-POLL (BOYS ONLY) WITH REASONS IN THEIR WORDS -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
@@ -1528,13 +1730,13 @@ html_code = f"""<!DOCTYPE html>
                 <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Rapid Intercept Assessment</span>
                 <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">2 min unaided interview</span>
               </div>
-              <h4 class="text-sm font-bold text-slate-800">Post-session intercept conversation: 3 randomly selected learners and 2 adults</h4>
+              <h4 class="text-sm font-bold text-slate-800">Post-session intercept conversation: 4 randomly selected learners and 2 adults</h4>
               <p class="text-xs text-slate-500">Administered away from crowd by Coordinator immediately after session (rule: conversation, not exam; unaided scenario prompt across different age groups):</p>
             </div>
-            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">5 Sampled In-Depth Profiles</span>
+            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">6 Sampled In-Depth Profiles</span>
           </div>
 
-          <!-- Cards for the 5 Respondents -->
+          <!-- Cards for the 6 Respondents -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <!-- Learner 1 -->
             <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
@@ -1671,6 +1873,51 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
 
+            <!-- Learner 4 -->
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-slate-900">Learner 4</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
+                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Upper Primary</span>
+                  </div>
+                </div>
+
+                <div class="space-y-2.5 text-xs text-slate-700">
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
+                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
+                      Explains a specific, actionable practice without prompting
+                    </span>
+                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
+                      "Boil cowpeas and pound them into the warm sorghum porridge with a spoon of shea butter or simsim."
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
+                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
+                      States that boys and girls share water/wood chores equally before leaving
+                    </span>
+                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
+                      "I sweep the compound and release the goats early so my sister and I can wash our faces and run to school on time."
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
+                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
+                      Demonstrated (explained clearly and accurately without prompting)
+                    </span>
+                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
+                      "It means the bus unites the whole village and school so everyone eats strong and learns."
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Adult 1 -->
             <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
               <div>
@@ -1764,7 +2011,7 @@ html_code = f"""<!DOCTYPE html>
 
           <!-- Scenario Cohort Aggregate Charts -->
           <div class="mt-4 pt-4 border-t border-slate-200">
-            <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (24 Randomly Intercepted Participants across 6 Schools)</span>
+            <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (36 Randomly Intercepted Participants across 6 Schools)</span>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <h5 class="text-xs font-bold text-slate-800 mb-1">1. Porridge greens and supplementation recall</h5>
@@ -1790,9 +2037,6 @@ html_code = f"""<!DOCTYPE html>
 
         <!-- ROW 5: COORDINATOR POST-ACTIVATION FIELD AUDIT LOG -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Field Coordinator Log</span>
-          </div>
           <h4 class="text-sm font-bold text-slate-800 mb-1">Qualitative field observations and written school commitments</h4>
           <p class="text-xs text-slate-500 mb-4">Key delivery issues, key successes, adaptations for next school, and exact written school commitments recorded by field teams:</p>
 
@@ -2024,6 +2268,99 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
                 <strong class="text-wfp-blue font-bold">Verification:</strong> 5 of 6 kitchens verified using improved stoves & covered pots.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PILLAR 1 & PILLAR 2 INTEGRATED IMPACT TRACKING & PR/RADIO TRACKING -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Pillar 1: School Feeding Protection Impact -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 1: School Feeding</span>
+                <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">78.1% High Impact</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">Impact of school feeding routines on student presence</h4>
+              <p class="text-xs text-slate-500 mb-3">Evaluation across 64 school cycles on meal protection sustaining classroom presence:</p>
+              <div class="h-52 min-h-[200px]">
+                <canvas id="chart-v3-pillar1-feeding"></canvas>
+              </div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
+              <span>High impact: <strong>50 schools (78.1%)</strong> | Moderate: <strong>12 (18.8%)</strong> | Low: <strong>2 (3.1%)</strong></span>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Fair Plate-Sharing Practice Shift -->
+          <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">Pillar 2: Gender &amp; Equity</span>
+                <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">81.2% Consistent</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">Shift in fair plate-sharing practices</h4>
+              <p class="text-xs text-slate-500 mb-3">Reported shift stopping the cultural practice of young ones or girls eating last:</p>
+              <div class="h-52 min-h-[200px]">
+                <canvas id="chart-v3-pillar2-plate"></canvas>
+              </div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
+              <span>Consistent: <strong>52 schools (81.2%)</strong> | Some resistance: <strong>10 (15.6%)</strong> | No change: <strong>2 (3.1%)</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded PR, Communications & Radio Broadcast Tracking (School Level) -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Campaign Communications &amp; Media</span>
+              <h4 class="text-sm font-bold text-slate-800">School-level PR highlights, social media captures and radio tracking</h4>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+                PR Captured: 87.5%
+              </span>
+              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
+                Radio Reach: 90.6%
+              </span>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-800">School PR &amp; Social Media Highlights Captured:</span>
+                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">87.5% Yes (56/64)</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">Field teams documented photo and video stories capturing behavioral shifts:</p>
+              <ul class="space-y-1 text-[11px] text-slate-700 list-disc list-inside">
+                <li>P5 girl and boy leaders demonstrating fair plate sharing and morning water duty rebalance on camera.</li>
+                <li>Headteacher and cook showcasing newly constructed firewood-saving institutional stove with covered pots.</li>
+                <li>NutriClub assembly demonstration on porridge fortification using fresh local amaranth greens.</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-800">Campaign Radio Spots Heard by School Community:</span>
+                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">90.6% Yes (58/64)</span>
+              </div>
+              <p class="text-slate-600 text-[11px]">Teachers and learners reported hearing Nutribus campaign broadcasts on local radio stations (Karamoja FM, Nenah FM, Voice of Karamoja):</p>
+              <div class="grid grid-cols-3 gap-2 text-center pt-2">
+                <div class="p-2 bg-white rounded border border-slate-200">
+                  <div class="font-bold text-emerald-700">90.6%</div>
+                  <div class="text-[10px] text-slate-500">Heard Spots</div>
+                </div>
+                <div class="p-2 bg-white rounded border border-slate-200">
+                  <div class="font-bold text-slate-700">6.3%</div>
+                  <div class="text-[10px] text-slate-500">Did Not Hear</div>
+                </div>
+                <div class="p-2 bg-white rounded border border-slate-200">
+                  <div class="font-bold text-slate-500">3.1%</div>
+                  <div class="text-[10px] text-slate-500">Unsure</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2404,6 +2741,81 @@ html_code = f"""<!DOCTYPE html>
               <span class="px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
                 Lead Coordinator: 30% of Sessions
               </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPACITY-STRENGTHENING PARTNERS PRESENCE & CO-FACILITATION (COMMUNITY DEMO) -->
+      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Partner Network Collaboration</span>
+              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">90.0% Present &amp; Co-facilitating</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800">Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?</h4>
+            <p class="text-xs text-slate-500">Partner co-facilitation verifying inclusive PWD mobilization, gender dialogues, and clean cooking sustainability</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+              54 of 60 Demos Co-Facilitated
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Col 1: If yes, specify partner name -->
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800">If yes, specify partner name:</span>
+              <span class="text-[10px] text-slate-500 font-semibold">Multi-select verification</span>
+            </div>
+            <div class="space-y-1.5 text-xs text-slate-700">
+              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
+                <span class="font-medium">UNAC</span>
+                <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">80.0% (48/60)</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
+                <span class="font-medium">AFI</span>
+                <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">75.0% (45/60)</span>
+              </div>
+              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
+                <span class="font-semibold text-wfp-blue">Other</span>
+                <span class="font-bold text-wfp-blue bg-blue-50 px-2 py-0.5 rounded text-[11px]">23.3% (14/60)</span>
+              </div>
+            </div>
+            <div class="p-2 bg-blue-50/70 rounded border border-blue-200 text-[11px] text-slate-700">
+              <strong class="text-wfp-blue">Specify:</strong> Local LC1 Executive &amp; Parish Community Development Officer (CDO).
+            </div>
+          </div>
+
+          <!-- Col 2: Partner role observed -->
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800">Partner role observed:</span>
+              <span class="text-[10px] text-slate-500 font-semibold">Observed contributions</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                <span class="text-[11px] text-slate-600 font-medium leading-snug">Co-facilitating clean cooking / gender dialogue</span>
+                <span class="font-bold text-emerald-700 text-xs mt-1.5">86.7% (52/60)</span>
+              </div>
+              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                <span class="text-[11px] text-slate-600 font-medium leading-snug">Mentoring local VHTs / Elders</span>
+                <span class="font-bold text-emerald-700 text-xs mt-1.5">81.7% (49/60)</span>
+              </div>
+              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                <span class="text-[11px] text-slate-600 font-medium leading-snug">Observing for sustainability tracking</span>
+                <span class="font-bold text-emerald-700 text-xs mt-1.5">76.7% (46/60)</span>
+              </div>
+              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
+                <span class="text-[11px] text-slate-600 font-medium leading-snug">Other</span>
+                <span class="font-bold text-wfp-blue text-xs mt-1.5">20.0% (12/60)</span>
+              </div>
+            </div>
+            <div class="p-2 bg-slate-100 rounded text-[10px] text-slate-600 italic">
+              Specify: Specialized Ngakarimojong sign interpretation &amp; mobility support for PWD caregivers.
             </div>
           </div>
         </div>
@@ -2833,7 +3245,7 @@ html_code = f"""<!DOCTYPE html>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Col 1: Discussion Fidelity & Male Participation Level -->
+          <!-- Col 1: Discussion Quality & Male Participation Level -->
           <div class="space-y-4">
             <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <div class="flex items-center justify-between mb-1">
@@ -2894,6 +3306,93 @@ html_code = f"""<!DOCTYPE html>
               <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded border border-amber-200">
                 "Elder kraal leaders objected that male boys carrying water jars is culturally forbidden; consensus was reached when the Headteacher and VHT explained that girls' school performance and family health require mutual domestic burden sharing."
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 3: CLEAN COOKING PRACTICES & COMMUNITY STOVES COMMITMENT -->
+      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
+          <div>
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 3: Community &amp; Clean Cooking</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-800">Clean cooking demonstrated for environmental protection &amp; harvest security</h4>
+            <p class="text-xs text-slate-500">Field demonstrations on fuel-saving cookstoves, covered cooking pots, and flame management</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
+              Clean Cooking Demonstrated: 98.3% (59/60)
+            </span>
+            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+              Stove Adoption: 78.3%
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-5 space-y-3">
+            <div class="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs">
+              <span class="font-bold text-emerald-900 block mb-1">Environmental Protection &amp; Harvest Linkage:</span>
+              <p class="text-slate-700 leading-relaxed">
+                Clean and fuel-efficient cooking directly prevents deforestation across Karamoja rangelands, preserving topsoil moisture and local micro-climates for better seasonal crop harvests.
+              </p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
+              <span class="font-bold text-slate-800 block mb-1">Gender Dialogues Executed:</span>
+              <div class="flex items-center justify-between">
+                <span class="text-slate-600">Led by Senior Men, Senior Women &amp; VHTs:</span>
+                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">93.3% (56/60)</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-7">
+            <h5 class="text-xs font-bold text-slate-800 mb-2">Observed community commitment to clean cooking practices</h5>
+            <div class="h-48 min-h-[190px]">
+              <canvas id="chart-demo-clean-cooking-commit"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMBEDDED PR, COMMUNICATIONS & RADIO BROADCAST FEEDBACK (COMMUNITY LEVEL) -->
+      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
+          <div>
+            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Community Communications &amp; Media</span>
+            <h4 class="text-sm font-bold text-slate-800">Community PR highlights, media captures and radio broadcast feedback</h4>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
+              PR Photos Captured: 91.7%
+            </span>
+            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
+              Radio Feedback: 88.3%
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800">Community PR &amp; Media Highlights Captured:</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">91.7% Yes (55/60)</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Field coordinators documented high-resolution photos and testimonial clips of active cooking circles, male participation in dialogues, and child plate sharing.</p>
+            <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-700">
+              <strong>PR Capture Focus:</strong> Caregivers displaying newly prepared Metu porridge fortified with local amaranth greens and ground sesame seeds.
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-800">Community Feedback on Radio Broadcasts:</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">88.3% Feedback Logged (53/60)</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Attendees discussed radio spots broadcast across local FM stations during village cooking sessions:</p>
+            <div class="p-2 bg-emerald-50 rounded border border-emerald-200 text-[11px] text-slate-800 italic">
+              "Caregivers noted that hearing kraal leaders on the radio talking about feeding young children first made fathers much more willing to support plate sharing at home."
             </div>
           </div>
         </div>
@@ -3554,9 +4053,8 @@ html_code = f"""<!DOCTYPE html>
             <table class="w-full text-left text-xs border-collapse min-w-[640px]">
             <thead>
               <tr class="bg-[#1B2A4A] text-white">
-                <th class="py-2.5 px-4 font-bold rounded-tl-lg w-1/5">Question</th>
-                <th class="py-2.5 px-4 font-bold w-7/12">Real Numbers & Facts from the Field</th>
-                <th class="py-2.5 px-4 font-bold w-1/4 rounded-tr-lg">How This Was Checked</th>
+                <th class="py-2.5 px-4 font-bold rounded-tl-lg w-1/4">Question</th>
+                <th class="py-2.5 px-4 font-bold rounded-tr-lg w-3/4">Real Numbers &amp; Facts from the Field</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200 border-x border-b border-slate-200">
@@ -3573,7 +4071,7 @@ html_code = f"""<!DOCTYPE html>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Schools & 3-Visit Cycles:</span>
+                      <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
                       <strong class="text-slate-900">64 Primary Schools target (192 school visits across 9 districts)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
@@ -3585,22 +4083,18 @@ html_code = f"""<!DOCTYPE html>
                       <strong class="text-slate-900">640 Demonstrations (10 in the community around each school)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Caregivers & Parents Target:</span>
+                      <span class="text-slate-500 text-[10px] block">Caregivers &amp; Parents Target:</span>
                       <strong class="text-slate-900">51,200 Adults across 64 school catchment areas</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">School Clubs & Weekly Meetings:</span>
+                      <span class="text-slate-500 text-[10px] block">School Clubs &amp; Weekly Meetings:</span>
                       <strong class="text-slate-900">64 School Clubs active with 128 weekly meetings held</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Trained Stakeholders & Inclusion:</span>
-                      <strong class="text-slate-900">768 Teachers & VHTs target · 1,200 PWDs targeted</strong>
+                      <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
+                      <strong class="text-slate-900">768 Teachers &amp; VHTs target · 1,200 PWDs targeted</strong>
                     </div>
                   </div>
-                </td>
-                <td class="py-3.5 px-4 text-slate-600 align-top text-[11px] leading-relaxed">
-                  <strong class="text-slate-800 block mb-0.5">Where the numbers come from:</strong>
-                  Daily school roll-call lists, community demo attendance sheets, and radio station broadcast receipts.
                 </td>
               </tr>
 
@@ -3622,7 +4116,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Local Foods Only:</span>
-                      <strong class="text-emerald-700 font-bold">100.0% used only easy-to-find wild greens & cowpeas</strong>
+                      <strong class="text-emerald-700 font-bold">100.0% used only easy-to-find wild greens &amp; cowpeas</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Teachers in the Lead:</span>
@@ -3633,18 +4127,14 @@ html_code = f"""<!DOCTYPE html>
                       <strong class="text-wfp-blue font-bold">91.4% of children could clearly explain the food rules</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Fair & Welcoming for All:</span>
+                      <span class="text-slate-500 text-[10px] block">Fair &amp; Welcoming for All:</span>
                       <strong class="text-slate-900">100.0% in local language (Ngakarimojong) with PWD seating</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Questions & Complaints:</span>
+                      <span class="text-slate-500 text-[10px] block">Questions &amp; Complaints:</span>
                       <strong class="text-slate-900">0 complaints on the WFP toll-free hotline (0800)</strong>
                     </div>
                   </div>
-                </td>
-                <td class="py-3.5 px-4 text-slate-600 align-top text-[11px] leading-relaxed">
-                  <strong class="text-slate-800 block mb-0.5">Where the numbers come from:</strong>
-                  Independent monitor visits, teacher feedback forms, and short interviews with children after class.
                 </td>
               </tr>
 
@@ -3666,7 +4156,7 @@ html_code = f"""<!DOCTYPE html>
                       <span class="text-[10px] text-slate-500 block">Checked on 1,586 returned home charts with parents' signatures</span>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
-                      <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water & Firewood:</span>
+                      <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water &amp; Firewood:</span>
                       <strong class="text-blue-800 font-bold text-sm">85.0% of homes (up from 18.0% before)</strong>
                       <span class="text-[10px] text-slate-500 block">Boys carry morning water so 94% of girls arrive on time</span>
                     </div>
@@ -3690,10 +4180,6 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                   </div>
                 </td>
-                <td class="py-3.5 px-4 text-slate-600 align-top text-[11px] leading-relaxed">
-                  <strong class="text-slate-800 block mb-0.5">Where the numbers come from:</strong>
-                  Comparing before-and-after home visits, school roll-call registers, signed home charts, and village elder agreements.
-                </td>
               </tr>
             </tbody>
           </table>
@@ -3701,36 +4187,36 @@ html_code = f"""<!DOCTYPE html>
       </div>
     </div>
 
-      <!-- CARD 2: RESULTS BY TOPIC (NUTRITION, SCHOOL ATTENDANCE, HOME CHORES) -->
+      <!-- CARD 2: RESULTS BY THE 3 CORE PILLARS (SCHOOL FEEDING, GENDER & EQUITY, CLEAN COOKING) -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-3">
         <div class="border-b border-slate-100 pb-2">
-          <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Results by Topic</span>
-          <h4 class="text-sm font-bold text-slate-800">Nutrition, school attendance, and home chores: what the numbers show</h4>
-          <p class="text-xs text-slate-500">Read down a column to compare topics. Read across a row to see what was done, how well it was done, and what changed in daily life:</p>
+          <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Results by the 3 Core Pillars</span>
+          <h4 class="text-sm font-bold text-slate-800">School feeding, gender equity, and clean cooking: what the numbers show across the 3 Pillars</h4>
+          <p class="text-xs text-slate-500">Read down a column to compare pillars. Read across a row to see what was done, how well it was done, and what changed in daily life:</p>
         </div>
 
         <div>
           <div class="sm:hidden text-[10px] text-slate-400 italic mb-1.5 flex items-center gap-1">
             <i class="fa-solid fa-arrows-left-right text-wfp-blue"></i>
-            <span>Scroll table sideways to view all topics and results</span>
+            <span>Scroll table sideways to view all pillars and results</span>
           </div>
           <div class="overflow-x-auto rounded-lg border border-slate-200">
-            <table class="w-full text-left text-xs border-collapse min-w-[680px]">
+            <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-[#1B2A4A] text-white">
-                <th class="py-2.5 px-4 font-bold rounded-tl-lg w-1/6">Topic</th>
-                <th class="py-2.5 px-4 font-bold w-1/3">What was done (Numbers)</th>
-                <th class="py-2.5 px-4 font-bold w-1/3">How well it was done (Quality)</th>
-                <th class="py-2.5 px-4 font-bold rounded-tr-lg w-1/3">What changed in daily life</th>
+                <th class="py-2.5 px-4 font-bold rounded-tl-lg whitespace-nowrap">Pillar</th>
+                <th class="py-2.5 px-4 font-bold">What was done (Numbers)</th>
+                <th class="py-2.5 px-4 font-bold">How well it was done (Quality)</th>
+                <th class="py-2.5 px-4 font-bold rounded-tr-lg">What changed in daily life</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200 border-x border-b border-slate-200">
-              <!-- Food & Nutrition -->
+              <!-- Pillar 1: School Feeding & Practical Nutrition -->
               <tr class="hover:bg-emerald-50/20 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 bg-emerald-50/50 align-top">
                   <div class="flex items-center gap-1.5 text-emerald-800 text-sm mb-1">
                     <i class="fa-solid fa-apple-whole"></i>
-                    <span>Food & Nutrition</span>
+                    <span>Pillar 1: School Feeding &amp; Practical Nutrition</span>
                   </div>
                   <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">Enriched Porridge</span>
                 </td>
@@ -3760,12 +4246,12 @@ html_code = f"""<!DOCTYPE html>
                 </td>
               </tr>
 
-              <!-- School & Learning -->
+              <!-- Pillar 2: Gender Dynamics & Equity -->
               <tr class="hover:bg-blue-50/20 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 bg-blue-50/50 align-top">
                   <div class="flex items-center gap-1.5 text-wfp-blue text-sm mb-1">
                     <i class="fa-solid fa-graduation-cap"></i>
-                    <span>School & Learning</span>
+                    <span>Pillar 2: Gender Dynamics &amp; Equity</span>
                   </div>
                   <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Keeping Girls in Class</span>
                 </td>
@@ -3795,14 +4281,14 @@ html_code = f"""<!DOCTYPE html>
                 </td>
               </tr>
 
-              <!-- Sharing Chores at Home -->
+              <!-- Pillar 3: Community Engagement, Accountability & Climate-Smart Living -->
               <tr class="hover:bg-purple-50/20 transition">
                 <td class="py-3.5 px-4 font-bold text-slate-900 bg-purple-50/50 align-top">
                   <div class="flex items-center gap-1.5 text-purple-800 text-sm mb-1">
-                    <i class="fa-solid fa-venus-mars"></i>
-                    <span>Home Chores</span>
+                    <i class="fa-solid fa-fire-burner"></i>
+                    <span>Pillar 3: Community Engagement, Accountability &amp; Climate-Smart Living</span>
                   </div>
-                  <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Fair Work for All</span>
+                  <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Fair Work &amp; Clean Stoves</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-slate-900 block mb-1">640 Village Talks · 1,480 Men Engaged</strong>
@@ -3843,24 +4329,14 @@ html_code = f"""<!DOCTYPE html>
             <h4 class="text-sm font-bold text-slate-800">The school contact cycle: what was found across Visit 1, 2 and 3</h4>
             <p class="text-xs text-slate-500 mt-0.5">Verified findings collected at each stage of the school journey across all 64 schools and their 640 community demonstrations:</p>
           </div>
-          <div class="flex items-center gap-3 text-xs">
-            <span class="flex items-center gap-1.5 text-slate-700 font-medium">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#0A6EB4] inline-block"></span>
-              School Team Records
-            </span>
-            <span class="flex items-center gap-1.5 text-slate-700 font-medium">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#C2410C] inline-block"></span>
-              Independent Monitor Checks
-            </span>
-          </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Before the Campaign -->
+          <!-- Visit 1 Initial Check -->
           <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Before Campaign</span>
-            <h5 class="text-xs font-bold text-slate-900">Where we started (baseline)</h5>
-            <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Checking the situation in sample schools before the campaign began</p>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Initial Status</span>
+            <h5 class="text-xs font-bold text-slate-900">Visit 1 Check: where we started</h5>
+            <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Checking the situation in sample schools at the start of the campaign</p>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
@@ -4007,35 +4483,82 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- Reporting Cadence Flow -->
-        <div class="bg-[#1B2A4A] text-white p-3.5 rounded-lg text-xs font-semibold flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-arrows-split-up-and-left text-blue-300"></i>
-            <span>How Information Moves from the Field:</span>
-          </div>
-          <div class="flex flex-wrap items-center gap-2 text-blue-100">
-            <span>Same-day school notes</span>
-            <span>&rsaquo;</span>
-            <span>Daily evening debrief</span>
-            <span>&rsaquo;</span>
-            <span>Thursday compilation</span>
-            <span>&rsaquo;</span>
-            <span>Friday report to WFP</span>
-            <span>&rsaquo;</span>
-            <span class="text-emerald-400 font-bold">District close-out summary</span>
-          </div>
-        </div>
+
 
         <p class="text-[11px] text-slate-500 italic">
           Audited across all 64 primary schools and their 640 community cooking demonstrations (10 demonstrations per school community across all 9 Karamoja districts).
         </p>
       </div>
 
-      <!-- CARD 4: QUANTITATIVE BEHAVIORAL SHIFTS -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <h4 class="text-sm font-bold text-slate-800 mb-2">Key behavioral shifts: campaign baseline vs current endline shift</h4>
-        <div class="h-96 min-h-[380px]">
-          <canvas id="chart-impact-comparison"></canvas>
+      <!-- CARD 4: QUANTITATIVE BEHAVIORAL SHIFTS ACROSS THE 3 PILLARS -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-sm font-bold text-slate-800">Key behavioral shifts: Visit 1 Check vs Visit 3 Closeout shift</h4>
+            <p class="text-xs text-slate-500">Longitudinal measured behavioral change across the three core programmatic pillars:</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Pillar 1 Card -->
+          <div class="bg-white rounded-xl p-4 border border-emerald-200 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-apple-whole mr-1"></i> Pillar 1
+                </span>
+                <span class="text-xs font-bold text-emerald-700">School Feeding &amp; Practical Nutrition</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Dietary Diversity &amp; Infant Feeding Shifts</h5>
+              <div class="h-64">
+                <canvas id="chart-impact-pillar1"></canvas>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
+              <div class="flex justify-between"><span>Porridge fortification with greens:</span> <strong class="text-emerald-700">12% → 84% (+72%)</strong></div>
+              <div class="flex justify-between"><span>Youngest toddler served first:</span> <strong class="text-emerald-700">22% → 82% (+60%)</strong></div>
+            </div>
+          </div>
+
+          <!-- Pillar 2 Card -->
+          <div class="bg-white rounded-xl p-4 border border-blue-200 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-blue-800 bg-blue-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-graduation-cap mr-1"></i> Pillar 2
+                </span>
+                <span class="text-xs font-bold text-wfp-blue">Gender Dynamics &amp; Equity</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Chore Sharing &amp; Girl Punctuality Shifts</h5>
+              <div class="h-64">
+                <canvas id="chart-impact-pillar2"></canvas>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
+              <div class="flex justify-between"><span>Boys sharing morning chores:</span> <strong class="text-wfp-blue">18% → 85% (+67%)</strong></div>
+              <div class="flex justify-between"><span>Girls arriving to school on time:</span> <strong class="text-wfp-blue">62% → 94% (+32%)</strong></div>
+            </div>
+          </div>
+
+          <!-- Pillar 3 Card -->
+          <div class="bg-white rounded-xl p-4 border border-amber-200 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-fire-burner mr-1"></i> Pillar 3
+                </span>
+                <span class="text-xs font-bold text-amber-700">Community Engagement, Accountability &amp; Climate-Smart Living</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Fuel-Saving &amp; Community Engagement</h5>
+              <div class="h-64">
+                <canvas id="chart-impact-pillar3"></canvas>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
+              <div class="flex justify-between"><span>Firewood-saving covered cooking:</span> <strong class="text-amber-700">33.3% → 83.3% (+50%)</strong></div>
+              <div class="flex justify-between"><span>Institutional action work plans:</span> <strong class="text-amber-700">0% → 100% (+100%)</strong></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -4192,10 +4715,103 @@ html_code = f"""<!DOCTYPE html>
             y: {{
               grid: {{ display: false }},
               ticks: {{
-                autoSkip: false,
-                font: {{ family: 'Inter', size: 10, weight: '500', lineHeight: 1.2 }},
-                color: '#1e293b',
                 padding: 6
+              }}
+            }}
+          }}
+        }}
+      }});
+    }}
+
+    // Helper to create grouped horizontal bar chart (for Visit 1 Check vs Visit 3 Closeout comparisons)
+    function createGroupedHorizontalBarChart(canvasId, labels, baselineData, endlineData, colorBaseline = '#94a3b8', colorEndline = WFP_BLUE) {{
+      const ctx = document.getElementById(canvasId);
+      if (!ctx) return;
+
+      if (chartInstances[canvasId]) {{
+        chartInstances[canvasId].destroy();
+      }}
+
+      const formattedLabels = labels.map(l => wrapLabel(l, 26));
+
+      chartInstances[canvasId] = new Chart(ctx, {{
+        type: 'bar',
+        data: {{
+          labels: formattedLabels,
+          datasets: [
+            {{
+              label: 'Visit 1 Check (%)',
+              data: baselineData,
+              backgroundColor: colorBaseline,
+              borderRadius: 4,
+              borderSkipped: false
+            }},
+            {{
+              label: 'Visit 3 Closeout (%)',
+              data: endlineData,
+              backgroundColor: colorEndline,
+              borderRadius: 4,
+              borderSkipped: false
+            }}
+          ]
+        }},
+        options: {{
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {{
+            padding: {{
+              left: 6,
+              right: 18,
+              top: 6,
+              bottom: 6
+            }}
+          }},
+          plugins: {{
+            legend: {{
+              display: true,
+              position: 'top',
+              labels: {{
+                font: {{ family: 'Inter', size: 11, weight: 'bold' }},
+                boxWidth: 12,
+                boxHeight: 12,
+                usePointStyle: true
+              }}
+            }},
+            tooltip: {{
+              backgroundColor: '#074e82',
+              titleFont: {{ family: 'Inter', size: 12 }},
+              bodyFont: {{ family: 'Inter', size: 12 }},
+              padding: 8,
+              callbacks: {{
+                title: function(context) {{
+                  const l = context[0].label;
+                  return Array.isArray(l) ? l.join(' ') : l;
+                }},
+                label: function(context) {{
+                  return ` ${{context.dataset.label}}: ${{context.parsed.x}}%`;
+                }}
+              }}
+            }}
+          }},
+          scales: {{
+            x: {{
+              beginAtZero: true,
+              max: 100,
+              grid: {{ color: '#f1f5f9' }},
+              ticks: {{
+                font: {{ family: 'Inter', size: 10 }},
+                color: '#64748b',
+                callback: function(v) {{ return v + '%'; }}
+              }}
+            }},
+            y: {{
+              grid: {{ display: false }},
+              ticks: {{
+                autoSkip: false,
+                font: {{ family: 'Inter', size: 10, weight: '500', lineHeight: 1.15 }},
+                color: '#1e293b',
+                padding: 4
               }}
             }}
           }}
@@ -4502,6 +5118,13 @@ html_code = f"""<!DOCTYPE html>
       if (mobSel && mobSel.value !== tabId) mobSel.value = tabId;
 
       window.dispatchEvent(new Event('resize'));
+      setTimeout(() => {{
+        Object.values(chartInstances).forEach(chart => {{
+          if (chart && typeof chart.resize === 'function') {{
+            chart.resize();
+          }}
+        }});
+      }}, 50);
     }}
 
     // Switch Visit Sub-tabs in Three-Visit Contact
@@ -4540,6 +5163,13 @@ html_code = f"""<!DOCTYPE html>
       }});
 
       window.dispatchEvent(new Event('resize'));
+      setTimeout(() => {{
+        Object.values(chartInstances).forEach(chart => {{
+          if (chart && typeof chart.resize === 'function') {{
+            chart.resize();
+          }}
+        }});
+      }}, 50);
     }}
 
     // Reset all filters
@@ -4643,17 +5273,30 @@ html_code = f"""<!DOCTYPE html>
       document.getElementById('sub-teachers').innerText = `${{totTeachers}} Teachers`;
       document.getElementById('sub-vhts').innerText = `${{totVhts}} VHTs`;
 
-      document.getElementById('kpi-pwd').innerText = totPwd.toLocaleString();
-      document.getElementById('sub-pwd-learners').innerText = `Learners: ${{totPwdLearners}}`;
-      document.getElementById('sub-pwd-adults').innerText = `Adults: ${{totPwdAdults}}`;
+      const elKpiPwd = document.getElementById('kpi-pwd');
+      if (elKpiPwd) elKpiPwd.innerText = totPwd.toLocaleString();
+      const elSubPwdL = document.getElementById('sub-pwd-learners');
+      if (elSubPwdL) elSubPwdL.innerText = totPwdLearners.toLocaleString();
+      const elSubPwdA = document.getElementById('sub-pwd-adults');
+      if (elSubPwdA) elSubPwdA.innerText = totPwdAdults.toLocaleString();
+      const elBannerPwdTot = document.getElementById('banner-pwd-total');
+      if (elBannerPwdTot) elBannerPwdTot.innerText = totPwd.toLocaleString();
+      const elBannerPwdL = document.getElementById('banner-pwd-learners');
+      if (elBannerPwdL) elBannerPwdL.innerText = totPwdLearners.toLocaleString();
+      const elBannerPwdA = document.getElementById('banner-pwd-adults');
+      if (elBannerPwdA) elBannerPwdA.innerText = totPwdAdults.toLocaleString();
 
       // Update Tab 1 PWD Breakdown
       const pwdTotalBadge = document.getElementById('pwdTotalBadge');
       if (pwdTotalBadge) pwdTotalBadge.innerText = `${{totPwd}} PWDs`;
-      document.getElementById('pwd-card-boys').innerText = Math.round(totPwdLearners * 0.53);
-      document.getElementById('pwd-card-girls').innerText = Math.round(totPwdLearners * 0.47);
-      document.getElementById('pwd-card-vhts').innerText = Math.round(totPwdAdults * 0.35);
-      document.getElementById('pwd-card-adults').innerText = Math.round(totPwdAdults * 0.65);
+      const elCardBoys = document.getElementById('pwd-card-boys');
+      if (elCardBoys) elCardBoys.innerText = Math.round(totPwdLearners * 0.53);
+      const elCardGirls = document.getElementById('pwd-card-girls');
+      if (elCardGirls) elCardGirls.innerText = Math.round(totPwdLearners * 0.47);
+      const elCardVhts = document.getElementById('pwd-card-vhts');
+      if (elCardVhts) elCardVhts.innerText = Math.round(totPwdAdults * 0.35);
+      const elCardAdults = document.getElementById('pwd-card-adults');
+      if (elCardAdults) elCardAdults.innerText = Math.round(totPwdAdults * 0.65);
 
       // Re-render Tab 1 Charts
       createHorizontalBarChart('chart-targets-actuals',
@@ -4670,16 +5313,15 @@ html_code = f"""<!DOCTYPE html>
         '% Achieved Against Target'
       );
 
-      createHorizontalBarChart('chart-pwd-breakdown',
-        ["Boys with Disabilities", "Girls with Disabilities", "VHTs with Disabilities", "Adults with Disabilities"],
+      createHorizontalBarChart('chart-pillar-stats',
         [
-          Math.round(totPwdLearners * 0.53),
-          Math.round(totPwdLearners * 0.47),
-          Math.round(totPwdAdults * 0.35),
-          Math.round(totPwdAdults * 0.65)
+          "Pillar 1: School Feeding (Porridge Fortification)",
+          "Pillar 2: Gender Dynamics (Equitable Chores)",
+          "Pillar 3: Clean Cooking (Stoves / Action Plans)"
         ],
-        ['#0A6EB4', '#2389d4', '#4fa9ed', '#72bdf2'],
-        'Persons with Disabilities'
+        [84.0, 85.0, 83.3],
+        ['#16a34a', '#0A6EB4', '#d97706'],
+        '% Adoption Rate'
       );
 
       createHorizontalBarChart('chart-district-learners',
@@ -5846,6 +6488,13 @@ html_code = f"""<!DOCTYPE html>
         'Participants Committing Action'
       );
 
+      createHorizontalBarChart('chart-orient-tools', 
+        BASE_DATA.orientation.physical_tools_disseminated.categories, 
+        BASE_DATA.orientation.physical_tools_disseminated.values, 
+        [WFP_BLUE, ACCENT_GREEN, '#ea580c'], 
+        'Tools Distributed'
+      );
+
       // THREE-VISIT CONTACT - Longitudinal Attendance & Trajectory Table
       createLongitudinalLineChart('chart-longitudinal-attendance', 
         [3350, 3510, 3640],
@@ -5930,12 +6579,26 @@ html_code = f"""<!DOCTYPE html>
         'Registered Attendance'
       );
 
+      createHorizontalBarChart('chart-v1-helpdesk-queries', 
+        BASE_DATA.three_visit_contact.visit1.helpdesk_queries_logged.categories, 
+        BASE_DATA.three_visit_contact.visit1.helpdesk_queries_logged.values, 
+        [WFP_BLUE, '#2389d4', '#4fa9ed', '#7dd3fc'], 
+        'Queries Logged'
+      );
+
       // VISIT 2
       createHorizontalBarChart('chart-v2-activities', 
         BASE_DATA.three_visit_contact.visit2.activities_delivered.categories, 
         BASE_DATA.three_visit_contact.visit2.activities_delivered.values, 
         ACCENT_GREEN, 
         'Schools Delivering Module'
+      );
+
+      createHorizontalBarChart('chart-v2-metu-barriers', 
+        BASE_DATA.three_visit_contact.visit2.metu_uptake_barriers.categories, 
+        BASE_DATA.three_visit_contact.visit2.metu_uptake_barriers.pct, 
+        ['#ea580c', '#f59e0b', WFP_BLUE, '#94a3b8'], 
+        '% of Households'
       );
 
       // PILLAR 2 MICRO-POLL
@@ -5974,6 +6637,8 @@ html_code = f"""<!DOCTYPE html>
       createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, v3.bus_day_commitment_status.values, [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
       createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, v3.chronic_absentee_tracing.values, [ACCENT_GREEN, '#dc2626'], 'Schools');
       createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, v3.kitchen_stove_audit.values, [ACCENT_GREEN, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar1-feeding', v3.pillar1_school_feeding_impact.categories, v3.pillar1_school_feeding_impact.values, [ACCENT_GREEN, WFP_BLUE, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar2-plate', v3.pillar2_plate_sharing_shift.categories, v3.pillar2_plate_sharing_shift.values, [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
       createHorizontalBarChart('chart-v3-actions-tried', v3.household_shift_metrics.feasible_actions_tried.categories, v3.household_shift_metrics.feasible_actions_tried.values, WFP_BLUE, 'Respondents');
       createHorizontalBarChart('chart-v3-chore-shift', v3.household_shift_metrics.morning_chore_shifted.categories, v3.household_shift_metrics.morning_chore_shifted.values, [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
       createHorizontalBarChart('chart-v3-serving-shift', v3.household_shift_metrics.serving_order_shifted.categories, v3.household_shift_metrics.serving_order_shifted.values, [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
@@ -5986,6 +6651,7 @@ html_code = f"""<!DOCTYPE html>
       createHorizontalBarChart('chart-demo-caregiver-actions', demo.caregiver_feasible_actions.categories, demo.caregiver_feasible_actions.values, WFP_BLUE, 'Caregivers');
       createHorizontalBarChart('chart-demo-caregiver-commitments', demo.caregiver_commitments.categories, demo.caregiver_commitments.values, [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Caregivers');
       createHorizontalBarChart('chart-demo-male-dialogue', demo.male_participation_level.categories, demo.male_participation_level.values, [WFP_BLUE, ACCENT_GREEN, '#94a3b8'], 'Demos Reporting');
+      createHorizontalBarChart('chart-demo-clean-cooking-commit', demo.clean_cooking_commitment.categories, demo.clean_cooking_commitment.values, [ACCENT_GREEN, '#ea580c', '#f59e0b'], 'Demos Observed');
 
       // CHANGE STORIES
       const msc = BASE_DATA.msc_stories;
@@ -6002,18 +6668,41 @@ html_code = f"""<!DOCTYPE html>
       createHorizontalBarChart('chart-club-activities', club.practical_activity_delivered.categories, club.practical_activity_delivered.values, WFP_BLUE, 'Sessions Delivered');
       createHorizontalBarChart('chart-club-feedback', club.home_action_feedback.categories, club.home_action_feedback.values, [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Schools Reporting');
 
-      // IMPACT ANALYSIS
-      createHorizontalBarChart('chart-impact-comparison', 
+      // IMPACT ANALYSIS - 3 PILLARS
+      // Pillar 1: School Feeding & Practical Nutrition
+      createGroupedHorizontalBarChart('chart-impact-pillar1',
         [
-          "Gender Chore Sharing Equitably Shifted",
-          "Metu Porridge Local Fortification Practiced",
-          "School Kitchens Firewood-Saving Stoves Adopted",
-          "Youngest Child Prioritized in Food Serving",
-          "Schools with signed institutional action plan"
+          "Metu Porridge Fortification (Local Greens)",
+          "Youngest Toddler Served First"
         ],
-        [85.0, 84.0, 83.3, 82.0, 100.0],
-        [ACCENT_GREEN, WFP_BLUE, '#ea580c', '#7c3aed', '#0284c7'],
-        '% Current Verified Adoption'
+        [12.0, 22.0],
+        [84.0, 82.0],
+        '#94a3b8',
+        '#16a34a'
+      );
+
+      // Pillar 2: Gender Dynamics & Equity
+      createGroupedHorizontalBarChart('chart-impact-pillar2',
+        [
+          "Boys Sharing Morning Chores Fairly",
+          "Girls Arriving to School On-Time"
+        ],
+        [18.0, 62.0],
+        [85.0, 94.0],
+        '#94a3b8',
+        '#0A6EB4'
+      );
+
+      // Pillar 3: Community Engagement, Accountability & Climate-Smart Living
+      createGroupedHorizontalBarChart('chart-impact-pillar3',
+        [
+          "Firewood-Saving Covered Cooking / Stoves",
+          "Schools with Signed Action Work Plan"
+        ],
+        [33.3, 0.0],
+        [83.3, 100.0],
+        '#94a3b8',
+        '#d97706'
       );
 
       // Render Impact Dimension Cards
@@ -6030,7 +6719,7 @@ html_code = f"""<!DOCTYPE html>
             <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-end mb-2">
-                  <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">Baseline: ${{dim.baseline}}</span>
+                  <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">Visit 1 Check: ${{dim.baseline}}</span>
                 </div>
                 <h4 class="text-sm font-bold text-slate-800 mb-1">${{dim.title}}</h4>
                 <div class="flex items-baseline gap-2 my-2">
@@ -6049,9 +6738,13 @@ html_code = f"""<!DOCTYPE html>
     }}
 
     // Document Ready
-    document.addEventListener('DOMContentLoaded', () => {{
+    if (document.readyState === 'loading') {{
+      document.addEventListener('DOMContentLoaded', () => {{
+        initAllCharts();
+      }});
+    }} else {{
       initAllCharts();
-    }});
+    }}
   </script>
 </body>
 </html>

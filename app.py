@@ -120,7 +120,7 @@ with open("dashboard_demo_sessions_640.json", "r", encoding="utf-8") as f:
 # Helper for Altair Horizontal Bar Chart (Labels on Vertical Axis)
 def make_horizontal_bar(df, y_col, x_col, color="#0A6EB4", title=None):
     chart = alt.Chart(df).mark_bar(color=color, cornerRadiusEnd=4).encode(
-        y=alt.Y(f"{y_col}:N", sort="-x", title=None, axis=alt.Axis(labelLimit=800, labelWrap=280)),
+        y=alt.Y(f"{y_col}:N", sort="-x", title=None, axis=alt.Axis(labelLimit=800)),
         x=alt.X(f"{x_col}:Q", title=None),
         tooltip=[y_col, x_col]
     ).properties(
@@ -252,12 +252,24 @@ with kpi5:
 with kpi6:
     st.markdown(f"""
     <div class="wfp-card">
-        <div class="metric-label">Total PWDs</div>
-        <div class="metric-value">{tot_pwd}</div>
-        <div style="font-size: 11px; color: #0A6EB4; font-weight: 600;">PWDs</div>
-        <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Learners: {int(tot_pwd*0.58)} | Adults: {int(tot_pwd*0.42)}</div>
+        <div class="metric-label">3 Pillars & Turnout</div>
+        <div class="metric-value">83.3%</div>
+        <div style="font-size: 11px; color: #16A34A; font-weight: 600;">Adoption</div>
+        <div style="font-size: 11px; color: #64748B; margin-top: 4px;">Feeding · Equity · Clean Stoves</div>
     </div>
     """, unsafe_allow_html=True)
+
+st.markdown(f"""
+<div style="background: rgba(10, 110, 180, 0.08); border: 1px solid rgba(10, 110, 180, 0.25); border-radius: 10px; padding: 8px 14px; margin-top: 10px; margin-bottom: 15px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 12px; color: #1E293B;">
+    <div>
+        <strong>Secondary demographic data:</strong> 248 Persons with Disabilities recorded across Karamoja ({int(tot_pwd*0.58)} learners, {int(tot_pwd*0.42)} adults · 4.6% inclusion).
+    </div>
+    <div style="font-weight: 600; color: #0A6EB4;">
+        <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #CBD5E1; margin-right: 6px;">Learners: {int(tot_pwd*0.58)}</span>
+        <span style="background: white; padding: 2px 8px; border-radius: 4px; border: 1px solid #CBD5E1;">Adults: {int(tot_pwd*0.42)}</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # 8 TABS LAYOUT
 tabs = st.tabs([
@@ -272,8 +284,8 @@ tabs = st.tabs([
 
 # TAB 1: SUMMARY & REACH OVERVIEW
 with tabs[0]:
-    st.subheader("Campaign overview and PWD inclusion")
-    st.caption("Live operational metrics and inclusive PWD reach aggregated across all 9 Karamoja districts from verified field monitoring")
+    st.subheader("Campaign overview and demographic tracking")
+    st.caption("Live operational metrics and secondary demographic tracking (PWD inclusion) aggregated across all 9 Karamoja districts from verified field monitoring")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -292,12 +304,17 @@ with tabs[0]:
         st.altair_chart(make_horizontal_bar(df_tgt, "Indicator", "Percent", color="#0A6EB4"), use_container_width=True)
     
     with col2:
-        st.markdown(f"#### ♿ Total PWD breakdown ({tot_pwd} PWDs)")
-        df_pwd = pd.DataFrame({
-            "Category": ["Boys with Disabilities", "Girls with Disabilities", "VHTs with Disabilities", "Adults with Disabilities"],
-            "Count": [int(tot_pwd*0.31), int(tot_pwd*0.27), int(tot_pwd*0.15), int(tot_pwd*0.27)]
+        st.markdown("#### 🏛️ Programmatic adoption across the 3 Core Pillars")
+        df_pil_overview = pd.DataFrame({
+            "Core Pillar": [
+                "Pillar 1: School Feeding (Porridge Fortification)",
+                "Pillar 2: Gender Dynamics (Equitable Chores)",
+                "Pillar 3: Clean Cooking (Stoves / Action Plans)"
+            ],
+            "Adoption Rate (%)": [84.0, 85.0, 83.3]
         })
-        st.altair_chart(make_horizontal_bar(df_pwd, "Category", "Count", color="#1E88E5"), use_container_width=True)
+        st.altair_chart(make_horizontal_bar(df_pil_overview, "Core Pillar", "Adoption Rate (%)", color="#16A34A"), use_container_width=True)
+        st.markdown("**Field Highlights:** Porridge Fortification (84.0%) · Equitable Chores (85.0%) · Fuel-Saving Stoves (83.3%)")
     
     st.markdown("---")
     st.markdown("#### 🗺️ District operational summary across all 9 Karamoja districts")
@@ -333,6 +350,50 @@ with tabs[1]:
             "Count": [int(tot_vhts*0.52), int(tot_vhts*0.48)]
         })
         st.altair_chart(make_horizontal_bar(df_vht, "Sex", "Count", color="#0A6EB4"), use_container_width=True)
+
+    c4, c5, c6 = st.columns(3)
+    with c4:
+        st.markdown("**VHTs with disabilities (PWDs)**")
+        df_vp = pd.DataFrame({
+            "Category": ["Male VHTs with PWDs", "Female VHTs with PWDs"],
+            "Count": [19, 17]
+        })
+        st.altair_chart(make_horizontal_bar(df_vp, "Category", "Count", color="#0A6EB4"), use_container_width=True)
+    with c5:
+        st.markdown("**Joint calendar agreement**")
+        df_cal = pd.DataFrame({
+            "Status": ["Agreed on joint calendar", "Did not agree / pending"],
+            "Count": [tot_schools, 0]
+        })
+        st.altair_chart(make_horizontal_bar(df_cal, "Status", "Count", color="#16A34A"), use_container_width=True)
+    with c6:
+        st.markdown("**Physical tools & manuals disseminated**")
+        df_tools = pd.DataFrame({
+            "Manual/Tool": BASE_DATA["orientation"]["physical_tools_disseminated"]["categories"],
+            "Quantity": BASE_DATA["orientation"]["physical_tools_disseminated"]["values"]
+        })
+        st.altair_chart(make_horizontal_bar(df_tools, "Manual/Tool", "Quantity", color="#0A6EB4"), use_container_width=True)
+
+    st.markdown("""
+    <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px; margin: 12px 0px 16px 0px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: 800; color: #0A6EB4; font-size: 13px;">🤝 Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</div>
+            <span style="background: #ECFDF5; color: #047857; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #A7F3D0;">100% Yes (6/6 Schools)</span>
+        </div>
+        <div style="font-size: 12px; color: #334155; margin-bottom: 8px;">
+            <strong>List the partners:</strong><br>
+            • UNAC (Uganda National Action on Childhood Disability): <strong>100% (6/6)</strong><br>
+            • Afi (Action for Inclusion): <strong>100% (6/6)</strong><br>
+            • District Education Offices: <strong>100% (6/6)</strong><br>
+            • Health Centre Parish Focal Persons: <strong>83.3% (5/6)</strong><br>
+            • <strong>Other:</strong> <strong>33.3% (2/6)</strong> <em>(Specify: Local LC1 Council Leadership, Sub-County Community Development Officer)</em>
+        </div>
+        <div style="font-size: 12px; color: #334155; border-top: 1px solid #E2E8F0; padding-top: 8px;">
+            <strong>How were the partners involved:</strong><br>
+            • Joint facilitation: <strong>100% (6/6)</strong> | • Sustainability planning: <strong>100% (6/6)</strong> | • Mentorship on tool rollout: <strong>83.3% (5/6)</strong> | • <strong>Other:</strong> <strong>33.3% (2/6)</strong> <em>(Specify: Community kraal mobilization and inclusive PWD translation)</em>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
     
@@ -397,11 +458,11 @@ with tabs[1]:
 with tabs[2]:
     # 64-School Milestone Pipeline Funnel - 4 Metric Cards at Top
     st.markdown("### 64-School Milestone Pipeline Funnel")
-    st.caption(f"Sequential completion of all 3 visits across Karamoja primary schools: {tot_schools} of {tot_target_schools} schools completed ({((tot_schools/tot_target_schools)*100):.1f}%) | Remaining Pipeline: {max(0, tot_target_schools - tot_schools)} Schools")
+    st.caption(f"Sequential completion of all 3 visits across Karamoja primary schools: {tot_schools} of {tot_tgt_schools} schools completed ({((tot_schools/tot_tgt_schools)*100):.1f}%) | Remaining Pipeline: {max(0, tot_tgt_schools - tot_schools)} Schools")
     
     p1, p2, p3, p4 = st.columns(4)
     with p1:
-        st.metric(label="🎯 Target Scope", value=f"{tot_target_schools} Schools", help="Total target primary schools across Karamoja")
+        st.metric(label="🎯 Target Scope", value=f"{tot_tgt_schools} Schools", help="Total target primary schools across Karamoja")
     with p2:
         st.metric(label="📋 Visit 1 Done", value=f"{tot_schools} Schools", delta="Enrolment Baseline", delta_color="normal")
     with p3:
@@ -616,6 +677,27 @@ with tabs[2]:
             "Registered Pupils": active_school_data['vals']
         })
         st.altair_chart(make_horizontal_bar(df_v1_att, "Grade Band & Sex", "Registered Pupils", color="#0A6EB4"), use_container_width=True)
+
+        st.markdown("---")
+        st.markdown("##### 📞 Cross-Cutting Accountability: WFP Toll-Free Hotline & Help-Desk Queries")
+        st.caption("Active awareness and verified feedback queries logged during school contact cycle:")
+        c_hd1, c_hd2 = st.columns([1, 2])
+        with c_hd1:
+            st.markdown(f"""
+            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px;">
+                <div style="font-size: 11px; font-weight: 700; color: #0A6EB4; text-transform: uppercase;">Hotline & Help-Desk Awareness</div>
+                <div style="font-size: 26px; font-weight: 900; color: #1E293B; margin: 4px 0px;">93.8%</div>
+                <div style="font-size: 12px; color: #475569;">60 of 64 respondents actively know and reference the WFP toll-free hotline and school help-desk.</div>
+                <hr style="margin: 10px 0px;">
+                <div style="font-size: 12px; color: #1E293B;"><strong>Total Queries Logged:</strong> 142</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with c_hd2:
+            df_queries = pd.DataFrame({
+                "Feedback Category": BASE_DATA["three_visit_contact"]["visit1"]["helpdesk_queries_logged"]["categories"],
+                "Queries Logged": BASE_DATA["three_visit_contact"]["visit1"]["helpdesk_queries_logged"]["values"]
+            })
+            st.altair_chart(make_horizontal_bar(df_queries, "Feedback Category", "Queries Logged", color="#0A6EB4"), use_container_width=True)
             
     with v_tab2:
         st.markdown("#### Visit 2: NutriBus Big Activation Day")
@@ -657,6 +739,26 @@ with tabs[2]:
 
         st.markdown("---")
 
+        # Section 2b: Pillar 3 Metu Porridge Barriers
+        st.markdown("##### 🍲 Pillar 3: Metu Porridge Uptake Barriers Despite Cash Support")
+        st.caption("Primary reason for low uptake or lack of know-how regarding preparing WFP's Metu porridge despite cash support:")
+        c_mb1, c_mb2 = st.columns([1, 2])
+        with c_mb1:
+            st.markdown("""
+            <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 10px; padding: 14px; font-size: 12px; color: #78350F;">
+                <strong>Key Diagnostic Finding:</strong><br>
+                <strong>58.3%</strong> of households cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier. This directly validates the necessity of practical, hands-on cooking demonstrations.
+            </div>
+            """, unsafe_allow_html=True)
+        with c_mb2:
+            df_metu_barr = pd.DataFrame({
+                "Reported Barrier": BASE_DATA["three_visit_contact"]["visit2"]["metu_uptake_barriers"]["categories"],
+                "% Households": BASE_DATA["three_visit_contact"]["visit2"]["metu_uptake_barriers"]["pct"]
+            })
+            st.altair_chart(make_horizontal_bar(df_metu_barr, "Reported Barrier", "% Households", color="#D97706"), use_container_width=True)
+
+        st.markdown("---")
+
         # Section 3: Pillar 2 Micro-Poll (Boys only)
         st.markdown("##### 🗳️ Pillar 2: Rebalancing Chores & Attendance (Boys-Only Micro-Poll, 180 Boys Sampled)")
         st.caption("Read out the following statements and count number who agree. Choice (Strongly Agree to Strongly Disagree), Number of boys, and Reason in their words:")
@@ -678,7 +780,7 @@ with tabs[2]:
         st.markdown("---")
 
         # Section 4: Post-Session Rapid Scenario Intercept Assessment
-        st.markdown("##### 🎙️ Rapid Post-Session Intercept Conversation (2 Randomly Selected Learners & 2 Adults + Learner 3)")
+        st.markdown("##### 🎙️ Rapid Post-Session Intercept Conversation (4 Randomly Selected Learners & 2 Adults)")
         st.caption("Administered away from the crowd by Coordinator immediately after session (rule: conversation, not exam; unaided scenario prompt across different age groups):")
         
         exit_tabs = st.tabs([r["respondent_id"] for r in BASE_DATA["three_visit_contact"]["visit2"]["rapid_exit_interviews"]])
@@ -699,8 +801,8 @@ with tabs[2]:
 
         st.markdown("---")
 
-        # Section 5: Coordinator Post-Activation Field Log
-        st.markdown("##### 📝 Coordinator Post-Activation Field Audit Log & School Commitments")
+        # Section 5: Qualitative Field Observations & Commitments
+        st.markdown("##### 📝 Qualitative Field Observations & School Commitments")
         st.caption("Key delivery issues, key successes, adaptations for next school, and exact written school commitments:")
         
         for audit in BASE_DATA["three_visit_contact"]["visit2"]["qualitative_field_audit"]:
@@ -791,6 +893,39 @@ with tabs[2]:
                 "Schools": BASE_DATA["three_visit_contact"]["visit3"]["kitchen_stove_audit"]["values"]
             })
             st.altair_chart(make_horizontal_bar(df_ktc, "Practice", "Schools", color="#16A34A"), use_container_width=True)
+
+        st.markdown("---")
+
+        # Section 3b: Pillar 1 & 2 Core Tracking & PR / Radio Tracking
+        st.markdown("##### 🌟 Core Pillars & Communications Tracking")
+        p_col1, p_col2 = st.columns(2)
+        with p_col1:
+            st.markdown("**Pillar 1: School Feeding Protection Impact on Student Presence**")
+            df_p1 = pd.DataFrame({
+                "Presence Impact": BASE_DATA["three_visit_contact"]["visit3"]["pillar1_school_feeding_impact"]["categories"],
+                "Schools": BASE_DATA["three_visit_contact"]["visit3"]["pillar1_school_feeding_impact"]["values"]
+            })
+            st.altair_chart(make_horizontal_bar(df_p1, "Presence Impact", "Schools", color="#16A34A"), use_container_width=True)
+        with p_col2:
+            st.markdown("**Pillar 2: Fair Plate-Sharing Shift (Stopping Young/Girls Eating Last)**")
+            df_p2 = pd.DataFrame({
+                "Plate Sharing Shift": BASE_DATA["three_visit_contact"]["visit3"]["pillar2_plate_sharing_shift"]["categories"],
+                "Schools": BASE_DATA["three_visit_contact"]["visit3"]["pillar2_plate_sharing_shift"]["values"]
+            })
+            st.altair_chart(make_horizontal_bar(df_p2, "Plate Sharing Shift", "Schools", color="#7C3AED"), use_container_width=True)
+
+        st.markdown("""
+        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 16px; margin: 10px 0px 16px 0px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <div style="font-weight: 700; color: #0A6EB4; font-size: 13px;">📻 School-Level PR Highlights & Radio Broadcast Tracking</div>
+                <span style="background: #EFF6FF; color: #0A6EB4; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #BFDBFE;">PR Captured: 87.5% | Radio Reach: 90.6%</span>
+            </div>
+            <div style="font-size: 12px; color: #334155; line-height: 1.5;">
+                • <strong>PR & Social Media Highlights:</strong> 87.5% of schools captured photo and video stories documenting girl and boy leaders demonstrating fair plate sharing, firewood-saving stoves, and NutriClub porridge fortification.<br>
+                • <strong>Radio Broadcast Tracking:</strong> 90.6% of teachers and learners reported hearing Nutribus campaign radio spots on local FM stations (Karamoja FM, Nenah FM, Voice of Karamoja).
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
         st.markdown("---")
 
@@ -918,6 +1053,33 @@ with tabs[3]:
         </div>
         <div style="padding: 10px 14px; background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 8px; font-size: 11px; color: #78350F; line-height: 1.5;">
             <strong>⚠️ M&E Red Flag Rule & Calculation Standard:</strong> Sessions with fewer than 80 participants are automatically red-flagged (🚩) to trigger supervisor investigation and community mobilization review. <strong>Crucially, all participants from red-flagged sessions are fully retained and included in all total calculations, district aggregations, and cumulative KPI headcounts.</strong>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Capacity-Strengthening Partners Co-Facilitation (Community Demo)
+    st.markdown("""
+    <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: 800; color: #0A6EB4; font-size: 13px;">🤝 Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?</div>
+            <span style="background: #ECFDF5; color: #047857; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #A7F3D0;">90.0% Yes (54/60 Demos)</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 12px; color: #334155;">
+            <div style="background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px;">
+                <strong>If yes, specify partner name:</strong><br>
+                • UNAC: <strong>80.0% (48/60)</strong><br>
+                • AFI: <strong>75.0% (45/60)</strong><br>
+                • <strong>Other:</strong> <strong>23.3% (14/60)</strong><br>
+                <span style="font-size: 11px; color: #64748B;"><em>Specify: Local LC1 Executive & Parish Community Development Officer (CDO)</em></span>
+            </div>
+            <div style="background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px;">
+                <strong>Partner role observed:</strong><br>
+                • Co-facilitating clean cooking / gender dialogue: <strong>86.7% (52/60)</strong><br>
+                • Mentoring local VHTs / Elders: <strong>81.7% (49/60)</strong><br>
+                • Observing for sustainability tracking: <strong>76.7% (46/60)</strong><br>
+                • <strong>Other:</strong> <strong>20.0% (12/60)</strong><br>
+                <span style="font-size: 11px; color: #64748B;"><em>Specify: Specialized Ngakarimojong sign interpretation & mobility support</em></span>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1152,6 +1314,46 @@ with tabs[3]:
         st.markdown(f"**Main debate point or objection raised before consensus was reached:**")
         st.warning(f"\"{dialogue['main_debate_point']}\"")
 
+    st.markdown("---")
+
+    # Section 5: Pillar 3 Clean Cooking & Community Stoves Commitment
+    st.markdown("##### 🌿 Pillar 3: Clean Cooking Practices & Environmental Harvest Protection")
+    st.caption("Clean cooking demonstrated to protect the environment and lead to better seasonal crop harvests:")
+    cc_col1, cc_col2 = st.columns([1, 2])
+    with cc_col1:
+        st.markdown(f"""
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 10px; padding: 14px; font-size: 12px; color: #065F46;">
+            <strong>Clean Cooking Demonstrated:</strong><br>
+            <span style="font-size: 24px; font-weight: 900; color: #047857;">98.3%</span> (59 of 60 demos)<br>
+            <hr style="margin: 8px 0px;">
+            <strong>Environmental Protection Linkage:</strong><br>
+            Fuel-efficient cooking and covered pots conserve woodlots, preventing topsoil erosion and protecting micro-climates for higher crop yields.
+            <hr style="margin: 8px 0px;">
+            <strong>Gender Dialogues Executed:</strong><br>
+            <span style="font-weight: 700; color: #047857;">93.3%</span> led by senior men, senior women & VHTs.
+        </div>
+        """, unsafe_allow_html=True)
+    with cc_col2:
+        st.markdown("**Observed Community Commitment to Clean Cooking Practices:**")
+        df_clean_com = pd.DataFrame({
+            "Commitment Status": BASE_DATA["community_demonstrations"]["clean_cooking_commitment"]["categories"],
+            "Demos Observed": BASE_DATA["community_demonstrations"]["clean_cooking_commitment"]["values"]
+        })
+        st.altair_chart(make_horizontal_bar(df_clean_com, "Commitment Status", "Demos Observed", color="#047857"), use_container_width=True)
+
+    st.markdown("""
+    <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 16px; margin: 12px 0px 16px 0px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div style="font-weight: 700; color: #0A6EB4; font-size: 13px;">📻 Community PR Highlights & Radio Broadcast Feedback</div>
+            <span style="background: #EFF6FF; color: #0A6EB4; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #BFDBFE;">PR Photos: 91.7% | Radio Feedback: 88.3%</span>
+        </div>
+        <div style="font-size: 12px; color: #334155; line-height: 1.5;">
+            • <strong>Community Media Highlights:</strong> 91.7% of village demonstrations captured high-resolution photos and video testimonials of cooking circles, male dialogue participation, and child plate sharing.<br>
+            • <strong>Radio Broadcast Feedback:</strong> 88.3% of sessions logged community feedback on radio spots: <em>"Caregivers noted that hearing kraal leaders on the radio talking about feeding young children first made fathers much more willing to support plate sharing at home."</em>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
 # TAB 5: CHANGE STORIES
 with tabs[4]:
     st.subheader("Change stories field insights")
@@ -1331,6 +1533,7 @@ with tabs[5]:
         tot_d_pwds = sum(s.get("total_pwd", 0) for s in d_schools)
         
         with st.expander(f"📍 **{d} District** — {len(d_schools)} Monitored Primary Schools ({tot_d_members} Club Members · {tot_d_pwds} PWDs)", expanded=(sel_district != "All 9 Karamoja Districts")):
+            for s in d_schools:
                 sub_txt = f"{s.get('subcounty', '')} Sc ({s.get('selection', 'Base 5')})"
                 enr_txt = f"Enrolled: {s.get('total_enrolled', 0):,} ({s.get('attendance_rate', '67%')} attending)"
                 with st.expander(f"🏫 {s['school']} — {sub_txt} | {enr_txt} · {s.get('total_membership', 0)} Club Members", expanded=False):
@@ -1377,7 +1580,7 @@ with tabs[6]:
             "Status": "On Track Against Targets"
         },
         {
-            "Evaluation Question": "How well did we do it? (Implementation Quality & Fidelity)",
+            "Evaluation Question": "How well did we do it? (Implementation Quality & Adoption)",
             "Empirical Data That Answers the Question": "88.3% Hands-On Cooking Rate (caregivers cooked rather than watched) | 100.0% Compliant with obtainable local foods (0 unapproved luxury foods) | 92.2% Independent Teacher Delivery (59/64 schools ran without road team) | 91.4% Learner Teach-Back Mastery on food rules & chores | 100.0% Provided Ngakarimojong & PWD accessible seating | 89.1% Home Action Feasibility & Trial | 0 Retaliation complaints on WFP 0800 hotline",
             "Verification Source": "Independent Monitor Observation Protocols, VHT Debrief Forms, Pupil Exit Polls, WFP Hotline Logs",
             "Status": "High Quality Verified"
@@ -1392,26 +1595,26 @@ with tabs[6]:
     st.dataframe(df_mel_core, use_container_width=True, hide_index=True)
 
     st.markdown("---")
-    st.markdown("### 2. Three-prong verified results matrix (nutrition, education, gender)")
-    st.caption("Read down a column to compare prong achievements. Read across a row to inspect how outputs, fidelity, and behavioral shifts were proven in the field.")
+    st.markdown("### 2. Results matrix by the 3 Core Pillars")
+    st.caption("Read down a column to compare pillar achievements. Read across a row to inspect how outputs, adoption, and behavioral shifts were proven in the field.")
     
     df_mel_matrix = pd.DataFrame([
         {
-            "Prong": "Nutrition",
+            "Pillar": "Pillar 1: School Feeding & Practical Nutrition",
             "How much did we do? (Verified Outputs)": "60 Catchment Cooking Demos · 1,840 Take-Home NutriCharts distributed · 64 schools delivered food mapping & local substitution games",
-            "How well did we do it? (Quality & Fidelity Data)": "88.3% hands-on cooking rate (caregivers cooked rather than watched) · 100% compliance with seasonal greens/cowpeas (0 unapproved items) · 91.4% teach-back mastery",
+            "How well did we do it? (Quality & Adoption Data)": "88.3% hands-on cooking rate (caregivers cooked rather than watched) · 100% compliance with seasonal greens/cowpeas (0 unapproved items) · 91.4% teach-back mastery",
             "What changed? (Measured Shifts)": "+72.0% increase in porridge fortification (12% to 84%) · 1,586 returned NutriCharts (86.2% return rate) certified 7-day greens intake · 82% dished youngest infant first (+60% shift)"
         },
         {
-            "Prong": "Education",
+            "Pillar": "Pillar 2: Gender Dynamics & Equity",
             "How much did we do? (Verified Outputs)": "64 schools completed all 3 contacts (192 visits) · 64 NutriClubs established · 128 weekly sessions held · 64 Assembly Nutri-Moments delivered",
-            "How well did we do it? (Quality & Fidelity Data)": "92.2% teacher-led delivery fidelity without road crew · 95.5% average club session attendance · 100% active designated meeting compounds · 38 PWD club members active",
+            "How well did we do it? (Quality & Adoption Data)": "92.2% teacher-led delivery adoption without road crew · 95.5% average club session attendance · 100% active designated meeting compounds · 38 PWD club members active",
             "What changed? (Measured Shifts)": "Audited attendance rose from 3,350 to 3,640 pupils (+8.7% gain) · Girl on-time arrival rose from 62% to 94% (+32% punctuality gain) · 18 chronic out-of-school girls traced & repatriated"
         },
         {
-            "Prong": "Gender",
+            "Pillar": "Pillar 3: Community Engagement, Accountability & Climate-Smart Living",
             "How much did we do? (Verified Outputs)": "60 community elder & kraal dialogues conducted · 1,480 male fathers/elders engaged · 64 schools delivered Adere Calabash fair chore & food debate",
-            "How well did we do it? (Quality & Fidelity Data)": "100% consensus agreements logged without naming individuals · Men actively participated in cooking and dialogue · 90.5% surveyed boys affirmed chores belong to both sexes",
+            "How well did we do it? (Quality & Adoption Data)": "100% consensus agreements logged without naming individuals · Men actively participated in cooking and dialogue · 90.5% surveyed boys affirmed chores belong to both sexes",
             "What changed? (Measured Shifts)": "+67.0% increase in household chore sharing (18% to 85%) · Morning girl absenteeism dropped by 34% as boys took water tasks · Kraal councils ratified fair food-sharing declaration"
         }
     ])
@@ -1419,15 +1622,12 @@ with tabs[6]:
 
     st.markdown("---")
     st.markdown("### 3. The school contact cycle: what was found across Visit 1, 2 and 3")
-    st.caption("Audited data points delivered across the Visit 1, 2 and 3 school monitoring cycle across delivery team logs and independent monitors.")
-    
-    st.info("**Reporting Cadence:** Same-day records → Daily debrief → Thursday compile → Friday report to WFP → District close-out")
     
     cyc_c1, cyc_c2, cyc_c3 = st.columns(3)
     with cyc_c1:
-        st.markdown("#### Where we started (baseline)")
-        st.caption("Baseline cohort established across audited schools")
-        st.markdown("🔴 **Attendance Point 1:** 3,350 pupils (1,630 girls, 1,720 boys)\n\n🔴 **Baseline Fortification:** 12.0% adding greens\n\n🔴 **Baseline Chore Sharing:** 18.0% boys assisting\n\n🔴 **Infant Serving Priority:** 22.0% dished first")
+        st.markdown("#### Visit 1 Check: where we started")
+        st.caption("Initial status established across audited schools")
+        st.markdown("🔴 **Attendance Point 1:** 3,350 pupils (1,630 girls, 1,720 boys)\n\n🔴 **Fortification:** 12.0% adding greens\n\n🔴 **Chore Sharing:** 18.0% boys assisting\n\n🔴 **Infant Serving Priority:** 22.0% dished first")
         
         st.markdown("#### Visit 1: getting started in class")
         st.caption("Song, sorting, food map, chart home")
@@ -1454,19 +1654,67 @@ with tabs[6]:
     st.caption("Audited across 64 monitored schools and 60 catchment demonstration sites. Longitudinal attendance tracked across sentinel cohorts with full set of sixteen verified behavioral shift indicators.")
 
     st.markdown("---")
-    st.markdown("### 4. Key behavioral shifts: campaign baseline vs current endline shift")
-    
-    df_imp = pd.DataFrame({
-        "Behavioral Indicator": [
-            "Gender chore sharing equitably shifted",
-            "Metu porridge local fortification practiced",
-            "School kitchens firewood-saving stoves adopted",
-            "Youngest child prioritized in food serving",
-            "Schools with signed institutional action plan"
-        ],
-        "Adoption %": [85.0, 84.0, 83.3, 82.0, 100.0]
-    })
-    st.altair_chart(make_horizontal_bar(df_imp, "Behavioral Indicator", "Adoption %", color="#0A6EB4"), use_container_width=True)
+    st.markdown("### 4. Key behavioral shifts across the 3 Pillars: Visit 1 Check vs Visit 3 Closeout shift")
+    st.caption("Longitudinal measured behavioral change across the three core programmatic pillars:")
+
+    p1_col, p2_col, p3_col = st.columns(3)
+
+    with p1_col:
+        st.markdown("#### 🍏 Pillar 1: School Feeding & Practical Nutrition")
+        st.caption("Dietary diversity & infant feeding shifts")
+        df_p1 = pd.DataFrame({
+            "Indicator": ["Porridge Fortification (Greens)", "Toddler Served First"],
+            "Visit 1 Check (%)": [12.0, 22.0],
+            "Visit 3 Closeout (%)": [84.0, 82.0]
+        })
+        df_p1_melted = df_p1.melt(id_vars=["Indicator"], var_name="Stage", value_name="Rate (%)")
+        chart_p1 = alt.Chart(df_p1_melted).mark_bar(cornerRadiusEnd=4).encode(
+            y=alt.Y("Indicator:N", title=None, axis=alt.Axis(labelLimit=300)),
+            x=alt.X("Rate (%):Q", title="Rate (%)", scale=alt.Scale(domain=[0, 100])),
+            color=alt.Color("Stage:N", scale=alt.Scale(domain=["Visit 1 Check (%)", "Visit 3 Closeout (%)"], range=["#94a3b8", "#16a34a"])),
+            yOffset="Stage:N",
+            tooltip=["Indicator", "Stage", "Rate (%)"]
+        ).properties(height=220)
+        st.altair_chart(chart_p1, use_container_width=True)
+        st.markdown("**Shift:** Greens +72.0% · Toddlers first +60.0%")
+
+    with p2_col:
+        st.markdown("#### 🎓 Pillar 2: Gender Dynamics & Equity")
+        st.caption("Chore sharing & girl punctuality shifts")
+        df_p2 = pd.DataFrame({
+            "Indicator": ["Boys Sharing Morning Chores", "Girls Arriving On-Time"],
+            "Visit 1 Check (%)": [18.0, 62.0],
+            "Visit 3 Closeout (%)": [85.0, 94.0]
+        })
+        df_p2_melted = df_p2.melt(id_vars=["Indicator"], var_name="Stage", value_name="Rate (%)")
+        chart_p2 = alt.Chart(df_p2_melted).mark_bar(cornerRadiusEnd=4).encode(
+            y=alt.Y("Indicator:N", title=None, axis=alt.Axis(labelLimit=300)),
+            x=alt.X("Rate (%):Q", title="Rate (%)", scale=alt.Scale(domain=[0, 100])),
+            color=alt.Color("Stage:N", scale=alt.Scale(domain=["Visit 1 Check (%)", "Visit 3 Closeout (%)"], range=["#94a3b8", "#0A6EB4"])),
+            yOffset="Stage:N",
+            tooltip=["Indicator", "Stage", "Rate (%)"]
+        ).properties(height=220)
+        st.altair_chart(chart_p2, use_container_width=True)
+        st.markdown("**Shift:** Chores +67.0% · Girl punctuality +32.0%")
+
+    with p3_col:
+        st.markdown("#### 🔥 Pillar 3: Community Engagement, Accountability & Climate-Smart Living")
+        st.caption("Fuel-saving & community action plans")
+        df_p3 = pd.DataFrame({
+            "Indicator": ["Covered Cooking / Stoves", "Signed Action Work Plan"],
+            "Visit 1 Check (%)": [33.3, 0.0],
+            "Visit 3 Closeout (%)": [83.3, 100.0]
+        })
+        df_p3_melted = df_p3.melt(id_vars=["Indicator"], var_name="Stage", value_name="Rate (%)")
+        chart_p3 = alt.Chart(df_p3_melted).mark_bar(cornerRadiusEnd=4).encode(
+            y=alt.Y("Indicator:N", title=None, axis=alt.Axis(labelLimit=300)),
+            x=alt.X("Rate (%):Q", title="Rate (%)", scale=alt.Scale(domain=[0, 100])),
+            color=alt.Color("Stage:N", scale=alt.Scale(domain=["Visit 1 Check (%)", "Visit 3 Closeout (%)"], range=["#94a3b8", "#d97706"])),
+            yOffset="Stage:N",
+            tooltip=["Indicator", "Stage", "Rate (%)"]
+        ).properties(height=220)
+        st.altair_chart(chart_p3, use_container_width=True)
+        st.markdown("**Shift:** Fuel-saving +50.0% · Action plans +100.0%")
 
 
 
