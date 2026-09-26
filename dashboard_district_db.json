@@ -1,0 +1,2220 @@
+{
+  "Abim": {
+    "dates": [
+      "2026-09-08",
+      "2026-09-15",
+      "2026-09-22"
+    ],
+    "schools": 1,
+    "target_schools": 9,
+    "demos": 8,
+    "target_demos": 90,
+    "learners": 820,
+    "target_learners": 14190,
+    "target_enrolled": 17111,
+    "caregivers": 22,
+    "target_caregivers": 7200,
+    "teachers_vhts": 22,
+    "pwd_reach": 34,
+    "teachers_male": 4,
+    "teachers_female": 4,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 7,
+    "vhts_female": 7,
+    "vhts_pwd_male": 3,
+    "vhts_pwd_female": 2,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will show mothers in our PTA meeting how to add dried cowpea flour to school porridge."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Fair plate sharing",
+          "Improved cooking methods",
+          "Hotline 0800"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will ensure boys carry water jerricans in the morning so girls do not come late for math."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Nutri Clubs & Hotline"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "I committed to running the NutriClub every Tuesday afternoon."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will visit 5 households every week to verify they add wild eboo to morning porridge."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will speak with the village elders to release young girls from early livestock herding."
+      },
+      "VHT 3": {
+        "sex": "Male",
+        "lessons": [
+          "Rebalancing morning water/wood chores so girls stay in school",
+          "Establishing Nutri Clubs, Nutri-Moments, or using WFP 0800 Hotline"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will organize village kraal meetings to ensure fathers assign morning borehole chores to boys, and share the 0800 toll-free number."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Tue": 1,
+        "Thu": 1
+      },
+      "plan": 1,
+      "charts": 260,
+      "tollfree": 1,
+      "att_m": 180,
+      "att_f": 170
+    },
+    "v2": {
+      "hc_lower_m": 115,
+      "hc_lower_f": 110,
+      "hc_mid_m": 110,
+      "hc_mid_f": 105,
+      "hc_up_m": 95,
+      "hc_up_f": 90,
+      "teachers_m": 4,
+      "teachers_f": 4,
+      "comm_m": 7,
+      "comm_f": 16,
+      "pwd_m": 10,
+      "pwd_f": 9
+    },
+    "v3": {
+      "charts_issued": 260,
+      "charts_returned": 228,
+      "joint_comp": 204,
+      "feedback_tried": 184,
+      "feedback_help": 32,
+      "feedback_not": 12,
+      "barriers": {
+        "Firewood": 10,
+        "Water": 8,
+        "Ingredients": 6,
+        "Chores": 4,
+        "Disagreement": 2
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 22,
+      "fathers": 8,
+      "boys": 34,
+      "girls": 38,
+      "pwd_m": 3,
+      "pwd_f": 2,
+      "handson": 7,
+      "passive": 1,
+      "fuelsaving": 7,
+      "barriers": {
+        "Money": 8,
+        "Water": 6,
+        "Missing items": 4,
+        "Firewood": 3,
+        "Chores": 1
+      },
+      "commitments": {
+        "Will try": 18,
+        "Need VHT": 3,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 1,
+        "district": "Abim",
+        "subcounty": "Morulem",
+        "name": "OBOLOKOME P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1200,
+        "male": 1229,
+        "total": 2429,
+        "attending": 868,
+        "lat": 2.625,
+        "lng": 33.74
+      },
+      {
+        "no": 2,
+        "district": "Abim",
+        "subcounty": "Abim Sc",
+        "name": "OTALABAR P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1146,
+        "male": 1101,
+        "total": 2247,
+        "attending": 1629,
+        "lat": 2.705,
+        "lng": 33.65
+      },
+      {
+        "no": 3,
+        "district": "Abim",
+        "subcounty": "Kiru Tc",
+        "name": "KIRU P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 914,
+        "male": 969,
+        "total": 1883,
+        "attending": 1714,
+        "lat": 2.715,
+        "lng": 33.67
+      },
+      {
+        "no": 4,
+        "district": "Abim",
+        "subcounty": "Awach",
+        "name": "AWACH P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 928,
+        "male": 920,
+        "total": 1848,
+        "attending": 1259,
+        "lat": 2.775,
+        "lng": 33.57
+      },
+      {
+        "no": 5,
+        "district": "Abim",
+        "subcounty": "Nyakwae",
+        "name": "ROGOM P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 875,
+        "male": 945,
+        "total": 1820,
+        "attending": 1592,
+        "lat": 2.545,
+        "lng": 33.61
+      },
+      {
+        "no": 6,
+        "district": "Abim",
+        "subcounty": "Morulem",
+        "name": "MORULEM BOYS P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 482,
+        "male": 1267,
+        "total": 1749,
+        "attending": 1719,
+        "lat": 2.618,
+        "lng": 33.755
+      },
+      {
+        "no": 7,
+        "district": "Abim",
+        "subcounty": "Nyakwae",
+        "name": "PUPUKAMUYA P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 866,
+        "male": 855,
+        "total": 1721,
+        "attending": 1139,
+        "lat": 2.56,
+        "lng": 33.63
+      },
+      {
+        "no": 8,
+        "district": "Abim",
+        "subcounty": "Morulem",
+        "name": "MORULEM GIRLS' P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 1713,
+        "male": 0,
+        "total": 1713,
+        "attending": 1851,
+        "lat": 2.622,
+        "lng": 33.748
+      },
+      {
+        "no": 9,
+        "district": "Abim",
+        "subcounty": "Alerek",
+        "name": "ALEREK P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 816,
+        "male": 885,
+        "total": 1701,
+        "attending": 2419,
+        "lat": 2.815,
+        "lng": 33.7
+      }
+    ]
+  },
+  "Amudat": {
+    "dates": [
+      "2026-09-07",
+      "2026-09-14",
+      "2026-09-21"
+    ],
+    "schools": 1,
+    "target_schools": 5,
+    "demos": 7,
+    "target_demos": 50,
+    "learners": 760,
+    "target_learners": 3600,
+    "target_enrolled": 6655,
+    "caregivers": 20,
+    "target_caregivers": 4000,
+    "teachers_vhts": 20,
+    "pwd_reach": 31,
+    "teachers_male": 4,
+    "teachers_female": 3,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 6,
+    "vhts_female": 7,
+    "vhts_pwd_male": 3,
+    "vhts_pwd_female": 2,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will make sure pupils understand that wild green vegetables give strength to study."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Boys must fetch water from the borehole so that their sisters are not late and whipped."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "I will inspect our school kitchen to ensure the cook covers the porridge pot."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will demonstrate crushing roasted sesame into morning porridge for weaning infants."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will encourage pastoral fathers to let boys take shifts at the water point."
+      },
+      "VHT 3": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Rebalancing morning water/wood chores so girls stay in school"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will train mothers in Karita on crushing cowpeas and drying seasonal greens for porridge."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Thu": 1,
+        "Fri": 1
+      },
+      "plan": 1,
+      "charts": 240,
+      "tollfree": 1,
+      "att_m": 170,
+      "att_f": 160
+    },
+    "v2": {
+      "hc_lower_m": 105,
+      "hc_lower_f": 100,
+      "hc_mid_m": 100,
+      "hc_mid_f": 95,
+      "hc_up_m": 90,
+      "hc_up_f": 85,
+      "teachers_m": 4,
+      "teachers_f": 3,
+      "comm_m": 6,
+      "comm_f": 15,
+      "pwd_m": 9,
+      "pwd_f": 8
+    },
+    "v3": {
+      "charts_issued": 240,
+      "charts_returned": 204,
+      "joint_comp": 182,
+      "feedback_tried": 165,
+      "feedback_help": 28,
+      "feedback_not": 11,
+      "barriers": {
+        "Firewood": 9,
+        "Water": 7,
+        "Ingredients": 5,
+        "Chores": 4,
+        "Disagreement": 2
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 20,
+      "fathers": 7,
+      "boys": 31,
+      "girls": 35,
+      "pwd_m": 2,
+      "pwd_f": 2,
+      "handson": 6,
+      "passive": 1,
+      "fuelsaving": 6,
+      "barriers": {
+        "Money": 7,
+        "Water": 5,
+        "Missing items": 3,
+        "Firewood": 3,
+        "Chores": 1
+      },
+      "commitments": {
+        "Will try": 16,
+        "Need VHT": 3,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 10,
+        "district": "Amudat",
+        "subcounty": "Amudat Tc",
+        "name": "KATIKIT P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 829,
+        "male": 710,
+        "total": 1539,
+        "attending": 945,
+        "lat": 1.948,
+        "lng": 34.945
+      },
+      {
+        "no": 11,
+        "district": "Amudat",
+        "subcounty": "Amudat",
+        "name": "ALAKAS P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 708,
+        "male": 698,
+        "total": 1406,
+        "attending": 454,
+        "lat": 1.96,
+        "lng": 34.93
+      },
+      {
+        "no": 12,
+        "district": "Amudat",
+        "subcounty": "Karita",
+        "name": "CHEPKARARAT P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 671,
+        "male": 665,
+        "total": 1336,
+        "attending": 1026,
+        "lat": 1.69,
+        "lng": 34.87
+      },
+      {
+        "no": 13,
+        "district": "Amudat",
+        "subcounty": "Karita",
+        "name": "NAMODO P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 601,
+        "male": 587,
+        "total": 1188,
+        "attending": 532,
+        "lat": 1.67,
+        "lng": 34.89
+      },
+      {
+        "no": 14,
+        "district": "Amudat",
+        "subcounty": "Karita",
+        "name": "KARITA P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 621,
+        "male": 565,
+        "total": 1186,
+        "attending": 643,
+        "lat": 1.682,
+        "lng": 34.88
+      }
+    ]
+  },
+  "Kaabong": {
+    "dates": [
+      "2026-09-09",
+      "2026-09-16",
+      "2026-09-24"
+    ],
+    "schools": 1,
+    "target_schools": 13,
+    "demos": 8,
+    "target_demos": 130,
+    "learners": 890,
+    "target_learners": 16378,
+    "target_enrolled": 25225,
+    "caregivers": 24,
+    "target_caregivers": 10400,
+    "teachers_vhts": 24,
+    "pwd_reach": 36,
+    "teachers_male": 5,
+    "teachers_female": 4,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 7,
+    "vhts_female": 8,
+    "vhts_pwd_male": 3,
+    "vhts_pwd_female": 3,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Male",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls",
+          "Fair plate sharing"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will register attendance every morning at 7:45 AM and follow up on late girls."
+      },
+      "Teacher 2": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Nutri Clubs & Hotline"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "We have established a school vegetable garden to supply cowpeas for NutriClub demos."
+      },
+      "Teacher 3": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "I will train pupils on fuel-efficient cooking and putting lids on pots."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will teach young mothers to forage safe eboo and sun-dry it for the dry season."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Fair plate sharing"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Elder men must be reminded that daughters also need rest and full bellies to grow."
+      },
+      "VHT 3": {
+        "sex": "Male",
+        "lessons": [
+          "Rebalancing morning water/wood chores so girls stay in school",
+          "Fair and equal plate sharing between boys and girls at home",
+          "Using improved cooking methods to consume less firewood"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will mobilize household heads across Kalapata so young girls are not pulled out of class for firewood collection."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Tue": 1,
+        "Thu": 1
+      },
+      "plan": 1,
+      "charts": 290,
+      "tollfree": 1,
+      "att_m": 195,
+      "att_f": 185
+    },
+    "v2": {
+      "hc_lower_m": 125,
+      "hc_lower_f": 120,
+      "hc_mid_m": 120,
+      "hc_mid_f": 115,
+      "hc_up_m": 105,
+      "hc_up_f": 100,
+      "teachers_m": 5,
+      "teachers_f": 4,
+      "comm_m": 8,
+      "comm_f": 18,
+      "pwd_m": 11,
+      "pwd_f": 10
+    },
+    "v3": {
+      "charts_issued": 290,
+      "charts_returned": 252,
+      "joint_comp": 224,
+      "feedback_tried": 204,
+      "feedback_help": 35,
+      "feedback_not": 13,
+      "barriers": {
+        "Firewood": 11,
+        "Water": 9,
+        "Ingredients": 7,
+        "Chores": 4,
+        "Disagreement": 2
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 24,
+      "fathers": 9,
+      "boys": 38,
+      "girls": 42,
+      "pwd_m": 3,
+      "pwd_f": 3,
+      "handson": 7,
+      "passive": 1,
+      "fuelsaving": 7,
+      "barriers": {
+        "Money": 9,
+        "Water": 6,
+        "Missing items": 4,
+        "Firewood": 3,
+        "Chores": 2
+      },
+      "commitments": {
+        "Will try": 20,
+        "Need VHT": 3,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 15,
+        "district": "Kaabong",
+        "subcounty": "Kalapata",
+        "name": "KALAPATA P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1133,
+        "male": 1298,
+        "total": 2431,
+        "attending": 1585,
+        "lat": 3.645,
+        "lng": 34.225
+      },
+      {
+        "no": 16,
+        "district": "Kaabong",
+        "subcounty": "Kathile South",
+        "name": "KAMACHARIKOL P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1035,
+        "male": 1204,
+        "total": 2239,
+        "attending": 1276,
+        "lat": 3.565,
+        "lng": 34.06
+      },
+      {
+        "no": 17,
+        "district": "Kaabong",
+        "subcounty": "Kakamar",
+        "name": "KAKAMAR P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1056,
+        "male": 1177,
+        "total": 2233,
+        "attending": 1489,
+        "lat": 3.412,
+        "lng": 34.032
+      },
+      {
+        "no": 18,
+        "district": "Kaabong",
+        "subcounty": "Kaabong T/C",
+        "name": "PAJAR P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1009,
+        "male": 1017,
+        "total": 2026,
+        "attending": 1831,
+        "lat": 3.515,
+        "lng": 34.12
+      },
+      {
+        "no": 19,
+        "district": "Kaabong",
+        "subcounty": "Kathile",
+        "name": "NARENGEPAK P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 864,
+        "male": 1070,
+        "total": 1934,
+        "attending": 1460,
+        "lat": 3.585,
+        "lng": 34.04
+      },
+      {
+        "no": 20,
+        "district": "Kaabong",
+        "subcounty": "Lotim",
+        "name": "LOTIM P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 746,
+        "male": 1108,
+        "total": 1854,
+        "attending": 1527,
+        "lat": 3.682,
+        "lng": 34.082
+      },
+      {
+        "no": 21,
+        "district": "Kaabong",
+        "subcounty": "Sidok",
+        "name": "KOPOTH P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 904,
+        "male": 946,
+        "total": 1850,
+        "attending": 1091,
+        "lat": 3.382,
+        "lng": 34.148
+      },
+      {
+        "no": 22,
+        "district": "Kaabong",
+        "subcounty": "Lolelia",
+        "name": "LOMODOCH P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 796,
+        "male": 1053,
+        "total": 1849,
+        "attending": 988,
+        "lat": 3.548,
+        "lng": 33.918
+      },
+      {
+        "no": 23,
+        "district": "Kaabong",
+        "subcounty": "Loyoro",
+        "name": "TOROI P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 885,
+        "male": 900,
+        "total": 1785,
+        "attending": 1143,
+        "lat": 3.392,
+        "lng": 34.282
+      },
+      {
+        "no": 24,
+        "district": "Kaabong",
+        "subcounty": "Kaabong West",
+        "name": "KACHIKOL P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 785,
+        "male": 992,
+        "total": 1777,
+        "attending": 785,
+        "lat": 3.505,
+        "lng": 34.1
+      },
+      {
+        "no": 25,
+        "district": "Kaabong",
+        "subcounty": "Sidok",
+        "name": "LOCHOM P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 853,
+        "male": 924,
+        "total": 1777,
+        "attending": 694,
+        "lat": 3.375,
+        "lng": 34.155
+      },
+      {
+        "no": 26,
+        "district": "Kaabong",
+        "subcounty": "Lolelia",
+        "name": "NACHAKUNET P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 830,
+        "male": 923,
+        "total": 1753,
+        "attending": 1610,
+        "lat": 3.555,
+        "lng": 33.928
+      },
+      {
+        "no": 27,
+        "district": "Kaabong",
+        "subcounty": "Kathile",
+        "name": "KATHILE P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 656,
+        "male": 1061,
+        "total": 1717,
+        "attending": 899,
+        "lat": 3.58,
+        "lng": 34.048
+      }
+    ]
+  },
+  "Kotido": {
+    "dates": [
+      "2026-09-10",
+      "2026-09-17"
+    ],
+    "schools": 0,
+    "target_schools": 12,
+    "demos": 5,
+    "target_demos": 120,
+    "learners": 480,
+    "target_learners": 17211,
+    "target_enrolled": 27441,
+    "caregivers": 15,
+    "target_caregivers": 9600,
+    "teachers_vhts": 14,
+    "pwd_reach": 22,
+    "teachers_male": 0,
+    "teachers_female": 0,
+    "headteachers": 0,
+    "patrons": 0,
+    "vhts_male": 7,
+    "vhts_female": 7,
+    "vhts_pwd_male": 2,
+    "vhts_pwd_female": 2,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will educate parents during assembly on adding dry cowpea leaf flour to child porridge."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Boys must participate in morning chores so their sisters can arrive before classes commence."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "We are organizing our NutriClub to practice energy-efficient stove operations."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "Community demonstration site mobilized for porridge enrichment."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Chore sharing promoted in catchment villages."
+      },
+      "VHT 3": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Using improved cooking methods to consume less firewood"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will conduct home visits to demonstrate fuel-saving covered cooking pots."
+      }
+    },
+    "v1": {
+      "active": 0,
+      "days": {},
+      "plan": 0,
+      "charts": 0,
+      "tollfree": 0,
+      "att_m": 0,
+      "att_f": 0
+    },
+    "v2": {
+      "hc_lower_m": 0,
+      "hc_lower_f": 0,
+      "hc_mid_m": 0,
+      "hc_mid_f": 0,
+      "hc_up_m": 0,
+      "hc_up_f": 0,
+      "teachers_m": 0,
+      "teachers_f": 0,
+      "comm_m": 0,
+      "comm_f": 0,
+      "pwd_m": 0,
+      "pwd_f": 0
+    },
+    "v3": {
+      "charts_issued": 0,
+      "charts_returned": 0,
+      "joint_comp": 0,
+      "feedback_tried": 0,
+      "feedback_help": 0,
+      "feedback_not": 0,
+      "barriers": {},
+      "stoves_verified": 0
+    },
+    "demos_metrics": {
+      "caregivers": 15,
+      "fathers": 5,
+      "boys": 21,
+      "girls": 24,
+      "pwd_m": 2,
+      "pwd_f": 2,
+      "handson": 5,
+      "passive": 0,
+      "fuelsaving": 5,
+      "barriers": {
+        "Money": 5,
+        "Water": 4,
+        "Missing items": 2,
+        "Firewood": 2,
+        "Chores": 1
+      },
+      "commitments": {
+        "Will try": 13,
+        "Need VHT": 2,
+        "Not possible": 0
+      }
+    },
+    "schools_list": [
+      {
+        "no": 33,
+        "district": "Kotido",
+        "subcounty": "Panyangara Sc",
+        "name": "NAPUMPUM P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1448,
+        "male": 2780,
+        "total": 4228,
+        "attending": 1186,
+        "lat": 2.875,
+        "lng": 34.182
+      },
+      {
+        "no": 34,
+        "district": "Kotido",
+        "subcounty": "Nakapelimoru Sc",
+        "name": "NAKAPELIMORU P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 994,
+        "male": 1525,
+        "total": 2519,
+        "attending": 1672,
+        "lat": 2.932,
+        "lng": 34.322
+      },
+      {
+        "no": 35,
+        "district": "Kotido",
+        "subcounty": "Central Division",
+        "name": "LOMUKURA P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1255,
+        "male": 1166,
+        "total": 2421,
+        "attending": 2020,
+        "lat": 2.982,
+        "lng": 34.132
+      },
+      {
+        "no": 36,
+        "district": "Kotido",
+        "subcounty": "Kotido Sc",
+        "name": "LOKITELAEBU P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1023,
+        "male": 1365,
+        "total": 2388,
+        "attending": 1555,
+        "lat": 2.99,
+        "lng": 34.145
+      },
+      {
+        "no": 37,
+        "district": "Kotido",
+        "subcounty": "Rengen Sc",
+        "name": "RENGEN P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 868,
+        "male": 1351,
+        "total": 2219,
+        "attending": 1924,
+        "lat": 3.082,
+        "lng": 34.102
+      },
+      {
+        "no": 38,
+        "district": "Kotido",
+        "subcounty": "West Division",
+        "name": "MARY MOTHER OF GOD P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 1014,
+        "male": 1122,
+        "total": 2136,
+        "attending": 1817,
+        "lat": 2.978,
+        "lng": 34.12
+      },
+      {
+        "no": 39,
+        "district": "Kotido",
+        "subcounty": "Panyangara Sc",
+        "name": "KALOSARICH P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 787,
+        "male": 1230,
+        "total": 2017,
+        "attending": 1096,
+        "lat": 2.868,
+        "lng": 34.19
+      },
+      {
+        "no": 40,
+        "district": "Kotido",
+        "subcounty": "North Division",
+        "name": "KOTIDO GIRLS P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 848,
+        "male": 1158,
+        "total": 2006,
+        "attending": 1475,
+        "lat": 2.988,
+        "lng": 34.135
+      },
+      {
+        "no": 41,
+        "district": "Kotido",
+        "subcounty": "Nakapelimoru Sc",
+        "name": "KANAIR P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 730,
+        "male": 1269,
+        "total": 1999,
+        "attending": 857,
+        "lat": 2.925,
+        "lng": 34.33
+      },
+      {
+        "no": 42,
+        "district": "Kotido",
+        "subcounty": "Central Division",
+        "name": "KOTIDO MIXED P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 949,
+        "male": 980,
+        "total": 1929,
+        "attending": 1381,
+        "lat": 2.98,
+        "lng": 34.128
+      },
+      {
+        "no": 43,
+        "district": "Kotido",
+        "subcounty": "Kacheri",
+        "name": "LOKIDING P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 752,
+        "male": 1073,
+        "total": 1825,
+        "attending": 1040,
+        "lat": 3.052,
+        "lng": 33.852
+      },
+      {
+        "no": 44,
+        "district": "Kotido",
+        "subcounty": "Nakapelimoru Sc",
+        "name": "LOOKOROK P/S",
+        "category": "Government",
+        "selection": "Balance",
+        "female": 625,
+        "male": 1129,
+        "total": 1754,
+        "attending": 1188,
+        "lat": 2.94,
+        "lng": 34.315
+      }
+    ]
+  },
+  "Moroto": {
+    "dates": [
+      "2026-09-06",
+      "2026-09-13",
+      "2026-09-22"
+    ],
+    "schools": 1,
+    "target_schools": 5,
+    "demos": 9,
+    "target_demos": 50,
+    "learners": 950,
+    "target_learners": 5545,
+    "target_enrolled": 9956,
+    "caregivers": 28,
+    "target_caregivers": 4000,
+    "teachers_vhts": 25,
+    "pwd_reach": 42,
+    "teachers_male": 5,
+    "teachers_female": 4,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 8,
+    "vhts_female": 8,
+    "vhts_pwd_male": 4,
+    "vhts_pwd_female": 3,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls",
+          "Fair plate sharing"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will mobilize boys in my class to share water fetching so sisters are not locked out."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Fair plate sharing",
+          "Improved cooking methods",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "I will personally check that the cook maintains the firewood-saving stove daily."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Nutri Clubs & Hotline"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will conduct porridge tasting during our Friday NutriClub assembly."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will teach caregivers in Manyattas how to grind dried wild greens into baby food."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will address kraal leaders on the benefits of girls attending classes punctually."
+      },
+      "VHT 3": {
+        "sex": "Male",
+        "lessons": [
+          "Rebalancing morning water/wood chores so girls stay in school",
+          "Fair and equal plate sharing between boys and girls at home",
+          "Establishing Nutri Clubs, Nutri-Moments, or using WFP 0800 Hotline"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will work with traditional leaders in Nadunget to rebalance morning water chores and promote the 0800 toll-free line."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Tue": 1,
+        "Thu": 1,
+        "Fri": 1
+      },
+      "plan": 1,
+      "charts": 310,
+      "tollfree": 1,
+      "att_m": 210,
+      "att_f": 200
+    },
+    "v2": {
+      "hc_lower_m": 135,
+      "hc_lower_f": 130,
+      "hc_mid_m": 130,
+      "hc_mid_f": 125,
+      "hc_up_m": 115,
+      "hc_up_f": 110,
+      "teachers_m": 5,
+      "teachers_f": 4,
+      "comm_m": 9,
+      "comm_f": 20,
+      "pwd_m": 13,
+      "pwd_f": 12
+    },
+    "v3": {
+      "charts_issued": 310,
+      "charts_returned": 272,
+      "joint_comp": 242,
+      "feedback_tried": 220,
+      "feedback_help": 38,
+      "feedback_not": 14,
+      "barriers": {
+        "Firewood": 12,
+        "Water": 10,
+        "Ingredients": 7,
+        "Chores": 5,
+        "Disagreement": 2
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 28,
+      "fathers": 10,
+      "boys": 42,
+      "girls": 46,
+      "pwd_m": 4,
+      "pwd_f": 3,
+      "handson": 8,
+      "passive": 1,
+      "fuelsaving": 8,
+      "barriers": {
+        "Money": 10,
+        "Water": 7,
+        "Missing items": 5,
+        "Firewood": 3,
+        "Chores": 2
+      },
+      "commitments": {
+        "Will try": 23,
+        "Need VHT": 4,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 45,
+        "district": "Moroto",
+        "subcounty": "South Division",
+        "name": "KASIMERI P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 2062,
+        "male": 2194,
+        "total": 4256,
+        "attending": 2020,
+        "lat": 2.532,
+        "lng": 34.665
+      },
+      {
+        "no": 46,
+        "district": "Moroto",
+        "subcounty": "South Division",
+        "name": "CHILD JESUS P/S",
+        "category": "Church Based",
+        "selection": "Base 5",
+        "female": 733,
+        "male": 768,
+        "total": 1501,
+        "attending": 1410,
+        "lat": 2.538,
+        "lng": 34.67
+      },
+      {
+        "no": 47,
+        "district": "Moroto",
+        "subcounty": "Nadunget",
+        "name": "NADUNGET P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 742,
+        "male": 743,
+        "total": 1485,
+        "attending": 677,
+        "lat": 2.522,
+        "lng": 34.582
+      },
+      {
+        "no": 48,
+        "district": "Moroto",
+        "subcounty": "Nadunget",
+        "name": "NAWANATAU P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 737,
+        "male": 653,
+        "total": 1390,
+        "attending": 748,
+        "lat": 2.515,
+        "lng": 34.575
+      },
+      {
+        "no": 49,
+        "district": "Moroto",
+        "subcounty": "Nadunget",
+        "name": "LOPUTUK P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 621,
+        "male": 703,
+        "total": 1324,
+        "attending": 690,
+        "lat": 2.51,
+        "lng": 34.59
+      }
+    ]
+  },
+  "Nabilatuk": {
+    "dates": [
+      "2026-09-08",
+      "2026-09-17",
+      "2026-09-25"
+    ],
+    "schools": 1,
+    "target_schools": 5,
+    "demos": 9,
+    "target_demos": 50,
+    "learners": 810,
+    "target_learners": 5510,
+    "target_enrolled": 9569,
+    "caregivers": 24,
+    "target_caregivers": 4000,
+    "teachers_vhts": 22,
+    "pwd_reach": 35,
+    "teachers_male": 4,
+    "teachers_female": 4,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 7,
+    "vhts_female": 7,
+    "vhts_pwd_male": 3,
+    "vhts_pwd_female": 3,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Male",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Boys volunteered in front of assembly to do morning sweeping and water chores."
+      },
+      "Teacher 2": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will encourage parents to bring greens to school on porridge cooking days."
+      },
+      "Teacher 3": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "We posted the toll-free board on the main office door for anyone with questions."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "We will show mothers how to enrich Metu rations with locally grown cowpea leaves."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "We have agreed that the youngest child must receive the first warm cup of porridge."
+      },
+      "VHT 3": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Fair and equal plate sharing between boys and girls at home"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will verify in community gatherings that the youngest child is served their nutritious cup of porridge first."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Tue": 1,
+        "Thu": 1
+      },
+      "plan": 1,
+      "charts": 270,
+      "tollfree": 1,
+      "att_m": 185,
+      "att_f": 175
+    },
+    "v2": {
+      "hc_lower_m": 115,
+      "hc_lower_f": 110,
+      "hc_mid_m": 110,
+      "hc_mid_f": 105,
+      "hc_up_m": 100,
+      "hc_up_f": 95,
+      "teachers_m": 4,
+      "teachers_f": 4,
+      "comm_m": 7,
+      "comm_f": 17,
+      "pwd_m": 11,
+      "pwd_f": 10
+    },
+    "v3": {
+      "charts_issued": 270,
+      "charts_returned": 234,
+      "joint_comp": 208,
+      "feedback_tried": 190,
+      "feedback_help": 32,
+      "feedback_not": 12,
+      "barriers": {
+        "Firewood": 10,
+        "Water": 8,
+        "Ingredients": 6,
+        "Chores": 4,
+        "Disagreement": 2
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 24,
+      "fathers": 9,
+      "boys": 35,
+      "girls": 39,
+      "pwd_m": 3,
+      "pwd_f": 3,
+      "handson": 8,
+      "passive": 1,
+      "fuelsaving": 8,
+      "barriers": {
+        "Money": 8,
+        "Water": 6,
+        "Missing items": 4,
+        "Firewood": 3,
+        "Chores": 2
+      },
+      "commitments": {
+        "Will try": 20,
+        "Need VHT": 3,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 50,
+        "district": "Nabilatuk",
+        "subcounty": "Lolachat",
+        "name": "NATIRAE P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 930,
+        "male": 1312,
+        "total": 2242,
+        "attending": 1767,
+        "lat": 2.022,
+        "lng": 34.582
+      },
+      {
+        "no": 51,
+        "district": "Nabilatuk",
+        "subcounty": "Nabilatuk",
+        "name": "NABILATUK TOWNSHIP P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 960,
+        "male": 1120,
+        "total": 2080,
+        "attending": 1647,
+        "lat": 2.122,
+        "lng": 34.522
+      },
+      {
+        "no": 52,
+        "district": "Nabilatuk",
+        "subcounty": "Nabilatuk",
+        "name": "ACEGERTOLIM P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 834,
+        "male": 998,
+        "total": 1832,
+        "attending": 917,
+        "lat": 2.13,
+        "lng": 34.515
+      },
+      {
+        "no": 53,
+        "district": "Nabilatuk",
+        "subcounty": "Nabilatuk",
+        "name": "NAPONGAE P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 891,
+        "male": 867,
+        "total": 1758,
+        "attending": 545,
+        "lat": 2.115,
+        "lng": 34.53
+      },
+      {
+        "no": 54,
+        "district": "Nabilatuk",
+        "subcounty": "Lorengedwat",
+        "name": "LORENGEDWAT P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 807,
+        "male": 850,
+        "total": 1657,
+        "attending": 634,
+        "lat": 2.322,
+        "lng": 34.582
+      }
+    ]
+  },
+  "Nakapiripirit": {
+    "dates": [
+      "2026-09-05",
+      "2026-09-12",
+      "2026-09-20"
+    ],
+    "schools": 1,
+    "target_schools": 5,
+    "demos": 8,
+    "target_demos": 50,
+    "learners": 730,
+    "target_learners": 6061,
+    "target_enrolled": 8749,
+    "caregivers": 18,
+    "target_caregivers": 4000,
+    "teachers_vhts": 20,
+    "pwd_reach": 28,
+    "teachers_male": 4,
+    "teachers_female": 3,
+    "headteachers": 1,
+    "patrons": 2,
+    "vhts_male": 6,
+    "vhts_female": 7,
+    "vhts_pwd_male": 2,
+    "vhts_pwd_female": 2,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "Pupils were excited to learn about adding greens to porridge without changing color."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will monitor girl attendance in morning class and visit homes of latecomers."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "NutriClub meets every Thursday to practice porridge preparation."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Fair plate sharing"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I demonstrated drying eboo under shade so vitamins are not destroyed by direct sun."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Elder council confirmed support for balanced chore division between boys and girls."
+      },
+      "VHT 3": {
+        "sex": "Male",
+        "lessons": [
+          "Rebalancing morning water/wood chores so girls stay in school",
+          "Using improved cooking methods to consume less firewood"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will engage elder councils in Lemusui so sons fetch morning water, allowing girls to reach school before 8:00 AM."
+      }
+    },
+    "v1": {
+      "active": 1,
+      "days": {
+        "Thu": 1,
+        "Fri": 1
+      },
+      "plan": 1,
+      "charts": 230,
+      "tollfree": 1,
+      "att_m": 160,
+      "att_f": 150
+    },
+    "v2": {
+      "hc_lower_m": 105,
+      "hc_lower_f": 100,
+      "hc_mid_m": 100,
+      "hc_mid_f": 95,
+      "hc_up_m": 90,
+      "hc_up_f": 85,
+      "teachers_m": 4,
+      "teachers_f": 3,
+      "comm_m": 6,
+      "comm_f": 15,
+      "pwd_m": 9,
+      "pwd_f": 8
+    },
+    "v3": {
+      "charts_issued": 230,
+      "charts_returned": 196,
+      "joint_comp": 174,
+      "feedback_tried": 160,
+      "feedback_help": 26,
+      "feedback_not": 10,
+      "barriers": {
+        "Firewood": 9,
+        "Water": 7,
+        "Ingredients": 5,
+        "Chores": 3,
+        "Disagreement": 1
+      },
+      "stoves_verified": 1
+    },
+    "demos_metrics": {
+      "caregivers": 18,
+      "fathers": 6,
+      "boys": 30,
+      "girls": 33,
+      "pwd_m": 2,
+      "pwd_f": 2,
+      "handson": 7,
+      "passive": 1,
+      "fuelsaving": 7,
+      "barriers": {
+        "Money": 7,
+        "Water": 5,
+        "Missing items": 3,
+        "Firewood": 2,
+        "Chores": 1
+      },
+      "commitments": {
+        "Will try": 15,
+        "Need VHT": 2,
+        "Not possible": 1
+      }
+    },
+    "schools_list": [
+      {
+        "no": 55,
+        "district": "Nakapiripirit",
+        "subcounty": "Kakomongole",
+        "name": "LOKADWARAN P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 951,
+        "male": 1167,
+        "total": 2118,
+        "attending": 1194,
+        "lat": 1.918,
+        "lng": 34.618
+      },
+      {
+        "no": 56,
+        "district": "Nakapiripirit",
+        "subcounty": "Moruita",
+        "name": "LEMUSUI P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 884,
+        "male": 932,
+        "total": 1816,
+        "attending": 913,
+        "lat": 1.852,
+        "lng": 34.652
+      },
+      {
+        "no": 57,
+        "district": "Nakapiripirit",
+        "subcounty": "Loregae",
+        "name": "NAPIANANYA P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 759,
+        "male": 1016,
+        "total": 1775,
+        "attending": 1427,
+        "lat": 1.982,
+        "lng": 34.602
+      },
+      {
+        "no": 58,
+        "district": "Nakapiripirit",
+        "subcounty": "Loregae",
+        "name": "LORENG P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 629,
+        "male": 908,
+        "total": 1537,
+        "attending": 1450,
+        "lat": 1.975,
+        "lng": 34.595
+      },
+      {
+        "no": 59,
+        "district": "Nakapiripirit",
+        "subcounty": "Namalu",
+        "name": "ST MARYS P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 735,
+        "male": 768,
+        "total": 1503,
+        "attending": 1077,
+        "lat": 1.782,
+        "lng": 34.602
+      }
+    ]
+  },
+  "Napak": {
+    "dates": [
+      "2026-09-11",
+      "2026-09-18"
+    ],
+    "schools": 0,
+    "target_schools": 5,
+    "demos": 3,
+    "target_demos": 50,
+    "learners": 210,
+    "target_learners": 4942,
+    "target_enrolled": 6459,
+    "caregivers": 8,
+    "target_caregivers": 4000,
+    "teachers_vhts": 8,
+    "pwd_reach": 11,
+    "teachers_male": 0,
+    "teachers_female": 0,
+    "headteachers": 0,
+    "patrons": 0,
+    "vhts_male": 4,
+    "vhts_female": 4,
+    "vhts_pwd_male": 1,
+    "vhts_pwd_female": 1,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Male",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will show mothers in our school meetings how to enrich rations with wild greens."
+      },
+      "Teacher 2": {
+        "sex": "Female",
+        "lessons": [
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "We will display the WFP toll-free hotline board clearly on the staffroom veranda."
+      },
+      "Teacher 3": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will follow up on boys fetching water so sisters arrive in class on time."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "Community demonstration site mobilized for porridge enrichment."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Chore sharing promoted in catchment villages."
+      },
+      "VHT 3": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Establishing Nutri Clubs, Nutri-Moments, or using WFP 0800 Hotline"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will support VHT community cooking sessions with wild greens and encourage community feedback via 0800."
+      }
+    },
+    "v1": {
+      "active": 0,
+      "days": {},
+      "plan": 0,
+      "charts": 0,
+      "tollfree": 0,
+      "att_m": 0,
+      "att_f": 0
+    },
+    "v2": {
+      "hc_lower_m": 0,
+      "hc_lower_f": 0,
+      "hc_mid_m": 0,
+      "hc_mid_f": 0,
+      "hc_up_m": 0,
+      "hc_up_f": 0,
+      "teachers_m": 0,
+      "teachers_f": 0,
+      "comm_m": 0,
+      "comm_f": 0,
+      "pwd_m": 0,
+      "pwd_f": 0
+    },
+    "v3": {
+      "charts_issued": 0,
+      "charts_returned": 0,
+      "joint_comp": 0,
+      "feedback_tried": 0,
+      "feedback_help": 0,
+      "feedback_not": 0,
+      "barriers": {},
+      "stoves_verified": 0
+    },
+    "demos_metrics": {
+      "caregivers": 8,
+      "fathers": 3,
+      "boys": 12,
+      "girls": 14,
+      "pwd_m": 1,
+      "pwd_f": 1,
+      "handson": 3,
+      "passive": 0,
+      "fuelsaving": 3,
+      "barriers": {
+        "Money": 3,
+        "Water": 2,
+        "Missing items": 1,
+        "Firewood": 1,
+        "Chores": 0
+      },
+      "commitments": {
+        "Will try": 7,
+        "Need VHT": 1,
+        "Not possible": 0
+      }
+    },
+    "schools_list": [
+      {
+        "no": 60,
+        "district": "Napak",
+        "subcounty": "Lopei",
+        "name": "LOPEEI P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 773,
+        "male": 690,
+        "total": 1463,
+        "attending": 1297,
+        "lat": 2.622,
+        "lng": 34.212
+      },
+      {
+        "no": 61,
+        "district": "Napak",
+        "subcounty": "Lokopo",
+        "name": "LONGALOM P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 680,
+        "male": 691,
+        "total": 1371,
+        "attending": 899,
+        "lat": 2.722,
+        "lng": 34.252
+      },
+      {
+        "no": 62,
+        "district": "Napak",
+        "subcounty": "Ngoleriet",
+        "name": "KALOTOM P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 632,
+        "male": 626,
+        "total": 1258,
+        "attending": 932,
+        "lat": 2.442,
+        "lng": 34.382
+      },
+      {
+        "no": 63,
+        "district": "Napak",
+        "subcounty": "Iriir",
+        "name": "KAPUAT P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 656,
+        "male": 580,
+        "total": 1236,
+        "attending": 717,
+        "lat": 2.222,
+        "lng": 34.332
+      },
+      {
+        "no": 64,
+        "district": "Napak",
+        "subcounty": "Lorengechora",
+        "name": "LORENGECHORA P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 576,
+        "male": 555,
+        "total": 1131,
+        "attending": 1097,
+        "lat": 2.292,
+        "lng": 34.422
+      }
+    ]
+  },
+  "Karenga": {
+    "dates": [
+      "2026-09-12",
+      "2026-09-19"
+    ],
+    "schools": 0,
+    "target_schools": 5,
+    "demos": 3,
+    "target_demos": 50,
+    "learners": 190,
+    "target_learners": 7438,
+    "target_enrolled": 9521,
+    "caregivers": 6,
+    "target_caregivers": 4000,
+    "teachers_vhts": 8,
+    "pwd_reach": 9,
+    "teachers_male": 0,
+    "teachers_female": 0,
+    "headteachers": 0,
+    "patrons": 0,
+    "vhts_male": 4,
+    "vhts_female": 4,
+    "vhts_pwd_male": 1,
+    "vhts_pwd_female": 1,
+    "exit_interviews": {
+      "Teacher 1": {
+        "sex": "Female",
+        "lessons": [
+          "Preparing/enriching WFP Metu porridge with local wild greens/staples",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "I will lead our school NutriClub in identifying safe local wild greens for porridge."
+      },
+      "Teacher 2": {
+        "sex": "Male",
+        "lessons": [
+          "Chore rebalancing for girls",
+          "Improved cooking methods"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will encourage boys to relieve sisters from morning firewood tasks."
+      },
+      "Teacher 3": {
+        "sex": "Female",
+        "lessons": [
+          "Fair plate sharing",
+          "Hotline 0800"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "We will ensure cooks cover cooking pots tightly to conserve school firewood."
+      },
+      "VHT 1": {
+        "sex": "Female",
+        "lessons": [
+          "Metu porridge with wild greens",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas",
+        "words": "Community demonstration site mobilized for porridge enrichment."
+      },
+      "VHT 2": {
+        "sex": "Male",
+        "lessons": [
+          "Improved cooking methods",
+          "Chore rebalancing for girls"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Chore sharing promoted in catchment villages."
+      },
+      "VHT 3": {
+        "sex": "Male",
+        "lessons": [
+          "Rebalancing morning water/wood chores so girls stay in school",
+          "Fair and equal plate sharing between boys and girls at home"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "I will mobilize boys in Kocholo to fetch domestic firewood and water so girls remain in class."
+      }
+    },
+    "v1": {
+      "active": 0,
+      "days": {},
+      "plan": 0,
+      "charts": 0,
+      "tollfree": 0,
+      "att_m": 0,
+      "att_f": 0
+    },
+    "v2": {
+      "hc_lower_m": 0,
+      "hc_lower_f": 0,
+      "hc_mid_m": 0,
+      "hc_mid_f": 0,
+      "hc_up_m": 0,
+      "hc_up_f": 0,
+      "teachers_m": 0,
+      "teachers_f": 0,
+      "comm_m": 0,
+      "comm_f": 0,
+      "pwd_m": 0,
+      "pwd_f": 0
+    },
+    "v3": {
+      "charts_issued": 0,
+      "charts_returned": 0,
+      "joint_comp": 0,
+      "feedback_tried": 0,
+      "feedback_help": 0,
+      "feedback_not": 0,
+      "barriers": {},
+      "stoves_verified": 0
+    },
+    "demos_metrics": {
+      "caregivers": 6,
+      "fathers": 2,
+      "boys": 11,
+      "girls": 13,
+      "pwd_m": 1,
+      "pwd_f": 1,
+      "handson": 3,
+      "passive": 0,
+      "fuelsaving": 3,
+      "barriers": {
+        "Money": 2,
+        "Water": 2,
+        "Missing items": 1,
+        "Firewood": 1,
+        "Chores": 0
+      },
+      "commitments": {
+        "Will try": 5,
+        "Need VHT": 1,
+        "Not possible": 0
+      }
+    },
+    "schools_list": [
+      {
+        "no": 28,
+        "district": "Karenga",
+        "subcounty": "Lobalangit",
+        "name": "LOBALANGIT P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1078,
+        "male": 1331,
+        "total": 2409,
+        "attending": 2234,
+        "lat": 3.712,
+        "lng": 33.785
+      },
+      {
+        "no": 29,
+        "district": "Karenga",
+        "subcounty": "Kapedo",
+        "name": "NALAKAS P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 1038,
+        "male": 1213,
+        "total": 2251,
+        "attending": 1394,
+        "lat": 3.585,
+        "lng": 33.722
+      },
+      {
+        "no": 30,
+        "district": "Karenga",
+        "subcounty": "Kawalakol",
+        "name": "KOCHOLO P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 757,
+        "male": 946,
+        "total": 1703,
+        "attending": 1035,
+        "lat": 3.68,
+        "lng": 33.55
+      },
+      {
+        "no": 31,
+        "district": "Karenga",
+        "subcounty": "Karenga T/C",
+        "name": "KARENGA BOYS P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 786,
+        "male": 843,
+        "total": 1629,
+        "attending": 1484,
+        "lat": 3.626,
+        "lng": 33.698
+      },
+      {
+        "no": 32,
+        "district": "Karenga",
+        "subcounty": "Karenga T/C",
+        "name": "KARENGA GIRLS P/S",
+        "category": "Government",
+        "selection": "Base 5",
+        "female": 766,
+        "male": 763,
+        "total": 1529,
+        "attending": 1291,
+        "lat": 3.628,
+        "lng": 33.702
+      }
+    ]
+  }
+}
