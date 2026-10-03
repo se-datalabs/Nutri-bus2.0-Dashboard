@@ -25,17 +25,57 @@ if not RECORDS:
         { "id": 884667912, "entry_index": 3, "date": "2026-10-02", "district": "Kotido", "activity": "Three visit contact", "school": "KOTIDO MIXED P/S", "coordinator": "Ogwang Sam", "reach": 63, "pwd": 5, "status": "Submitted / Cleaned" }
     ]
 
+def norm_sch_name(txt):
+    return str(txt).upper().replace('P/S', '').replace('PS', '').replace('PRIMARY SCHOOL', '').strip()
+
 SCHOOL_TRAJECTORIES = []
 for s in OFFICIAL_SCHOOLS:
-    is_km = "KOTIDO MIXED" in s["name"].upper()
+    dist = s.get("district", "")
+    dist_info = DISTRICT_DB.get(dist, {})
+    v1_val = None
+    v2_val = None
+    v3_val = None
+
+    v1_rec = dist_info.get("v1")
+    if v1_rec:
+        s_norm = norm_sch_name(s["name"])
+        r_norm = norm_sch_name(v1_rec.get("school", ""))
+        if s_norm in r_norm or r_norm in s_norm:
+            v1_val = (v1_rec.get("hc_mid_m", 0) + v1_rec.get("hc_mid_f", 0) + v1_rec.get("hc_up_m", 0) + v1_rec.get("hc_up_f", 0)) or 35
+
+    v2_rec = dist_info.get("v2")
+    if v2_rec:
+        s_norm = norm_sch_name(s["name"])
+        r_norm = norm_sch_name(v2_rec.get("school", ""))
+        if s_norm in r_norm or r_norm in s_norm:
+            v2_val = (v2_rec.get("hc_mid_m", 0) + v2_rec.get("hc_mid_f", 0) + v2_rec.get("hc_up_m", 0) + v2_rec.get("hc_up_f", 0)) or 35
+
+    v3_rec = dist_info.get("v3")
+    if v3_rec:
+        s_norm = norm_sch_name(s["name"])
+        r_norm = norm_sch_name(v3_rec.get("school", ""))
+        if s_norm in r_norm or r_norm in s_norm:
+            v3_val = (v3_rec.get("hc_mid_m", 0) + v3_rec.get("hc_mid_f", 0) + v3_rec.get("hc_up_m", 0) + v3_rec.get("hc_up_f", 0)) or 35
+
+    if "KOTIDO MIXED" in s["name"].upper() and not v2_val:
+        v2_val = 35
+
+    status = "Scheduled / Pending Deployment"
+    if v3_val is not None:
+        status = "Completed (3 Visits Done)"
+    elif v2_val is not None:
+        status = "Active (Visit 2 Done)"
+    elif v1_val is not None:
+        status = "Active (Visit 1 Done)"
+
     SCHOOL_TRAJECTORIES.append({
         "name": s["name"],
         "district": s["district"],
         "enrolment": s["total"],
-        "v1": None,
-        "v2": 35 if is_km else None,
-        "v3": None,
-        "status": "Active (Visit 2 Done)" if is_km else "Scheduled / Pending Deployment"
+        "v1": v1_val,
+        "v2": v2_val,
+        "v3": v3_val,
+        "status": status
     })
 
 RECORDS_JSON = json.dumps(RECORDS, indent=2)
@@ -271,14 +311,6 @@ html_code = f"""<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- ACTIVE FILTER NOTICE -->
-    <div id="filterBanner" class="hidden bg-blue-50 border border-blue-200 text-wfp-blue px-4 py-2 rounded-xl text-xs flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-circle-info"></i>
-        <span>Filtered View: <strong id="filterBannerText">All Districts</strong></span>
-      </div>
-      <button onclick="resetFilters()" class="font-bold text-wfp-dark hover:underline">Clear Filter</button>
-    </div>
 
 <!-- 6 HEADLINE METRICS ROW -->
     <section>
@@ -546,11 +578,11 @@ html_code = f"""<!DOCTYPE html>
             </h4>
             <span class="text-[11px] font-semibold text-slate-500">Conducted vs Target Numbers</span>
           </div>
-          <div class="h-72">
+          <div class="h-80">
             <canvas id="chart-targets-actuals"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Core Activities: Schools (64), Visits (192), Cooking Demos (640), NutriClubs (64)</span>
+            <span id="core-activities-conducted-summary">Activities Conducted: Schools (3), Visit 1 (0), Visit 2 (1), Visit 3 (0), Cooking Demos (0), NutriClubs (1)</span>
           </div>
         </div>
 
@@ -4651,18 +4683,9 @@ html_code = f"""<!DOCTYPE html>
       const endDate = document.getElementById('dateFilterEnd').value;
       const search = document.getElementById('searchKeyword').value.toLowerCase();
 
-      // Show / hide active filter banner
-      const banner = document.getElementById('filterBanner');
-      const bannerText = document.getElementById('filterBannerText');
       const badge = document.getElementById('activeDistrictBadge');
-
-      if (selDistrict !== 'ALL' || startDate !== '2026-09-01' || endDate !== '2026-09-30') {{
-        banner.classList.remove('hidden');
-        bannerText.innerText = `${{selDistrict === 'ALL' ? 'All Districts' : selDistrict}} (${{startDate}} to ${{endDate}})`;
-        if (badge) badge.innerText = `${{selDistrict === 'ALL' ? 'All Districts' : selDistrict}} Active`;
-      }} else {{
-        banner.classList.add('hidden');
-        if (badge) badge.innerText = 'All 9 Karamoja Districts';
+      if (badge) {{
+        badge.innerText = selDistrict === 'ALL' ? 'All 9 Karamoja Districts' : `${{selDistrict}} Active`;
       }}
 
       // Calculate aggregated metrics based on filter
@@ -4829,13 +4852,20 @@ html_code = f"""<!DOCTYPE html>
       createGroupedBarChart('chart-targets-actuals',
         [
           "Primary Schools",
-          "School Contact Visits",
+          "Contact Visit 1",
+          "Contact Visit 2",
+          "Contact Visit 3",
           "Community Demos",
           "School NutriClubs"
         ],
-        [totSchools, totVisits, totDemos, totClubs],
-        [totTargetSchools, totTargetVisits, totTargetDemos, totTargetSchools]
+        [totSchools, v1DoneCount, v2DoneCount, v3DoneCount, totDemos, totClubs],
+        [totTargetSchools, totTargetSchools, totTargetSchools, totTargetSchools, totTargetDemos, totTargetSchools]
       );
+
+      const coreActEl = document.getElementById('core-activities-conducted-summary');
+      if (coreActEl) {{
+        coreActEl.innerHTML = `Activities Conducted: <strong class="text-slate-800">Schools (${{totSchools}})</strong>, <strong class="text-slate-800">Visit 1 (${{v1DoneCount}})</strong>, <strong class="text-slate-800">Visit 2 (${{v2DoneCount}})</strong>, <strong class="text-slate-800">Visit 3 (${{v3DoneCount}})</strong>, <strong class="text-slate-800">Cooking Demos (${{totDemos}})</strong>, <strong class="text-slate-800">NutriClubs (${{totClubs}})</strong>`;
+      }}
 
       createHorizontalBarChart('chart-pillar-stats',
         [
@@ -5040,6 +5070,16 @@ html_code = f"""<!DOCTYPE html>
 
       // Re-render school trajectory table
       renderSchoolTrajectoryTable(selDistrict);
+
+      const trajPill = document.getElementById('traj-active-cohort-pill');
+      if (trajPill) {{
+        const activeSchools = filteredTrajectorySchools.filter(s => s.v1 !== null || s.v2 !== null || s.v3 !== null);
+        if (activeSchools.length > 0) {{
+          trajPill.innerText = `${{activeSchools.length}} active cohort${{activeSchools.length > 1 ? 's' : ''}} (${{activeSchools.map(s => s.name).join(', ')}})`;
+        }} else {{
+          trajPill.innerText = '0 active cohorts';
+        }}
+      }}
 
       // Sync V1 School Scope with District filter if applicable
       const schoolSel = document.getElementById('v1-school-select');

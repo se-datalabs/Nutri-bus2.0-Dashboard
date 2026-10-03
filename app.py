@@ -293,11 +293,18 @@ with tabs[0]:
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("#### 🎯 Core Activities: Conducted vs Target")
+        v1_done = 0
+        v2_done = 2 if sel_district == "All 9 Karamoja Districts" else (1 if sel_district in ["Kotido", "Moroto"] else 0)
+        v3_done = 0
         df_act = pd.DataFrame([
             {"Activity": "Primary Schools", "Status": "Conducted", "Count": tot_schools},
             {"Activity": "Primary Schools", "Status": "Target", "Count": tot_tgt_schools},
-            {"Activity": "Contact Visits", "Status": "Conducted", "Count": tot_visits},
-            {"Activity": "Contact Visits", "Status": "Target", "Count": tot_tgt_visits},
+            {"Activity": "Contact Visit 1", "Status": "Conducted", "Count": v1_done},
+            {"Activity": "Contact Visit 1", "Status": "Target", "Count": tot_tgt_schools},
+            {"Activity": "Contact Visit 2", "Status": "Conducted", "Count": v2_done},
+            {"Activity": "Contact Visit 2", "Status": "Target", "Count": tot_tgt_schools},
+            {"Activity": "Contact Visit 3", "Status": "Conducted", "Count": v3_done},
+            {"Activity": "Contact Visit 3", "Status": "Target", "Count": tot_tgt_schools},
             {"Activity": "Cooking Demos", "Status": "Conducted", "Count": tot_demos},
             {"Activity": "Cooking Demos", "Status": "Target", "Count": tot_tgt_demos},
             {"Activity": "NutriClubs", "Status": "Conducted", "Count": tot_clubs},
@@ -309,9 +316,9 @@ with tabs[0]:
             color=alt.Color("Status:N", scale=alt.Scale(domain=["Conducted", "Target"], range=["#0A6EB4", "#CBD5E1"])),
             yOffset="Status:N",
             tooltip=["Activity", "Status", "Count"]
-        ).properties(height=260)
+        ).properties(height=300)
         st.altair_chart(chart_act, use_container_width=True)
-        st.caption(f"📊 **Activities Summary:** Schools: **{tot_schools} / {tot_tgt_schools}** · Visits: **{tot_visits} / {tot_tgt_visits}** · Cooking Demos: **{tot_demos} / {tot_tgt_demos}** · NutriClubs: **{tot_clubs} / {tot_tgt_clubs}**")
+        st.caption(f"📊 **Activities Conducted:** Schools: **{tot_schools}**, Visit 1: **{v1_done}**, Visit 2: **{v2_done}**, Visit 3: **{v3_done}**, Cooking Demos: **{tot_demos}**, NutriClubs: **{tot_clubs}**")
     
     with col2:
         st.markdown("#### 🏛️ Programmatic adoption across the 3 Core Pillars")
@@ -511,23 +518,26 @@ with tabs[2]:
         if not d_schools:
             continue
         
-        d_active = sum(1 for s in d_schools if "KOTIDO MIXED" in s["name"].upper())
-        status_label = f"🟢 {d_active} Active Cohort (Visit 2 Logged)" if d_active > 0 else "⚪ 0 Visits Logged"
+        d_active = sum(1 for s in d_schools if ("KOTIDO MIXED" in s["name"].upper() or "KASIMERI" in s["name"].upper()))
+        status_label = f"🟢 {d_active} Active Cohort{'s' if d_active > 1 else ''} (Visit 2 Logged)" if d_active > 0 else "⚪ 0 Visits Logged"
         tot_enrol = sum(s["total"] for s in d_schools)
-        is_expanded = (sel_district != "All 9 Karamoja Districts" or d == "Kotido")
+        is_expanded = (sel_district != "All 9 Karamoja Districts" or d == "Kotido" or d == "Moroto")
 
         with st.expander(f"📍 {d} District ({len(d_schools)} Schools · Enrolment: {tot_enrol:,} · {status_label})", expanded=is_expanded):
             d_rows = []
             for s in d_schools:
                 is_km = "KOTIDO MIXED" in s["name"].upper()
+                is_kas = "KASIMERI" in s["name"].upper()
+                v2_val = 35 if is_km else (403 if is_kas else "-")
+                has_v2 = (is_km or is_kas)
                 d_rows.append({
                     "School Name": s["name"],
                     "Baseline Enrolment": s["total"],
-                    "Visit 1": "-" if not is_km else "-",
-                    "Visit 2": 35 if is_km else "-",
+                    "Visit 1": "-",
+                    "Visit 2": v2_val,
                     "Visit 3": "-",
-                    "Attendance Trajectory": "Active (Visit 2 Done)" if is_km else "Scheduled",
-                    "Cohort Status": "1/3 Visits Completed" if is_km else "Pending Deployment"
+                    "Attendance Trajectory": "Active (Visit 2 Done)" if has_v2 else "Scheduled",
+                    "Cohort Status": "1/3 Visits Completed" if has_v2 else "Pending Deployment"
                 })
             df_dist = pd.DataFrame(d_rows)
             st.dataframe(df_dist, use_container_width=True, hide_index=True)
