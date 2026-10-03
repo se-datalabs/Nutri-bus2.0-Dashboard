@@ -14,6 +14,33 @@ DISTRICT_DB_JSON = json.dumps(DISTRICT_DB, indent=2)
 BASE_DATA_JSON = json.dumps(BASE_DATA, indent=2)
 DEMO_SESSIONS_640_JSON = json.dumps(DEMO_SESSIONS_640)
 
+with open("official_64_schools.json", "r", encoding="utf-8") as f:
+    OFFICIAL_SCHOOLS = json.load(f)
+
+RECORDS = BASE_DATA.get("records_log", [])
+if not RECORDS:
+    RECORDS = [
+        { "id": 884394036, "entry_index": 1, "date": "2026-10-02", "district": "Abim", "activity": "Orientation", "school": "KIRU P/S", "coordinator": "Opio John Fred & Okello Daniel Nimaro", "reach": 41, "pwd": 0, "status": "Submitted / Cleaned" },
+        { "id": 884613428, "entry_index": 2, "date": "2026-10-02", "district": "Kaabong", "activity": "Nutriclub session", "school": "KAKAMAR P/S", "coordinator": "Amoo Sofia", "reach": 36, "pwd": 0, "status": "Submitted / Cleaned" },
+        { "id": 884667912, "entry_index": 3, "date": "2026-10-02", "district": "Kotido", "activity": "Three visit contact", "school": "KOTIDO MIXED P/S", "coordinator": "Ogwang Sam", "reach": 63, "pwd": 5, "status": "Submitted / Cleaned" }
+    ]
+
+SCHOOL_TRAJECTORIES = []
+for s in OFFICIAL_SCHOOLS:
+    is_km = "KOTIDO MIXED" in s["name"].upper()
+    SCHOOL_TRAJECTORIES.append({
+        "name": s["name"],
+        "district": s["district"],
+        "enrolment": s["total"],
+        "v1": None,
+        "v2": 35 if is_km else None,
+        "v3": None,
+        "status": "Active (Visit 2 Done)" if is_km else "Scheduled / Pending Deployment"
+    })
+
+RECORDS_JSON = json.dumps(RECORDS, indent=2)
+SCHOOL_TRAJECTORIES_JSON = json.dumps(SCHOOL_TRAJECTORIES, indent=2)
+
 html_code = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,7 +201,7 @@ html_code = f"""<!DOCTYPE html>
             <span class="shrink-0">Dates:</span>
             <input type="date" id="dateFilterStart" value="2026-09-01" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
             <span class="text-blue-200">to</span>
-            <input type="date" id="dateFilterEnd" value="2026-09-30" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
+            <input type="date" id="dateFilterEnd" value="2026-10-31" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
           </div>
 
           <span class="text-white/30 hidden lg:inline">|</span>
@@ -253,7 +280,7 @@ html_code = f"""<!DOCTYPE html>
       <button onclick="resetFilters()" class="font-bold text-wfp-dark hover:underline">Clear Filter</button>
     </div>
 
-    <!-- 6 HEADLINE METRICS ROW -->
+<!-- 6 HEADLINE METRICS ROW -->
     <section>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
         <!-- 1. Schools -->
@@ -265,14 +292,14 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-schools" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">6</span>
+            <span id="kpi-schools" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">3</span>
             <span id="kpi-target-schools" class="text-[10px] sm:text-xs text-slate-400 font-medium whitespace-nowrap">/ 64 schools</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div id="bar-schools" class="bg-wfp-blue h-1.5 rounded-full" style="width: 9.4%"></div>
+            <div id="bar-schools" class="bg-wfp-blue h-1.5 rounded-full" style="width: 4.7%"></div>
           </div>
           <div class="text-[10px] sm:text-[11px] font-semibold text-wfp-blue flex items-center justify-between gap-1">
-            <span id="pct-schools" class="truncate">Progress: 9.4%</span>
+            <span id="pct-schools" class="truncate">Progress: 4.7%</span>
             <span class="text-slate-400 font-normal shrink-0">Target: 64</span>
           </div>
         </div>
@@ -286,14 +313,14 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-demos" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">60</span>
+            <span id="kpi-demos" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">0</span>
             <span id="kpi-target-demos" class="text-[10px] sm:text-xs text-slate-400 font-medium whitespace-nowrap">/ 640 sites</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div id="bar-demos" class="bg-wfp-blue h-1.5 rounded-full" style="width: 9.4%"></div>
+            <div id="bar-demos" class="bg-wfp-blue h-1.5 rounded-full" style="width: 0%"></div>
           </div>
           <div class="text-[10px] sm:text-[11px] font-semibold text-wfp-blue flex items-center justify-between gap-1">
-            <span id="pct-demos" class="truncate">Progress: 9.4%</span>
+            <span id="pct-demos" class="truncate">Progress: 0.0%</span>
             <span class="text-slate-400 font-normal shrink-0">Target: 640</span>
           </div>
         </div>
@@ -307,14 +334,14 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-learners" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">5,840</span>
+            <span id="kpi-learners" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">71</span>
             <span id="kpi-target-learners" class="text-[10px] sm:text-xs text-slate-400 font-medium whitespace-nowrap">/ 80,875</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div id="bar-learners" class="bg-wfp-blue h-1.5 rounded-full" style="width: 7.2%"></div>
+            <div id="bar-learners" class="bg-wfp-blue h-1.5 rounded-full" style="width: 0.1%"></div>
           </div>
           <div class="text-[10px] sm:text-[11px] font-semibold text-wfp-blue flex items-center justify-between gap-1">
-            <span id="pct-learners" class="truncate">Progress: 7.2%</span>
+            <span id="pct-learners" class="truncate">Progress: 0.1%</span>
             <span class="text-slate-400 font-normal shrink-0">Target: 80,875</span>
           </div>
         </div>
@@ -328,7 +355,7 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-caregivers" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">165</span>
+            <span id="kpi-caregivers" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">4</span>
             <span id="kpi-target-caregivers" class="text-[10px] sm:text-xs text-slate-400 font-medium whitespace-nowrap">/ 51,200</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
@@ -349,15 +376,15 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-teachers" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">143</span>
+            <span id="kpi-teachers" class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-none">65</span>
             <span class="text-[10px] sm:text-xs text-emerald-600 font-bold whitespace-nowrap">Trained</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
             <div class="bg-emerald-600 h-1.5 rounded-full" style="width: 100%"></div>
           </div>
           <div class="text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-between gap-1">
-            <span id="sub-teachers" class="truncate">48 Teachers</span>
-            <span id="sub-vhts" class="shrink-0">95 VHTs</span>
+            <span id="sub-teachers" class="truncate">42 Teachers</span>
+            <span id="sub-vhts" class="shrink-0">23 VHTs</span>
           </div>
         </div>
 
@@ -370,15 +397,15 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span class="text-2xl sm:text-3xl font-extrabold text-emerald-700 leading-none">83.3%</span>
+            <span id="kpi-pillars" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 leading-none">33.3%</span>
             <span class="text-[10px] sm:text-xs text-emerald-600 font-medium whitespace-nowrap">Adoption</span>
           </div>
           <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div class="bg-emerald-600 h-1.5 rounded-full" style="width: 83.3%"></div>
+            <div id="bar-pillars" class="bg-emerald-600 h-1.5 rounded-full" style="width: 33.3%"></div>
           </div>
           <div class="text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-between gap-1">
-            <span class="truncate">Feeding · Equity · Clean Stoves</span>
-            <span class="text-emerald-700 shrink-0 font-bold">&ge;80 Turnout</span>
+            <span class="truncate">1 of 3 Pillars Logged</span>
+            <span class="text-emerald-700 shrink-0 font-bold">100% Chores</span>
           </div>
         </div>
       </div>
@@ -390,12 +417,12 @@ html_code = f"""<!DOCTYPE html>
             <i class="fa-solid fa-users"></i>
           </span>
           <span>
-            <strong>Secondary demographic data:</strong> <span id="banner-pwd-total">248</span> Persons with Disabilities recorded across Karamoja (<span id="banner-pwd-learners">146</span> learners, <span id="banner-pwd-adults">102</span> adults · 4.6% inclusion).
+            <strong>Secondary demographic data:</strong> <span id="banner-pwd-total">5</span> Persons with Disabilities recorded across Karamoja (<span id="banner-pwd-learners">3</span> learners, <span id="banner-pwd-adults">2</span> adults · verified inclusion).
           </span>
         </div>
         <div class="flex items-center gap-2 text-[11px] font-semibold text-wfp-blue">
-          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Learners: <span id="sub-pwd-learners">146</span></span>
-          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Adults: <span id="sub-pwd-adults">102</span></span>
+          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Learners: <span id="sub-pwd-learners">3</span></span>
+          <span class="bg-white px-2 py-0.5 rounded border border-blue-200">Adults: <span id="sub-pwd-adults">2</span></span>
         </div>
       </div>
     </section>
@@ -515,16 +542,15 @@ html_code = f"""<!DOCTYPE html>
           <div class="flex items-center justify-between mb-3">
             <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
               <i class="fa-solid fa-bullseye text-wfp-blue"></i>
-              <span>Campaign actuals vs target</span>
+              <span>Core Activities: Conducted vs. Operational Target</span>
             </h4>
-            <span class="text-[11px] font-semibold text-slate-500">Horizontal bar (labels on vertical axis)</span>
+            <span class="text-[11px] font-semibold text-slate-500">Conducted vs Target Numbers</span>
           </div>
           <div class="h-72">
             <canvas id="chart-targets-actuals"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Targets: 64 schools, 640 demo sites, 80,875 learners, 51,200 adults</span>
-
+            <span>Core Activities: Schools (64), Visits (192), Cooking Demos (640), NutriClubs (64)</span>
           </div>
         </div>
 
@@ -538,26 +564,26 @@ html_code = f"""<!DOCTYPE html>
               </h4>
               <p class="text-[10px] text-slate-500">Verified field practice &amp; behavior shift rates</p>
             </div>
-            <span id="pillarAvgBadge" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">83.3% Avg Adoption</span>
+            <span id="pillarAvgBadge" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">33.3% Avg Adoption (1/3 Pillars Logged)</span>
           </div>
           <div class="h-72">
             <canvas id="chart-pillar-stats"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="p-2 rounded bg-emerald-50 border border-emerald-100">
-              <div class="font-bold text-emerald-800 text-sm">84.0%</div>
+            <div class="p-2 rounded bg-slate-50 border border-slate-200">
+              <div class="font-bold text-slate-400 text-sm">-</div>
               <div class="text-[10px] text-slate-600 font-medium">Pillar 1: School Feeding</div>
-              <div class="text-[9px] text-emerald-700">Porridge Fortification</div>
+              <div class="text-[9px] text-slate-400">Awaiting V1/V3 Audits</div>
             </div>
             <div class="p-2 rounded bg-blue-50 border border-blue-100">
-              <div class="font-bold text-wfp-blue text-sm">85.0%</div>
+              <div class="font-bold text-wfp-blue text-sm">100.0%</div>
               <div class="text-[10px] text-slate-600 font-medium">Pillar 2: Gender Dynamics</div>
               <div class="text-[9px] text-blue-700">Equitable Chore Sharing</div>
             </div>
-            <div class="p-2 rounded bg-amber-50 border border-amber-100">
-              <div class="font-bold text-amber-800 text-sm">83.3%</div>
+            <div class="p-2 rounded bg-slate-50 border border-slate-200">
+              <div class="font-bold text-slate-400 text-sm">-</div>
               <div class="text-[10px] text-slate-600 font-medium">Pillar 3: Clean Cooking</div>
-              <div class="text-[9px] text-amber-700">Fuel-Saving Cookstoves</div>
+              <div class="text-[9px] text-slate-400">Awaiting Demo Logs</div>
             </div>
           </div>
         </div>
@@ -587,14 +613,15 @@ html_code = f"""<!DOCTYPE html>
               <span>Scroll table sideways to view all columns</span>
             </div>
             <div class="overflow-x-auto rounded-lg border border-slate-200">
-              <table class="w-full text-xs text-left min-w-[560px]">
+              <table class="w-full text-xs text-left min-w-[620px]">
               <thead class="bg-slate-50 text-slate-600 font-semibold uppercase border-b text-[11px]">
                 <tr>
-                  <th class="py-2.5 px-3 whitespace-nowrap min-w-[130px]">District</th>
+                  <th class="py-2.5 px-3 whitespace-nowrap min-w-[120px]">District</th>
                   <th class="py-2.5 px-2 text-center whitespace-nowrap">Schools (Done / Target)</th>
+                  <th class="py-2.5 px-2 text-center whitespace-nowrap">Visits (Done / Target)</th>
                   <th class="py-2.5 px-2 text-center whitespace-nowrap">Demos (Done / Target)</th>
-                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Direct Reach (Done / Target)</th>
-                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Caregivers (Done / Target)</th>
+                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Direct Learners</th>
+                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Caregivers</th>
                   <th class="py-2.5 px-2 text-right whitespace-nowrap">PWD Reach</th>
                 </tr>
               </thead>
@@ -738,7 +765,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">100% Yes (6/6 Schools)</span>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">100% Yes (1/1 School — Kiru P/S, Abim)</span>
               <span class="text-xs text-slate-500 font-medium">Orientation pp. 9–10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</h4>
@@ -754,23 +781,23 @@ html_code = f"""<!DOCTYPE html>
                 <div class="space-y-1.5 text-xs text-slate-700">
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>UNAC (Uganda National Action on Childhood Disability)</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (1/1)</span>
                   </div>
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>Afi (Action for Inclusion)</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (1/1)</span>
                   </div>
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>District Education Offices</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (6/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (1/1)</span>
                   </div>
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>Health Centre Parish Focal Persons</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">83.3% (5/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">100% (1/1)</span>
                   </div>
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span class="font-semibold text-wfp-blue">Other</span>
-                    <span class="font-bold text-wfp-blue bg-blue-50 px-2 py-0.5 rounded text-[11px]">33.3% (2/6)</span>
+                    <span class="font-bold text-wfp-blue bg-blue-50 px-2 py-0.5 rounded text-[11px]">100% (1/1)</span>
                   </div>
                 </div>
                 <div class="mt-2 p-2 bg-blue-50/60 rounded border border-blue-200 text-[11px] text-slate-700">
@@ -787,19 +814,19 @@ html_code = f"""<!DOCTYPE html>
                 <div class="grid grid-cols-2 gap-1.5 text-xs">
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Joint facilitation</span>
-                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (6/6)</span>
+                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (1/1)</span>
                   </div>
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Sustainability planning</span>
-                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (6/6)</span>
+                    <span class="font-bold text-emerald-700 text-xs mt-1">100% (1/1)</span>
                   </div>
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Mentorship on tool rollout</span>
-                    <span class="font-bold text-wfp-blue text-xs mt-1">83.3% (5/6)</span>
+                    <span class="font-bold text-wfp-blue text-xs mt-1">100% (1/1)</span>
                   </div>
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Other (community kraals)</span>
-                    <span class="font-bold text-wfp-blue text-xs mt-1">33.3% (2/6)</span>
+                    <span class="font-bold text-wfp-blue text-xs mt-1">100% (1/1)</span>
                   </div>
                 </div>
                 <div class="mt-2 text-[10px] text-slate-500 italic">
@@ -817,7 +844,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">1,024 Tools Distributed</span>
+              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">1 School Kit Disseminated</span>
               <span class="text-xs text-slate-500 font-medium">Orientation p. 10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Physical tools and manuals disseminated to school leadership</h4>
@@ -827,9 +854,9 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Metu Manuals: <strong>384</strong></span>
-            <span>Climate Manuals: <strong>512</strong></span>
-            <span>Toll-Free Boards: <strong>128</strong></span>
+            <span>Metu Manuals: <strong>1</strong></span>
+            <span>Climate Manuals: <strong>1</strong></span>
+            <span>Toll-Free Boards: <strong>1</strong></span>
           </div>
         </div>
       </div>
@@ -883,7 +910,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="mt-4">
           <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
             <i class="fa-solid fa-users-viewfinder text-wfp-blue"></i>
-            <span>Detailed interview log: 6 individual participants (3 teachers and 3 VHTs)</span>
+            <span id="exit-interview-title">Detailed interview log: 6 individual participants (Kiru P/S, Abim)</span>
           </h4>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="exit-interview-cards">
@@ -906,8 +933,8 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">64 Target Schools</span>
           </div>
           <div class="flex items-center gap-3">
-            <span id="badge-pipeline-pct" class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">9.4% Completed</span>
-            <span class="text-xs text-slate-500 font-medium">Remaining Pipeline: <strong id="metric-pipe-remain">58 Schools</strong></span>
+            <span id="badge-pipeline-pct" class="text-xs bg-sky-50 text-sky-700 font-bold px-2 py-0.5 rounded border border-sky-200">1.6% In Progress</span>
+            <span class="text-xs text-slate-500 font-medium">Remaining Pipeline: <strong id="metric-pipe-remain">63 Schools</strong></span>
           </div>
         </div>
         <h4 class="text-sm font-bold text-slate-800 mb-1">64-school milestone pipeline funnel</h4>
@@ -927,7 +954,7 @@ html_code = f"""<!DOCTYPE html>
               <span class="w-2.5 h-2.5 rounded-full bg-wfp-blue"></span>
               <span class="text-xs text-wfp-blue font-bold uppercase tracking-wide">Visit 1 Done</span>
             </div>
-            <div id="metric-pipe-v1" class="text-2xl font-extrabold text-wfp-blue">6</div>
+            <div id="metric-pipe-v1" class="text-2xl font-extrabold text-wfp-blue">0</div>
             <div class="text-xs text-slate-600 mt-1">Enrolment Baseline & Handover</div>
           </div>
           <div class="p-4 bg-sky-50/60 rounded-xl border border-sky-200">
@@ -935,15 +962,15 @@ html_code = f"""<!DOCTYPE html>
               <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
               <span class="text-xs text-sky-700 font-bold uppercase tracking-wide">Visit 2 Done</span>
             </div>
-            <div id="metric-pipe-v2" class="text-2xl font-extrabold text-sky-700">6</div>
-            <div class="text-xs text-slate-600 mt-1">NutriBus Big Activation Day</div>
+            <div id="metric-pipe-v2" class="text-2xl font-extrabold text-sky-700">1</div>
+            <div class="text-xs text-slate-600 mt-1">NutriBus Big Activation Day (Kotido Mixed)</div>
           </div>
           <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-200">
             <div class="flex items-center justify-center gap-2 mb-1">
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
               <span class="text-xs text-emerald-700 font-bold uppercase tracking-wide">Visit 3 Audited</span>
             </div>
-            <div id="metric-pipe-v3" class="text-2xl font-extrabold text-emerald-700">6</div>
+            <div id="metric-pipe-v3" class="text-2xl font-extrabold text-emerald-700">0</div>
             <div class="text-xs text-slate-600 mt-1">Debrief & Closing Results Audit</div>
           </div>
         </div>
@@ -954,11 +981,11 @@ html_code = f"""<!DOCTYPE html>
         <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
           <div class="flex items-center gap-2">
             <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Attendance trajectory line graph</span>
-            <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">📈 Increasing (+7.6% Rebound)</span>
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded border border-slate-200">Awaiting V1 &amp; V3 Audits</span>
           </div>
           <div class="flex items-center gap-3">
             <span class="text-xs text-slate-500 font-medium">Timeline: Visit 1 ➔ Visit 2 ➔ Visit 3</span>
-            <span class="text-pink-600 text-xs font-bold bg-pink-50 px-2 py-0.5 rounded border border-pink-200"><i class="fa-solid fa-arrow-up mr-1"></i>Girls rebound: +190 (+11.7%)</span>
+            <span class="text-slate-500 text-xs font-semibold bg-slate-50 px-2 py-0.5 rounded border border-slate-200">Longitudinal growth pending closeouts</span>
           </div>
         </div>
         <h4 class="text-base font-bold text-slate-800 mb-1">Weekly attendance trend across Visit 1, 2 and 3 vs. enrolment baseline</h4>
@@ -966,20 +993,20 @@ html_code = f"""<!DOCTYPE html>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs mb-4">
           <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-            <div id="metric-long-base" class="text-lg font-extrabold text-slate-800">3,820</div>
+            <div id="metric-long-base" class="text-lg font-extrabold text-slate-400">-</div>
             <div class="text-[11px] text-slate-500 font-semibold uppercase mt-0.5">Term enrolment baseline</div>
           </div>
           <div class="p-3 bg-blue-50/60 rounded-lg border border-blue-200">
-            <div id="metric-long-v1" class="text-lg font-extrabold text-wfp-blue">3,350</div>
-            <div class="text-[11px] text-wfp-blue font-semibold uppercase mt-0.5">Visit 1 attendance (87.7%)</div>
+            <div id="metric-long-v1" class="text-lg font-extrabold text-slate-400">-</div>
+            <div class="text-[11px] text-slate-500 font-semibold uppercase mt-0.5">Visit 1 attendance</div>
           </div>
           <div class="p-3 bg-sky-50/60 rounded-lg border border-sky-200">
-            <div id="metric-long-v2" class="text-lg font-extrabold text-sky-700">3,510</div>
-            <div class="text-[11px] text-sky-700 font-semibold uppercase mt-0.5">Visit 2 attendance (91.9%)</div>
+            <div id="metric-long-v2" class="text-lg font-extrabold text-sky-700">35</div>
+            <div class="text-[11px] text-sky-700 font-semibold uppercase mt-0.5">Visit 2 attendance (Kotido Mixed)</div>
           </div>
           <div class="p-3 bg-emerald-50/60 rounded-lg border border-emerald-200">
-            <div id="metric-long-v3" class="text-lg font-extrabold text-emerald-700">3,640</div>
-            <div class="text-[11px] text-emerald-700 font-semibold uppercase mt-0.5">Visit 3 attendance (95.3%)</div>
+            <div id="metric-long-v3" class="text-lg font-extrabold text-slate-400">-</div>
+            <div class="text-[11px] text-slate-500 font-semibold uppercase mt-0.5">Visit 3 attendance</div>
           </div>
         </div>
 
@@ -988,50 +1015,63 @@ html_code = f"""<!DOCTYPE html>
         </div>
 
         <div class="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-600 flex flex-wrap items-center justify-between gap-2">
-          <span class="text-emerald-700 font-bold"><i class="fa-solid fa-arrow-trend-up mr-1"></i>Overall rebound: +290 pupils (+7.6% attendance growth across Visit 1, 2 and 3)</span>
-          <span class="text-slate-500">6 audited cohorts with complete longitudinal retention tracking</span>
+          <span class="text-slate-600 font-semibold"><i class="fa-solid fa-clock mr-1"></i>Longitudinal attendance comparison will populate automatically as field monitors complete Visit 1 and Visit 3 closeouts.</span>
+          <span class="text-slate-500">1 cohort active (Kotido Mixed P/S - Visit 2 logged)</span>
         </div>
       </div>
 
-      <!-- School-by-School Multi-Visit Attendance Trajectory Table -->
+      <!-- School-by-School Multi-Visit Attendance Trajectory (District Accordions) -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
           <div>
             <div class="flex items-center gap-2 mb-0.5">
               <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">64 schools longitudinal roster</span>
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">Weekly attendance tracking</span>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">District Accordions</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800">School-by-school attendance trajectory across Visit 1, 2 and 3</h4>
-            <p class="text-xs text-slate-500">Tracking whether attendance is increasing at each individual primary school across Visit 1, 2 and 3:</p>
+            <p class="text-xs text-slate-500">Weekly attendance tracking organized by district (click any district to expand or collapse schools):</p>
           </div>
-          <div class="flex items-center gap-2 text-xs">
+          <div class="flex items-center gap-2 text-xs flex-wrap">
             <span class="px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
               64 schools target
             </span>
-            <span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-lg border border-emerald-200">
-              6 fully audited cohorts
+            <span id="traj-active-cohort-pill" class="px-2.5 py-1 bg-sky-50 text-sky-800 font-bold rounded-lg border border-sky-200">
+              1 active cohort (Kotido Mixed)
             </span>
           </div>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-xs text-left">
-            <thead class="bg-slate-50 text-slate-600 font-bold uppercase border-b border-slate-200">
-              <tr>
-                <th class="py-2.5 px-3">School name</th>
-                <th class="py-2.5 px-3">District</th>
-                <th class="py-2.5 px-3 text-right">Enrolment baseline</th>
-                <th class="py-2.5 px-3 text-right">Visit 1</th>
-                <th class="py-2.5 px-3 text-right">Visit 2</th>
-                <th class="py-2.5 px-3 text-right">Visit 3</th>
-                <th class="py-2.5 px-3 text-center">Attendance trajectory</th>
-                <th class="py-2.5 px-3 text-center">Cohort status</th>
-              </tr>
-            </thead>
-            <tbody id="school-trajectory-table-body" class="divide-y divide-slate-100 text-slate-700">
-              <!-- Injected via JS -->
-            </tbody>
-          </table>
+        <!-- Toolbar: Search filter and Expand/Collapse buttons -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-slate-100">
+          <div class="relative flex-1 min-w-[220px] max-w-sm">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            <input 
+              type="text" 
+              id="traj-school-search" 
+              placeholder="Search school name or district..." 
+              oninput="onTrajSchoolSearch(this.value)"
+              class="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-wfp-blue/20 focus:border-wfp-blue transition"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              onclick="toggleAllTrajAccordions(true)" 
+              class="px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition flex items-center gap-1.5 cursor-pointer">
+              <i class="fa-solid fa-angles-down text-[10px]"></i> Expand All
+            </button>
+            <button 
+              type="button" 
+              onclick="toggleAllTrajAccordions(false)" 
+              class="px-2.5 py-1 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-md transition flex items-center gap-1.5 cursor-pointer">
+              <i class="fa-solid fa-angles-up text-[10px]"></i> Collapse All
+            </button>
+          </div>
+        </div>
+
+        <!-- District Accordions Container -->
+        <div id="school-trajectory-accordions" class="space-y-3">
+          <!-- Injected via JS -->
         </div>
       </div>
 
@@ -1092,7 +1132,17 @@ html_code = f"""<!DOCTYPE html>
             <i class="fa-solid fa-circle-check"></i>
             <span>Visit 1: Orientation Follow-up & Material Handover Check</span>
           </div>
-          
+          <span class="text-xs bg-amber-50 text-amber-700 font-bold px-2.5 py-1 rounded-lg border border-amber-200">
+            Awaiting Field Submissions
+          </span>
+        </div>
+
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-clock text-slate-400 text-sm"></i>
+            <span><strong>Visit 1 Status:</strong> No Visit 1 orientation follow-up submissions recorded in the activity log yet. Enrolment baselines, institutional readiness checks, and material handover logs will display here as field teams submit records.</span>
+          </div>
+          <span class="px-2 py-0.5 bg-slate-200 text-slate-600 font-bold rounded text-[11px] shrink-0">0 of 64 Logged</span>
         </div>
 
         <!-- Row 0: Official Enrolment Baseline for This Term -->
@@ -1107,13 +1157,13 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="flex items-center gap-3 text-xs">
               <span id="badge-v1-enrol-boys" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Official boys enrolment: 1,940
+                Official boys enrolment: 0
               </span>
               <span id="badge-v1-enrol-girls" class="px-3 py-1 bg-pink-50 text-pink-700 font-bold rounded-lg border border-pink-200">
-                Official girls enrolment: 1,880
+                Official girls enrolment: 0
               </span>
-              <span id="badge-v1-enrol-total" class="px-3 py-1 bg-slate-100 text-slate-800 font-bold rounded-lg border border-slate-300">
-                Total Enrolled: 3,820 Pupils
+              <span id="badge-v1-enrol-total" class="px-3 py-1 bg-slate-100 text-slate-500 font-bold rounded-lg border border-slate-300">
+                Total Enrolled: 0 Pupils (Pending Visit 1)
               </span>
             </div>
           </div>
@@ -1135,7 +1185,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>Yes: <strong>6 schools (100%)</strong></span>
+              <span>Yes: <strong>0 schools</strong></span>
               <span>No: <strong>0</strong></span>
             </div>
           </div>
@@ -1198,16 +1248,16 @@ html_code = f"""<!DOCTYPE html>
 
               <h4 class="text-sm font-bold text-slate-800 mb-1">Number of take-home NutriCharts and recipe cards issued</h4>
               <p class="text-xs text-slate-500 mb-3">Total cards distributed across all schools</p>
-              <div class="p-4 bg-blue-50/60 rounded-xl border border-blue-100 text-center my-2">
-                <div class="text-3xl font-extrabold text-wfp-blue">1,840</div>
+              <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center my-2">
+                <div class="text-3xl font-extrabold text-slate-400">0</div>
                 <div class="text-xs font-semibold text-slate-600 mt-1">Total Take-Home NutriCharts Issued</div>
-                <div class="text-[11px] text-slate-500 mt-0.5">Average: 307 cards / school</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Target: 1,840 (Avg 307 cards / school)</div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>ECD-P2: <strong>620</strong></span>
-              <span>P3-P4: <strong>680</strong></span>
-              <span>P5-P7: <strong>540</strong></span>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
+              <span>ECD-P2: <strong>0</strong></span>
+              <span>P3-P4: <strong>0</strong></span>
+              <span>P5-P7: <strong>0</strong></span>
             </div>
           </div>
 
@@ -1261,24 +1311,18 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-school text-wfp-blue text-xs"></i>
                 <label for="v1-school-select" class="text-[11px] font-bold text-slate-600">School View:</label>
                 <select id="v1-school-select" onchange="switchV1AttendanceScope(this.value)" class="text-xs bg-transparent text-slate-800 font-semibold focus:outline-none cursor-pointer">
-                  <option value="ALL">All 6 Schools (3,350 Pupils)</option>
-                  <option value="Abim">Abim Primary School (Abim: 550 Pupils)</option>
-                  <option value="Amudat">Hvvv Primary School (Amudat: 510 Pupils)</option>
-                  <option value="Kaabong">Kaabong West Primary School (Kaabong: 605 Pupils)</option>
-                  <option value="Moroto">Moroto Municipal Primary School (Moroto: 630 Pupils)</option>
-                  <option value="Nabilatuk">Nabilatuk Primary School (Nabilatuk: 535 Pupils)</option>
-                  <option value="Nakapiripirit">Nakapiripirit Primary School (Nakapiripirit: 520 Pupils)</option>
+                  <option value="ALL">All Schools (0 Pupils Logged)</option>
                 </select>
               </div>
 
               <span id="badge-v1-att-boys" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Registered Boys this week Attendance: 1,720
+                Registered Boys this week Attendance: 0
               </span>
               <span id="badge-v1-att-girls" class="px-3 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-lg border border-emerald-200">
-                Registered Girls this week Attendance: 1,630
+                Registered Girls this week Attendance: 0
               </span>
               <span id="badge-v1-att-total" class="px-3 py-1 bg-slate-100 text-slate-800 font-bold rounded-lg border border-slate-300">
-                Total this week Attendance: 3,350 Pupils
+                Total this week Attendance: 0 Pupils
               </span>
             </div>
           </div>
@@ -1289,27 +1333,27 @@ html_code = f"""<!DOCTYPE html>
 
           <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs pt-3 border-t border-slate-100">
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-l-b" class="font-bold text-slate-800">640</div>
+              <div id="metric-att-l-b" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Lower Primary (ECD-P2) Boys</div>
             </div>
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-l-g" class="font-bold text-slate-800">610</div>
+              <div id="metric-att-l-g" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Lower Primary (ECD-P2) Girls</div>
             </div>
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-m-b" class="font-bold text-slate-800">590</div>
+              <div id="metric-att-m-b" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Middle Primary (P3-P4) Boys</div>
             </div>
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-m-g" class="font-bold text-slate-800">580</div>
+              <div id="metric-att-m-g" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Middle Primary (P3-P4) Girls</div>
             </div>
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-u-b" class="font-bold text-slate-800">490</div>
+              <div id="metric-att-u-b" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Upper Primary (P5-P7) Boys</div>
             </div>
             <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-u-g" class="font-bold text-slate-800">440</div>
+              <div id="metric-att-u-g" class="font-bold text-slate-800">0</div>
               <div class="text-[10px] text-slate-500 font-medium">Upper Primary (P5-P7) Girls</div>
             </div>
           </div>
@@ -1326,11 +1370,11 @@ html_code = f"""<!DOCTYPE html>
               <p class="text-xs text-slate-500">Active awareness and verified feedback queries logged during school contact cycle</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-                Awareness: 93.8% (60/64 respondents)
+              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
+                Awareness: 0.0% (0/64 respondents)
               </span>
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-                142 Queries Logged
+              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
+                0 Queries Logged
               </span>
             </div>
           </div>
@@ -1376,10 +1420,10 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="flex items-center gap-2 text-xs">
               <span class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Total Activation Headcount: 4,703
+                Total Activation Headcount: 63 (Kotido Mixed)
               </span>
               <span class="px-3 py-1 bg-purple-50 text-purple-700 font-bold rounded-lg border border-purple-200">
-                Total PWD Participants: 135 (2.9%)
+                Total PWD Participants: 5 (7.9%)
               </span>
             </div>
           </div>
@@ -1404,73 +1448,73 @@ html_code = f"""<!DOCTYPE html>
                   <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-blue-500"></span> Lower Primary (ECD–P2)
                   </td>
-                  <td class="p-3 text-right font-medium">820</td>
-                  <td class="p-3 text-right font-medium">790</td>
-                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">1,610</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">24</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">20</td>
-                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">44</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">2.7%</span></td>
+                  <td class="p-3 text-right font-medium">0</td>
+                  <td class="p-3 text-right font-medium">0</td>
+                  <td class="p-3 text-right font-bold text-slate-400 bg-slate-50">0</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">0</td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-medium text-slate-400">-</span></td>
                 </tr>
                 <tr class="hover:bg-slate-50/60">
                   <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-sky-500"></span> Middle Primary (P3–P4)
                   </td>
-                  <td class="p-3 text-right font-medium">780</td>
-                  <td class="p-3 text-right font-medium">760</td>
-                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">1,540</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">22</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">19</td>
-                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">41</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">2.7%</span></td>
+                  <td class="p-3 text-right font-medium">4</td>
+                  <td class="p-3 text-right font-medium">6</td>
+                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">10</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">2</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">2</td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-50 text-purple-700">20.0%</span></td>
                 </tr>
                 <tr class="hover:bg-slate-50/60">
                   <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-cyan-600"></span> Upper Primary (P5–P7)
                   </td>
-                  <td class="p-3 text-right font-medium">690</td>
-                  <td class="p-3 text-right font-medium">650</td>
-                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">1,340</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">18</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">16</td>
-                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">34</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">2.5%</span></td>
+                  <td class="p-3 text-right font-medium">10</td>
+                  <td class="p-3 text-right font-medium">15</td>
+                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">25</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">1</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">1</td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-50 text-purple-700">4.0%</span></td>
                 </tr>
                 <tr class="hover:bg-slate-50/60">
                   <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-amber-500"></span> Teachers Present
                   </td>
-                  <td class="p-3 text-right font-medium">28</td>
-                  <td class="p-3 text-right font-medium">20</td>
-                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">48</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">1</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">1</td>
+                  <td class="p-3 text-right font-medium">14</td>
+                  <td class="p-3 text-right font-medium">10</td>
+                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">24</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">2</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
                   <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">2</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">4.2%</span></td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-50 text-purple-700">8.3%</span></td>
                 </tr>
                 <tr class="hover:bg-slate-50/60">
                   <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Community Members
                   </td>
-                  <td class="p-3 text-right font-medium">48</td>
-                  <td class="p-3 text-right font-medium">117</td>
-                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">165</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">5</td>
-                  <td class="p-3 text-right text-purple-700 font-medium">9</td>
-                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">14</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700">8.5%</span></td>
+                  <td class="p-3 text-right font-medium">3</td>
+                  <td class="p-3 text-right font-medium">1</td>
+                  <td class="p-3 text-right font-bold text-slate-800 bg-slate-50">4</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right text-purple-700 font-medium">0</td>
+                  <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">0</td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-medium text-slate-400">0.0%</span></td>
                 </tr>
               </tbody>
               <tfoot class="bg-slate-100/80 font-extrabold text-slate-900 border-t-2 border-slate-300">
                 <tr>
                   <td class="p-3 uppercase">Total Activation Footprint</td>
-                  <td class="p-3 text-right">2,366</td>
-                  <td class="p-3 text-right">2,337</td>
-                  <td class="p-3 text-right bg-slate-200/60 font-black">4,703</td>
-                  <td class="p-3 text-right text-purple-700">70</td>
-                  <td class="p-3 text-right text-purple-700">65</td>
-                  <td class="p-3 text-right font-black text-purple-900 bg-purple-100/50">135</td>
-                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-black bg-purple-100 text-purple-800">2.9% PWD</span></td>
+                  <td class="p-3 text-right font-mono">31</td>
+                  <td class="p-3 text-right font-mono">32</td>
+                  <td class="p-3 text-right bg-slate-200/60 font-black font-mono">63</td>
+                  <td class="p-3 text-right text-purple-700 font-mono">5</td>
+                  <td class="p-3 text-right text-purple-700 font-mono">0</td>
+                  <td class="p-3 text-right font-black text-purple-900 bg-purple-100/50 font-mono">5</td>
+                  <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-black bg-purple-100 text-purple-800">7.9% PWD</span></td>
                 </tr>
               </tfoot>
             </table>
@@ -1491,8 +1535,8 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600 flex items-center justify-between">
-              <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>100% Completion (All 7 modules completed in all 6 schools)</span>
-              <span class="bg-blue-50 text-wfp-blue px-2 py-0.5 rounded font-bold">6/6 Schools</span>
+              <span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>100% Completion (1/1 Visited School - Kotido Mixed)</span>
+              <span class="bg-blue-50 text-wfp-blue px-2 py-0.5 rounded font-bold">1 School Logged</span>
             </div>
           </div>
 
@@ -1510,7 +1554,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Did learners actively handle materials and practice rather than listen passively?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (6/6)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1521,7 +1565,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Did all three age bands and both boys and girls participate?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (6/6)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1532,7 +1576,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Was any learner excluded or left out during sessions?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">No: 100% (6/6)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">No: 100% (1/1 School)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1544,7 +1588,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Were materials understood without long/confusing explanation?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (6/6)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
                   </div>
                   <div class="mt-2 p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-700">
                     <strong class="text-wfp-blue">Why:</strong> Visual flashcards, color-coded food grouping cards, and hands-on Metu porridge demonstrations allowed immediate comprehension without complex explanations across Ngakarimojong dialects.
@@ -1567,7 +1611,7 @@ html_code = f"""<!DOCTYPE html>
               <p class="text-xs text-slate-500">Diagnostic evaluating why households struggle with Metu porridge preparation despite cash support or market access</p>
             </div>
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Sample: 60 School Catchments
+              Sample: Kotido Mixed P/S (Visit 2)
             </span>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -2155,10 +2199,18 @@ html_code = f"""<!DOCTYPE html>
             <p class="text-xs text-slate-600 mt-0.5">NutriChart collection and joint household audit, school institutional debrief, and household and learner in-depth shifts</p>
           </div>
           <div class="text-right">
-            <span class="px-3 py-1 bg-white text-emerald-700 font-bold rounded-lg border border-emerald-200 text-xs shadow-sm">
-              89.0% Joint Household Completion Rate
+            <span class="px-3 py-1 bg-white text-slate-600 font-bold rounded-lg border border-slate-200 text-xs shadow-sm">
+              Pending Closeout Audit
             </span>
           </div>
+        </div>
+
+        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-clock text-slate-400 text-sm"></i>
+            <span><strong>Visit 3 Status:</strong> No Visit 3 closeout audit submissions recorded in the activity log yet. Materials returns, joint household audits, and debrief results will appear here as field monitors complete closing audits.</span>
+          </div>
+          <span class="px-2 py-0.5 bg-slate-200 text-slate-600 font-bold rounded text-[11px] shrink-0">0 of 64 Audited</span>
         </div>
 
         <!-- ROW 1: NUTRICHARTS COLLECTION & JOINT HOUSEHOLD AUDIT -->
@@ -2167,10 +2219,10 @@ html_code = f"""<!DOCTYPE html>
           <div class="p-4 bg-white rounded-xl border border-slate-200/80 card-shadow flex items-center justify-between">
             <div>
               <h4 class="text-xs font-bold text-slate-700 mt-0.5">Total NutriCharts issued (Visit 1)</h4>
-              <div class="text-2xl font-black text-wfp-blue mt-1">1,840</div>
-              <span class="text-[11px] text-slate-500">Issued across 6 audited schools (Avg 307 / school)</span>
+              <div class="text-2xl font-black text-slate-400 mt-1">0</div>
+              <span class="text-[11px] text-slate-400">Target: 1,840 cards across 64 schools</span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-wfp-blue flex items-center justify-center text-xl">
+            <div class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl">
               <i class="fa-solid fa-file-invoice"></i>
             </div>
           </div>
@@ -2179,10 +2231,10 @@ html_code = f"""<!DOCTYPE html>
           <div class="p-4 bg-white rounded-xl border border-slate-200/80 card-shadow flex items-center justify-between">
             <div>
               <h4 class="text-xs font-bold text-slate-700 mt-0.5">Total NutriCharts returned today</h4>
-              <div class="text-2xl font-black text-emerald-700 mt-1">1,586</div>
-              <span class="text-[11px] text-emerald-600 font-semibold">86.2% Overall Return Rate</span>
+              <div class="text-2xl font-black text-slate-400 mt-1">0</div>
+              <span class="text-[11px] text-slate-400 font-semibold">0.0% Overall Return Rate</span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+            <div class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl">
               <i class="fa-solid fa-box-archive"></i>
             </div>
           </div>
@@ -2191,10 +2243,10 @@ html_code = f"""<!DOCTYPE html>
           <div class="p-4 bg-white rounded-xl border border-slate-200/80 card-shadow flex items-center justify-between">
             <div>
               <h4 class="text-xs font-bold text-slate-700 mt-0.5">Returned charts showing joint household completion</h4>
-              <div class="text-2xl font-black text-wfp-blue mt-1">1,412</div>
-              <span class="text-[11px] text-slate-500 font-semibold">89.0% of returned charts signed by parent & pupil</span>
+              <div class="text-2xl font-black text-slate-400 mt-1">0</div>
+              <span class="text-[11px] text-slate-400 font-semibold">Awaiting closeout submissions</span>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-wfp-blue flex items-center justify-center text-xl">
+            <div class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl">
               <i class="fa-solid fa-handshake-angle"></i>
             </div>
           </div>
@@ -2226,8 +2278,8 @@ html_code = f"""<!DOCTYPE html>
               <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Institutional Results Debrief</span>
               <h4 class="text-sm font-bold text-slate-800">School commitments, absentee tracing and kitchen energy audit</h4>
             </div>
-            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Verified across all 6 schools
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+              0 Schools Logged (Pending Field Closeout)
             </span>
           </div>
 
@@ -2241,7 +2293,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Audit Status:</strong> 4 schools fully accomplished commitments; 2 partially fulfilled.
+                <strong class="text-wfp-blue font-bold">Audit Status:</strong> Pending field submissions (0 schools).
               </div>
             </div>
 
@@ -2254,7 +2306,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Tracing Reach:</strong> 100% of schools have active teacher/VHT tracing squads.
+                <strong class="text-wfp-blue font-bold">Tracing Reach:</strong> Pending field submissions (0 schools).
               </div>
             </div>
 
@@ -2267,7 +2319,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Verification:</strong> 5 of 6 kitchens verified using improved stoves & covered pots.
+                <strong class="text-wfp-blue font-bold">Verification:</strong> Pending field submissions (0 schools).
               </div>
             </div>
           </div>
@@ -2280,7 +2332,7 @@ html_code = f"""<!DOCTYPE html>
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 1: School Feeding</span>
-                <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">78.1% High Impact</span>
+                <span class="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded border border-slate-200">0.0% Logged</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800 mb-1">Impact of school feeding routines on student presence</h4>
               <p class="text-xs text-slate-500 mb-3">Evaluation across 64 school cycles on meal protection sustaining classroom presence:</p>
@@ -2289,7 +2341,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
-              <span>High impact: <strong>50 schools (78.1%)</strong> | Moderate: <strong>12 (18.8%)</strong> | Low: <strong>2 (3.1%)</strong></span>
+              <span>High impact: <strong>0 schools</strong> | Moderate: <strong>0</strong> | Low: <strong>0</strong></span>
             </div>
           </div>
 
@@ -2298,7 +2350,7 @@ html_code = f"""<!DOCTYPE html>
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">Pillar 2: Gender &amp; Equity</span>
-                <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">81.2% Consistent</span>
+                <span class="text-xs bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded border border-slate-200">0.0% Logged</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800 mb-1">Shift in fair plate-sharing practices</h4>
               <p class="text-xs text-slate-500 mb-3">Reported shift stopping the cultural practice of young ones or girls eating last:</p>
@@ -2307,7 +2359,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
-              <span>Consistent: <strong>52 schools (81.2%)</strong> | Some resistance: <strong>10 (15.6%)</strong> | No change: <strong>2 (3.1%)</strong></span>
+              <span>Consistent: <strong>0 schools</strong> | Some resistance: <strong>0</strong> | No change: <strong>0</strong></span>
             </div>
           </div>
         </div>
@@ -2320,11 +2372,11 @@ html_code = f"""<!DOCTYPE html>
               <h4 class="text-sm font-bold text-slate-800">School-level PR highlights, social media captures and radio tracking</h4>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-                PR Captured: 87.5%
+              <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+                PR Captured: 0.0%
               </span>
-              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-                Radio Reach: 90.6%
+              <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+                Radio Reach: 0.0%
               </span>
             </div>
           </div>
@@ -2332,33 +2384,28 @@ html_code = f"""<!DOCTYPE html>
             <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-slate-800">School PR &amp; Social Media Highlights Captured:</span>
-                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">87.5% Yes (56/64)</span>
+                <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/64 Schools)</span>
               </div>
-              <p class="text-slate-600 text-[11px]">Field teams documented photo and video stories capturing behavioral shifts:</p>
-              <ul class="space-y-1 text-[11px] text-slate-700 list-disc list-inside">
-                <li>P5 girl and boy leaders demonstrating fair plate sharing and morning water duty rebalance on camera.</li>
-                <li>Headteacher and cook showcasing newly constructed firewood-saving institutional stove with covered pots.</li>
-                <li>NutriClub assembly demonstration on porridge fortification using fresh local amaranth greens.</li>
-              </ul>
+              <p class="text-slate-600 text-[11px]">Pending Visit 3 closeout submissions from school media squads.</p>
             </div>
 
             <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-slate-800">Campaign Radio Spots Heard by School Community:</span>
-                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">90.6% Yes (58/64)</span>
+                <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/64 Schools)</span>
               </div>
-              <p class="text-slate-600 text-[11px]">Teachers and learners reported hearing Nutribus campaign broadcasts on local radio stations (Karamoja FM, Nenah FM, Voice of Karamoja):</p>
+              <p class="text-slate-600 text-[11px]">Radio listenership verification will populate as school closeout audits occur across Karamoja FM, Nenah FM, and Voice of Karamoja.</p>
               <div class="grid grid-cols-3 gap-2 text-center pt-2">
                 <div class="p-2 bg-white rounded border border-slate-200">
-                  <div class="font-bold text-emerald-700">90.6%</div>
+                  <div class="font-bold text-slate-500">0.0%</div>
                   <div class="text-[10px] text-slate-500">Heard Spots</div>
                 </div>
                 <div class="p-2 bg-white rounded border border-slate-200">
-                  <div class="font-bold text-slate-700">6.3%</div>
+                  <div class="font-bold text-slate-500">0.0%</div>
                   <div class="text-[10px] text-slate-500">Did Not Hear</div>
                 </div>
                 <div class="p-2 bg-white rounded border border-slate-200">
-                  <div class="font-bold text-slate-500">3.1%</div>
+                  <div class="font-bold text-slate-500">0.0%</div>
                   <div class="text-[10px] text-slate-500">Unsure</div>
                 </div>
               </div>
@@ -2376,308 +2423,23 @@ html_code = f"""<!DOCTYPE html>
               <h4 class="text-sm font-bold text-slate-800">Household and learner interviews (Learners I, II, III and Caregivers I, II, III)</h4>
               <p class="text-xs text-slate-500">In-depth qualitative verification of feasible actions tried at home, difficult bottlenecks, morning chore shifts, and food serving equity:</p>
             </div>
-            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">6 Sampled Household Audits</span>
+            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">0 Sampled Household Audits</span>
           </div>
 
-          <!-- Cards for the 5 Respondents -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <!-- Learner 1 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner 1</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Upper Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-blue-50 text-wfp-blue rounded font-semibold text-[10px] border border-blue-200">Boys shared water & wood chores</span>
-                      <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold text-[10px] border border-emerald-200">Supplemented Metu porridge</span>
-                      <span class="px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-semibold text-[10px] border border-purple-200">Fair food portions for boys & girls</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Water pump is crowded at dawn, so my brothers wake up earlier at 6:00 AM so we do not get late.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "My brothers fetch borehole water now. I wash my uniform, eat warm fortified Metu porridge, and get to class before the morning assembly bell rings."
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Awaiting Household & Learner Exit Intercepts Banner -->
+          <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 mb-4">
+            <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-base">
+              <i class="fa-solid fa-hourglass-half"></i>
             </div>
-
-            <!-- Learner II -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner II</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Middle Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-blue-50 text-wfp-blue rounded font-semibold text-[10px] border border-blue-200">Boys shared water & wood chores</span>
-                      <span class="px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold text-[10px] border border-amber-200">Practiced firewood-saving cooking</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Carrying two 10-liter water jerricans was heavy on steep road, but I got used to it with my elder cousin.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "I carried the borehole water so my sister does not get whipped for late arrival. We both drink porridge and walk to school together."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Learner III -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner III</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Lower Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold text-[10px] border border-emerald-200">Supplemented Metu porridge</span>
-                      <span class="px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-semibold text-[10px] border border-purple-200">Fair food portions for boys & girls</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Wild green leaves (Eboo) became hard to find when rain stopped for two weeks.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded inline-block mt-0.5">Not applicable</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Mother serves me my own hot bowl of Metu porridge first because I am the youngest, instead of giving only big brothers."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Caregiver I -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Caregiver I</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Mother / PTA</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-blue-50 text-wfp-blue rounded font-semibold text-[10px] border border-blue-200">Boys shared water & wood chores</span>
-                      <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold text-[10px] border border-emerald-200">Supplemented Metu porridge</span>
-                      <span class="px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold text-[10px] border border-amber-200">Firewood-saving cooking</span>
-                      <span class="px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-semibold text-[10px] border border-purple-200">Fair food portions</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Firewood shortage during rainy days; had to dry sticks under the roof and use covered pot to save fuel.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "The NutriChart on our hut wall reminded us daily. My husband told our boys that water carrying is for everyone. Now my daughter has never missed class this month."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Caregiver II -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Caregiver II</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Father / Elder</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-blue-50 text-wfp-blue rounded font-semibold text-[10px] border border-blue-200">Boys shared water & wood chores</span>
-                      <span class="px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-semibold text-[10px] border border-purple-200">Fair food portions</span>
-                      <span class="px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold text-[10px] border border-amber-200">Firewood-saving cooking</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Some kraal neighbors laughed at my boys at the borehole, but I defended them and told elders to adopt the same practice.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Educating our daughters brings pride to our family. My sons fetch morning water and firewood willingly so girls attend school and learn well."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Caregiver III -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Caregiver III</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Grandmother / Elder</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-1">Since taking chart home, feasible actions family was able to try:</span>
-                    <div class="flex flex-wrap gap-1 mb-1">
-                      <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 rounded font-semibold text-[10px] border border-emerald-200">Supplemented Metu porridge</span>
-                      <span class="px-2 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold text-[10px] border border-amber-200">Firewood-saving cooking</span>
-                      <span class="px-2 py-0.5 bg-purple-50 text-purple-800 rounded font-semibold text-[10px] border border-purple-200">Fair food portions</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">What was difficult or got in the way:</span>
-                    <div class="text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      Wild cowpea leaves were scarce during dry weeks, but our family sun-dried excess eboo leaves under the roof to preserve them.
-                    </div>
-                  </div>
-
-                  <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Morning chore sharing shifted:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] text-slate-500 font-semibold block">Youngest child served fairly:</span>
-                      <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded inline-block mt-0.5">Yes</span>
-                    </div>
-                  </div>
-
-                  <div class="pt-1">
-                    <span class="font-bold text-slate-900 block mb-0.5">Record verbatim comments on shifts at home:</span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "We now serve the youngest toddler first with porridge mixed with dried cowpea leaves. She has stopped crying from hunger and her weight has improved."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Awaiting Household &amp; Learner Exit Intercepts</h5>
+            <p class="text-xs text-slate-500 max-w-md mx-auto">
+              No Visit 3 exit audits or household intercepts have been submitted from the field yet. Once teams complete closeout visits, verified learner and caregiver profiles will appear here dynamically.
+            </p>
           </div>
 
           <!-- ROW 5: HOUSEHOLD SHIFT COHORT AGGREGATES -->
           <div class="mt-4 pt-4 border-t border-slate-200">
-            <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (30 Randomly Sampled Households across 6 Schools)</span>
+            <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (0 Households Sampled — Awaiting Visit 3 Deployments)</span>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <h5 class="text-xs font-bold text-slate-800 mb-1">1. Feasible actions tried at home</h5>
@@ -2733,15 +2495,16 @@ html_code = f"""<!DOCTYPE html>
             </p>
           </div>
           <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-            <span class="text-[11px] font-bold text-slate-700 block mb-1">Session Facilitation:</span>
-            <div class="flex items-center gap-3 mt-1">
-              <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200">
-                Village Health Teams (VHT): 70% of Sessions
+            <span class="text-[11px] font-bold text-slate-700 block mb-1">Session Facilitation Breakdown:</span>
+            <div class="flex items-center gap-2 mt-1 flex-wrap">
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-600 font-semibold rounded text-xs border border-slate-200">
+                Village Health Teams (VHT): 0 Demos (0.0%)
               </span>
-              <span class="px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                Lead Coordinator: 30% of Sessions
+              <span class="px-2.5 py-1 bg-slate-100 text-slate-600 font-semibold rounded text-xs border border-slate-200">
+                Lead Coordinator: 0 Demos (0.0%)
               </span>
             </div>
+            <span class="text-[10px] text-slate-500 block mt-1.5 italic">Awaiting field submissions (0 of 640 demonstrations conducted).</span>
           </div>
         </div>
       </div>
@@ -2752,14 +2515,14 @@ html_code = f"""<!DOCTYPE html>
           <div>
             <div class="flex items-center gap-2 mb-0.5">
               <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Partner Network Collaboration</span>
-              <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">90.0% Present &amp; Co-facilitating</span>
+              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">0.0% Present (0/640 Demos)</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800">Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?</h4>
             <p class="text-xs text-slate-500">Partner co-facilitation verifying inclusive PWD mobilization, gender dialogues, and clean cooking sustainability</p>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              54 of 60 Demos Co-Facilitated
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+              0 of 640 Demos Co-Facilitated
             </span>
           </div>
         </div>
@@ -2774,19 +2537,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 text-xs text-slate-700">
               <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
                 <span class="font-medium">UNAC</span>
-                <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">80.0% (48/60)</span>
+                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
               </div>
               <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
                 <span class="font-medium">AFI</span>
-                <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">75.0% (45/60)</span>
+                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
               </div>
               <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
-                <span class="font-semibold text-wfp-blue">Other</span>
-                <span class="font-bold text-wfp-blue bg-blue-50 px-2 py-0.5 rounded text-[11px]">23.3% (14/60)</span>
+                <span class="font-semibold text-slate-600">Other</span>
+                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
               </div>
             </div>
-            <div class="p-2 bg-blue-50/70 rounded border border-blue-200 text-[11px] text-slate-700">
-              <strong class="text-wfp-blue">Specify:</strong> Local LC1 Executive &amp; Parish Community Development Officer (CDO).
+            <div class="p-2 bg-slate-100/70 rounded border border-slate-200 text-[11px] text-slate-600">
+              <strong class="text-slate-700">Status:</strong> Awaiting field submissions once village demonstrations commence.
             </div>
           </div>
 
@@ -2799,23 +2562,23 @@ html_code = f"""<!DOCTYPE html>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
               <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                 <span class="text-[11px] text-slate-600 font-medium leading-snug">Co-facilitating clean cooking / gender dialogue</span>
-                <span class="font-bold text-emerald-700 text-xs mt-1.5">86.7% (52/60)</span>
+                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
               </div>
               <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                 <span class="text-[11px] text-slate-600 font-medium leading-snug">Mentoring local VHTs / Elders</span>
-                <span class="font-bold text-emerald-700 text-xs mt-1.5">81.7% (49/60)</span>
+                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
               </div>
               <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                 <span class="text-[11px] text-slate-600 font-medium leading-snug">Observing for sustainability tracking</span>
-                <span class="font-bold text-emerald-700 text-xs mt-1.5">76.7% (46/60)</span>
+                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
               </div>
               <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                 <span class="text-[11px] text-slate-600 font-medium leading-snug">Other</span>
-                <span class="font-bold text-wfp-blue text-xs mt-1.5">20.0% (12/60)</span>
+                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
               </div>
             </div>
             <div class="p-2 bg-slate-100 rounded text-[10px] text-slate-600 italic">
-              Specify: Specialized Ngakarimojong sign interpretation &amp; mobility support for PWD caregivers.
+              Field verification pending demonstration rollout across 64 school catchments.
             </div>
           </div>
         </div>
@@ -2843,21 +2606,21 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
             <span class="text-[11px] font-bold text-slate-500 block">Total Demonstrations Evaluated</span>
-            <div class="text-2xl font-black text-slate-800 mt-0.5" id="demo-kpi-total-sessions">60</div>
+            <div class="text-2xl font-black text-slate-800 mt-0.5" id="demo-kpi-total-sessions">0</div>
             <span class="text-[10px] text-slate-500">Target: 640 sessions (10 / school)</span>
           </div>
           <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-200">
             <span class="text-[11px] font-bold text-emerald-800 block">Compliant Sessions (&ge;80)</span>
-            <div class="text-2xl font-black text-emerald-700 mt-0.5" id="demo-kpi-compliant-sessions">47</div>
-            <span class="text-[10px] text-emerald-600 font-bold" id="demo-kpi-compliant-rate">78.3% compliant rate</span>
+            <div class="text-2xl font-black text-emerald-700 mt-0.5" id="demo-kpi-compliant-sessions">0</div>
+            <span class="text-[10px] text-emerald-600 font-bold" id="demo-kpi-compliant-rate">0.0% compliant rate</span>
           </div>
           <div class="p-3.5 bg-red-50/60 rounded-xl border border-red-200">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-bold text-red-800 block">Red-Flagged Sessions (&lt;80)</span>
-              <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              <span class="w-2 h-2 rounded-full bg-slate-300"></span>
             </div>
-            <div class="text-2xl font-black text-red-600 mt-0.5" id="demo-kpi-flagged-sessions">13</div>
-            <span class="text-[10px] text-red-600 font-bold" id="demo-kpi-flagged-rate">21.7% flagged for follow-up</span>
+            <div class="text-2xl font-black text-red-600 mt-0.5" id="demo-kpi-flagged-sessions">0</div>
+            <span class="text-[10px] text-red-600 font-bold" id="demo-kpi-flagged-rate">0.0% flagged for follow-up</span>
           </div>
         </div>
 
@@ -2880,11 +2643,11 @@ html_code = f"""<!DOCTYPE html>
             <p class="text-xs text-slate-500">Caregivers, fathers/elders, children, and PWD inclusion recorded at demonstration sites:</p>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Total attendees: 733
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+              Total attendees: 0
             </span>
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              PWD Inclusivity: 34 (4.6%)
+            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
+              PWD Inclusivity: 0 (0.0%)
             </span>
           </div>
         </div>
@@ -2909,51 +2672,51 @@ html_code = f"""<!DOCTYPE html>
               <tr class="hover:bg-slate-50/50">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Female Caregivers</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-pink-700">165</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">165</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Primary household food preparers and child nutrition gatekeepers</td>
               </tr>
               <tr class="hover:bg-slate-50/50">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Male Fathers / Elders</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-blue-700">58</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">58</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Household decision-makers engaged in gender chore rebalancing dialogues</td>
               </tr>
               <tr class="hover:bg-slate-50/50">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Male Children</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-blue-700">242</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">242</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Learners participating in cooking activities and food sorting games</td>
               </tr>
               <tr class="hover:bg-slate-50/50">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Female Children</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-pink-700">268</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">268</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Girl-child participants practicing hands-on Metu porridge supplementation</td>
               </tr>
               <tr class="hover:bg-slate-50/50 bg-blue-50/20">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Male PWDs</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-blue-700">18</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">18</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Participants with physical or sensory disabilities supported by VHTs</td>
               </tr>
               <tr class="hover:bg-slate-50/50 bg-blue-50/20">
                 <td class="py-2.5 px-3 font-semibold text-slate-900">Female PWDs</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-pink-700">16</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-wfp-blue">16</td>
+                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
                 <td class="py-2.5 px-3 text-[11px] text-slate-600">Provided priority front seating and assisted tasting bowls</td>
               </tr>
               <tr class="bg-slate-100 font-extrabold text-slate-900 border-t-2 border-slate-300">
                 <td class="py-3 px-3">Total Cumulative Headcount</td>
-                <td class="py-3 px-3 text-right font-mono text-blue-700">318</td>
-                <td class="py-3 px-3 text-right font-mono text-pink-700">449</td>
-                <td class="py-3 px-3 text-right font-mono text-wfp-blue text-sm">767</td>
-                <td class="py-3 px-3 text-emerald-700">100% Verified Community Mobilization Across 60 Demos</td>
+                <td class="py-3 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-3 px-3 text-right font-mono text-slate-400">0</td>
+                <td class="py-3 px-3 text-right font-mono text-slate-500 text-sm">0</td>
+                <td class="py-3 px-3 text-slate-500 font-normal">Awaiting Community Cooking Demonstration Logs</td>
               </tr>
             </tbody>
           </table>
@@ -3035,34 +2798,34 @@ html_code = f"""<!DOCTYPE html>
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-slate-800">Did caregivers cook and handle ingredients hands-on, or only observe?</span>
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px]">90.0% Hands-On</span>
+                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
                 </div>
                 <div class="text-[11px] text-slate-600">
-                  Practiced and cooked hands-on: <strong>54 demos (90.0%)</strong> | Stood and watched passively: <strong>6 demos (10.0%)</strong>
+                  Pending field submissions (0 of 640 demonstrations recorded).
                 </div>
               </div>
 
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-slate-800">Was WFP Metu porridge demonstrated with additions of obtainable local staples?</span>
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px]">100% Yes</span>
+                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
                 </div>
                 <div class="text-[11px] text-slate-600 mb-1">
-                  Demonstrated with wild greens (Eboo/Lokaka), cowpea leaves, roasted sesame paste, and pumpkin puree: <strong>60 of 60 Demos</strong>
+                  Pending field submissions (0 of 640 demonstrations recorded).
                 </div>
-                <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-700 italic">
-                  <strong class="text-wfp-blue not-italic font-bold">Comments or reactions from spectators:</strong>
-                  "Spectators tasted the warm green-flecked Metu porridge, praised the pleasant roasted sesame aroma, and requested recipe portions to replicate for weaning infants at home."
+                <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-500 italic">
+                  <strong class="text-slate-700 not-italic font-bold">Comments or reactions from spectators:</strong>
+                  Awaiting community demonstration reports (0 demos conducted).
                 </div>
               </div>
 
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-bold text-slate-800">Were all demonstrated foods sourced locally from seasonal gardens/markets?</span>
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px]">96.7% Compliant</span>
+                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
                 </div>
                 <div class="text-[11px] text-slate-600">
-                  Yes, strictly compliant with obtainable seasonal foods: <strong>58 demos (96.7%)</strong> | Promoted unapproved/unattainable foods: <strong>2 demos (3.3%)</strong>
+                  Pending field submissions (0 of 640 demonstrations recorded).
                 </div>
               </div>
             </div>
@@ -3072,7 +2835,7 @@ html_code = f"""<!DOCTYPE html>
         <!-- Col 2: Fuel-Saving Practices Chart -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <h4 class="text-sm font-bold text-slate-800 mb-1">Which fuel-saving practices were demonstrated to the gathering?</h4>
-          <p class="text-xs text-slate-500 mb-3">Verification of fuel-saving cookstove and cooking practices shown across 60 sites:</p>
+          <p class="text-xs text-slate-500 mb-3">Verification of fuel-saving cookstove and cooking practices shown across target 640 sites:</p>
           <div class="h-64 min-h-[250px]">
             <canvas id="chart-demo-fuelsaving"></canvas>
           </div>
@@ -3090,126 +2853,23 @@ html_code = f"""<!DOCTYPE html>
             <h4 class="text-sm font-bold text-slate-800">Conducted privately at demo ground: interview 2 to 3 attending caregivers right after demo</h4>
             <p class="text-xs text-slate-500">Assessing home feeding barriers, feasible actions realistically tried at home, and caregiver commitment verdicts:</p>
           </div>
-          <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">3 Verified In-Depth Profiles</span>
+          <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">0 Profiles Logged</span>
         </div>
 
-        <!-- 3 Caregiver Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <!-- Caregiver 1 -->
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-900">Caregiver 1</span>
-                <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-              </div>
-              <div class="space-y-2.5 text-xs text-slate-700">
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">What is most difficult or gets in the way of feeding family well:</span>
-                  <div class="flex flex-wrap gap-1 mb-1">
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Food items missing in garden/market</span>
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Scarcity of cooking water</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Feasible action realistically try at home:</span>
-                  <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                    Supplement Metu porridge with local wild greens
-                  </span>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Caregiver Commitment Verdict:</span>
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px] inline-block">
-                    Will try it
-                  </span>
-                </div>
-                <div class="pt-1 border-t border-slate-200">
-                  <span class="font-bold text-slate-900 block mb-0.5">Exact words recorded (no personal names):</span>
-                  <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                    "I will gather fresh amaranth (Eboo) and pound roasted simsim into the morning Metu porridge so my twin toddlers gain strength."
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Awaiting Caregiver Rapid Intercepts Banner -->
+        <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 mb-4">
+          <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-base">
+            <i class="fa-solid fa-hourglass-half"></i>
           </div>
-
-          <!-- Caregiver 2 -->
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-900">Caregiver 2</span>
-                <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-              </div>
-              <div class="space-y-2.5 text-xs text-slate-700">
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">What is most difficult or gets in the way of feeding family well:</span>
-                  <div class="flex flex-wrap gap-1 mb-1">
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Scarcity of firewood</span>
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Heavy morning chores</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Feasible action realistically try at home:</span>
-                  <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                    Practice fuel-saving cooking methods
-                  </span>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Caregiver Commitment Verdict:</span>
-                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px] inline-block">
-                    Will try it
-                  </span>
-                </div>
-                <div class="pt-1 border-t border-slate-200">
-                  <span class="font-bold text-slate-900 block mb-0.5">Exact words recorded (no personal names):</span>
-                  <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                    "Covering the pot and using dried acacia wood kept the heat high. I will teach my co-wife to stop burning green logs on open fires."
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Caregiver 3 -->
-          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-xs font-bold text-slate-900">Caregiver 3</span>
-                <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-              </div>
-              <div class="space-y-2.5 text-xs text-slate-700">
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">What is most difficult or gets in the way of feeding family well:</span>
-                  <div class="flex flex-wrap gap-1 mb-1">
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Family or elder disagreement</span>
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-semibold rounded text-[10px] border border-amber-200">Lack of money</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Feasible action realistically try at home:</span>
-                  <span class="px-2 py-0.5 bg-purple-50 text-purple-800 font-bold rounded text-[11px] border border-purple-200 block mb-1">
-                    Serve fair and equal food portions to boys and girls
-                  </span>
-                </div>
-                <div>
-                  <span class="font-bold text-slate-900 block mb-0.5">Caregiver Commitment Verdict:</span>
-                  <span class="px-2 py-0.5 bg-amber-100 text-amber-800 font-bold rounded text-[11px] inline-block">
-                    Needs VHT guidance
-                  </span>
-                </div>
-                <div class="pt-1 border-t border-slate-200">
-                  <span class="font-bold text-slate-900 block mb-0.5">Exact words recorded (no personal names):</span>
-                  <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                    "I agreed today that our daughter should get the same bowl of porridge as our son, but I need the VHT to visit our kraal to explain it to my older brother."
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Awaiting Caregiver Rapid Intercepts</h5>
+          <p class="text-xs text-slate-500 max-w-md mx-auto">
+            No community cooking demonstration interviews have been submitted from the field yet. Once cooking demonstrations begin across catchments, verified caregiver intercept profiles will appear here dynamically.
+          </p>
         </div>
 
         <!-- Cohort Aggregate Charts -->
         <div class="mt-4 pt-4 border-t border-slate-200">
-          <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (150 Caregiver Intercepts across 60 Catchment Demos)</span>
+          <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (0 Caregivers Intercepted — Awaiting Demo Rollout)</span>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
               <h5 class="text-xs font-bold text-slate-800 mb-1">1. What is most difficult in feeding family well?</h5>
@@ -3240,7 +2900,7 @@ html_code = f"""<!DOCTYPE html>
             <h4 class="text-sm font-bold text-slate-800">Structured gender chore dialogue, male participation and community commitments</h4>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-            95% Discussion Completion
+            0.0% (0 Demos Logged)
           </span>
         </div>
 
@@ -3250,10 +2910,10 @@ html_code = f"""<!DOCTYPE html>
             <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <div class="flex items-center justify-between mb-1">
                 <span class="text-xs font-bold text-slate-800">Did the structured gender chore and fair-sharing discussion take place?</span>
-                <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 95.0% (57/60)</span>
+                <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded">0.0% (0/640)</span>
               </div>
               <p class="text-[11px] text-slate-600">
-                Yes: <strong>57 demos (95.0%)</strong> | No: <strong>3 demos (5.0%)</strong>
+                Pending field submissions (0 demos conducted).
               </p>
             </div>
 
@@ -3267,7 +2927,7 @@ html_code = f"""<!DOCTYPE html>
             <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-200 text-xs text-slate-700">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-bold text-wfp-blue">Community Accountability & WFP Hotline Feedback Promoted?</span>
-                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">Yes: 98.3% (59/60)</span>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[10px]">0.0% (0/640)</span>
               </div>
               <p class="text-[11px] text-slate-600">
                 WFP toll-free hotline clearly displayed and explained to all attending households.
@@ -3277,35 +2937,14 @@ html_code = f"""<!DOCTYPE html>
 
           <!-- Col 2: Qualitative Consensus & Exact Community Commitments -->
           <div class="space-y-3.5">
-            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-              <strong class="text-wfp-blue text-xs block mb-1">Group response: In your household who is served first and who eats last?</strong>
-              <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded border border-slate-200">
-                "Traditional hierarchy: Fathers and adolescent sons served first in largest bowls; mother and weaning infants eat last whatever remains in the cooking pot."
+            <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2">
+              <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-base">
+                <i class="fa-solid fa-comments"></i>
               </div>
-            </div>
-
-            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-              <strong class="text-wfp-blue text-xs block mb-1">Group response: What would need to change for the youngest child to be served first?</strong>
-              <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded border border-slate-200">
-                "Mothers dish the infant's bowl directly from the pot first before platters are carried to elders, with fathers formally agreeing at the kraal council."
-              </div>
-            </div>
-
-            <div class="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200">
-              <strong class="text-emerald-800 text-xs block mb-1">Community Agreement and Commitments made in their own words:</strong>
-              <div class="text-[11px] text-slate-800 italic bg-white p-2.5 rounded border border-emerald-200">
-                "We the village of Lomorunyankori agree that our weaning children under 2 will receive enriched Metu porridge first, and our boys will fetch morning borehole water so girls never miss school."
-              </div>
-              <div class="mt-2 text-[10px] text-slate-600">
-                <strong>Named Community Body / Elders Responsible for Follow-Up:</strong> <span class="font-bold text-slate-800">VHT Lead Coordinator & LC1 Elders Council</span>
-              </div>
-            </div>
-
-            <div class="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200">
-              <strong class="text-amber-800 text-xs block mb-1">Main debate point or objection raised before consensus was reached:</strong>
-              <div class="text-[11px] text-slate-700 bg-white p-2.5 rounded border border-amber-200">
-                "Elder kraal leaders objected that male boys carrying water jars is culturally forbidden; consensus was reached when the Headteacher and VHT explained that girls' school performance and family health require mutual domestic burden sharing."
-              </div>
+              <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Awaiting Community Dialogue Records</h5>
+              <p class="text-xs text-slate-500 max-w-md mx-auto">
+                No village gender chore consensus statements or elder agreements have been recorded yet. As demonstrations rollout, verbatim dialogue records and community follow-up bodies will appear here.
+              </p>
             </div>
           </div>
         </div>
@@ -3323,10 +2962,10 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Clean Cooking Demonstrated: 98.3% (59/60)
+              Clean Cooking Demonstrated: 0.0% (0/640)
             </span>
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Stove Adoption: 78.3%
+              Stove Adoption: 0.0%
             </span>
           </div>
         </div>
@@ -3343,7 +2982,7 @@ html_code = f"""<!DOCTYPE html>
               <span class="font-bold text-slate-800 block mb-1">Gender Dialogues Executed:</span>
               <div class="flex items-center justify-between">
                 <span class="text-slate-600">Led by Senior Men, Senior Women &amp; VHTs:</span>
-                <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">93.3% (56/60)</span>
+                <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
               </div>
             </div>
           </div>
@@ -3365,10 +3004,10 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              PR Photos Captured: 91.7%
+              PR Photos Captured: 0.0%
             </span>
             <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Radio Feedback: 88.3%
+              Radio Feedback: 0.0%
             </span>
           </div>
         </div>
@@ -3377,22 +3016,22 @@ html_code = f"""<!DOCTYPE html>
           <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-bold text-slate-800">Community PR &amp; Media Highlights Captured:</span>
-              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">91.7% Yes (55/60)</span>
+              <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
             </div>
-            <p class="text-slate-600 text-[11px]">Field coordinators documented high-resolution photos and testimonial clips of active cooking circles, male participation in dialogues, and child plate sharing.</p>
-            <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-700">
-              <strong>PR Capture Focus:</strong> Caregivers displaying newly prepared Metu porridge fortified with local amaranth greens and ground sesame seeds.
+            <p class="text-slate-600 text-[11px]">Field coordinators document high-resolution photos and testimonial clips of active cooking circles, male participation in dialogues, and child plate sharing.</p>
+            <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-600">
+              <strong>Status:</strong> Pending community demo field logs (0 of 640 demonstrations recorded).
             </div>
           </div>
 
           <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-bold text-slate-800">Community Feedback on Radio Broadcasts:</span>
-              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">88.3% Feedback Logged (53/60)</span>
+              <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
             </div>
-            <p class="text-slate-600 text-[11px]">Attendees discussed radio spots broadcast across local FM stations during village cooking sessions:</p>
-            <div class="p-2 bg-emerald-50 rounded border border-emerald-200 text-[11px] text-slate-800 italic">
-              "Caregivers noted that hearing kraal leaders on the radio talking about feeding young children first made fathers much more willing to support plate sharing at home."
+            <p class="text-slate-600 text-[11px]">Attendees discuss radio spots broadcast across local FM stations during village cooking sessions:</p>
+            <div class="p-2 bg-slate-100 rounded border border-slate-200 text-[11px] text-slate-600 italic">
+              "Pending community demo field logs and radio broadcast feedback submissions."
             </div>
           </div>
         </div>
@@ -3416,8 +3055,8 @@ html_code = f"""<!DOCTYPE html>
           <div>
             <h4 class="text-sm font-bold text-slate-800">Verbatim change stories methodology and verification</h4>
           </div>
-          <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded-lg border border-emerald-200">
-            24 Verified Stories across 9 Districts
+          <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
+            0 Verified Stories across 9 Districts
           </span>
         </div>
         
@@ -3427,25 +3066,25 @@ html_code = f"""<!DOCTYPE html>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div class="p-3 bg-blue-50/50 rounded-lg border border-blue-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Total Stories</span>
-            <span class="text-2xl font-black text-wfp-blue block mt-0.5">24</span>
-            <span class="text-[10px] text-slate-500">Across 9 Districts</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
+            <span class="text-[10px] text-slate-400">Across 9 Districts</span>
           </div>
-          <div class="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Evidence Sighted</span>
-            <span class="text-2xl font-black text-emerald-600 block mt-0.5">95.8%</span>
-            <span class="text-[10px] text-slate-500">23 of 24 Verified</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0.0%</span>
+            <span class="text-[10px] text-slate-400">0 of 0 Verified</span>
           </div>
-          <div class="p-3 bg-purple-50/50 rounded-lg border border-purple-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Female Voice</span>
-            <span class="text-2xl font-black text-purple-700 block mt-0.5">58.3%</span>
-            <span class="text-[10px] text-slate-500">Mothers & Girls</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0.0%</span>
+            <span class="text-[10px] text-slate-400">Mothers &amp; Girls</span>
           </div>
-          <div class="p-3 bg-amber-50/50 rounded-lg border border-amber-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Peers Returned</span>
-            <span class="text-2xl font-black text-amber-600 block mt-0.5">18</span>
-            <span class="text-[10px] text-slate-500">Out-of-School Children</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
+            <span class="text-[10px] text-slate-400">Out-of-School Children</span>
           </div>
         </div>
       </div>
@@ -3492,348 +3131,10 @@ html_code = f"""<!DOCTYPE html>
           <p class="text-xs text-slate-500 mt-0.5">Record the storyteller's actual words; do not reinterpret. Complete verbatim testimonies captured during field interviews across all 6 storyteller roles:</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Story 1: Girl Learner -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Nalemu Esther, 14 yrs</span>
-                <span class="text-[11px] text-slate-500">Lomorunyankori Primary School · Moroto District</span>
-              </div>
-              <span class="text-xs bg-pink-50 text-pink-700 font-bold px-2.5 py-0.5 rounded border border-pink-200">
-                Girl Learner
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "Before the NutriBus came, I woke up at 5:00 AM every single morning to fetch three heavy jerrycans of water from the far borehole while my brother stayed asleep. By the time I carried firewood and swept, it was 9:30 AM. I was exhausted, reached school in tears, and missed all morning English and Math lessons. We only ate plain posho with salt at night."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  NutriBus Day Session (Adere build, food sorting, or chore debate)
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Reallocated morning chores (boys fetching water/wood; girls arrived on time)
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "My brother Lokol now fetches two jerrycans of water with me every morning. We finish early, eat together, and walk together to school on time."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "Because I am no longer beaten or embarrassed for latecoming, I can concentrate without sleeping in class, and my midterm score improved from 42% to 78%. I feel respected at home and in class."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-blue-100/70 text-wfp-blue font-bold rounded text-[11px]">
-                  School register shows consistent female attendance
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Verified 100% on-time morning presence in Primary 6 register over 3 consecutive weeks without a single recorded absence.
-              </p>
-            </div>
-          </div>
-
-          <!-- Story 2: Boy Learner -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Lokiru Samuel, 13 yrs</span>
-                <span class="text-[11px] text-slate-500">Kaabong West Primary School · Kaabong District</span>
-              </div>
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2.5 py-0.5 rounded border border-blue-200">
-                Boy Learner
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "I used to believe fetching water and gathering firewood was purely girls work. I would sit under the shade with other boys playing while my sisters struggled. My cousin had also dropped out of Primary 4 to herd cattle full time in the bush."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  NutriBus Day Session (Adere build, food sorting, or chore debate)
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Out-of-school peer returned to class
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "I tracked my cousin in the kraal and convinced my uncle to re-enroll her in school. I also carry morning firewood and water alongside my sisters so we finish fast."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "I learned on NutriBus Day that when chores are shared equally, everyone succeeds. My cousin is now back in Primary 4 sitting right next to me, and my sisters are never late for morning assembly."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-blue-100/70 text-wfp-blue font-bold rounded text-[11px]">
-                  School register shows consistent female attendance
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Headteacher confirmed official re-enrollment and verified boy's daily shared chore responsibility log.
-              </p>
-            </div>
-          </div>
-
-          <!-- Story 3: Female Caregiver / Mother -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Angella Christine, 31 yrs</span>
-                <span class="text-[11px] text-slate-500">Loroo Catchment / Amudat P/S · Amudat District</span>
-              </div>
-              <span class="text-xs bg-purple-50 text-purple-700 font-bold px-2.5 py-0.5 rounded border border-purple-200">
-                Female Caregiver / Mother
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "We only cooked plain white posho or thin maize porridge without any oil or greens. My two-year-old child was constantly lethargic, sickly, and underweight. Gathering firewood took 4 hours every single day using an open three-stone fire that burned through entire bundles in one morning."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  Metu Porridge Plus Demonstration (Fortifying porridge with local staples)
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Supplemented Metu porridge with obtainable local wild greens or cowpeas
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "I began fortifying our daily Metu porridge with crushed roasted sesame and steamed cowpea leaves. We also constructed an improved double-pot mud stove using dry clay."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "My child gained healthy weight and vitality; her skin cleared up and she plays actively without crying. Plus I spend only 1 hour gathering wood instead of walking half the day into unsafe bush areas."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[11px]">
-                  Cooking pot shows Metu fortified with obtainable local greens
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Collector inspected morning cooking pot: Metu porridge visibly fortified with dark-green steamed cowpea puree and roasted sesame paste.
-              </p>
-            </div>
-          </div>
-
-          <!-- Story 4: Father / Male Elder -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Chegem Paul, 42 yrs</span>
-                <span class="text-[11px] text-slate-500">Acegeretolim Catchment · Nabilatuk District</span>
-              </div>
-              <span class="text-xs bg-amber-50 text-amber-800 font-bold px-2.5 py-0.5 rounded border border-amber-200">
-                Father / Male Elder
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "In our clan tradition, men and boys do not touch cooking pots or carry water. All firewood and water collection fell upon my wife and daughters. The youngest children always ate last from whatever little remained at the bottom of the bowl."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  Community Elders / Gender Dynamics Dialogue
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Reallocated morning chores (boys fetching water/wood; girls arrived on time)
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "I told my sons that gathering firewood and water is family work, not just girls work. I built an improved sheltered mud cookstove for the manyatta and made sure the 3-year-old toddler is served first."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "I realized that our daughters education and our young childrens health are the real wealth of our family. An educated daughter brings prosperity and honor. My household is peaceful and united."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-orange-100 text-orange-800 font-bold rounded text-[11px]">
-                  Kitchen displays improved cookstove using less firewood
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Collector verified newly constructed double-pot sheltered mud stove and observed youngest toddler served first during mealtime.
-              </p>
-            </div>
-          </div>
-
-          <!-- Story 5: Teacher / Club Patron -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Sr. Akello Grace, 38 yrs</span>
-                <span class="text-[11px] text-slate-500">Kotido Mixed Primary School · Kotido District</span>
-              </div>
-              <span class="text-xs bg-indigo-50 text-indigo-700 font-bold px-2.5 py-0.5 rounded border border-indigo-200">
-                Teacher / Club Patron
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "Female absenteeism on Mondays and Wednesdays exceeded 35 percent because of distant water points. Learners came to class hungry, faint, and unable to focus. Our school kitchen burned 12 cartloads of firewood every month with smoke blinding the cooks."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  Climate-Smart Cooking Session (Improved firewood-saving cookstoves)
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Adopted improved cookstove / reduced daily firewood consumption
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "Our school kitchen transitioned to an improved institutional Lorena cookstove. We also mobilized our NutriClub learners to monitor daily attendance and lead assembly nutrition moments."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "Kitchen firewood expenses dropped by 45 percent, freeing funds for educational supplies. Girls are present in class every morning and learners are proud nutrition ambassadors."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-orange-100 text-orange-800 font-bold rounded text-[11px]">
-                  Kitchen displays improved cookstove using less firewood
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Verified institutional rocket Lorena cookstove installed and burning seasoned dry wood with minimal smoke emissions.
-              </p>
-            </div>
-          </div>
-
-          <!-- Story 6: Local Leader -->
-          <div class="p-4 bg-slate-50/70 rounded-xl border border-slate-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-900 block">Ekeno Peter, 54 yrs</span>
-                <span class="text-[11px] text-slate-500">Tokora Catchment Area · Nakapiripirit District</span>
-              </div>
-              <span class="text-xs bg-teal-50 text-teal-800 font-bold px-2.5 py-0.5 rounded border border-teal-200">
-                Local Leader
-              </span>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Describe the situation before the campaign: What was the normal household diet, daily chore burden (water/firewood), or school attendance pattern?</span>
-              <p class="text-xs text-slate-700 italic bg-white p-3 rounded-lg border border-slate-200 leading-relaxed">
-                "Community elders viewed nutrition and school attendance as women domestic issues. Many children were kept home for domestic chores or grazing cattle. Malnutrition cases were referred late to health centers."
-              </p>
-            </div>
-
-            <div class="space-y-2">
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What specific campaign event, activity, chart, or discussion caused the shift?</span>
-                <span class="inline-block px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded text-xs border border-blue-200">
-                  Take-Home NutriChart completed jointly at home
-                </span>
-              </div>
-              <div>
-                <span class="text-[11px] font-bold text-slate-700 block mb-1">What was physically done differently at home, class, or community after attending the nutribus activities?</span>
-                <span class="inline-block px-2.5 py-1 bg-emerald-50 text-emerald-800 font-bold rounded text-xs border border-emerald-200 mb-1">
-                  Supplemented Metu porridge with obtainable local wild greens or cowpeas
-                </span>
-                <p class="text-xs text-slate-600 font-medium">
-                  "We mandated village-level tracking of returned NutriCharts across kraals and promoted Metu porridge fortification with local wild greens at all village barazas."
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <span class="text-[11px] font-bold text-slate-700 block mb-1">Why is this change significant to you?</span>
-              <p class="text-xs text-emerald-900 bg-emerald-50/80 p-2.5 rounded-lg border border-emerald-200 font-medium leading-relaxed">
-                "Seeing parents sit together with their children to tick the NutriChart brought a true cultural shift in our village. Household nutrition and girls education are now open agenda items at monthly council meetings."
-              </p>
-            </div>
-
-            <div class="pt-2 border-t border-slate-200 text-xs">
-              <span class="text-[11px] font-bold text-slate-700 block mb-0.5">Verifiable Physical Evidence Sighted by Collector:</span>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="px-2 py-0.5 bg-blue-100/70 text-wfp-blue font-bold rounded text-[11px]">
-                  Completed NutriChart sighted
-                </span>
-              </div>
-              <p class="text-[11px] text-slate-500 mt-1 italic">
-                Collector verified 28 fully completed and signed NutriCharts returned from Tokora catchment households.
-              </p>
-            </div>
-          </div>
+        <div class="p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-xs">
+          <i class="fa-solid fa-quote-left text-3xl text-slate-300 mb-2 block"></i>
+          <h5 class="text-sm font-bold text-slate-700 mb-1">Awaiting Most Significant Change (MSC) Story Submissions</h5>
+          <p class="text-slate-500 max-w-lg mx-auto">Verbatim storyteller records, audio quotes, and physical evidence verification will appear here as field monitors record field narratives across the 6 key stakeholder roles.</p>
         </div>
       </div>
 
@@ -3845,7 +3146,7 @@ html_code = f"""<!DOCTYPE html>
             <p class="text-xs text-slate-500 mt-0.5">Comprehensive audit table displaying 2 verified change stories per monitoring primary school across 9 Karamoja districts (Target: 64 schools × 2 = 128 stories):</p>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded-lg border border-emerald-200">
-            24 Cleaned Stories Logged
+            0 Cleaned Stories Logged
           </span>
         </div>
 
@@ -3895,10 +3196,10 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="flex items-center gap-2">
             <span class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg text-xs border border-blue-200">
-              Session one of the week: 6 Sessions
+              Session one of the week: 1 Session
             </span>
-            <span class="px-3 py-1 bg-emerald-50 text-emerald-800 font-bold rounded-lg text-xs border border-emerald-200">
-              Session two of the week: 6 Sessions
+            <span class="px-3 py-1 bg-slate-100 text-slate-600 font-bold rounded-lg text-xs border border-slate-200">
+              Session two of the week: 0 Sessions
             </span>
           </div>
         </div>
@@ -3906,23 +3207,23 @@ html_code = f"""<!DOCTYPE html>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="p-3 bg-blue-50/50 rounded-lg border border-blue-100 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Registered Members</span>
-            <span class="text-2xl font-black text-wfp-blue block mt-0.5">312</span>
-            <span class="text-[10px] text-slate-500">162 Girls · 150 Boys</span>
+            <span class="text-2xl font-black text-wfp-blue block mt-0.5">41</span>
+            <span class="text-[10px] text-slate-500">25 Girls · 16 Boys (Kakamar P/S)</span>
           </div>
           <div class="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Average Attendance</span>
-            <span class="text-2xl font-black text-emerald-600 block mt-0.5">95.5%</span>
-            <span class="text-[10px] text-slate-500">298 Active Attendees</span>
+            <span class="text-2xl font-black text-emerald-600 block mt-0.5">87.8%</span>
+            <span class="text-[10px] text-slate-500">36 Active Attendees</span>
           </div>
-          <div class="p-3 bg-purple-50/50 rounded-lg border border-purple-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">PWD Learners Active</span>
-            <span class="text-2xl font-black text-purple-700 block mt-0.5">38</span>
-            <span class="text-[10px] text-slate-500">20 Boys · 18 Girls</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
+            <span class="text-[10px] text-slate-400">0 Boys · 0 Girls</span>
           </div>
-          <div class="p-3 bg-amber-50/50 rounded-lg border border-amber-100 text-center">
+          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Assembly Nutri-Moments</span>
-            <span class="text-2xl font-black text-amber-600 block mt-0.5">6</span>
-            <span class="text-[10px] text-slate-500">Delivered School-Wide</span>
+            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
+            <span class="text-[10px] text-slate-400">Pending Delivery</span>
           </div>
         </div>
       </div>
@@ -4072,27 +3373,27 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
-                      <strong class="text-slate-900">64 Primary Schools target (192 school visits across 9 districts)</strong>
+                      <strong class="text-slate-900">3 Primary Schools active (1 Orientation, 1 Visit 2, 1 NutriClub) · 64 Target Schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Direct Session Reach Target:</span>
-                      <strong class="text-wfp-blue font-bold">80,875 Pupils target (from 120,686 enrolled learners)</strong>
+                      <strong class="text-wfp-blue font-bold">71 Learners directly reached · 80,875 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
-                      <strong class="text-slate-900">640 Demonstrations (10 in the community around each school)</strong>
+                      <strong class="text-slate-900">0 Demonstrations logged · 640 Target Sites</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Caregivers &amp; Parents Target:</span>
-                      <strong class="text-slate-900">51,200 Adults across 64 school catchment areas</strong>
+                      <strong class="text-slate-900">4 Caregivers reached · 51,200 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">School Clubs &amp; Weekly Meetings:</span>
-                      <strong class="text-slate-900">64 School Clubs active with 128 weekly meetings held</strong>
+                      <strong class="text-slate-900">1 NutriClub active (Kakamar P/S, 41 members) · 64 Target Clubs</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
-                      <strong class="text-slate-900">768 Teachers &amp; VHTs target · 1,200 PWDs targeted</strong>
+                      <strong class="text-slate-900">65 Teachers &amp; VHTs logged · 5 PWDs reached · 768 Target</strong>
                     </div>
                   </div>
                 </td>
@@ -4112,23 +3413,23 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Cooking Practice:</span>
-                      <strong class="text-emerald-700 font-bold">88.3% of mothers cooked hands-on (only 11.7% watched)</strong>
+                      <strong class="text-slate-500 font-bold">Awaiting cooking demo submissions (0 demos conducted)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Local Foods Only:</span>
-                      <strong class="text-emerald-700 font-bold">100.0% used only easy-to-find wild greens &amp; cowpeas</strong>
+                      <strong class="text-slate-500 font-bold">Awaiting cooking demo submissions (0 demos conducted)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Teachers in the Lead:</span>
-                      <strong class="text-slate-900">92.2% (59 of 64 schools ran visits on their own)</strong>
+                      <strong class="text-slate-900">100% (1 of 1 school — Kiru P/S, Abim)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">What Children Remembered:</span>
-                      <strong class="text-wfp-blue font-bold">91.4% of children could clearly explain the food rules</strong>
+                      <strong class="text-wfp-blue font-bold">100% (1 of 1 school — Kotido Mixed P/S)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Fair &amp; Welcoming for All:</span>
-                      <strong class="text-slate-900">100.0% in local language (Ngakarimojong) with PWD seating</strong>
+                      <strong class="text-slate-900">100.0% in local language with inclusive PWD accommodation</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Questions &amp; Complaints:</span>
@@ -4152,31 +3453,31 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-emerald-50/60 rounded border border-emerald-200">
                       <span class="text-emerald-900 text-[10px] block font-semibold">Adding Greens to Morning Porridge:</span>
-                      <strong class="text-emerald-800 font-bold text-sm">84.0% of homes (up from 12.0% before)</strong>
-                      <span class="text-[10px] text-slate-500 block">Checked on 1,586 returned home charts with parents' signatures</span>
+                      <strong class="text-slate-600 font-bold text-sm">Pending Visit 3 closeout audits (0 schools)</strong>
+                      <span class="text-[10px] text-slate-500 block">Awaiting returned Home Charts at Visit 3 closeout</span>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water &amp; Firewood:</span>
-                      <strong class="text-blue-800 font-bold text-sm">85.0% of homes (up from 18.0% before)</strong>
-                      <span class="text-[10px] text-slate-500 block">Boys carry morning water so 94% of girls arrive on time</span>
+                      <strong class="text-blue-800 font-bold text-sm">100% chore agreement (Kotido Mixed P/S, 24/24 participants)</strong>
+                      <span class="text-[10px] text-slate-500 block">Polled consensus on rebalancing domestic water chores</span>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
                       <span class="text-purple-900 text-[10px] block font-semibold">Serving Toddlers First:</span>
-                      <strong class="text-purple-800 font-bold text-sm">82.0% of homes (up from 22.0% before)</strong>
-                      <span class="text-[10px] text-slate-500 block">Mothers now dish the toddler's bowl first straight from the pot</span>
+                      <strong class="text-slate-600 font-bold text-sm">Pending Visit 3 closeout audits (0 schools)</strong>
+                      <span class="text-[10px] text-slate-500 block">Youngest child prioritization pending household verification</span>
                     </div>
                     <div class="p-2 bg-amber-50/60 rounded border border-amber-200">
                       <span class="text-amber-900 text-[10px] block font-semibold">Saving Daily Firewood:</span>
-                      <strong class="text-amber-800 font-bold text-sm">83.3% of homes (up from 33.3% before)</strong>
-                      <span class="text-[10px] text-slate-500 block">Covering pots and using better stoves cut wood trips by half</span>
+                      <strong class="text-slate-600 font-bold text-sm">Pending cooking demo submissions (0 demos)</strong>
+                      <span class="text-[10px] text-slate-500 block">Firewood savings to be verified during cooking demos</span>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">More Pupils in School:</span>
-                      <strong class="text-slate-900 font-bold">+8.7% Attendance Increase (from 3,350 to 3,640 pupils)</strong>
+                      <strong class="text-slate-600 font-bold">- (Pending longitudinal return visits)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">Out-of-School Girls Back in Class:</span>
-                      <strong class="text-emerald-700 font-bold">18 girls who had dropped out are back in school</strong>
+                      <strong class="text-slate-600 font-bold">0 (Pending tracing squad reports)</strong>
                     </div>
                   </div>
                 </td>
@@ -4221,27 +3522,27 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">Enriched Porridge</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">640 Demos · 1,840 Home Charts</strong>
+                  <strong class="text-slate-900 block mb-1">1 Orientation · 1 Visit 2 Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 640 community cooking demonstrations held (10 around each of the 64 schools)</li>
-                    <li>• 1,840 Home Charts given to pupils to take to parents</li>
-                    <li>• All 64 schools practiced food sorting and porridge enrichment</li>
+                    <li>• Kiru P/S (Abim) completed orientation with 41 stakeholders</li>
+                    <li>• Kotido Mixed P/S delivered Visit 2 reaching 63 attendees</li>
+                    <li>• Target: 640 community demonstrations across 64 schools</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-emerald-700 block mb-1">88.3% Cooked Hands-On · 100% Local Greens</strong>
+                  <strong class="text-emerald-700 block mb-1">100% Fortification Recall</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 88.3% of caregivers cooked hands-on rather than just watching</li>
-                    <li>• 100% compliance with easy-to-find wild greens (Eboo, Lokaka, cowpeas)</li>
-                    <li>• 91.4% of children could clearly explain the food substitution rules</li>
+                    <li>• 100% recall of local greens (Eboo, Lokaka) at Kotido Mixed P/S</li>
+                    <li>• 50% of Abim exit interviewees committed to immediate porridge fortification</li>
+                    <li>• Awaiting community cooking demonstration rollout</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-emerald-50/30">
-                  <strong class="text-emerald-800 block mb-1">84% Enrich Porridge · 82% Dish Toddlers First</strong>
+                  <strong class="text-emerald-800 block mb-1">Awaiting Closeout Audits</strong>
                   <ul class="space-y-1 text-[11px] text-emerald-900">
-                    <li>• Adding greens to porridge jumped from 12.0% before to 84.0% (+72% shift)</li>
-                    <li>• 1,586 returned charts confirmed 7-day green diet at home</li>
-                    <li>• 82.0% of families now dish food for the youngest toddler first (up from 22%)</li>
+                    <li>• Household recipe trial audits pending Visit 3 closeouts</li>
+                    <li>• 0 of 640 community demonstration reports recorded to date</li>
+                    <li>• Verified shift metrics will calculate upon endline submissions</li>
                   </ul>
                 </td>
               </tr>
@@ -4256,27 +3557,27 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Keeping Girls in Class</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">64 Schools · 192 Visits · 128 Meetings</strong>
+                  <strong class="text-slate-900 block mb-1">1 NutriClub · 1 Visit 2 Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 64 primary schools completed all 3 visits (192 total visits)</li>
-                    <li>• 64 active school clubs established with 3,280 member pupils</li>
-                    <li>• 64 whole-school morning assembly talks delivered</li>
+                    <li>• Kakamar P/S (Kaabong) NutriClub active (41 members, 36 present)</li>
+                    <li>• Kotido Mixed P/S delivered interactive chore rebalancing dialogue</li>
+                    <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-wfp-blue block mb-1">92.2% Run by Teachers · 95.5% Attendance</strong>
+                  <strong class="text-wfp-blue block mb-1">100% Chore Sharing Agreement</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 92.2% of schools delivered sessions independently without the visiting team</li>
-                    <li>• 95.5% average attendance maintained across weekly club meetings</li>
-                    <li>• 38 pupils with disabilities actively taking part in club activities</li>
+                    <li>• 24 of 24 polled participants agreed domestic chores should be shared equally</li>
+                    <li>• 87.8% session attendance recorded at Kakamar P/S NutriClub</li>
+                    <li>• Inclusive accommodation verified (5 PWD attendees at Kotido Mixed P/S)</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-blue-50/30">
-                  <strong class="text-blue-900 block mb-1">+8.7% Attendance · 94% Girls on Time</strong>
+                  <strong class="text-blue-900 block mb-1">Chore Rebalancing Committed</strong>
                   <ul class="space-y-1 text-[11px] text-blue-900">
-                    <li>• Overall school attendance grew from 3,350 to 3,640 pupils (+8.7% gain)</li>
-                    <li>• Girls on-time arrival rose from 62.0% to 94.0% (+32.0% punctuality gain)</li>
-                    <li>• 18 girls who had dropped out were traced and brought back to class</li>
+                    <li>• 100% consensus in Kotido post-session intercepts on boys fetching water</li>
+                    <li>• Longitudinal attendance tracking initiated (Kotido Mixed: 35 learners)</li>
+                    <li>• Punctuality and attendance gains to be audited at Visit 3</li>
                   </ul>
                 </td>
               </tr>
@@ -4291,27 +3592,27 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Fair Work &amp; Clean Stoves</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">640 Village Talks · 1,480 Men Engaged</strong>
+                  <strong class="text-slate-900 block mb-1">1 Joint Calendar Agreed</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 640 community discussions held in villages around all 64 schools (10 per school community)</li>
-                    <li>• 1,480 fathers and elders actively took part in discussions</li>
-                    <li>• All 64 schools held the fair chore sharing debate</li>
+                    <li>• Kiru P/S (Abim) established 4-week joint activity schedule with VHTs</li>
+                    <li>• 9 teacher patrons appointed at Kiru P/S</li>
+                    <li>• Target: 640 community demonstrations and 64 school commitment pledges</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-purple-700 block mb-1">100% Peaceful Agreement · 90.5% Boys Affirm</strong>
+                  <strong class="text-purple-700 block mb-1">100% Multi-Partner Engagement</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 100% of village talks reached consensus without blaming any individual</li>
-                    <li>• Men actively tasted enriched porridge and joined stove demonstrations</li>
-                    <li>• 90.5% of surveyed boys agreed domestic work belongs to brothers and sisters alike</li>
+                    <li>• UNAC, Afi, DEO, and Health Centre partners actively co-facilitated in Abim</li>
+                    <li>• 0 complaints logged on WFP toll-free hotline (0800)</li>
+                    <li>• Clean cooking and firewood-saving demonstrations scheduled</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-purple-50/30">
-                  <strong class="text-purple-900 block mb-1">85% Share Chores · -34% Girl Absences</strong>
+                  <strong class="text-purple-900 block mb-1">Institutional Work Plans Underway</strong>
                   <ul class="space-y-1 text-[11px] text-purple-900">
-                    <li>• Boys sharing morning chores jumped from 18.0% to 85.0% (+67.0% shift)</li>
-                    <li>• Morning girl absences dropped by 34% as boys took on borehole water trips</li>
-                    <li>• Village elders formally agreed that boys carry water and toddlers eat first</li>
+                    <li>• School commitment boards and kitchen stove audits pending Visit 3</li>
+                    <li>• Firewood conservation practices to be verified during cooking demos</li>
+                    <li>• 0 village kraal consensus reports logged to date</li>
                   </ul>
                 </td>
               </tr>
@@ -4340,19 +3641,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance:</strong> 3,350 pupils counted in school registers (1,630 girls, 1,720 boys)</span>
+                <span class="text-slate-800"><strong>Attendance:</strong> - (Pending Visit 1 baseline register logs)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Enriched Porridge:</strong> Only 12.0% of homes adding greens</span>
+                <span class="text-slate-800"><strong>Enriched Porridge:</strong> Pending baseline audits (0 schools)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Sharing Chores:</strong> Only 18.0% of boys helping with morning water or firewood</span>
+                <span class="text-slate-800"><strong>Sharing Chores:</strong> Pending baseline audits (0 schools)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Serving Children First:</strong> Only 22.0% of families dishing the youngest child first</span>
+                <span class="text-slate-800"><strong>Serving Children First:</strong> Pending baseline audits (0 schools)</span>
               </div>
             </div>
           </div>
@@ -4365,19 +3666,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Children Reached:</strong> 31,240 learners engaged across 64 schools</span>
+                <span class="text-slate-800"><strong>Children Reached:</strong> 0 learners (Awaiting Visit 1 submissions)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Classroom Practice:</strong> 100% of schools did the hands-on food sorting game</span>
+                <span class="text-slate-800"><strong>Classroom Practice:</strong> 0 schools logged (Pending Visit 1)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Home Charts Given:</strong> 1,840 Home Charts given to pupils to take to parents</span>
+                <span class="text-slate-800"><strong>Home Charts Given:</strong> 0 charts logged (Pending Visit 1)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Patrons Appointed:</strong> 128 teacher patrons confirmed by Headteachers</span>
+                <span class="text-slate-800"><strong>Patrons Appointed:</strong> 9 patrons appointed (Kiru P/S, Abim)</span>
               </div>
             </div>
           </div>
@@ -4390,19 +3691,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance Growth:</strong> 3,510 pupils (+4.8% increase over baseline)</span>
+                <span class="text-slate-800"><strong>Attendance Logged:</strong> 35 learners counted (Kotido Mixed P/S)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> 91.4% of children remembered all 3 core messages</span>
+                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> 100% recall of 3 core messages (Kotido Mixed P/S)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>School Pledges:</strong> All 64 schools signed and hung up their commitment boards</span>
+                <span class="text-slate-800"><strong>School Pledges:</strong> 1 school commitment signed (Kotido Mixed P/S)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Village Cooking Demos:</strong> 640 demonstrations underway (88.3% cooked hands-on)</span>
+                <span class="text-slate-800"><strong>Village Cooking Demos:</strong> 0 demos logged (Target: 640 sites)</span>
               </div>
             </div>
           </div>
@@ -4415,19 +3716,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance Growth:</strong> 3,640 pupils (+8.7% cumulative gain over baseline)</span>
+                <span class="text-slate-800"><strong>Attendance Growth:</strong> - (Awaiting Visit 3 closeouts)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Charts Returned:</strong> 1,586 Home Charts brought back from parents (86.2% return rate)</span>
+                <span class="text-slate-800"><strong>Charts Returned:</strong> 0 returned (Pending Visit 3 closeouts)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>School Commitments:</strong> 93.8% of school action plans verified actively working</span>
+                <span class="text-slate-800"><strong>School Commitments:</strong> Pending endline verification (0 schools)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Club Continuity:</strong> All 64 school clubs established ongoing weekly schedules</span>
+                <span class="text-slate-800"><strong>Club Continuity:</strong> 1 NutriClub active (Kakamar P/S, Kaabong)</span>
               </div>
             </div>
           </div>
@@ -4440,19 +3741,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Community Demos:</strong> 640 cooking demonstrations held (10 per school community)</span>
+                <span class="text-slate-800"><strong>Community Demos:</strong> 0 cooking demonstrations logged (Target: 640)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Elders & Fathers:</strong> 1,480 male elders joined talks on fair meals and chores</span>
+                <span class="text-slate-800"><strong>Elders & Fathers:</strong> 4 male community leaders logged</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Home Follow-Up:</strong> 85% of visited homes confirmed boys fetching morning water</span>
+                <span class="text-slate-800"><strong>Home Follow-Up:</strong> Awaiting post-demo household visits</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Hotline Redress:</strong> 0 complaints of unfair treatment on the WFP toll-free hotline</span>
+                <span class="text-slate-800"><strong>Hotline Redress:</strong> 0 complaints logged on WFP hotline (0800)</span>
               </div>
             </div>
           </div>
@@ -4465,19 +3766,19 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Radio Broadcasts:</strong> 144 spots aired on Voice of Karamoja, Nenah FM, and Radio Pacis</span>
+                <span class="text-slate-800"><strong>Radio Broadcasts:</strong> Radio broadcast feedback pending field reports</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Disability Inclusion:</strong> 248 people with disabilities took part in all activities</span>
+                <span class="text-slate-800"><strong>Disability Inclusion:</strong> 5 people with disabilities reached</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Local Language:</strong> 100% of talks and cards delivered in Ngakarimojong</span>
+                <span class="text-slate-800"><strong>Local Language:</strong> 100% delivered in local languages</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Saving Firewood:</strong> 83.3% of homes saving wood with pot lids and better stoves</span>
+                <span class="text-slate-800"><strong>Saving Firewood:</strong> Clean cooking demonstrations pending rollout</span>
               </div>
             </div>
           </div>
@@ -4588,38 +3889,7 @@ html_code = f"""<!DOCTYPE html>
     const DEMO_SESSIONS_640 = {DEMO_SESSIONS_640_JSON};
 
     // Comprehensive record log for filtering
-    const RECORDS = [
-      {{ id: 1, date: "2026-09-08", district: "Abim", activity: "Orientation", school: "Abim P/S", coordinator: "Emma", reach: 22, pwd: 5, status: "Cleaned" }},
-      {{ id: 2, date: "2026-09-15", district: "Abim", activity: "Three visit contact", school: "Abim P/S", coordinator: "Emma", reach: 820, pwd: 29, status: "Cleaned" }},
-      {{ id: 3, date: "2026-09-20", district: "Abim", activity: "Community demonstration", school: "Abim Boma Kraal", coordinator: "Lead Coordinator", reach: 88, pwd: 5, status: "Cleaned" }},
-      {{ id: 4, date: "2026-09-21", district: "Abim", activity: "Community demonstration", school: "Wiyawoi Trading Shade", coordinator: "VHT", reach: 72, pwd: 3, status: "Cleaned" }},
-      {{ id: 5, date: "2026-09-07", district: "Amudat", activity: "Orientation", school: "Hvvv P/S", coordinator: "Emma", reach: 20, pwd: 5, status: "Cleaned" }},
-      {{ id: 6, date: "2026-09-14", district: "Amudat", activity: "Three visit contact", school: "Hvvv P/S", coordinator: "Emma", reach: 760, pwd: 26, status: "Cleaned" }},
-      {{ id: 7, date: "2026-09-19", district: "Amudat", activity: "Community demonstration", school: "Amudat Community Kraal", coordinator: "Lead Coordinator", reach: 88, pwd: 4, status: "Cleaned" }},
-      {{ id: 8, date: "2026-09-21", district: "Amudat", activity: "Community demonstration", school: "Karita Trading Shade", coordinator: "VHT", reach: 74, pwd: 3, status: "Cleaned" }},
-      {{ id: 9, date: "2026-09-09", district: "Kaabong", activity: "Orientation", school: "Kaabong West P/S", coordinator: "Emma", reach: 24, pwd: 6, status: "Cleaned" }},
-      {{ id: 10, date: "2026-09-16", district: "Kaabong", activity: "Three visit contact", school: "Kaabong West P/S", coordinator: "Emma", reach: 890, pwd: 30, status: "Cleaned" }},
-      {{ id: 11, date: "2026-09-22", district: "Kaabong", activity: "Community demonstration", school: "Kaabong Central Market", coordinator: "Lead Coordinator", reach: 85, pwd: 3, status: "Cleaned" }},
-      {{ id: 12, date: "2026-09-24", district: "Kaabong", activity: "Community demonstration", school: "Lobalangit Kraal Shade", coordinator: "VHT", reach: 65, pwd: 2, status: "Cleaned" }},
-      {{ id: 13, date: "2026-09-17", district: "Kotido", activity: "Community demonstration", school: "Kotido Sub-county Shade", coordinator: "Lead Coordinator", reach: 106, pwd: 6, status: "Cleaned" }},
-      {{ id: 14, date: "2026-09-21", district: "Kotido", activity: "Community demonstration", school: "Lokitelaebu Trading Point", coordinator: "VHT", reach: 74, pwd: 3, status: "Cleaned" }},
-      {{ id: 15, date: "2026-09-06", district: "Moroto", activity: "Orientation", school: "Lomorunyankori P/S", coordinator: "Emma", reach: 25, pwd: 7, status: "Cleaned" }},
-      {{ id: 16, date: "2026-09-13", district: "Moroto", activity: "Three visit contact", school: "Lomorunyankori P/S", coordinator: "Emma", reach: 950, pwd: 35, status: "Cleaned" }},
-      {{ id: 17, date: "2026-09-22", district: "Moroto", activity: "Community demonstration", school: "Lomorunyankori Shade Tree", coordinator: "VHT", reach: 92, pwd: 4, status: "Cleaned" }},
-      {{ id: 18, date: "2026-09-23", district: "Moroto", activity: "Community demonstration", school: "Nadunget Borehole Point", coordinator: "VHT", reach: 68, pwd: 2, status: "Cleaned" }},
-      {{ id: 19, date: "2026-09-08", district: "Nabilatuk", activity: "Orientation", school: "ACEGERETOLIM P/S", coordinator: "Francis awas", reach: 22, pwd: 6, status: "Cleaned" }},
-      {{ id: 20, date: "2026-09-17", district: "Nabilatuk", activity: "Three visit contact", school: "ACEGERETOLIM P/S", coordinator: "Francis p", reach: 810, pwd: 29, status: "Cleaned" }},
-      {{ id: 21, date: "2026-09-22", district: "Nabilatuk", activity: "Community demonstration", school: "Acegeretolim Centre Shade", coordinator: "Francis awas", reach: 84, pwd: 4, status: "Cleaned" }},
-      {{ id: 22, date: "2026-09-24", district: "Nabilatuk", activity: "Community demonstration", school: "Lorengedwat Kraal Gathering", coordinator: "VHT", reach: 71, pwd: 3, status: "Cleaned" }},
-      {{ id: 23, date: "2026-09-05", district: "Nakapiripirit", activity: "Orientation", school: "Nakapiripirit P/S", coordinator: "Emma", reach: 20, pwd: 4, status: "Cleaned" }},
-      {{ id: 24, date: "2026-09-12", district: "Nakapiripirit", activity: "Three visit contact", school: "Nakapiripirit P/S", coordinator: "Emma", reach: 730, pwd: 24, status: "Cleaned" }},
-      {{ id: 25, date: "2026-09-18", district: "Nakapiripirit", activity: "Community demonstration", school: "Moruita Borehole Point", coordinator: "VHT", reach: 82, pwd: 4, status: "Cleaned" }},
-      {{ id: 26, date: "2026-09-20", district: "Nakapiripirit", activity: "Community demonstration", school: "Town Board Meeting Shade", coordinator: "VHT", reach: 58, pwd: 2, status: "Cleaned" }},
-      {{ id: 27, date: "2026-09-16", district: "Napak", activity: "Community demonstration", school: "Matany Trading Centre", coordinator: "Lead Coordinator", reach: 95, pwd: 5, status: "Cleaned" }},
-      {{ id: 28, date: "2026-09-18", district: "Napak", activity: "Community demonstration", school: "Lorengechora Kraal", coordinator: "VHT", reach: 76, pwd: 4, status: "Cleaned" }},
-      {{ id: 29, date: "2026-09-18", district: "Karenga", activity: "Community demonstration", school: "Karenga Boma Ground", coordinator: "Lead Coordinator", reach: 80, pwd: 3, status: "Cleaned" }},
-      {{ id: 30, date: "2026-09-20", district: "Karenga", activity: "Community demonstration", school: "Sangar Borehole Area", coordinator: "VHT", reach: 62, pwd: 2, status: "Cleaned" }}
-    ];
+    const RECORDS = {RECORDS_JSON};
 
     // Helper to wrap long labels into multiline arrays so text is never cut off
     function wrapLabel(label, maxChars = 28) {{
@@ -4647,6 +3917,86 @@ html_code = f"""<!DOCTYPE html>
       }}
       if (currentLine) lines.push(currentLine);
       return lines;
+    }}
+
+    // Helper to create grouped horizontal bar chart for Core Activities (Conducted vs Target)
+    function createGroupedBarChart(canvasId, labels, conductedData, targetData) {{
+      const ctx = document.getElementById(canvasId);
+      if (!ctx) return;
+
+      if (chartInstances[canvasId]) {{
+        chartInstances[canvasId].destroy();
+      }}
+
+      const formattedLabels = labels.map(l => wrapLabel(l, 26));
+
+      chartInstances[canvasId] = new Chart(ctx, {{
+        type: 'bar',
+        data: {{
+          labels: formattedLabels,
+          datasets: [
+            {{
+              label: 'Conducted',
+              data: conductedData,
+              backgroundColor: '#0A6EB4',
+              borderRadius: 4,
+              borderSkipped: false
+            }},
+            {{
+              label: 'Operational Target',
+              data: targetData,
+              backgroundColor: '#E2E8F0',
+              borderColor: '#94A3B8',
+              borderWidth: 1,
+              borderRadius: 4,
+              borderSkipped: false
+            }}
+          ]
+        }},
+        options: {{
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {{
+            legend: {{
+              display: true,
+              position: 'top',
+              labels: {{
+                boxWidth: 12,
+                font: {{ size: 11, weight: 'bold' }}
+              }}
+            }},
+            tooltip: {{
+              callbacks: {{
+                label: function(ctx) {{
+                  return `${{ctx.dataset.label}}: ${{ctx.parsed.x.toLocaleString()}}`;
+                }},
+                afterBody: function(items) {{
+                  if (items && items[0]) {{
+                    const idx = items[0].dataIndex;
+                    const c = conductedData[idx] || 0;
+                    const t = targetData[idx] || 1;
+                    const pct = ((c / t) * 100).toFixed(1);
+                    return `Progress: ${{pct}}% (${{c}} of ${{t}})`;
+                  }}
+                  return '';
+                }}
+              }}
+            }}
+          }},
+          scales: {{
+            x: {{
+              beginAtZero: true,
+              grid: {{ color: '#f1f5f9' }},
+              ticks: {{ font: {{ size: 10 }} }}
+            }},
+            y: {{
+              grid: {{ display: false }},
+              ticks: {{ font: {{ size: 11, weight: '600' }} }}
+            }}
+          }}
+        }}
+      }});
     }}
 
     // Helper to create horizontal bar chart (Labels on Vertical Axis)
@@ -4943,112 +4293,225 @@ html_code = f"""<!DOCTYPE html>
     }}
 
     // School Trajectory List
-    const SCHOOL_TRAJECTORIES = [
-      {{ name: "Abim Primary School", district: "Abim", enrolment: 630, v1: 550, v2: 580, v3: 605, status: "Audited" }},
-      {{ name: "Hvvv Primary School", district: "Amudat", enrolment: 580, v1: 510, v2: 535, v3: 555, status: "Audited" }},
-      {{ name: "Kaabong West Primary School", district: "Kaabong", enrolment: 690, v1: 605, v2: 635, v3: 660, status: "Audited" }},
-      {{ name: "Moroto Municipal Primary School", district: "Moroto", enrolment: 720, v1: 630, v2: 660, v3: 685, status: "Audited" }},
-      {{ name: "Nabilatuk Primary School", district: "Nabilatuk", enrolment: 610, v1: 535, v2: 560, v3: 580, status: "Audited" }},
-      {{ name: "Nakapiripirit Primary School", district: "Nakapiripirit", enrolment: 590, v1: 520, v2: 540, v3: 555, status: "Audited" }},
-      {{ name: "Kotido Mixed Primary School", district: "Kotido", enrolment: 640, v1: null, v2: null, v3: null, status: "Pending" }},
-      {{ name: "Napak Township School", district: "Napak", enrolment: 610, v1: null, v2: null, v3: null, status: "Pending" }},
-      {{ name: "Karenga Community Primary School", district: "Karenga", enrolment: 570, v1: null, v2: null, v3: null, status: "Pending" }}
-    ];
+    const SCHOOL_TRAJECTORIES = {SCHOOL_TRAJECTORIES_JSON};
 
-    // Render School Trajectory Table
-    function renderSchoolTrajectoryTable(selDistrict = 'ALL') {{
-      const tbody = document.getElementById('school-trajectory-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
+    let currentTrajSearch = '';
+    const trajAccordionState = {{}};
 
-      const filtered = selDistrict === 'ALL' 
-        ? SCHOOL_TRAJECTORIES 
-        : SCHOOL_TRAJECTORIES.filter(s => s.district === selDistrict);
+    function toggleTrajAccordion(distName) {{
+      const body = document.getElementById(`traj-body-${{distName}}`);
+      const chevron = document.getElementById(`chevron-traj-${{distName}}`);
+      if (!body) return;
+      const isHidden = body.classList.contains('hidden');
+      if (isHidden) {{
+        body.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+        trajAccordionState[distName] = true;
+      }} else {{
+        body.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+        trajAccordionState[distName] = false;
+      }}
+    }}
 
-      filtered.forEach(s => {{
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-50 transition-colors';
+    function toggleAllTrajAccordions(expand) {{
+      const districtOrder = ['Abim', 'Amudat', 'Kaabong', 'Karenga', 'Kotido', 'Moroto', 'Nabilatuk', 'Nakapiripirit', 'Napak'];
+      districtOrder.forEach(d => {{
+        trajAccordionState[d] = expand;
+        const body = document.getElementById(`traj-body-${{d}}`);
+        const chevron = document.getElementById(`chevron-traj-${{d}}`);
+        if (body) {{
+          if (expand) body.classList.remove('hidden');
+          else body.classList.add('hidden');
+        }}
+        if (chevron) {{
+          if (expand) chevron.classList.add('rotate-180');
+          else chevron.classList.remove('rotate-180');
+        }}
+      }});
+    }}
 
-        if (s.status === 'Audited') {{
-          const gain = s.v3 - s.v1;
-          const gainPct = ((gain / s.enrolment) * 100).toFixed(1);
-          const v3Pct = ((s.v3 / s.enrolment) * 100).toFixed(1);
+    function onTrajSchoolSearch(val) {{
+      currentTrajSearch = val;
+      const globalSel = document.getElementById('global-district-filter');
+      const dist = globalSel ? globalSel.value : 'ALL';
+      renderSchoolTrajectoryTable(dist, currentTrajSearch);
+    }}
 
-          tr.innerHTML = `
-            <td class="py-2.5 px-3 font-semibold text-slate-800 flex items-center gap-1.5">
-              <i class="fa-solid fa-school text-wfp-blue"></i>
-              <span>${{s.name}}</span>
-            </td>
-            <td class="py-2.5 px-3"><span class="px-2 py-0.5 bg-blue-50 text-wfp-blue rounded font-medium">${{s.district}}</span></td>
-            <td class="py-2.5 px-3 text-right font-semibold">${{s.enrolment.toLocaleString()}}</td>
-            <td class="py-2.5 px-3 text-right text-slate-700">${{s.v1.toLocaleString()}} <span class="text-[10px] text-slate-400">(${{((s.v1/s.enrolment)*100).toFixed(0)}}%)</span></td>
-            <td class="py-2.5 px-3 text-right text-slate-700">${{s.v2.toLocaleString()}} <span class="text-[10px] text-slate-400">(${{((s.v2/s.enrolment)*100).toFixed(0)}}%)</span></td>
-            <td class="py-2.5 px-3 text-right font-bold text-emerald-700">${{s.v3.toLocaleString()}} <span class="text-[10px]">(${{v3Pct}}%)</span></td>
-            <td class="py-2.5 px-3 text-center">
+    // Render School Trajectory District Accordions
+    function renderSchoolTrajectoryTable(selDistrict = 'ALL', search = '') {{
+      const container = document.getElementById('school-trajectory-accordions');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const searchLower = (search || currentTrajSearch || '').toLowerCase().trim();
+      const districtOrder = ['Abim', 'Amudat', 'Kaabong', 'Karenga', 'Kotido', 'Moroto', 'Nabilatuk', 'Nakapiripirit', 'Napak'];
+
+      // Group trajectory schools by district
+      const grouped = {{}};
+      districtOrder.forEach(d => {{ grouped[d] = []; }});
+
+      SCHOOL_TRAJECTORIES.forEach(s => {{
+        if (!grouped[s.district]) grouped[s.district] = [];
+        grouped[s.district].push(s);
+      }});
+
+      let totalMatchedSchools = 0;
+
+      districtOrder.forEach(dName => {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) return;
+
+        let dSchools = grouped[dName] || [];
+        if (searchLower) {{
+          dSchools = dSchools.filter(s => {{
+            const haystack = (s.name + ' ' + s.district + ' ' + (s.status || '')).toLowerCase();
+            return haystack.includes(searchLower);
+          }});
+        }}
+
+        if (dSchools.length === 0) return;
+        totalMatchedSchools += dSchools.length;
+
+        // Calculate district totals
+        const totEnrol = dSchools.reduce((acc, s) => acc + (s.enrolment || 0), 0);
+        let distVisitsDone = 0;
+        let distActiveSchools = 0;
+        dSchools.forEach(s => {{
+          let hasVisits = false;
+          if (s.v1 !== null && s.v1 !== undefined) {{ distVisitsDone++; hasVisits = true; }}
+          if (s.v2 !== null && s.v2 !== undefined) {{ distVisitsDone++; hasVisits = true; }}
+          if (s.v3 !== null && s.v3 !== undefined) {{ distVisitsDone++; hasVisits = true; }}
+          if (hasVisits) distActiveSchools++;
+        }});
+
+        // Determine if open
+        let isOpen = false;
+        if (trajAccordionState[dName] !== undefined) {{
+          isOpen = trajAccordionState[dName];
+        }} else {{
+          isOpen = (selDistrict !== 'ALL' || searchLower.length > 0 || distActiveSchools > 0);
+        }}
+
+        const card = document.createElement('div');
+        card.className = 'border border-slate-200/90 rounded-xl overflow-hidden shadow-2xs bg-white';
+        card.id = `traj-district-acc-${{dName}}`;
+
+        let rowsHtml = '';
+        dSchools.forEach(s => {{
+          const v1Display = s.v1 !== null && s.v1 !== undefined 
+            ? `<span class="font-bold text-slate-800">${{s.v1.toLocaleString()}}</span> <span class="text-[10px] text-slate-400">(${{((s.v1/s.enrolment)*100).toFixed(0)}}%)</span>` 
+            : `<span class="text-slate-400 font-medium">-</span>`;
+          const v2Display = s.v2 !== null && s.v2 !== undefined 
+            ? `<span class="font-bold text-sky-700">${{s.v2.toLocaleString()}}</span> <span class="text-[10px] text-slate-400">(${{((s.v2/s.enrolment)*100).toFixed(0)}}%)</span>` 
+            : `<span class="text-slate-400 font-medium">-</span>`;
+          const v3Display = s.v3 !== null && s.v3 !== undefined 
+            ? `<span class="font-bold text-emerald-700">${{s.v3.toLocaleString()}}</span> <span class="text-[10px] text-slate-400">(${{((s.v3/s.enrolment)*100).toFixed(0)}}%)</span>` 
+            : `<span class="text-slate-400 font-medium">-</span>`;
+
+          let gainDisplay = `<span class="text-slate-400 italic text-[11px]">-</span>`;
+          if (s.v3 !== null && s.v3 !== undefined && s.v1 !== null && s.v1 !== undefined) {{
+            const gain = s.v3 - s.v1;
+            const gainPct = ((gain / s.enrolment) * 100).toFixed(1);
+            gainDisplay = `
               <span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-700 font-bold rounded-full text-[11px]">
                 <i class="fa-solid fa-arrow-trend-up"></i> +${{gain}} (+${{gainPct}}%)
               </span>
-            </td>
-            <td class="py-2.5 px-3 text-center">
-              <span class="px-2 py-0.5 bg-blue-100 text-blue-800 font-semibold rounded text-[10px]">3 / 3 Visits Done</span>
-            </td>
+            `;
+          }}
+
+          let statusBadge = `<span class="px-2 py-0.5 bg-slate-100 text-slate-500 font-semibold rounded text-[10px]">Pending Deployment</span>`;
+          if (s.v3 !== null && s.v3 !== undefined) {{
+            statusBadge = `<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-semibold rounded text-[10px]">3 / 3 Visits Done</span>`;
+          }} else if (s.v2 !== null && s.v2 !== undefined) {{
+            statusBadge = `<span class="px-2 py-0.5 bg-sky-100 text-sky-800 font-bold rounded text-[10px]">Visit 2 Done</span>`;
+          }} else if (s.v1 !== null && s.v1 !== undefined) {{
+            statusBadge = `<span class="px-2 py-0.5 bg-blue-100 text-blue-800 font-semibold rounded text-[10px]">Visit 1 Done</span>`;
+          }}
+
+          const hasVisits = (s.v1 !== null && s.v1 !== undefined) || (s.v2 !== null && s.v2 !== undefined) || (s.v3 !== null && s.v3 !== undefined);
+
+          rowsHtml += `
+            <tr class="hover:bg-blue-50/40 transition-colors">
+              <td class="py-2.5 px-3 font-semibold ${{hasVisits ? 'text-slate-900' : 'text-slate-600'}} flex items-center gap-2">
+                <i class="fa-solid ${{hasVisits ? 'fa-school text-wfp-blue' : 'fa-school text-slate-300'}} text-xs"></i>
+                <span>${{s.name}}</span>
+              </td>
+              <td class="py-2.5 px-3 text-right ${{hasVisits ? 'text-slate-800 font-bold' : 'text-slate-500 font-normal'}}">${{s.enrolment ? s.enrolment.toLocaleString() : '-'}}</td>
+              <td class="py-2.5 px-3 text-right">${{v1Display}}</td>
+              <td class="py-2.5 px-3 text-right">${{v2Display}}</td>
+              <td class="py-2.5 px-3 text-right">${{v3Display}}</td>
+              <td class="py-2.5 px-3 text-center">${{gainDisplay}}</td>
+              <td class="py-2.5 px-3 text-center">${{statusBadge}}</td>
+            </tr>
           `;
-        }} else {{
-          tr.innerHTML = `
-            <td class="py-2.5 px-3 font-semibold text-slate-500 flex items-center gap-1.5">
-              <i class="fa-solid fa-clock text-slate-400"></i>
-              <span>${{s.name}}</span>
-            </td>
-            <td class="py-2.5 px-3"><span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded font-medium">${{s.district}}</span></td>
-            <td class="py-2.5 px-3 text-right text-slate-500 font-semibold">${{s.enrolment.toLocaleString()}}</td>
-            <td class="py-2.5 px-3 text-right text-slate-400">-</td>
-            <td class="py-2.5 px-3 text-right text-slate-400">-</td>
-            <td class="py-2.5 px-3 text-right text-slate-400">-</td>
-            <td class="py-2.5 px-3 text-center"><span class="text-slate-400 italic text-[11px]">Scheduled</span></td>
-            <td class="py-2.5 px-3 text-center">
-              <span class="px-2 py-0.5 bg-amber-50 text-amber-700 font-semibold rounded text-[10px]">Pending Deployment</span>
-            </td>
-          `;
-        }}
-        tbody.appendChild(tr);
+        }});
+
+        const statusPill = distActiveSchools > 0
+          ? `<span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200 text-xs flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600 text-[10px]"></i> ${{distActiveSchools}} Active Cohort (${{distVisitsDone}} Visit Conducted)</span>`
+          : `<span class="px-2.5 py-0.5 bg-slate-100 text-slate-500 font-medium rounded-lg text-[11px]">0 Visits Conducted</span>`;
+
+        card.innerHTML = `
+          <button type="button" 
+                  onclick="toggleTrajAccordion('${{dName}}')" 
+                  class="w-full p-3.5 flex flex-wrap items-center justify-between gap-3 bg-slate-50/80 hover:bg-blue-50/50 transition text-left border-b border-slate-200 cursor-pointer">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg ${{distActiveSchools > 0 ? 'bg-blue-600 text-white shadow-xs' : 'bg-slate-200 text-slate-600'}} flex items-center justify-center font-bold text-xs shrink-0">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </span>
+              <div>
+                <h5 class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                  <span>${{dName}} District</span>
+                  <span class="text-[11px] font-normal text-slate-500">(${{dSchools.length}} Primary Schools)</span>
+                </h5>
+                <p class="text-[11px] text-slate-500 mt-0.5">
+                  Total Baseline Enrolment: <strong class="text-slate-700">${{totEnrol.toLocaleString()}}</strong> Pupils · Cohort Coverage Target: 3 Visits per School
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              ${{statusPill}}
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200 ${{isOpen ? 'rotate-180' : ''}}" id="chevron-traj-${{dName}}"></i>
+            </div>
+          </button>
+
+          <div id="traj-body-${{dName}}" class="${{isOpen ? '' : 'hidden'}} bg-white overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-slate-50/60 text-slate-600 font-bold uppercase border-b border-slate-200 text-[11px]">
+                <tr>
+                  <th class="py-2.5 px-3">School Name</th>
+                  <th class="py-2.5 px-3 text-right">Enrolment Baseline</th>
+                  <th class="py-2.5 px-3 text-right">Visit 1</th>
+                  <th class="py-2.5 px-3 text-right">Visit 2</th>
+                  <th class="py-2.5 px-3 text-right">Visit 3</th>
+                  <th class="py-2.5 px-3 text-center">Attendance Trajectory</th>
+                  <th class="py-2.5 px-3 text-center">Cohort Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                ${{rowsHtml}}
+              </tbody>
+            </table>
+          </div>
+        `;
+        container.appendChild(card);
       }});
+
+      if (totalMatchedSchools === 0) {{
+        container.innerHTML = `
+          <div class="text-center py-8 bg-slate-50 border border-slate-200 rounded-xl">
+            <i class="fa-solid fa-school-circle-xmark text-3xl text-slate-300 mb-2 block"></i>
+            <h5 class="text-xs font-bold text-slate-700">No schools matching "${{searchLower}}"</h5>
+            <p class="text-[11px] text-slate-500 mt-0.5">Try searching with a different school name or clear the search filter.</p>
+          </div>
+        `;
+      }}
     }}
 
     const SCHOOL_ATTENDANCE_DB = {{
       "ALL": {{
-        name: "All 6 Audited Schools",
-        boys: 1720, girls: 1630, total: 3350,
-        lb: 640, lg: 610, mb: 590, mg: 580, ub: 490, ug: 440
-      }},
-      "Abim": {{
-        name: "Abim Primary School (Abim)",
-        boys: 285, girls: 265, total: 550,
-        lb: 105, lg: 100, mb: 100, mg: 95, ub: 80, ug: 70
-      }},
-      "Amudat": {{
-        name: "Hvvv Primary School (Amudat)",
-        boys: 265, girls: 245, total: 510,
-        lb: 100, lg: 95, mb: 90, mg: 85, ub: 75, ug: 65
-      }},
-      "Kaabong": {{
-        name: "Kaabong West Primary School (Kaabong)",
-        boys: 310, girls: 295, total: 605,
-        lb: 115, lg: 110, mb: 105, mg: 105, ub: 90, ug: 80
-      }},
-      "Moroto": {{
-        name: "Moroto Municipal Primary School (Moroto)",
-        boys: 320, girls: 310, total: 630,
-        lb: 120, lg: 115, mb: 110, mg: 110, ub: 90, ug: 85
-      }},
-      "Nabilatuk": {{
-        name: "Nabilatuk Primary School (Nabilatuk)",
-        boys: 275, girls: 260, total: 535,
-        lb: 105, lg: 100, mb: 95, mg: 95, ub: 75, ug: 65
-      }},
-      "Nakapiripirit": {{
-        name: "Nakapiripirit Primary School (Nakapiripirit)",
-        boys: 265, girls: 255, total: 520,
-        lb: 95, lg: 90, mb: 90, mg: 90, ub: 80, ug: 75
+        name: "All Schools",
+        boys: 0, girls: 0, total: 0,
+        lb: 0, lg: 0, mb: 0, mg: 0, ub: 0, ug: 0
       }}
     }};
 
@@ -5176,7 +4639,7 @@ html_code = f"""<!DOCTYPE html>
     function resetFilters() {{
       document.getElementById('districtFilter').value = 'ALL';
       document.getElementById('dateFilterStart').value = '2026-09-01';
-      document.getElementById('dateFilterEnd').value = '2026-09-30';
+      document.getElementById('dateFilterEnd').value = '2026-10-31';
       document.getElementById('searchKeyword').value = '';
       applyFilters();
     }}
@@ -5209,69 +4672,133 @@ html_code = f"""<!DOCTYPE html>
       let totCaregivers = 0, totTargetCaregivers = 0;
       let totTeachers = 0, totVhts = 0;
       let totPwdLearners = 0, totPwdAdults = 0;
+      let totOrientSchools = 0;
 
       // Filter district list
       let activeDistricts = [];
       for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
         if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
 
-        // Check date overlap
-        const hasDate = d.dates.some(dt => dt >= startDate && dt <= endDate);
-        if (!hasDate) continue;
-
-        activeDistricts.push(dName);
-        totSchools += d.schools;
+        // Targets belong to all matching districts
         totTargetSchools += d.target_schools;
-        totDemos += d.demos;
         totTargetDemos += d.target_demos;
-        totLearners += d.learners;
         totTargetLearners += d.target_learners;
-        totCaregivers += d.caregivers;
         totTargetCaregivers += d.target_caregivers;
-        totTeachers += (d.teachers_male + d.teachers_female);
-        totVhts += (d.vhts_male + d.vhts_female);
-        totPwdLearners += (d.pwd_reach > 25 ? Math.round(d.pwd_reach * 0.58) : Math.round(d.pwd_reach * 0.5));
-        totPwdAdults += (d.pwd_reach - (d.pwd_reach > 25 ? Math.round(d.pwd_reach * 0.58) : Math.round(d.pwd_reach * 0.5)));
-      }}
 
-      // If "ALL" without date restriction, preserve exact official baseline
-      if (selDistrict === 'ALL' && startDate <= '2026-09-01' && endDate >= '2026-09-30') {{
-        totSchools = 6; totTargetSchools = 64;
-        totDemos = 60; totTargetDemos = 640;
-        totLearners = 5840; totTargetLearners = 80875;
-        totCaregivers = 165; totTargetCaregivers = 51200;
-        totTeachers = 48; totVhts = 95;
-        totPwdLearners = 146; totPwdAdults = 102;
+        // Check date overlap for actual records
+        const hasDate = (d.dates && d.dates.length > 0)
+          ? d.dates.some(dt => dt >= startDate && dt <= endDate)
+          : true;
+
+        if (d.schools > 0 && hasDate) {{
+          activeDistricts.push(dName);
+          totSchools += d.schools;
+          totDemos += d.demos;
+          totLearners += d.learners;
+          totCaregivers += d.caregivers;
+          totTeachers += (d.teachers_male + d.teachers_female);
+          totVhts += (d.vhts_male + d.vhts_female);
+          totPwdLearners += (d.v2 ? ((d.v2.hc_mid_pwd || 0) + (d.v2.hc_up_pwd || 0)) : 0);
+          totPwdAdults += (d.v2 ? (d.v2.teachers_pwd || 0) : 0);
+          if (d.headteachers) totOrientSchools += d.headteachers;
+        }}
       }}
 
       const totPwd = totPwdLearners + totPwdAdults;
       const totStakeholders = totTeachers + totVhts;
 
-      // Update KPI DOM
-      document.getElementById('kpi-schools').innerText = totSchools.toLocaleString();
-      document.getElementById('kpi-target-schools').innerText = `/ ${{totTargetSchools}} schools`;
+      // Calculate visits and NutriClubs based on filter
+      const filteredTrajectorySchools = (selDistrict === 'ALL' ? SCHOOL_TRAJECTORIES : SCHOOL_TRAJECTORIES.filter(s => s.district === selDistrict));
+      const v1DoneCount = filteredTrajectorySchools.filter(s => s.v1 !== null && s.v1 !== undefined).length;
+      const v2DoneCount = filteredTrajectorySchools.filter(s => s.v2 !== null && s.v2 !== undefined).length;
+      const v3DoneCount = filteredTrajectorySchools.filter(s => s.v3 !== null && s.v3 !== undefined).length;
+      const totVisits = v1DoneCount + v2DoneCount + v3DoneCount;
+      const totTargetVisits = totTargetSchools * 3;
+
+      let totClubs = 0;
+      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
+        totClubs += (d.nutriclubs !== undefined ? d.nutriclubs : (dName === 'Kaabong' ? 1 : 0));
+      }}
+
+      // 1. Primary Schools KPI
+      const elKpiSch = document.getElementById('kpi-schools');
+      if (elKpiSch) elKpiSch.innerText = totSchools.toLocaleString();
+      const elKpiTgtSch = document.getElementById('kpi-target-schools');
+      if (elKpiTgtSch) elKpiTgtSch.innerText = `/ ${{totTargetSchools}} schools`;
       const pctSch = totTargetSchools > 0 ? ((totSchools / totTargetSchools) * 100).toFixed(1) : 0;
-      document.getElementById('bar-schools').style.width = pctSch + '%';
-      document.getElementById('pct-schools').innerText = `Progress: ${{pctSch}}%`;
+      const elBarSch = document.getElementById('bar-schools');
+      if (elBarSch) elBarSch.style.width = pctSch + '%';
+      const elPctSch = document.getElementById('pct-schools');
+      if (elPctSch) elPctSch.innerText = `Progress: ${{pctSch}}%`;
+      const elRemainSch = document.getElementById('remain-schools');
+      if (elRemainSch) elRemainSch.innerText = `${{Math.max(0, totTargetSchools - totSchools)}} Remaining`;
+      const elBadgeSch = document.getElementById('badge-schools-status');
+      if (elBadgeSch) elBadgeSch.innerText = `${{totSchools}} Active`;
 
-      document.getElementById('kpi-demos').innerText = totDemos.toLocaleString();
-      document.getElementById('kpi-target-demos').innerText = `/ ${{totTargetDemos}} sites`;
+      // 2. School Contact Visits KPI
+      const elKpiVis = document.getElementById('kpi-visits');
+      if (elKpiVis) elKpiVis.innerText = totVisits.toLocaleString();
+      const elKpiTgtVis = document.getElementById('kpi-target-visits');
+      if (elKpiTgtVis) elKpiTgtVis.innerText = `/ ${{totTargetVisits}} total visits`;
+      const pctVis = totTargetVisits > 0 ? ((totVisits / totTargetVisits) * 100).toFixed(1) : 0;
+      const elBarVis = document.getElementById('bar-visits');
+      if (elBarVis) elBarVis.style.width = pctVis + '%';
+      const elPctVis = document.getElementById('pct-visits');
+      if (elPctVis) elPctVis.innerText = `Progress: ${{pctVis}}%`;
+      const elRemainVis = document.getElementById('remain-visits');
+      if (elRemainVis) elRemainVis.innerText = `${{Math.max(0, totTargetVisits - totVisits)}} Remaining`;
+      const elV1Pill = document.getElementById('kpi-v1-pill');
+      if (elV1Pill) elV1Pill.innerText = `${{v1DoneCount}} / ${{totTargetSchools}}`;
+      const elV2Pill = document.getElementById('kpi-v2-pill');
+      if (elV2Pill) elV2Pill.innerText = v2DoneCount > 0 ? `${{v2DoneCount}} / ${{totTargetSchools}} Done` : `0 / ${{totTargetSchools}}`;
+      const elV3Pill = document.getElementById('kpi-v3-pill');
+      if (elV3Pill) elV3Pill.innerText = `${{v3DoneCount}} / ${{totTargetSchools}}`;
+      const elBadgeVis = document.getElementById('badge-visits-status');
+      if (elBadgeVis) elBadgeVis.innerText = `${{totVisits}} Conducted`;
+
+      // 3. Community Demonstrations KPI
+      const elKpiDem = document.getElementById('kpi-demos');
+      if (elKpiDem) elKpiDem.innerText = totDemos.toLocaleString();
+      const elKpiTgtDem = document.getElementById('kpi-target-demos');
+      if (elKpiTgtDem) elKpiTgtDem.innerText = `/ ${{totTargetDemos}} sites`;
       const pctDem = totTargetDemos > 0 ? ((totDemos / totTargetDemos) * 100).toFixed(1) : 0;
-      document.getElementById('bar-demos').style.width = pctDem + '%';
-      document.getElementById('pct-demos').innerText = `Progress: ${{pctDem}}%`;
+      const elBarDem = document.getElementById('bar-demos');
+      if (elBarDem) elBarDem.style.width = pctDem + '%';
+      const elPctDem = document.getElementById('pct-demos');
+      if (elPctDem) elPctDem.innerText = `Progress: ${{pctDem}}%`;
+      const elRemainDem = document.getElementById('remain-demos');
+      if (elRemainDem) elRemainDem.innerText = `${{Math.max(0, totTargetDemos - totDemos)}} Remaining`;
+      const elBadgeDem = document.getElementById('badge-demos-status');
+      if (elBadgeDem) elBadgeDem.innerText = `${{totDemos}} Conducted`;
 
-      document.getElementById('kpi-learners').innerText = totLearners.toLocaleString();
-      document.getElementById('kpi-target-learners').innerText = `/ ${{totTargetLearners.toLocaleString()}}`;
+      // Secondary Activities & Reach
+      const elKpiClubs = document.getElementById('kpi-clubs');
+      if (elKpiClubs) elKpiClubs.innerText = totClubs.toLocaleString();
+      const elKpiTgtClubs = document.getElementById('kpi-target-clubs');
+      if (elKpiTgtClubs) elKpiTgtClubs.innerText = `/ ${{totTargetSchools}} clubs`;
+
+      const elKpiLrn = document.getElementById('kpi-learners');
+      if (elKpiLrn) elKpiLrn.innerText = totLearners.toLocaleString();
+      const elKpiTgtLrn = document.getElementById('kpi-target-learners');
+      if (elKpiTgtLrn) elKpiTgtLrn.innerText = `/ ${{totTargetLearners.toLocaleString()}}`;
       const pctLrn = totTargetLearners > 0 ? ((totLearners / totTargetLearners) * 100).toFixed(1) : 0;
-      document.getElementById('bar-learners').style.width = pctLrn + '%';
-      document.getElementById('pct-learners').innerText = `Progress: ${{pctLrn}}%`;
+      const elBarLrn = document.getElementById('bar-learners');
+      if (elBarLrn) elBarLrn.style.width = pctLrn + '%';
+      const elPctLrn = document.getElementById('pct-learners');
+      if (elPctLrn) elPctLrn.innerText = `Progress: ${{pctLrn}}%`;
 
-      document.getElementById('kpi-caregivers').innerText = totCaregivers.toLocaleString();
-      document.getElementById('kpi-target-caregivers').innerText = `/ ${{totTargetCaregivers.toLocaleString()}}`;
+      const elKpiCg = document.getElementById('kpi-caregivers');
+      if (elKpiCg) elKpiCg.innerText = totCaregivers.toLocaleString();
+      const elKpiTgtCg = document.getElementById('kpi-target-caregivers');
+      if (elKpiTgtCg) elKpiTgtCg.innerText = `/ ${{totTargetCaregivers.toLocaleString()}}`;
 
-      document.getElementById('kpi-teachers').innerText = totStakeholders.toLocaleString();
-      document.getElementById('sub-teachers').innerText = `${{totTeachers}} Teachers`;
-      document.getElementById('sub-vhts').innerText = `${{totVhts}} VHTs`;
+      const elKpiTea = document.getElementById('kpi-teachers');
+      if (elKpiTea) elKpiTea.innerText = totStakeholders.toLocaleString();
+      const elSubTea = document.getElementById('sub-teachers');
+      if (elSubTea) elSubTea.innerText = `${{totTeachers}} Teachers`;
+      const elSubVht = document.getElementById('sub-vhts');
+      if (elSubVht) elSubVht.innerText = `${{totVhts}} VHTs`;
 
       const elKpiPwd = document.getElementById('kpi-pwd');
       if (elKpiPwd) elKpiPwd.innerText = totPwd.toLocaleString();
@@ -5298,28 +4825,25 @@ html_code = f"""<!DOCTYPE html>
       const elCardAdults = document.getElementById('pwd-card-adults');
       if (elCardAdults) elCardAdults.innerText = Math.round(totPwdAdults * 0.65);
 
-      // Re-render Tab 1 Charts
-      createHorizontalBarChart('chart-targets-actuals',
-        ["Schools Reached", "Demonstration Sites", "Learners Reached", "Caregivers Reached", "Teachers & VHTs", "PWD Reach"],
+      // Re-render Tab 1 Charts: Core Activities Conducted vs Operational Targets
+      createGroupedBarChart('chart-targets-actuals',
         [
-          totTargetSchools ? ((totSchools / totTargetSchools) * 100).toFixed(1) : 0,
-          totTargetDemos ? ((totDemos / totTargetDemos) * 100).toFixed(1) : 0,
-          totTargetLearners ? ((totLearners / totTargetLearners) * 100).toFixed(1) : 0,
-          totTargetCaregivers ? ((totCaregivers / totTargetCaregivers) * 100).toFixed(2) : 0,
-          ((totStakeholders / 768) * 100).toFixed(1),
-          ((totPwd / 1200) * 100).toFixed(1)
+          "Primary Schools",
+          "School Contact Visits",
+          "Community Demos",
+          "School NutriClubs"
         ],
-        WFP_BLUE,
-        '% Achieved Against Target'
+        [totSchools, totVisits, totDemos, totClubs],
+        [totTargetSchools, totTargetVisits, totTargetDemos, totTargetSchools]
       );
 
       createHorizontalBarChart('chart-pillar-stats',
         [
           "Pillar 1: School Feeding (Porridge Fortification)",
           "Pillar 2: Gender Dynamics (Equitable Chores)",
-          "Pillar 3: Clean Cooking (Stoves / Action Plans)"
+          "Pillar 3: Community Accountability & Action Plans"
         ],
-        [84.0, 85.0, 83.3],
+        [0.0, 100.0, 0.0],
         ['#16a34a', '#0A6EB4', '#d97706'],
         '% Adoption Rate'
       );
@@ -5340,7 +4864,7 @@ html_code = f"""<!DOCTYPE html>
       document.getElementById('label-tea-f').innerHTML = `Female: <strong>${{Math.round(totTeachers * 0.46)}}</strong>`;
       document.getElementById('label-vht-f').innerHTML = `Female VHTs: <strong>${{Math.round(totVhts * 0.52)}}</strong>`;
       document.getElementById('label-vht-m').innerHTML = `Male VHTs: <strong>${{Math.round(totVhts * 0.48)}}</strong>`;
-      document.getElementById('label-ht-yes').innerHTML = `Present: <strong>${{totSchools}}</strong>`;
+      document.getElementById('label-ht-yes').innerHTML = `Present: <strong>${{totOrientSchools}}</strong>`;
 
       createHorizontalBarChart('chart-orient-teachers',
         ["Male Teachers", "Female Teachers"],
@@ -5351,7 +4875,7 @@ html_code = f"""<!DOCTYPE html>
 
       createHorizontalBarChart('chart-orient-headteachers',
         ["Headteacher / Deputy Present", "Absent / Not Represented"],
-        [totSchools, 0],
+        [totOrientSchools, 0],
         [ACCENT_GREEN, '#cbd5e1'],
         'Schools'
       );
@@ -5365,14 +4889,14 @@ html_code = f"""<!DOCTYPE html>
 
       createHorizontalBarChart('chart-orient-vhts-pwd',
         ["Male VHTs with PWDs", "Female VHTs with PWDs"],
-        [Math.round(totPwdAdults * 0.19), Math.round(totPwdAdults * 0.17)],
+        [0, 0],
         [WFP_BLUE, '#2389d4'],
         'VHTs with Disabilities'
       );
 
       createHorizontalBarChart('chart-orient-calendar',
         ["Agreed on joint calendar", "Did not agree / pending"],
-        [totSchools, 0],
+        [totOrientSchools, 0],
         [ACCENT_GREEN, '#cbd5e1'],
         'Agreements Signed'
       );
@@ -5389,83 +4913,70 @@ html_code = f"""<!DOCTYPE html>
           "Cooking manual",
           "Pledge / Commitment card"
         ],
-        [totSchools, totSchools, totSchools, totSchools, totSchools, totSchools, totSchools, totSchools, totSchools],
+        [totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools, totOrientSchools],
         WFP_BLUE,
         'Schools Handed Over'
       );
 
-      // Visit 1 dynamic updates
-      const v1BoysEnrol = Math.round(totLearners * 0.33);
-      const v1GirlsEnrol = Math.round(totLearners * 0.32);
-      const v1TotalEnrol = v1BoysEnrol + v1GirlsEnrol;
+      // Visit 1 dynamic updates (0 schools completed Visit 1)
       const bEnrolB = document.getElementById('badge-v1-enrol-boys');
       const bEnrolG = document.getElementById('badge-v1-enrol-girls');
       const bEnrolT = document.getElementById('badge-v1-enrol-total');
-      if (bEnrolB) bEnrolB.innerText = `Officials boys enrolment: ${{v1BoysEnrol.toLocaleString()}}`;
-      if (bEnrolG) bEnrolG.innerText = `Officials girls enrolment: ${{v1GirlsEnrol.toLocaleString()}}`;
-      if (bEnrolT) bEnrolT.innerText = `Total Enrolled: ${{v1TotalEnrol.toLocaleString()}} Pupils`;
+      if (bEnrolB) bEnrolB.innerText = 'Officials boys enrolment: 0';
+      if (bEnrolG) bEnrolG.innerText = 'Officials girls enrolment: 0';
+      if (bEnrolT) bEnrolT.innerText = 'Total Enrolled: 0 Pupils';
 
       createHorizontalBarChart('chart-v1-enrolment', 
         [
           ["Official Boys Enrolment", "for this Term in the School"],
           ["Official Girls Enrolment", "for this Term in the School"]
         ],
-        [v1BoysEnrol, v1GirlsEnrol],
+        [0, 0],
         [WFP_BLUE, '#ec4899'],
         'Registered Pupils'
       );
 
       createHorizontalBarChart('chart-v1-active', 
         [["Active with Patron", "& Meeting Space"], ["Not Yet", "Active"]], 
-        [totSchools, 0], 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-process-nutriclub', 
         [["Already Fully", "Active"], ["In Process", "of Creating"]], 
-        [totSchools, 0], 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-plan', 
         [["Signed institutional", "work plan"], ["No signed", "work plan"]], 
-        [totSchools, 0], 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-classes', 
         ["Lower (ECD-P2)", "Middle (P3-P4)", "Upper (P5-P7)"], 
-        [totSchools, totSchools, totSchools], 
+        [0, 0, 0], 
         [ACCENT_GREEN, ACCENT_GREEN, ACCENT_GREEN], 
         'Schools Receiving Materials'
       );
 
       createHorizontalBarChart('chart-v1-tollfree', 
         [["Toll-Free Hotline", "Displayed"], ["Not", "Displayed"]], 
-        [totSchools, 0], 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools Displaying Hotline'
       );
 
-      const attLB = Math.round(totLearners * 0.11);
-      const attLG = Math.round(totLearners * 0.104);
-      const attMB = Math.round(totLearners * 0.101);
-      const attMG = Math.round(totLearners * 0.099);
-      const attUB = Math.round(totLearners * 0.084);
-      const attUG = Math.round(totLearners * 0.075);
-      const totAttB = attLB + attMB + attUB;
-      const totAttG = attLG + attMG + attUG;
-      const totAttAll = totAttB + totAttG;
-
       const bAttB = document.getElementById('badge-v1-att-boys');
       const bAttG = document.getElementById('badge-v1-att-girls');
       const bAttT = document.getElementById('badge-v1-att-total');
-      if (bAttB) bAttB.innerText = `Registered Boys this week Attendance: ${{totAttB.toLocaleString()}}`;
-      if (bAttG) bAttG.innerText = `Registered Girls this week Attendance: ${{totAttG.toLocaleString()}}`;
-      if (bAttT) bAttT.innerText = `Total this week Attendance: ${{totAttAll.toLocaleString()}} Pupils`;
+      if (bAttB) bAttB.innerText = 'Registered Boys this week Attendance: 0';
+      if (bAttG) bAttG.innerText = 'Registered Girls this week Attendance: 0';
+      if (bAttT) bAttT.innerText = 'Total this week Attendance: 0 Pupils';
 
       const mAttLB = document.getElementById('metric-att-l-b');
       const mAttLG = document.getElementById('metric-att-l-g');
@@ -5473,12 +4984,12 @@ html_code = f"""<!DOCTYPE html>
       const mAttMG = document.getElementById('metric-att-m-g');
       const mAttUB = document.getElementById('metric-att-u-b');
       const mAttUG = document.getElementById('metric-att-u-g');
-      if (mAttLB) mAttLB.innerText = attLB.toLocaleString();
-      if (mAttLG) mAttLG.innerText = attLG.toLocaleString();
-      if (mAttMB) mAttMB.innerText = attMB.toLocaleString();
-      if (mAttMG) mAttMG.innerText = attMG.toLocaleString();
-      if (mAttUB) mAttUB.innerText = attUB.toLocaleString();
-      if (mAttUG) mAttUG.innerText = attUG.toLocaleString();
+      if (mAttLB) mAttLB.innerText = '0';
+      if (mAttLG) mAttLG.innerText = '0';
+      if (mAttMB) mAttMB.innerText = '0';
+      if (mAttMG) mAttMG.innerText = '0';
+      if (mAttUB) mAttUB.innerText = '0';
+      if (mAttUG) mAttUG.innerText = '0';
 
       createHorizontalBarChart('chart-v1-attendance', 
         [
@@ -5489,7 +5000,7 @@ html_code = f"""<!DOCTYPE html>
           ["Upper Primary (P5-P7)", "Registered Boys Attendance"],
           ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
         ],
-        [attLB, attLG, attMB, attMG, attUB, attUG],
+        [0, 0, 0, 0, 0, 0],
         WFP_BLUE,
         'Registered Attendance'
       );
@@ -5500,39 +5011,31 @@ html_code = f"""<!DOCTYPE html>
       const mPipeV3 = document.getElementById('metric-pipe-v3');
       const bPipePct = document.getElementById('badge-pipeline-pct');
       const mPipeRemain = document.getElementById('metric-pipe-remain');
-      if (mPipeV1) mPipeV1.innerText = totSchools;
-      if (mPipeV2) mPipeV2.innerText = totSchools;
-      if (mPipeV3) mPipeV3.innerText = totSchools;
-      if (bPipePct && totTargetSchools) bPipePct.innerText = `${{((totSchools / totTargetSchools) * 100).toFixed(1)}}% Completed`;
-      if (mPipeRemain && totTargetSchools) mPipeRemain.innerText = `${{Math.max(0, totTargetSchools - totSchools)}} Schools`;
+
+      const targetSchoolsCohort = filteredTrajectorySchools.length;
+
+      if (mPipeV1) mPipeV1.innerText = v1DoneCount;
+      if (mPipeV2) mPipeV2.innerText = v2DoneCount;
+      if (mPipeV3) mPipeV3.innerText = v3DoneCount;
+      if (bPipePct) bPipePct.innerText = targetSchoolsCohort > 0 ? `${{((v3DoneCount / targetSchoolsCohort) * 100).toFixed(1)}}% Completed` : '0.0%';
+      if (mPipeRemain) mPipeRemain.innerText = `${{Math.max(0, targetSchoolsCohort - v3DoneCount)}} Schools`;
 
       // Longitudinal Attendance dynamic update
-      const longBase = Math.round(totLearners * 0.654);
-      const longV1 = Math.round(longBase * 0.877);
-      const longV2 = Math.round(longBase * 0.919);
-      const longV3 = Math.round(longBase * 0.953);
-
+      const v2AttendanceTotal = filteredTrajectorySchools.reduce((acc, s) => acc + (s.v2 || 0), 0);
       const mLongBase = document.getElementById('metric-long-base');
       const mLongV1 = document.getElementById('metric-long-v1');
       const mLongV2 = document.getElementById('metric-long-v2');
       const mLongV3 = document.getElementById('metric-long-v3');
-      if (mLongBase) mLongBase.innerText = longBase.toLocaleString();
-      if (mLongV1) mLongV1.innerText = longV1.toLocaleString();
-      if (mLongV2) mLongV2.innerText = longV2.toLocaleString();
-      if (mLongV3) mLongV3.innerText = longV3.toLocaleString();
-
-      const longGirls1 = Math.round(longV1 * 0.487);
-      const longGirls2 = Math.round(longV2 * 0.496);
-      const longGirls3 = Math.round(longV3 * 0.500);
-      const longBoys1 = longV1 - longGirls1;
-      const longBoys2 = longV2 - longGirls2;
-      const longBoys3 = longV3 - longGirls3;
+      if (mLongBase) mLongBase.innerText = '-';
+      if (mLongV1) mLongV1.innerText = '-';
+      if (mLongV2) mLongV2.innerText = v2AttendanceTotal > 0 ? v2AttendanceTotal.toLocaleString() : '-';
+      if (mLongV3) mLongV3.innerText = '-';
 
       createLongitudinalLineChart('chart-longitudinal-attendance', 
-        [longV1, longV2, longV3],
-        [longGirls1, longGirls2, longGirls3],
-        [longBoys1, longBoys2, longBoys3],
-        longBase
+        [0, v2AttendanceTotal, 0],
+        [0, Math.round(v2AttendanceTotal * 0.514), 0],
+        [0, Math.round(v2AttendanceTotal * 0.486), 0],
+        0
       );
 
       // Re-render school trajectory table
@@ -5581,6 +5084,18 @@ html_code = f"""<!DOCTYPE html>
 
       const stories = (BASE_DATA.msc_stories && BASE_DATA.msc_stories.stories_register) ? BASE_DATA.msc_stories.stories_register : [];
       const searchLower = (search || '').toLowerCase().trim();
+
+      if (!stories || stories.length === 0) {{
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-10 text-slate-400 text-xs">
+              <i class="fa-solid fa-book-open text-3xl text-slate-300 mb-2 block"></i>
+              No Most Significant Change (MSC) stories submitted yet. Awaiting field narratives from monitoring visits.
+            </td>
+          </tr>
+        `;
+        return;
+      }}
 
       const badgeColors = {{
         'Girl Learner': 'bg-pink-50 text-pink-700 border-pink-200',
@@ -5951,6 +5466,17 @@ html_code = f"""<!DOCTYPE html>
         if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
 
         const schoolsNames = (item.schools_list || []).map(s => s.name || s.school).join(', ');
+        
+        // Calculate visits for this district from SCHOOL_TRAJECTORIES
+        const dTrajectories = SCHOOL_TRAJECTORIES.filter(s => s.district === dName);
+        let dVisitsDone = 0;
+        dTrajectories.forEach(s => {{
+          if (s.v1 !== null && s.v1 !== undefined) dVisitsDone++;
+          if (s.v2 !== null && s.v2 !== undefined) dVisitsDone++;
+          if (s.v3 !== null && s.v3 !== undefined) dVisitsDone++;
+        }});
+        const dTargetVisits = (item.target_schools || 0) * 3;
+
         const tr = document.createElement('tr');
         tr.className = 'hover:bg-blue-50/60 border-b border-slate-100 cursor-pointer transition';
         tr.onclick = function() {{
@@ -5958,17 +5484,36 @@ html_code = f"""<!DOCTYPE html>
           applyFilters();
         }};
         tr.innerHTML = `
-          <td class="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap min-w-[130px]" title="${{schoolsNames}}">
+          <td class="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap min-w-[120px]" title="${{schoolsNames}}">
             <span class="inline-flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-wfp-blue shrink-0"></span>
+              <span class="w-2 h-2 rounded-full ${{item.schools > 0 ? 'bg-emerald-500' : 'bg-slate-300'}} shrink-0"></span>
               <span class="font-bold text-slate-900">${{dName}}</span>
+              ${{item.schools > 0 ? '<span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">Active</span>' : ''}}
             </span>
           </td>
-          <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap" title="${{schoolsNames}}">${{item.schools}} <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_schools}}</span></td>
-          <td class="py-2.5 px-2 text-center font-medium whitespace-nowrap">${{item.demos}} <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_demos}}</span></td>
-          <td class="py-2.5 px-2 text-right font-medium text-wfp-blue whitespace-nowrap">${{item.learners.toLocaleString()}} <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_learners.toLocaleString()}}</span></td>
-          <td class="py-2.5 px-2 text-right whitespace-nowrap">${{item.caregivers}} <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_caregivers.toLocaleString()}}</span></td>
-          <td class="py-2.5 px-2 text-right font-bold text-slate-800 whitespace-nowrap">${{item.pwd_reach}}</td>
+          <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap" title="${{schoolsNames}}">
+            ${{item.schools > 0 ? `<span class="font-bold text-slate-900">${{item.schools}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_schools}}</span>
+          </td>
+          <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap">
+            ${{dVisitsDone > 0 ? `<span class="font-bold text-sky-700">${{dVisitsDone}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{dTargetVisits}}</span>
+          </td>
+          <td class="py-2.5 px-2 text-center font-medium whitespace-nowrap">
+            ${{item.demos > 0 ? `<span class="font-bold text-slate-900">${{item.demos}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_demos}}</span>
+          </td>
+          <td class="py-2.5 px-2 text-right font-medium text-wfp-blue whitespace-nowrap">
+            ${{item.learners > 0 ? `<span class="font-bold text-wfp-blue">${{item.learners.toLocaleString()}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_learners.toLocaleString()}}</span>
+          </td>
+          <td class="py-2.5 px-2 text-right whitespace-nowrap">
+            ${{item.caregivers > 0 ? `<span class="font-bold text-slate-900">${{item.caregivers.toLocaleString()}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_caregivers.toLocaleString()}}</span>
+          </td>
+          <td class="py-2.5 px-2 text-right font-bold text-slate-800 whitespace-nowrap">
+            ${{item.pwd_reach > 0 ? `<span class="font-bold text-emerald-600">${{item.pwd_reach}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+          </td>
         `;
         tbody.appendChild(tr);
       }}
@@ -6117,6 +5662,36 @@ html_code = f"""<!DOCTYPE html>
       const container = document.getElementById('demo-accordions-container');
       const banner = document.getElementById('demo-summary-banner');
       if (!container) return;
+
+      if (!DEMO_SESSIONS_640 || DEMO_SESSIONS_640.length === 0) {{
+        const kpiTotal = document.getElementById('demo-kpi-total-sessions');
+        const kpiCompliant = document.getElementById('demo-kpi-compliant-sessions');
+        const kpiCompliantRate = document.getElementById('demo-kpi-compliant-rate');
+        const kpiFlagged = document.getElementById('demo-kpi-flagged-sessions');
+        const kpiFlaggedRate = document.getElementById('demo-kpi-flagged-rate');
+        if (kpiTotal) kpiTotal.innerText = '0';
+        if (kpiCompliant) kpiCompliant.innerText = '0';
+        if (kpiCompliantRate) kpiCompliantRate.innerText = '0.0%';
+        if (kpiFlagged) kpiFlagged.innerText = '0';
+        if (kpiFlaggedRate) kpiFlaggedRate.innerText = '0.0%';
+
+        if (banner) {{
+          banner.innerHTML = `
+            <div class="flex items-center justify-between flex-wrap gap-2 text-xs">
+              <span class="font-bold text-slate-700">0 Demonstrations Logged</span>
+              <span class="text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Awaiting Field Submissions</span>
+            </div>
+          `;
+        }}
+        container.innerHTML = `
+          <div class="text-center py-12 bg-white border border-slate-200 rounded-xl card-shadow">
+            <i class="fa-solid fa-utensils text-4xl text-slate-300 mb-3 block"></i>
+            <h4 class="text-base font-bold text-slate-700">Awaiting Community Cooking Demonstration Submissions</h4>
+            <p class="text-xs text-slate-500 max-w-md mx-auto mt-1">No community demonstration sessions have been submitted in the activity log yet. As field teams submit demonstration records, session summaries, quality assurance checks, and caregiver metrics will appear here.</p>
+          </div>
+        `;
+        return;
+      }}
 
       const searchLower = (search || currentDemoSearch || '').toLowerCase().trim();
       const districtOrder = ['Abim', 'Amudat', 'Kaabong', 'Karenga', 'Kotido', 'Moroto', 'Nabilatuk', 'Nakapiripirit', 'Napak'];
@@ -6400,22 +5975,37 @@ html_code = f"""<!DOCTYPE html>
       const container = document.getElementById('exit-interview-cards');
       if (!container) return;
 
-      const dKey = selDistrict === 'ALL' ? 'Moroto' : selDistrict;
-      const districtObj = DISTRICT_DB[dKey] || DISTRICT_DB['Moroto'];
-      const interviews = districtObj.exit_interviews || DISTRICT_DB['Moroto'].exit_interviews;
+      let interviewsList = [];
+      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
+        if (d.exit_interviews) {{
+          for (const [rKey, rVal] of Object.entries(d.exit_interviews)) {{
+            interviewsList.push({{ key: rKey, ...rVal }});
+          }}
+        }}
+      }}
 
-      // The exact 6 individuals specified in the official tool:
-      const participantsOrder = ["Teacher 3", "VHT 2", "Teacher 1", "Teacher 2", "VHT 1", "VHT 3"];
+      const titleEl = document.getElementById('exit-interview-title');
+      if (titleEl) {{
+        if (interviewsList.length === 0) {{
+          titleEl.innerText = 'Detailed interview log: 0 individual participants logged';
+        }} else {{
+          titleEl.innerText = `Detailed interview log: ${{interviewsList.length}} individual participants (${{selDistrict === 'ALL' ? 'Kiru P/S, Abim' : selDistrict}})`;
+        }}
+      }}
 
       container.innerHTML = '';
-      participantsOrder.forEach(role => {{
-        const item = interviews[role] || interviews["Teacher 1"] || {{
-          sex: "Female",
-          lessons: ["Preparing/enriching WFP Metu porridge", "Rebalancing morning chores"],
-          action: "Enrich school/home porridge with obtainable local greens or cowpeas",
-          words: "I will ensure that children receive fortified porridge and boys help with water."
-        }};
+      if (interviewsList.length === 0) {{
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center bg-slate-50 border border-slate-200 rounded-xl text-slate-500 text-xs">
+            <i class="fa-solid fa-clipboard-question text-2xl text-slate-400 mb-2 block"></i>
+            No exit interviews recorded yet for this selection. Awaiting field submissions.
+          </div>
+        `;
+        return;
+      }}
 
+      interviewsList.forEach(item => {{
         let lessonsList = '';
         if (item.lessons) {{
           item.lessons.forEach(l => {{
@@ -6429,11 +6019,11 @@ html_code = f"""<!DOCTYPE html>
           <div>
             <div class="flex items-center justify-between mb-2">
               <span class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
-                <i class="fa-solid ${{role.includes('Teacher') ? 'fa-chalkboard-user text-wfp-blue' : 'fa-hand-holding-medical text-emerald-600'}}"></i>
-                ${{role}}
+                <i class="fa-solid ${{(item.role || '').includes('Teacher') ? 'fa-chalkboard-user text-wfp-blue' : 'fa-hand-holding-medical text-emerald-600'}}"></i>
+                ${{item.key || item.role}}
               </span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded ${{item.sex === 'Female' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700'}}">
-                ${{item.sex}}
+                ${{item.sex || 'Female'}}
               </span>
             </div>
 
@@ -6451,7 +6041,7 @@ html_code = f"""<!DOCTYPE html>
                 Committed Action This Week:
               </span>
               <div class="text-xs font-semibold text-wfp-blue bg-blue-50/70 p-2 rounded border border-blue-100">
-                <i class="fa-solid fa-arrow-right text-[10px] mr-1"></i> ${{item.action}}
+                <i class="fa-solid fa-arrow-right text-[10px] mr-1"></i> ${{item.action || ''}}
               </div>
             </div>
           </div>
@@ -6461,7 +6051,7 @@ html_code = f"""<!DOCTYPE html>
               Specific Personal Action in Exact Words:
             </span>
             <p class="text-xs text-slate-700 italic bg-white p-2 rounded border border-slate-200">
-              "${{item.words}}"
+              "${{item.words || ''}}"
             </p>
           </div>
         `;
@@ -6471,8 +6061,6 @@ html_code = f"""<!DOCTYPE html>
 
     // Initialize All Horizontal Bar Charts
     function initAllCharts() {{
-      applyFilters();
-
       // Exit Interviews Aggregate Charts
       createHorizontalBarChart('chart-orient-exit-pillars', 
         BASE_DATA.orientation.exit_interviews_pillars.categories, 
@@ -6497,70 +6085,70 @@ html_code = f"""<!DOCTYPE html>
 
       // THREE-VISIT CONTACT - Longitudinal Attendance & Trajectory Table
       createLongitudinalLineChart('chart-longitudinal-attendance', 
-        [3350, 3510, 3640],
-        [1630, 1740, 1820],
-        [1720, 1770, 1820],
-        3820
+        [0, 35, 0],
+        [0, 18, 0],
+        [0, 17, 0],
+        0
       );
 
       renderSchoolTrajectoryTable('ALL');
 
-      // THREE-VISIT CONTACT - VISIT 1
+      // THREE-VISIT CONTACT - VISIT 1 (0 Schools Logged)
       createHorizontalBarChart('chart-v1-enrolment', 
         [
           ["Official Boys Enrolment", "for this Term in the School"],
           ["Official Girls Enrolment", "for this Term in the School"]
         ],
-        [1940, 1880],
+        [0, 0],
         [WFP_BLUE, '#ec4899'],
         'Registered Pupils'
       );
 
       createHorizontalBarChart('chart-v1-active', 
         [["Active with Patron", "& Meeting Space"], ["Not Yet", "Active"]], 
-        BASE_DATA.three_visit_contact.visit1.nutriclub_active.values, 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-process-nutriclub', 
         [["Already Fully", "Active"], ["In Process", "of Creating"]], 
-        [6, 0], 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-days', 
         BASE_DATA.three_visit_contact.visit1.activity_days.categories, 
-        BASE_DATA.three_visit_contact.visit1.activity_days.values, 
+        [0, 0, 0, 0, 0], 
         WFP_BLUE, 
         'Schools Active on Day'
       );
 
       createHorizontalBarChart('chart-v1-plan', 
         [["Signed institutional", "work plan"], ["No signed", "work plan"]], 
-        BASE_DATA.three_visit_contact.visit1.signed_workplan.values, 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-charts', 
         BASE_DATA.three_visit_contact.visit1.charts_by_class.categories, 
-        BASE_DATA.three_visit_contact.visit1.charts_by_class.values, 
+        [0, 0, 0], 
         [WFP_BLUE, '#2389d4', '#4fa9ed'], 
         'Charts Issued'
       );
 
       createHorizontalBarChart('chart-v1-classes', 
         ["Lower (ECD-P2)", "Middle (P3-P4)", "Upper (P5-P7)"], 
-        [6, 6, 6], 
+        [0, 0, 0], 
         [ACCENT_GREEN, ACCENT_GREEN, ACCENT_GREEN], 
         'Schools Receiving Materials'
       );
 
       createHorizontalBarChart('chart-v1-tollfree', 
         [["Toll-Free Hotline", "Displayed"], ["Not", "Displayed"]], 
-        BASE_DATA.three_visit_contact.visit1.tollfree_display.values, 
+        [0, 0], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools Displaying Hotline'
       );
@@ -6574,19 +6162,19 @@ html_code = f"""<!DOCTYPE html>
           ["Upper Primary (P5-P7)", "Registered Boys Attendance"],
           ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
         ],
-        BASE_DATA.three_visit_contact.visit1.weekly_registered_attendance.values, 
+        [0, 0, 0, 0, 0, 0], 
         WFP_BLUE, 
         'Registered Attendance'
       );
 
       createHorizontalBarChart('chart-v1-helpdesk-queries', 
         BASE_DATA.three_visit_contact.visit1.helpdesk_queries_logged.categories, 
-        BASE_DATA.three_visit_contact.visit1.helpdesk_queries_logged.values, 
+        [0, 0, 0, 0], 
         [WFP_BLUE, '#2389d4', '#4fa9ed', '#7dd3fc'], 
         'Queries Logged'
       );
 
-      // VISIT 2
+      // VISIT 2 (Kotido Mixed P/S)
       createHorizontalBarChart('chart-v2-activities', 
         BASE_DATA.three_visit_contact.visit2.activities_delivered.categories, 
         BASE_DATA.three_visit_contact.visit2.activities_delivered.values, 
@@ -6609,7 +6197,7 @@ html_code = f"""<!DOCTYPE html>
       createHorizontalBarChart('chart-v2-poll-4', poll.statement_4.categories, poll.statement_4.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
       createHorizontalBarChart('chart-v2-poll-5', poll.statement_5.categories, poll.statement_5.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
 
-      // VISIT 2 - POST-SESSION SCENARIOS (24 SAMPLED PARTICIPANTS)
+      // VISIT 2 - POST-SESSION SCENARIOS (Kotido Mixed P/S)
       const sc = BASE_DATA.three_visit_contact.visit2.post_session_scenario;
       createHorizontalBarChart('chart-v2-scenario-porridge', 
         sc.porridge_recall.categories, 
@@ -6630,37 +6218,37 @@ html_code = f"""<!DOCTYPE html>
         'Participants'
       );
 
-      // VISIT 3
+      // VISIT 3 (0 Schools Logged)
       const v3 = BASE_DATA.three_visit_contact.visit3;
-      createHorizontalBarChart('chart-v3-feedback', v3.household_feedback.categories, v3.household_feedback.values, [ACCENT_GREEN, WFP_BLUE, '#cbd5e1'], 'Households');
-      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, v3.primary_barriers.values, ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#cbd5e1'], 'Households Reporting');
-      createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, v3.bus_day_commitment_status.values, [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, v3.chronic_absentee_tracing.values, [ACCENT_GREEN, '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, v3.kitchen_stove_audit.values, [ACCENT_GREEN, '#ea580c'], 'Schools');
-      createHorizontalBarChart('chart-v3-pillar1-feeding', v3.pillar1_school_feeding_impact.categories, v3.pillar1_school_feeding_impact.values, [ACCENT_GREEN, WFP_BLUE, '#ea580c'], 'Schools');
-      createHorizontalBarChart('chart-v3-pillar2-plate', v3.pillar2_plate_sharing_shift.categories, v3.pillar2_plate_sharing_shift.values, [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-actions-tried', v3.household_shift_metrics.feasible_actions_tried.categories, v3.household_shift_metrics.feasible_actions_tried.values, WFP_BLUE, 'Respondents');
-      createHorizontalBarChart('chart-v3-chore-shift', v3.household_shift_metrics.morning_chore_shifted.categories, v3.household_shift_metrics.morning_chore_shifted.values, [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
-      createHorizontalBarChart('chart-v3-serving-shift', v3.household_shift_metrics.serving_order_shifted.categories, v3.household_shift_metrics.serving_order_shifted.values, [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
+      createHorizontalBarChart('chart-v3-feedback', v3.household_feedback.categories, [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#cbd5e1'], 'Households');
+      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, [0, 0, 0, 0, 0, 0], ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#cbd5e1'], 'Households Reporting');
+      createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, [0, 0], [ACCENT_GREEN, '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, [0, 0], [ACCENT_GREEN, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar1-feeding', v3.pillar1_school_feeding_impact.categories, [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar2-plate', v3.pillar2_plate_sharing_shift.categories, [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-actions-tried', v3.household_shift_metrics.feasible_actions_tried.categories, [0, 0, 0, 0], WFP_BLUE, 'Respondents');
+      createHorizontalBarChart('chart-v3-chore-shift', v3.household_shift_metrics.morning_chore_shifted.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
+      createHorizontalBarChart('chart-v3-serving-shift', v3.household_shift_metrics.serving_order_shifted.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
 
-      // COMMUNITY COOKING DEMO
+      // COMMUNITY COOKING DEMO (0 Demos Logged)
       const demo = BASE_DATA.community_demonstrations;
-      createHorizontalBarChart('chart-demo-headcounts', demo.headcount_breakdown.categories, demo.headcount_breakdown.values, WFP_BLUE, 'Participants');
-      createHorizontalBarChart('chart-demo-fuelsaving', demo.fuel_saving_practices.categories, demo.fuel_saving_practices.values, [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#dc2626'], 'Demos Observed');
-      createHorizontalBarChart('chart-demo-caregiver-barriers', demo.caregiver_barriers.categories, demo.caregiver_barriers.values, '#ea580c', 'Caregivers');
-      createHorizontalBarChart('chart-demo-caregiver-actions', demo.caregiver_feasible_actions.categories, demo.caregiver_feasible_actions.values, WFP_BLUE, 'Caregivers');
-      createHorizontalBarChart('chart-demo-caregiver-commitments', demo.caregiver_commitments.categories, demo.caregiver_commitments.values, [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Caregivers');
-      createHorizontalBarChart('chart-demo-male-dialogue', demo.male_participation_level.categories, demo.male_participation_level.values, [WFP_BLUE, ACCENT_GREEN, '#94a3b8'], 'Demos Reporting');
-      createHorizontalBarChart('chart-demo-clean-cooking-commit', demo.clean_cooking_commitment.categories, demo.clean_cooking_commitment.values, [ACCENT_GREEN, '#ea580c', '#f59e0b'], 'Demos Observed');
+      createHorizontalBarChart('chart-demo-headcounts', demo.headcount_breakdown.categories, [0, 0, 0, 0, 0, 0], WFP_BLUE, 'Participants');
+      createHorizontalBarChart('chart-demo-fuelsaving', demo.fuel_saving_practices.categories, [0, 0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#dc2626'], 'Demos Observed');
+      createHorizontalBarChart('chart-demo-caregiver-barriers', demo.caregiver_barriers.categories, [0, 0, 0, 0, 0], '#ea580c', 'Caregivers');
+      createHorizontalBarChart('chart-demo-caregiver-actions', demo.caregiver_feasible_actions.categories, [0, 0, 0, 0], WFP_BLUE, 'Caregivers');
+      createHorizontalBarChart('chart-demo-caregiver-commitments', demo.caregiver_commitments.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Caregivers');
+      createHorizontalBarChart('chart-demo-male-dialogue', demo.male_participation_level.categories, [0, 0, 0], [WFP_BLUE, ACCENT_GREEN, '#94a3b8'], 'Demos Reporting');
+      createHorizontalBarChart('chart-demo-clean-cooking-commit', demo.clean_cooking_commitment.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#f59e0b'], 'Demos Observed');
 
-      // CHANGE STORIES
+      // CHANGE STORIES (0 Stories Logged)
       const msc = BASE_DATA.msc_stories;
-      createHorizontalBarChart('chart-msc-role', msc.storyteller_role.categories, msc.storyteller_role.values, WFP_BLUE, 'Stories');
-      createHorizontalBarChart('chart-msc-event', msc.triggering_campaign_event.categories, msc.triggering_campaign_event.values, WFP_BLUE, 'Stories');
-      createHorizontalBarChart('chart-msc-shift', msc.behavioral_shift_observed.categories, msc.behavioral_shift_observed.values, ACCENT_GREEN, 'Stories');
-      createHorizontalBarChart('chart-msc-evidence', msc.physical_evidence_sighted.categories, msc.physical_evidence_sighted.values, [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#4fa9ed', '#cbd5e1'], 'Certified Evidences');
+      createHorizontalBarChart('chart-msc-role', msc.storyteller_role.categories, [0, 0, 0, 0, 0, 0], WFP_BLUE, 'Stories');
+      createHorizontalBarChart('chart-msc-event', msc.triggering_campaign_event.categories, [0, 0, 0, 0, 0], WFP_BLUE, 'Stories');
+      createHorizontalBarChart('chart-msc-shift', msc.behavioral_shift_observed.categories, [0, 0, 0, 0], ACCENT_GREEN, 'Stories');
+      createHorizontalBarChart('chart-msc-evidence', msc.physical_evidence_sighted.categories, [0, 0, 0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#4fa9ed', '#cbd5e1'], 'Certified Evidences');
 
-      // NUTRICLUB SESSIONS
+      // NUTRICLUB SESSIONS (Kakamar P/S, Kaabong)
       const club = BASE_DATA.nutriclub_sessions;
       createHorizontalBarChart('chart-club-membership', club.club_membership_gender.categories, club.club_membership_gender.values, [WFP_BLUE, '#16a34a'], 'Members');
       createHorizontalBarChart('chart-club-attendance', club.session_attendance_gender.categories, club.session_attendance_gender.values, ['#16a34a', WFP_BLUE], 'Attendance');
@@ -6675,8 +6263,8 @@ html_code = f"""<!DOCTYPE html>
           "Metu Porridge Fortification (Local Greens)",
           "Youngest Toddler Served First"
         ],
-        [12.0, 22.0],
-        [84.0, 82.0],
+        [0.0, 0.0],
+        [0.0, 0.0],
         '#94a3b8',
         '#16a34a'
       );
@@ -6687,8 +6275,8 @@ html_code = f"""<!DOCTYPE html>
           "Boys Sharing Morning Chores Fairly",
           "Girls Arriving to School On-Time"
         ],
-        [18.0, 62.0],
-        [85.0, 94.0],
+        [0.0, 0.0],
+        [100.0, 0.0],
         '#94a3b8',
         '#0A6EB4'
       );
@@ -6699,8 +6287,8 @@ html_code = f"""<!DOCTYPE html>
           "Firewood-Saving Covered Cooking / Stoves",
           "Schools with Signed Action Work Plan"
         ],
-        [33.3, 0.0],
-        [83.3, 100.0],
+        [0.0, 0.0],
+        [0.0, 0.0],
         '#94a3b8',
         '#d97706'
       );
@@ -6735,6 +6323,9 @@ html_code = f"""<!DOCTYPE html>
           `;
         }});
       }}
+
+      // Apply dynamic filtering across all components as final source of truth
+      applyFilters();
     }}
 
     // Document Ready
