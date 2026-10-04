@@ -807,22 +807,6 @@
     "exit_interviews": {
       "Respondent 1 (KOTIDO MIXED P/S)": {
         "key": "Respondent 1 (KOTIDO MIXED P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "7",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 2 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 2 (KOTIDO MIXED P/S)",
         "sex": "Male",
         "role": "Teacher / VHT",
         "lessons": [
@@ -838,21 +822,8 @@
         "district": "Kotido",
         "entry_index": 6
       },
-      "Respondent 3 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 3 (KOTIDO MIXED P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
-        "words": "2",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 4 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 4 (KOTIDO MIXED P/S)",
+      "Respondent 2 (KOTIDO MIXED P/S)": {
+        "key": "Respondent 2 (KOTIDO MIXED P/S)",
         "sex": "Female",
         "role": "Teacher / VHT",
         "lessons": [
@@ -867,8 +838,8 @@
         "district": "Kotido",
         "entry_index": 6
       },
-      "Respondent 5 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 5 (KOTIDO MIXED P/S)",
+      "Respondent 3 (KOTIDO MIXED P/S)": {
+        "key": "Respondent 3 (KOTIDO MIXED P/S)",
         "sex": "Male",
         "role": "Teacher / VHT",
         "lessons": [
@@ -877,21 +848,6 @@
         ],
         "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
         "words": "2",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 6 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 6 (KOTIDO MIXED P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "6",
         "school": "KOTIDO MIXED P/S",
         "district": "Kotido",
         "entry_index": 6
@@ -1125,21 +1081,6 @@
     "exit_interviews": {
       "Respondent 1 (KASIMERI P/S)": {
         "key": "Respondent 1 (KASIMERI P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Fair and Equal Plate Sharing at Home"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 2 (KASIMERI P/S)": {
-        "key": "Respondent 2 (KASIMERI P/S)",
         "sex": "Female",
         "role": "Teacher / VHT",
         "lessons": [
@@ -1154,23 +1095,8 @@
         "district": "Moroto",
         "entry_index": 8
       },
-      "Respondent 3 (KASIMERI P/S)": {
-        "key": "Respondent 3 (KASIMERI P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home"
-        ],
-        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 4 (KASIMERI P/S)": {
-        "key": "Respondent 4 (KASIMERI P/S)",
+      "Respondent 2 (KASIMERI P/S)": {
+        "key": "Respondent 2 (KASIMERI P/S)",
         "sex": "Female",
         "role": "Teacher / VHT",
         "lessons": [
@@ -1184,8 +1110,8 @@
         "district": "Moroto",
         "entry_index": 8
       },
-      "Respondent 5 (KASIMERI P/S)": {
-        "key": "Respondent 5 (KASIMERI P/S)",
+      "Respondent 3 (KASIMERI P/S)": {
+        "key": "Respondent 3 (KASIMERI P/S)",
         "sex": "Male",
         "role": "Teacher / VHT",
         "lessons": [
@@ -1194,22 +1120,6 @@
         ],
         "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
         "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 6 (KASIMERI P/S)": {
-        "key": "Respondent 6 (KASIMERI P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "5",
         "school": "KASIMERI P/S",
         "district": "Moroto",
         "entry_index": 8
@@ -1530,36 +1440,147 @@
     ]
   },
   "Nakapiripirit": {
-    "dates": [],
-    "schools": 0,
+    "dates": [
+      "2026-10-01",
+      "2026-10-03"
+    ],
+    "schools": 2,
     "target_schools": 5,
     "demos": 0,
     "target_demos": 50,
-    "learners": 0,
+    "learners": 185,
     "target_learners": 6061,
     "target_enrolled": 8749,
     "caregivers": 0,
     "target_caregivers": 4000,
-    "teachers_vhts": 0,
-    "pwd_reach": 0,
-    "teachers_male": 0,
-    "teachers_female": 0,
-    "headteachers": 0,
+    "teachers_vhts": 17.0,
+    "pwd_reach": 119,
+    "teachers_male": 6.0,
+    "teachers_female": 2.0,
+    "headteachers": 1,
     "patrons": 0,
-    "vhts_male": 0,
-    "vhts_female": 0,
+    "vhts_male": 6.0,
+    "vhts_female": 3.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {},
-    "visits": 0,
+    "exit_interviews": {
+      "Respondent 1 (NAPIANANYA P/S)": {
+        "key": "Respondent 1 (NAPIANANYA P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Fair and Equal Plate Sharing at Home"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "Mobilise learners for the bus visit",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      },
+      "Respondent 2 (NAPIANANYA P/S)": {
+        "key": "Respondent 2 (NAPIANANYA P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Establishing Nutri Clubs & Hotline 0800"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Support nutrition club",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      },
+      "Respondent 3 (NAPIANANYA P/S)": {
+        "key": "Respondent 3 (NAPIANANYA P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Establishing Nutri Clubs & Hotline 0800",
+          "Fair and Equal Plate Sharing at Home"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Strengthen the nutrition club in school",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      },
+      "Respondent 4 (NAPIANANYA P/S)": {
+        "key": "Respondent 4 (NAPIANANYA P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Metu Porridge Fortification (Local Greens)",
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Improved Cooking Methods (Firewood Saving)"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "This materials are locally available",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      },
+      "Respondent 5 (NAPIANANYA P/S)": {
+        "key": "Respondent 5 (NAPIANANYA P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Metu Porridge Fortification (Local Greens)",
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Establishing Nutri Clubs & Hotline 0800",
+          "Improved Cooking Methods (Firewood Saving)"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "Going to sensitise communities to embrace this knowledge they have recieved",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      },
+      "Respondent 6 (NAPIANANYA P/S)": {
+        "key": "Respondent 6 (NAPIANANYA P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Metu Porridge Fortification (Local Greens)",
+          "Fair and Equal Plate Sharing at Home"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "Im ready to do it in my community",
+        "school": "NAPIANANYA P/S",
+        "district": "Nakapiripirit",
+        "entry_index": 10
+      }
+    },
+    "visits": 1,
     "target_visits": 15,
     "v1_count": 0,
-    "v2_count": 0,
+    "v2_count": 1,
     "v3_count": 0,
     "nutriclubs": 0,
     "target_nutriclubs": 5,
     "v1": null,
-    "v2": null,
+    "v2": {
+      "entry_index": 9,
+      "school": "ST MARYS P/S",
+      "district": "Nakapiripirit",
+      "hc_lower_m": 0,
+      "hc_lower_f": 40,
+      "hc_lower_pwd": 50,
+      "hc_mid_m": 40,
+      "hc_mid_f": 40,
+      "hc_mid_pwd": 44,
+      "hc_up_m": 30,
+      "hc_up_f": 35,
+      "hc_up_pwd": 25,
+      "teachers_m": 0,
+      "teachers_f": 0,
+      "teachers_pwd": 0,
+      "comm_m": 0,
+      "comm_f": 0,
+      "comm_pwd": 0
+    },
     "v3": null,
     "demos_metrics": null,
     "schools_list": [

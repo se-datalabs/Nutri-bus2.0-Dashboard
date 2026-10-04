@@ -294,7 +294,7 @@ with tabs[0]:
     with col1:
         st.markdown("#### 🎯 Core Activities: Conducted vs Target")
         v1_done = 0
-        v2_done = 2 if sel_district == "All 9 Karamoja Districts" else (1 if sel_district in ["Kotido", "Moroto"] else 0)
+        v2_done = 3 if sel_district == "All 9 Karamoja Districts" else (1 if sel_district in ["Kotido", "Moroto", "Nakapiripirit"] else 0)
         v3_done = 0
         df_act = pd.DataFrame([
             {"Activity": "Primary Schools", "Status": "Conducted", "Count": tot_schools},
@@ -518,18 +518,19 @@ with tabs[2]:
         if not d_schools:
             continue
         
-        d_active = sum(1 for s in d_schools if ("KOTIDO MIXED" in s["name"].upper() or "KASIMERI" in s["name"].upper()))
+        d_active = sum(1 for s in d_schools if ("KOTIDO MIXED" in s["name"].upper() or "KASIMERI" in s["name"].upper() or "ST MARYS" in s["name"].upper() or "ST. MARY" in s["name"].upper()))
         status_label = f"🟢 {d_active} Active Cohort{'s' if d_active > 1 else ''} (Visit 2 Logged)" if d_active > 0 else "⚪ 0 Visits Logged"
         tot_enrol = sum(s["total"] for s in d_schools)
-        is_expanded = (sel_district != "All 9 Karamoja Districts" or d == "Kotido" or d == "Moroto")
+        is_expanded = (sel_district != "All 9 Karamoja Districts" or d in ["Kotido", "Moroto", "Nakapiripirit"])
 
         with st.expander(f"📍 {d} District ({len(d_schools)} Schools · Enrolment: {tot_enrol:,} · {status_label})", expanded=is_expanded):
             d_rows = []
             for s in d_schools:
                 is_km = "KOTIDO MIXED" in s["name"].upper()
                 is_kas = "KASIMERI" in s["name"].upper()
-                v2_val = 35 if is_km else (403 if is_kas else "-")
-                has_v2 = (is_km or is_kas)
+                is_stm = "ST MARYS" in s["name"].upper() or "ST. MARY" in s["name"].upper()
+                v2_val = 35 if is_km else (403 if is_kas else (185 if is_stm else "-"))
+                has_v2 = (is_km or is_kas or is_stm)
                 d_rows.append({
                     "School Name": s["name"],
                     "Baseline Enrolment": s["total"],

@@ -41,21 +41,21 @@ for s in OFFICIAL_SCHOOLS:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v1_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v1_val = (v1_rec.get("hc_mid_m", 0) + v1_rec.get("hc_mid_f", 0) + v1_rec.get("hc_up_m", 0) + v1_rec.get("hc_up_f", 0)) or 35
+            v1_val = (v1_rec.get("hc_lower_m", 0) + v1_rec.get("hc_lower_f", 0) + v1_rec.get("hc_mid_m", 0) + v1_rec.get("hc_mid_f", 0) + v1_rec.get("hc_up_m", 0) + v1_rec.get("hc_up_f", 0)) or 35
 
     v2_rec = dist_info.get("v2")
     if v2_rec:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v2_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v2_val = (v2_rec.get("hc_mid_m", 0) + v2_rec.get("hc_mid_f", 0) + v2_rec.get("hc_up_m", 0) + v2_rec.get("hc_up_f", 0)) or 35
+            v2_val = (v2_rec.get("hc_lower_m", 0) + v2_rec.get("hc_lower_f", 0) + v2_rec.get("hc_mid_m", 0) + v2_rec.get("hc_mid_f", 0) + v2_rec.get("hc_up_m", 0) + v2_rec.get("hc_up_f", 0)) or 35
 
     v3_rec = dist_info.get("v3")
     if v3_rec:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v3_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v3_val = (v3_rec.get("hc_mid_m", 0) + v3_rec.get("hc_mid_f", 0) + v3_rec.get("hc_up_m", 0) + v3_rec.get("hc_up_f", 0)) or 35
+            v3_val = (v3_rec.get("hc_lower_m", 0) + v3_rec.get("hc_lower_f", 0) + v3_rec.get("hc_mid_m", 0) + v3_rec.get("hc_mid_f", 0) + v3_rec.get("hc_up_m", 0) + v3_rec.get("hc_up_f", 0)) or 35
 
     if "KOTIDO MIXED" in s["name"].upper() and not v2_val:
         v2_val = 35
@@ -4721,7 +4721,7 @@ html_code = f"""<!DOCTYPE html>
           totCaregivers += d.caregivers;
           totTeachers += (d.teachers_male + d.teachers_female);
           totVhts += (d.vhts_male + d.vhts_female);
-          totPwdLearners += (d.v2 ? ((d.v2.hc_mid_pwd || 0) + (d.v2.hc_up_pwd || 0)) : 0);
+          totPwdLearners += (d.v2 ? ((d.v2.hc_lower_pwd || 0) + (d.v2.hc_mid_pwd || 0) + (d.v2.hc_up_pwd || 0)) : 0);
           totPwdAdults += (d.v2 ? (d.v2.teachers_pwd || 0) : 0);
           if (d.headteachers) totOrientSchools += d.headteachers;
         }}
