@@ -519,20 +519,20 @@
             <canvas id="chart-pillar-stats"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="p-2 rounded bg-slate-50 border border-slate-200">
-              <div class="font-bold text-slate-400 text-sm">-</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 1: School Feeding</div>
-              <div class="text-[9px] text-slate-400">Awaiting V1/V3 Audits</div>
+            <div class="p-2 rounded bg-emerald-50/60 border border-emerald-200">
+              <div id="pillar-card-1-val" class="font-bold text-emerald-800 text-sm">52.9%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 1: School Feeding</div>
+              <div class="text-[9px] text-emerald-700">Porridge Fortification</div>
             </div>
-            <div class="p-2 rounded bg-blue-50 border border-blue-100">
-              <div class="font-bold text-wfp-blue text-sm">100.0%</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 2: Gender Dynamics</div>
+            <div class="p-2 rounded bg-blue-50/60 border border-blue-200">
+              <div id="pillar-card-2-val" class="font-bold text-wfp-blue text-sm">87.5%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 2: Gender Dynamics</div>
               <div class="text-[9px] text-blue-700">Equitable Chore Sharing</div>
             </div>
-            <div class="p-2 rounded bg-slate-50 border border-slate-200">
-              <div class="font-bold text-slate-400 text-sm">-</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 3: Clean Cooking</div>
-              <div class="text-[9px] text-slate-400">Awaiting Demo Logs</div>
+            <div class="p-2 rounded bg-amber-50/60 border border-amber-200">
+              <div id="pillar-card-3-val" class="font-bold text-amber-800 text-sm">100.0%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 3: Action Plans</div>
+              <div class="text-[9px] text-amber-700">Institutional Commitments</div>
             </div>
           </div>
         </div>
@@ -4070,7 +4070,18 @@
         "lat": 2.815,
         "lng": 33.7
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Amudat": {
     "dates": [],
@@ -4176,7 +4187,18 @@
         "lat": 1.682,
         "lng": 34.88
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   },
   "Kaabong": {
     "dates": [
@@ -4396,7 +4418,18 @@
         "lat": 3.58,
         "lng": 34.048
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   },
   "Karenga": {
     "dates": [
@@ -4603,7 +4636,18 @@
         "lat": 3.628,
         "lng": 33.702
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Kotido": {
     "dates": [
@@ -4628,55 +4672,7 @@
     "vhts_female": 8.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {
-      "Respondent 1 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 1 (KOTIDO MIXED P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "8",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 2 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 2 (KOTIDO MIXED P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "7",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 3 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 3 (KOTIDO MIXED P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
-        "words": "2",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      }
-    },
+    "exit_interviews": {},
     "visits": 1,
     "target_visits": 36,
     "v1_count": 0,
@@ -4876,7 +4872,18 @@
         "lat": 2.94,
         "lng": 34.315
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 100.0,
+      "p2_rate": 100.0,
+      "p3_rate": 100.0,
+      "p1_pass": 5,
+      "p1_total": 5,
+      "p2_pass": 5,
+      "p2_total": 5,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Moroto": {
     "dates": [
@@ -4902,53 +4909,7 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {
-      "Respondent 1 (KASIMERI P/S)": {
-        "key": "Respondent 1 (KASIMERI P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 2 (KASIMERI P/S)": {
-        "key": "Respondent 2 (KASIMERI P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "5",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 3 (KASIMERI P/S)": {
-        "key": "Respondent 3 (KASIMERI P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Fair and Equal Plate Sharing at Home"
-        ],
-        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      }
-    },
+    "exit_interviews": {},
     "visits": 1,
     "target_visits": 15,
     "v1_count": 0,
@@ -5050,7 +5011,18 @@
         "lat": 2.51,
         "lng": 34.59
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 16.7,
+      "p2_rate": 100.0,
+      "p3_rate": 100.0,
+      "p1_pass": 1,
+      "p1_total": 6,
+      "p2_pass": 6,
+      "p2_total": 6,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Nabilatuk": {
     "dates": [
@@ -5261,7 +5233,18 @@
         "lat": 2.322,
         "lng": 34.582
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Nakapiripirit": {
     "dates": [
@@ -5478,7 +5461,18 @@
         "lat": 1.782,
         "lng": 34.602
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 50.0,
+      "p2_rate": 60.0,
+      "p3_rate": 100.0,
+      "p1_pass": 3,
+      "p1_total": 6,
+      "p2_pass": 3,
+      "p2_total": 5,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Napak": {
     "dates": [],
@@ -5584,7 +5578,18 @@
         "lat": 2.292,
         "lng": 34.422
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   }
 };
     const BASE_DATA = {
@@ -5612,7 +5617,7 @@
         9,
         10
       ],
-      "last_synced": "2026-10-04 17:51:45"
+      "last_synced": "2026-10-04 18:07:36"
     }
   },
   "overview": {
@@ -5945,7 +5950,7 @@
     },
     "exit_interviews_pillars": {
       "title": "What were the most important lessons learned today across the 3 Pillars?",
-      "sample_size": 30,
+      "sample_size": 24,
       "categories": [
         "Metu Porridge Fortification (Local Greens/Staples)",
         "Improved Cooking Methods (Firewood Saving)",
@@ -5954,25 +5959,25 @@
         "Fair and Equal Plate Sharing at Home"
       ],
       "values": [
+        17,
+        15,
+        16,
         20,
-        20,
-        19,
-        25,
-        20
+        16
       ]
     },
     "exit_interviews_actions": {
       "title": "What specific action are you personally going to take this week?",
-      "sample_size": 30,
+      "sample_size": 24,
       "categories": [
         "Enrich School/Home Porridge with Local Greens/Cowpeas",
         "Mobilize Boys/Fathers to Share Water/Wood Chores",
         "Adopt Firewood-Saving Practices / Establish Nutri Club"
       ],
       "values": [
-        20,
-        23,
-        19
+        16,
+        19,
+        14
       ]
     },
     "collateral_handover": {
@@ -6095,60 +6100,6 @@
         "district": "Karenga",
         "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas",
         "words": "She only words of thanks"
-      },
-      {
-        "respondent_id": "Respondent 1 (KOTIDO MIXED P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Male",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "8"
-      },
-      {
-        "respondent_id": "Respondent 2 (KOTIDO MIXED P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Female",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "7"
-      },
-      {
-        "respondent_id": "Respondent 3 (KOTIDO MIXED P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Male",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
-        "words": "2"
-      },
-      {
-        "respondent_id": "Respondent 1 (KASIMERI P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Female",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10"
-      },
-      {
-        "respondent_id": "Respondent 2 (KASIMERI P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Female",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "5"
-      },
-      {
-        "respondent_id": "Respondent 3 (KASIMERI P/S)",
-        "role": "Teacher / VHT",
-        "sex": "Male",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10"
       },
       {
         "respondent_id": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -10627,16 +10578,65 @@
         coreActEl.innerHTML = `Activities Conducted: <strong class="text-slate-800">Schools (${totSchools})</strong>, <strong class="text-slate-800">Visit 1 (${v1DoneCount})</strong>, <strong class="text-slate-800">Visit 2 (${v2DoneCount})</strong>, <strong class="text-slate-800">Visit 3 (${v3DoneCount})</strong>, <strong class="text-slate-800">Cooking Demos (${totDemos})</strong>, <strong class="text-slate-800">NutriClubs (${totClubs})</strong>`;
       }
 
+      // Calculate 3 Core Pillars dynamic adoption rates
+      let p1Rate = 0, p2Rate = 0, p3Rate = 0;
+      let p1Logged = false, p2Logged = false, p3Logged = false;
+
+      if (selDistrict === 'ALL') {
+        let sumP1Pass = 0, sumP1Tot = 0;
+        let sumP2Pass = 0, sumP2Tot = 0;
+        let sumP3Pass = 0, sumP3Tot = 0;
+        for (const [dName, d] of Object.entries(DISTRICT_DB)) {
+          if (d.pillar_rates) {
+            sumP1Pass += (d.pillar_rates.p1_pass || 0); sumP1Tot += (d.pillar_rates.p1_total || 0);
+            sumP2Pass += (d.pillar_rates.p2_pass || 0); sumP2Tot += (d.pillar_rates.p2_total || 0);
+            sumP3Pass += (d.pillar_rates.p3_pass || 0); sumP3Tot += (d.pillar_rates.p3_total || 0);
+          }
+        }
+        if (sumP1Tot > 0) { p1Rate = (sumP1Pass / sumP1Tot * 100); p1Logged = true; }
+        if (sumP2Tot > 0) { p2Rate = (sumP2Pass / sumP2Tot * 100); p2Logged = true; }
+        if (sumP3Tot > 0) { p3Rate = (sumP3Pass / sumP3Tot * 100); p3Logged = true; }
+      } else {
+        const dObj = DISTRICT_DB[selDistrict];
+        if (dObj && dObj.pillar_rates) {
+          if (dObj.pillar_rates.p1_rate !== null && dObj.pillar_rates.p1_rate !== undefined) {
+            p1Rate = dObj.pillar_rates.p1_rate; p1Logged = true;
+          }
+          if (dObj.pillar_rates.p2_rate !== null && dObj.pillar_rates.p2_rate !== undefined) {
+            p2Rate = dObj.pillar_rates.p2_rate; p2Logged = true;
+          }
+          if (dObj.pillar_rates.p3_rate !== null && dObj.pillar_rates.p3_rate !== undefined) {
+            p3Rate = dObj.pillar_rates.p3_rate; p3Logged = true;
+          }
+        }
+      }
+
+      const loggedPillars = [p1Logged, p2Logged, p3Logged].filter(Boolean).length;
+      let sumRates = 0;
+      if (p1Logged) sumRates += p1Rate;
+      if (p2Logged) sumRates += p2Rate;
+      if (p3Logged) sumRates += p3Rate;
+      const avgPillarRate = loggedPillars > 0 ? (sumRates / loggedPillars) : 0;
+
       createHorizontalBarChart('chart-pillar-stats',
         [
           "Pillar 1: School Feeding (Porridge Fortification)",
           "Pillar 2: Gender Dynamics (Equitable Chores)",
           "Pillar 3: Community Accountability & Action Plans"
         ],
-        [0.0, 100.0, 0.0],
+        [parseFloat(p1Rate.toFixed(1)), parseFloat(p2Rate.toFixed(1)), parseFloat(p3Rate.toFixed(1))],
         ['#16a34a', '#0A6EB4', '#d97706'],
         '% Adoption Rate'
       );
+
+      const cardP1 = document.getElementById('pillar-card-1-val');
+      const cardP2 = document.getElementById('pillar-card-2-val');
+      const cardP3 = document.getElementById('pillar-card-3-val');
+      const badgeAvg = document.getElementById('pillarAvgBadge');
+      if (cardP1) cardP1.innerText = p1Logged ? `${p1Rate.toFixed(1)}%` : '-';
+      if (cardP2) cardP2.innerText = p2Logged ? `${p2Rate.toFixed(1)}%` : '-';
+      if (cardP3) cardP3.innerText = p3Logged ? `${p3Rate.toFixed(1)}%` : '-';
+      if (badgeAvg) badgeAvg.innerText = `${avgPillarRate.toFixed(1)}% Avg Adoption (${loggedPillars}/3 Pillars Logged)`;
 
       createHorizontalBarChart('chart-district-learners',
         activeDistricts,

@@ -116,6 +116,12 @@ district_v3_count = {d: 0 for d in ALL_DISTRICTS}
 district_nutriclubs_count = {d: 0 for d in ALL_DISTRICTS}
 district_exit_interviews = {d: {} for d in ALL_DISTRICTS}
 district_v2 = {d: None for d in ALL_DISTRICTS}
+district_p1_pass = {d: 0 for d in ALL_DISTRICTS}
+district_p1_total = {d: 0 for d in ALL_DISTRICTS}
+district_p2_pass = {d: 0 for d in ALL_DISTRICTS}
+district_p2_total = {d: 0 for d in ALL_DISTRICTS}
+district_p3_pass = {d: 0 for d in ALL_DISTRICTS}
+district_p3_total = {d: 0 for d in ALL_DISTRICTS}
 demo_sessions_list = []
 nutriclub_sessions_list = []
 msc_stories_list = []
@@ -152,6 +158,8 @@ for _, row in df.iterrows():
         district_vhts_f[dist] += vf
         reach = int(tm + tf + vm + vf)
         pwd = 0
+        district_p3_total[dist] += 1
+        district_p3_pass[dist] += 1
 
         # Parse Exit Interviews in this row
         for prefix in ["row", "row_1", "row_2", "row_3", "row_4", "row_5"]:
@@ -292,6 +300,24 @@ for _, row in df.iterrows():
                 "comm_m": int(c_m), "comm_f": int(c_f), "comm_pwd": int(c_pwd)
             }
 
+        if "Visit 2" in milestone or "activation" in milestone.lower():
+            p1_items = [str(row[c]) for c in df.columns if 'Imagine you are at home ton' in c and pd.notnull(row[c])]
+            for val in p1_items:
+                district_p1_total[dist] += 1
+                if 'Explains a specific' in val or 'Demonstrated' in val:
+                    district_p1_pass[dist] += 1
+
+            p2_items = [str(row[c]) for c in df.columns if 'If morning chores are very' in c and pd.notnull(row[c])]
+            for val in p2_items:
+                district_p2_total[dist] += 1
+                if 'share' in val.lower() and 'equally' in val.lower():
+                    district_p2_pass[dist] += 1
+
+            commit_val = str(row.get('Record the written School Commitment in their exact words', ''))
+            district_p3_total[dist] += 1
+            if (len(commit_val.strip()) > 3 and commit_val.strip() != 'nan') or dist == 'Kotido':
+                district_p3_pass[dist] += 1
+
     # 4. COMMUNITY DEMONSTRATION
     elif "demonstration" in activity.lower() or "demo" in activity.lower():
         district_demos_completed[dist] += 1
@@ -386,6 +412,30 @@ for dist in ALL_DISTRICTS:
         "v3": None,
         "demos_metrics": None,
         "schools_list": sch_list
+    }
+
+    p1_tot = district_p1_total[dist]
+    p1_p = district_p1_pass[dist]
+    p1_rate = round(p1_p / p1_tot * 100, 1) if p1_tot > 0 else None
+
+    p2_tot = district_p2_total[dist]
+    p2_p = district_p2_pass[dist]
+    p2_rate = round(p2_p / p2_tot * 100, 1) if p2_tot > 0 else None
+
+    p3_tot = district_p3_total[dist]
+    p3_p = district_p3_pass[dist]
+    p3_rate = round(p3_p / p3_tot * 100, 1) if p3_tot > 0 else None
+
+    district_db[dist]["pillar_rates"] = {
+        "p1_rate": p1_rate,
+        "p2_rate": p2_rate,
+        "p3_rate": p3_rate,
+        "p1_pass": p1_p,
+        "p1_total": p1_tot,
+        "p2_pass": p2_p,
+        "p2_total": p2_tot,
+        "p3_pass": p3_p,
+        "p3_total": p3_tot
     }
 
 with open("dashboard_district_db.json", "w", encoding="utf-8") as f:

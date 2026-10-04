@@ -602,20 +602,20 @@ html_code = f"""<!DOCTYPE html>
             <canvas id="chart-pillar-stats"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="p-2 rounded bg-slate-50 border border-slate-200">
-              <div class="font-bold text-slate-400 text-sm">-</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 1: School Feeding</div>
-              <div class="text-[9px] text-slate-400">Awaiting V1/V3 Audits</div>
+            <div class="p-2 rounded bg-emerald-50/60 border border-emerald-200">
+              <div id="pillar-card-1-val" class="font-bold text-emerald-800 text-sm">52.9%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 1: School Feeding</div>
+              <div class="text-[9px] text-emerald-700">Porridge Fortification</div>
             </div>
-            <div class="p-2 rounded bg-blue-50 border border-blue-100">
-              <div class="font-bold text-wfp-blue text-sm">100.0%</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 2: Gender Dynamics</div>
+            <div class="p-2 rounded bg-blue-50/60 border border-blue-200">
+              <div id="pillar-card-2-val" class="font-bold text-wfp-blue text-sm">87.5%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 2: Gender Dynamics</div>
               <div class="text-[9px] text-blue-700">Equitable Chore Sharing</div>
             </div>
-            <div class="p-2 rounded bg-slate-50 border border-slate-200">
-              <div class="font-bold text-slate-400 text-sm">-</div>
-              <div class="text-[10px] text-slate-600 font-medium">Pillar 3: Clean Cooking</div>
-              <div class="text-[9px] text-slate-400">Awaiting Demo Logs</div>
+            <div class="p-2 rounded bg-amber-50/60 border border-amber-200">
+              <div id="pillar-card-3-val" class="font-bold text-amber-800 text-sm">100.0%</div>
+              <div class="text-[10px] text-slate-700 font-semibold">Pillar 3: Action Plans</div>
+              <div class="text-[9px] text-amber-700">Institutional Commitments</div>
             </div>
           </div>
         </div>
@@ -4867,16 +4867,65 @@ html_code = f"""<!DOCTYPE html>
         coreActEl.innerHTML = `Activities Conducted: <strong class="text-slate-800">Schools (${{totSchools}})</strong>, <strong class="text-slate-800">Visit 1 (${{v1DoneCount}})</strong>, <strong class="text-slate-800">Visit 2 (${{v2DoneCount}})</strong>, <strong class="text-slate-800">Visit 3 (${{v3DoneCount}})</strong>, <strong class="text-slate-800">Cooking Demos (${{totDemos}})</strong>, <strong class="text-slate-800">NutriClubs (${{totClubs}})</strong>`;
       }}
 
+      // Calculate 3 Core Pillars dynamic adoption rates
+      let p1Rate = 0, p2Rate = 0, p3Rate = 0;
+      let p1Logged = false, p2Logged = false, p3Logged = false;
+
+      if (selDistrict === 'ALL') {{
+        let sumP1Pass = 0, sumP1Tot = 0;
+        let sumP2Pass = 0, sumP2Tot = 0;
+        let sumP3Pass = 0, sumP3Tot = 0;
+        for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+          if (d.pillar_rates) {{
+            sumP1Pass += (d.pillar_rates.p1_pass || 0); sumP1Tot += (d.pillar_rates.p1_total || 0);
+            sumP2Pass += (d.pillar_rates.p2_pass || 0); sumP2Tot += (d.pillar_rates.p2_total || 0);
+            sumP3Pass += (d.pillar_rates.p3_pass || 0); sumP3Tot += (d.pillar_rates.p3_total || 0);
+          }}
+        }}
+        if (sumP1Tot > 0) {{ p1Rate = (sumP1Pass / sumP1Tot * 100); p1Logged = true; }}
+        if (sumP2Tot > 0) {{ p2Rate = (sumP2Pass / sumP2Tot * 100); p2Logged = true; }}
+        if (sumP3Tot > 0) {{ p3Rate = (sumP3Pass / sumP3Tot * 100); p3Logged = true; }}
+      }} else {{
+        const dObj = DISTRICT_DB[selDistrict];
+        if (dObj && dObj.pillar_rates) {{
+          if (dObj.pillar_rates.p1_rate !== null && dObj.pillar_rates.p1_rate !== undefined) {{
+            p1Rate = dObj.pillar_rates.p1_rate; p1Logged = true;
+          }}
+          if (dObj.pillar_rates.p2_rate !== null && dObj.pillar_rates.p2_rate !== undefined) {{
+            p2Rate = dObj.pillar_rates.p2_rate; p2Logged = true;
+          }}
+          if (dObj.pillar_rates.p3_rate !== null && dObj.pillar_rates.p3_rate !== undefined) {{
+            p3Rate = dObj.pillar_rates.p3_rate; p3Logged = true;
+          }}
+        }}
+      }}
+
+      const loggedPillars = [p1Logged, p2Logged, p3Logged].filter(Boolean).length;
+      let sumRates = 0;
+      if (p1Logged) sumRates += p1Rate;
+      if (p2Logged) sumRates += p2Rate;
+      if (p3Logged) sumRates += p3Rate;
+      const avgPillarRate = loggedPillars > 0 ? (sumRates / loggedPillars) : 0;
+
       createHorizontalBarChart('chart-pillar-stats',
         [
           "Pillar 1: School Feeding (Porridge Fortification)",
           "Pillar 2: Gender Dynamics (Equitable Chores)",
           "Pillar 3: Community Accountability & Action Plans"
         ],
-        [0.0, 100.0, 0.0],
+        [parseFloat(p1Rate.toFixed(1)), parseFloat(p2Rate.toFixed(1)), parseFloat(p3Rate.toFixed(1))],
         ['#16a34a', '#0A6EB4', '#d97706'],
         '% Adoption Rate'
       );
+
+      const cardP1 = document.getElementById('pillar-card-1-val');
+      const cardP2 = document.getElementById('pillar-card-2-val');
+      const cardP3 = document.getElementById('pillar-card-3-val');
+      const badgeAvg = document.getElementById('pillarAvgBadge');
+      if (cardP1) cardP1.innerText = p1Logged ? `${{p1Rate.toFixed(1)}}%` : '-';
+      if (cardP2) cardP2.innerText = p2Logged ? `${{p2Rate.toFixed(1)}}%` : '-';
+      if (cardP3) cardP3.innerText = p3Logged ? `${{p3Rate.toFixed(1)}}%` : '-';
+      if (badgeAvg) badgeAvg.innerText = `${{avgPillarRate.toFixed(1)}}% Avg Adoption (${{loggedPillars}}/3 Pillars Logged)`;
 
       createHorizontalBarChart('chart-district-learners',
         activeDistricts,

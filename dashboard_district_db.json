@@ -246,7 +246,18 @@
         "lat": 2.815,
         "lng": 33.7
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Amudat": {
     "dates": [],
@@ -352,7 +363,18 @@
         "lat": 1.682,
         "lng": 34.88
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   },
   "Kaabong": {
     "dates": [
@@ -572,7 +594,18 @@
         "lat": 3.58,
         "lng": 34.048
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   },
   "Karenga": {
     "dates": [
@@ -779,7 +812,18 @@
         "lat": 3.628,
         "lng": 33.702
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Kotido": {
     "dates": [
@@ -804,55 +848,7 @@
     "vhts_female": 8.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {
-      "Respondent 1 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 1 (KOTIDO MIXED P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "8",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 2 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 2 (KOTIDO MIXED P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "7",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      },
-      "Respondent 3 (KOTIDO MIXED P/S)": {
-        "key": "Respondent 3 (KOTIDO MIXED P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
-        "words": "2",
-        "school": "KOTIDO MIXED P/S",
-        "district": "Kotido",
-        "entry_index": 6
-      }
-    },
+    "exit_interviews": {},
     "visits": 1,
     "target_visits": 36,
     "v1_count": 0,
@@ -1052,7 +1048,18 @@
         "lat": 2.94,
         "lng": 34.315
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 100.0,
+      "p2_rate": 100.0,
+      "p3_rate": 100.0,
+      "p1_pass": 5,
+      "p1_total": 5,
+      "p2_pass": 5,
+      "p2_total": 5,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Moroto": {
     "dates": [
@@ -1078,53 +1085,7 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {
-      "Respondent 1 (KASIMERI P/S)": {
-        "key": "Respondent 1 (KASIMERI P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Establishing Nutri Clubs & Hotline 0800",
-          "Fair and Equal Plate Sharing at Home",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 2 (KASIMERI P/S)": {
-        "key": "Respondent 2 (KASIMERI P/S)",
-        "sex": "Female",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Rebalancing Morning Chores so Girls Stay in School",
-          "Improved Cooking Methods (Firewood Saving)"
-        ],
-        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "5",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      },
-      "Respondent 3 (KASIMERI P/S)": {
-        "key": "Respondent 3 (KASIMERI P/S)",
-        "sex": "Male",
-        "role": "Teacher / VHT",
-        "lessons": [
-          "Metu Porridge Fortification (Local Greens)",
-          "Fair and Equal Plate Sharing at Home"
-        ],
-        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
-        "words": "10",
-        "school": "KASIMERI P/S",
-        "district": "Moroto",
-        "entry_index": 8
-      }
-    },
+    "exit_interviews": {},
     "visits": 1,
     "target_visits": 15,
     "v1_count": 0,
@@ -1226,7 +1187,18 @@
         "lat": 2.51,
         "lng": 34.59
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 16.7,
+      "p2_rate": 100.0,
+      "p3_rate": 100.0,
+      "p1_pass": 1,
+      "p1_total": 6,
+      "p2_pass": 6,
+      "p2_total": 6,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Nabilatuk": {
     "dates": [
@@ -1437,7 +1409,18 @@
         "lat": 2.322,
         "lng": 34.582
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": 100.0,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 1,
+      "p3_total": 1
+    }
   },
   "Nakapiripirit": {
     "dates": [
@@ -1654,7 +1637,18 @@
         "lat": 1.782,
         "lng": 34.602
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": 50.0,
+      "p2_rate": 60.0,
+      "p3_rate": 100.0,
+      "p1_pass": 3,
+      "p1_total": 6,
+      "p2_pass": 3,
+      "p2_total": 5,
+      "p3_pass": 2,
+      "p3_total": 2
+    }
   },
   "Napak": {
     "dates": [],
@@ -1760,6 +1754,17 @@
         "lat": 2.292,
         "lng": 34.422
       }
-    ]
+    ],
+    "pillar_rates": {
+      "p1_rate": null,
+      "p2_rate": null,
+      "p3_rate": null,
+      "p1_pass": 0,
+      "p1_total": 0,
+      "p2_pass": 0,
+      "p2_total": 0,
+      "p3_pass": 0,
+      "p3_total": 0
+    }
   }
 }
