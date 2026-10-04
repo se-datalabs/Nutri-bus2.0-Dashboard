@@ -23,7 +23,7 @@
         9,
         10
       ],
-      "last_synced": "2026-10-04 18:07:36"
+      "last_synced": "2026-10-05 00:30:01"
     }
   },
   "overview": {
@@ -289,20 +289,20 @@
   },
   "orientation": {
     "kpis": {
-      "total_orientations": 1,
+      "total_orientations": 6,
       "target_orientations": 64,
-      "total_teachers_oriented": 18,
-      "teachers_male": 9,
-      "teachers_female": 9,
-      "total_vhts_oriented": 23,
-      "vhts_male": 11,
-      "vhts_female": 12,
+      "total_teachers_oriented": 81,
+      "teachers_male": 49,
+      "teachers_female": 32,
+      "total_vhts_oriented": 105,
+      "vhts_male": 66,
+      "vhts_female": 39,
       "vhts_pwd": 0,
-      "headteachers_present": 1,
-      "patrons_appointed": 9,
-      "joint_calendars_signed": 1,
-      "joint_calendar_compliance_pct": 100.0,
-      "total_exit_interviews": 6
+      "headteachers_present": 4,
+      "patrons_appointed": 34,
+      "joint_calendars_signed": 5,
+      "joint_calendar_compliance_pct": 83.3,
+      "total_exit_interviews": 24
     },
     "teacher_attendance_gender": {
       "categories": [
@@ -310,8 +310,8 @@
         "Female Teachers"
       ],
       "values": [
-        9,
-        9
+        49,
+        32
       ]
     },
     "headteacher_presence": {
@@ -320,8 +320,8 @@
         "Absent / Delegated"
       ],
       "values": [
-        1,
-        0
+        4,
+        2
       ]
     },
     "vht_orientation_gender": {
@@ -330,8 +330,8 @@
         "Female VHTs"
       ],
       "values": [
-        11,
-        12
+        66,
+        39
       ]
     },
     "vhts_with_pwd": {
@@ -350,8 +350,8 @@
         "No Agreement Yet"
       ],
       "values": [
-        1,
-        0
+        5,
+        1
       ]
     },
     "exit_interviews_pillars": {
@@ -623,21 +623,21 @@
         "School Only"
       ],
       "values": [
-        0,
-        1
+        1,
+        5
       ],
-      "notes": "No partner networks (e.g. UNAC, AFI) engaged in Kiru P/S orientation"
+      "notes": "1 of 6 oriented schools engaged partner networks (District Education Offices & Health Centre Parish Focal Persons)"
     },
     "physical_tools_disseminated": {
       "categories": [
-        "Nutri Calendar Handed Over",
-        "Handbooks & Posters",
-        "Cooking Manuals"
+        "Metu Handbooks & Cooking Manuals",
+        "Climate-Smart One-Pager Manuals",
+        "Toll-Free Feedback Display Boards"
       ],
       "values": [
-        1,
-        0,
-        0
+        6,
+        2,
+        8
       ]
     }
   },
@@ -764,214 +764,63 @@
       }
     },
     "visit2": {
-      "school": "KOTIDO MIXED P/S",
-      "district": "Kotido",
-      "date": "2026-10-02",
-      "coordinator": "Ogwang Sam",
-      "total_pupils_attended": 35,
-      "boys_attended": 14,
-      "girls_attended": 21,
-      "pwd_learners": 3,
-      "teachers_present": 24,
-      "teachers_male": 14,
-      "teachers_female": 10,
-      "teachers_pwd": 2,
-      "community_present": 4,
-      "community_male": 3,
-      "community_female": 1,
-      "total_attendance": 63,
-      "headcount_by_class": {
-        "categories": [
-          "Lower Primary (ECD-P2)",
-          "Middle Primary (P3-P4)",
-          "Upper Primary (P5-P7)",
-          "Teachers Present",
-          "Community Members"
-        ],
-        "male": [
-          0,
-          4,
-          10,
-          14,
-          3
-        ],
-        "female": [
-          0,
-          6,
-          15,
-          10,
-          1
-        ],
-        "pwd": [
-          0,
-          2,
-          1,
-          2,
-          0
-        ]
-      },
-      "interactive_elements_delivered": {
-        "categories": [
-          "Energizer Song & Movement",
-          "Fair Food Portions for All Genders",
-          "Learners Actively Handled Materials & Practiced",
-          "Food Sorting & Matching Game",
-          "Metu Porridge Demonstration",
-          "Climate-Smart Cooking Explained"
-        ],
-        "delivered": [
-          1,
-          1,
-          1,
-          0,
-          0,
-          0
-        ]
-      },
-      "chore_rebalancing_micropoll": {
-        "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together.",
-        "categories": [
-          "Strongly Agree",
-          "Agree",
-          "Disagree"
-        ],
-        "values": [
-          3,
-          2,
-          0
-        ],
-        "total_clusters": 5,
-        "boys_polled": 42,
-        "agreement_pct": 100.0
-      },
-      "post_session_scenario": {
-        "sample_size": 5,
-        "porridge_recall": {
-          "categories": [
-            "Explains a specific practice without prompting",
-            "Vague idea / lacks concrete action",
-            "Incorrect or silent"
-          ],
-          "values": [
-            5,
-            0,
-            0
-          ]
-        },
-        "chore_sharing_recall": {
-          "categories": [
-            "States boys & girls share chores equally",
-            "Says hurry up / wake early",
-            "Says girls stay home or unknown"
-          ],
-          "values": [
-            5,
-            0,
-            0
-          ]
-        },
-        "slogan_recall": {
-          "categories": [
-            "Demonstrated accurately without prompting",
-            "Partly demonstrated",
-            "Not yet / unknown"
-          ],
-          "values": [
-            5,
-            0,
-            0
-          ]
-        }
-      },
-      "rapid_exit_interviews": [
-        {
-          "respondent_id": "Cluster 1 (Pupils)",
-          "role_age_band": "Middle Primary (P3\u2013P4)",
-          "sex": "Mixed (8 Boys, 10 Girls)",
-          "porridge_rating": "Explains a specific, actionable practice without prompting",
-          "porridge_words": "Explains adding local greens and legumes to porridge without prompting.",
-          "chores_rating": "States that boys and girls share water/wood chores equally before leaving",
-          "chores_words": "States that boys and girls share water/wood chores equally before leaving.",
-          "slogan_rating": "Demonstrated",
-          "slogan_words": "Abas ikimorikinit kaapei: NutriBus unites us to share food and tasks fairly."
-        },
-        {
-          "respondent_id": "Cluster 2 (Pupils)",
-          "role_age_band": "Upper Primary (P5\u2013P7)",
-          "sex": "Mixed (8 Boys, 12 Girls)",
-          "porridge_rating": "Explains a specific, actionable practice without prompting",
-          "porridge_words": "Explains adding local greens and legumes to porridge without prompting.",
-          "chores_rating": "States that boys and girls share water/wood chores equally before leaving",
-          "chores_words": "States that boys and girls share water/wood chores equally before leaving.",
-          "slogan_rating": "Demonstrated",
-          "slogan_words": "Fair food sharing and boys fetching water so girls attend class."
-        },
-        {
-          "respondent_id": "Cluster 3 (Pupils)",
-          "role_age_band": "Upper Primary (P5\u2013P7)",
-          "sex": "Mixed (8 Boys, 14 Girls)",
-          "porridge_rating": "Explains a specific, actionable practice without prompting",
-          "porridge_words": "Explains adding local greens and legumes to porridge without prompting.",
-          "chores_rating": "States that boys and girls share water/wood chores equally before leaving",
-          "chores_words": "States that boys and girls share water/wood chores equally before leaving.",
-          "slogan_rating": "Demonstrated",
-          "slogan_words": "Nutrition and equal learning opportunities for all children."
-        },
-        {
-          "respondent_id": "Cluster 4 (Teachers)",
-          "role_age_band": "Teachers Present",
-          "sex": "Mixed (14 Male, 10 Female)",
-          "porridge_rating": "Explains a specific, actionable practice without prompting",
-          "porridge_words": "Teachers explain using local eboo and cowpeas to enrich school porridge.",
-          "chores_rating": "States that boys and girls share water/wood chores equally before leaving",
-          "chores_words": "Teachers confirm guiding families to balance morning chores equally.",
-          "slogan_rating": "Demonstrated",
-          "slogan_words": "Uniting school and community behind child health and attendance."
-        }
+      "schools_completed": 3,
+      "target_schools": 64,
+      "schools_list": [
+        "Kotido mixed PS (Kotido)",
+        "KASIMERI P/S (Moroto)",
+        "ST MARYS P/S (Nakapiripirit)"
       ],
+      "total_pupils_attended": 623,
+      "pwd_learners": 127,
+      "teachers_present": 67,
+      "community_present": 52,
+      "total_attendance": 742,
+      "pwd_total": 131,
+      "pwd_rate_pct": 17.7,
       "activities_delivered": {
         "categories": [
           "Energizer song & movement",
-          "Fair food portions for all genders",
-          "Learners actively handled materials & practiced",
           "Food sorting & matching game",
           "Metu porridge supplementation demonstrated",
           "Structured dialogue on rebalancing chores",
-          "Climate-smart cooking methods explained"
+          "Fair food portions for all genders",
+          "Climate-smart cooking methods explained",
+          "Learners actively handled materials"
         ],
         "values": [
-          1,
-          1,
+          3,
           1,
           0,
+          1,
+          2,
           0,
-          0,
-          0
+          2
         ]
       },
       "metu_uptake_barriers": {
         "categories": [
-          "Preparation confidence/skills",
-          "Taste preference",
-          "Ingredients not prioritized",
-          "Other"
+          "Lack of preparation confidence/skills",
+          "Ingredients not prioritized at household level",
+          "Other",
+          "Taste preference barriers"
         ],
         "values": [
-          0,
-          0,
-          0,
+          2,
+          1,
+          1,
           0
         ],
         "pct": [
-          0.0,
-          0.0,
-          0.0,
+          50.0,
+          25.0,
+          25.0,
           0.0
         ]
       },
       "micro_poll": {
         "statement_1": {
-          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together.",
+          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together",
           "categories": [
             "Strongly Agree",
             "Agree",
@@ -980,15 +829,15 @@
             "Strongly Disagree"
           ],
           "values": [
-            24,
-            18,
+            0,
+            3,
             0,
             0,
             0
           ]
         },
         "statement_2": {
-          "statement": "Fair and equal plate sharing between boys and girls at home",
+          "statement": "I am ready to fetch water from borehole in morning so my sister is not late/punished",
           "categories": [
             "Strongly Agree",
             "Agree",
@@ -998,14 +847,14 @@
           ],
           "values": [
             0,
-            0,
+            2,
             0,
             0,
             0
           ]
         },
         "statement_3": {
-          "statement": "Youngest toddler served first plate",
+          "statement": "If a girl misses school to herd animals or do chores I will speak up to get her back to class",
           "categories": [
             "Strongly Agree",
             "Agree",
@@ -1014,15 +863,15 @@
             "Strongly Disagree"
           ],
           "values": [
-            0,
-            0,
+            2,
+            1,
             0,
             0,
             0
           ]
         },
         "statement_4": {
-          "statement": "Metu porridge fortification with wild greens",
+          "statement": "Collecting firewood for cooking is a chore that boys and girls should do together",
           "categories": [
             "Strongly Agree",
             "Agree",
@@ -1031,15 +880,15 @@
             "Strongly Disagree"
           ],
           "values": [
-            0,
-            0,
+            1,
+            2,
             0,
             0,
             0
           ]
         },
         "statement_5": {
-          "statement": "Firewood-saving cooking methods",
+          "statement": "It is unfair for a girl to stay home doing compound work while brothers leave early for class",
           "categories": [
             "Strongly Agree",
             "Agree",
@@ -1048,66 +897,53 @@
             "Strongly Disagree"
           ],
           "values": [
+            1,
+            1,
             0,
-            0,
-            0,
-            0,
+            1,
             0
           ]
         }
       },
-      "age_bands_matrix": [
-        {
-          "age_band": "Lower Primary (ECD\u2013P2)",
-          "male": 0,
-          "female": 0,
-          "male_pwd": 0,
-          "female_pwd": 0,
-          "total": 0
+      "post_session_scenario": {
+        "sample_size": 17,
+        "porridge_recall": {
+          "categories": [
+            "Specific Actionable Fortification",
+            "General / Vague Idea",
+            "Incorrect / Unavailable Foods"
+          ],
+          "values": [
+            9,
+            3,
+            5
+          ]
         },
-        {
-          "age_band": "Middle Primary (P3\u2013P4)",
-          "male": 4,
-          "female": 6,
-          "male_pwd": 2,
-          "female_pwd": 0,
-          "total": 10
+        "chore_sharing_recall": {
+          "categories": [
+            "Share Chores Equally",
+            "Hurry Up / Wake Early Alone",
+            "Leaves Work Only to Girls"
+          ],
+          "values": [
+            14,
+            2,
+            0
+          ]
         },
-        {
-          "age_band": "Upper Primary (P5\u2013P7)",
-          "male": 10,
-          "female": 15,
-          "male_pwd": 1,
-          "female_pwd": 0,
-          "total": 25
-        },
-        {
-          "age_band": "Teachers Present",
-          "male": 14,
-          "female": 10,
-          "male_pwd": 2,
-          "female_pwd": 0,
-          "total": 24
-        },
-        {
-          "age_band": "Community Members",
-          "male": 3,
-          "female": 1,
-          "male_pwd": 0,
-          "female_pwd": 0,
-          "total": 4
+        "slogan_recall": {
+          "categories": [
+            "Demonstrated Clearly",
+            "Partly Demonstrated",
+            "Not Demonstrated"
+          ],
+          "values": [
+            6,
+            6,
+            0
+          ]
         }
-      ],
-      "qualitative_field_audit": [
-        {
-          "school": "KOTIDO MIXED P/S",
-          "district": "Kotido",
-          "delivery_issue": "High upper-class lesson schedule meant coordinating attendance needed close teacher collaboration.",
-          "key_success": "100% agreement during micro-poll on equal morning chore sharing between boys and girls.",
-          "one_adaptation": "Pre-agree session time slots with headteacher to ensure ECD and lower classes also participate.",
-          "school_commitment": "Kotido Mixed P/S commits to promoting fair food sharing and active NutriClub sessions."
-        }
-      ]
+      }
     },
     "visit3": {
       "total_schools_completed": 0,
@@ -2840,39 +2676,39 @@
   "impact_analysis": {
     "dimensions": [
       {
-        "title": "Pillar 1: School Feeding & Porridge Fortification",
-        "metric_value": "100%",
-        "metric_label": "Unaided Fortification Recall (Activation Day)",
-        "summary": "100% of interviewed pupils and teachers at Kotido Mixed P/S unaidedly named local greens/cowpeas to enrich Metu porridge.",
+        "title": "Pillar 1: School Feeding & Practical Nutrition",
+        "metric_value": "52.9%",
+        "metric_label": "Fortification Mastery (3 Activation Schools)",
+        "summary": "52.9% of interviewed learners across 3 Visit 2 activations demonstrated actionable local fortification knowledge.",
         "baseline": "Pending Visit 1",
         "evidence_points": [
-          "100% unaided recall of local wild greens (Eboo, Lokaka) in Kotido post-session intercepts",
-          "Abim orientation: 3 of 6 teachers/VHTs prioritized immediate porridge enrichment actions",
-          "Visit 3 closeout audit pending endline field verification"
+          "9 learners gave specific, actionable local fortification recipes without prompting",
+          "24 teacher & VHT exit interviews completed across 7 oriented schools",
+          "Community cooking demonstration rollout pending (0 of 640 conducted)"
         ]
       },
       {
         "title": "Pillar 2: Gender Dynamics & Equitable Morning Chores",
-        "metric_value": "100%",
-        "metric_label": "Agreement with Equitable Chore Sharing",
-        "summary": "42 of 42 polled boys and teachers at Kotido Mixed P/S agreed that boys and girls should share morning water/firewood chores equally.",
+        "metric_value": "87.5%",
+        "metric_label": "Chore Rebalancing Agreement (3 Activation Schools)",
+        "summary": "87.5% of participants in Visit 2 micro-polls and intercepts affirmed boys and girls must share domestic water/firewood chores equally.",
         "baseline": "Pending Visit 1",
         "evidence_points": [
-          "100% micro-poll consensus (3 clusters Strongly Agree, 2 Agree) at Kotido Mixed P/S",
-          "Kaabong Kakamar P/S NutriClub delivered practical Gender Chore Rebalancing dialogue",
-          "Abim orientation: 2 cadres committed to mobilize fathers/boys for water fetching"
+          "14 of 16 learners stated boys and girls should share water/wood chores equally before leaving",
+          "1 NutriClub active (1 schools) delivering practical chore rebalancing dialogue",
+          "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)"
         ]
       },
       {
         "title": "Pillar 3: Community Accountability & Climate-Smart Living",
-        "metric_value": "100%",
-        "metric_label": "Orientation Joint Calendar Compliance",
-        "summary": "100% of oriented school leadership and VHTs (Abim Kiru P/S) formally agreed on a joint 4-week calendar (2 sessions/week).",
+        "metric_value": "100.0%",
+        "metric_label": "Commitment & Joint Calendars (7 Oriented Schools)",
+        "summary": "100% of oriented school leadership and VHTs (7 schools) agreed on joint 4-week calendars with signed action plans.",
         "baseline": "0.0% Prior",
         "evidence_points": [
-          "Joint 4-week calendar formally agreed between school management and VHTs in Abim",
-          "9 NutriClub patrons appointed at Kiru P/S",
-          "Kaabong Kakamar P/S NutriClub assigned home kitchen garden tasks to all 36 attending members"
+          "7 primary schools completed multi-stakeholder orientation sessions",
+          "131 persons with disabilities accommodated and included across sessions",
+          "0 retaliation complaints recorded on the WFP toll-free hotline (0800)"
         ]
       }
     ],
@@ -2880,149 +2716,139 @@
       {
         "question": "How much did we do?",
         "subtitle": "What was done on the ground",
-        "cadence": "Daily logs, counted weekly",
-        "status_badge": "100% Completed as Planned",
+        "cadence": "Verified field submissions log",
+        "status_badge": "9 of 64 Schools Active",
         "key_metrics": [
           {
-            "label": "Schools & Visits",
-            "value": "64 Schools \u00b7 192 Visits",
-            "detail": "All 64 primary schools completed all 3 visits as planned"
+            "label": "Schools Reached",
+            "value": "9 Schools",
+            "detail": "9 primary schools reached out of 64 total target schools"
           },
           {
-            "label": "Children in Class",
-            "value": "31,240 Pupils",
-            "detail": "16,280 Girls and 14,960 Boys took part across all classes"
+            "label": "School Contact Visits",
+            "value": "3 Visits Conducted",
+            "detail": "3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
+          },
+          {
+            "label": "Children Reached",
+            "value": "659 Pupils",
+            "detail": "623 in Visit 2 activations, 36 in NutriClub sessions (Target: 80,875)"
           },
           {
             "label": "Village Cooking Demos",
-            "value": "640 Demonstrations",
-            "detail": "10 cooking demonstrations held in the community around each of the 64 schools"
+            "value": "0 Demonstrations",
+            "detail": "0 of 640 community cooking demonstrations conducted to date"
           },
           {
-            "label": "Parents & Elders Reached",
-            "value": "4,620 Adults",
-            "detail": "3,140 Mothers and 1,480 Fathers and kraal elders attended"
+            "label": "Caregivers Reached",
+            "value": "52 Caregivers",
+            "detail": "52 community caregivers attended Visit 2 activations (Target: 51,200)"
           },
           {
-            "label": "NutriClubs & Weekly Meetings",
-            "value": "64 Clubs \u00b7 128 Meetings",
-            "detail": "Active school clubs meeting weekly with appointed teacher patrons"
+            "label": "Active NutriClubs",
+            "value": "1 Club Active",
+            "detail": "1 active club at Kakamar P/S with 41 registered members (Target: 64 clubs)"
           },
           {
-            "label": "Home Charts Given Out",
-            "value": "1,840 Home Charts",
-            "detail": "Taken home by pupils so parents could practice healthy meals for 7 days"
+            "label": "Teachers & VHTs Oriented",
+            "value": "254.0 Stakeholders",
+            "detail": "Oriented across 7 primary schools (Target: 768)"
           },
           {
-            "label": "Radio Messages Aired",
-            "value": "144 Radio Spots",
-            "detail": "Broadcast on Voice of Karamoja, Nenah FM, and Radio Pacis"
-          },
-          {
-            "label": "People with Disabilities",
-            "value": "248 Included",
-            "detail": "Fully included in school clubs, community cooking, and village talks"
+            "label": "Persons with Disabilities",
+            "value": "131 PWDs Reached",
+            "detail": "127 learners and 4 adults included across sessions"
           }
         ],
-        "verification_source": "Daily school attendance sheets, community attendance lists, and radio broadcast logs."
+        "verification_source": "Verified field activity forms, sign-in sheets, and monitor observation logs."
       },
       {
         "question": "How well did we do it?",
-        "subtitle": "Quality and safety of the sessions",
-        "cadence": "Checked during and after every session",
+        "subtitle": "Quality and inclusivity of the sessions",
+        "cadence": "Recorded during and after every session",
         "status_badge": "High Quality Confirmed",
         "key_metrics": [
           {
             "label": "Hands-On Cooking Practice",
-            "value": "88.3% Cooked Hands-On",
-            "detail": "Mothers and caregivers chopped, stirred, and cooked rather than just watching"
+            "value": "Awaiting Demos",
+            "detail": "Community cooking demonstrations have not commenced (0 demos conducted)"
           },
           {
             "label": "Local Foods Only",
-            "value": "100% Local Greens",
-            "detail": "Strictly used only easy-to-find wild greens (Eboo, Lokaka) and cowpeas with zero expensive food"
+            "value": "100% Compliant",
+            "detail": "Promoted exclusively local wild greens (Eboo, Lokaka) and cowpeas"
           },
           {
             "label": "Teachers in the Lead",
-            "value": "92.2% (59 of 64 Schools)",
-            "detail": "Teachers ran visits 2 and 3 on their own without needing the visiting team"
+            "value": "100% (7 Schools)",
+            "detail": "All 7 oriented schools demonstrated active teacher and headteacher leadership"
           },
           {
             "label": "What Children Learned",
-            "value": "91.4% Explained Lessons",
-            "detail": "Pupils could clearly explain the food rules and chore sharing to monitors"
+            "value": "52.9% Unaided Recall",
+            "detail": "52.9% of learners in post-session intercepts correctly explained core nutrition messages"
           },
           {
             "label": "Fair & Accessible for All",
-            "value": "100% in Local Language",
-            "detail": "Delivered in Ngakarimojong with accessible seating for people with disabilities"
-          },
-          {
-            "label": "Real Actions at Home",
-            "value": "89.1% Tried Successfully",
-            "detail": "Club pupils said the assigned home tasks were simple and were tried with parents"
+            "value": "100% Local Language",
+            "detail": "All sessions delivered in Ngakarimojong dialects with accessible seating for PWDs"
           },
           {
             "label": "Teacher Patrons in Charge",
-            "value": "128 Certified Patrons",
-            "detail": "2 trained teacher patrons running the club in every school"
+            "value": "1 Appointed Patron",
+            "detail": "Club patron active at Kakamar P/S (Kaabong)"
           },
           {
             "label": "Safe with No Retaliation",
             "value": "0 Complaints",
-            "detail": "WFP toll-free hotline (0800) shared widely with zero complaints of unfairness"
+            "detail": "WFP toll-free hotline (0800) promoted with zero complaints recorded"
           }
         ],
-        "verification_source": "Visits by independent monitors, teacher feedback notes, and short interviews with children."
+        "verification_source": "Observation protocols, teacher feedback notes, and intercept exit polls."
       },
       {
         "question": "What changed?",
-        "subtitle": "Real changes seen in homes and classrooms",
-        "cadence": "Comparing before the campaign and after",
-        "status_badge": "Big Positive Shift",
+        "subtitle": "Real behavioral shifts observed",
+        "cadence": "Comparing baseline vs endline",
+        "status_badge": "Field Submissions Active",
         "key_metrics": [
           {
             "label": "Adding Greens to Morning Porridge",
-            "value": "84.0% (Up from 12.0%)",
-            "detail": "Pending Visit 3 closeout audits (0 schools)"
+            "value": "Awaiting Closeouts",
+            "detail": "Household recipe trial audits pending Visit 3 closeouts (0 schools audited)"
           },
           {
             "label": "Boys Helping with Morning Chores",
-            "value": "85.0% (Up from 18.0%)",
-            "detail": "A +67.0% shift; boys fetch morning water and firewood so girls arrive early"
+            "value": "87.5% Consensus",
+            "detail": "87.5% agreement in Visit 2 micro-polls that domestic chores must be shared"
           },
           {
             "label": "Girls Arriving on Time for Class",
-            "value": "94.0% (Up from 62.0%)",
-            "detail": "A +32.0% gain in punctuality; 18 girls who had dropped out are back in school"
+            "value": "Pending Closeouts",
+            "detail": "Attendance and punctuality gains will be verified at Visit 3 closeouts"
           },
           {
             "label": "Serving Toddlers First",
-            "value": "82.0% (Up from 22.0%)",
-            "detail": "Families now dish food for the youngest child first before adults eat"
+            "value": "Awaiting Closeouts",
+            "detail": "Youngest child prioritization pending household verification at Visit 3"
           },
           {
             "label": "Saving Daily Firewood",
-            "value": "83.3% (Up from 33.3%)",
-            "detail": "Covering boiling pots and using better stoves cut wood-gathering trips in half"
-          },
-          {
-            "label": "Less Burden for Girls",
-            "value": "50% Fewer Wood Trips",
-            "detail": "Weekly wood collection trips dropped from 4 times to 2 times, saving girls' study time"
+            "value": "Awaiting Demos",
+            "detail": "Firewood savings to be verified during community cooking demonstrations"
           },
           {
             "label": "Returned Home Charts",
-            "value": "86.2% Return Rate",
-            "detail": "0 signed charts audited (Awaiting Visit 3 closeout)"
+            "value": "0 Charts Returned",
+            "detail": "Charts to be collected and audited during Visit 3 closeout audits"
           },
           {
             "label": "Clubs Continuing on Their Own",
-            "value": "100% Active",
-            "detail": "All 64 schools embedded Nutri-Moments into regular Monday and Friday assemblies"
+            "value": "1 Active Club",
+            "detail": "Kakamar P/S NutriClub established with weekly meetings"
           }
         ],
-        "verification_source": "Comparing before-and-after home visits, school roll-call registers, signed home charts, and village elder agreements."
+        "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
       }
     ],
     "three_prong_results_matrix": [
@@ -3031,27 +2857,27 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "640 Demos \u00b7 1,840 Home Charts",
+          "headline": "7 Orientations \u00b7 3 Activations",
           "data_points": [
-            "640 community cooking demonstrations held across 64 school communities (10 per school community)",
-            "1,840 Home Charts given to pupils to take home to parents",
-            "All 64 schools practiced healthy food sorting and porridge enrichment"
+            "7 schools oriented on Metu porridge fortification and clean cooking",
+            "3 schools delivered Visit 2 Big Activation Day (623 pupils engaged)",
+            "0 of 640 community cooking demonstrations conducted to date"
           ]
         },
         "how_well": {
-          "headline": "88.3% Cooked Hands-On \u00b7 100% Local Greens",
+          "headline": "52.9% Unaided Recall \u00b7 100% Local Foods",
           "data_points": [
-            "88.3% of caregivers cooked hands-on rather than just watching",
-            "100% compliance with easy-to-find wild greens (Eboo, Lokaka, cowpeas)",
-            "91.4% of children could clearly explain the food substitution rules"
+            "52.9% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
+            "100% compliance with easy-to-find wild greens and zero unattainable ingredients",
+            "Community demonstration hands-on cooking pending rollout"
           ]
         },
         "what_changed": {
-          "headline": "84% Enrich Porridge \u00b7 82% Dish Toddlers First",
+          "headline": "Awaiting Closeout Audits",
           "data_points": [
-            "Adding greens to porridge jumped from 12.0% before to 84.0% (+72.0% shift)",
-            "Awaiting returned Home Charts at Visit 3 closeout",
-            "82.0% of families now dish food for the youngest toddler first (up from 22.0%)"
+            "Household recipe trial audits pending Visit 3 closeouts",
+            "0 returned Home Charts audited (pending Visit 3)",
+            "Toddler feeding priority to be verified in community demos"
           ]
         }
       },
@@ -3060,27 +2886,27 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "64 Schools \u00b7 192 Visits \u00b7 128 Meetings",
+          "headline": "3 Visits \u00b7 1 Active NutriClub",
           "data_points": [
-            "64 primary schools completed all 3 visits (192 total visits)",
-            "64 active school clubs established with 3,280 member pupils",
-            "64 whole-school morning assembly talks delivered"
+            "3 primary schools completed Visit 2 Big Activation Day",
+            "1 active school club established at Kakamar P/S (41 members)",
+            "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
         "how_well": {
-          "headline": "92.2% Run by Teachers \u00b7 95.5% Attendance",
+          "headline": "7 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
-            "92.2% of schools delivered sessions independently without the visiting team",
-            "95.5% average attendance maintained across weekly club meetings",
-            "38 pupils with disabilities actively taking part in club activities"
+            "All 7 oriented schools confirmed active teacher & headteacher leadership",
+            "131 persons with disabilities accommodated and actively participating",
+            "Zero learners excluded during interactive activation sessions"
           ]
         },
         "what_changed": {
-          "headline": "+8.7% Attendance \u00b7 94% Girls on Time",
+          "headline": "Longitudinal Tracking Initiated",
           "data_points": [
-            "Longitudinal attendance tracking initiated (35 learners logged at Kotido Mixed P/S)",
-            "Girls on-time arrival rose from 62.0% to 94.0% (+32.0% punctuality gain)",
-            "18 girls who had dropped out were traced and brought back to class"
+            "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)",
+            "Punctuality and attendance rebound to be audited at Visit 3",
+            "Out-of-school girl tracing pending closeout reports"
           ]
         }
       },
@@ -3089,27 +2915,27 @@
         "icon": "fa-venus-mars",
         "theme_color": "purple",
         "how_much": {
-          "headline": "640 Community Talks \u00b7 1,480 Fathers & Elders",
+          "headline": "3 Activation Dialogues \u00b7 52 Caregivers",
           "data_points": [
-            "640 community discussions held in villages around all 64 schools (10 per school community)",
-            "1,480 fathers and elders actively took part in discussions",
-            "All 64 schools held the fair chore sharing debate"
+            "Structured chore rebalancing dialogues delivered across 3 schools",
+            "52 community caregivers and elders attended school activations",
+            "Target: 640 community discussions in villages around 64 schools"
           ]
         },
         "how_well": {
-          "headline": "100% Peaceful Agreement \u00b7 90.5% Boys Affirm",
+          "headline": "87.5% Chore Agreement \u00b7 0 Hotline Complaints",
           "data_points": [
-            "100% of village talks reached consensus without blaming any individual",
-            "Men actively tasted enriched porridge and joined stove demonstrations",
-            "90.5% of surveyed boys agreed domestic work belongs to brothers and sisters alike"
+            "87.5% agreement in micro-polls that chores should be shared equally",
+            "Dialogue conducted constructively without assigning blame to individuals",
+            "WFP toll-free hotline (0800) promoted with zero retaliation complaints"
           ]
         },
         "what_changed": {
-          "headline": "85% Share Chores Fairly \u00b7 -34% Girl Absences",
+          "headline": "Consensus on Domestic Sharing",
           "data_points": [
-            "Boys sharing morning chores jumped from 18.0% to 85.0% (+67.0% shift)",
-            "Morning girl absences dropped by 34% as boys took on borehole water trips",
-            "Village elders formally agreed that boys carry water and toddlers eat first"
+            "14 of 16 polled learners agreed boys must help with morning water/wood",
+            "School pledges signed committing to equitable chore support",
+            "Household morning chore division to be audited during Visit 3 closeouts"
           ]
         }
       }
@@ -3121,42 +2947,42 @@
         "desc": "Checking the situation in sample schools before the campaign began",
         "data_collected": [
           "Attendance: - (Pending Visit 1 baseline register logs)",
-          "Enriched Porridge: Only 12.0% of homes adding greens to porridge",
-          "Sharing Chores: Only 18.0% of boys helping with morning water or firewood",
-          "Serving Children First: Only 22.0% of families dishing the youngest child first"
+          "Enriched Porridge: Pending baseline audits (0 schools)",
+          "Sharing Chores: Pending baseline audits (0 schools)",
+          "Serving Children First: Pending baseline audits (0 schools)"
         ]
       },
       {
         "stage": "Week One",
-        "title": "Visit One: Getting Started in Class",
+        "title": "Visit 1: Getting Started in Class",
         "desc": "Healthy food sorting, the Adere calabash game, and Home Charts given out",
         "data_collected": [
-          "Children Reached: 31,240 learners engaged across 64 schools",
-          "Classroom Practice: 100% of schools did the hands-on food sorting game",
-          "Home Charts Given: 1,840 Home Charts given to pupils to take to parents",
-          "Patrons Appointed: 128 teacher patrons confirmed by Headteachers"
+          "Children Reached: 0 learners (Awaiting Visit 1 field submissions)",
+          "Classroom Practice: 0 schools logged (Pending Visit 1)",
+          "Home Charts Given: 0 charts logged (Pending Visit 1)",
+          "Patrons Appointed: 1 club patron appointed (Kakamar P/S, Kaabong)"
         ]
       },
       {
         "stage": "Week Two",
-        "title": "NutriBus Day: School & Village Event",
+        "title": "Visit 2: NutriBus Day Activation",
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
-          "Attendance Growth: 3,510 pupils (+4.8% increase over baseline)",
-          "What Pupils Remembered: 91.4% of children remembered all 3 core messages",
-          "School Pledges: All 64 schools signed and hung up their commitment boards",
-          "Village Cooking Demos: 640 demonstrations underway (88.3% cooked hands-on)"
+          "Attendance Logged: 623 learners counted across 3 schools",
+          "What Pupils Remembered: 52.9% unaided recall of core messages",
+          "School Pledges: 3 school commitments signed",
+          "Village Cooking Demos: 0 demos logged (Target: 640 sites)"
         ]
       },
       {
         "stage": "Week Three",
-        "title": "Visit Three: Checking Real Changes",
+        "title": "Visit 3: Checking Real Changes",
         "desc": "Checking returned Home Charts, pupil teach-back, and ongoing clubs",
         "data_collected": [
-          "Attendance Growth: 3,640 pupils (+8.7% cumulative gain over baseline)",
+          "Attendance Growth: - (Awaiting Visit 3 closeouts)",
           "Charts Returned: 0 returned (Pending Visit 3 closeout audits)",
-          "School Commitments: 93.8% of school action plans verified actively working",
-          "Club Continuity: All 64 school clubs established ongoing weekly schedules"
+          "School Commitments: Pending endline verification (0 schools)",
+          "Club Continuity: 1 NutriClub active (Kakamar P/S, Kaabong)"
         ]
       },
       {
@@ -3164,10 +2990,10 @@
         "title": "In the Villages: Fathers, Elders & Stoves",
         "desc": "Village gatherings, male participation, and saving firewood",
         "data_collected": [
-          "Community Demos: 640 cooking demonstrations held (10 per school community)",
-          "Elders & Fathers: 1,480 male elders joined talks on fair meals and chores",
-          "Home Follow-Up: 85% of visited homes confirmed boys fetching morning water",
-          "Hotline Redress: 0 complaints of unfair treatment on the WFP toll-free hotline"
+          "Community Demos: 0 cooking demonstrations held (Target: 640)",
+          "Caregivers Reached: 52 caregivers attended school activations",
+          "Home Follow-Up: Awaiting community demonstration rollout",
+          "Hotline Redress: 0 complaints logged on WFP hotline (0800)"
         ]
       },
       {
@@ -3175,10 +3001,10 @@
         "title": "On the Radio & For Everyone",
         "desc": "Radio broadcasts, local language, and including people with disabilities",
         "data_collected": [
-          "Radio Broadcasts: 144 spots aired on Voice of Karamoja, Nenah FM, and Radio Pacis",
-          "Disability Inclusion: 248 people with disabilities took part in all activities",
-          "Local Language: 100% of talks and cards delivered in Ngakarimojong",
-          "Saving Firewood: 83.3% of homes saving wood with pot lids and better stoves"
+          "Radio Broadcasts: Transmission logs pending broadcast collation",
+          "Disability Inclusion: 131 persons with disabilities accommodated",
+          "Local Language: 100% of sessions delivered in Ngakarimojong dialects",
+          "Saving Firewood: Fuel saving practices to be audited during community demos"
         ]
       }
     ]

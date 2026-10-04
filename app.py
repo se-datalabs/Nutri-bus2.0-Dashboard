@@ -410,19 +410,17 @@ with tabs[1]:
     <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px; margin: 12px 0px 16px 0px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <div style="font-weight: 800; color: #0A6EB4; font-size: 13px;">🤝 Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</div>
-            <span style="background: #ECFDF5; color: #047857; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #A7F3D0;">100% Yes (1/1 School — Kiru P/S, Abim)</span>
+            <span style="background: #ECFDF5; color: #047857; font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 6px; border: 1px solid #A7F3D0;">16.7% Yes (1/6 Schools — Lomukura P/S, Kotido)</span>
         </div>
         <div style="font-size: 12px; color: #334155; margin-bottom: 8px;">
             <strong>List the partners:</strong><br>
-            • UNAC (Uganda National Action on Childhood Disability): <strong>100% (1/1)</strong><br>
-            • Afi (Action for Inclusion): <strong>100% (1/1)</strong><br>
-            • District Education Offices: <strong>100% (1/1)</strong><br>
-            • Health Centre Parish Focal Persons: <strong>100% (1/1)</strong><br>
-            • <strong>Other:</strong> <strong>100% (1/1)</strong> <em>(Specify: Local LC1 Council Leadership, Sub-County Community Development Officer)</em>
+            • District Education Offices: <strong>16.7% (1/6)</strong><br>
+            • Health Centre Parish Focal Persons: <strong>16.7% (1/6)</strong><br>
+            • UNAC &amp; Afi: <strong>0% (0/6)</strong> (Pending broader district rollout)
         </div>
         <div style="font-size: 12px; color: #334155; border-top: 1px solid #E2E8F0; padding-top: 8px;">
             <strong>How were the partners involved:</strong><br>
-            • Joint facilitation: <strong>100% (6/6)</strong> | • Sustainability planning: <strong>100% (6/6)</strong> | • Mentorship on tool rollout: <strong>83.3% (5/6)</strong> | • <strong>Other:</strong> <strong>100% (1/1)</strong> <em>(Specify: Community kraal mobilization and inclusive PWD translation)</em>
+            • Joint facilitation: <strong>100% of engaged schools (1/1)</strong> | • Sustainability planning: <strong>Pending</strong> | • Mentorship on tool rollout: <strong>Pending</strong>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -494,8 +492,8 @@ with tabs[2]:
     with p2:
         st.metric(label="📋 Visit 1 Done", value="0 Schools", delta="Pending", delta_color="off")
     with p3:
-        v2_done = 1 if (sel_district in ["All 9 Karamoja Districts", "Kotido"]) else 0
-        st.metric(label="🚌 Visit 2 Done", value=f"{v2_done} Schools", delta="Kotido Mixed P/S" if v2_done else "Pending", delta_color="normal" if v2_done else "off")
+        v2_done = sum(DISTRICT_DB.get(d, {}).get("v2_count", 0) for d in active_districts)
+        st.metric(label="🚌 Visit 2 Done", value=f"{v2_done} Schools", delta=f"{v2_done} Logged" if v2_done else "Pending", delta_color="normal" if v2_done else "off")
     with p4:
         st.metric(label="✅ Visit 3 Audited", value="0 Schools", delta="Pending", delta_color="off")
 
@@ -506,7 +504,7 @@ with tabs[2]:
     st.markdown("**Weekly attendance trend across Visit 1, 2 and 3 vs. enrolment baseline**")
     st.caption("Tracking multi-visit SBCC attendance trajectory across Visit 1, 2 and 3:")
     
-    v2_att = 35 if (sel_district in ["All 9 Karamoja Districts", "Kotido"]) else 0
+    v2_att = sum(DISTRICT_DB.get(d, {}).get("learners", 0) for d in active_districts)
 
     m1, m2, m3, m4 = st.columns(4)
     with m1:
@@ -514,11 +512,11 @@ with tabs[2]:
     with m2:
         st.metric(label="Visit 1 Attendance", value="-", delta="Pending V1", delta_color="off")
     with m3:
-        st.metric(label="Visit 2 Attendance", value=f"{v2_att}" if v2_att > 0 else "-", delta="Kotido Mixed P/S" if v2_att > 0 else "Pending", delta_color="normal" if v2_att > 0 else "off")
+        st.metric(label="Visit 2 Attendance", value=f"{v2_att}" if v2_att > 0 else "-", delta=f"{v2_att} Pupils" if v2_att > 0 else "Pending", delta_color="normal" if v2_att > 0 else "off")
     with m4:
         st.metric(label="Visit 3 Attendance", value="-", delta="Pending V3", delta_color="off")
 
-    st.info("ℹ️ **Attendance Trajectory Tracking:** Longitudinal line charts will plot multi-point attendance rebound once Visit 1 and Visit 3 records are logged alongside Visit 2 (Kotido Mixed P/S logged 35 learners in Visit 2).")
+    st.info(f"ℹ️ **Attendance Trajectory Tracking:** Longitudinal line charts will plot multi-point attendance rebound once Visit 1 and Visit 3 records are logged alongside Visit 2 ({v2_att} learners logged across {v2_done} schools in Visit 2).")
 
     # School-by-School Multi-Visit Attendance Trajectory (District Accordions)
     st.markdown("**64 Schools Longitudinal Attendance Trajectory (Grouped by District)**")
@@ -699,16 +697,16 @@ with tabs[2]:
                 "Schools Delivering": BASE_DATA["three_visit_contact"]["visit2"]["activities_delivered"]["values"]
             })
             st.altair_chart(make_horizontal_bar(df_v2_act, "Module Activity", "Schools Delivering", color="#16A34A"), use_container_width=True)
-            st.success("✅ 100% Completion: All 7 interactive modules successfully conducted at Kotido Mixed P/S.")
+            st.success("✅ Completion: Interactive modules conducted across 3 Visit 2 schools (Kotido Mixed, Kasimeri, St Mary's).")
 
         with qual_col:
             st.markdown("##### 📋 Facilitation Quality & Inclusivity Checklist")
             st.caption("Verifiable observation checklist recorded during activation:")
             st.markdown("""
-            - **Did learners actively handle materials and practice rather than listen passively?**: `Yes: 100% (1/1 School)`
-            - **Did all three age bands and both boys and girls participate?**: `Yes: 100% (1/1 School)`
-            - **Was any learner excluded or left out during sessions?**: `No: 100% (1/1 School)` *(Zero learners excluded)*
-            - **Were materials understood without long/confusing explanation?**: `Yes: 100% (1/1 School)`
+            - **Did learners actively handle materials and practice rather than listen passively?**: `Yes: 100% (3/3 Schools)`
+            - **Did all three age bands and both boys and girls participate?**: `Yes: 100% (3/3 Schools)`
+            - **Was any learner excluded or left out during sessions?**: `No: 100% (3/3 Schools)` *(Zero learners excluded)*
+            - **Were materials understood without long/confusing explanation?**: `Yes: 100% (3/3 Schools)`
             """)
             st.info("**Why:** Visual flashcards, color-coded food grouping cards, and hands-on Metu porridge demonstrations allowed immediate comprehension without complex explanations across Ngakarimojong dialects.")
 
@@ -722,7 +720,7 @@ with tabs[2]:
             st.markdown("""
             <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 10px; padding: 14px; font-size: 12px; color: #78350F;">
                 <strong>Key Diagnostic Finding:</strong><br>
-                <strong>58.3%</strong> of households cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier. This directly validates the necessity of practical, hands-on cooking demonstrations.
+                <strong>50.0%</strong> of reporting schools cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier, alongside ingredient prioritization (25.0%). This directly validates the necessity of practical, hands-on cooking demonstrations.
             </div>
             """, unsafe_allow_html=True)
         with c_mb2:
@@ -1523,19 +1521,19 @@ with tabs[6]:
     df_mel_core = pd.DataFrame([
         {
             "Evaluation Question": "How much did we do? (Outputs & Delivery Reach)",
-            "Empirical Data That Answers the Question": "3 Primary Schools Active (1 Orientation, 1 Visit 2, 1 NutriClub) · 64 Target Schools | 71 Direct Session Reach Target (from 80,875 target) | 0 Community Demonstrations Target (from 640 target) | 4 Caregivers Reached (from 51,200 target) | 65 Teachers & VHTs Logged (from 768 target) | 1 NutriClub Active (Kakamar P/S, 41 members) | 5 PWDs Reached",
-            "Verification Source": "Field Activity Forms 1–3, Field Sign-in Sheets, School Headcounts, Radio Pacis/Nenah FM Transmission Logs",
+            "Empirical Data That Answers the Question": f"{tot_schools} Primary Schools Active (6 Orientations, 3 Visit 2, 1 NutriClub) · 64 Target Schools | {tot_learners} Direct Session Reach (from 80,875 target) | 0 Community Demonstrations Target (from 640 target) | {tot_caregivers} Caregivers Reached (from 51,200 target) | {tot_stakeholders} Teachers & VHTs Logged (from 768 target) | 1 NutriClub Active (Kakamar P/S, 41 members) | {tot_pwd} PWDs Reached",
+            "Verification Source": "Field Activity Forms 1–3, Field Sign-in Sheets, School Headcounts, Radio Transmission Logs",
             "Status": "On Track Against Targets"
         },
         {
             "Evaluation Question": "How well did we do it? (Implementation Quality & Adoption)",
-            "Empirical Data That Answers the Question": "100.0% Unaided Fortification Recall at Kotido Mixed P/S | 100.0% Chore Sharing Agreement in Kotido Micro-Poll | 100.0% Local Language & Inclusive PWD Seating | 0 Retaliation complaints on WFP 0800 hotline",
+            "Empirical Data That Answers the Question": "Unaided Fortification Recall verified across Visit 2 schools | Consensus on Chore Sharing across Micro-Polls | 100.0% Local Language & Inclusive PWD Accommodation | 0 Retaliation complaints on WFP 0800 hotline",
             "Verification Source": "Independent Monitor Observation Protocols, VHT Debrief Forms, Pupil Exit Polls, WFP Hotline Logs",
             "Status": "High Quality Verified"
         },
         {
             "Evaluation Question": "What changed? (Measured Behavioral Shifts & Outcomes)",
-            "Empirical Data That Answers the Question": "Baseline vs Endline shifts pending Visit 3 closeouts | 100% agreement on equitable chores in Kotido post-session intercepts | Longitudinal attendance tracking initiated (35 learners logged at Kotido Mixed P/S)",
+            "Empirical Data That Answers the Question": f"Baseline vs Endline shifts pending Visit 3 closeouts | Polled consensus on equitable chores in post-session intercepts | Longitudinal attendance tracking initiated ({tot_learners} learners logged in Visit 2 & NutriClub)",
             "Verification Source": "Baseline vs Endline Longitudinal Cohort Audit, Attendance Registers, NutriChart Verifications, Kraal Minutes",
             "Status": "Field Logs Active"
         }
@@ -1549,20 +1547,20 @@ with tabs[6]:
     df_mel_matrix = pd.DataFrame([
         {
             "Pillar": "Pillar 1: School Feeding & Practical Nutrition",
-            "How much did we do? (Verified Outputs)": "1 Orientation · 1 Visit 2 Session Logged · 104 attendees reached · 0 Demos conducted to date",
-            "How well did we do it? (Quality & Adoption Data)": "100% unaided fortification recall in Kotido · 50% Abim exit interviewees committed to immediate porridge fortification · Cooking demos pending",
+            "How much did we do? (Verified Outputs)": f"6 Orientations · 3 Visit 2 Sessions Logged · {tot_learners + tot_stakeholders} attendees reached · 0 Demos conducted to date",
+            "How well did we do it? (Quality & Adoption Data)": "Unaided fortification recall verified across Visit 2 schools · 16 exit interviewees committed to immediate porridge fortification · Cooking demos pending",
             "What changed? (Measured Shifts)": "Recipe trial verification pending Visit 3 closeout audits · 0 of 640 demonstration reports recorded to date"
         },
         {
             "Pillar": "Pillar 2: Gender Dynamics & Equity",
-            "How much did we do? (Verified Outputs)": "1 NutriClub active (Kakamar P/S, 41 members) · 1 Visit 2 session delivered (Kotido Mixed P/S, 63 attendees)",
-            "How well did we do it? (Quality & Adoption Data)": "100% chore sharing agreement in Kotido micro-poll · 87.8% club session attendance in Kakamar · 5 PWD attendees accommodated",
-            "What changed? (Measured Shifts)": "Longitudinal attendance trajectory tracking initiated (Kotido Mixed: 35 learners) · Punctuality and attendance gains to be audited at Visit 3"
+            "How much did we do? (Verified Outputs)": "1 NutriClub active (Kakamar P/S, 41 members) · 3 Visit 2 sessions delivered (623 pupils, 131 PWDs)",
+            "How well did we do it? (Quality & Adoption Data)": "Consensus on chore sharing in micro-polls · 87.8% club session attendance in Kakamar · 131 PWD attendees accommodated",
+            "What changed? (Measured Shifts)": f"Longitudinal attendance trajectory tracking initiated ({tot_learners} learners logged) · Punctuality and attendance gains to be audited at Visit 3"
         },
         {
             "Pillar": "Pillar 3: Community Engagement, Accountability & Climate-Smart Living",
-            "How much did we do? (Verified Outputs)": "1 Joint calendar agreed with VHTs (Kiru P/S, Abim) · 9 NutriClub patrons appointed · 0 Demos conducted",
-            "How well did we do it? (Quality & Adoption Data)": "Multi-partner engagement active (UNAC, Afi, DEO, Health Centre) · 0 hotline complaints logged · Clean cooking demos pending",
+            "How much did we do? (Verified Outputs)": "5 Joint calendars agreed with VHTs · 34 School NutriClub patrons appointed (plus 1 club patron) · 0 Demos conducted",
+            "How well did we do it? (Quality & Adoption Data)": "Multi-partner engagement active (DEO, Health Centre in Kotido) · 0 hotline complaints logged · Clean cooking demos pending",
             "What changed? (Measured Shifts)": "Institutional work plans underway · Firewood conservation and plate-sharing declarations pending field rollout"
         }
     ])
@@ -1579,12 +1577,12 @@ with tabs[6]:
         
         st.markdown("#### Visit 1: getting started in class")
         st.caption("Song, sorting, food map, chart home")
-        st.markdown("🔵 **Headcount Reached:** 0 learners (Awaiting Visit 1 submissions)\n\n🔵 **Session Observation:** 0 schools logged (Pending Visit 1)\n\n🔵 **Materials Issued:** 0 charts logged (Pending Visit 1)\n\n🔵 **Patrons Appointed:** 9 patrons appointed (Kiru P/S, Abim)")
+        st.markdown("🔵 **Headcount Reached:** 0 learners (Awaiting Visit 1 submissions)\n\n🔵 **Session Observation:** 0 schools logged (Pending Visit 1)\n\n🔵 **Materials Issued:** 0 charts logged (Pending Visit 1)\n\n🔵 **Patrons Appointed:** 34 patrons appointed across 6 orientation schools")
         
     with cyc_c2:
         st.markdown("#### Visit 2: NutriBus big activation day")
         st.caption("Stations, whole-school session, pledges, demos")
-        st.markdown("🔴 **Attendance Point 2:** 35 learners counted (Kotido Mixed P/S)\n\n🔴 **Line Recall Mastery:** 100% recall of 3 core messages (Kotido Mixed P/S)\n\n🔵 **School Pledges Scored:** 1 commitment signed (Kotido Mixed P/S)\n\n🔵 **Demos Mobilized:** 0 sites (Target: 640 sites)")
+        st.markdown("🔴 **Attendance Point 2:** 623 learners counted (3 activation schools)\n\n🔴 **Line Recall Mastery:** Unaided recall of 3 core messages across activations\n\n🔵 **School Pledges Scored:** 3 commitments signed\n\n🔵 **Demos Mobilized:** 0 sites (Target: 640 sites)")
         
         st.markdown("#### Visit 3: checking real changes")
         st.caption("Teach-back, fair-sharing debate, chart audit")
@@ -1593,11 +1591,11 @@ with tabs[6]:
     with cyc_c3:
         st.markdown("#### In the villages: fathers, elders and stoves")
         st.caption("Elder councils, gender dialogues, male participation")
-        st.markdown("🔵 **Elder Dialogues:** 0 kraal dialogues conducted (Target: 640)\n\n🔵 **Male Elders Reached:** 4 male community leaders logged\n\n🔴 **Day 7 Follow-Up:** Awaiting post-demo household visits\n\n🔴 **Hotline Redress:** 0 complaints logged on WFP hotline (0800)")
+        st.markdown("🔵 **Elder Dialogues:** 0 kraal dialogues conducted (Target: 640)\n\n🔵 **Male Elders Reached:** 30 male community members logged (52 total community attendees in Visit 2)\n\n🔴 **Day 7 Follow-Up:** Awaiting post-demo household visits\n\n🔴 **Hotline Redress:** 0 complaints logged on WFP hotline (0800)")
         
         st.markdown("#### On the radio and for everyone")
         st.caption("Radio campaigns, disability inclusion, outreach")
-        st.markdown("🔵 **Radio Transmission:** 144 spots aired (100% booked)\n\n🔵 **Stations Verified:** Voice of Karamoja, Nenah, Pacis\n\n🔵 **Disability Inclusion:** 248 PWD stakeholders active\n\n🔴 **Accessibility:** 100% local language translation")
+        st.markdown(f"🔵 **Radio Transmission:** 144 spots booked across Voice of Karamoja, Nenah, Pacis\n\n🔵 **Stations Verified:** Radio Pacis, Nenah FM, Voice of Karamoja\n\n🔵 **Disability Inclusion:** {tot_pwd} PWD attendees active\n\n🔴 **Accessibility:** 100% local language translation")
 
     st.caption("Audited across 64 monitored schools and 60 catchment demonstration sites. Longitudinal attendance tracked across sentinel cohorts with full set of sixteen verified behavioral shift indicators.")
 
@@ -1643,7 +1641,7 @@ with tabs[6]:
             tooltip=["Indicator", "Stage", "Rate (%)"]
         ).properties(height=220)
         st.altair_chart(chart_p2, use_container_width=True)
-        st.markdown("**Shift:** Chores 100% agreement (Kotido Mixed) · Punctuality audit pending")
+        st.markdown("**Shift:** Consensus on chore rebalancing across micro-polls · Punctuality audit pending")
 
     with p3_col:
         st.markdown("#### 🔥 Pillar 3: Community Engagement, Accountability & Climate-Smart Living")
