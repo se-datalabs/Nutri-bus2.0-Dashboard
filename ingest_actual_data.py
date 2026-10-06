@@ -85,6 +85,13 @@ def clean_val(val, default=0):
     except:
         return default
 
+def get_col_val(row, patterns, default=""):
+    for col in row.index:
+        for p in patterns:
+            if p.lower() in str(col).lower() and pd.notnull(row[col]):
+                return row[col]
+    return default
+
 def get_school_name(row):
     dist = str(row.get("District", "")).strip()
     if dist in row and pd.notnull(row[dist]):
@@ -117,6 +124,7 @@ district_v2_count = {d: 0 for d in ALL_DISTRICTS}
 district_v3_count = {d: 0 for d in ALL_DISTRICTS}
 district_nutriclubs_count = {d: 0 for d in ALL_DISTRICTS}
 district_exit_interviews = {d: {} for d in ALL_DISTRICTS}
+district_v1 = {d: None for d in ALL_DISTRICTS}
 district_v2 = {d: None for d in ALL_DISTRICTS}
 district_p1_pass = {d: 0 for d in ALL_DISTRICTS}
 district_p1_total = {d: 0 for d in ALL_DISTRICTS}
@@ -249,55 +257,129 @@ for _, row in df.iterrows():
     elif "Three visit" in activity or "visit" in activity.lower():
         milestone = str(row.get("Milestone Being Conducted Today", "Visit 2: NutriBus Big Activation Day"))
         district_visits_conducted[dist] += 1
+        
         if "visit 1" in milestone.lower() or "baseline" in milestone.lower():
             district_v1_count[dist] += 1
+
+            # Enrolment census
+            enrol_b = clean_val(row.get("Officials boys enrolment for this term in the school", 0))
+            enrol_g = clean_val(row.get("Officials girls enrolment for this term in the school", 0))
+            enrol_tot = int(enrol_b + enrol_g)
+
+            # Registered attendance across grade bands
+            # Lower: row, row_1
+            l_b0 = clean_val(row.get('<span style="display:none">row-Boys</span>', 0))
+            l_b1 = clean_val(row.get('<span style="display:none">row_1-Boys</span>', 0))
+            l_g0 = clean_val(row.get('<span style="display:none">row-Girls</span>', 0))
+            l_g1 = clean_val(row.get('<span style="display:none">row_1-Girls</span>', 0))
+
+            # Mid: row_2, row_3
+            m_b2 = clean_val(row.get('<span style="display:none">row_2-Boys</span>', 0))
+            m_b3 = clean_val(row.get('<span style="display:none">row_3-Boys</span>', 0))
+            m_g2 = clean_val(row.get('<span style="display:none">row_2-Girls</span>', 0))
+            m_g3 = clean_val(row.get('<span style="display:none">row_3-Girls</span>', 0))
+
+            # Upper: row_4, row_5
+            u_b4 = clean_val(row.get('<span style="display:none">row_4-Boys</span>', 0))
+            u_b5 = clean_val(row.get('<span style="display:none">row_5-Boys</span>', 0))
+            u_g4 = clean_val(row.get('<span style="display:none">row_4-Girls</span>', 0))
+            u_g5 = clean_val(row.get('<span style="display:none">row_5-Girls</span>', 0))
+
+            tot_v1_b = int(l_b0 + l_b1 + m_b2 + m_b3 + u_b4 + u_b5)
+            tot_v1_g = int(l_g0 + l_g1 + m_g2 + m_g3 + u_g4 + u_g5)
+            tot_pupils = tot_v1_b + tot_v1_g
+
+            charts_iss = int(clean_val(get_col_val(row, ["Number of Total Take-Home NutriCharts", "Take-Home NutriCharts", "charts_iss"], 0)))
+            classes_rcv = str(get_col_val(row, ["Classes Receiving Materials", "classes receiving"], "Lower (ECD-P2) Middle (P3-P4) Upper (P5-P7)"))
+            nc_act = str(get_col_val(row, ["Is the Nutri Club active", "nutriclub active"], "Yes")).strip()
+            nc_proc = str(get_col_val(row, ["process of creating a nutriclub", "creating a nutriclub"], "Yes")).strip()
+            plan_sgn = str(get_col_val(row, ["Signed 4-week institutional work plan", "work plan"], "Yes")).strip()
+            tf_disp = str(get_col_val(row, ["WFP Toll-Free displayed", "toll-free displayed"], "Yes")).strip()
+            tf_loc = str(get_col_val(row, ["Where is it displayed"], "")).strip()
+            tf_kwn = str(get_col_val(row, ["actively known and referenced", "hotline actively known"], "Yes")).strip()
+            hd_queries = int(clean_val(get_col_val(row, ["feedback queries or help-desk", "queries logged", "feedback queries"], 0)))
+            mtg_days = str(get_col_val(row, ["conduct its activities", "conduct activities"], "")).strip()
+            mtg_wed = int(clean_val(get_col_val(row, ["conduct its activities/Wednesday", "conduct its activities / Wednesday"], 0)))
+            mtg_fri = int(clean_val(get_col_val(row, ["conduct its activities/Friday", "conduct its activities / Friday"], 0)))
+
+            district_learners_reached[dist] += tot_pupils
+            reach = tot_pupils
+            pwd = 0
+
+            district_v1[dist] = {
+                "entry_index": entry_index,
+                "school": school_name,
+                "district": dist,
+                "enrol_boys": int(enrol_b),
+                "enrol_girls": int(enrol_g),
+                "enrol_total": enrol_tot,
+                "att_boys": tot_v1_b,
+                "att_girls": tot_v1_g,
+                "att_total": tot_pupils,
+                "att_lower_b": int(l_b0 + l_b1),
+                "att_lower_g": int(l_g0 + l_g1),
+                "att_mid_b": int(m_b2 + m_b3),
+                "att_mid_g": int(m_g2 + m_g3),
+                "att_up_b": int(u_b4 + u_b5),
+                "att_up_g": int(u_g4 + u_g5),
+                "charts_issued": charts_iss,
+                "classes_receiving": classes_rcv,
+                "nutriclub_active": nc_act,
+                "nutriclub_creating": nc_proc,
+                "work_plan_signed": plan_sgn,
+                "toll_free_displayed": tf_disp,
+                "toll_free_location": tf_loc,
+                "toll_free_known": tf_kwn,
+                "helpdesk_queries": hd_queries,
+                "meeting_days": mtg_days,
+                "meeting_wed": mtg_wed,
+                "meeting_fri": mtg_fri
+            }
+
         elif "visit 2" in milestone.lower() or "activation" in milestone.lower():
             district_v2_count[dist] += 1
-        elif "visit 3" in milestone.lower() or "closeout" in milestone.lower():
-            district_v3_count[dist] += 1
-        
-        # Lower
-        l_m = clean_val(row.get('<span style="display:none">row-Male</span>', 0))
-        l_f = clean_val(row.get('<span style="display:none">row-Female</span>', 0))
-        l_pwd = clean_val(row.get('<span style="display:none">row-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row-Female PWDs</span>', 0))
-        
-        # Mid
-        m_m = clean_val(row.get('<span style="display:none">row_1-Male</span>', 0))
-        m_f = clean_val(row.get('<span style="display:none">row_1-Female</span>', 0))
-        m_pwd = clean_val(row.get('<span style="display:none">row_1-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_1-Female PWDs</span>', 0))
-        
-        # Upper
-        u_m = clean_val(row.get('<span style="display:none">row_2-Male</span>', 0))
-        u_f = clean_val(row.get('<span style="display:none">row_2-Female</span>', 0))
-        u_pwd = clean_val(row.get('<span style="display:none">row_2-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_2-Female PWDs</span>', 0))
-        
-        # Teachers
-        t_m = clean_val(row.get('<span style="display:none">row_3-Male</span>', 0))
-        t_f = clean_val(row.get('<span style="display:none">row_3-Female</span>', 0))
-        t_pwd = clean_val(row.get('<span style="display:none">row_3-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_3-Female PWDs</span>', 0))
-        
-        # Community
-        c_m = clean_val(row.get('<span style="display:none">row_4-Male</span>', 0))
-        c_f = clean_val(row.get('<span style="display:none">row_4-Female</span>', 0))
-        c_pwd = clean_val(row.get('<span style="display:none">row_4-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_4-Female PWDs</span>', 0))
+            
+            # Lower
+            l_m = clean_val(row.get('<span style="display:none">row-Male</span>', 0))
+            l_f = clean_val(row.get('<span style="display:none">row-Female</span>', 0))
+            l_pwd = clean_val(row.get('<span style="display:none">row-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row-Female PWDs</span>', 0))
+            
+            # Mid
+            m_m = clean_val(row.get('<span style="display:none">row_1-Male</span>', 0))
+            m_f = clean_val(row.get('<span style="display:none">row_1-Female</span>', 0))
+            m_pwd = clean_val(row.get('<span style="display:none">row_1-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_1-Female PWDs</span>', 0))
+            
+            # Upper
+            u_m = clean_val(row.get('<span style="display:none">row_2-Male</span>', 0))
+            u_f = clean_val(row.get('<span style="display:none">row_2-Female</span>', 0))
+            u_pwd = clean_val(row.get('<span style="display:none">row_2-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_2-Female PWDs</span>', 0))
+            
+            # Teachers
+            t_m = clean_val(row.get('<span style="display:none">row_3-Male</span>', 0))
+            t_f = clean_val(row.get('<span style="display:none">row_3-Female</span>', 0))
+            t_pwd = clean_val(row.get('<span style="display:none">row_3-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_3-Female PWDs</span>', 0))
+            
+            # Community
+            c_m = clean_val(row.get('<span style="display:none">row_4-Male</span>', 0))
+            c_f = clean_val(row.get('<span style="display:none">row_4-Female</span>', 0))
+            c_pwd = clean_val(row.get('<span style="display:none">row_4-Male PWDs</span>', 0)) + clean_val(row.get('<span style="display:none">row_4-Female PWDs</span>', 0))
 
-        tot_pupils = int(l_m + l_f + m_m + m_f + u_m + u_f)
-        tot_staff = int(t_m + t_f)
-        tot_comm = int(c_m + c_f)
-        tot_pwd_l = int(l_pwd + m_pwd + u_pwd)
-        tot_pwd_a = int(t_pwd + c_pwd)
+            tot_pupils = int(l_m + l_f + m_m + m_f + u_m + u_f)
+            tot_staff = int(t_m + t_f)
+            tot_comm = int(c_m + c_f)
+            tot_pwd_l = int(l_pwd + m_pwd + u_pwd)
+            tot_pwd_a = int(t_pwd + c_pwd)
 
-        district_learners_reached[dist] += tot_pupils
-        district_teachers_m[dist] += int(t_m)
-        district_teachers_f[dist] += int(t_f)
-        district_caregivers_reached[dist] += tot_comm
-        district_pwd_learners[dist] += tot_pwd_l
-        district_pwd_adults[dist] += tot_pwd_a
+            district_learners_reached[dist] += tot_pupils
+            district_teachers_m[dist] += int(t_m)
+            district_teachers_f[dist] += int(t_f)
+            district_caregivers_reached[dist] += tot_comm
+            district_pwd_learners[dist] += tot_pwd_l
+            district_pwd_adults[dist] += tot_pwd_a
 
-        reach = tot_pupils + tot_staff + tot_comm
-        pwd = tot_pwd_l + tot_pwd_a
+            reach = tot_pupils + tot_staff + tot_comm
+            pwd = tot_pwd_l + tot_pwd_a
 
-        if "Visit 2" in milestone or district_v2[dist] is None:
             district_v2[dist] = {
                 "entry_index": entry_index,
                 "school": school_name,
@@ -309,7 +391,6 @@ for _, row in df.iterrows():
                 "comm_m": int(c_m), "comm_f": int(c_f), "comm_pwd": int(c_pwd)
             }
 
-        if "Visit 2" in milestone or "activation" in milestone.lower():
             p1_items = [str(row[c]) for c in df.columns if 'Imagine you are at home ton' in c and pd.notnull(row[c])]
             for val in p1_items:
                 district_p1_total[dist] += 1
@@ -326,6 +407,9 @@ for _, row in df.iterrows():
             district_p3_total[dist] += 1
             if (len(commit_val.strip()) > 3 and commit_val.strip() != 'nan') or dist == 'Kotido':
                 district_p3_pass[dist] += 1
+
+        elif "visit 3" in milestone.lower() or "closeout" in milestone.lower():
+            district_v3_count[dist] += 1
 
     # 4. COMMUNITY DEMONSTRATION
     elif "demonstration" in activity.lower() or "demo" in activity.lower():
@@ -416,7 +500,7 @@ for dist in ALL_DISTRICTS:
         "v3_count": district_v3_count[dist],
         "nutriclubs": district_nutriclubs_count[dist],
         "target_nutriclubs": len(sch_list),
-        "v1": None,
+        "v1": district_v1[dist],
         "v2": district_v2[dist],
         "v3": None,
         "demos_metrics": None,
@@ -534,6 +618,36 @@ d_data["overview"]["targets_vs_actuals"]["pct"] = [
     round((tot_stakeholders/768)*100, 1),
     round((tot_pwd/1200)*100, 2)
 ]
+
+# Dynamically populate district metrics table from district_db
+d_data["overview"]["district_metrics"] = []
+for dist in ALL_DISTRICTS:
+    d = district_db[dist]
+    sch_r = d["schools"]
+    tgt_s = d["target_schools"]
+    s_pct = round((sch_r / tgt_s * 100), 1) if tgt_s > 0 else 0.0
+    dem_c = d["demos"]
+    tgt_d = d["target_demos"]
+    d_pct = round((dem_c / tgt_d * 100), 1) if tgt_d > 0 else 0.0
+    lrn_r = d["learners"]
+    cg_r = d["caregivers"]
+    stk_t = d["teachers_vhts"]
+    pwd_r = d["pwd_reach"]
+    status_str = "Active (Reports Received)" if (sch_r > 0 or dem_c > 0 or stk_t > 0 or lrn_r > 0) else "Scheduled / Awaiting Data"
+    d_data["overview"]["district_metrics"].append({
+        "district": dist,
+        "schools_reached": sch_r,
+        "target_schools": tgt_s,
+        "school_progress_pct": s_pct,
+        "demos_completed": dem_c,
+        "target_demos": tgt_d,
+        "demo_progress_pct": d_pct,
+        "learners_reached": lrn_r,
+        "caregivers_reached": cg_r,
+        "stakeholders_trained": stk_t,
+        "pwd_reach": pwd_r,
+        "status": status_str
+    })
 
 # Dynamically aggregate orientation exit interview charts from all ingested interview records
 all_interviews = []
@@ -851,12 +965,32 @@ if tot_demos == 0:
         }
     }
 
-# --- VISIT 2 DYNAMIC AGGREGATION ---
+# --- VISIT 1 & VISIT 2 DYNAMIC AGGREGATION ---
 act_col_found = [c for c in df.columns if c.strip().lower() == 'activity'][0]
-v_rows = df[df[act_col_found].astype(str).str.contains('visit', case=False, na=False)]
+ms_col_found = [c for c in df.columns if 'milestone' in c.lower()]
+ms_col_name = ms_col_found[0] if ms_col_found else None
+
+def is_v1_row(r):
+    act = str(r.get(act_col_found, '')).lower()
+    if 'visit' not in act: return False
+    if ms_col_name and pd.notnull(r.get(ms_col_name)):
+        m = str(r.get(ms_col_name)).lower()
+        return 'visit 1' in m or 'baseline' in m
+    return False
+
+def is_v2_row(r):
+    act = str(r.get(act_col_found, '')).lower()
+    if 'visit' not in act: return False
+    if ms_col_name and pd.notnull(r.get(ms_col_name)):
+        m = str(r.get(ms_col_name)).lower()
+        return 'visit 2' in m or 'activation' in m
+    return True
+
+v1_rows = df[df.apply(is_v1_row, axis=1)]
+v2_rows = df[df.apply(is_v2_row, axis=1)]
 
 v2_schools = []
-for idx_v, r_v in v_rows.iterrows():
+for idx_v, r_v in v2_rows.iterrows():
     s_name = get_school_name(r_v)
     d_name = str(r_v.get('District', '')).strip()
     v2_schools.append(f"{s_name} ({d_name})")
@@ -875,7 +1009,7 @@ act_vals = []
 for short_lbl, col_sub in act_keys:
     matching_cols = [c for c in df.columns if col_sub in c]
     cnt = 0
-    for idx_v, r_v in v_rows.iterrows():
+    for idx_v, r_v in v2_rows.iterrows():
         for mc in matching_cols:
             if r_v.get(mc) == 1.0 or str(r_v.get(mc)).strip() == '1':
                 cnt += 1
@@ -893,7 +1027,7 @@ barr_vals = []
 for lbl, sub in barr_keys:
     m_cols = [c for c in df.columns if 'primary reason' in c.lower() and sub in c]
     cnt = 0
-    for idx_v, r_v in v_rows.iterrows():
+    for idx_v, r_v in v2_rows.iterrows():
         for mc in m_cols:
             if r_v.get(mc) == 1.0 or str(r_v.get(mc)).strip() == '1':
                 cnt += 1
@@ -916,7 +1050,7 @@ for stmt_key, (stmt_text, col_pat) in poll_statements.items():
     col_name = m_cols[0] if m_cols else None
     opt_counts = [0, 0, 0, 0, 0]
     if col_name:
-        for idx_v, r_v in v_rows.iterrows():
+        for idx_v, r_v in v2_rows.iterrows():
             val = str(r_v.get(col_name, '')).strip().lower()
             for opt_idx, opt in enumerate(poll_options):
                 if opt.lower() == val:
@@ -937,7 +1071,7 @@ slogan_demo = 0
 slogan_part = 0
 slogan_none = 0
 
-for idx_v, r_v in v_rows.iterrows():
+for idx_v, r_v in v2_rows.iterrows():
     p1_cols = [c for c in df.columns if 'plain porridge' in c.lower() and pd.notnull(r_v[c])]
     for c in p1_cols:
         v = str(r_v[c]).lower()
@@ -967,6 +1101,8 @@ for idx_v, r_v in v_rows.iterrows():
             slogan_none += 1
 
 tot_v2_pupils = sum(d["v2"]["hc_lower_m"] + d["v2"]["hc_lower_f"] + d["v2"]["hc_mid_m"] + d["v2"]["hc_mid_f"] + d["v2"]["hc_up_m"] + d["v2"]["hc_up_f"] for d in district_db.values() if d.get("v2"))
+tot_v2_boys = sum(d["v2"]["hc_lower_m"] + d["v2"]["hc_mid_m"] + d["v2"]["hc_up_m"] for d in district_db.values() if d.get("v2"))
+tot_v2_girls = sum(d["v2"]["hc_lower_f"] + d["v2"]["hc_mid_f"] + d["v2"]["hc_up_f"] for d in district_db.values() if d.get("v2"))
 tot_v2_staff = sum(d["v2"]["teachers_m"] + d["v2"]["teachers_f"] for d in district_db.values() if d.get("v2"))
 tot_v2_comm = sum(d["v2"]["comm_m"] + d["v2"]["comm_f"] for d in district_db.values() if d.get("v2"))
 tot_v2_pwd_l = sum(d["v2"]["hc_lower_pwd"] + d["v2"]["hc_mid_pwd"] + d["v2"]["hc_up_pwd"] for d in district_db.values() if d.get("v2"))
@@ -974,9 +1110,129 @@ tot_v2_pwd_a = sum(d["v2"]["teachers_pwd"] + d["v2"]["comm_pwd"] for d in distri
 tot_v2_pwd = tot_v2_pwd_l + tot_v2_pwd_a
 tot_v2_attendance = tot_v2_pupils + tot_v2_staff + tot_v2_comm
 
+# VISIT 1 AGGREGATION
+v1_schools = []
+for idx_v, r_v in v1_rows.iterrows():
+    s_name = get_school_name(r_v)
+    d_name = str(r_v.get('District', '')).strip()
+    v1_schools.append(f"{s_name} ({d_name})")
+
+tot_v1_pupils = sum(d["v1"]["att_total"] for d in district_db.values() if d.get("v1"))
+tot_v1_boys = sum(d["v1"]["att_boys"] for d in district_db.values() if d.get("v1"))
+tot_v1_girls = sum(d["v1"]["att_girls"] for d in district_db.values() if d.get("v1"))
+tot_v1_enrol = sum(d["v1"]["enrol_total"] for d in district_db.values() if d.get("v1"))
+tot_v1_enrol_b = sum(d["v1"]["enrol_boys"] for d in district_db.values() if d.get("v1"))
+tot_v1_enrol_g = sum(d["v1"]["enrol_girls"] for d in district_db.values() if d.get("v1"))
+tot_v1_charts = sum(d["v1"]["charts_issued"] for d in district_db.values() if d.get("v1"))
+tot_v1_queries = sum(d["v1"]["helpdesk_queries"] for d in district_db.values() if d.get("v1"))
+v1_nc_act = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("nutriclub_active") == "Yes")
+v1_nc_proc = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("nutriclub_creating") == "Yes")
+v1_wp = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("work_plan_signed") == "Yes")
+v1_tf = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("toll_free_displayed") == "Yes")
+v1_wed = sum(d["v1"].get("meeting_wed", 0) for d in district_db.values() if d.get("v1"))
+v1_fri = sum(d["v1"].get("meeting_fri", 0) for d in district_db.values() if d.get("v1"))
+
 if "three_visit_contact" in d_data:
+    d_data["three_visit_contact"]["pipeline_funnel"] = {
+        "stages": [
+            "Visit 1: School Onboarding & Audit",
+            "Visit 2: Big NutriBus Activation Day",
+            "Visit 3: Final Closeout & Audits"
+        ],
+        "completed_schools": [
+            len(v1_rows),
+            len(v2_rows),
+            0
+        ]
+    }
+    d_data["three_visit_contact"]["milestones_completed"] = {
+        "categories": [
+            "Visit 1 Completed",
+            "Visit 2 Completed",
+            "Visit 3 Completed"
+        ],
+        "values": [
+            len(v1_rows),
+            len(v2_rows),
+            0
+        ]
+    }
+    d_data["three_visit_contact"]["longitudinal_attendance"] = {
+        "labels": [
+            "Visit 1 Check",
+            "Visit 2 Activation",
+            "Visit 3 Closeout"
+        ],
+        "total_attendance": [
+            tot_v1_pupils,
+            tot_v2_pupils,
+            0
+        ],
+        "boys": [
+            tot_v1_boys,
+            tot_v2_boys,
+            0
+        ],
+        "girls": [
+            tot_v1_girls,
+            tot_v2_girls,
+            0
+        ]
+    }
+    d_data["three_visit_contact"]["visit1"] = {
+        "total_schools_completed": len(v1_rows),
+        "target_schools": 64,
+        "schools_list": v1_schools,
+        "status": f"{len(v1_rows)} School Logged ({', '.join(v1_schools)})",
+        "enrolment": {
+            "boys": tot_v1_enrol_b,
+            "girls": tot_v1_enrol_g,
+            "total": tot_v1_enrol
+        },
+        "attendance": {
+            "boys": tot_v1_boys,
+            "girls": tot_v1_girls,
+            "total": tot_v1_pupils
+        },
+        "charts_issued": tot_v1_charts,
+        "nutriclub_active": {
+            "values": [v1_nc_act, max(0, len(v1_rows) - v1_nc_act)]
+        },
+        "nutriclub_in_process": {
+            "values": [v1_nc_act, v1_nc_proc]
+        },
+        "signed_workplan": {
+            "values": [v1_wp, max(0, len(v1_rows) - v1_wp)]
+        },
+        "charts_by_class": {
+            "categories": ["Lower Primary (ECD-P2)", "Middle Primary (P3-P4)", "Upper Primary (P5-P7)"],
+            "values": [len(v1_rows), len(v1_rows), len(v1_rows)]
+        },
+        "activity_days": {
+            "categories": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+            "values": [0, 0, v1_wed, 0, v1_fri]
+        },
+        "tollfree_display": {
+            "values": [v1_tf, max(0, len(v1_rows) - v1_tf)]
+        },
+        "weekly_registered_attendance": {
+            "categories": ["Lower Boys", "Lower Girls", "Middle Boys", "Middle Girls", "Upper Boys", "Upper Girls"],
+            "values": [
+                sum(d["v1"]["att_lower_b"] for d in district_db.values() if d.get("v1")),
+                sum(d["v1"]["att_lower_g"] for d in district_db.values() if d.get("v1")),
+                sum(d["v1"]["att_mid_b"] for d in district_db.values() if d.get("v1")),
+                sum(d["v1"]["att_mid_g"] for d in district_db.values() if d.get("v1")),
+                sum(d["v1"]["att_up_b"] for d in district_db.values() if d.get("v1")),
+                sum(d["v1"]["att_up_g"] for d in district_db.values() if d.get("v1"))
+            ]
+        },
+        "helpdesk_queries_logged": {
+            "categories": ["Feedback Queries Logged", "Hotline query", "NutriClub guidance", "Other"],
+            "values": [tot_v1_queries, 0, 0, 0]
+        }
+    }
     d_data["three_visit_contact"]["visit2"] = {
-        "schools_completed": len(v_rows),
+        "schools_completed": len(v2_rows),
         "target_schools": 64,
         "schools_list": v2_schools,
         "total_pupils_attended": tot_v2_pupils,
@@ -986,6 +1242,48 @@ if "three_visit_contact" in d_data:
         "total_attendance": tot_v2_attendance,
         "pwd_total": tot_v2_pwd,
         "pwd_rate_pct": round((tot_v2_pwd / tot_v2_attendance * 100), 1) if tot_v2_attendance > 0 else 0.0,
+        "age_bands_matrix": [
+            {
+                "age_band": "Lower Primary (P1-P3)",
+                "male": sum(d["v2"]["hc_lower_m"] for d in district_db.values() if d.get("v2")),
+                "female": sum(d["v2"]["hc_lower_f"] for d in district_db.values() if d.get("v2")),
+                "total": sum(d["v2"]["hc_lower_m"] + d["v2"]["hc_lower_f"] for d in district_db.values() if d.get("v2")),
+                "male_pwd": sum(d["v2"]["hc_lower_pwd"] for d in district_db.values() if d.get("v2")),
+                "female_pwd": 0
+            },
+            {
+                "age_band": "Mid Primary (P4-P5)",
+                "male": sum(d["v2"]["hc_mid_m"] for d in district_db.values() if d.get("v2")),
+                "female": sum(d["v2"]["hc_mid_f"] for d in district_db.values() if d.get("v2")),
+                "total": sum(d["v2"]["hc_mid_m"] + d["v2"]["hc_mid_f"] for d in district_db.values() if d.get("v2")),
+                "male_pwd": sum(d["v2"]["hc_mid_pwd"] for d in district_db.values() if d.get("v2")),
+                "female_pwd": 0
+            },
+            {
+                "age_band": "Upper Primary (P6-P7)",
+                "male": sum(d["v2"]["hc_up_m"] for d in district_db.values() if d.get("v2")),
+                "female": sum(d["v2"]["hc_up_f"] for d in district_db.values() if d.get("v2")),
+                "total": sum(d["v2"]["hc_up_m"] + d["v2"]["hc_up_f"] for d in district_db.values() if d.get("v2")),
+                "male_pwd": sum(d["v2"]["hc_up_pwd"] for d in district_db.values() if d.get("v2")),
+                "female_pwd": 0
+            },
+            {
+                "age_band": "Teachers & Staff",
+                "male": sum(d["v2"]["teachers_m"] for d in district_db.values() if d.get("v2")),
+                "female": sum(d["v2"]["teachers_f"] for d in district_db.values() if d.get("v2")),
+                "total": sum(d["v2"]["teachers_m"] + d["v2"]["teachers_f"] for d in district_db.values() if d.get("v2")),
+                "male_pwd": sum(d["v2"]["teachers_pwd"] for d in district_db.values() if d.get("v2")),
+                "female_pwd": 0
+            },
+            {
+                "age_band": "Community & Caregivers",
+                "male": sum(d["v2"]["comm_m"] for d in district_db.values() if d.get("v2")),
+                "female": sum(d["v2"]["comm_f"] for d in district_db.values() if d.get("v2")),
+                "total": sum(d["v2"]["comm_m"] + d["v2"]["comm_f"] for d in district_db.values() if d.get("v2")),
+                "male_pwd": sum(d["v2"]["comm_pwd"] for d in district_db.values() if d.get("v2")),
+                "female_pwd": 0
+            }
+        ],
         "activities_delivered": {
             "categories": act_cats,
             "values": act_vals
@@ -1015,7 +1313,7 @@ if "three_visit_contact" in d_data:
 
 # --- IMPACT ANALYSIS DYNAMIC AGGREGATION ---
 tot_orient_schools = sum(1 for d in district_db.values() if d["schools"] > 0 and (d["teachers_male"] + d["teachers_female"] > 0))
-v2_completed_count = len(v_rows)
+v2_completed_count = len(v2_rows)
 p1_rate_overall = round((sum(d["pillar_rates"]["p1_pass"] for d in district_db.values()) / max(1, sum(d["pillar_rates"]["p1_total"] for d in district_db.values()))) * 100, 1) if sum(d["pillar_rates"]["p1_total"] for d in district_db.values()) > 0 else 0.0
 p2_rate_overall = round((sum(d["pillar_rates"]["p2_pass"] for d in district_db.values()) / max(1, sum(d["pillar_rates"]["p2_total"] for d in district_db.values()))) * 100, 1) if sum(d["pillar_rates"]["p2_total"] for d in district_db.values()) > 0 else 0.0
 p3_rate_overall = round((sum(d["pillar_rates"]["p3_pass"] for d in district_db.values()) / max(1, sum(d["pillar_rates"]["p3_total"] for d in district_db.values()))) * 100, 1) if sum(d["pillar_rates"]["p3_total"] for d in district_db.values()) > 0 else 0.0

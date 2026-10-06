@@ -8,8 +8,8 @@
     "last_updated": "2026-10-02",
     "index_tracking": {
       "column": "_index",
-      "last_processed_index": 10,
-      "total_submissions_tracked": 10,
+      "last_processed_index": 12,
+      "total_submissions_tracked": 12,
       "new_entries_this_batch": 0,
       "tracked_indices": [
         1,
@@ -21,9 +21,11 @@
         7,
         8,
         9,
-        10
+        10,
+        11,
+        12
       ],
-      "last_synced": "2026-10-05 00:30:01"
+      "last_synced": "2026-10-06 12:38:21"
     }
   },
   "overview": {
@@ -31,10 +33,10 @@
       {
         "id": "schools",
         "title": "Schools Reached",
-        "value": 9,
+        "value": 10,
         "target": 64,
         "unit": "schools",
-        "progress_pct": 14.1,
+        "progress_pct": 15.6,
         "icon": "fa-school",
         "badge": "Active Deployment",
         "context": "3 unique schools reporting: KIRU P/S (Abim), KAKAMAR P/S (Kaabong), KOTIDO MIXED P/S (Kotido)"
@@ -42,10 +44,10 @@
       {
         "id": "visits",
         "title": "School Contact Visits",
-        "value": 3,
+        "value": 4,
         "target": 192,
         "unit": "visits",
-        "progress_pct": 1.6,
+        "progress_pct": 2.1,
         "icon": "fa-bus",
         "badge": "3-Visit Cycle",
         "context": "1 activation visit at Kotido Mixed P/S completed out of 192 total scheduled visits across 64 schools"
@@ -64,10 +66,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 659,
+        "value": 1305,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 0.81,
+        "progress_pct": 1.61,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -86,10 +88,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 254.0,
+        "value": 264.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 33.1,
+        "progress_pct": 34.4,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -127,23 +129,23 @@
         "demo_progress_pct": 0.0,
         "learners_reached": 0,
         "caregivers_reached": 0,
-        "stakeholders_trained": 41,
+        "stakeholders_trained": 41.0,
         "pwd_reach": 0,
         "status": "Active (Reports Received)"
       },
       {
         "district": "Amudat",
-        "schools_reached": 0,
+        "schools_reached": 1,
         "target_schools": 5,
-        "school_progress_pct": 0.0,
+        "school_progress_pct": 20.0,
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
-        "learners_reached": 0,
+        "learners_reached": 646,
         "caregivers_reached": 0,
-        "stakeholders_trained": 0,
+        "stakeholders_trained": 10.0,
         "pwd_reach": 0,
-        "status": "Scheduled / Awaiting Data"
+        "status": "Active (Reports Received)"
       },
       {
         "district": "Kaabong",
@@ -161,73 +163,73 @@
       },
       {
         "district": "Karenga",
-        "schools_reached": 0,
+        "schools_reached": 1,
         "target_schools": 5,
-        "school_progress_pct": 0.0,
+        "school_progress_pct": 20.0,
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
         "learners_reached": 0,
         "caregivers_reached": 0,
-        "stakeholders_trained": 0,
+        "stakeholders_trained": 24.0,
         "pwd_reach": 0,
-        "status": "Scheduled / Awaiting Data"
+        "status": "Active (Reports Received)"
       },
       {
         "district": "Kotido",
-        "schools_reached": 1,
+        "schools_reached": 2,
         "target_schools": 12,
-        "school_progress_pct": 8.3,
+        "school_progress_pct": 16.7,
         "demos_completed": 0,
         "target_demos": 120,
         "demo_progress_pct": 0.0,
         "learners_reached": 35,
-        "caregivers_reached": 0,
-        "stakeholders_trained": 24,
+        "caregivers_reached": 4,
+        "stakeholders_trained": 84.0,
         "pwd_reach": 5,
         "status": "Active (Reports Received)"
       },
       {
         "district": "Moroto",
-        "schools_reached": 0,
+        "schools_reached": 1,
         "target_schools": 5,
-        "school_progress_pct": 0.0,
+        "school_progress_pct": 20.0,
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
-        "learners_reached": 0,
-        "caregivers_reached": 0,
-        "stakeholders_trained": 0,
-        "pwd_reach": 0,
-        "status": "Scheduled / Awaiting Data"
+        "learners_reached": 403,
+        "caregivers_reached": 48,
+        "stakeholders_trained": 64.0,
+        "pwd_reach": 7,
+        "status": "Active (Reports Received)"
       },
       {
         "district": "Nabilatuk",
-        "schools_reached": 0,
+        "schools_reached": 1,
         "target_schools": 5,
-        "school_progress_pct": 0.0,
+        "school_progress_pct": 20.0,
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
         "learners_reached": 0,
         "caregivers_reached": 0,
-        "stakeholders_trained": 0,
+        "stakeholders_trained": 23.0,
         "pwd_reach": 0,
-        "status": "Scheduled / Awaiting Data"
+        "status": "Active (Reports Received)"
       },
       {
         "district": "Nakapiripirit",
-        "schools_reached": 0,
+        "schools_reached": 2,
         "target_schools": 5,
-        "school_progress_pct": 0.0,
+        "school_progress_pct": 40.0,
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
-        "learners_reached": 0,
+        "learners_reached": 185,
         "caregivers_reached": 0,
-        "stakeholders_trained": 0,
-        "pwd_reach": 0,
-        "status": "Scheduled / Awaiting Data"
+        "stakeholders_trained": 17.0,
+        "pwd_reach": 119,
+        "status": "Active (Reports Received)"
       },
       {
         "district": "Napak",
@@ -266,43 +268,43 @@
         1200
       ],
       "actuals": [
-        9,
-        3,
+        10,
+        4,
         0,
         1,
-        659,
+        1305,
         52,
-        254.0,
+        264.0,
         131
       ],
       "pct": [
-        14.1,
-        1.6,
+        15.6,
+        2.1,
         0.0,
         1.6,
-        0.81,
+        1.61,
         0.1,
-        33.1,
+        34.4,
         10.92
       ]
     }
   },
   "orientation": {
     "kpis": {
-      "total_orientations": 6,
+      "total_orientations": 7,
       "target_orientations": 64,
-      "total_teachers_oriented": 81,
-      "teachers_male": 49,
-      "teachers_female": 32,
-      "total_vhts_oriented": 105,
-      "vhts_male": 66,
-      "vhts_female": 39,
+      "total_teachers_oriented": 85,
+      "teachers_male": 52,
+      "teachers_female": 33,
+      "total_vhts_oriented": 111,
+      "vhts_male": 67,
+      "vhts_female": 44,
       "vhts_pwd": 0,
       "headteachers_present": 4,
-      "patrons_appointed": 34,
-      "joint_calendars_signed": 5,
-      "joint_calendar_compliance_pct": 83.3,
-      "total_exit_interviews": 24
+      "patrons_appointed": 36,
+      "joint_calendars_signed": 6,
+      "joint_calendar_compliance_pct": 85.7,
+      "total_exit_interviews": 42
     },
     "teacher_attendance_gender": {
       "categories": [
@@ -310,8 +312,8 @@
         "Female Teachers"
       ],
       "values": [
-        49,
-        32
+        52,
+        33
       ]
     },
     "headteacher_presence": {
@@ -321,7 +323,7 @@
       ],
       "values": [
         4,
-        2
+        3
       ]
     },
     "vht_orientation_gender": {
@@ -330,8 +332,8 @@
         "Female VHTs"
       ],
       "values": [
-        66,
-        39
+        67,
+        44
       ]
     },
     "vhts_with_pwd": {
@@ -350,13 +352,13 @@
         "No Agreement Yet"
       ],
       "values": [
-        5,
+        6,
         1
       ]
     },
     "exit_interviews_pillars": {
       "title": "What were the most important lessons learned today across the 3 Pillars?",
-      "sample_size": 24,
+      "sample_size": 42,
       "categories": [
         "Metu Porridge Fortification (Local Greens/Staples)",
         "Improved Cooking Methods (Firewood Saving)",
@@ -365,25 +367,25 @@
         "Fair and Equal Plate Sharing at Home"
       ],
       "values": [
-        17,
-        15,
-        16,
-        20,
-        16
+        23,
+        23,
+        23,
+        32,
+        27
       ]
     },
     "exit_interviews_actions": {
       "title": "What specific action are you personally going to take this week?",
-      "sample_size": 24,
+      "sample_size": 42,
       "categories": [
         "Enrich School/Home Porridge with Local Greens/Cowpeas",
         "Mobilize Boys/Fathers to Share Water/Wood Chores",
         "Adopt Firewood-Saving Practices / Establish Nutri Club"
       ],
       "values": [
-        16,
-        19,
-        14
+        25,
+        32,
+        27
       ]
     },
     "collateral_handover": {
@@ -454,6 +456,60 @@
         "words": "Conducting cooking demos in 10 villages neighbouring the school"
       },
       {
+        "respondent_id": "Respondent 1 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "Preparing learners the two week sessons"
+      },
+      {
+        "respondent_id": "Respondent 2 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Making learners underatnd nutrition in depth"
+      },
+      {
+        "respondent_id": "Respondent 3 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "Mobilize learners both boys and girls in the school to atten nutrition club activities"
+      },
+      {
+        "respondent_id": "Respondent 4 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "preparing diffrent food  staffs"
+      },
+      {
+        "respondent_id": "Respondent 5 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Teach both parents shareing house chores"
+      },
+      {
+        "respondent_id": "Respondent 6 (KATIKIT P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "Take them throug weekly sessons"
+      },
+      {
         "respondent_id": "Respondent 1 (KARENGA BOYS P/S)",
         "role": "Teacher / VHT",
         "sex": "Female",
@@ -506,6 +562,114 @@
         "district": "Karenga",
         "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas",
         "words": "She only words of thanks"
+      },
+      {
+        "respondent_id": "Respondent 1 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "7"
+      },
+      {
+        "respondent_id": "Respondent 2 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "8"
+      },
+      {
+        "respondent_id": "Respondent 3 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 4 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "7"
+      },
+      {
+        "respondent_id": "Respondent 5 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 6 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "6"
+      },
+      {
+        "respondent_id": "Respondent 1 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 2 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 3 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 4 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "5"
+      },
+      {
+        "respondent_id": "Respondent 5 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 6 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "5"
       },
       {
         "respondent_id": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -624,9 +788,9 @@
       ],
       "values": [
         1,
-        5
+        6
       ],
-      "notes": "1 of 6 oriented schools engaged partner networks (District Education Offices & Health Centre Parish Focal Persons)"
+      "notes": "1 of 7 oriented schools engaged partner networks (District Education Offices & Health Centre Parish Focal Persons)"
     },
     "physical_tools_disseminated": {
       "categories": [
@@ -635,9 +799,9 @@
         "Toll-Free Feedback Display Boards"
       ],
       "values": [
-        6,
-        2,
-        8
+        0,
+        26,
+        4
       ]
     }
   },
@@ -649,8 +813,8 @@
         "Visit 3: Final Closeout & Audits"
       ],
       "completed_schools": [
-        0,
         1,
+        3,
         0
       ]
     },
@@ -661,18 +825,18 @@
         "Visit 3 Closeout"
       ],
       "total_attendance": [
-        0,
-        35,
+        646,
+        623,
         0
       ],
       "boys": [
-        0,
-        14,
+        289,
+        286,
         0
       ],
       "girls": [
-        0,
-        21,
+        357,
+        337,
         0
       ]
     },
@@ -683,24 +847,45 @@
         "Visit 3 Completed"
       ],
       "values": [
-        0,
         1,
+        3,
         0
       ]
     },
     "visit1": {
-      "total_schools_completed": 0,
+      "total_schools_completed": 1,
       "target_schools": 64,
+      "schools_list": [
+        "KATIKIT P/S (Amudat)"
+      ],
+      "status": "1 School Logged (KATIKIT P/S (Amudat))",
+      "enrolment": {
+        "boys": 676,
+        "girls": 804,
+        "total": 1480
+      },
+      "attendance": {
+        "boys": 289,
+        "girls": 357,
+        "total": 646
+      },
+      "charts_issued": 19,
       "nutriclub_active": {
         "values": [
           1,
-          63
+          0
+        ]
+      },
+      "nutriclub_in_process": {
+        "values": [
+          1,
+          1
         ]
       },
       "signed_workplan": {
         "values": [
           1,
-          63
+          0
         ]
       },
       "charts_by_class": {
@@ -710,9 +895,9 @@
           "Upper Primary (P5-P7)"
         ],
         "values": [
-          0,
-          0,
-          0
+          1,
+          1,
+          1
         ]
       },
       "activity_days": {
@@ -726,37 +911,44 @@
         "values": [
           0,
           0,
-          0,
+          1,
           0,
           1
         ]
       },
-      "status": "Pending field submissions for Visit 1 onboarding",
       "tollfree_display": {
         "values": [
           1,
-          63
+          0
         ]
       },
       "weekly_registered_attendance": {
+        "categories": [
+          "Lower Boys",
+          "Lower Girls",
+          "Middle Boys",
+          "Middle Girls",
+          "Upper Boys",
+          "Upper Girls"
+        ],
         "values": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
+          100,
+          105,
+          96,
+          141,
+          93,
+          111
         ]
       },
       "helpdesk_queries_logged": {
         "categories": [
-          "Porridge recipes",
+          "Feedback Queries Logged",
           "Hotline query",
           "NutriClub guidance",
           "Other"
         ],
         "values": [
-          0,
+          11,
           0,
           0,
           0
@@ -778,6 +970,48 @@
       "total_attendance": 742,
       "pwd_total": 131,
       "pwd_rate_pct": 17.7,
+      "age_bands_matrix": [
+        {
+          "age_band": "Lower Primary (P1-P3)",
+          "male": 0,
+          "female": 40,
+          "total": 40,
+          "male_pwd": 50,
+          "female_pwd": 0
+        },
+        {
+          "age_band": "Mid Primary (P4-P5)",
+          "male": 133,
+          "female": 153,
+          "total": 286,
+          "male_pwd": 51,
+          "female_pwd": 0
+        },
+        {
+          "age_band": "Upper Primary (P6-P7)",
+          "male": 153,
+          "female": 144,
+          "total": 297,
+          "male_pwd": 26,
+          "female_pwd": 0
+        },
+        {
+          "age_band": "Teachers & Staff",
+          "male": 26,
+          "female": 41,
+          "total": 67,
+          "male_pwd": 2,
+          "female_pwd": 0
+        },
+        {
+          "age_band": "Community & Caregivers",
+          "male": 33,
+          "female": 19,
+          "total": 52,
+          "male_pwd": 2,
+          "female_pwd": 0
+        }
+      ],
       "activities_delivered": {
         "categories": [
           "Energizer song & movement",
@@ -2683,7 +2917,7 @@
         "baseline": "Pending Visit 1",
         "evidence_points": [
           "9 learners gave specific, actionable local fortification recipes without prompting",
-          "24 teacher & VHT exit interviews completed across 7 oriented schools",
+          "42 teacher & VHT exit interviews completed across 8 oriented schools",
           "Community cooking demonstration rollout pending (0 of 640 conducted)"
         ]
       },
@@ -2702,11 +2936,11 @@
       {
         "title": "Pillar 3: Community Accountability & Climate-Smart Living",
         "metric_value": "100.0%",
-        "metric_label": "Commitment & Joint Calendars (7 Oriented Schools)",
-        "summary": "100% of oriented school leadership and VHTs (7 schools) agreed on joint 4-week calendars with signed action plans.",
+        "metric_label": "Commitment & Joint Calendars (8 Oriented Schools)",
+        "summary": "100% of oriented school leadership and VHTs (8 schools) agreed on joint 4-week calendars with signed action plans.",
         "baseline": "0.0% Prior",
         "evidence_points": [
-          "7 primary schools completed multi-stakeholder orientation sessions",
+          "8 primary schools completed multi-stakeholder orientation sessions",
           "131 persons with disabilities accommodated and included across sessions",
           "0 retaliation complaints recorded on the WFP toll-free hotline (0800)"
         ]
@@ -2717,21 +2951,21 @@
         "question": "How much did we do?",
         "subtitle": "What was done on the ground",
         "cadence": "Verified field submissions log",
-        "status_badge": "9 of 64 Schools Active",
+        "status_badge": "10 of 64 Schools Active",
         "key_metrics": [
           {
             "label": "Schools Reached",
-            "value": "9 Schools",
-            "detail": "9 primary schools reached out of 64 total target schools"
+            "value": "10 Schools",
+            "detail": "10 primary schools reached out of 64 total target schools"
           },
           {
             "label": "School Contact Visits",
-            "value": "3 Visits Conducted",
+            "value": "4 Visits Conducted",
             "detail": "3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
           },
           {
             "label": "Children Reached",
-            "value": "659 Pupils",
+            "value": "1,305 Pupils",
             "detail": "623 in Visit 2 activations, 36 in NutriClub sessions (Target: 80,875)"
           },
           {
@@ -2751,8 +2985,8 @@
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "254.0 Stakeholders",
-            "detail": "Oriented across 7 primary schools (Target: 768)"
+            "value": "264.0 Stakeholders",
+            "detail": "Oriented across 8 primary schools (Target: 768)"
           },
           {
             "label": "Persons with Disabilities",
@@ -2780,8 +3014,8 @@
           },
           {
             "label": "Teachers in the Lead",
-            "value": "100% (7 Schools)",
-            "detail": "All 7 oriented schools demonstrated active teacher and headteacher leadership"
+            "value": "100% (8 Schools)",
+            "detail": "All 8 oriented schools demonstrated active teacher and headteacher leadership"
           },
           {
             "label": "What Children Learned",
@@ -2857,9 +3091,9 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "7 Orientations \u00b7 3 Activations",
+          "headline": "8 Orientations \u00b7 3 Activations",
           "data_points": [
-            "7 schools oriented on Metu porridge fortification and clean cooking",
+            "8 schools oriented on Metu porridge fortification and clean cooking",
             "3 schools delivered Visit 2 Big Activation Day (623 pupils engaged)",
             "0 of 640 community cooking demonstrations conducted to date"
           ]
@@ -2894,9 +3128,9 @@
           ]
         },
         "how_well": {
-          "headline": "7 Schools Oriented \u00b7 100% Inclusive",
+          "headline": "8 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
-            "All 7 oriented schools confirmed active teacher & headteacher leadership",
+            "All 8 oriented schools confirmed active teacher & headteacher leadership",
             "131 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
@@ -3136,6 +3370,32 @@
       "school": "NAPIANANYA P/S",
       "coordinator": "Lobur stephen",
       "reach": 17,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 11,
+      "id": 886644705,
+      "date": "2026-10-03",
+      "district": "Amudat",
+      "activity": "Orientation",
+      "school": "KATIKIT P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 10,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 12,
+      "id": 886659275,
+      "date": "2026-10-03",
+      "district": "Amudat",
+      "activity": "Three visit contact",
+      "school": "KATIKIT P/S",
+      "coordinator": "cheparen pauline",
+      "reach": 646,
       "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"

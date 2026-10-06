@@ -41,7 +41,7 @@ for s in OFFICIAL_SCHOOLS:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v1_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v1_val = (v1_rec.get("hc_lower_m", 0) + v1_rec.get("hc_lower_f", 0) + v1_rec.get("hc_mid_m", 0) + v1_rec.get("hc_mid_f", 0) + v1_rec.get("hc_up_m", 0) + v1_rec.get("hc_up_f", 0)) or 35
+            v1_val = v1_rec.get("att_total") or (v1_rec.get("att_boys", 0) + v1_rec.get("att_girls", 0)) or 35
 
     v2_rec = dist_info.get("v2")
     if v2_rec:
@@ -80,6 +80,69 @@ for s in OFFICIAL_SCHOOLS:
 
 RECORDS_JSON = json.dumps(RECORDS, indent=2)
 SCHOOL_TRAJECTORIES_JSON = json.dumps(SCHOOL_TRAJECTORIES, indent=2)
+
+v1_db_map = {}
+tot_v1_b_all = 0
+tot_v1_g_all = 0
+tot_v1_lb_all = 0
+tot_v1_lg_all = 0
+tot_v1_mb_all = 0
+tot_v1_mg_all = 0
+tot_v1_ub_all = 0
+tot_v1_ug_all = 0
+v1_school_opts = []
+
+for d_name, d_obj in DISTRICT_DB.items():
+    v1_rec = d_obj.get("v1")
+    if v1_rec:
+        b = v1_rec.get("att_boys", 0)
+        g = v1_rec.get("att_girls", 0)
+        tot = v1_rec.get("att_total", 0) or (b + g)
+        lb = v1_rec.get("att_lower_b", 0)
+        lg = v1_rec.get("att_lower_g", 0)
+        mb = v1_rec.get("att_mid_b", 0)
+        mg = v1_rec.get("att_mid_g", 0)
+        ub = v1_rec.get("att_up_b", 0)
+        ug = v1_rec.get("att_up_g", 0)
+        tot_v1_b_all += b
+        tot_v1_g_all += g
+        tot_v1_lb_all += lb
+        tot_v1_lg_all += lg
+        tot_v1_mb_all += mb
+        tot_v1_mg_all += mg
+        tot_v1_ub_all += ub
+        tot_v1_ug_all += ug
+        sch_label = f"{v1_rec.get('school', 'School')} ({d_name})"
+        v1_db_map[d_name] = {
+            "name": sch_label,
+            "boys": b,
+            "girls": g,
+            "total": tot,
+            "lb": lb,
+            "lg": lg,
+            "mb": mb,
+            "mg": mg,
+            "ub": ub,
+            "ug": ug
+        }
+        v1_school_opts.append(f'<option value="{d_name}">{sch_label} - {tot:,} Pupils</option>')
+
+tot_v1_sum_all = tot_v1_b_all + tot_v1_g_all
+v1_db_map["ALL"] = {
+    "name": "All Schools",
+    "boys": tot_v1_b_all,
+    "girls": tot_v1_g_all,
+    "total": tot_v1_sum_all,
+    "lb": tot_v1_lb_all,
+    "lg": tot_v1_lg_all,
+    "mb": tot_v1_mb_all,
+    "mg": tot_v1_mg_all,
+    "ub": tot_v1_ub_all,
+    "ug": tot_v1_ug_all
+}
+SCHOOL_ATTENDANCE_DB_JSON = json.dumps(v1_db_map, indent=2)
+V1_SCHOOL_OPTIONS_HTML = "\n".join(v1_school_opts)
+V1_COUNT_SCHOOLS = sum(1 for d in DISTRICT_DB.values() if d.get("v1"))
 
 html_code = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1336,7 +1399,8 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-school text-wfp-blue text-xs"></i>
                 <label for="v1-school-select" class="text-[11px] font-bold text-slate-600">School View:</label>
                 <select id="v1-school-select" onchange="switchV1AttendanceScope(this.value)" class="text-xs bg-transparent text-slate-800 font-semibold focus:outline-none cursor-pointer">
-                  <option value="ALL">All Schools (0 Pupils Logged)</option>
+                  <option value="ALL">All Schools ({tot_v1_sum_all:,} Pupils Logged)</option>
+                  {V1_SCHOOL_OPTIONS_HTML}
                 </select>
               </div>
 
@@ -3328,11 +3392,11 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
-                      <strong class="text-slate-900">8 Primary Schools active (6 Orientations, 3 Visit 2, 1 NutriClub) · 64 Target Schools</strong>
+                      <strong class="text-slate-900">10 Primary Schools active (7 Orientations, 1 Visit 1, 3 Visit 2, 1 NutriClub) · 64 Target Schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Direct Session Reach Target:</span>
-                      <strong class="text-wfp-blue font-bold">659 Learners directly reached · 80,875 Target</strong>
+                      <strong class="text-wfp-blue font-bold">1,305 Learners directly reached · 80,875 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
@@ -3348,7 +3412,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
-                      <strong class="text-slate-900">186 Teachers &amp; VHTs logged · 131 PWDs reached · 768 Target</strong>
+                      <strong class="text-slate-900">264 Teachers &amp; VHTs logged · 131 PWDs reached · 768 Target</strong>
                     </div>
                   </div>
                 </td>
@@ -3477,10 +3541,11 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">Enriched Porridge</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">6 Orientations · 3 Visit 2 Activations Logged</strong>
+                  <strong class="text-slate-900 block mb-1">7 Orientations · 1 Visit 1 · 3 Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 6 primary schools completed orientation with 254 stakeholders</li>
-                    <li>• 3 schools delivered Visit 2 reaching 742 participants</li>
+                    <li>• 7 primary schools completed orientation with 264 stakeholders logged across activities</li>
+                    <li>• 1 school completed Visit 1 reaching 646 learners (Katikit P/S, Amudat)</li>
+                    <li>• 3 schools delivered Visit 2 reaching 742 participants (623 pupils, 67 staff, 52 community)</li>
                     <li>• Target: 640 community demonstrations across 64 schools</li>
                   </ul>
                 </td>
@@ -3512,9 +3577,10 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Keeping Girls in Class</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">1 NutriClub · 3 Visit 2 Activations Logged</strong>
+                  <strong class="text-slate-900 block mb-1">1 NutriClub · 1 Visit 1 · 3 Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• Kakamar P/S (Kaabong) NutriClub active (41 members, 36 present)</li>
+                    <li>• Katikit P/S (Amudat) active NutriClub verified with 2 patrons &amp; work plan</li>
                     <li>• 3 schools delivered interactive chore rebalancing dialogue</li>
                     <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
@@ -3531,7 +3597,7 @@ html_code = f"""<!DOCTYPE html>
                   <strong class="text-blue-900 block mb-1">Chore Rebalancing Committed</strong>
                   <ul class="space-y-1 text-[11px] text-blue-900">
                     <li>• Polled consensus on boys fetching water and sharing morning chores</li>
-                    <li>• Longitudinal attendance tracking initiated (623 learners logged in Visit 2)</li>
+                    <li>• Longitudinal attendance tracking initiated (1,269 learners logged across Visit 1 &amp; Visit 2)</li>
                     <li>• Punctuality and attendance gains to be audited at Visit 3</li>
                   </ul>
                 </td>
@@ -4462,13 +4528,7 @@ html_code = f"""<!DOCTYPE html>
       }}
     }}
 
-    const SCHOOL_ATTENDANCE_DB = {{
-      "ALL": {{
-        name: "All Schools",
-        boys: 0, girls: 0, total: 0,
-        lb: 0, lg: 0, mb: 0, mg: 0, ub: 0, ug: 0
-      }}
-    }};
+    const SCHOOL_ATTENDANCE_DB = {SCHOOL_ATTENDANCE_DB_JSON};
 
     function switchV1AttendanceScope(scopeVal) {{
       const data = SCHOOL_ATTENDANCE_DB[scopeVal] || SCHOOL_ATTENDANCE_DB["ALL"];
@@ -4944,54 +5004,100 @@ html_code = f"""<!DOCTYPE html>
       );
 
       // Visit 1 dynamic updates (0 schools completed Visit 1)
+      // Visit 1 dynamic updates
+      let v1EnrolB = 0, v1EnrolG = 0, v1EnrolT = 0;
+      let v1AttB = 0, v1AttG = 0, v1AttT = 0;
+      let v1AttLB = 0, v1AttLG = 0, v1AttMB = 0, v1AttMG = 0, v1AttUB = 0, v1AttUG = 0;
+      let v1NcActiveCount = 0, v1NcInProcessCount = 0, v1WorkPlanCount = 0, v1TollFreeCount = 0;
+      let v1ClassLower = 0, v1ClassMid = 0, v1ClassUp = 0;
+      let v1WedCount = 0, v1FriCount = 0;
+      let v1HelpdeskQueries = 0;
+      let v1SchoolsCompleted = 0;
+
+      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
+        if (d.v1) {{
+          v1SchoolsCompleted += 1;
+          v1EnrolB += (d.v1.enrol_boys || 0);
+          v1EnrolG += (d.v1.enrol_girls || 0);
+          v1EnrolT += (d.v1.enrol_total || 0);
+          v1AttB += (d.v1.att_boys || 0);
+          v1AttG += (d.v1.att_girls || 0);
+          v1AttT += (d.v1.att_total || 0);
+          v1AttLB += (d.v1.att_lower_b || 0);
+          v1AttLG += (d.v1.att_lower_g || 0);
+          v1AttMB += (d.v1.att_mid_b || 0);
+          v1AttMG += (d.v1.att_mid_g || 0);
+          v1AttUB += (d.v1.att_up_b || 0);
+          v1AttUG += (d.v1.att_up_g || 0);
+          if (d.v1.nutriclub_active === 'Yes') v1NcActiveCount += 1;
+          if (d.v1.nutriclub_creating === 'Yes') v1NcInProcessCount += 1;
+          if (d.v1.work_plan_signed === 'Yes') v1WorkPlanCount += 1;
+          if (d.v1.toll_free_displayed === 'Yes') v1TollFreeCount += 1;
+          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Lower')) v1ClassLower += 1;
+          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Middle')) v1ClassMid += 1;
+          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Upper')) v1ClassUp += 1;
+          v1WedCount += (d.v1.meeting_wed || 0);
+          v1FriCount += (d.v1.meeting_fri || 0);
+          v1HelpdeskQueries += (d.v1.helpdesk_queries || 0);
+        }}
+      }}
+
       const bEnrolB = document.getElementById('badge-v1-enrol-boys');
       const bEnrolG = document.getElementById('badge-v1-enrol-girls');
       const bEnrolT = document.getElementById('badge-v1-enrol-total');
-      if (bEnrolB) bEnrolB.innerText = 'Officials boys enrolment: 0';
-      if (bEnrolG) bEnrolG.innerText = 'Officials girls enrolment: 0';
-      if (bEnrolT) bEnrolT.innerText = 'Total Enrolled: 0 Pupils';
+      if (bEnrolB) bEnrolB.innerText = `Officials boys enrolment: ${{v1EnrolB.toLocaleString()}}`;
+      if (bEnrolG) bEnrolG.innerText = `Officials girls enrolment: ${{v1EnrolG.toLocaleString()}}`;
+      if (bEnrolT) bEnrolT.innerText = `Total Enrolled: ${{v1EnrolT.toLocaleString()}} Pupils`;
 
       createHorizontalBarChart('chart-v1-enrolment', 
         [
           ["Official Boys Enrolment", "for this Term in the School"],
           ["Official Girls Enrolment", "for this Term in the School"]
         ],
-        [0, 0],
+        [v1EnrolB, v1EnrolG],
         [WFP_BLUE, '#ec4899'],
         'Registered Pupils'
       );
 
       createHorizontalBarChart('chart-v1-active', 
         [["Active with Patron", "& Meeting Space"], ["Not Yet", "Active"]], 
-        [0, 0], 
+        [v1NcActiveCount, Math.max(0, v1SchoolsCompleted - v1NcActiveCount)], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-process-nutriclub', 
         [["Already Fully", "Active"], ["In Process", "of Creating"]], 
-        [0, 0], 
+        [v1NcActiveCount, v1NcInProcessCount], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
+      createHorizontalBarChart('chart-v1-days', 
+        ["Mon", "Tue", "Wed", "Thu", "Fri"], 
+        [0, 0, v1WedCount, 0, v1FriCount], 
+        WFP_BLUE, 
+        'Schools Active on Day'
+      );
+
       createHorizontalBarChart('chart-v1-plan', 
         [["Signed institutional", "work plan"], ["No signed", "work plan"]], 
-        [0, 0], 
+        [v1WorkPlanCount, Math.max(0, v1SchoolsCompleted - v1WorkPlanCount)], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools'
       );
 
       createHorizontalBarChart('chart-v1-classes', 
         ["Lower (ECD-P2)", "Middle (P3-P4)", "Upper (P5-P7)"], 
-        [0, 0, 0], 
+        [v1ClassLower, v1ClassMid, v1ClassUp], 
         [ACCENT_GREEN, ACCENT_GREEN, ACCENT_GREEN], 
         'Schools Receiving Materials'
       );
 
       createHorizontalBarChart('chart-v1-tollfree', 
         [["Toll-Free Hotline", "Displayed"], ["Not", "Displayed"]], 
-        [0, 0], 
+        [v1TollFreeCount, Math.max(0, v1SchoolsCompleted - v1TollFreeCount)], 
         [ACCENT_GREEN, '#cbd5e1'], 
         'Schools Displaying Hotline'
       );
@@ -4999,9 +5105,9 @@ html_code = f"""<!DOCTYPE html>
       const bAttB = document.getElementById('badge-v1-att-boys');
       const bAttG = document.getElementById('badge-v1-att-girls');
       const bAttT = document.getElementById('badge-v1-att-total');
-      if (bAttB) bAttB.innerText = 'Registered Boys this week Attendance: 0';
-      if (bAttG) bAttG.innerText = 'Registered Girls this week Attendance: 0';
-      if (bAttT) bAttT.innerText = 'Total this week Attendance: 0 Pupils';
+      if (bAttB) bAttB.innerText = `Registered Boys this week Attendance: ${{v1AttB.toLocaleString()}}`;
+      if (bAttG) bAttG.innerText = `Registered Girls this week Attendance: ${{v1AttG.toLocaleString()}}`;
+      if (bAttT) bAttT.innerText = `Total this week Attendance: ${{v1AttT.toLocaleString()}} Pupils`;
 
       const mAttLB = document.getElementById('metric-att-l-b');
       const mAttLG = document.getElementById('metric-att-l-g');
@@ -5009,12 +5115,12 @@ html_code = f"""<!DOCTYPE html>
       const mAttMG = document.getElementById('metric-att-m-g');
       const mAttUB = document.getElementById('metric-att-u-b');
       const mAttUG = document.getElementById('metric-att-u-g');
-      if (mAttLB) mAttLB.innerText = '0';
-      if (mAttLG) mAttLG.innerText = '0';
-      if (mAttMB) mAttMB.innerText = '0';
-      if (mAttMG) mAttMG.innerText = '0';
-      if (mAttUB) mAttUB.innerText = '0';
-      if (mAttUG) mAttUG.innerText = '0';
+      if (mAttLB) mAttLB.innerText = v1AttLB.toLocaleString();
+      if (mAttLG) mAttLG.innerText = v1AttLG.toLocaleString();
+      if (mAttMB) mAttMB.innerText = v1AttMB.toLocaleString();
+      if (mAttMG) mAttMG.innerText = v1AttMG.toLocaleString();
+      if (mAttUB) mAttUB.innerText = v1AttUB.toLocaleString();
+      if (mAttUG) mAttUG.innerText = v1AttUG.toLocaleString();
 
       createHorizontalBarChart('chart-v1-attendance', 
         [
@@ -5025,9 +5131,16 @@ html_code = f"""<!DOCTYPE html>
           ["Upper Primary (P5-P7)", "Registered Boys Attendance"],
           ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
         ],
-        [0, 0, 0, 0, 0, 0],
+        [v1AttLB, v1AttLG, v1AttMB, v1AttMG, v1AttUB, v1AttUG],
         WFP_BLUE,
         'Registered Attendance'
+      );
+
+      createHorizontalBarChart('chart-v1-helpdesk-queries', 
+        ["School Level Help Desk / Queries Logged", "Hotline Queries", "NutriClub Queries", "Other"], 
+        [v1HelpdeskQueries, 0, 0, 0], 
+        [WFP_BLUE, '#2389d4', '#4fa9ed', '#7dd3fc'], 
+        'Queries Logged'
       );
 
       // Pipeline Funnel dynamic metrics update
@@ -5052,21 +5165,32 @@ html_code = f"""<!DOCTYPE html>
       if (v2ActBadge) v2ActBadge.innerText = `${{v2DoneCount}} School${{v2DoneCount !== 1 ? 's' : ''}} Logged`;
 
       // Longitudinal Attendance dynamic update
+      const v1AttendanceTotal = filteredTrajectorySchools.reduce((acc, s) => acc + (s.v1 || 0), 0);
       const v2AttendanceTotal = filteredTrajectorySchools.reduce((acc, s) => acc + (s.v2 || 0), 0);
+      const v3AttendanceTotal = filteredTrajectorySchools.reduce((acc, s) => acc + (s.v3 || 0), 0);
+      const v1EnrolBaseline = filteredTrajectorySchools.reduce((acc, s) => (s.v1 ? acc + (s.enrolment || 0) : acc), 0);
+
       const mLongBase = document.getElementById('metric-long-base');
       const mLongV1 = document.getElementById('metric-long-v1');
       const mLongV2 = document.getElementById('metric-long-v2');
       const mLongV3 = document.getElementById('metric-long-v3');
-      if (mLongBase) mLongBase.innerText = '-';
-      if (mLongV1) mLongV1.innerText = '-';
+      if (mLongBase) mLongBase.innerText = v1EnrolBaseline > 0 ? v1EnrolBaseline.toLocaleString() : '-';
+      if (mLongV1) mLongV1.innerText = v1AttendanceTotal > 0 ? v1AttendanceTotal.toLocaleString() : '-';
       if (mLongV2) mLongV2.innerText = v2AttendanceTotal > 0 ? v2AttendanceTotal.toLocaleString() : '-';
       if (mLongV3) mLongV3.innerText = '-';
 
+      const v1GirlsLong = v1AttG;
+      const v1BoysLong = v1AttB;
+      const v2GirlsLong = v2AttendanceTotal > 0 ? Math.round(v2AttendanceTotal * 0.541) : 0;
+      const v2BoysLong = v2AttendanceTotal > 0 ? Math.round(v2AttendanceTotal * 0.459) : 0;
+      const v3GirlsLong = v3AttendanceTotal > 0 ? Math.round(v3AttendanceTotal * 0.5) : 0;
+      const v3BoysLong = v3AttendanceTotal > 0 ? Math.round(v3AttendanceTotal * 0.5) : 0;
+
       createLongitudinalLineChart('chart-longitudinal-attendance', 
-        [0, v2AttendanceTotal, 0],
-        [0, Math.round(v2AttendanceTotal * 0.514), 0],
-        [0, Math.round(v2AttendanceTotal * 0.486), 0],
-        0
+        [v1AttendanceTotal, v2AttendanceTotal, v3AttendanceTotal],
+        [v1GirlsLong, v2GirlsLong, v3GirlsLong],
+        [v1BoysLong, v2BoysLong, v3BoysLong],
+        v1EnrolBaseline
       );
 
       // Re-render school trajectory table
