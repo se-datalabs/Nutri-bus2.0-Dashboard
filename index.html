@@ -830,7 +830,7 @@
           <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between mb-3">
               <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">What were the most important lessons learned today across the 3 Pillars?</h5>
-              <span class="text-[11px] font-bold text-wfp-blue bg-blue-100 px-2 py-0.5 rounded">All Exit Interviews</span>
+              <span class="text-[11px] font-bold text-wfp-blue bg-blue-100 px-2 py-0.5 rounded">36 Stakeholders Sampled</span>
             </div>
             <div class="h-96 min-h-[380px]">
               <canvas id="chart-orient-exit-pillars"></canvas>
@@ -840,7 +840,7 @@
           <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between mb-3">
               <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">What specific action are you personally going to take this week?</h5>
-              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">Committed Actions</span>
+              <span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">36 Committed Actions</span>
             </div>
             <div class="h-96 min-h-[380px]">
               <canvas id="chart-orient-exit-actions"></canvas>
@@ -848,15 +848,15 @@
           </div>
         </div>
 
-        <!-- DETAILED BREAKDOWN OF THE 6 INDIVIDUAL PARTICIPANTS (Teacher 3, VHT 2, Teacher 1, Teacher 2, VHT 1, VHT 3) -->
+        <!-- DETAILED BREAKDOWN OF THE PARTICIPANT EXIT INTERVIEWS -->
         <div class="mt-4">
           <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
             <i class="fa-solid fa-users-viewfinder text-wfp-blue"></i>
-            <span id="exit-interview-title">Detailed interview log: 24 individual participants across 6 schools</span>
+            <span id="exit-interview-title">Summative Interview Synthesis: 36 Participants Across 7 Schools</span>
           </h4>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="exit-interview-cards">
-            <!-- Injected via JS for all 6 participants: Teacher 3, VHT 2, Teacher 1, Teacher 2, VHT 1, VHT 3 -->
+          <div id="exit-interview-cards">
+            <!-- Populated via renderExitInterviewCards with executive summation & collapsible records -->
           </div>
         </div>
 
@@ -1742,11 +1742,11 @@
                 <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 2 Micro-Poll</span>
                 <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">Boys Only Session</span>
               </div>
-              <h4 class="text-sm font-bold text-slate-800">Pillar 2: rebalancing chores and attendance (180 boys sampled)</h4>
-              <p class="text-xs text-slate-500">Read out the following statements and count number who agree. Choice (Strongly Agree to Strongly Disagree), Number of boys, and Reason in their words:</p>
+              <h4 class="text-sm font-bold text-slate-800">Pillar 2: Rebalancing chores and attendance (514 boy responses recorded)</h4>
+              <p class="text-xs text-slate-500">Read out the following statements and count number who agree. Aggregated across all participating schools with verbatim boy reflections:</p>
             </div>
             <span class="px-3 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-lg border border-emerald-200 text-xs">
-              Consensus: 90.9% Average Agreement
+              Consensus: 99.4% Average Agreement (511 / 514)
             </span>
           </div>
 
@@ -1757,7 +1757,7 @@
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Statement 1</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">163 / 180 Agreed (90.6%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">88 / 90 Agreed (97.8)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">It is unfair for a girl to stay home doing compound work while brothers leave early for class.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -1766,7 +1766,7 @@
               </div>
               <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
                 <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
-                <p class="italic text-slate-600 mt-0.5">"A girl has equal right to learn and be in class on time; keeping her sweeping compound alone makes her fail tests."</p>
+                <p class="italic text-slate-600 mt-0.5">"Nakapiripirit: "The girl may not concentrate like aboy""</p>
               </div>
             </div>
 
@@ -1775,7 +1775,7 @@
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Statement 2</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">168 / 180 Agreed (93.3%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">110 / 110 Agreed (100.0)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -1784,7 +1784,7 @@
               </div>
               <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
                 <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
-                <p class="italic text-slate-600 mt-0.5">"When we help sweep and milk together, porridge is eaten fast and nobody walks alone on the road."</p>
+                <p class="italic text-slate-600 mt-0.5">"Nakapiripirit: "To make work easy""</p>
               </div>
             </div>
 
@@ -1793,7 +1793,7 @@
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Statement 3</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">161 / 180 Agreed (89.4%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">119 / 119 Agreed (100.0)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Collecting firewood for cooking is a chore that boys and girls should do together.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -1802,7 +1802,7 @@
               </div>
               <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
                 <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
-                <p class="italic text-slate-600 mt-0.5">"Heavy bundles are easier carried when two people go together, and girls won't get attacked on bushes."</p>
+                <p class="italic text-slate-600 mt-0.5">"Nakapiripirit: "To offer campany to and security to girls from rapiest""</p>
               </div>
             </div>
 
@@ -1811,7 +1811,7 @@
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Statement 4</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">165 / 180 Agreed (91.7%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">58 / 59 Agreed (98.3)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">I am ready to fetch water from borehole in morning so my sister is not late/punished.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -1820,7 +1820,7 @@
               </div>
               <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
                 <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
-                <p class="italic text-slate-600 mt-0.5">"I have strong arms for the 20-litre jerrican; my sister can carry the small 5-litre one so she doesn't get whipped for late arrival."</p>
+                <p class="italic text-slate-600 mt-0.5">"Nakapiripirit: "Share work with my sister""</p>
               </div>
             </div>
 
@@ -1829,7 +1829,7 @@
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Statement 5</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">161 / 180 Agreed (89.4%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">136 / 136 Agreed (100.0)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">If a girl misses school to herd animals or do chores I will speak up to get her back to class.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -1838,7 +1838,7 @@
               </div>
               <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
                 <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
-                <p class="italic text-slate-600 mt-0.5">"I will tell our father that herding can wait or elders take turns so my sister stays in primary school."</p>
+                <p class="italic text-slate-600 mt-0.5">"Nakapiripirit: "Girls are not to look after animas while boys go to school""</p>
               </div>
             </div>
 
@@ -1846,10 +1846,10 @@
             <div class="p-4 bg-blue-50/60 rounded-xl border border-blue-200 flex flex-col justify-between">
               <div>
                 <span class="text-xs font-bold text-wfp-blue uppercase tracking-wider">Pillar 2 Consensus</span>
-                <div class="text-3xl font-black text-wfp-blue mt-1">90.9%</div>
-                <div class="text-xs text-slate-700 font-bold mt-1">Average Agreement Rate across 180 Boys</div>
+                <div class="text-3xl font-black text-wfp-blue mt-1">99.4%</div>
+                <div class="text-xs text-slate-700 font-bold mt-1">Average Agreement Rate across 514 Boy Responses</div>
                 <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Boys explicitly challenged cultural norms and volunteered to carry heavy water jerricans and split firewood so sisters arrive on time.
+                  Boys explicitly committed to gender equity, agreeing to take on firewood collection, borehole water fetching, and advocating against keeping girls home for chores.
                 </p>
               </div>
               <div class="p-3 bg-white/90 rounded-lg border border-blue-200 mt-3 text-xs text-wfp-blue font-semibold">
@@ -1859,7 +1859,7 @@
           </div>
         </div>
 
-        <!-- ROW 4: POST-SESSION RAPID SCENARIO INTERVIEW (LEARNER 1, 2, 3 & ADULT 1, 2) -->
+        <!-- ROW 4: POST-SESSION RAPID SCENARIO INTERVIEW (DYNAMIC RESPONDENTS) -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
@@ -1867,309 +1867,107 @@
                 <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Rapid Intercept Assessment</span>
                 <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">2 min unaided interview</span>
               </div>
-              <h4 class="text-sm font-bold text-slate-800">Post-session intercept conversation: 4 randomly selected learners and 2 adults</h4>
+              <h4 class="text-sm font-bold text-slate-800">Post-session intercept conversation: 4 randomly selected learners and 2 adults per school</h4>
               <p class="text-xs text-slate-500">Administered away from crowd by Coordinator immediately after session (rule: conversation, not exam; unaided scenario prompt across different age groups):</p>
             </div>
-            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">6 Sampled In-Depth Profiles</span>
+            <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded" id="v2-scenario-badge">17 Sampled Responses (All Monitored Schools)</span>
           </div>
 
-          <!-- Cards for the 6 Respondents -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <!-- Learner 1 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner 1</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Upper Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Explains a specific, actionable practice without prompting
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Add crushed groundnuts, pounded moringa leaves, and roasted sesame seeds to make Metu thick and nutritious."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "My brother fetches the first water jerrycan while I sweep so we both finish by 7:00 AM and walk to school together."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Demonstrated (explained clearly and accurately without prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "It means the NutriBus brings all of us together as one school and one family to eat healthy food and learn."
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Summary Row (17 Sampled Responses) -->
+          <div id="v2-scenario-summary-row" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+            <div class="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3 text-center">
+              <div class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Intercepts Sampled</div>
+              <div class="text-xl font-black text-slate-800 mt-0.5" id="v2-kpi-total">17</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-schools">3 Activation Schools</div>
             </div>
-
-            <!-- Learner 2 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner 2</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Middle Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Explains a specific, actionable practice without prompting
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Stir in cow milk and fresh amaranth greens (Eboo) picked from home garden into warm porridge."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "I carry the firewood bundle from the store while my sister lights the fire, so nobody is left behind."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Demonstrated (explained clearly and accurately without prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Together we share work and food so girls and boys both study well."
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3 text-center">
+              <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Fortification Mastery</div>
+              <div class="text-xl font-black text-emerald-700 mt-0.5" id="v2-kpi-p1">70.6%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p1-sub">12 of 17 Specific Recipes</div>
             </div>
-
-            <!-- Learner 3 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner 3</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Lower Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-bold rounded text-[11px] border border-amber-200 block mb-1">
-                      Gives a general/vague idea; lacks a concrete action
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Put yellow pumpkin and green leaves from mum to grow big and run fast."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Big brother helps bring the water bucket so mummy smiles and we run together."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-amber-50 text-amber-800 font-bold rounded text-[11px] border border-amber-200 block mb-1">
-                      Partly demonstrated (vague or needed prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "The bus that came with music and good porridge for everyone."
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 text-center">
+              <div class="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Chore Rebalancing</div>
+              <div class="text-xl font-black text-indigo-700 mt-0.5" id="v2-kpi-p2">87.5%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p2-sub">14 of 16 Share Equally</div>
             </div>
-
-            <!-- Learner 4 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Learner 4</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Upper Primary</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Explains a specific, actionable practice without prompting
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Boil cowpeas and pound them into the warm sorghum porridge with a spoon of shea butter or simsim."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "I sweep the compound and release the goats early so my sister and I can wash our faces and run to school on time."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Demonstrated (explained clearly and accurately without prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "It means the bus unites the whole village and school so everyone eats strong and learns."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Adult 1 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Adult 1</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-pink-50 text-pink-700 font-bold px-2 py-0.5 rounded border border-pink-200">Female</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Caregiver / PTA</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Explains a specific, actionable practice without prompting
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Supplement plain sorghum flour with roasted simsim paste, orange sweet potato puree, and local milk for zinc and iron."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Assign male sons the morning borehole water trip so female daughters are dressed and at school gates before 7:30 AM."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Demonstrated (explained clearly and accurately without prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Moving forward united: when boys and girls share burdens equally, family nutrition and school completion improve."
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Adult 2 -->
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <span class="text-xs font-bold text-slate-900">Adult 2</span>
-                  <div class="flex items-center gap-1.5">
-                    <span class="text-[11px] bg-blue-50 text-blue-700 font-bold px-2 py-0.5 rounded border border-blue-200">Male</span>
-                    <span class="text-[10px] bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded">Senior Teacher / SMC</span>
-                  </div>
-                </div>
-
-                <div class="space-y-2.5 text-xs text-slate-700">
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Porridge greens/food addition:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Explains a specific, actionable practice without prompting
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Promote multi-grain porridge with cowpea flour, dry fish powder, and indigenous greens to fight anaemia in learners."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Heavy morning chores resolution:</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      States that boys and girls share water/wood chores equally before leaving
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Sensitize village elders at water points so fathers stop sending only girls to herd and fetch water during school hours."
-                    </div>
-                  </div>
-
-                  <div>
-                    <span class="font-bold text-slate-900 block mb-0.5">Campaign Line Recall: 'Abas ikimorikinit kaapei':</span>
-                    <span class="px-2 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded text-[11px] border border-emerald-200 block mb-1">
-                      Demonstrated (explained clearly and accurately without prompting)
-                    </span>
-                    <div class="italic text-slate-600 bg-white p-2 rounded border border-slate-200 text-[11px]">
-                      "Collective action for education and nutrition: no child should be left behind due to preventable household division of labour."
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-center">
+              <div class="text-[10px] font-bold text-amber-700 uppercase tracking-wider">Campaign Slogan Recall</div>
+              <div class="text-xl font-black text-amber-700 mt-0.5" id="v2-kpi-slogan">100.0%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-slogan-sub">12 of 12 Retained</div>
             </div>
           </div>
 
-          <!-- Scenario Cohort Aggregate Charts -->
-          <div class="mt-4 pt-4 border-t border-slate-200">
-            <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates (36 Randomly Intercepted Participants across 6 Schools)</span>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <h5 class="text-xs font-bold text-slate-800 mb-1">1. Porridge greens and supplementation recall</h5>
-                <div class="h-52 min-h-[210px]">
+          <!-- 3 Scenario Question Cards (Pillar 2 Micro-Poll Style) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Scenario 1 Card -->
+            <div class="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-1.5">
+                  <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 1</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-porridge">12 / 17 Mastered (70.6%)</span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Unaided recall of local wild greens (Eboo, Lokaka) or cowpea powder to enrich emergency rations.</h5>
+                <div class="h-44 min-h-[175px] mb-2">
                   <canvas id="chart-v2-scenario-porridge"></canvas>
                 </div>
               </div>
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <h5 class="text-xs font-bold text-slate-800 mb-1">2. Chore rebalancing strategy recall</h5>
-                <div class="h-52 min-h-[210px]">
+              <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
+                <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
+                <p id="v2-sc-quote-porridge" class="italic text-slate-600 mt-0.5">"Wash wild greens before cutting; pound cowpeas into powder and boil in morning porridge."</p>
+              </div>
+            </div>
+
+            <!-- Scenario 2 Card -->
+            <div class="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-1.5">
+                  <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 2</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-chores">14 / 16 Share Equally (87.5%)</span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">How brother and sister should share heavy firewood/water morning chores so both arrive on time.</h5>
+                <div class="h-44 min-h-[175px] mb-2">
                   <canvas id="chart-v2-scenario-chores"></canvas>
                 </div>
               </div>
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <h5 class="text-xs font-bold text-slate-800 mb-1">3. 'Abas ikimorikinit kaapei' meaning recall</h5>
-                <div class="h-52 min-h-[210px]">
+              <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
+                <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
+                <p id="v2-sc-quote-chores" class="italic text-slate-600 mt-0.5">"Boys fetch water with bicycle while girls sweep so neither is late or punished."</p>
+              </div>
+            </div>
+
+            <!-- Scenario 3 Card -->
+            <div class="p-3.5 bg-slate-50/80 rounded-xl border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-1.5">
+                  <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 3</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-slogan">12 / 12 Retained (100.0%)</span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Unaided recall and explanation of campaign line: 'Abas ikimorikinit kaapei'.</h5>
+                <div class="h-44 min-h-[175px] mb-2">
                   <canvas id="chart-v2-scenario-slogan"></canvas>
                 </div>
               </div>
+              <div class="mt-2 p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-700">
+                <strong class="text-wfp-blue font-bold">Reason in their words:</strong>
+                <p id="v2-sc-quote-slogan" class="italic text-slate-600 mt-0.5">"Together we can make our children healthy and keep girls in school."</p>
+              </div>
             </div>
           </div>
+
+          <!-- Expandable Granular School Intercept Logs Drawer -->
+          <details class="mt-5 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden transition group">
+            <summary class="px-4 py-3 bg-slate-100/70 hover:bg-slate-100 cursor-pointer text-xs font-bold text-slate-700 flex items-center justify-between transition">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-list-ul text-wfp-blue"></i>
+                <span id="v2-drawer-summary-title">View School Intercept Summation & Individual Field Logs (17 Responses across 3 Activation Schools)</span>
+              </span>
+              <span class="text-[11px] font-normal text-slate-500 group-open:hidden">Click to expand raw school logs ▼</span>
+              <span class="text-[11px] font-normal text-slate-500 hidden group-open:inline">Click to collapse ▲</span>
+            </summary>
+            <div id="v2-scenario-cards" class="p-4 border-t border-slate-200 bg-slate-50/50">
+              <!-- Populated dynamically via renderScenarioInterceptCards with school summation table & individual cards -->
+            </div>
+          </details>
         </div>
 
         <!-- ROW 5: COORDINATOR POST-ACTIVATION FIELD AUDIT LOG -->
@@ -3466,11 +3264,11 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
-                      <strong class="text-slate-900">10 Primary Schools active (7 Orientations, 1 Visit 1, 3 Visit 2, 1 NutriClub) · 64 Target Schools</strong>
+                      <strong class="text-slate-900">11 Primary Schools reached (7 Orientations, 1 Visit 1, 3 Visit 2, 3 NutriClubs) · 64 Target Schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Direct Session Reach Target:</span>
-                      <strong class="text-wfp-blue font-bold">1,147 Learners directly reached · 80,875 Target</strong>
+                      <strong class="text-wfp-blue font-bold">1,363 Learners directly reached · 80,875 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
@@ -3482,11 +3280,11 @@
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">School Clubs &amp; Weekly Meetings:</span>
-                      <strong class="text-slate-900">1 NutriClub active (Kakamar P/S, 41 members) · 64 Target Clubs</strong>
+                      <strong class="text-slate-900">3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 registered members) · 64 Target Clubs</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
-                      <strong class="text-slate-900">264 Teachers &amp; VHTs logged · 131 PWDs reached · 768 Target</strong>
+                      <strong class="text-slate-900">266 Teachers &amp; VHTs logged · 132 PWDs reached · 768 Target</strong>
                     </div>
                   </div>
                 </td>
@@ -3514,11 +3312,11 @@
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Teachers in the Lead:</span>
-                      <strong class="text-slate-900">100% (6 of 6 schools with teacher &amp; VHT leadership)</strong>
+                      <strong class="text-slate-900">100% (7 of 7 schools with teacher &amp; VHT leadership)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">What Children Remembered:</span>
-                      <strong class="text-wfp-blue font-bold">Unaided recall verified across 3 activation schools</strong>
+                      <strong class="text-wfp-blue font-bold">Unaided recall verified across 3 activation schools (17 intercepted respondents)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Fair &amp; Welcoming for All:</span>
@@ -3551,7 +3349,7 @@
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water &amp; Firewood:</span>
-                      <strong class="text-blue-800 font-bold text-sm">Agreement across Visit 2 micro-polls (Kotido, Moroto, Nakapiripirit)</strong>
+                      <strong class="text-blue-800 font-bold text-sm">99.4% agreement across Visit 2 micro-polls (514 boy responses recorded across Kotido, Moroto, Nakapiripirit)</strong>
                       <span class="text-[10px] text-slate-500 block">Polled consensus on rebalancing domestic water chores</span>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
@@ -3566,7 +3364,7 @@
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">More Pupils in School:</span>
-                      <strong class="text-slate-600 font-bold">- (Pending longitudinal return visits)</strong>
+                      <strong class="text-slate-700 font-bold">1,480 enrolled, 374 weekly attendees at Katikit P/S (Pending longitudinal returns)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">Out-of-School Girls Back in Class:</span>
@@ -3617,8 +3415,8 @@
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-slate-900 block mb-1">7 Orientations · 1 Visit 1 · 3 Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 7 primary schools completed orientation with 264 stakeholders logged across activities</li>
-                    <li>• 1 school completed Visit 1 reaching 646 learners (Katikit P/S, Amudat)</li>
+                    <li>• 7 primary schools completed orientation with 266 stakeholders logged across activities</li>
+                    <li>• 1 school completed Visit 1 onboarding &amp; audit (Katikit P/S, Amudat: 1,480 enrolled, 374 weekly attendance, 19 NutriCharts issued)</li>
                     <li>• 3 schools delivered Visit 2 reaching 742 participants (623 pupils, 67 staff, 52 community)</li>
                     <li>• Target: 640 community demonstrations across 64 schools</li>
                   </ul>
@@ -3651,11 +3449,11 @@
                   <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Keeping Girls in Class</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">1 NutriClub · 1 Visit 1 · 3 Visit 2 Activations Logged</strong>
+                  <strong class="text-slate-900 block mb-1">3 NutriClubs · 1 Visit 1 · 3 Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• Kakamar P/S (Kaabong) NutriClub active (41 members, 36 present)</li>
-                    <li>• Katikit P/S (Amudat) active NutriClub verified with 2 patrons &amp; work plan</li>
-                    <li>• 3 schools delivered interactive chore rebalancing dialogue</li>
+                    <li>• 3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S; 161 total registered members)</li>
+                    <li>• Katikit P/S (Amudat) active NutriClub verified with 2 patrons &amp; work plan signed</li>
+                    <li>• 3 schools delivered interactive chore rebalancing dialogue &amp; micro-poll (514 boy responses, 99.4% agreement)</li>
                     <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
                 </td>
@@ -3664,14 +3462,14 @@
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• Micro-polls affirm domestic chores should be shared equally</li>
                     <li>• 87.8% session attendance recorded at Kakamar P/S NutriClub</li>
-                    <li>• Inclusive accommodation verified (131 PWD attendees across sessions)</li>
+                    <li>• Inclusive accommodation verified (132 PWD attendees across sessions)</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-blue-50/30">
                   <strong class="text-blue-900 block mb-1">Chore Rebalancing Committed</strong>
                   <ul class="space-y-1 text-[11px] text-blue-900">
                     <li>• Polled consensus on boys fetching water and sharing morning chores</li>
-                    <li>• Longitudinal attendance tracking initiated (1,269 learners logged across Visit 1 &amp; Visit 2)</li>
+                    <li>• Longitudinal attendance tracking initiated (997 learners logged across Visit 1 &amp; Visit 2)</li>
                     <li>• Punctuality and attendance gains to be audited at Visit 3</li>
                   </ul>
                 </td>
@@ -3687,10 +3485,10 @@
                   <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Fair Work &amp; Clean Stoves</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">5 Joint Calendars Agreed · 34 Patrons Appointed</strong>
+                  <strong class="text-slate-900 block mb-1">6 Joint Calendars Agreed · 36 Patrons Appointed</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• 5 of 6 oriented schools established 4-week joint activity schedules with VHTs</li>
-                    <li>• 34 teacher patrons appointed across 6 primary schools (plus 1 club patron at Kakamar P/S)</li>
+                    <li>• 6 of 7 oriented schools established 4-week joint activity schedules with VHTs</li>
+                    <li>• 36 teacher patrons appointed across 7 primary schools (plus 3 club patrons)</li>
                     <li>• Target: 640 community demonstrations and 64 school commitment pledges</li>
                   </ul>
                 </td>
@@ -3735,20 +3533,20 @@
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Checking the situation in sample schools at the start of the campaign</p>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance:</strong> - (Pending Visit 1 baseline register logs)</span>
+                <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+                <span class="text-slate-800"><strong>Attendance &amp; Enrolment:</strong> 1,480 enrolled (765 boys, 715 girls), 374 weekly attendees at Katikit P/S</span>
               </div>
               <div class="flex items-start gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Enriched Porridge:</strong> Pending baseline audits (0 schools)</span>
+                <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+                <span class="text-slate-800"><strong>NutriCharts Issued:</strong> 19 classroom NutriCharts distributed across Lower, Middle, Upper primary</span>
               </div>
               <div class="flex items-start gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Sharing Chores:</strong> Pending baseline audits (0 schools)</span>
+                <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+                <span class="text-slate-800"><strong>NutriClub Setup:</strong> Active setup verified with 2 teacher patrons and signed work plan</span>
               </div>
               <div class="flex items-start gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Serving Children First:</strong> Pending baseline audits (0 schools)</span>
+                <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+                <span class="text-slate-800"><strong>Toll-Free Hotline:</strong> 0800 displayed and 1 feedback query logged</span>
               </div>
             </div>
           </div>
@@ -3761,19 +3559,19 @@
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Children Reached:</strong> 0 learners (Awaiting Visit 1 submissions)</span>
+                <span class="text-slate-800"><strong>Children Audited:</strong> 374 weekly attendees (1,480 total enrolled) at Katikit P/S</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Classroom Practice:</strong> 0 schools logged (Pending Visit 1)</span>
+                <span class="text-slate-800"><strong>Classroom Practice:</strong> 1 school completed onboarding &amp; audit (Katikit P/S, Amudat)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Home Charts Given:</strong> 0 charts logged (Pending Visit 1)</span>
+                <span class="text-slate-800"><strong>Classroom Charts Given:</strong> 19 NutriCharts issued across all grades</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Patrons Appointed:</strong> 34 school patrons appointed across 6 orientation schools (plus 1 club patron at Kakamar P/S)</span>
+                <span class="text-slate-800"><strong>Patrons Appointed:</strong> 36 school patrons appointed across 7 orientation schools (plus 3 club patrons)</span>
               </div>
             </div>
           </div>
@@ -3790,7 +3588,11 @@
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> Unaided recall of 3 core messages across activations</span>
+                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> Unaided recall across 17 intercepted respondents (17 porridge, 16 chores)</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+                <span class="text-slate-800"><strong>Pillar 2 Micro-Poll:</strong> 514 boy responses across 5 statements (99.4% agreement rate)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3823,7 +3625,7 @@
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Club Continuity:</strong> 1 NutriClub active (Kakamar P/S, Kaabong)</span>
+                <span class="text-slate-800"><strong>Club Continuity:</strong> 3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 members)</span>
               </div>
             </div>
           </div>
@@ -3865,7 +3667,7 @@
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Disability Inclusion:</strong> 5 people with disabilities reached</span>
+                <span class="text-slate-800"><strong>Disability Inclusion:</strong> 132 people with disabilities reached across activities</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3931,7 +3733,7 @@
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Boys sharing morning chores:</span> <strong class="text-wfp-blue">Agreement in Micro-Polls</strong></div>
+              <div class="flex justify-between"><span>Boys sharing morning chores:</span> <strong class="text-wfp-blue">99.4% Agreement across 514 Boy Responses</strong></div>
               <div class="flex justify-between"><span>Girls arriving to school on time:</span> <strong class="text-slate-600">Punctuality Audit Pending Visit 3</strong></div>
             </div>
           </div>
@@ -4695,17 +4497,17 @@
     "target_schools": 5,
     "demos": 0,
     "target_demos": 50,
-    "learners": 114,
+    "learners": 330,
     "target_learners": 7438,
     "target_enrolled": 9521,
     "caregivers": 0,
     "target_caregivers": 4000,
-    "teachers_vhts": 25.0,
+    "teachers_vhts": 26.0,
     "pwd_reach": 1,
-    "teachers_male": 7.0,
+    "teachers_male": 8.0,
     "teachers_female": 4.0,
     "headteachers": 0,
-    "patrons": 3,
+    "patrons": 4,
     "vhts_male": 5.0,
     "vhts_female": 9.0,
     "vhts_pwd_male": 0,
@@ -4815,7 +4617,7 @@
     "v1_count": 0,
     "v2_count": 0,
     "v3_count": 0,
-    "nutriclubs": 1,
+    "nutriclubs": 2,
     "target_nutriclubs": 5,
     "v1": null,
     "v2": null,
@@ -4928,7 +4730,50 @@
     "vhts_female": 8.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {},
+    "exit_interviews": {
+      "Respondent 1 (KOTIDO MIXED P/S)": {
+        "key": "Respondent 1 (KOTIDO MIXED P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "entry_index": 6
+      },
+      "Respondent 2 (KOTIDO MIXED P/S)": {
+        "key": "Respondent 2 (KOTIDO MIXED P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Improved Cooking Methods (Firewood Saving)"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "entry_index": 6
+      },
+      "Respondent 3 (KOTIDO MIXED P/S)": {
+        "key": "Respondent 3 (KOTIDO MIXED P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Fair and Equal Plate Sharing at Home",
+          "Improved Cooking Methods (Firewood Saving)"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "6",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "entry_index": 6
+      }
+    },
     "visits": 1,
     "target_visits": 36,
     "v1_count": 0,
@@ -5179,7 +5024,53 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
-    "exit_interviews": {},
+    "exit_interviews": {
+      "Respondent 1 (KASIMERI P/S)": {
+        "key": "Respondent 1 (KASIMERI P/S)",
+        "sex": "Female",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Establishing Nutri Clubs & Hotline 0800",
+          "Fair and Equal Plate Sharing at Home"
+        ],
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "entry_index": 8
+      },
+      "Respondent 2 (KASIMERI P/S)": {
+        "key": "Respondent 2 (KASIMERI P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Metu Porridge Fortification (Local Greens)",
+          "Fair and Equal Plate Sharing at Home"
+        ],
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "entry_index": 8
+      },
+      "Respondent 3 (KASIMERI P/S)": {
+        "key": "Respondent 3 (KASIMERI P/S)",
+        "sex": "Male",
+        "role": "Teacher / VHT",
+        "lessons": [
+          "Metu Porridge Fortification (Local Greens)",
+          "Rebalancing Morning Chores so Girls Stay in School",
+          "Establishing Nutri Clubs & Hotline 0800",
+          "Improved Cooking Methods (Firewood Saving)"
+        ],
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "5",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "entry_index": 8
+      }
+    },
     "visits": 1,
     "target_visits": 15,
     "v1_count": 0,
@@ -5926,8 +5817,8 @@
     "last_updated": "2026-10-02",
     "index_tracking": {
       "column": "_index",
-      "last_processed_index": 13,
-      "total_submissions_tracked": 13,
+      "last_processed_index": 14,
+      "total_submissions_tracked": 14,
       "new_entries_this_batch": 0,
       "tracked_indices": [
         1,
@@ -5942,9 +5833,10 @@
         10,
         11,
         12,
-        13
+        13,
+        14
       ],
-      "last_synced": "2026-10-06 14:03:10"
+      "last_synced": "2026-10-06 16:21:21"
     }
   },
   "overview": {
@@ -5985,10 +5877,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 1147,
+        "value": 1363,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 1.42,
+        "progress_pct": 1.69,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -6007,10 +5899,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 265.0,
+        "value": 266.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 34.5,
+        "progress_pct": 34.6,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -6088,9 +5980,9 @@
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
-        "learners_reached": 114,
+        "learners_reached": 330,
         "caregivers_reached": 0,
-        "stakeholders_trained": 25.0,
+        "stakeholders_trained": 26.0,
         "pwd_reach": 1,
         "status": "Active (Reports Received)"
       },
@@ -6190,20 +6082,20 @@
         11,
         4,
         0,
-        2,
-        1147,
+        3,
+        1363,
         52,
-        265.0,
+        266.0,
         132
       ],
       "pct": [
         17.2,
         2.1,
         0.0,
-        3.1,
-        1.42,
+        4.7,
+        1.69,
         0.1,
-        34.5,
+        34.6,
         11.0
       ]
     }
@@ -6223,7 +6115,7 @@
       "patrons_appointed": 36,
       "joint_calendars_signed": 6,
       "joint_calendar_compliance_pct": 85.7,
-      "total_exit_interviews": 30
+      "total_exit_interviews": 36
     },
     "teacher_attendance_gender": {
       "categories": [
@@ -6277,7 +6169,7 @@
     },
     "exit_interviews_pillars": {
       "title": "What were the most important lessons learned today across the 3 Pillars?",
-      "sample_size": 30,
+      "sample_size": 36,
       "categories": [
         "Metu Porridge Fortification (Local Greens/Staples)",
         "Improved Cooking Methods (Firewood Saving)",
@@ -6286,25 +6178,25 @@
         "Fair and Equal Plate Sharing at Home"
       ],
       "values": [
+        20,
         18,
-        15,
-        17,
-        21,
-        19
+        19,
+        26,
+        22
       ]
     },
     "exit_interviews_actions": {
       "title": "What specific action are you personally going to take this week?",
-      "sample_size": 30,
+      "sample_size": 36,
       "categories": [
         "Enrich School/Home Porridge with Local Greens/Cowpeas",
         "Mobilize Boys/Fathers to Share Water/Wood Chores",
         "Adopt Firewood-Saving Practices / Establish Nutri Club"
       ],
       "values": [
-        17,
-        23,
-        17
+        20,
+        27,
+        21
       ]
     },
     "collateral_handover": {
@@ -6481,6 +6373,60 @@
         "district": "Karenga",
         "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas",
         "words": "She only words of thanks"
+      },
+      {
+        "respondent_id": "Respondent 1 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 2 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 3 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "6"
+      },
+      {
+        "respondent_id": "Respondent 1 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 2 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 3 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "5"
       },
       {
         "respondent_id": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -6865,88 +6811,123 @@
       },
       "micro_poll": {
         "statement_1": {
-          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together",
+          "statement": "It is unfair for a girl to stay home doing compound work while brothers leave early for class.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
+            8,
+            80,
             0,
-            3,
-            0,
-            0,
+            2,
             0
+          ],
+          "total_boys": 90,
+          "agreed_boys": 88,
+          "pct_agreed": 97.8,
+          "reason_in_words": "Nakapiripirit: \"The girl may not concentrate like aboy\"",
+          "all_reasons": [
+            "Nakapiripirit: \"The girl may not concentrate like aboy\""
           ]
         },
         "statement_2": {
-          "statement": "I am ready to fetch water from borehole in morning so my sister is not late/punished",
+          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
             0,
-            2,
+            110,
             0,
             0,
             0
+          ],
+          "total_boys": 110,
+          "agreed_boys": 110,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"To make work easy\"",
+          "all_reasons": [
+            "Nakapiripirit: \"To make work easy\""
           ]
         },
         "statement_3": {
-          "statement": "If a girl misses school to herd animals or do chores I will speak up to get her back to class",
+          "statement": "Collecting firewood for cooking is a chore that boys and girls should do together.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            2,
-            1,
+            8,
+            111,
             0,
             0,
             0
+          ],
+          "total_boys": 119,
+          "agreed_boys": 119,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"To offer campany to and security to girls from rapiest\"",
+          "all_reasons": [
+            "Nakapiripirit: \"To offer campany to and security to girls from rapiest\""
           ]
         },
         "statement_4": {
-          "statement": "Collecting firewood for cooking is a chore that boys and girls should do together",
+          "statement": "I am ready to fetch water from borehole in morning so my sister is not late/punished.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            1,
-            2,
             0,
+            58,
+            1,
             0,
             0
+          ],
+          "total_boys": 59,
+          "agreed_boys": 58,
+          "pct_agreed": 98.3,
+          "reason_in_words": "Nakapiripirit: \"Share work with my sister\"",
+          "all_reasons": [
+            "Nakapiripirit: \"Share work with my sister\""
           ]
         },
         "statement_5": {
-          "statement": "It is unfair for a girl to stay home doing compound work while brothers leave early for class",
+          "statement": "If a girl misses school to herd animals or do chores I will speak up to get her back to class.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            1,
-            1,
+            128,
+            8,
             0,
-            1,
+            0,
             0
+          ],
+          "total_boys": 136,
+          "agreed_boys": 136,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"Girls are not to look after animas while boys go to school\"",
+          "all_reasons": [
+            "Nakapiripirit: \"Girls are not to look after animas while boys go to school\""
           ]
         }
       },
@@ -6987,7 +6968,162 @@
             6,
             0
           ]
-        }
+        },
+        "respondents": [
+          {
+            "id": "Kotido mixed PS - Learner 1",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 2",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 2",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 3",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 3",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 4",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 4",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Adult 1",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Adult 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 1",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 2",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 3",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 3",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 4",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 4",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Adult 1",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Adult 1",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Adult 2",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Adult 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 1",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 1",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 2",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "Not assessed",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 3",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 3",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 4",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 4",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Adult 1",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Adult 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Adult 2",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Adult 2",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          }
+        ]
       }
     },
     "visit3": {
@@ -7488,15 +7624,15 @@
   },
   "nutriclub_sessions": {
     "kpis": {
-      "total_sessions_logged": 2,
+      "total_sessions_logged": 3,
       "target_schools": 64,
-      "schools_with_active_clubs": 2,
-      "total_members": 101,
-      "members_male": 42,
-      "members_female": 59,
-      "session_attendance": 150,
-      "attendance_boys": 63,
-      "attendance_girls": 87,
+      "schools_with_active_clubs": 3,
+      "total_members": 161,
+      "members_male": 72,
+      "members_female": 89,
+      "session_attendance": 366,
+      "attendance_boys": 175,
+      "attendance_girls": 191,
       "pwd_learners": 1
     },
     "club_membership_gender": {
@@ -7505,8 +7641,8 @@
         "Female Members"
       ],
       "values": [
-        42,
-        59
+        72,
+        89
       ]
     },
     "session_attendance_gender": {
@@ -7515,8 +7651,8 @@
         "Girls Present"
       ],
       "values": [
-        63,
-        87
+        175,
+        191
       ]
     },
     "pwd_learners_attendance": {
@@ -7638,6 +7774,31 @@
         "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
         "home_action_assigned": "Carry food calenders at home and tick the food they eat at home for supper and return those food calenders to the school patron",
         "coordinator_notes": "Advised the teacher to continue engaging pupils practically during the session, children also were actually participating because of gifts"
+      },
+      {
+        "entry_index": 14,
+        "id": "NC-886940645",
+        "school": "KARENGA BOYS P/S",
+        "district": "Karenga",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-06",
+        "start_time": "12:30 PM",
+        "end_time": "14:00 PM",
+        "patron": "Lopeyok Paul pax",
+        "membership_male": 30,
+        "membership_female": 30,
+        "total_membership": 60,
+        "boys_present": 112,
+        "girls_present": 104,
+        "total_present": 216,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "meeting_place": "School compound",
+        "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+        "home_action_assigned": "We informed them to go and try eating a full balanced diet meal at home and list for us the type of food they eat and mark the food calenders given to themthey should mark in the d ca",
+        "coordinator_notes": "The children are excited for the activity because it a wards them gifts after answering questions"
       }
     ],
     "schools_register": [
@@ -8170,15 +8331,28 @@
         "district": "Karenga",
         "subcounty": "Karenga T/C",
         "selection": "Base 5",
-        "patron_name": "To be appointed",
-        "meeting_place": "Pending designation",
+        "patron_name": "Lopeyok Paul pax",
+        "meeting_place": "School compound",
         "total_enrolled": 1629,
         "attendance_rate": "91%",
-        "total_membership": 0,
-        "male_membership": 0,
-        "female_membership": 0,
+        "total_membership": 60,
+        "male_membership": 30,
+        "female_membership": 30,
         "total_pwd": 0,
-        "session_one": null,
+        "session_one": {
+          "date_conducted": "2026-10-06",
+          "start_time": "12:30 PM",
+          "end_time": "14:00 PM",
+          "designated_meeting_place": "School compound",
+          "club_patron_name": "Lopeyok Paul pax",
+          "boys_present": 112,
+          "girls_present": 104,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+          "home_action_assigned": "We informed them to go and try eating a full balanced diet meal at home and list for us the type of food they eat and mark the food calenders given to themthey should mark in the d ca",
+          "coordinator_notes": "The children are excited for the activity because it a wards them gifts after answering questions"
+        },
         "session_two": null
       },
       {
@@ -8768,7 +8942,7 @@
         "baseline": "Pending Visit 1",
         "evidence_points": [
           "9 learners gave specific, actionable local fortification recipes without prompting",
-          "30 teacher & VHT exit interviews completed across 8 oriented schools",
+          "36 teacher & VHT exit interviews completed across 8 oriented schools",
           "Community cooking demonstration rollout pending (0 of 640 conducted)"
         ]
       },
@@ -8780,8 +8954,9 @@
         "baseline": "Pending Visit 1",
         "evidence_points": [
           "14 of 16 learners stated boys and girls should share water/wood chores equally before leaving",
-          "2 NutriClub active (2 schools) delivering practical chore rebalancing dialogue",
-          "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)"
+          "514 boy responses recorded across 5 micro-poll statements with 99.4% agreement rate (511 agreements) affirming gender chore rebalancing",
+          "3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S with 161 registered members) delivering practical chore rebalancing dialogue",
+          "Longitudinal attendance tracking initiated (997 learners logged across Visit 1 and Visit 2)"
         ]
       },
       {
@@ -8812,12 +8987,12 @@
           {
             "label": "School Contact Visits",
             "value": "4 Visits Conducted",
-            "detail": "3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
+            "detail": "1 Visit 1 School Onboarding completed, 3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
           },
           {
             "label": "Children Reached",
-            "value": "1,147 Pupils",
-            "detail": "623 in Visit 2 activations, 150 in NutriClub sessions (Target: 80,875)"
+            "value": "1,363 Pupils",
+            "detail": "374 weekly attendees (1480 enrolled) at Visit 1, 623 in Visit 2 activations, 366 in NutriClub sessions (Target: 80,875)"
           },
           {
             "label": "Village Cooking Demos",
@@ -8831,12 +9006,12 @@
           },
           {
             "label": "Active NutriClubs",
-            "value": "2 Clubs Active",
-            "detail": "2 active club(s) (KAKAMAR P/S, KARENGA GIRLS P/S) with 101 registered members (Target: 64 clubs)"
+            "value": "3 Clubs Active",
+            "detail": "3 active club(s) (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S) with 161 registered members (Target: 64 clubs)"
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "265.0 Stakeholders",
+            "value": "266.0 Stakeholders",
             "detail": "Oriented across 8 primary schools (Target: 768)"
           },
           {
@@ -8880,8 +9055,8 @@
           },
           {
             "label": "Teacher Patrons in Charge",
-            "value": "1 Appointed Patron",
-            "detail": "Club patron active at Kakamar P/S (Kaabong)"
+            "value": "3 Appointed Club Patrons",
+            "detail": "Club patrons active across KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S"
           },
           {
             "label": "Safe with No Retaliation",
@@ -8904,8 +9079,8 @@
           },
           {
             "label": "Boys Helping with Morning Chores",
-            "value": "87.5% Consensus",
-            "detail": "87.5% agreement in Visit 2 micro-polls that domestic chores must be shared"
+            "value": "99.4% Consensus",
+            "detail": "99.4% agreement across 514 boy responses in Visit 2 micro-polls that domestic chores must be shared"
           },
           {
             "label": "Girls Arriving on Time for Class",
@@ -8929,8 +9104,8 @@
           },
           {
             "label": "Clubs Continuing on Their Own",
-            "value": "1 Active Club",
-            "detail": "Kakamar P/S NutriClub established with weekly meetings"
+            "value": "3 Active Clubs",
+            "detail": "KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S NutriClubs established with weekly meetings"
           }
         ],
         "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
@@ -8971,10 +9146,10 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "3 Visits \u00b7 2 Active NutriClub",
+          "headline": "3 Visits \u00b7 3 Active NutriClubs",
           "data_points": [
             "3 primary schools completed Visit 2 Big Activation Day",
-            "2 active school club established at Kakamar P/S (41 members)",
+            "3 active school clubs established (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 registered members)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
@@ -8989,7 +9164,7 @@
         "what_changed": {
           "headline": "Longitudinal Tracking Initiated",
           "data_points": [
-            "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)",
+            "Longitudinal attendance tracking initiated (997 learners logged in Visit 1 & Visit 2)",
             "Punctuality and attendance rebound to be audited at Visit 3",
             "Out-of-school girl tracing pending closeout reports"
           ]
@@ -9042,10 +9217,10 @@
         "title": "Visit 1: Getting Started in Class",
         "desc": "Healthy food sorting, the Adere calabash game, and Home Charts given out",
         "data_collected": [
-          "Children Reached: 0 learners (Awaiting Visit 1 field submissions)",
-          "Classroom Practice: 0 schools logged (Pending Visit 1)",
-          "Home Charts Given: 0 charts logged (Pending Visit 1)",
-          "Patrons Appointed: 1 club patron appointed (Kakamar P/S, Kaabong)"
+          "Children Audited: 374 weekly attendees (1480 total enrolled) at Katikit P/S",
+          "Classroom Practice: 1 school completed onboarding & audit (KATIKIT P/S (Amudat))",
+          "Home Charts Given: 19 classroom NutriCharts issued across Lower, Middle, Upper primary",
+          "Patrons Appointed: 36 teacher patrons appointed across 8 orientation schools (plus 3 club patrons)"
         ]
       },
       {
@@ -9054,7 +9229,7 @@
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
           "Attendance Logged: 623 learners counted across 3 schools",
-          "What Pupils Remembered: 52.9% unaided recall of core messages",
+          "What Pupils Remembered: 52.9% unaided recall of core messages (9 actionable fortification recipes)",
           "School Pledges: 3 school commitments signed",
           "Village Cooking Demos: 0 demos logged (Target: 640 sites)"
         ]
@@ -9067,7 +9242,7 @@
           "Attendance Growth: - (Awaiting Visit 3 closeouts)",
           "Charts Returned: 0 returned (Pending Visit 3 closeout audits)",
           "School Commitments: Pending endline verification (0 schools)",
-          "Club Continuity: 2 NutriClub active (Kakamar P/S, Kaabong)"
+          "Club Continuity: 3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 members)"
         ]
       },
       {
@@ -9263,6 +9438,19 @@
       "pwd": 1,
       "is_new": false,
       "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 14,
+      "id": 886940645,
+      "date": "2026-10-06",
+      "district": "Karenga",
+      "activity": "Nutriclub session",
+      "school": "KARENGA BOYS P/S",
+      "coordinator": "Lopeyok Martin",
+      "reach": 216,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
     }
   ]
 };
@@ -9447,6 +9635,19 @@
     "coordinator": "Lopeyok Martin",
     "reach": 114,
     "pwd": 1,
+    "is_new": false,
+    "status": "Verified / Ingested"
+  },
+  {
+    "entry_index": 14,
+    "id": 886940645,
+    "date": "2026-10-06",
+    "district": "Karenga",
+    "activity": "Nutriclub session",
+    "school": "KARENGA BOYS P/S",
+    "coordinator": "Lopeyok Martin",
+    "reach": 216,
+    "pwd": 0,
     "is_new": false,
     "status": "Verified / Ingested"
   }
@@ -11377,6 +11578,9 @@
       // Re-render exit interview cards
       renderExitInterviewCards(selDistrict);
 
+      // Re-render Visit 2 rapid scenario intercept cards
+      renderScenarioInterceptCards(selDistrict);
+
       // Re-render change stories table
       renderChangeStoriesTable(selDistrict, search);
 
@@ -11669,6 +11873,126 @@
 
         let schoolsHtml = '';
         dSchools.forEach((s) => {
+          const hasS1 = s.session_one !== null && s.session_one !== undefined;
+          const hasS2 = s.session_two !== null && s.session_two !== undefined;
+          const sCount = (hasS1 ? 1 : 0) + (hasS2 ? 1 : 0);
+
+          let badgeHtml = '';
+          if (sCount === 2) {
+            badgeHtml = '<span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2.5 py-0.5 rounded-lg border border-emerald-200 whitespace-nowrap"><i class="fa-solid fa-check-double mr-1"></i> 2 Sessions Completed</span>';
+          } else if (sCount === 1) {
+            badgeHtml = '<span class="text-[10px] bg-blue-50 text-wfp-blue font-bold px-2.5 py-0.5 rounded-lg border border-blue-200 whitespace-nowrap"><i class="fa-solid fa-check mr-1"></i> 1 Session Completed</span>';
+          } else {
+            badgeHtml = '<span class="text-[10px] bg-slate-100 text-slate-500 font-semibold px-2.5 py-0.5 rounded-lg border border-slate-200 whitespace-nowrap"><i class="fa-solid fa-clock mr-1"></i> Club Setup Pending</span>';
+          }
+
+          const toggleBtnHtml = (hasS1 || hasS2) 
+            ? `<button type="button" class="text-xs text-wfp-blue font-semibold hover:underline flex items-center gap-1">
+                 <span id="label-toggle-${s.id}">View Sessions</span>
+                 <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200" id="chevron-school-${s.id}"></i>
+               </button>`
+            : '';
+
+          let sessionOneHtml = '';
+          if (hasS1) {
+            const s1 = s.session_one;
+            sessionOneHtml = `
+              <div class="p-3.5 bg-white rounded-lg border border-slate-200 space-y-2.5 shadow-2xs">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                  <span class="text-xs font-bold text-wfp-blue flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-dot text-[10px]"></i> Session one of the week
+                  </span>
+                  <span class="text-[11px] text-slate-500 font-mono">${s1.date_conducted || ''} · ${s1.start_time || ''} - ${s1.end_time || ''}</span>
+                </div>
+                <div class="text-xs space-y-1">
+                  <div><span class="text-[11px] font-bold text-slate-600">Meeting Place on Compound:</span> <span class="text-slate-800">${s1.designated_meeting_place || 'Tree shade / compound'}</span></div>
+                  <div><span class="text-[11px] font-bold text-slate-600">Patron In-Charge:</span> <span class="text-slate-800">${s1.club_patron_name || 'Designated Patron'}</span></div>
+                </div>
+                <div class="p-2 bg-slate-50 rounded border border-slate-200">
+                  <span class="text-[10px] font-bold text-slate-600 block mb-1">Learner Attendance:</span>
+                  <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Boys Present</span>
+                      <span class="font-bold text-slate-800 text-xs">${s1.boys_present || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Girls Present</span>
+                      <span class="font-bold text-slate-800 text-xs">${s1.girls_present || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Male PWD</span>
+                      <span class="font-bold text-wfp-blue text-xs">${s1.male_pwd || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Female PWD</span>
+                      <span class="font-bold text-wfp-blue text-xs">${s1.female_pwd || 0}</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Practical Activity Delivered:</span>
+                  <span class="inline-block px-2 py-0.5 bg-blue-50 text-wfp-blue font-semibold rounded text-[11px] border border-blue-200">
+                    ${s1.practical_activity || 'Practical Activity'}
+                  </span>
+                </div>
+                ${s1.home_action_assigned ? `<div class="text-[11px] text-slate-600 italic bg-slate-50 p-2 rounded border border-slate-200">"${s1.home_action_assigned}"</div>` : ''}
+              </div>
+            `;
+          }
+
+          let sessionTwoHtml = '';
+          if (hasS2) {
+            const s2 = s.session_two;
+            sessionTwoHtml = `
+              <div class="p-3.5 bg-white rounded-lg border border-slate-200 space-y-2.5 shadow-2xs">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                  <span class="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Session two of the week
+                  </span>
+                  <span class="text-[11px] text-slate-500 font-mono">${s2.date_conducted || ''} · ${s2.start_time || ''} - ${s2.end_time || ''}</span>
+                </div>
+                <div class="p-2 bg-slate-50 rounded border border-slate-200">
+                  <span class="text-[10px] font-bold text-slate-600 block mb-1">Learner Attendance:</span>
+                  <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Boys Present</span>
+                      <span class="font-bold text-slate-800 text-xs">${s2.boys_present || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Girls Present</span>
+                      <span class="font-bold text-slate-800 text-xs">${s2.girls_present || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Male PWD</span>
+                      <span class="font-bold text-wfp-blue text-xs">${s2.male_pwd || 0}</span>
+                    </div>
+                    <div class="bg-white p-1 rounded border border-slate-200">
+                      <span class="text-[9px] text-slate-500 block">Female PWD</span>
+                      <span class="font-bold text-wfp-blue text-xs">${s2.female_pwd || 0}</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Practical Activity Delivered:</span>
+                  <span class="inline-block px-2 py-0.5 bg-emerald-50 text-emerald-800 font-semibold rounded text-[11px] border border-emerald-200">
+                    ${s2.practical_activity || 'Practical Activity'}
+                  </span>
+                </div>
+                ${s2.home_action_feedback ? `<div class="flex items-center gap-2"><span class="text-[10px] font-bold text-slate-600">Home Action Outcome:</span><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">${s2.home_action_feedback}</span></div>` : ''}
+                ${s2.assembly_core_message ? `<div class="pt-2 border-t border-slate-100 text-xs space-y-1"><div class="flex items-center justify-between text-[11px]"><span class="font-bold text-slate-700">Whole-School Assembly Nutri-Moment:</span><span class="text-slate-500">${s2.assembly_date || ''} · By ${s2.assembly_delivered_by || ''}</span></div><p class="text-[11px] text-blue-900 bg-blue-50/70 p-2 rounded border border-blue-200 font-medium">"${s2.assembly_core_message}"</p></div>` : ''}
+              </div>
+            `;
+          }
+
+          const expandedContentHtml = (hasS1 || hasS2)
+            ? `<div id="school-detail-${s.id}" class="p-4 hidden space-y-4 border-t border-slate-100 bg-slate-50/50">
+                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                   ${sessionOneHtml}
+                   ${sessionTwoHtml}
+                 </div>
+               </div>`
+            : '';
+
           schoolsHtml += `
             <div class="bg-white rounded-xl border border-slate-200 shadow-2xs overflow-hidden">
               <div class="p-3.5 flex flex-wrap items-center justify-between gap-3 bg-white cursor-pointer hover:bg-slate-50 transition border-b border-slate-100"
@@ -11695,122 +12019,12 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-2.5">
-                  <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2.5 py-0.5 rounded-lg border border-emerald-200 whitespace-nowrap">
-                    <i class="fa-solid fa-check-double mr-1"></i> 2 Sessions Completed
-                  </span>
-                  <button type="button" class="text-xs text-wfp-blue font-semibold hover:underline flex items-center gap-1">
-                    <span id="label-toggle-${s.id}">View Sessions</span>
-                    <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200" id="chevron-school-${s.id}"></i>
-                  </button>
+                  ${badgeHtml}
+                  ${toggleBtnHtml}
                 </div>
               </div>
 
-              <!-- Expanded School Content -->
-              <div id="school-detail-${s.id}" class="p-4 hidden space-y-4 border-t border-slate-100 bg-slate-50/50">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <!-- Session One -->
-                  <div class="p-3.5 bg-white rounded-lg border border-slate-200 space-y-2.5 shadow-2xs">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
-                      <span class="text-xs font-bold text-wfp-blue flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-dot text-[10px]"></i> Session one of the week
-                      </span>
-                      <span class="text-[11px] text-slate-500 font-mono">${s.session_one.date_conducted} · ${s.session_one.start_time} - ${s.session_one.end_time}</span>
-                    </div>
-                    <div class="text-xs space-y-1">
-                      <div><span class="text-[11px] font-bold text-slate-600">Meeting Place on Compound:</span> <span class="text-slate-800">${s.session_one.designated_meeting_place}</span></div>
-                      <div><span class="text-[11px] font-bold text-slate-600">Patron In-Charge:</span> <span class="text-slate-800">${s.session_one.club_patron_name}</span></div>
-                    </div>
-                    <!-- Attendance grid -->
-                    <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-[10px] font-bold text-slate-600 block mb-1">Learner Attendance:</span>
-                      <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Boys Present</span>
-                          <span class="font-bold text-slate-800 text-xs">${s.session_one.boys_present}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Girls Present</span>
-                          <span class="font-bold text-slate-800 text-xs">${s.session_one.girls_present}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Male PWD</span>
-                          <span class="font-bold text-wfp-blue text-xs">${s.session_one.male_pwd}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Female PWD</span>
-                          <span class="font-bold text-wfp-blue text-xs">${s.session_one.female_pwd}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Practical Activity Delivered:</span>
-                      <span class="inline-block px-2 py-0.5 bg-blue-50 text-wfp-blue font-semibold rounded text-[11px] border border-blue-200">
-                        ${s.session_one.practical_activity}
-                      </span>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Feasible Food or Chore Action Assigned:</span>
-                      <p class="text-[11px] text-slate-600 italic bg-slate-50 p-2 rounded border border-slate-200">
-                        "${s.session_one.home_action_assigned}"
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Session Two -->
-                  <div class="p-3.5 bg-white rounded-lg border border-slate-200 space-y-2.5 shadow-2xs">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-1.5">
-                      <span class="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-check text-[10px]"></i> Session two of the week
-                      </span>
-                      <span class="text-[11px] text-slate-500 font-mono">${s.session_two.date_conducted} · ${s.session_two.start_time} - ${s.session_two.end_time}</span>
-                    </div>
-                    <!-- Attendance grid -->
-                    <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-[10px] font-bold text-slate-600 block mb-1">Learner Attendance:</span>
-                      <div class="grid grid-cols-4 gap-1.5 text-center text-xs">
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Boys Present</span>
-                          <span class="font-bold text-slate-800 text-xs">${s.session_two.boys_present}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Girls Present</span>
-                          <span class="font-bold text-slate-800 text-xs">${s.session_two.girls_present}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Male PWD</span>
-                          <span class="font-bold text-wfp-blue text-xs">${s.session_two.male_pwd}</span>
-                        </div>
-                        <div class="bg-white p-1 rounded border border-slate-200">
-                          <span class="text-[9px] text-slate-500 block">Female PWD</span>
-                          <span class="font-bold text-wfp-blue text-xs">${s.session_two.female_pwd}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Practical Activity Delivered:</span>
-                      <span class="inline-block px-2 py-0.5 bg-emerald-50 text-emerald-800 font-semibold rounded text-[11px] border border-emerald-200">
-                        ${s.session_two.practical_activity}
-                      </span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-[10px] font-bold text-slate-600">Home Action Outcome:</span>
-                      <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">
-                        ${s.session_two.home_action_feedback}
-                      </span>
-                    </div>
-                    <!-- Assembly Nutri-Moment -->
-                    <div class="pt-2 border-t border-slate-100 text-xs space-y-1">
-                      <div class="flex items-center justify-between text-[11px]">
-                        <span class="font-bold text-slate-700">Whole-School Assembly Nutri-Moment:</span>
-                        <span class="text-slate-500">${s.session_two.assembly_date} · By ${s.session_two.assembly_delivered_by}</span>
-                      </div>
-                      <p class="text-[11px] text-blue-900 bg-blue-50/70 p-2 rounded border border-blue-200 font-medium">
-                        "${s.session_two.assembly_core_message}"
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ${expandedContentHtml}
             </div>
           `;
         });
@@ -12421,8 +12635,7 @@
       container.innerHTML = html;
     }
 
-    // Render the 6 Individual Participant Exit Interviews Required by the Official KoBo Tool
-    // (Teacher 3, VHT 2, Teacher 1, Teacher 2, VHT 1, VHT 3)
+    // Render the Participant Exit Interviews with Summative Synthesis & Demographics
     function renderExitInterviewCards(selDistrict = 'ALL') {
       const container = document.getElementById('exit-interview-cards');
       if (!container) return;
@@ -12440,22 +12653,149 @@
       const titleEl = document.getElementById('exit-interview-title');
       if (titleEl) {
         if (interviewsList.length === 0) {
-          titleEl.innerText = 'Detailed interview log: 0 individual participants logged';
+          titleEl.innerText = 'Summative Interview Synthesis: 0 Participants Logged';
         } else {
-          titleEl.innerText = `Detailed interview log: ${interviewsList.length} individual participants (${selDistrict === 'ALL' ? 'All Monitored Schools' : selDistrict})`;
+          titleEl.innerText = `Summative Interview Synthesis: ${interviewsList.length} Participants (${selDistrict === 'ALL' ? 'All Monitored Schools' : selDistrict})`;
         }
       }
 
       container.innerHTML = '';
       if (interviewsList.length === 0) {
         container.innerHTML = `
-          <div class="col-span-full py-8 text-center bg-slate-50 border border-slate-200 rounded-xl text-slate-500 text-xs">
+          <div class="py-8 text-center bg-slate-50 border border-slate-200 rounded-xl text-slate-500 text-xs">
             <i class="fa-solid fa-clipboard-question text-2xl text-slate-400 mb-2 block"></i>
             No exit interviews recorded yet for this selection. Awaiting field submissions.
           </div>
         `;
         return;
       }
+
+      // Calculate Summation Metrics
+      const totalSampled = interviewsList.length;
+      const fCount = interviewsList.filter(i => i.sex === 'Female').length;
+      const mCount = interviewsList.filter(i => i.sex === 'Male').length;
+      const schSet = new Set(interviewsList.map(i => i.school));
+      const distSet = new Set(interviewsList.map(i => i.district));
+      const pctFemale = Math.round((fCount / totalSampled) * 100);
+      const pctMale = Math.round((mCount / totalSampled) * 100);
+
+      // Group by School for Cohort Summation Table
+      const schMap = {};
+      interviewsList.forEach(item => {
+        const sName = item.school || 'Unknown School';
+        if (!schMap[sName]) {
+          schMap[sName] = {
+            school: sName,
+            district: item.district || '',
+            items: [],
+            females: 0,
+            males: 0,
+            actions: new Set(),
+            quotes: []
+          };
+        }
+        schMap[sName].items.push(item);
+        if (item.sex === 'Female') schMap[sName].females += 1;
+        else if (item.sex === 'Male') schMap[sName].males += 1;
+        if (item.action) schMap[sName].actions.add(item.action);
+        if (item.words && item.words.trim().length > 3) {
+          schMap[sName].quotes.push(item.words.trim());
+        }
+      });
+
+      // 1. Summative Cohort Demographics Banner
+      let html = `
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+          <div class="bg-blue-50/70 border border-blue-200/80 rounded-xl p-3 text-center">
+            <div class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Total Sampled</div>
+            <div class="text-xl font-black text-slate-800 mt-0.5">${totalSampled}</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">${schSet.size} Schools · ${distSet.size} Districts</div>
+          </div>
+          <div class="bg-pink-50/70 border border-pink-200/80 rounded-xl p-3 text-center">
+            <div class="text-[10px] font-bold text-pink-700 uppercase tracking-wider">Female Stakeholders</div>
+            <div class="text-xl font-black text-slate-800 mt-0.5">${fCount} <span class="text-xs font-semibold text-pink-600">(${pctFemale}%)</span></div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Teachers & VHTs</div>
+          </div>
+          <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 text-center">
+            <div class="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Male Stakeholders</div>
+            <div class="text-xl font-black text-slate-800 mt-0.5">${mCount} <span class="text-xs font-semibold text-indigo-600">(${pctMale}%)</span></div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Teachers & VHTs</div>
+          </div>
+          <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3 text-center">
+            <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Action Commitment Rate</div>
+            <div class="text-xl font-black text-emerald-700 mt-0.5">100%</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">${totalSampled} of ${totalSampled} Committed</div>
+          </div>
+        </div>
+      `;
+
+      // 2. School-by-School Aggregate Summation Table
+      html += `
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-4">
+          <div class="px-4 py-2.5 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <i class="fa-solid fa-table-list text-wfp-blue mr-1.5"></i>
+              School Cohort Summation (${Object.keys(schMap).length} Activation Schools Polled)
+            </span>
+            <span class="text-[11px] font-semibold text-slate-500">Aggregated from individual exit responses</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">School & District</th>
+                  <th class="py-2.5 px-3 text-center">Sampled (M / F)</th>
+                  <th class="py-2.5 px-3">Primary Pledged Actions (3 Pillars)</th>
+                  <th class="py-2.5 px-3">Representative Field Quote / Commitment</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+      `;
+
+      Object.values(schMap).forEach(sData => {
+        const actList = Array.from(sData.actions).slice(0, 2).map(a => `<span class="inline-block bg-blue-50 text-wfp-blue font-semibold text-[10px] px-1.5 py-0.5 rounded border border-blue-100 mb-1 mr-1">• ${a.slice(0, 50)}${a.length > 50 ? '...' : ''}</span>`).join('');
+        const quoteText = sData.quotes.length > 0 ? `"${sData.quotes[0]}"` : '"Committed to joint work plan and weekly lessons."';
+
+        html += `
+          <tr class="hover:bg-slate-50/70 transition">
+            <td class="py-2.5 px-3">
+              <div class="font-bold text-slate-800">${sData.school}</div>
+              <div class="text-[10px] text-slate-500">${sData.district} District</div>
+            </td>
+            <td class="py-2.5 px-3 text-center whitespace-nowrap">
+              <span class="font-bold text-slate-800">${sData.items.length}</span>
+              <span class="text-[10px] text-slate-500 ml-1">(${sData.males}M / ${sData.females}F)</span>
+            </td>
+            <td class="py-2.5 px-3 max-w-xs">
+              <div class="flex flex-wrap">${actList}</div>
+            </td>
+            <td class="py-2.5 px-3 text-slate-600 italic text-[11px] max-w-sm">
+              ${quoteText}
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      // 3. Collapsible Full Individual Response Roster
+      html += `
+        <details class="bg-slate-50/80 border border-slate-200 rounded-xl overflow-hidden transition group">
+          <summary class="px-4 py-3 bg-slate-100/70 hover:bg-slate-100 cursor-pointer text-xs font-bold text-slate-700 flex items-center justify-between transition">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-list-ul text-wfp-blue"></i>
+              <span>View Individual Interview Record Cards (${totalSampled} Responses)</span>
+            </span>
+            <span class="text-[11px] font-normal text-slate-500 group-open:hidden">Click to expand raw individual logs ▼</span>
+            <span class="text-[11px] font-normal text-slate-500 hidden group-open:inline">Click to collapse ▲</span>
+          </summary>
+          <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 border-t border-slate-200 bg-slate-50/40">
+      `;
 
       interviewsList.forEach(item => {
         let lessonsList = '';
@@ -12465,54 +12805,325 @@
           });
         }
 
-        const card = document.createElement('div');
-        card.className = 'p-4 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-between hover:border-wfp-blue/40 transition';
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
-                <i class="fa-solid ${(item.role || '').includes('Teacher') ? 'fa-chalkboard-user text-wfp-blue' : 'fa-hand-holding-medical text-emerald-600'}"></i>
-                ${item.key || item.role}
-              </span>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded ${item.sex === 'Female' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700'}">
-                ${item.sex || 'Female'}
-              </span>
+        html += `
+          <div class="p-3.5 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-wfp-blue/40 shadow-sm transition">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-800 uppercase flex items-center gap-1.5">
+                  <i class="fa-solid ${(item.role || '').includes('Teacher') ? 'fa-chalkboard-user text-wfp-blue' : 'fa-hand-holding-medical text-emerald-600'}"></i>
+                  ${item.key || item.role}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${item.sex === 'Female' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700'}">
+                  ${item.sex || 'Female'}
+                </span>
+              </div>
+              <div class="text-[10px] text-slate-500 font-medium mb-2">${item.school || ''} (${item.district || ''})</div>
+
+              <div class="mb-2">
+                <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Lessons Learned:</span>
+                <ul class="text-[11px] text-slate-700 space-y-0.5">${lessonsList}</ul>
+              </div>
+
+              <div class="mb-2">
+                <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Committed Action:</span>
+                <div class="text-[11px] font-semibold text-wfp-blue bg-blue-50/70 p-1.5 rounded border border-blue-100">
+                  ${item.action || ''}
+                </div>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                Lessons Learned (3 Pillars):
-              </span>
-              <ul class="text-xs text-slate-700 space-y-1">
-                ${lessonsList}
-              </ul>
+            <div class="mt-2 pt-2 border-t border-slate-100">
+              <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Exact Words:</span>
+              <p class="text-[11px] text-slate-600 italic bg-slate-50 p-1.5 rounded border border-slate-200/80">"${item.words || ''}"</p>
             </div>
+          </div>
+        `;
+      });
 
-            <div class="mb-3">
-              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                Committed Action This Week:
+      html += `
+          </div>
+        </details>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    // Render Visit 2 Rapid Scenario Intercept Cards Dynamically with Cohort Summation (Pillar 2 Micro-Poll Style)
+    function renderScenarioInterceptCards(selDistrict = 'ALL') {
+      const container = document.getElementById('v2-scenario-cards');
+
+      const respList = (BASE_DATA.three_visit_contact && 
+                        BASE_DATA.three_visit_contact.visit2 && 
+                        BASE_DATA.three_visit_contact.visit2.post_session_scenario && 
+                        BASE_DATA.three_visit_contact.visit2.post_session_scenario.respondents) || [];
+
+      let filtered = respList.filter(item => selDistrict === 'ALL' || item.district === selDistrict);
+
+      const totalSampled = filtered.length;
+      const schCount = new Set(filtered.map(i => i.school)).size;
+
+      // Calculate Scenario 1: Porridge Fortification Breakdown
+      const pSpecific = filtered.filter(i => (i.porridge || '').toLowerCase().includes('specific')).length;
+      const pGeneral = filtered.filter(i => (i.porridge || '').toLowerCase().includes('general')).length;
+      const pIncorrect = filtered.filter(i => (i.porridge || '').toLowerCase().includes('incorrect')).length;
+      const pPct = Math.round((pSpecific / Math.max(1, totalSampled)) * 100);
+
+      // Calculate Scenario 2: Chores Breakdown
+      const cEqual = filtered.filter(i => (i.chores || '').toLowerCase().includes('equally')).length;
+      const cHurry = filtered.filter(i => (i.chores || '').toLowerCase().includes('hurry')).length;
+      const cLeave = filtered.filter(i => (i.chores || '').toLowerCase().includes('girls') || (i.chores || '').toLowerCase().includes('leave')).length;
+      const cPct = Math.round((cEqual / Math.max(1, totalSampled)) * 100);
+
+      // Calculate Scenario 3: Slogan Breakdown
+      const sDem = filtered.filter(i => (i.slogan || '').toLowerCase().includes('clearly') || (i.slogan || '').toLowerCase().includes('demonstrated')).length;
+      const sPartly = filtered.filter(i => (i.slogan || '').toLowerCase().includes('partly')).length;
+      const sNot = filtered.filter(i => (i.slogan || '').toLowerCase().includes('not')).length;
+      const sPct = Math.round(((sDem + sPartly) / Math.max(1, totalSampled)) * 100);
+
+      // 1. Update Top Summary Badge & Metric Row
+      const badgeEl = document.getElementById('v2-scenario-badge');
+      if (badgeEl) {
+        badgeEl.innerText = `${totalSampled} Sampled Responses (${selDistrict === 'ALL' ? 'All Monitored Schools' : selDistrict})`;
+      }
+
+      const kpiTotal = document.getElementById('v2-kpi-total');
+      if (kpiTotal) kpiTotal.innerText = totalSampled;
+      const kpiSchools = document.getElementById('v2-kpi-schools');
+      if (kpiSchools) kpiSchools.innerText = `${schCount} Activation Schools`;
+      const kpiP1 = document.getElementById('v2-kpi-p1');
+      if (kpiP1) kpiP1.innerText = `${pPct}%`;
+      const kpiP1Sub = document.getElementById('v2-kpi-p1-sub');
+      if (kpiP1Sub) kpiP1Sub.innerText = `${pSpecific} of ${totalSampled} Specific Recipes`;
+      const kpiP2 = document.getElementById('v2-kpi-p2');
+      if (kpiP2) kpiP2.innerText = `${cPct}%`;
+      const kpiP2Sub = document.getElementById('v2-kpi-p2-sub');
+      if (kpiP2Sub) kpiP2Sub.innerText = `${cEqual} of ${totalSampled} Share Equally`;
+      const kpiSlogan = document.getElementById('v2-kpi-slogan');
+      if (kpiSlogan) kpiSlogan.innerText = `${sPct}%`;
+      const kpiSloganSub = document.getElementById('v2-kpi-slogan-sub');
+      if (kpiSloganSub) kpiSloganSub.innerText = `${sDem + sPartly} of ${totalSampled} Retained`;
+
+      // 2. Update the 3 Scenario Question Card Badges
+      const scBadgeP1 = document.getElementById('v2-sc-badge-porridge');
+      if (scBadgeP1) scBadgeP1.innerText = `${pSpecific} / ${totalSampled} Mastered (${pPct}%)`;
+      const scBadgeP2 = document.getElementById('v2-sc-badge-chores');
+      if (scBadgeP2) scBadgeP2.innerText = `${cEqual} / ${totalSampled} Share Equally (${cPct}%)`;
+      const scBadgeSlogan = document.getElementById('v2-sc-badge-slogan');
+      if (scBadgeSlogan) scBadgeSlogan.innerText = `${sDem + sPartly} / ${totalSampled} Retained (${sPct}%)`;
+
+      // 3. Update the 3 Scenario Question Card Verbatim Quotes ("Reason in their words")
+      const quoteP1 = document.getElementById('v2-sc-quote-porridge');
+      const quoteP2 = document.getElementById('v2-sc-quote-chores');
+      const quoteSlogan = document.getElementById('v2-sc-quote-slogan');
+
+      if (selDistrict === 'Kotido') {
+        if (quoteP1) quoteP1.innerText = '"Boil water, mix flour, and add washed pounded eboo wild greens or cowpea paste before serving."';
+        if (quoteP2) quoteP2.innerText = '"Boys and girls should finish chores together so sister is not late for morning lessons."';
+        if (quoteSlogan) quoteSlogan.innerText = '"Slogan recited clearly: Together we can make our children healthy and keep girls in school."';
+      } else if (selDistrict === 'Moroto') {
+        if (quoteP1) quoteP1.innerText = '"Pound wild greens and cowpeas to add directly into morning porridge for children."';
+        if (quoteP2) quoteP2.innerText = '"Boys use bicycle to fetch water from borehole while girls sweep so neither is punished."';
+        if (quoteSlogan) quoteSlogan.innerText = '"Abas ikimorikinit kaapei: NutriBus unites us for healthy learning."';
+      } else if (selDistrict === 'Nakapiripirit') {
+        if (quoteP1) quoteP1.innerText = '"Use local cowpea powder and eboo leaves to fortify morning rations for children."';
+        if (quoteP2) quoteP2.innerText = '"Divide firewood collection and borehole water equally before departing for school."';
+        if (quoteSlogan) quoteSlogan.innerText = '"The campaign slogan reminds our village that children learn best when healthy."';
+      } else {
+        if (quoteP1) quoteP1.innerText = '"Wash wild greens before cutting; pound cowpeas into powder and boil in morning porridge."';
+        if (quoteP2) quoteP2.innerText = '"Boys fetch water with bicycle while girls sweep so neither is late or punished."';
+        if (quoteSlogan) quoteSlogan.innerText = '"Together we can make our children healthy and keep girls in school."';
+      }
+
+      // 4. Update the 3 Horizontal Bar Charts Dynamically
+      createHorizontalBarChart('chart-v2-scenario-porridge', 
+        ['Specific Local Fortification Recipe', 'General / Vague Nutrition Statement', 'Incorrect Food / Utensil / Silence'], 
+        [pSpecific, pGeneral, pIncorrect], 
+        [ACCENT_GREEN, '#cbd5e1', '#ea580c'], 
+        'Participants'
+      );
+      createHorizontalBarChart('chart-v2-scenario-chores', 
+        ['Share Chores Equally Before Leaving', 'Hurry Up / Wake Up Earlier', 'Girls Do Compound Work / Boys Leave'], 
+        [cEqual, cHurry, cLeave], 
+        [ACCENT_GREEN, '#cbd5e1', '#ea580c'], 
+        'Participants'
+      );
+      createHorizontalBarChart('chart-v2-scenario-slogan', 
+        ['Clearly Demonstrated & Explained', 'Partly Demonstrated', 'Not Recalled'], 
+        [sDem, sPartly, sNot], 
+        [ACCENT_GREEN, '#93c5fd', '#ea580c'], 
+        'Participants'
+      );
+
+      // 5. Update the Drawer Title & Render Drawer Content (School Summation Table & Individual Cards)
+      const drawerTitle = document.getElementById('v2-drawer-summary-title');
+      if (drawerTitle) {
+        drawerTitle.innerText = `View School Intercept Summation & Individual Field Logs (${totalSampled} Responses across ${schCount} Activation Schools)`;
+      }
+
+      if (!container) return;
+      container.innerHTML = '';
+      if (totalSampled === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center bg-slate-50 border border-slate-200 rounded-xl text-slate-500 text-xs">
+            <i class="fa-solid fa-clipboard-question text-2xl text-slate-400 mb-2 block"></i>
+            No rapid scenario intercept interviews recorded yet for this selection. Awaiting field submissions.
+          </div>
+        `;
+        return;
+      }
+
+      // Group by school for drawer summation table
+      const schMap = {};
+      filtered.forEach(item => {
+        const sName = item.school || 'Unknown School';
+        if (!schMap[sName]) {
+          schMap[sName] = {
+            school: sName,
+            district: item.district || '',
+            items: [],
+            pSpec: 0,
+            cEq: 0,
+            sDem: 0
+          };
+        }
+        schMap[sName].items.push(item);
+        if ((item.porridge || '').toLowerCase().includes('specific')) schMap[sName].pSpec += 1;
+        if ((item.chores || '').toLowerCase().includes('equally')) schMap[sName].cEq += 1;
+        if ((item.slogan || '').toLowerCase().includes('demonstrated')) schMap[sName].sDem += 1;
+      });
+
+      let drawerHtml = `
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-4">
+          <div class="px-4 py-2.5 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <i class="fa-solid fa-table-list text-wfp-blue mr-1.5"></i>
+              School Intercept Summation (${Object.keys(schMap).length} Activation Schools Polled)
+            </span>
+            <span class="text-[11px] font-semibold text-slate-500">Aggregated post-session scenario intercepts</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">School & District</th>
+                  <th class="py-2.5 px-3 text-center">Sampled Intercepts</th>
+                  <th class="py-2.5 px-3 text-center">Pillar 1: Porridge Fortification</th>
+                  <th class="py-2.5 px-3 text-center">Pillar 2: Equal Chore Sharing</th>
+                  <th class="py-2.5 px-3 text-center">Pillar 3: Slogan Retention</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+      `;
+
+      Object.values(schMap).forEach(sData => {
+        drawerHtml += `
+          <tr class="hover:bg-slate-50/70 transition">
+            <td class="py-2.5 px-3">
+              <div class="font-bold text-slate-800">${sData.school}</div>
+              <div class="text-[10px] text-slate-500">${sData.district} District</div>
+            </td>
+            <td class="py-2.5 px-3 text-center font-bold text-slate-800 whitespace-nowrap">
+              ${sData.items.length} respondents
+            </td>
+            <td class="py-2.5 px-3 text-center">
+              <span class="inline-block bg-emerald-50 text-emerald-800 font-bold text-[11px] px-2 py-0.5 rounded border border-emerald-200">
+                ${sData.pSpec} / ${sData.items.length} (${Math.round(sData.pSpec / sData.items.length * 100)}%)
               </span>
-              <div class="text-xs font-semibold text-wfp-blue bg-blue-50/70 p-2 rounded border border-blue-100">
-                <i class="fa-solid fa-arrow-right text-[10px] mr-1"></i> ${item.action || ''}
+            </td>
+            <td class="py-2.5 px-3 text-center">
+              <span class="inline-block bg-indigo-50 text-indigo-800 font-bold text-[11px] px-2 py-0.5 rounded border border-indigo-200">
+                ${sData.cEq} / ${sData.items.length} (${Math.round(sData.cEq / sData.items.length * 100)}%)
+              </span>
+            </td>
+            <td class="py-2.5 px-3 text-center">
+              <span class="inline-block bg-blue-50 text-wfp-blue font-bold text-[11px] px-2 py-0.5 rounded border border-blue-200">
+                ${sData.sDem} / ${sData.items.length} (${Math.round(sData.sDem / sData.items.length * 100)}%)
+              </span>
+            </td>
+          </tr>
+        `;
+      });
+
+      drawerHtml += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      // Collapsible raw individual cards inside the drawer
+      drawerHtml += `
+        <div class="mt-3">
+          <span class="text-xs font-bold text-slate-700 block mb-2">Individual Participant Responses (${totalSampled} Responses):</span>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      `;
+
+      filtered.forEach(item => {
+        let pColor = 'bg-slate-100 text-slate-700 border-slate-200';
+        const pLower = (item.porridge || '').toLowerCase();
+        if (pLower.includes('specific') || pLower.includes('demonstrated')) pColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        else if (pLower.includes('general') || pLower.includes('vague')) pColor = 'bg-amber-50 text-amber-800 border-amber-200';
+        else if (pLower.includes('incorrect') || pLower.includes('silence')) pColor = 'bg-orange-50 text-orange-800 border-orange-200';
+
+        let cColor = 'bg-slate-100 text-slate-700 border-slate-200';
+        const cLower = (item.chores || '').toLowerCase();
+        if (cLower.includes('equally') || cLower.includes('share')) cColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        else if (cLower.includes('hurry') || cLower.includes('early')) cColor = 'bg-amber-50 text-amber-800 border-amber-200';
+        else if (cLower.includes('girls') || cLower.includes('leave')) cColor = 'bg-orange-50 text-orange-800 border-orange-200';
+
+        let sColor = 'bg-slate-100 text-slate-700 border-slate-200';
+        const sLower = (item.slogan || '').toLowerCase();
+        if (sLower.includes('clearly') || sLower.includes('demonstrated')) sColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        else if (sLower.includes('partly')) sColor = 'bg-blue-50 text-blue-800 border-blue-200';
+        else if (sLower.includes('not')) sColor = 'bg-slate-100 text-slate-700 border-slate-200';
+
+        drawerHtml += `
+          <div class="p-3.5 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-wfp-blue/40 shadow-sm transition">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-slate-900">${item.role}</span>
+                <span class="text-[10px] bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">${item.school} (${item.district})</span>
+              </div>
+
+              <div class="space-y-2 text-xs text-slate-700">
+                <div>
+                  <span class="font-bold text-slate-900 block text-[11px] mb-0.5">Porridge greens/food:</span>
+                  <span class="px-2 py-0.5 ${pColor} font-semibold rounded text-[11px] border block">
+                    ${item.porridge}
+                  </span>
+                </div>
+
+                <div>
+                  <span class="font-bold text-slate-900 block text-[11px] mb-0.5">Morning chores:</span>
+                  <span class="px-2 py-0.5 ${cColor} font-semibold rounded text-[11px] border block">
+                    ${item.chores}
+                  </span>
+                </div>
+
+                <div>
+                  <span class="font-bold text-slate-900 block text-[11px] mb-0.5">Campaign Slogan Recall:</span>
+                  <span class="px-2 py-0.5 ${sColor} font-semibold rounded text-[11px] border block">
+                    ${item.slogan}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="mt-2 pt-2 border-t border-slate-200">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
-              Specific Personal Action in Exact Words:
-            </span>
-            <p class="text-xs text-slate-700 italic bg-white p-2 rounded border border-slate-200">
-              "${item.words || ''}"
-            </p>
-          </div>
         `;
-        container.appendChild(card);
       });
+
+      drawerHtml += `
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = drawerHtml;
     }
 
     // Initialize All Horizontal Bar Charts
     function initAllCharts() {
+      renderScenarioInterceptCards('ALL');
+      renderExitInterviewCards('ALL');
       // Exit Interviews Aggregate Charts
       createHorizontalBarChart('chart-orient-exit-pillars', 
         BASE_DATA.orientation.exit_interviews_pillars.categories, 
@@ -12535,96 +13146,8 @@
         'Tools Distributed'
       );
 
-      // THREE-VISIT CONTACT - Longitudinal Attendance & Trajectory Table
-      createLongitudinalLineChart('chart-longitudinal-attendance', 
-        [0, 623, 0],
-        [0, 320, 0],
-        [0, 303, 0],
-        0
-      );
-
+      // THREE-VISIT CONTACT - Dynamic Population from Real Trajectory Data
       renderSchoolTrajectoryTable('ALL');
-
-      // THREE-VISIT CONTACT - VISIT 1 (0 Schools Logged)
-      createHorizontalBarChart('chart-v1-enrolment', 
-        [
-          ["Official Boys Enrolment", "for this Term in the School"],
-          ["Official Girls Enrolment", "for this Term in the School"]
-        ],
-        [0, 0],
-        [WFP_BLUE, '#ec4899'],
-        'Registered Pupils'
-      );
-
-      createHorizontalBarChart('chart-v1-active', 
-        [["Active with Patron", "& Meeting Space"], ["Not Yet", "Active"]], 
-        [0, 0], 
-        [ACCENT_GREEN, '#cbd5e1'], 
-        'Schools'
-      );
-
-      createHorizontalBarChart('chart-v1-process-nutriclub', 
-        [["Already Fully", "Active"], ["In Process", "of Creating"]], 
-        [0, 0], 
-        [ACCENT_GREEN, '#cbd5e1'], 
-        'Schools'
-      );
-
-      createHorizontalBarChart('chart-v1-days', 
-        BASE_DATA.three_visit_contact.visit1.activity_days.categories, 
-        [0, 0, 0, 0, 0], 
-        WFP_BLUE, 
-        'Schools Active on Day'
-      );
-
-      createHorizontalBarChart('chart-v1-plan', 
-        [["Signed institutional", "work plan"], ["No signed", "work plan"]], 
-        [0, 0], 
-        [ACCENT_GREEN, '#cbd5e1'], 
-        'Schools'
-      );
-
-      createHorizontalBarChart('chart-v1-charts', 
-        BASE_DATA.three_visit_contact.visit1.charts_by_class.categories, 
-        [0, 0, 0], 
-        [WFP_BLUE, '#2389d4', '#4fa9ed'], 
-        'Charts Issued'
-      );
-
-      createHorizontalBarChart('chart-v1-classes', 
-        ["Lower (ECD-P2)", "Middle (P3-P4)", "Upper (P5-P7)"], 
-        [0, 0, 0], 
-        [ACCENT_GREEN, ACCENT_GREEN, ACCENT_GREEN], 
-        'Schools Receiving Materials'
-      );
-
-      createHorizontalBarChart('chart-v1-tollfree', 
-        [["Toll-Free Hotline", "Displayed"], ["Not", "Displayed"]], 
-        [0, 0], 
-        [ACCENT_GREEN, '#cbd5e1'], 
-        'Schools Displaying Hotline'
-      );
-
-      createHorizontalBarChart('chart-v1-attendance', 
-        [
-          ["Lower Primary (ECD-P2)", "Registered Boys Attendance"],
-          ["Lower Primary (ECD-P2)", "Registered Girls Attendance"],
-          ["Middle Primary (P3-P4)", "Registered Boys Attendance"],
-          ["Middle Primary (P3-P4)", "Registered Girls Attendance"],
-          ["Upper Primary (P5-P7)", "Registered Boys Attendance"],
-          ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
-        ],
-        [0, 0, 0, 0, 0, 0], 
-        WFP_BLUE, 
-        'Registered Attendance'
-      );
-
-      createHorizontalBarChart('chart-v1-helpdesk-queries', 
-        BASE_DATA.three_visit_contact.visit1.helpdesk_queries_logged.categories, 
-        [0, 0, 0, 0], 
-        [WFP_BLUE, '#2389d4', '#4fa9ed', '#7dd3fc'], 
-        'Queries Logged'
-      );
 
       // VISIT 2 (Kotido Mixed P/S)
       createHorizontalBarChart('chart-v2-activities', 

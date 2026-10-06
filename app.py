@@ -918,10 +918,10 @@ with tabs[2]:
         st.markdown("---")
 
         # Section 3: Pillar 2 Micro-Poll (Boys only)
-        st.markdown("##### 🗳️ Pillar 2: Rebalancing Chores & Attendance (Boys-Only Micro-Poll, 180 Boys Sampled)")
-        st.caption("Read out the following statements and count number who agree. Choice (Strongly Agree to Strongly Disagree), Number of boys, and Reason in their words:")
-        
         poll = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("micro_poll", {})
+        total_p_votes = sum(poll[k].get("total_boys", sum(poll[k].get("values", [0]))) for k in ["statement_1", "statement_2", "statement_3", "statement_4", "statement_5"] if k in poll)
+        st.markdown(f"##### 🗳️ Pillar 2: Rebalancing Chores & Attendance (Boys-Only Micro-Poll, {total_p_votes:,} Boy Responses Recorded Across Schools)")
+        st.caption("Read out the following statements and count number who agree. Aggregated across all participating schools with verbatim boy reflections:")
         for k in ["statement_1", "statement_2", "statement_3", "statement_4", "statement_5"]:
             if k not in poll:
                 continue
@@ -972,6 +972,13 @@ with tabs[2]:
                     "Participants": sc.get("slogan_recall", {}).get("values", [])
                 })
                 st.altair_chart(make_horizontal_bar(df_slog, "Recall Response", "Participants", color="#D97706"), use_container_width=True)
+
+            v2_resps = sc.get("respondents", [])
+            if v2_resps:
+                with st.expander(f"📋 Sampled Respondent Details ({len(v2_resps)} Intercepted Profiles across {len(set(r['school'] for r in v2_resps))} Activation Schools)", expanded=False):
+                    df_resps = pd.DataFrame(v2_resps)[["role", "school", "district", "porridge", "chores", "slogan"]]
+                    df_resps.columns = ["Respondent Role", "School", "District", "Porridge Fortification Recall", "Chore Sharing Recall", "Slogan Recall"]
+                    st.dataframe(df_resps, use_container_width=True)
 
         st.markdown("---")
 

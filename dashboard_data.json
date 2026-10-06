@@ -8,8 +8,8 @@
     "last_updated": "2026-10-02",
     "index_tracking": {
       "column": "_index",
-      "last_processed_index": 13,
-      "total_submissions_tracked": 13,
+      "last_processed_index": 14,
+      "total_submissions_tracked": 14,
       "new_entries_this_batch": 0,
       "tracked_indices": [
         1,
@@ -24,9 +24,10 @@
         10,
         11,
         12,
-        13
+        13,
+        14
       ],
-      "last_synced": "2026-10-06 14:03:10"
+      "last_synced": "2026-10-06 16:21:21"
     }
   },
   "overview": {
@@ -67,10 +68,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 1147,
+        "value": 1363,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 1.42,
+        "progress_pct": 1.69,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -89,10 +90,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 265.0,
+        "value": 266.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 34.5,
+        "progress_pct": 34.6,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -170,9 +171,9 @@
         "demos_completed": 0,
         "target_demos": 50,
         "demo_progress_pct": 0.0,
-        "learners_reached": 114,
+        "learners_reached": 330,
         "caregivers_reached": 0,
-        "stakeholders_trained": 25.0,
+        "stakeholders_trained": 26.0,
         "pwd_reach": 1,
         "status": "Active (Reports Received)"
       },
@@ -272,20 +273,20 @@
         11,
         4,
         0,
-        2,
-        1147,
+        3,
+        1363,
         52,
-        265.0,
+        266.0,
         132
       ],
       "pct": [
         17.2,
         2.1,
         0.0,
-        3.1,
-        1.42,
+        4.7,
+        1.69,
         0.1,
-        34.5,
+        34.6,
         11.0
       ]
     }
@@ -305,7 +306,7 @@
       "patrons_appointed": 36,
       "joint_calendars_signed": 6,
       "joint_calendar_compliance_pct": 85.7,
-      "total_exit_interviews": 30
+      "total_exit_interviews": 36
     },
     "teacher_attendance_gender": {
       "categories": [
@@ -359,7 +360,7 @@
     },
     "exit_interviews_pillars": {
       "title": "What were the most important lessons learned today across the 3 Pillars?",
-      "sample_size": 30,
+      "sample_size": 36,
       "categories": [
         "Metu Porridge Fortification (Local Greens/Staples)",
         "Improved Cooking Methods (Firewood Saving)",
@@ -368,25 +369,25 @@
         "Fair and Equal Plate Sharing at Home"
       ],
       "values": [
+        20,
         18,
-        15,
-        17,
-        21,
-        19
+        19,
+        26,
+        22
       ]
     },
     "exit_interviews_actions": {
       "title": "What specific action are you personally going to take this week?",
-      "sample_size": 30,
+      "sample_size": 36,
       "categories": [
         "Enrich School/Home Porridge with Local Greens/Cowpeas",
         "Mobilize Boys/Fathers to Share Water/Wood Chores",
         "Adopt Firewood-Saving Practices / Establish Nutri Club"
       ],
       "values": [
-        17,
-        23,
-        17
+        20,
+        27,
+        21
       ]
     },
     "collateral_handover": {
@@ -563,6 +564,60 @@
         "district": "Karenga",
         "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas",
         "words": "She only words of thanks"
+      },
+      {
+        "respondent_id": "Respondent 1 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 2 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time",
+        "words": "2"
+      },
+      {
+        "respondent_id": "Respondent 3 (KOTIDO MIXED P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KOTIDO MIXED P/S",
+        "district": "Kotido",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "6"
+      },
+      {
+        "respondent_id": "Respondent 1 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Female",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 2 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "10"
+      },
+      {
+        "respondent_id": "Respondent 3 (KASIMERI P/S)",
+        "role": "Teacher / VHT",
+        "sex": "Male",
+        "school": "KASIMERI P/S",
+        "district": "Moroto",
+        "action": "Mobilize boys/fathers to share water/wood chores so girls arrive on time Enrich school/home porridge with obtainable local greens or cowpeas Adopt firewood-saving practices in school kitchen / establish Nutri Club",
+        "words": "5"
       },
       {
         "respondent_id": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -947,88 +1002,123 @@
       },
       "micro_poll": {
         "statement_1": {
-          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together",
+          "statement": "It is unfair for a girl to stay home doing compound work while brothers leave early for class.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
+            8,
+            80,
             0,
-            3,
-            0,
-            0,
+            2,
             0
+          ],
+          "total_boys": 90,
+          "agreed_boys": 88,
+          "pct_agreed": 97.8,
+          "reason_in_words": "Nakapiripirit: \"The girl may not concentrate like aboy\"",
+          "all_reasons": [
+            "Nakapiripirit: \"The girl may not concentrate like aboy\""
           ]
         },
         "statement_2": {
-          "statement": "I am ready to fetch water from borehole in morning so my sister is not late/punished",
+          "statement": "Boys and girls should finish morning chores at the same time so both eat porridge and walk to school together.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
             0,
-            2,
+            110,
             0,
             0,
             0
+          ],
+          "total_boys": 110,
+          "agreed_boys": 110,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"To make work easy\"",
+          "all_reasons": [
+            "Nakapiripirit: \"To make work easy\""
           ]
         },
         "statement_3": {
-          "statement": "If a girl misses school to herd animals or do chores I will speak up to get her back to class",
+          "statement": "Collecting firewood for cooking is a chore that boys and girls should do together.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            2,
-            1,
+            8,
+            111,
             0,
             0,
             0
+          ],
+          "total_boys": 119,
+          "agreed_boys": 119,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"To offer campany to and security to girls from rapiest\"",
+          "all_reasons": [
+            "Nakapiripirit: \"To offer campany to and security to girls from rapiest\""
           ]
         },
         "statement_4": {
-          "statement": "Collecting firewood for cooking is a chore that boys and girls should do together",
+          "statement": "I am ready to fetch water from borehole in morning so my sister is not late/punished.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            1,
-            2,
             0,
+            58,
+            1,
             0,
             0
+          ],
+          "total_boys": 59,
+          "agreed_boys": 58,
+          "pct_agreed": 98.3,
+          "reason_in_words": "Nakapiripirit: \"Share work with my sister\"",
+          "all_reasons": [
+            "Nakapiripirit: \"Share work with my sister\""
           ]
         },
         "statement_5": {
-          "statement": "It is unfair for a girl to stay home doing compound work while brothers leave early for class",
+          "statement": "If a girl misses school to herd animals or do chores I will speak up to get her back to class.",
           "categories": [
             "Strongly Agree",
             "Agree",
-            "Neutral",
+            "Neutral / Undecided",
             "Disagree",
             "Strongly Disagree"
           ],
           "values": [
-            1,
-            1,
+            128,
+            8,
             0,
-            1,
+            0,
             0
+          ],
+          "total_boys": 136,
+          "agreed_boys": 136,
+          "pct_agreed": 100.0,
+          "reason_in_words": "Nakapiripirit: \"Girls are not to look after animas while boys go to school\"",
+          "all_reasons": [
+            "Nakapiripirit: \"Girls are not to look after animas while boys go to school\""
           ]
         }
       },
@@ -1069,7 +1159,162 @@
             6,
             0
           ]
-        }
+        },
+        "respondents": [
+          {
+            "id": "Kotido mixed PS - Learner 1",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 2",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 2",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 3",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 3",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Learner 4",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Learner 4",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "Kotido mixed PS - Adult 1",
+            "school": "Kotido mixed PS",
+            "district": "Kotido",
+            "role": "Adult 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Not assessed"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 1",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 2",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 3",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 3",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Learner 4",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Learner 4",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Adult 1",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Adult 1",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "KASIMERI P/S - Adult 2",
+            "school": "KASIMERI P/S",
+            "district": "Moroto",
+            "role": "Adult 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 1",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 1",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 2",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "Not assessed",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 3",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 3",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Learner 4",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Learner 4",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Adult 1",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Adult 1",
+            "porridge": "Explains a specific, actionable practice without prompting",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
+          },
+          {
+            "id": "ST MARYS P/S - Adult 2",
+            "school": "ST MARYS P/S",
+            "district": "Nakapiripirit",
+            "role": "Adult 2",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          }
+        ]
       }
     },
     "visit3": {
@@ -1570,15 +1815,15 @@
   },
   "nutriclub_sessions": {
     "kpis": {
-      "total_sessions_logged": 2,
+      "total_sessions_logged": 3,
       "target_schools": 64,
-      "schools_with_active_clubs": 2,
-      "total_members": 101,
-      "members_male": 42,
-      "members_female": 59,
-      "session_attendance": 150,
-      "attendance_boys": 63,
-      "attendance_girls": 87,
+      "schools_with_active_clubs": 3,
+      "total_members": 161,
+      "members_male": 72,
+      "members_female": 89,
+      "session_attendance": 366,
+      "attendance_boys": 175,
+      "attendance_girls": 191,
       "pwd_learners": 1
     },
     "club_membership_gender": {
@@ -1587,8 +1832,8 @@
         "Female Members"
       ],
       "values": [
-        42,
-        59
+        72,
+        89
       ]
     },
     "session_attendance_gender": {
@@ -1597,8 +1842,8 @@
         "Girls Present"
       ],
       "values": [
-        63,
-        87
+        175,
+        191
       ]
     },
     "pwd_learners_attendance": {
@@ -1720,6 +1965,31 @@
         "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
         "home_action_assigned": "Carry food calenders at home and tick the food they eat at home for supper and return those food calenders to the school patron",
         "coordinator_notes": "Advised the teacher to continue engaging pupils practically during the session, children also were actually participating because of gifts"
+      },
+      {
+        "entry_index": 14,
+        "id": "NC-886940645",
+        "school": "KARENGA BOYS P/S",
+        "district": "Karenga",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-06",
+        "start_time": "12:30 PM",
+        "end_time": "14:00 PM",
+        "patron": "Lopeyok Paul pax",
+        "membership_male": 30,
+        "membership_female": 30,
+        "total_membership": 60,
+        "boys_present": 112,
+        "girls_present": 104,
+        "total_present": 216,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "meeting_place": "School compound",
+        "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+        "home_action_assigned": "We informed them to go and try eating a full balanced diet meal at home and list for us the type of food they eat and mark the food calenders given to themthey should mark in the d ca",
+        "coordinator_notes": "The children are excited for the activity because it a wards them gifts after answering questions"
       }
     ],
     "schools_register": [
@@ -2252,15 +2522,28 @@
         "district": "Karenga",
         "subcounty": "Karenga T/C",
         "selection": "Base 5",
-        "patron_name": "To be appointed",
-        "meeting_place": "Pending designation",
+        "patron_name": "Lopeyok Paul pax",
+        "meeting_place": "School compound",
         "total_enrolled": 1629,
         "attendance_rate": "91%",
-        "total_membership": 0,
-        "male_membership": 0,
-        "female_membership": 0,
+        "total_membership": 60,
+        "male_membership": 30,
+        "female_membership": 30,
         "total_pwd": 0,
-        "session_one": null,
+        "session_one": {
+          "date_conducted": "2026-10-06",
+          "start_time": "12:30 PM",
+          "end_time": "14:00 PM",
+          "designated_meeting_place": "School compound",
+          "club_patron_name": "Lopeyok Paul pax",
+          "boys_present": 112,
+          "girls_present": 104,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+          "home_action_assigned": "We informed them to go and try eating a full balanced diet meal at home and list for us the type of food they eat and mark the food calenders given to themthey should mark in the d ca",
+          "coordinator_notes": "The children are excited for the activity because it a wards them gifts after answering questions"
+        },
         "session_two": null
       },
       {
@@ -2850,7 +3133,7 @@
         "baseline": "Pending Visit 1",
         "evidence_points": [
           "9 learners gave specific, actionable local fortification recipes without prompting",
-          "30 teacher & VHT exit interviews completed across 8 oriented schools",
+          "36 teacher & VHT exit interviews completed across 8 oriented schools",
           "Community cooking demonstration rollout pending (0 of 640 conducted)"
         ]
       },
@@ -2862,8 +3145,9 @@
         "baseline": "Pending Visit 1",
         "evidence_points": [
           "14 of 16 learners stated boys and girls should share water/wood chores equally before leaving",
-          "2 NutriClub active (2 schools) delivering practical chore rebalancing dialogue",
-          "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)"
+          "514 boy responses recorded across 5 micro-poll statements with 99.4% agreement rate (511 agreements) affirming gender chore rebalancing",
+          "3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S with 161 registered members) delivering practical chore rebalancing dialogue",
+          "Longitudinal attendance tracking initiated (997 learners logged across Visit 1 and Visit 2)"
         ]
       },
       {
@@ -2894,12 +3178,12 @@
           {
             "label": "School Contact Visits",
             "value": "4 Visits Conducted",
-            "detail": "3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
+            "detail": "1 Visit 1 School Onboarding completed, 3 Visit 2 Big Activation Days completed (Target: 192 total visits)"
           },
           {
             "label": "Children Reached",
-            "value": "1,147 Pupils",
-            "detail": "623 in Visit 2 activations, 150 in NutriClub sessions (Target: 80,875)"
+            "value": "1,363 Pupils",
+            "detail": "374 weekly attendees (1480 enrolled) at Visit 1, 623 in Visit 2 activations, 366 in NutriClub sessions (Target: 80,875)"
           },
           {
             "label": "Village Cooking Demos",
@@ -2913,12 +3197,12 @@
           },
           {
             "label": "Active NutriClubs",
-            "value": "2 Clubs Active",
-            "detail": "2 active club(s) (KAKAMAR P/S, KARENGA GIRLS P/S) with 101 registered members (Target: 64 clubs)"
+            "value": "3 Clubs Active",
+            "detail": "3 active club(s) (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S) with 161 registered members (Target: 64 clubs)"
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "265.0 Stakeholders",
+            "value": "266.0 Stakeholders",
             "detail": "Oriented across 8 primary schools (Target: 768)"
           },
           {
@@ -2962,8 +3246,8 @@
           },
           {
             "label": "Teacher Patrons in Charge",
-            "value": "1 Appointed Patron",
-            "detail": "Club patron active at Kakamar P/S (Kaabong)"
+            "value": "3 Appointed Club Patrons",
+            "detail": "Club patrons active across KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S"
           },
           {
             "label": "Safe with No Retaliation",
@@ -2986,8 +3270,8 @@
           },
           {
             "label": "Boys Helping with Morning Chores",
-            "value": "87.5% Consensus",
-            "detail": "87.5% agreement in Visit 2 micro-polls that domestic chores must be shared"
+            "value": "99.4% Consensus",
+            "detail": "99.4% agreement across 514 boy responses in Visit 2 micro-polls that domestic chores must be shared"
           },
           {
             "label": "Girls Arriving on Time for Class",
@@ -3011,8 +3295,8 @@
           },
           {
             "label": "Clubs Continuing on Their Own",
-            "value": "1 Active Club",
-            "detail": "Kakamar P/S NutriClub established with weekly meetings"
+            "value": "3 Active Clubs",
+            "detail": "KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S NutriClubs established with weekly meetings"
           }
         ],
         "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
@@ -3053,10 +3337,10 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "3 Visits \u00b7 2 Active NutriClub",
+          "headline": "3 Visits \u00b7 3 Active NutriClubs",
           "data_points": [
             "3 primary schools completed Visit 2 Big Activation Day",
-            "2 active school club established at Kakamar P/S (41 members)",
+            "3 active school clubs established (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 registered members)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
@@ -3071,7 +3355,7 @@
         "what_changed": {
           "headline": "Longitudinal Tracking Initiated",
           "data_points": [
-            "Longitudinal attendance tracking initiated (623 learners logged in Visit 2)",
+            "Longitudinal attendance tracking initiated (997 learners logged in Visit 1 & Visit 2)",
             "Punctuality and attendance rebound to be audited at Visit 3",
             "Out-of-school girl tracing pending closeout reports"
           ]
@@ -3124,10 +3408,10 @@
         "title": "Visit 1: Getting Started in Class",
         "desc": "Healthy food sorting, the Adere calabash game, and Home Charts given out",
         "data_collected": [
-          "Children Reached: 0 learners (Awaiting Visit 1 field submissions)",
-          "Classroom Practice: 0 schools logged (Pending Visit 1)",
-          "Home Charts Given: 0 charts logged (Pending Visit 1)",
-          "Patrons Appointed: 1 club patron appointed (Kakamar P/S, Kaabong)"
+          "Children Audited: 374 weekly attendees (1480 total enrolled) at Katikit P/S",
+          "Classroom Practice: 1 school completed onboarding & audit (KATIKIT P/S (Amudat))",
+          "Home Charts Given: 19 classroom NutriCharts issued across Lower, Middle, Upper primary",
+          "Patrons Appointed: 36 teacher patrons appointed across 8 orientation schools (plus 3 club patrons)"
         ]
       },
       {
@@ -3136,7 +3420,7 @@
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
           "Attendance Logged: 623 learners counted across 3 schools",
-          "What Pupils Remembered: 52.9% unaided recall of core messages",
+          "What Pupils Remembered: 52.9% unaided recall of core messages (9 actionable fortification recipes)",
           "School Pledges: 3 school commitments signed",
           "Village Cooking Demos: 0 demos logged (Target: 640 sites)"
         ]
@@ -3149,7 +3433,7 @@
           "Attendance Growth: - (Awaiting Visit 3 closeouts)",
           "Charts Returned: 0 returned (Pending Visit 3 closeout audits)",
           "School Commitments: Pending endline verification (0 schools)",
-          "Club Continuity: 2 NutriClub active (Kakamar P/S, Kaabong)"
+          "Club Continuity: 3 NutriClubs active (KAKAMAR P/S, KARENGA BOYS P/S, KARENGA GIRLS P/S, 161 members)"
         ]
       },
       {
@@ -3343,6 +3627,19 @@
       "coordinator": "Lopeyok Martin",
       "reach": 114,
       "pwd": 1,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 14,
+      "id": 886940645,
+      "date": "2026-10-06",
+      "district": "Karenga",
+      "activity": "Nutriclub session",
+      "school": "KARENGA BOYS P/S",
+      "coordinator": "Lopeyok Martin",
+      "reach": 216,
+      "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"
     }
