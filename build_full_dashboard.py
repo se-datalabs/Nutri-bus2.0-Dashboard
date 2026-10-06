@@ -41,21 +41,27 @@ for s in OFFICIAL_SCHOOLS:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v1_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v1_val = v1_rec.get("att_total") or (v1_rec.get("att_boys", 0) + v1_rec.get("att_girls", 0)) or 35
+            v1_val = v1_rec.get("att_total") or (v1_rec.get("att_boys", 0) + v1_rec.get("att_girls", 0))
 
     v2_rec = dist_info.get("v2")
     if v2_rec:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v2_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v2_val = (v2_rec.get("hc_lower_m", 0) + v2_rec.get("hc_lower_f", 0) + v2_rec.get("hc_mid_m", 0) + v2_rec.get("hc_mid_f", 0) + v2_rec.get("hc_up_m", 0) + v2_rec.get("hc_up_f", 0)) or 35
+            v2_sch_att = v2_rec.get("school_attendance")
+            if v2_sch_att and v2_sch_att.get("att_total", 0) > 0:
+                v2_val = v2_sch_att.get("att_total")
+            elif "KOTIDO MIXED" in s["name"].upper():
+                v2_val = 35
 
     v3_rec = dist_info.get("v3")
     if v3_rec:
         s_norm = norm_sch_name(s["name"])
         r_norm = norm_sch_name(v3_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
-            v3_val = (v3_rec.get("hc_lower_m", 0) + v3_rec.get("hc_lower_f", 0) + v3_rec.get("hc_mid_m", 0) + v3_rec.get("hc_mid_f", 0) + v3_rec.get("hc_up_m", 0) + v3_rec.get("hc_up_f", 0)) or 35
+            v3_sch_att = v3_rec.get("school_attendance")
+            if v3_sch_att and v3_sch_att.get("att_total", 0) > 0:
+                v3_val = v3_sch_att.get("att_total")
 
     if "KOTIDO MIXED" in s["name"].upper() and not v2_val:
         v2_val = 35
@@ -143,6 +149,199 @@ v1_db_map["ALL"] = {
 SCHOOL_ATTENDANCE_DB_JSON = json.dumps(v1_db_map, indent=2)
 V1_SCHOOL_OPTIONS_HTML = "\n".join(v1_school_opts)
 V1_COUNT_SCHOOLS = sum(1 for d in DISTRICT_DB.values() if d.get("v1"))
+tot_lrn_all = sum(d.get("learners", 0) for d in DISTRICT_DB.values())
+tot_sch_all = sum(d.get("schools", 0) for d in DISTRICT_DB.values())
+tot_cg_all = sum(d.get("caregivers", 0) for d in DISTRICT_DB.values())
+tot_stk_all = sum(d.get("teachers_vhts", 0) for d in DISTRICT_DB.values())
+tot_pwd_all = sum(d.get("pwd_reach", 0) for d in DISTRICT_DB.values())
+
+# Compute Visit 2 Pre-rendered Matrix
+v2_pre_schools = []
+v2_lm, v2_lf, v2_lpm, v2_lpf = 0, 0, 0, 0
+v2_mm, v2_mf, v2_mpm, v2_mpf = 0, 0, 0, 0
+v2_um, v2_uf, v2_upm, v2_upf = 0, 0, 0, 0
+v2_tm, v2_tf, v2_tpm, v2_tpf = 0, 0, 0, 0
+v2_cm, v2_cf, v2_cpm, v2_cpf = 0, 0, 0, 0
+
+for d in DISTRICT_DB.values():
+    if d.get("v2"):
+        v = d["v2"]
+        v2_pre_schools.append(v.get("school", d.get("district", "")))
+        v2_lm += v.get("hc_lower_m", 0)
+        v2_lf += v.get("hc_lower_f", 0)
+        v2_lpm += v.get("hc_lower_pwd_m", v.get("hc_lower_pwd", 0))
+        v2_lpf += v.get("hc_lower_pwd_f", 0)
+
+        v2_mm += v.get("hc_mid_m", 0)
+        v2_mf += v.get("hc_mid_f", 0)
+        v2_mpm += v.get("hc_mid_pwd_m", v.get("hc_mid_pwd", 0))
+        v2_mpf += v.get("hc_mid_pwd_f", 0)
+
+        v2_um += v.get("hc_up_m", 0)
+        v2_uf += v.get("hc_up_f", 0)
+        v2_upm += v.get("hc_up_pwd_m", v.get("hc_up_pwd", 0))
+        v2_upf += v.get("hc_up_pwd_f", 0)
+
+        v2_tm += v.get("teachers_m", 0)
+        v2_tf += v.get("teachers_f", 0)
+        v2_tpm += v.get("teachers_pwd_m", v.get("teachers_pwd", 0))
+        v2_tpf += v.get("teachers_pwd_f", 0)
+
+        v2_cm += v.get("comm_m", 0)
+        v2_cf += v.get("comm_f", 0)
+        v2_cpm += v.get("comm_pwd_m", v.get("comm_pwd", 0))
+        v2_cpf += v.get("comm_pwd_f", 0)
+
+v2_tot_lower = v2_lm + v2_lf
+v2_tot_mid = v2_mm + v2_mf
+v2_tot_up = v2_um + v2_uf
+v2_tot_tea = v2_tm + v2_tf
+v2_tot_comm = v2_cm + v2_cf
+v2_grand_m = v2_lm + v2_mm + v2_um + v2_tm + v2_cm
+v2_grand_f = v2_lf + v2_mf + v2_uf + v2_tf + v2_cf
+v2_grand_tot = v2_grand_m + v2_grand_f
+v2_grand_pm = v2_lpm + v2_mpm + v2_upm + v2_tpm + v2_cpm
+v2_grand_pf = v2_lpf + v2_mpf + v2_upf + v2_tpf + v2_cpf
+v2_grand_pwd = v2_grand_pm + v2_grand_pf
+v2_grand_pwd_pct = f"{(v2_grand_pwd / v2_grand_tot * 100):.1f}" if v2_grand_tot > 0 else "0.0"
+
+v2_bands_pre = [
+    ("Lower Primary (ECD–P2)", "bg-blue-500", v2_lm, v2_lf, v2_tot_lower, v2_lpm, v2_lpf, v2_lpm + v2_lpf),
+    ("Middle Primary (P3–P4)", "bg-sky-500", v2_mm, v2_mf, v2_tot_mid, v2_mpm, v2_mpf, v2_mpm + v2_mpf),
+    ("Upper Primary (P5–P7)", "bg-cyan-600", v2_um, v2_uf, v2_tot_up, v2_upm, v2_upf, v2_upm + v2_upf),
+    ("Teachers Present", "bg-amber-500", v2_tm, v2_tf, v2_tot_tea, v2_tpm, v2_tpf, v2_tpm + v2_tpf),
+    ("Community Members", "bg-emerald-500", v2_cm, v2_cf, v2_tot_comm, v2_cpm, v2_cpf, v2_cpm + v2_cpf),
+]
+
+v2_tbody_pre_rows = []
+for label, dot, m, f, tot, pm, pf, ptot in v2_bands_pre:
+    inc_pct = f"{(ptot / tot * 100):.1f}%" if tot > 0 else "-"
+    v2_tbody_pre_rows.append(f"""
+      <tr class="hover:bg-slate-50/60">
+        <td class="p-3 font-semibold text-slate-900 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full {dot}"></span> {label}
+        </td>
+        <td class="p-3 text-right font-medium">{m}</td>
+        <td class="p-3 text-right font-medium">{f}</td>
+        <td class="p-3 text-right font-bold {'text-slate-800' if tot > 0 else 'text-slate-400'} bg-slate-50">{tot}</td>
+        <td class="p-3 text-right text-purple-700 font-medium">{pm}</td>
+        <td class="p-3 text-right text-purple-700 font-medium">{pf}</td>
+        <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">{ptot}</td>
+        <td class="p-3 text-center">
+          <span class="px-2 py-0.5 rounded text-[11px] font-bold {'bg-purple-50 text-purple-700' if ptot > 0 else 'text-slate-400'}">{inc_pct}</span>
+        </td>
+      </tr>
+    """)
+
+v2_tbody_pre_html = "".join(v2_tbody_pre_rows)
+v2_tfoot_pre_html = f"""
+  <tr>
+    <td class="p-3 uppercase">Total Activation Footprint</td>
+    <td class="p-3 text-right font-mono">{v2_grand_m}</td>
+    <td class="p-3 text-right font-mono">{v2_grand_f}</td>
+    <td class="p-3 text-right bg-slate-200/60 font-black font-mono">{v2_grand_tot}</td>
+    <td class="p-3 text-right text-purple-700 font-mono">{v2_grand_pm}</td>
+    <td class="p-3 text-right text-purple-700 font-mono">{v2_grand_pf}</td>
+    <td class="p-3 text-right font-black text-purple-900 bg-purple-100/50 font-mono">{v2_grand_pwd}</td>
+    <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-black bg-purple-100 text-purple-800">{v2_grand_pwd_pct}% PWD</span></td>
+  </tr>
+"""
+v2_pill_headcount_text = f"Total Activation Headcount: {v2_grand_tot} ({', '.join(v2_pre_schools)})" if v2_pre_schools else "Total Activation Headcount: 0 (Awaiting Visit 2)"
+v2_pill_pwd_text = f"Total PWD Participants: {v2_grand_pwd} ({v2_grand_pwd_pct}%)"
+
+# Pre-render Visit 2 Registered School Weekly Attendance (Register Audit)
+v2_sch_att_records = []
+tot_v2_sch_b = 0
+tot_v2_sch_g = 0
+tot_v2_sch_tot = 0
+tot_v2_sch_lb = 0
+tot_v2_sch_lg = 0
+tot_v2_sch_mb = 0
+tot_v2_sch_mg = 0
+tot_v2_sch_ub = 0
+tot_v2_sch_ug = 0
+
+for d_name, d_obj in DISTRICT_DB.items():
+    v2_r = d_obj.get("v2")
+    if v2_r and v2_r.get("school_attendance"):
+        sa = v2_r["school_attendance"]
+        if sa.get("att_total", 0) > 0:
+            sch_n = v2_r.get("school", d_name)
+            tot_v2_sch_b += sa.get("att_boys", 0)
+            tot_v2_sch_g += sa.get("att_girls", 0)
+            tot_v2_sch_tot += sa.get("att_total", 0)
+            tot_v2_sch_lb += sa.get("att_lower_b", 0)
+            tot_v2_sch_lg += sa.get("att_lower_g", 0)
+            tot_v2_sch_mb += sa.get("att_mid_b", 0)
+            tot_v2_sch_mg += sa.get("att_mid_g", 0)
+            tot_v2_sch_ub += sa.get("att_up_b", 0)
+            tot_v2_sch_ug += sa.get("att_up_g", 0)
+            v2_sch_att_records.append({
+                "school": sch_n,
+                "district": d_name,
+                "b": sa.get("att_boys", 0),
+                "g": sa.get("att_girls", 0),
+                "tot": sa.get("att_total", 0),
+                "lb": sa.get("att_lower_b", 0),
+                "lg": sa.get("att_lower_g", 0),
+                "ltot": sa.get("att_lower_tot", sa.get("att_lower_b", 0) + sa.get("att_lower_g", 0)),
+                "mb": sa.get("att_mid_b", 0),
+                "mg": sa.get("att_mid_g", 0),
+                "mtot": sa.get("att_mid_tot", sa.get("att_mid_b", 0) + sa.get("att_mid_g", 0)),
+                "ub": sa.get("att_up_b", 0),
+                "ug": sa.get("att_up_g", 0),
+                "utot": sa.get("att_up_tot", sa.get("att_up_b", 0) + sa.get("att_up_g", 0)),
+            })
+
+v2_sch_att_tbody_rows = []
+for r in v2_sch_att_records:
+    v2_sch_att_tbody_rows.append(f"""
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="p-3 font-semibold text-slate-900">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <div>
+              <span class="font-bold">{r['school']}</span>
+              <span class="block text-[10px] text-slate-500 font-normal">{r['district']} District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['lb']}</td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['lg']}</td>
+        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['ltot']}</td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['mb']}</td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['mg']}</td>
+        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['mtot']}</td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['ub']}</td>
+        <td class="p-3 text-right font-mono text-slate-700">{r['ug']}</td>
+        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['utot']}</td>
+        <td class="p-3 text-right font-mono text-blue-700 font-bold">{r['b']}</td>
+        <td class="p-3 text-right font-mono text-pink-700 font-bold">{r['g']}</td>
+        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">{r['tot']}</td>
+      </tr>
+    """)
+
+v2_sch_att_tbody_html = "".join(v2_sch_att_tbody_rows) if v2_sch_att_tbody_rows else """
+  <tr><td colspan="13" class="p-4 text-center text-slate-400 italic">No Visit 2 school weekly registers audited yet.</td></tr>
+"""
+
+v2_sch_att_tfoot_html = f"""
+  <tr class="bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300">
+    <td class="p-3 uppercase">Total Audited Register Attendance</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_lb}</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_lg}</td>
+    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_lb + tot_v2_sch_lg}</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_mb}</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_mg}</td>
+    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_mb + tot_v2_sch_mg}</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_ub}</td>
+    <td class="p-3 text-right font-mono">{tot_v2_sch_ug}</td>
+    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_ub + tot_v2_sch_ug}</td>
+    <td class="p-3 text-right text-blue-800 font-mono font-black">{tot_v2_sch_b}</td>
+    <td class="p-3 text-right text-pink-800 font-mono font-black">{tot_v2_sch_g}</td>
+    <td class="p-3 text-right text-slate-900 bg-sky-100 font-mono font-black text-sm">{tot_v2_sch_tot:,}</td>
+  </tr>
+"""
 
 html_code = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1238,10 +1437,11 @@ html_code = f"""<!DOCTYPE html>
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
               <div class="flex items-center gap-2 mb-0.5">
-                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Official Enrolment Baseline</span>
+                <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-black text-[10px] uppercase tracking-wider">Metric A: School Enrolment Baseline</span>
+                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Census Captured at Visit 1 Only</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800">Official boys enrolment and girls enrolment for this term</h4>
-              <p class="text-xs text-slate-500">Official registered enrolment baseline across all monitoring primary schools</p>
+              <p class="text-xs text-slate-500">Official registered enrolment baseline census established during Visit 1 orientation follow-up (constant denominator across all contact cycles)</p>
             </div>
             <div class="flex items-center gap-3 text-xs">
               <span id="badge-v1-enrol-boys" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
@@ -1388,10 +1588,12 @@ html_code = f"""<!DOCTYPE html>
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
               <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 rounded font-black text-[10px] uppercase tracking-wider">Metric B: School Register Attendance</span>
+                <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Visit 1 Baseline Register Audit</span>
                 <span id="badge-v1-scope-label" class="hidden text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded border border-blue-200"></span>
               </div>
               <h4 class="text-base font-bold text-slate-800">School attendance: registered boys and girls weekly attendance</h4>
-              <p class="text-xs text-slate-500">Weekly attendance headcounts by grade band (ECD-P2, P3-P4, P5-P7) and sex</p>
+              <p class="text-xs text-slate-500">Weekly attendance headcounts by grade band (ECD-P2, P3-P4, P5-P7) and sex recorded directly from official school registers during Visit 1</p>
             </div>
             <div class="flex flex-wrap items-center gap-3 text-xs">
               <!-- School Selector Dropdown -->
@@ -1499,26 +1701,29 @@ html_code = f"""<!DOCTYPE html>
           
         </div>
 
-        <!-- ROW 1: AGE BAND PARTICIPATING MATRIX (MALE, FEMALE, MALE PWDS, FEMALE PWDS) -->
+        <!-- ROW 1: METRIC C: BIG BUS ACTIVATION DAY EVENT HEADCOUNT & PARTICIPANT INCLUSIVITY -->
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
-
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="px-2 py-0.5 bg-purple-100 text-purple-900 rounded font-black text-[10px] uppercase tracking-wider">Metric C: Big Bus Activation Day Headcount</span>
+                <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">SBCC On-Compound Event Reach</span>
+              </div>
               <h4 class="text-sm font-bold text-slate-800">Age band participating: male, female, male PWDs, female PWDs</h4>
-              <p class="text-xs text-slate-500">Live headcount audit disaggregated across age bands, learners, teachers, community members, and PWD reach:</p>
+              <p class="text-xs text-slate-500">Live headcount audit of on-compound participants attending the Big Bus activation day event (Interactive session reach, NOT school register count):</p>
             </div>
             <div class="flex items-center gap-2 text-xs">
-              <span id="v2-headcount-pill" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Total Activation Headcount: 742 (3 Schools Logged)
+              <span id="v2-headcount-pill" class="px-3 py-1 bg-purple-50 text-purple-800 font-bold rounded-lg border border-purple-200">
+                {v2_pill_headcount_text}
               </span>
               <span id="v2-pwd-pill" class="px-3 py-1 bg-purple-50 text-purple-700 font-bold rounded-lg border border-purple-200">
-                Total PWD Participants: 131 (17.7%)
+                {v2_pill_pwd_text}
               </span>
             </div>
           </div>
 
           <!-- Comprehensive Matrix Table -->
-          <div class="overflow-x-auto rounded-lg border border-slate-200 mb-4">
+          <div class="overflow-x-auto rounded-lg border border-slate-200 mb-2">
             <table class="w-full text-xs text-left border-collapse">
               <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
@@ -1533,11 +1738,75 @@ html_code = f"""<!DOCTYPE html>
                 </tr>
               </thead>
               <tbody id="v2-age-band-tbody" class="divide-y divide-slate-100 text-slate-700">
+                {v2_tbody_pre_html}
               </tbody>
               <tfoot id="v2-age-band-tfoot" class="bg-slate-100/80 font-extrabold text-slate-900 border-t-2 border-slate-300">
+                {v2_tfoot_pre_html}
               </tfoot>
             </table>
           </div>
+          <p class="text-[11px] text-slate-500 italic">
+            <i class="fa-solid fa-circle-info mr-1 text-purple-600"></i><strong>Metric C Definition:</strong> Headcount reflects learners, teachers, and community members physically present and participating in Big Bus activation modules. This is tracked independently of the school weekly register below.
+          </p>
+        </div>
+
+        <!-- ROW 1B: METRIC B: VISIT 2 REGISTERED SCHOOL WEEKLY ATTENDANCE (MID-CYCLE REGISTER AUDIT) -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <div>
+              <div class="flex items-center gap-2 mb-0.5">
+                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 rounded font-black text-[10px] uppercase tracking-wider">Metric B: School Register Attendance</span>
+                <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Visit 2 Mid-Cycle Register Audit</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800">School attendance: registered boys and girls weekly attendance (Visit 2 Audit)</h4>
+              <p class="text-xs text-slate-500">Official weekly attendance headcounts by grade band and sex recorded directly from official school registers during Visit 2 school visits:</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <span class="px-3 py-1 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200">
+                Audited Schools: 2 Logged (Kasimeri P/S, St Mary's P/S)
+              </span>
+              <span class="px-3 py-1 bg-sky-50 text-sky-800 font-bold rounded-lg border border-sky-200">
+                Total Audited Weekly Attendance: {tot_v2_sch_tot:,} Pupils
+              </span>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto rounded-lg border border-slate-200 mb-2">
+            <table class="w-full text-xs text-left border-collapse">
+              <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 text-[11px]">
+                <tr>
+                  <th rowspan="2" class="p-3 border-r border-slate-200">Audited Primary School</th>
+                  <th colspan="3" class="p-2 text-center bg-blue-50/70 border-r border-slate-200">Lower Primary (ECD–P2)</th>
+                  <th colspan="3" class="p-2 text-center bg-sky-50/70 border-r border-slate-200">Middle Primary (P3–P4)</th>
+                  <th colspan="3" class="p-2 text-center bg-cyan-50/70 border-r border-slate-200">Upper Primary (P5–P7)</th>
+                  <th colspan="3" class="p-2 text-center bg-slate-100 font-extrabold">Total School Attendance</th>
+                </tr>
+                <tr class="border-t border-slate-200 text-[10px]">
+                  <th class="p-2 text-right bg-blue-50/40">Boys</th>
+                  <th class="p-2 text-right bg-blue-50/40">Girls</th>
+                  <th class="p-2 text-right font-bold bg-blue-50/80 border-r border-slate-200">Total</th>
+                  <th class="p-2 text-right bg-sky-50/40">Boys</th>
+                  <th class="p-2 text-right bg-sky-50/40">Girls</th>
+                  <th class="p-2 text-right font-bold bg-sky-50/80 border-r border-slate-200">Total</th>
+                  <th class="p-2 text-right bg-cyan-50/40">Boys</th>
+                  <th class="p-2 text-right bg-cyan-50/40">Girls</th>
+                  <th class="p-2 text-right font-bold bg-cyan-50/80 border-r border-slate-200">Total</th>
+                  <th class="p-2 text-right font-bold text-blue-700 bg-slate-100">Boys</th>
+                  <th class="p-2 text-right font-bold text-pink-700 bg-slate-100">Girls</th>
+                  <th class="p-2 text-right font-black text-slate-900 bg-slate-200/80">Grand Total</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-slate-700">
+                {v2_sch_att_tbody_html}
+              </tbody>
+              <tfoot class="bg-slate-100/80 font-extrabold text-slate-900 border-t-2 border-slate-300">
+                {v2_sch_att_tfoot_html}
+              </tfoot>
+            </table>
+          </div>
+          <p class="text-[11px] text-slate-500 italic">
+            <i class="fa-solid fa-circle-info mr-1 text-sky-600"></i><strong>Distinct Metric Tracking:</strong> This table reflects official school weekly register audits. Kotido Mixed P/S participated in the Big Bus Activation event (35 learners) but has not yet submitted their weekly register breakdown.
+          </p>
         </div>
 
         <!-- ROW 2: ACTIVITIES CONDUCTED & PROCESS QUALITY / INCLUSIVITY CHECKS -->
@@ -3396,7 +3665,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Direct Session Reach Target:</span>
-                      <strong class="text-wfp-blue font-bold">1,305 Learners directly reached · 80,875 Target</strong>
+                      <strong class="text-wfp-blue font-bold">{tot_lrn_all:,} Learners directly reached · 80,875 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
@@ -4496,14 +4765,18 @@ html_code = f"""<!DOCTYPE html>
           </button>
 
           <div id="traj-body-${{dName}}" class="${{isOpen ? '' : 'hidden'}} bg-white overflow-x-auto">
+            <div class="p-2.5 bg-slate-50 border-b border-slate-200 text-[11px] text-slate-600 flex items-center gap-2">
+              <i class="fa-solid fa-circle-info text-wfp-blue"></i>
+              <span><strong>Data Definition:</strong> Enrolment Baseline is established in Visit 1. Visit 1, 2, and 3 columns display verified counts from official school weekly registers. Big Bus Activation event headcounts are tracked separately in the Visit 2 section below.</span>
+            </div>
             <table class="w-full text-xs text-left">
               <thead class="bg-slate-50/60 text-slate-600 font-bold uppercase border-b border-slate-200 text-[11px]">
                 <tr>
                   <th class="py-2.5 px-3">School Name</th>
-                  <th class="py-2.5 px-3 text-right">Enrolment Baseline</th>
-                  <th class="py-2.5 px-3 text-right">Visit 1</th>
-                  <th class="py-2.5 px-3 text-right">Visit 2</th>
-                  <th class="py-2.5 px-3 text-right">Visit 3</th>
+                  <th class="py-2.5 px-3 text-right">Term Enrolment Baseline (Visit 1)</th>
+                  <th class="py-2.5 px-3 text-right">Visit 1 Register Attendance</th>
+                  <th class="py-2.5 px-3 text-right">Visit 2 Register Attendance</th>
+                  <th class="py-2.5 px-3 text-right">Visit 3 Register Attendance</th>
                   <th class="py-2.5 px-3 text-center">Attendance Trajectory</th>
                   <th class="py-2.5 px-3 text-center">Cohort Status</th>
                 </tr>
@@ -5250,11 +5523,11 @@ html_code = f"""<!DOCTYPE html>
       const tfoot = document.getElementById('v2-age-band-tfoot');
       if (!tbody || !tfoot) return;
 
-      let lowerM = 0, lowerF = 0, lowerPwd = 0;
-      let midM = 0, midF = 0, midPwd = 0;
-      let upM = 0, upF = 0, upPwd = 0;
-      let teaM = 0, teaF = 0, teaPwd = 0;
-      let commM = 0, commF = 0, commPwd = 0;
+      let lowerM = 0, lowerF = 0, lowerPwdM = 0, lowerPwdF = 0;
+      let midM = 0, midF = 0, midPwdM = 0, midPwdF = 0;
+      let upM = 0, upF = 0, upPwdM = 0, upPwdF = 0;
+      let teaM = 0, teaF = 0, teaPwdM = 0, teaPwdF = 0;
+      let commM = 0, commF = 0, commPwdM = 0, commPwdF = 0;
       let schoolsLogged = [];
 
       for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
@@ -5263,20 +5536,61 @@ html_code = f"""<!DOCTYPE html>
           schoolsLogged.push(d.v2.school || dName);
           lowerM += (d.v2.hc_lower_m || 0);
           lowerF += (d.v2.hc_lower_f || 0);
-          lowerPwd += (d.v2.hc_lower_pwd || 0);
+          lowerPwdM += (d.v2.hc_lower_pwd_m !== undefined ? d.v2.hc_lower_pwd_m : (d.v2.hc_lower_pwd || 0));
+          lowerPwdF += (d.v2.hc_lower_pwd_f || 0);
+
           midM += (d.v2.hc_mid_m || 0);
           midF += (d.v2.hc_mid_f || 0);
-          midPwd += (d.v2.hc_mid_pwd || 0);
+          midPwdM += (d.v2.hc_mid_pwd_m !== undefined ? d.v2.hc_mid_pwd_m : (d.v2.hc_mid_pwd || 0));
+          midPwdF += (d.v2.hc_mid_pwd_f || 0);
+
           upM += (d.v2.hc_up_m || 0);
           upF += (d.v2.hc_up_f || 0);
-          upPwd += (d.v2.hc_up_pwd || 0);
+          upPwdM += (d.v2.hc_up_pwd_m !== undefined ? d.v2.hc_up_pwd_m : (d.v2.hc_up_pwd || 0));
+          upPwdF += (d.v2.hc_up_pwd_f || 0);
+
           teaM += (d.v2.teachers_m || 0);
           teaF += (d.v2.teachers_f || 0);
-          teaPwd += (d.v2.teachers_pwd || 0);
+          teaPwdM += (d.v2.teachers_pwd_m !== undefined ? d.v2.teachers_pwd_m : (d.v2.teachers_pwd || 0));
+          teaPwdF += (d.v2.teachers_pwd_f || 0);
+
           commM += (d.v2.comm_m || 0);
           commF += (d.v2.comm_f || 0);
-          commPwd += (d.v2.comm_pwd || 0);
+          commPwdM += (d.v2.comm_pwd_m !== undefined ? d.v2.comm_pwd_m : (d.v2.comm_pwd || 0));
+          commPwdF += (d.v2.comm_pwd_f || 0);
         }}
+      }}
+
+      const pillHeadcount = document.getElementById('v2-headcount-pill');
+      const pillPwd = document.getElementById('v2-pwd-pill');
+
+      if (schoolsLogged.length === 0) {{
+        if (pillHeadcount) pillHeadcount.innerText = `Total Activation Headcount: 0 (Awaiting Visit 2 in ${{selDistrict}})`;
+        if (pillPwd) pillPwd.innerText = `Total PWD Participants: 0 (0.0%)`;
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="p-6 text-center text-slate-500 bg-slate-50/50">
+              <div class="flex flex-col items-center justify-center gap-1.5">
+                <span class="w-8 h-8 rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                <span class="font-bold text-slate-700">Awaiting Visit 2 Big Activation Day for ${{selDistrict}} District</span>
+                <span class="text-xs text-slate-400 max-w-md">No Big Activation Day session has been submitted for ${{selDistrict}} yet. Showing baseline cohort targets until field submission is recorded.</span>
+              </div>
+            </td>
+          </tr>
+        `;
+        tfoot.innerHTML = `
+          <tr>
+            <td class="p-3 uppercase">Total Activation Footprint</td>
+            <td class="p-3 text-right font-mono">0</td>
+            <td class="p-3 text-right font-mono">0</td>
+            <td class="p-3 text-right bg-slate-200/60 font-black font-mono">0</td>
+            <td class="p-3 text-right text-purple-700 font-mono">0</td>
+            <td class="p-3 text-right text-purple-700 font-mono">0</td>
+            <td class="p-3 text-right font-black text-purple-900 bg-purple-100/50 font-mono">0</td>
+            <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-medium text-slate-400">0.0% PWD</span></td>
+          </tr>
+        `;
+        return;
       }}
 
       const totLower = lowerM + lowerF;
@@ -5287,30 +5601,24 @@ html_code = f"""<!DOCTYPE html>
       const grandMale = lowerM + midM + upM + teaM + commM;
       const grandFemale = lowerF + midF + upF + teaF + commF;
       const grandTotal = grandMale + grandFemale;
-      const grandPwdL = lowerPwd + midPwd + upPwd;
-      const grandPwdA = teaPwd + commPwd;
-      const grandPwd = grandPwdL + grandPwdA;
+      const grandPwdM = lowerPwdM + midPwdM + upPwdM + teaPwdM + commPwdM;
+      const grandPwdF = lowerPwdF + midPwdF + upPwdF + teaPwdF + commPwdF;
+      const grandPwd = grandPwdM + grandPwdF;
       const grandPwdPct = grandTotal > 0 ? ((grandPwd / grandTotal) * 100).toFixed(1) : '0.0';
 
-      const pillHeadcount = document.getElementById('v2-headcount-pill');
-      const pillPwd = document.getElementById('v2-pwd-pill');
       if (pillHeadcount) {{
-        if (schoolsLogged.length > 0) {{
-          pillHeadcount.innerText = `Total Activation Headcount: ${{grandTotal}} (${{schoolsLogged.join(', ')}})`;
-        }} else {{
-          pillHeadcount.innerText = `Total Activation Headcount: 0 (Awaiting Visit 2)`;
-        }}
+        pillHeadcount.innerText = `Total Activation Headcount: ${{grandTotal}} (${{schoolsLogged.join(', ')}})`;
       }}
       if (pillPwd) {{
         pillPwd.innerText = `Total PWD Participants: ${{grandPwd}} (${{grandPwdPct}}%)`;
       }}
 
       const rows = [
-        {{ label: "Lower Primary (ECD–P2)", dot: "bg-blue-500", m: lowerM, f: lowerF, tot: totLower, pwd: lowerPwd }},
-        {{ label: "Middle Primary (P3–P4)", dot: "bg-sky-500", m: midM, f: midF, tot: totMid, pwd: midPwd }},
-        {{ label: "Upper Primary (P5–P7)", dot: "bg-cyan-600", m: upM, f: upF, tot: totUp, pwd: upPwd }},
-        {{ label: "Teachers Present", dot: "bg-amber-500", m: teaM, f: teaF, tot: totTea, pwd: teaPwd }},
-        {{ label: "Community Members", dot: "bg-emerald-500", m: commM, f: commF, tot: totComm, pwd: commPwd }}
+        {{ label: "Lower Primary (ECD–P2)", dot: "bg-blue-500", m: lowerM, f: lowerF, tot: totLower, pwd_m: lowerPwdM, pwd_f: lowerPwdF, pwd: lowerPwdM + lowerPwdF }},
+        {{ label: "Middle Primary (P3–P4)", dot: "bg-sky-500", m: midM, f: midF, tot: totMid, pwd_m: midPwdM, pwd_f: midPwdF, pwd: midPwdM + midPwdF }},
+        {{ label: "Upper Primary (P5–P7)", dot: "bg-cyan-600", m: upM, f: upF, tot: totUp, pwd_m: upPwdM, pwd_f: upPwdF, pwd: upPwdM + upPwdF }},
+        {{ label: "Teachers Present", dot: "bg-amber-500", m: teaM, f: teaF, tot: totTea, pwd_m: teaPwdM, pwd_f: teaPwdF, pwd: teaPwdM + teaPwdF }},
+        {{ label: "Community Members", dot: "bg-emerald-500", m: commM, f: commF, tot: totComm, pwd_m: commPwdM, pwd_f: commPwdF, pwd: commPwdM + commPwdF }}
       ];
 
       tbody.innerHTML = rows.map(r => {{
@@ -5323,8 +5631,8 @@ html_code = f"""<!DOCTYPE html>
             <td class="p-3 text-right font-medium">${{r.m}}</td>
             <td class="p-3 text-right font-medium">${{r.f}}</td>
             <td class="p-3 text-right font-bold ${{r.tot > 0 ? 'text-slate-800' : 'text-slate-400'}} bg-slate-50">${{r.tot}}</td>
-            <td class="p-3 text-right text-purple-700 font-medium">${{r.pwd}}</td>
-            <td class="p-3 text-right text-purple-700 font-medium">0</td>
+            <td class="p-3 text-right text-purple-700 font-medium">${{r.pwd_m}}</td>
+            <td class="p-3 text-right text-purple-700 font-medium">${{r.pwd_f}}</td>
             <td class="p-3 text-right font-bold text-purple-800 bg-purple-50/30">${{r.pwd}}</td>
             <td class="p-3 text-center">
               <span class="px-2 py-0.5 rounded text-[11px] font-bold ${{r.pwd > 0 ? 'bg-purple-50 text-purple-700' : 'text-slate-400'}}">${{inclassPct}}</span>
@@ -5339,8 +5647,8 @@ html_code = f"""<!DOCTYPE html>
           <td class="p-3 text-right font-mono">${{grandMale}}</td>
           <td class="p-3 text-right font-mono">${{grandFemale}}</td>
           <td class="p-3 text-right bg-slate-200/60 font-black font-mono">${{grandTotal}}</td>
-          <td class="p-3 text-right text-purple-700 font-mono">${{grandPwd}}</td>
-          <td class="p-3 text-right text-purple-700 font-mono">0</td>
+          <td class="p-3 text-right text-purple-700 font-mono">${{grandPwdM}}</td>
+          <td class="p-3 text-right text-purple-700 font-mono">${{grandPwdF}}</td>
           <td class="p-3 text-right font-black text-purple-900 bg-purple-100/50 font-mono">${{grandPwd}}</td>
           <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-black bg-purple-100 text-purple-800">${{grandPwdPct}}% PWD</span></td>
         </tr>
