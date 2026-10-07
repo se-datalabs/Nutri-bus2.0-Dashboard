@@ -198,6 +198,7 @@ V1_SCHOOL_OPTIONS_HTML = "\n".join(v1_school_opts)
 V1_COUNT_SCHOOLS = len(v1_schools_data)
 tot_lrn_all = sum(d.get("learners", 0) for d in DISTRICT_DB.values())
 tot_sch_all = sum(d.get("schools", 0) for d in DISTRICT_DB.values())
+tot_dem_all = sum(d.get("demos", 0) for d in DISTRICT_DB.values())
 tot_cg_all = sum(d.get("caregivers", 0) for d in DISTRICT_DB.values())
 tot_stk_all = sum(d.get("teachers_vhts", 0) for d in DISTRICT_DB.values())
 tot_pwd_all = sum(d.get("pwd_reach", 0) for d in DISTRICT_DB.values())
@@ -276,6 +277,23 @@ v2_completed_count = sum(1 for d in DISTRICT_DB.values() if d.get("v2"))
 v2_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {})
 v2_schools_list = v2_data.get("schools_list", [])
 v2_schools_str = ", ".join(v2_schools_list) if v2_schools_list else "0 Schools"
+v2_poll_dict = v2_data.get("micro_poll", {})
+tot_poll_boys = sum(v.get("total_boys", 0) for v in v2_poll_dict.values())
+tot_poll_agreed = sum(v.get("agreed_boys", 0) for v in v2_poll_dict.values())
+poll_agreed_pct = round(tot_poll_agreed / max(1, tot_poll_boys) * 100, 1) if tot_poll_boys > 0 else 0.0
+
+p1_rate_overall = round((sum(d.get("pillar_rates", {}).get("p1_pass", 0) for d in DISTRICT_DB.values()) / max(1, sum(d.get("pillar_rates", {}).get("p1_total", 0) for d in DISTRICT_DB.values()))) * 100, 1) if sum(d.get("pillar_rates", {}).get("p1_total", 0) for d in DISTRICT_DB.values()) > 0 else 0.0
+p2_rate_overall = round((sum(d.get("pillar_rates", {}).get("p2_pass", 0) for d in DISTRICT_DB.values()) / max(1, sum(d.get("pillar_rates", {}).get("p2_total", 0) for d in DISTRICT_DB.values()))) * 100, 1) if sum(d.get("pillar_rates", {}).get("p2_total", 0) for d in DISTRICT_DB.values()) > 0 else 0.0
+p3_rate_overall = round((sum(d.get("pillar_rates", {}).get("p3_pass", 0) for d in DISTRICT_DB.values()) / max(1, sum(d.get("pillar_rates", {}).get("p3_total", 0) for d in DISTRICT_DB.values()))) * 100, 1) if sum(d.get("pillar_rates", {}).get("p3_total", 0) for d in DISTRICT_DB.values()) > 0 else 0.0
+
+new_metrics = BASE_DATA.get("new_pillar_metrics", {})
+tot_ofsp = new_metrics.get("tot_ofsp", 0)
+tot_iron_beans = new_metrics.get("tot_iron_beans", 0)
+tot_lead_mothers = new_metrics.get("tot_lead_mothers", 0)
+tot_cost_dialogues = new_metrics.get("tot_cost_dialogues", 0)
+tot_mhm_dialogues = new_metrics.get("tot_mhm_dialogues", 0)
+tot_theft_queries = new_metrics.get("tot_theft_queries", 0)
+tot_hotline_210_promoted = new_metrics.get("tot_hotline_210_promoted", 0)
 
 v3_sc = BASE_DATA.get("three_visit_contact", {}).get("visit3", {}).get("household_shift_metrics", {})
 v3_hh_sample_size = sum(v3_sc.get("morning_chore_shifted", {}).get("values", [0, 0, 0]))
@@ -2649,6 +2667,96 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
+        <!-- VISIT 3 DEDICATED PILLAR METRIC CARDS: BIOFORTIFIED FOODS, GENDER DIALOGUES & HELPLINE AUDIT -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Visit 3 Pillar Closeout Verification</span>
+              <h4 class="text-sm font-bold text-slate-800">Biofortified food adoption, practical constraint dialogues &amp; meal protection audit</h4>
+            </div>
+            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2.5 py-0.5 rounded border border-blue-200">
+              Closeout Audit Indicators
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <!-- Card 1: Biofortified Foods Adoption -->
+            <div class="p-3 bg-purple-50/50 rounded-xl border border-purple-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-bold text-purple-900 uppercase tracking-wider">Biofortified Foods</span>
+                  <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-bowl-rice"></i>
+                  </span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800">OFSP &amp; Iron-Rich Beans</h5>
+                <div class="text-lg font-black text-purple-900 mt-1">{tot_ofsp} OFSP · {tot_iron_beans} Beans</div>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">Demo gardens and biofortified recipes verified in school closeout audits.</p>
+            </div>
+
+            <!-- Card 2: Lead Mothers Engagement -->
+            <div class="p-3 bg-emerald-50/50 rounded-xl border border-emerald-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-bold text-emerald-900 uppercase tracking-wider">Lead Mothers</span>
+                  <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-people-roof"></i>
+                  </span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800">Lead Mothers Present</h5>
+                <div class="text-lg font-black text-emerald-900 mt-1">{tot_lead_mothers} Sessions</div>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">Lead mother pairs supporting adolescent girl retention and domestic chore dialogues.</p>
+            </div>
+
+            <!-- Card 3: Constraint Dialogue: Scholastic Costs -->
+            <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-bold text-blue-900 uppercase tracking-wider">Gender Dialogue</span>
+                  <span class="w-6 h-6 rounded-lg bg-blue-100 text-wfp-blue flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                  </span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800">Cost of Scholastic Materials</h5>
+                <div class="text-lg font-black text-blue-900 mt-1">{tot_cost_dialogues} Sessions</div>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">Structured dialogue on practical cost barriers with boys, fathers and male teachers as allies.</p>
+            </div>
+
+            <!-- Card 4: Constraint Dialogue: Menstrual Hygiene -->
+            <div class="p-3 bg-rose-50/50 rounded-xl border border-rose-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-bold text-rose-900 uppercase tracking-wider">Gender Dialogue</span>
+                  <span class="w-6 h-6 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                  </span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800">Menstrual Hygiene (MHM)</h5>
+                <div class="text-lg font-black text-rose-900 mt-1">{tot_mhm_dialogues} Sessions</div>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">Addressing practical menstruation constraints to safeguard girls' attendance.</p>
+            </div>
+
+            <!-- Card 5: WFP Helpline & Meal Protection Redress -->
+            <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-bold text-amber-900 uppercase tracking-wider">Meal Protection</span>
+                  <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-phone-volume"></i>
+                  </span>
+                </div>
+                <h5 class="text-xs font-bold text-slate-800">Helpline 0800 210 210</h5>
+                <div class="text-lg font-black text-amber-900 mt-1">{tot_theft_queries} Theft Queries</div>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-1.5 leading-snug">Helpline promoted ({tot_hotline_210_promoted} sessions); reporting theft or mismanagement of school meals.</p>
+            </div>
+          </div>
+        </div>
+
         <!-- ROW 2: PRIMARY FEEDBACK & PRIMARY BARRIERS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
@@ -2897,6 +3005,81 @@ html_code = f"""<!DOCTYPE html>
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregiver Reach</span>
           <span class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
           <span class="text-[10px] text-slate-400 font-medium">Target: 51,200 (80/session)</span>
+        </div>
+      </div>
+
+      <!-- PILLAR 3 & COMMUNITY ENGAGEMENT DEDICATED METRIC CARDS -->
+      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
+          <div>
+            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Pillars 1 &amp; 3 Field Monitoring Indicators</span>
+            <h4 class="text-sm font-bold text-slate-800">Biofortified food demos, lead-mother co-facilitation &amp; helpline accountability</h4>
+          </div>
+          <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-0.5 rounded border border-emerald-200">
+            Community Activation Benchmarks
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- Card 1: Biofortified Foods Demonstrated -->
+          <div class="p-3.5 bg-purple-50/50 rounded-xl border border-purple-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold text-purple-900 uppercase tracking-wider">Biofortified Foods</span>
+                <span class="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-seedling"></i>
+                </span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800">OFSP &amp; Iron-Rich Beans</h5>
+              <div class="text-xl font-black text-purple-900 mt-1">{tot_ofsp} OFSP · {tot_iron_beans} Iron Beans</div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Demonstrated alongside wild greens (Eboo, Lokaka) in Metu porridge cooking demos.</p>
+          </div>
+
+          <!-- Card 2: Lead Mothers & VHT Pairs -->
+          <div class="p-3.5 bg-emerald-50/50 rounded-xl border border-emerald-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold text-emerald-900 uppercase tracking-wider">VHT / Lead Mother Pairs</span>
+                <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-people-roof"></i>
+                </span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800">Lead Mothers Present</h5>
+              <div class="text-xl font-black text-emerald-900 mt-1">{tot_lead_mothers} Sessions</div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Target: 256 VHT / Lead-Mother pairs co-facilitating across 640 demo sites.</p>
+          </div>
+
+          <!-- Card 3: WFP Helpline Awareness -->
+          <div class="p-3.5 bg-blue-50/50 rounded-xl border border-blue-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold text-blue-900 uppercase tracking-wider">Helpline Awareness</span>
+                <span class="w-7 h-7 rounded-lg bg-blue-100 text-wfp-blue flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-phone-volume"></i>
+                </span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800">WFP Helpline 0800 210 210</h5>
+              <div class="text-xl font-black text-blue-900 mt-1">{tot_hotline_210_promoted} Promoted</div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Toll-free reporting promoted for meal theft or mismanagement with zero retaliation.</p>
+          </div>
+
+          <!-- Card 4: Meal Mismanagement Redress -->
+          <div class="p-3.5 bg-amber-50/50 rounded-xl border border-amber-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold text-amber-900 uppercase tracking-wider">Accountability Redress</span>
+                <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xs">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-800">Meal Theft / Mismanagement</h5>
+              <div class="text-xl font-black text-amber-900 mt-1">{tot_theft_queries} Queries Logged</div>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-2">Verified queries regarding theft or mismanagement of school meals logged and redressed.</p>
+          </div>
         </div>
       </div>
 
@@ -3235,7 +3418,7 @@ html_code = f"""<!DOCTYPE html>
                   <span class="px-2 py-0.5 bg-blue-100 text-wfp-blue font-bold text-[10px] rounded">Completed as Planned</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
                       <strong class="text-slate-900">{tot_sch_all} Primary Schools reached ({tot_orient_schools} Orientations, {V1_COUNT_SCHOOLS} Visit 1, {v2_completed_count} Visit 2, {tot_active_clubs_cnt} NutriClubs) · 64 Target Schools</strong>
@@ -3246,19 +3429,29 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
-                      <strong class="text-slate-900">0 Demonstrations logged · 640 Target Sites</strong>
+                      <strong class="text-slate-900">{tot_dem_all} Demonstrations logged · 640 Target Sites</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Caregivers &amp; Parents Target:</span>
-                      <strong class="text-slate-900">52 Caregivers reached · 51,200 Target</strong>
+                      <strong class="text-slate-900">{tot_cg_all} Caregivers reached · 51,200 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">School Clubs &amp; Weekly Meetings:</span>
-                      <strong class="text-slate-900">{tot_active_clubs_cnt} NutriClubs active ({active_club_names_str}, {tot_active_club_members} registered members) · 64 Target Clubs</strong>
+                      <strong class="text-slate-900">{tot_active_clubs_cnt} NutriClubs active ({tot_active_club_members} registered members across active schools) · 64 Target Clubs</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
                       <strong class="text-slate-900">{int(tot_stk_all)} Teachers &amp; VHTs logged · {tot_pwd_all} PWDs reached · 768 Target</strong>
+                    </div>
+                    <div class="p-2 bg-emerald-50/60 rounded border border-emerald-200">
+                      <span class="text-emerald-900 text-[10px] block font-semibold">Lead Mothers &amp; VHT Pairs:</span>
+                      <strong class="text-emerald-800 font-bold">{tot_lead_mothers} Sessions with Lead Mothers Co-Facilitating</strong>
+                      <span class="text-[10px] text-slate-500 block">Target: 256 VHT/Lead-Mother pairs</span>
+                    </div>
+                    <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
+                      <span class="text-purple-900 text-[10px] block font-semibold">Biofortified Foods Demonstrated:</span>
+                      <strong class="text-purple-800 font-bold">{tot_ofsp} OFSP &amp; {tot_iron_beans} Iron-Rich Bean Demos</strong>
+                      <span class="text-[10px] text-slate-500 block">Orange-fleshed sweet potato &amp; iron beans</span>
                     </div>
                   </div>
                 </td>
@@ -3275,7 +3468,7 @@ html_code = f"""<!DOCTYPE html>
                   <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold text-[10px] rounded">High Quality Confirmed</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Cooking Practice:</span>
                       <strong class="text-slate-500 font-bold">Awaiting cooking demo submissions (0 demos conducted)</strong>
@@ -3286,7 +3479,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Teachers in the Lead:</span>
-                      <strong class="text-slate-900">100% ({tot_orient_schools} of {tot_orient_schools} schools with teacher &amp; VHT leadership)</strong>
+                      <strong class="text-slate-900">{ht_presence_pct}% ({tot_ht_all} of {tot_orient_schools} schools with headteacher/deputy leadership)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">What Children Remembered:</span>
@@ -3296,9 +3489,10 @@ html_code = f"""<!DOCTYPE html>
                       <span class="text-slate-500 text-[10px] block">Fair &amp; Welcoming for All:</span>
                       <strong class="text-slate-900">100.0% in local language with inclusive PWD accommodation</strong>
                     </div>
-                    <div class="p-2 bg-slate-50 rounded border border-slate-200">
-                      <span class="text-slate-500 text-[10px] block">Questions &amp; Complaints:</span>
-                      <strong class="text-slate-900">0 complaints on the WFP toll-free hotline (0800)</strong>
+                    <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
+                      <span class="text-purple-900 text-[10px] block font-semibold">WFP Helpline (0800 210 210) &amp; Complaints:</span>
+                      <strong class="text-purple-800 font-bold">{tot_theft_queries} meal theft/mismanagement complaints logged</strong>
+                      <span class="text-[10px] text-slate-500 block">Helpline 0800 210 210 promoted across {tot_orient_schools} schools</span>
                     </div>
                   </div>
                 </td>
@@ -3315,7 +3509,7 @@ html_code = f"""<!DOCTYPE html>
                   <span class="px-2 py-0.5 bg-purple-100 text-purple-800 font-bold text-[10px] rounded">Big Positive Shift</span>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
                     <div class="p-2 bg-emerald-50/60 rounded border border-emerald-200">
                       <span class="text-emerald-900 text-[10px] block font-semibold">Adding Greens to Morning Porridge:</span>
                       <strong class="text-slate-600 font-bold text-sm">Pending Visit 3 closeout audits (0 schools)</strong>
@@ -3323,7 +3517,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water &amp; Firewood:</span>
-                      <strong class="text-blue-800 font-bold text-sm">99.4% agreement across Visit 2 micro-polls (514 boy responses recorded across Kotido, Moroto, Nakapiripirit)</strong>
+                      <strong class="text-blue-800 font-bold text-sm">{poll_agreed_pct}% agreement across Visit 2 micro-polls ({tot_poll_boys:,} boy responses recorded across activation schools)</strong>
                       <span class="text-[10px] text-slate-500 block">Polled consensus on rebalancing domestic water chores</span>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
@@ -3336,9 +3530,19 @@ html_code = f"""<!DOCTYPE html>
                       <strong class="text-slate-600 font-bold text-sm">Pending cooking demo submissions (0 demos)</strong>
                       <span class="text-[10px] text-slate-500 block">Firewood savings to be verified during cooking demos</span>
                     </div>
+                    <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
+                      <span class="text-blue-900 text-[10px] block font-semibold">Constraint Dialogue: Cost of Materials:</span>
+                      <strong class="text-blue-800 font-bold text-sm">{tot_cost_dialogues} Sessions Logged</strong>
+                      <span class="text-[10px] text-slate-500 block">Tackling cost of scholastic materials in gender dialogues</span>
+                    </div>
+                    <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
+                      <span class="text-blue-900 text-[10px] block font-semibold">Constraint Dialogue: Menstrual Hygiene:</span>
+                      <strong class="text-blue-800 font-bold text-sm">{tot_mhm_dialogues} Sessions Logged</strong>
+                      <span class="text-[10px] text-slate-500 block">Tackling menstrual hygiene management (MHM) barriers</span>
+                    </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">More Pupils in School:</span>
-                      <strong class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendees across {len(v1_schools_list)} monitored schools ({v1_schools_str})</strong>
+                      <strong class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendees across {len(v1_schools_list)} monitored schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">Out-of-School Girls Back in Class:</span>
@@ -3377,35 +3581,40 @@ html_code = f"""<!DOCTYPE html>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-200 border-x border-b border-slate-200">
-              <!-- Pillar 1: School Feeding & Practical Nutrition -->
-              <tr class="hover:bg-emerald-50/20 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 bg-emerald-50/50 align-top">
-                  <div class="flex items-center gap-1.5 text-emerald-800 text-sm mb-1">
-                    <i class="fa-solid fa-apple-whole"></i>
-                    <span>Pillar 1: School Feeding &amp; Practical Nutrition</span>
+              <!-- Pillar 1: School feeding -->
+              <tr class="hover:bg-purple-50/20 transition">
+                <td class="py-3.5 px-4 font-bold text-slate-900 bg-purple-50/50 align-top w-1/4">
+                  <div class="flex items-center gap-1.5 text-purple-800 text-sm mb-1">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <span>Pillar 1: School feeding.</span>
                   </div>
-                  <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">Enriched Porridge</span>
+                  <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold inline-block mb-2">School Meal Protection &amp; METU-1</span>
+                  <div class="p-2 bg-white rounded border border-purple-200 shadow-xs">
+                    <span class="text-[10px] text-purple-700 block font-bold uppercase tracking-wider">Fortification Mastery:</span>
+                    <strong class="text-sm font-extrabold text-purple-800">{p1_rate_overall}%</strong>
+                    <span class="text-[10px] text-slate-500 block">Fortification recall pass</span>
+                  </div>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-slate-900 block mb-1">{tot_orient_schools} Orientations · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• {tot_orient_schools} primary schools completed orientation with {int(tot_stk_all)} stakeholders logged across activities</li>
-                    <li>• {len(v1_schools_list)} schools completed Visit 1 onboarding &amp; audit ({v1_schools_str}: {v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendance, {v1_charts_issued:,} NutriCharts issued)</li>
-                    <li>• {v2_completed_count} schools delivered Visit 2 reaching {v2_grand_tot} participants ({v2_tot_lower + v2_tot_mid + v2_tot_up} pupils, {v2_tot_tea} staff, {v2_tot_comm} community)</li>
-                    <li>• Target: 640 community demonstrations across 64 schools</li>
+                    <li>• <strong>Protect school meal &amp; learning:</strong> {tot_orient_schools} primary schools completed orientation with {int(tot_stk_all)} stakeholders logged across activities</li>
+                    <li>• <strong>Promote balanced plate &amp; METU-1 porridge:</strong> Anchor multi-mix recipe using locally available greens (Eboo, Lokaka) and cowpeas ({v2_completed_count} schools delivered Visit 2 reaching {v2_grand_tot} participants)</li>
+                    <li>• <strong>Strengthen nutrition clubs &amp; gardens:</strong> {tot_active_clubs_cnt} active clubs ({tot_active_club_members} registered members across active schools); demo gardens, OFSP &amp; iron-rich beans tracked</li>
+                    <li>• <strong>Raise awareness of WFP helpline (0800 210 210):</strong> Toll-free reporting promoted for theft or mismanagement of school meals</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-emerald-700 block mb-1">Unaided Fortification Recall</strong>
+                  <strong class="text-purple-800 block mb-1">Unaided Fortification Recall</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• Unaided recall of local greens (Eboo, Lokaka) across activation schools</li>
+                    <li>• Unaided recall of METU-1 fortification ingredients across activation schools</li>
                     <li>• Exit interviewees committed to immediate porridge fortification</li>
-                    <li>• Awaiting community cooking demonstration rollout</li>
+                    <li>• WFP helpline (0800 210 210) display boards handed over across all schools</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-emerald-50/30">
-                  <strong class="text-emerald-800 block mb-1">Awaiting Closeout Audits</strong>
-                  <ul class="space-y-1 text-[11px] text-emerald-900">
+                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-purple-50/30">
+                  <strong class="text-purple-900 block mb-1">Protected Meals &amp; Fortification</strong>
+                  <ul class="space-y-1 text-[11px] text-purple-900">
                     <li>• Household recipe trial audits pending Visit 3 closeouts</li>
                     <li>• 0 of 640 community demonstration reports recorded to date</li>
                     <li>• Verified shift metrics will calculate upon endline submissions</li>
@@ -3413,21 +3622,26 @@ html_code = f"""<!DOCTYPE html>
                 </td>
               </tr>
 
-              <!-- Pillar 2: Gender Dynamics & Equity -->
+              <!-- Pillar 2: Gender -->
               <tr class="hover:bg-blue-50/20 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 bg-blue-50/50 align-top">
+                <td class="py-3.5 px-4 font-bold text-slate-900 bg-blue-50/50 align-top w-1/4">
                   <div class="flex items-center gap-1.5 text-wfp-blue text-sm mb-1">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    <span>Pillar 2: Gender Dynamics &amp; Equity</span>
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <span>Pillar 2: Gender.</span>
                   </div>
-                  <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold">Keeping Girls in Class</span>
+                  <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold inline-block mb-2">Fair Sharing &amp; Allyship</span>
+                  <div class="p-2 bg-white rounded border border-blue-200 shadow-xs">
+                    <span class="text-[10px] text-wfp-blue block font-bold uppercase tracking-wider">Boy Allyship Consensus:</span>
+                    <strong class="text-sm font-extrabold text-wfp-blue">{poll_agreed_pct}%</strong>
+                    <span class="text-[10px] text-slate-500 block">({tot_poll_boys:,} boy responses)</span>
+                  </div>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-slate-900 block mb-1">{tot_active_clubs_cnt} NutriClubs · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• {tot_active_clubs_cnt} NutriClubs active ({active_club_names_str}; {tot_active_club_members} total registered members)</li>
-                    <li>• {tot_active_clubs_cnt} active NutriClubs verified with patrons &amp; signed work plans across monitored schools</li>
-                    <li>• {v2_completed_count} schools delivered interactive chore rebalancing dialogue &amp; micro-poll (514 boy responses, 99.4% agreement)</li>
+                    <li>• <strong>Fair sharing at table &amp; classroom:</strong> Parity audited across {len(v1_schools_list)} schools ({v1_enrol_boys:,} boys, {v1_enrol_girls:,} girls)</li>
+                    <li>• <strong>Structured dialogues with allies:</strong> Boys, fathers &amp; male teachers engaged as allies ({tot_poll_boys:,} boy responses, {poll_agreed_pct}% agreement)</li>
+                    <li>• <strong>Address practical constraints:</strong> Tackling domestic labour (water &amp; firewood chores), cost, and menstruation to keep girls in class</li>
                     <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
                 </td>
@@ -3449,34 +3663,40 @@ html_code = f"""<!DOCTYPE html>
                 </td>
               </tr>
 
-              <!-- Pillar 3: Community Engagement, Accountability & Climate-Smart Living -->
-              <tr class="hover:bg-purple-50/20 transition">
-                <td class="py-3.5 px-4 font-bold text-slate-900 bg-purple-50/50 align-top">
-                  <div class="flex items-center gap-1.5 text-purple-800 text-sm mb-1">
-                    <i class="fa-solid fa-fire-burner"></i>
-                    <span>Pillar 3: Community Engagement, Accountability &amp; Climate-Smart Living</span>
+              <!-- Pillar 3: Community engagement -->
+              <tr class="hover:bg-emerald-50/20 transition">
+                <td class="py-3.5 px-4 font-bold text-slate-900 bg-emerald-50/50 align-top w-1/4">
+                  <div class="flex items-center gap-1.5 text-emerald-800 text-sm mb-1">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Pillar 3: Community engagement.</span>
                   </div>
-                  <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold">Fair Work &amp; Clean Stoves</span>
+                  <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold inline-block mb-2">640 Demos &amp; Clean Cooking</span>
+                  <div class="p-2 bg-white rounded border border-emerald-200 shadow-xs">
+                    <span class="text-[10px] text-emerald-700 block font-bold uppercase tracking-wider">Joint Action Calendars:</span>
+                    <strong class="text-sm font-extrabold text-emerald-800">{cal_agreed_pct}%</strong>
+                    <span class="text-[10px] text-slate-500 block">({cal_yes_cnt} of {tot_orient_schools} schools)</span>
+                  </div>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-slate-900 block mb-1">{cal_yes_cnt} Joint Calendars Agreed · {tot_patrons_app} Patrons Appointed</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• {cal_yes_cnt} of {tot_orient_schools} oriented schools established 4-week joint activity schedules with VHTs</li>
-                    <li>• {tot_patrons_app} teacher patrons appointed across {tot_orient_schools} primary schools (plus {tot_active_clubs_cnt} club patrons)</li>
-                    <li>• Target: 640 community demonstrations and 64 school commitment pledges</li>
+                    <li>• <strong>640 Cooking Demonstrations target:</strong> Led by 256 VHT/lead-mother pairs (10 demonstrations per school community across 64 schools)</li>
+                    <li>• <strong>Community dialogues with men &amp; elders:</strong> {v2_cm} male community members engaged; {cal_yes_cnt} of {tot_orient_schools} schools agreed on 4-week joint calendars with VHTs</li>
+                    <li>• <strong>Clean &amp; smart cooking practices:</strong> Fuelwood pre-drying, pot covering, retained heat cooking, moving from 3-stone fires</li>
+                    <li>• <strong>METU-1 recipe chart routine:</strong> {v1_charts_issued:,} take-home NutriCharts issued for household routine adoption</li>
                   </ul>
                 </td>
                 <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-purple-700 block mb-1">16.7% Multi-Partner Engagement</strong>
+                  <strong class="text-emerald-800 block mb-1">{orient_part_pct}% Multi-Partner Engagement</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• District Education Offices and Health Centre partners co-facilitated in Kotido</li>
-                    <li>• 0 complaints logged on WFP toll-free hotline (0800)</li>
+                    <li>• 0 complaints logged on WFP toll-free helpline (0800 210 210)</li>
                     <li>• Clean cooking and firewood-saving demonstrations scheduled</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-purple-50/30">
-                  <strong class="text-purple-900 block mb-1">Institutional Work Plans Underway</strong>
-                  <ul class="space-y-1 text-[11px] text-purple-900">
+                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-emerald-50/30">
+                  <strong class="text-emerald-900 block mb-1">Clean Cooking &amp; Recipe Adoption</strong>
+                  <ul class="space-y-1 text-[11px] text-emerald-900">
                     <li>• School commitment boards and kitchen stove audits pending Visit 3</li>
                     <li>• Firewood conservation practices to be verified during cooking demos</li>
                     <li>• 0 village kraal consensus reports logged to date</li>
@@ -3508,7 +3728,7 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance &amp; Enrolment:</strong> {v1_enrol_tot:,} enrolled (765 boys, 715 girls), {v1_att_tot} weekly attendees at Katikit P/S</span>
+                <span class="text-slate-800"><strong>Attendance &amp; Enrolment:</strong> {v1_enrol_tot:,} enrolled ({v1_enrol_boys:,} boys, {v1_enrol_girls:,} girls), {v1_att_tot:,} weekly attendees across {v1_sch_completed} audited school(s)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3516,11 +3736,11 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>NutriClub Setup:</strong> Active setup verified with 2 teacher patrons and signed work plan</span>
+                <span class="text-slate-800"><strong>NutriClub Setup:</strong> Active setup verified with teacher patrons and signed work plan</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Toll-Free Hotline:</strong> 0800 displayed and 1 feedback query logged</span>
+                <span class="text-slate-800"><strong>Toll-Free Hotline:</strong> 0800 displayed and {v1_queries_logged} feedback query logged</span>
               </div>
             </div>
           </div>
@@ -3533,11 +3753,11 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Children Audited:</strong> {v1_att_tot} weekly attendees ({v1_enrol_tot:,} total enrolled) at Katikit P/S</span>
+                <span class="text-slate-800"><strong>Children Audited:</strong> {v1_att_tot:,} weekly attendees ({v1_enrol_tot:,} total enrolled) across {v1_sch_completed} audited school(s)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Classroom Practice:</strong> {V1_COUNT_SCHOOLS} school completed onboarding &amp; audit (Katikit P/S, Amudat)</span>
+                <span class="text-slate-800"><strong>Classroom Practice:</strong> {v1_sch_completed} school(s) completed onboarding &amp; audit</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3566,7 +3786,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Pillar 2 Micro-Poll:</strong> 514 boy responses across 5 statements (99.4% agreement rate)</span>
+                <span class="text-slate-800"><strong>Pillar 2 Micro-Poll:</strong> {tot_poll_boys:,} boy responses across 5 statements ({poll_agreed_pct}% agreement rate)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3574,7 +3794,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Village Cooking Demos:</strong> 0 demos logged (Target: 640 sites)</span>
+                <span class="text-slate-800"><strong>Village Cooking Demos:</strong> {tot_dem_all} demos logged (Target: 640 sites)</span>
               </div>
             </div>
           </div>
@@ -3599,7 +3819,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Club Continuity:</strong> {tot_active_clubs_cnt} NutriClubs active ({active_club_names_str}, {tot_active_club_members} members)</span>
+                <span class="text-slate-800"><strong>Club Continuity:</strong> {tot_active_clubs_cnt} NutriClubs active ({tot_active_club_members} registered members across active schools)</span>
               </div>
             </div>
           </div>
@@ -3612,11 +3832,11 @@ html_code = f"""<!DOCTYPE html>
             <div class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Community Demos:</strong> 0 cooking demonstrations logged (Target: 640)</span>
+                <span class="text-slate-800"><strong>Community Demos:</strong> {tot_dem_all} cooking demonstrations logged (Target: 640)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Elders & Fathers:</strong> 30 male community members logged (52 total community attendees in Visit 2)</span>
+                <span class="text-slate-800"><strong>Elders &amp; Fathers:</strong> {v2_cm} male community members logged ({v2_tot_comm} total community attendees in Visit 2)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
@@ -3673,22 +3893,23 @@ html_code = f"""<!DOCTYPE html>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
           <!-- Pillar 1 Card -->
-          <div class="bg-white rounded-xl p-4 border border-emerald-200 card-shadow flex flex-col justify-between">
+          <div class="bg-white rounded-xl p-4 border border-purple-200 card-shadow flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded uppercase tracking-wider">
-                  <i class="fa-solid fa-apple-whole mr-1"></i> Pillar 1
+                <span class="text-[10px] font-bold text-purple-800 bg-purple-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-bowl-food mr-1"></i> Pillar 1
                 </span>
-                <span class="text-xs font-bold text-emerald-700">School Feeding &amp; Practical Nutrition</span>
+                <span class="text-xs font-bold text-purple-700">School feeding.</span>
               </div>
-              <h5 class="text-xs font-bold text-slate-800 mb-2">Dietary Diversity &amp; Infant Feeding Shifts</h5>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">School Meal Protection &amp; METU-1 Fortification Shifts</h5>
               <div class="h-64">
                 <canvas id="chart-impact-pillar1"></canvas>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Porridge fortification with greens:</span> <strong class="text-slate-600">Pending Visit 3 Closeouts</strong></div>
-              <div class="flex justify-between"><span>Youngest toddler served first:</span> <strong class="text-slate-600">Pending Visit 3 Closeouts</strong></div>
+              <div class="flex justify-between"><span>METU-1 porridge recipe anchor:</span> <strong class="text-purple-700">Local Greens &amp; Cowpeas</strong></div>
+              <div class="flex justify-between"><span>OFSP &amp; Iron-rich beans:</span> <strong class="text-purple-700">{tot_ofsp} OFSP / {tot_iron_beans} Bean Demos</strong></div>
+              <div class="flex justify-between"><span>WFP 0800 210 210 theft complaints:</span> <strong class="text-purple-700">{tot_theft_queries} Logged (100% Promoted)</strong></div>
             </div>
           </div>
 
@@ -3697,38 +3918,40 @@ html_code = f"""<!DOCTYPE html>
             <div>
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[10px] font-bold text-blue-800 bg-blue-100 px-2 py-0.5 rounded uppercase tracking-wider">
-                  <i class="fa-solid fa-graduation-cap mr-1"></i> Pillar 2
+                  <i class="fa-solid fa-scale-balanced mr-1"></i> Pillar 2
                 </span>
-                <span class="text-xs font-bold text-wfp-blue">Gender Dynamics &amp; Equity</span>
+                <span class="text-xs font-bold text-wfp-blue">Gender.</span>
               </div>
-              <h5 class="text-xs font-bold text-slate-800 mb-2">Chore Sharing &amp; Girl Punctuality Shifts</h5>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Fair Sharing &amp; Male Ally Dialogue Shifts</h5>
               <div class="h-64">
                 <canvas id="chart-impact-pillar2"></canvas>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Boys sharing morning chores:</span> <strong class="text-wfp-blue">99.4% Agreement across 514 Boy Responses</strong></div>
-              <div class="flex justify-between"><span>Girls arriving to school on time:</span> <strong class="text-slate-600">Punctuality Audit Pending Visit 3</strong></div>
+              <div class="flex justify-between"><span>Male ally chore sharing (Micro-polls):</span> <strong class="text-wfp-blue">{poll_agreed_pct}% ({tot_poll_boys:,} Boys)</strong></div>
+              <div class="flex justify-between"><span>Scholastic cost constraint:</span> <strong class="text-wfp-blue">{tot_cost_dialogues} Sessions Logged</strong></div>
+              <div class="flex justify-between"><span>Menstrual hygiene constraint (MHM):</span> <strong class="text-wfp-blue">{tot_mhm_dialogues} Sessions Logged</strong></div>
             </div>
           </div>
 
           <!-- Pillar 3 Card -->
-          <div class="bg-white rounded-xl p-4 border border-amber-200 card-shadow flex flex-col justify-between">
+          <div class="bg-white rounded-xl p-4 border border-emerald-200 card-shadow flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded uppercase tracking-wider">
-                  <i class="fa-solid fa-fire-burner mr-1"></i> Pillar 3
+                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-users mr-1"></i> Pillar 3
                 </span>
-                <span class="text-xs font-bold text-amber-700">Community Engagement, Accountability &amp; Climate-Smart Living</span>
+                <span class="text-xs font-bold text-emerald-700">Community engagement.</span>
               </div>
-              <h5 class="text-xs font-bold text-slate-800 mb-2">Fuel-Saving &amp; Community Engagement</h5>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">640 Cooking Demos &amp; Clean Cooking Practices</h5>
               <div class="h-64">
                 <canvas id="chart-impact-pillar3"></canvas>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Firewood-saving covered cooking:</span> <strong class="text-slate-600">Pending Cooking Demonstrations</strong></div>
-              <div class="flex justify-between"><span>Institutional action work plans:</span> <strong class="text-amber-700">100% Signed Across Oriented Schools</strong></div>
+              <div class="flex justify-between"><span>640 Demos led by 256 VHT pairs:</span> <strong class="text-emerald-700">Rollout Underway (64 Sites)</strong></div>
+              <div class="flex justify-between"><span>Lead Mothers co-facilitating:</span> <strong class="text-emerald-700">{tot_lead_mothers} Sessions Logged</strong></div>
+              <div class="flex justify-between"><span>Institutional joint action calendars:</span> <strong class="text-emerald-700">{cal_agreed_pct}% Signed ({cal_yes_cnt} of {tot_orient_schools})</strong></div>
             </div>
           </div>
         </div>
@@ -5411,24 +5634,50 @@ html_code = f"""<!DOCTYPE html>
       if (!impactContainer) return;
       impactContainer.innerHTML = '';
       if (!BASE_DATA.impact_analysis || !BASE_DATA.impact_analysis.dimensions) return;
-      BASE_DATA.impact_analysis.dimensions.forEach(dim => {{
+
+      const dRates = selDistrict !== 'ALL' ? DISTRICT_DB[selDistrict]?.pillar_rates : null;
+
+      BASE_DATA.impact_analysis.dimensions.forEach((dim, idx) => {{
+        const checkColor = idx === 0 ? 'text-purple-600' : (idx === 1 ? 'text-blue-600' : 'text-emerald-600');
+        const iconHtml = idx === 0 ? '<i class=\"fa-solid fa-bowl-food text-[#8e24aa] mr-1.5\"></i>' : (idx === 1 ? '<i class=\"fa-solid fa-scale-balanced text-[#1e88e5] mr-1.5\"></i>' : '<i class=\"fa-solid fa-users text-[#2e7d32] mr-1.5\"></i>');
+        const borderCls = idx === 0 ? 'border-purple-200' : (idx === 1 ? 'border-blue-200' : 'border-emerald-200');
+        const badgeCls = idx === 0 ? 'bg-purple-50 text-purple-700 border-purple-200' : (idx === 1 ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200');
+        const titleCls = idx === 0 ? 'text-purple-900' : (idx === 1 ? 'text-blue-900' : 'text-emerald-900');
+        const valCls = idx === 0 ? 'text-purple-800' : (idx === 1 ? 'text-blue-800' : 'text-emerald-800');
+
         let pointsHtml = '';
         if (dim.evidence_points) {{
           dim.evidence_points.forEach(pt => {{
-            pointsHtml += `<li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✓</span> <span>${{pt}}</span></li>`;
+            pointsHtml += `<li class="flex items-start gap-1.5"><span class="${{checkColor}} font-bold">✓</span> <span>${{pt}}</span></li>`;
           }});
         }}
 
+        let metricVal = dim.metric_value;
+        let metricLbl = dim.metric_label;
+
+        if (dRates) {{
+          if (idx === 0) {{
+            metricVal = (dRates.p1_rate !== null && dRates.p1_rate !== undefined) ? `${{dRates.p1_rate}}%` : 'Pending Visit 2';
+            metricLbl = `${{selDistrict}} District (${{dRates.p1_pass || 0}} of ${{dRates.p1_total || 0}} Passed)`;
+          }} else if (idx === 1) {{
+            metricVal = (dRates.p2_rate !== null && dRates.p2_rate !== undefined) ? `${{dRates.p2_rate}}%` : 'Pending Visit 2';
+            metricLbl = `${{selDistrict}} District (${{dRates.p2_pass || 0}} of ${{dRates.p2_total || 0}} Passed)`;
+          }} else if (idx === 2) {{
+            metricVal = (dRates.p3_rate !== null && dRates.p3_rate !== undefined) ? `${{dRates.p3_rate}}%` : '100.0%';
+            metricLbl = `${{selDistrict}} District (${{dRates.p3_pass || 0}} of ${{dRates.p3_total || 0}} Passed)`;
+          }}
+        }}
+
         impactContainer.innerHTML += `
-          <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+          <div class="bg-white rounded-xl p-5 border ${{borderCls}} card-shadow flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-end mb-2">
-                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">Visit 1 Check: ${{dim.baseline}}</span>
+                <span class="text-xs ${{badgeCls}} font-bold px-2 py-0.5 rounded border">Visit 1 Check: ${{dim.baseline}}</span>
               </div>
-              <h4 class="text-sm font-bold text-slate-800 mb-1">${{dim.title}}</h4>
+              <h4 class="text-sm font-bold ${{titleCls}} mb-1 flex items-center">${{iconHtml}}${{dim.title}}</h4>
               <div class="flex items-baseline gap-2 my-2">
-                <span class="text-2xl font-black text-slate-800">${{dim.metric_value}}</span>
-                <span class="text-xs text-slate-500">${{dim.metric_label}}</span>
+                <span class="text-2xl font-black ${{valCls}}">${{metricVal}}</span>
+                <span class="text-xs text-slate-500">${{metricLbl}}</span>
               </div>
               <p class="text-xs text-slate-600 mb-3">${{dim.summary}}</p>
               <ul class="text-xs text-slate-600 space-y-1.5 border-t border-slate-100 pt-3">
