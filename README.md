@@ -29,9 +29,6 @@ Whenever new data is added or modified in `Nutribus_2.0_Activity.xlsx`:
 ```bash
 # Simply run the update script in the terminal:
 ./update_dashboard.sh
-
-# Or on macOS, double-click:
-Update_Dashboard.command
 ```
 This automatically ingests the latest Excel data, updates `dashboard_data.json` and `dashboard_district_db.json`, and rebuilds the standalone `index.html`.
 

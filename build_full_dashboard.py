@@ -38,13 +38,20 @@ for s in OFFICIAL_SCHOOLS:
             v1_val = v1_rec.get("att_total") or (v1_rec.get("att_boys", 0) + v1_rec.get("att_girls", 0))
             break
 
-    v2_rec = dist_info.get("v2")
-    if v2_rec:
-        s_norm = norm_sch_name(s["name"])
+    v2_schools_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("schools_data", [])
+    s_norm = norm_sch_name(s["name"])
+    for v2_rec in v2_schools_data:
         r_norm = norm_sch_name(v2_rec.get("school", ""))
-        if s_norm in r_norm or r_norm in s_norm:
+        rec_dist = v2_rec.get("district", "")
+        is_match = (s_norm in r_norm or r_norm in s_norm) if (r_norm and r_norm != "NAN") else (rec_dist == dist == "Kotido")
+        if is_match and (rec_dist == dist or dist == ""):
             v2_sch_att = v2_rec.get("school_attendance")
-            if v2_sch_att and v2_sch_att.get("att_total", 0) > 0:
+            sch_enrol = s.get("total", s.get("enrolment", 1000))
+            if v2_sch_att and 0 < v2_sch_att.get("att_total", 0) <= sch_enrol * 1.25:
+                v2_val = v2_sch_att.get("att_total")
+            elif v2_rec.get("pupils_total", 0) > 0:
+                v2_val = v2_rec.get("pupils_total")
+            elif v2_sch_att and v2_sch_att.get("att_total", 0) > 0:
                 v2_val = v2_sch_att.get("att_total")
             else:
                 tot_v2_learners = (v2_rec.get("hc_lower_m", 0) + v2_rec.get("hc_lower_f", 0) + 
@@ -1794,7 +1801,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
-              <span id="footer-v1-days">Peak meeting days: <strong>Wednesday, Thursday, Friday, Tuesday (2 schools each); Monday, Saturday (1 each)</strong></span>
+              <span id="footer-v1-days">Peak meeting days: <strong>Tuesday (5 schools), Friday (4 schools), Thursday (3 schools); Mon &amp; Wed (2 each); Sat (1)</strong></span>
             </div>
           </div>
 
@@ -5155,7 +5162,7 @@ html_code = f"""<!DOCTYPE html>
       // Dynamic card footer and metric updates for Visit 1
       const footerDays = document.getElementById('footer-v1-days');
       if (footerDays) {{
-        footerDays.innerHTML = `Meeting Days: <strong>Wed (${{v1WedCount}}), Thu (${{v1ThuCount}}), Fri (${{v1FriCount}}), Mon (${{v1MonCount}}), Tue (${{v1TueCount}}), Sat (${{v1SatCount}})</strong>`;
+        footerDays.innerHTML = `Meeting Days: <strong>Tue (${{v1TueCount}}), Fri (${{v1FriCount}}), Thu (${{v1ThuCount}}), Wed (${{v1WedCount}}), Mon (${{v1MonCount}}), Sat (${{v1SatCount}})</strong>`;
       }}
       const elCharts = document.getElementById('metric-v1-charts-issued');
       if (elCharts) elCharts.innerText = v1ChartsIssued.toLocaleString();

@@ -244,6 +244,7 @@ nutriclub_sessions_list = []
 msc_stories_list = []
 records_log = []
 v1_all_schools_records = []
+v2_all_schools_records = []
 
 # --- PARSE EACH ROW BY INDEX ---
 for _, row in df.iterrows():
@@ -597,6 +598,24 @@ for _, row in df.iterrows():
                     else:
                         for k, v in v2_sch_att.items():
                             d_v2["school_attendance"][k] += v
+
+            v2_rec = {
+                "entry_index": entry_index,
+                "school": school_name,
+                "district": dist,
+                "date": str(date_val),
+                "pupils_total": tot_pupils,
+                "pupils_boys": int(l_m + m_m + u_m),
+                "pupils_girls": int(l_f + m_f + u_f),
+                "teachers_total": tot_staff,
+                "comm_total": tot_comm,
+                "pwd_total": pwd,
+                "hc_lower_m": int(l_m), "hc_lower_f": int(l_f),
+                "hc_mid_m": int(m_m), "hc_mid_f": int(m_f),
+                "hc_up_m": int(u_m), "hc_up_f": int(u_f),
+                "school_attendance": v2_sch_att if v2_sch_att["att_total"] > 0 else None
+            }
+            v2_all_schools_records.append(v2_rec)
 
             p1_items = [str(row[c]) for c in df.columns if 'Imagine you are at home ton' in c and pd.notnull(row[c])]
             for val in p1_items:
@@ -1581,6 +1600,7 @@ if "three_visit_contact" in d_data:
         "schools_completed": len(v2_rows),
         "target_schools": 64,
         "schools_list": v2_schools,
+        "schools_data": v2_all_schools_records,
         "total_pupils_attended": tot_v2_pupils,
         "pwd_learners": tot_v2_pwd_l,
         "teachers_present": tot_v2_staff,
