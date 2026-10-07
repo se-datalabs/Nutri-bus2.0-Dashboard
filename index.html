@@ -753,7 +753,7 @@
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">100% Present</span>
+              <span id="badge-orient-headteachers" class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">70.0% Present</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Headteacher or deputy present</h4>
             <p class="text-xs text-slate-500 mb-3">Headteacher or deputy present</p>
@@ -762,7 +762,7 @@
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-ht-yes">Present: <strong>10</strong></span>
+            <span id="label-ht-yes">Present: <strong>7 of 10</strong></span>
             <span id="label-patrons-count">Nutri Club Patrons: <strong>50</strong></span>
           </div>
         </div>
@@ -789,7 +789,7 @@
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">0 PWD VHTs</span>
+              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">10 PWD VHTs</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">VHTs with disabilities (PWDs)</h4>
             <p class="text-xs text-slate-500 mb-3">VHTs with disabilities by sex</p>
@@ -798,7 +798,7 @@
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-vht-pwd-m">Male PWD: <strong>0</strong></span>
+            <span id="label-vht-pwd-m">Male PWD: <strong>10</strong></span>
             <span id="label-vht-pwd-f">Female PWD: <strong>0</strong></span>
           </div>
         </div>
@@ -807,7 +807,7 @@
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">100% Agreed</span>
+              <span id="badge-orient-calendar" class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">80.0% Agreed</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Joint calendar agreement</h4>
             <p class="text-xs text-slate-500 mb-3">Did school leadership and VHTs agree on joint calendar?</p>
@@ -816,7 +816,7 @@
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <span>Details of plan: <strong>Joint weekly calendars verified in all schools</strong></span>
+            <span id="label-calendar-details">Agreed: <strong>8 of 10 schools</strong> signed joint 4-week plan</span>
           </div>
         </div>
 
@@ -1662,161 +1662,377 @@
             </div>
             <div class="flex items-center gap-2 text-xs">
               <span class="px-3 py-1 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200">
-                Audited Schools: 2 Logged (Kasimeri P/S, St Mary's P/S)
+                Audited Schools: 13 Logged
               </span>
               <span class="px-3 py-1 bg-sky-50 text-sky-800 font-bold rounded-lg border border-sky-200">
-                Total Audited Weekly Attendance: 13,820 Pupils
+                Total Audited Weekly Attendance: 24,076 Pupils
               </span>
             </div>
           </div>
 
           <div class="overflow-x-auto rounded-lg border border-slate-200 mb-2">
-            <table class="w-full text-xs text-left border-collapse">
+            <table class="w-full text-xs text-left border-collapse min-w-[980px]">
               <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 text-[11px]">
                 <tr>
-                  <th rowspan="2" class="p-3 border-r border-slate-200">Audited Primary School</th>
-                  <th colspan="3" class="p-2 text-center bg-blue-50/70 border-r border-slate-200">Lower Primary (ECD–P2)</th>
-                  <th colspan="3" class="p-2 text-center bg-sky-50/70 border-r border-slate-200">Middle Primary (P3–P4)</th>
-                  <th colspan="3" class="p-2 text-center bg-cyan-50/70 border-r border-slate-200">Upper Primary (P5–P7)</th>
-                  <th colspan="3" class="p-2 text-center bg-slate-100 font-extrabold">Total School Attendance</th>
+                  <th rowspan="2" class="px-3 py-2 border-r border-slate-200 whitespace-nowrap">Audited Primary School</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-blue-50/70 border-r border-slate-200 whitespace-nowrap">Lower Primary (ECD–P2)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-sky-50/70 border-r border-slate-200 whitespace-nowrap">Middle Primary (P3–P4)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-cyan-50/70 border-r border-slate-200 whitespace-nowrap">Upper Primary (P5–P7)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-slate-100 font-extrabold whitespace-nowrap">Total School Attendance</th>
                 </tr>
                 <tr class="border-t border-slate-200 text-[10px]">
-                  <th class="p-2 text-right bg-blue-50/40">Boys</th>
-                  <th class="p-2 text-right bg-blue-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-blue-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right bg-sky-50/40">Boys</th>
-                  <th class="p-2 text-right bg-sky-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-sky-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right bg-cyan-50/40">Boys</th>
-                  <th class="p-2 text-right bg-cyan-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-cyan-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right font-bold text-blue-700 bg-slate-100">Boys</th>
-                  <th class="p-2 text-right font-bold text-pink-700 bg-slate-100">Girls</th>
-                  <th class="p-2 text-right font-black text-slate-900 bg-slate-200/80">Grand Total</th>
+                  <th class="px-2 py-1.5 text-right bg-blue-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-blue-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-blue-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right bg-sky-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-sky-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-sky-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right bg-cyan-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-cyan-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-cyan-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right font-bold text-blue-700 bg-slate-100 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right font-bold text-pink-700 bg-slate-100 whitespace-nowrap">Girls</th>
+                  <th class="px-2.5 py-1.5 text-right font-black text-slate-900 bg-slate-200/80 whitespace-nowrap">Grand Total</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-slate-700">
                 
       <tr class="hover:bg-slate-50/70 border-b border-slate-100">
-        <td class="p-3 font-semibold text-slate-900">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
             <div>
-              <span class="font-bold">KATIKIT P/S, ALAKAS P/S, NAMODO P/S, CHEPKARARAT P/S</span>
-              <span class="block text-[10px] text-slate-500 font-normal">Amudat District · Mid-Cycle Audit</span>
+              <span class="font-bold block leading-tight">KASIMERI P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
             </div>
           </div>
         </td>
-        <td class="p-3 text-right font-mono text-slate-700">843</td>
-        <td class="p-3 text-right font-mono text-slate-700">746</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">1589</td>
-        <td class="p-3 text-right font-mono text-slate-700">403</td>
-        <td class="p-3 text-right font-mono text-slate-700">420</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">823</td>
-        <td class="p-3 text-right font-mono text-slate-700">369</td>
-        <td class="p-3 text-right font-mono text-slate-700">394</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">763</td>
-        <td class="p-3 text-right font-mono text-blue-700 font-bold">1615</td>
-        <td class="p-3 text-right font-mono text-pink-700 font-bold">1560</td>
-        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">3175</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">809</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">771</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">1,580</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">1,445</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">1,255</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">2,700</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">1,125</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">1,653</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">2,778</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">3,379</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">3,679</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">7,058</td>
       </tr>
     
       <tr class="hover:bg-slate-50/70 border-b border-slate-100">
-        <td class="p-3 font-semibold text-slate-900">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
             <div>
-              <span class="font-bold">KAMACHARIKOL P/S, PAJAR P/S</span>
-              <span class="block text-[10px] text-slate-500 font-normal">Kaabong District · Mid-Cycle Audit</span>
+              <span class="font-bold block leading-tight">ST MARYS P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Nakapiripirit District · Mid-Cycle Audit</span>
             </div>
           </div>
         </td>
-        <td class="p-3 text-right font-mono text-slate-700">582</td>
-        <td class="p-3 text-right font-mono text-slate-700">655</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">1237</td>
-        <td class="p-3 text-right font-mono text-slate-700">439</td>
-        <td class="p-3 text-right font-mono text-slate-700">517</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">956</td>
-        <td class="p-3 text-right font-mono text-slate-700">338</td>
-        <td class="p-3 text-right font-mono text-slate-700">268</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">606</td>
-        <td class="p-3 text-right font-mono text-blue-700 font-bold">1359</td>
-        <td class="p-3 text-right font-mono text-pink-700 font-bold">1440</td>
-        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">2799</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">90</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">140</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">230</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">150</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">200</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">350</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">118</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">90</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">208</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">358</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">430</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">788</td>
       </tr>
     
       <tr class="hover:bg-slate-50/70 border-b border-slate-100">
-        <td class="p-3 font-semibold text-slate-900">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
             <div>
-              <span class="font-bold">KASIMERI P/S, LOPUTUK P/S, NAWANATAU P/S, CHILD JESUS P/S, NADUNGET P/S</span>
-              <span class="block text-[10px] text-slate-500 font-normal">Moroto District · Mid-Cycle Audit</span>
+              <span class="font-bold block leading-tight">KATIKIT P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Amudat District · Mid-Cycle Audit</span>
             </div>
           </div>
         </td>
-        <td class="p-3 text-right font-mono text-slate-700">809</td>
-        <td class="p-3 text-right font-mono text-slate-700">771</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">1580</td>
-        <td class="p-3 text-right font-mono text-slate-700">1445</td>
-        <td class="p-3 text-right font-mono text-slate-700">1255</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">2700</td>
-        <td class="p-3 text-right font-mono text-slate-700">1125</td>
-        <td class="p-3 text-right font-mono text-slate-700">1653</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">2778</td>
-        <td class="p-3 text-right font-mono text-blue-700 font-bold">3379</td>
-        <td class="p-3 text-right font-mono text-pink-700 font-bold">3679</td>
-        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">7058</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">843</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">746</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">1,589</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">403</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">420</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">823</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">369</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">394</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">763</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">1,615</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">1,560</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">3,175</td>
       </tr>
     
       <tr class="hover:bg-slate-50/70 border-b border-slate-100">
-        <td class="p-3 font-semibold text-slate-900">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
             <div>
-              <span class="font-bold">ST MARYS P/S</span>
-              <span class="block text-[10px] text-slate-500 font-normal">Nakapiripirit District · Mid-Cycle Audit</span>
+              <span class="font-bold block leading-tight">ALAKAS P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Amudat District · Mid-Cycle Audit</span>
             </div>
           </div>
         </td>
-        <td class="p-3 text-right font-mono text-slate-700">90</td>
-        <td class="p-3 text-right font-mono text-slate-700">140</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">230</td>
-        <td class="p-3 text-right font-mono text-slate-700">150</td>
-        <td class="p-3 text-right font-mono text-slate-700">200</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">350</td>
-        <td class="p-3 text-right font-mono text-slate-700">118</td>
-        <td class="p-3 text-right font-mono text-slate-700">90</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">208</td>
-        <td class="p-3 text-right font-mono text-blue-700 font-bold">358</td>
-        <td class="p-3 text-right font-mono text-pink-700 font-bold">430</td>
-        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">788</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">319</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">338</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">657</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">98</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">92</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">190</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">86</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">67</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">153</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">503</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">497</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">1,000</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">NAMODO P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Amudat District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">253</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">144</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">397</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">102</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">107</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">209</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">112</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">133</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">245</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">467</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">384</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">851</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">LOPUTUK P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">194</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">191</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">385</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">53</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">37</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">90</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">24</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">27</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">51</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">271</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">255</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">526</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">NAWANATAU P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">124</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">115</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">239</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">171</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">194</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">365</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">185</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">186</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">371</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">480</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">495</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">975</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">CHEPKARARAT P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Amudat District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">209</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">212</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">421</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">140</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">147</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">287</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">118</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">126</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">244</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">467</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">485</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">952</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">CHILD JESUS P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">254</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">231</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">485</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">205</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">187</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">392</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">237</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">482</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">719</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">696</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">900</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">1,596</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">NADUNGET P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">170</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">106</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">276</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">207</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">167</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">374</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">270</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">276</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">546</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">647</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">549</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">1,196</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">KASIMERI P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Moroto District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">67</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">128</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">195</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">159</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">295</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">454</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">323</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">591</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">914</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">549</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">1,014</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">1,563</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">KAMACHARIKOL P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Kaabong District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">582</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">655</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">1,237</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">439</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">517</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">956</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">338</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">268</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">606</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">1,359</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">1,440</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">2,799</td>
+      </tr>
+    
+      <tr class="hover:bg-slate-50/70 border-b border-slate-100">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
+            <div>
+              <span class="font-bold block leading-tight">PAJAR P/S</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">Kaabong District · Mid-Cycle Audit</span>
+            </div>
+          </div>
+        </td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">306</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">351</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">657</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">238</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">248</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">486</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">253</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">201</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">454</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">797</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">800</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">1,597</td>
       </tr>
     
               </tbody>
               <tfoot class="bg-slate-100/80 font-extrabold text-slate-900 border-t-2 border-slate-300">
                 
   <tr class="bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300">
-    <td class="p-3 uppercase">Total Audited Register Attendance</td>
-    <td class="p-3 text-right font-mono">2324</td>
-    <td class="p-3 text-right font-mono">2312</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">4636</td>
-    <td class="p-3 text-right font-mono">2437</td>
-    <td class="p-3 text-right font-mono">2392</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">4829</td>
-    <td class="p-3 text-right font-mono">1950</td>
-    <td class="p-3 text-right font-mono">2405</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">4355</td>
-    <td class="p-3 text-right text-blue-800 font-mono font-black">6711</td>
-    <td class="p-3 text-right text-pink-800 font-mono font-black">7109</td>
-    <td class="p-3 text-right text-slate-900 bg-sky-100 font-mono font-black text-sm">13,820</td>
+    <td class="px-3 py-2 uppercase whitespace-nowrap">Total Audited Register Attendance</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">4,220</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">4,128</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">8,348</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">3,810</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">3,866</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">7,676</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">3,558</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">4,494</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">8,052</td>
+    <td class="px-2 py-2 text-right text-blue-800 font-mono font-black whitespace-nowrap">11,588</td>
+    <td class="px-2 py-2 text-right text-pink-800 font-mono font-black whitespace-nowrap">12,488</td>
+    <td class="px-2.5 py-2 text-right text-slate-900 bg-sky-100 font-mono font-black text-xs whitespace-nowrap">24,076</td>
   </tr>
 
               </tfoot>
             </table>
           </div>
           <p class="text-[11px] text-slate-500 italic">
-            <i class="fa-solid fa-circle-info mr-1 text-sky-600"></i><strong>Distinct Metric Tracking:</strong> This table reflects official school weekly register audits. Kotido Mixed P/S participated in the Big Bus Activation event (35 learners) but has not yet submitted their weekly register breakdown.
+            <i class="fa-solid fa-circle-info mr-1 text-sky-600"></i><strong>Distinct Metric Tracking:</strong> This table reflects official school weekly register audits recorded directly during Visit 2 school visits.
           </p>
         </div>
 
@@ -3468,6 +3684,10 @@
     "vhts_female": 12.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KIRU P/S)": {
         "key": "Respondent 1 (KIRU P/S)",
@@ -3733,8 +3953,12 @@
     "patrons": 6,
     "vhts_male": 14.0,
     "vhts_female": 17.0,
-    "vhts_pwd_male": 0,
+    "vhts_pwd_male": 10,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 10,
+    "orientations": 3,
+    "calendars_signed": 2,
+    "calendars_pending": 1,
     "exit_interviews": {
       "Respondent 1 (KATIKIT P/S)": {
         "key": "Respondent 1 (KATIKIT P/S)",
@@ -4365,6 +4589,10 @@
     "vhts_female": 0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 0,
+    "calendars_signed": 0,
+    "calendars_pending": 0,
     "exit_interviews": {},
     "visits": 6,
     "target_visits": 39,
@@ -4978,6 +5206,10 @@
     "vhts_female": 9.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KARENGA BOYS P/S)": {
         "key": "Respondent 1 (KARENGA BOYS P/S)",
@@ -5199,6 +5431,10 @@
     "vhts_female": 8.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KOTIDO MIXED P/S)": {
         "key": "Respondent 1 (KOTIDO MIXED P/S)",
@@ -5546,6 +5782,10 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 0,
+    "calendars_pending": 1,
     "exit_interviews": {
       "Respondent 1 (KASIMERI P/S)": {
         "key": "Respondent 1 (KASIMERI P/S)",
@@ -6130,6 +6370,10 @@
     "vhts_female": 2.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (NABILATUK TOWNSHIP P/S)": {
         "key": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -6354,6 +6598,10 @@
     "vhts_female": 3.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (NAPIANANYA P/S)": {
         "key": "Respondent 1 (NAPIANANYA P/S)",
@@ -6609,6 +6857,10 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (LONGALOM P/S)": {
         "key": "Respondent 1 (LONGALOM P/S)",
@@ -6864,7 +7116,7 @@
         42,
         43
       ],
-      "last_synced": "2026-10-07 19:48:42"
+      "last_synced": "2026-10-07 20:35:09"
     }
   },
   "overview": {
@@ -11992,7 +12244,7 @@
         "title": "Pillar 3: Community Accountability & Climate-Smart Living",
         "metric_value": "100.0%",
         "metric_label": "Commitment & Joint Calendars (9 Oriented Schools)",
-        "summary": "100% of oriented school leadership and VHTs (9 schools) agreed on joint 4-week calendars with signed action plans.",
+        "summary": "88.9% of oriented school leadership and VHTs (8 of 9 schools) agreed on joint 4-week calendars with signed action plans.",
         "baseline": "0.0% Prior",
         "evidence_points": [
           "9 primary schools completed multi-stakeholder orientation sessions",
@@ -12069,8 +12321,8 @@
           },
           {
             "label": "Teachers in the Lead",
-            "value": "100% (9 Schools)",
-            "detail": "All 9 oriented schools demonstrated active teacher and headteacher leadership"
+            "value": "77.8% (7 of 9 Schools)",
+            "detail": "7 of 9 oriented schools confirmed headteacher or deputy leadership present"
           },
           {
             "label": "What Children Learned",
@@ -15286,7 +15538,7 @@
           totVhtsF += (d.vhts_female || 0);
           totPwdLearners += (d.v2 ? ((d.v2.hc_lower_pwd || 0) + (d.v2.hc_mid_pwd || 0) + (d.v2.hc_up_pwd || 0)) : 0);
           totPwdAdults += (d.v2 ? (d.v2.teachers_pwd || 0) : 0);
-          if (d.headteachers) totOrientSchools += d.headteachers;
+          totOrientSchools += (d.orientations !== undefined ? d.orientations : (d.headteachers || 0));
         }
       }
 
@@ -15528,16 +15780,32 @@
       
       const totHtPresent = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].headteachers || 0), 0);
       const totPatronsApp = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].patrons || 0), 0);
+      const totVhtPwdM = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].vhts_pwd_male || 0), 0);
+      const totVhtPwdF = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].vhts_pwd_female || 0), 0);
+      const totVhtPwdTot = totVhtPwdM + totVhtPwdF;
+      const totCalSigned = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].calendars_signed || 0), 0);
+
+      const htPct = totOrientSchools > 0 ? ((totHtPresent / totOrientSchools) * 100).toFixed(1) : 0;
+      const calPct = totOrientSchools > 0 ? ((totCalSigned / totOrientSchools) * 100).toFixed(1) : 0;
+
+      const elHtBadge = document.getElementById('badge-orient-headteachers');
+      if (elHtBadge) elHtBadge.innerText = `${htPct}% Present`;
       const elHt = document.getElementById('label-ht-yes');
-      if (elHt) elHt.innerHTML = `Present: <strong>${totHtPresent}</strong>`;
+      if (elHt) elHt.innerHTML = `Present: <strong>${totHtPresent} of ${totOrientSchools}</strong>`;
       const elPat = document.getElementById('label-patrons-count');
       if (elPat) elPat.innerHTML = `Nutri Club Patrons: <strong>${totPatronsApp}</strong>`;
+
       const elVhtPwdBadge = document.getElementById('badge-vht-pwd-count');
-      if (elVhtPwdBadge) elVhtPwdBadge.innerText = '0 PWD VHTs';
+      if (elVhtPwdBadge) elVhtPwdBadge.innerText = `${totVhtPwdTot} PWD VHTs`;
       const elVhtPwdM = document.getElementById('label-vht-pwd-m');
-      if (elVhtPwdM) elVhtPwdM.innerHTML = 'Male PWD: <strong>0</strong>';
+      if (elVhtPwdM) elVhtPwdM.innerHTML = `Male PWD: <strong>${totVhtPwdM}</strong>`;
       const elVhtPwdF = document.getElementById('label-vht-pwd-f');
-      if (elVhtPwdF) elVhtPwdF.innerHTML = 'Female PWD: <strong>0</strong>';
+      if (elVhtPwdF) elVhtPwdF.innerHTML = `Female PWD: <strong>${totVhtPwdF}</strong>`;
+
+      const elCalBadge = document.getElementById('badge-orient-calendar');
+      if (elCalBadge) elCalBadge.innerText = `${calPct}% Agreed`;
+      const elCalDetails = document.getElementById('label-calendar-details');
+      if (elCalDetails) elCalDetails.innerHTML = `Agreed: <strong>${totCalSigned} of ${totOrientSchools} schools</strong> signed joint 4-week plan`;
 
       createHorizontalBarChart('chart-orient-teachers',
         ["Male Teachers", "Female Teachers"],
@@ -15562,14 +15830,14 @@
 
       createHorizontalBarChart('chart-orient-vhts-pwd',
         ["Male VHTs with PWDs", "Female VHTs with PWDs"],
-        [0, 0],
+        [totVhtPwdM, totVhtPwdF],
         [WFP_BLUE, '#2389d4'],
         'VHTs with Disabilities'
       );
 
       createHorizontalBarChart('chart-orient-calendar',
         ["Agreed on joint calendar", "Did not agree / pending"],
-        [totOrientSchools, 0],
+        [totCalSigned, Math.max(0, totOrientSchools - totCalSigned)],
         [ACCENT_GREEN, '#cbd5e1'],
         'Agreements Signed'
       );

@@ -209,6 +209,9 @@ tot_vht_f_all = sum(d.get("vhts_female", 0) for d in DISTRICT_DB.values())
 tot_vht_all = tot_vht_m_all + tot_vht_f_all
 tot_ht_all = sum(d.get("headteachers", 0) for d in DISTRICT_DB.values())
 tot_patrons_all = sum(d.get("patrons", 0) for d in DISTRICT_DB.values())
+tot_o_vht_pwd_m = sum(d.get("vhts_pwd_male", 0) for d in DISTRICT_DB.values())
+tot_o_vht_pwd_f = sum(d.get("vhts_pwd_female", 0) for d in DISTRICT_DB.values())
+tot_o_vht_pwd_tot = tot_o_vht_pwd_m + tot_o_vht_pwd_f
 
 # Dynamic stats for Sample Interviews and MEL Tab
 orient_kpis = BASE_DATA.get("orientation", {}).get("kpis", {})
@@ -216,6 +219,8 @@ tot_orient_schools = orient_kpis.get("total_orientations", 8)
 tot_orient_exit_sample = orient_kpis.get("total_exit_interviews", 48)
 tot_patrons_app = orient_kpis.get("patrons_appointed", 46)
 cal_yes_cnt = orient_kpis.get("joint_calendars_signed", 7)
+ht_presence_pct = round((tot_ht_all / max(1, tot_orient_schools) * 100), 1)
+cal_agreed_pct = round((cal_yes_cnt / max(1, tot_orient_schools) * 100), 1)
 
 # Orientation partner engagement and physical tools dynamic variables
 orient_partner = BASE_DATA.get("orientation", {}).get("partner_engagement", {})
@@ -415,63 +420,63 @@ tot_v2_sch_mg = 0
 tot_v2_sch_ub = 0
 tot_v2_sch_ug = 0
 
-for d_name, d_obj in DISTRICT_DB.items():
-    v2_r = d_obj.get("v2")
-    if v2_r and v2_r.get("school_attendance"):
-        sa = v2_r["school_attendance"]
-        if sa.get("att_total", 0) > 0:
-            sch_n = v2_r.get("school", d_name)
-            tot_v2_sch_b += sa.get("att_boys", 0)
-            tot_v2_sch_g += sa.get("att_girls", 0)
-            tot_v2_sch_tot += sa.get("att_total", 0)
-            tot_v2_sch_lb += sa.get("att_lower_b", 0)
-            tot_v2_sch_lg += sa.get("att_lower_g", 0)
-            tot_v2_sch_mb += sa.get("att_mid_b", 0)
-            tot_v2_sch_mg += sa.get("att_mid_g", 0)
-            tot_v2_sch_ub += sa.get("att_up_b", 0)
-            tot_v2_sch_ug += sa.get("att_up_g", 0)
-            v2_sch_att_records.append({
-                "school": sch_n,
-                "district": d_name,
-                "b": sa.get("att_boys", 0),
-                "g": sa.get("att_girls", 0),
-                "tot": sa.get("att_total", 0),
-                "lb": sa.get("att_lower_b", 0),
-                "lg": sa.get("att_lower_g", 0),
-                "ltot": sa.get("att_lower_tot", sa.get("att_lower_b", 0) + sa.get("att_lower_g", 0)),
-                "mb": sa.get("att_mid_b", 0),
-                "mg": sa.get("att_mid_g", 0),
-                "mtot": sa.get("att_mid_tot", sa.get("att_mid_b", 0) + sa.get("att_mid_g", 0)),
-                "ub": sa.get("att_up_b", 0),
-                "ug": sa.get("att_up_g", 0),
-                "utot": sa.get("att_up_tot", sa.get("att_up_b", 0) + sa.get("att_up_g", 0)),
-            })
+v2_schools_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("schools_data", [])
+for rec in v2_schools_data:
+    sa = rec.get("school_attendance")
+    if sa and sa.get("att_total", 0) > 0:
+        sch_n = rec.get("school", "Audited School")
+        d_name = rec.get("district", "")
+        tot_v2_sch_b += sa.get("att_boys", 0)
+        tot_v2_sch_g += sa.get("att_girls", 0)
+        tot_v2_sch_tot += sa.get("att_total", 0)
+        tot_v2_sch_lb += sa.get("att_lower_b", 0)
+        tot_v2_sch_lg += sa.get("att_lower_g", 0)
+        tot_v2_sch_mb += sa.get("att_mid_b", 0)
+        tot_v2_sch_mg += sa.get("att_mid_g", 0)
+        tot_v2_sch_ub += sa.get("att_up_b", 0)
+        tot_v2_sch_ug += sa.get("att_up_g", 0)
+        v2_sch_att_records.append({
+            "school": sch_n,
+            "district": d_name,
+            "b": sa.get("att_boys", 0),
+            "g": sa.get("att_girls", 0),
+            "tot": sa.get("att_total", 0),
+            "lb": sa.get("att_lower_b", 0),
+            "lg": sa.get("att_lower_g", 0),
+            "ltot": sa.get("att_lower_tot", sa.get("att_lower_b", 0) + sa.get("att_lower_g", 0)),
+            "mb": sa.get("att_mid_b", 0),
+            "mg": sa.get("att_mid_g", 0),
+            "mtot": sa.get("att_mid_tot", sa.get("att_mid_b", 0) + sa.get("att_mid_g", 0)),
+            "ub": sa.get("att_up_b", 0),
+            "ug": sa.get("att_up_g", 0),
+            "utot": sa.get("att_up_tot", sa.get("att_up_b", 0) + sa.get("att_up_g", 0)),
+        })
 
 v2_sch_att_tbody_rows = []
 for r in v2_sch_att_records:
     v2_sch_att_tbody_rows.append(f"""
       <tr class="hover:bg-slate-50/70 border-b border-slate-100">
-        <td class="p-3 font-semibold text-slate-900">
+        <td class="px-3 py-2 font-semibold text-slate-900 whitespace-nowrap">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-school text-sky-600 text-xs"></i>
+            <i class="fa-solid fa-school text-sky-600 text-xs flex-shrink-0"></i>
             <div>
-              <span class="font-bold">{r['school']}</span>
-              <span class="block text-[10px] text-slate-500 font-normal">{r['district']} District · Mid-Cycle Audit</span>
+              <span class="font-bold block leading-tight">{r['school']}</span>
+              <span class="text-[10px] text-slate-500 font-normal block leading-tight">{r['district']} District · Mid-Cycle Audit</span>
             </div>
           </div>
         </td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['lb']}</td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['lg']}</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['ltot']}</td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['mb']}</td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['mg']}</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['mtot']}</td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['ub']}</td>
-        <td class="p-3 text-right font-mono text-slate-700">{r['ug']}</td>
-        <td class="p-3 text-right font-bold text-slate-800 bg-slate-50 font-mono">{r['utot']}</td>
-        <td class="p-3 text-right font-mono text-blue-700 font-bold">{r['b']}</td>
-        <td class="p-3 text-right font-mono text-pink-700 font-bold">{r['g']}</td>
-        <td class="p-3 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-sm">{r['tot']}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['lb']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['lg']:,}</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">{r['ltot']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['mb']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['mg']:,}</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">{r['mtot']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['ub']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-slate-700 whitespace-nowrap">{r['ug']:,}</td>
+        <td class="px-2 py-2 text-right font-bold text-slate-800 bg-slate-50 font-mono whitespace-nowrap">{r['utot']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-blue-700 font-bold whitespace-nowrap">{r['b']:,}</td>
+        <td class="px-2 py-2 text-right font-mono text-pink-700 font-bold whitespace-nowrap">{r['g']:,}</td>
+        <td class="px-2.5 py-2 text-right font-black text-slate-900 bg-sky-50/70 font-mono text-xs whitespace-nowrap">{r['tot']:,}</td>
       </tr>
     """)
 
@@ -481,19 +486,19 @@ v2_sch_att_tbody_html = "".join(v2_sch_att_tbody_rows) if v2_sch_att_tbody_rows 
 
 v2_sch_att_tfoot_html = f"""
   <tr class="bg-slate-100/90 font-black text-slate-900 border-t-2 border-slate-300">
-    <td class="p-3 uppercase">Total Audited Register Attendance</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_lb}</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_lg}</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_lb + tot_v2_sch_lg}</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_mb}</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_mg}</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_mb + tot_v2_sch_mg}</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_ub}</td>
-    <td class="p-3 text-right font-mono">{tot_v2_sch_ug}</td>
-    <td class="p-3 text-right bg-slate-200/60 font-mono font-bold">{tot_v2_sch_ub + tot_v2_sch_ug}</td>
-    <td class="p-3 text-right text-blue-800 font-mono font-black">{tot_v2_sch_b}</td>
-    <td class="p-3 text-right text-pink-800 font-mono font-black">{tot_v2_sch_g}</td>
-    <td class="p-3 text-right text-slate-900 bg-sky-100 font-mono font-black text-sm">{tot_v2_sch_tot:,}</td>
+    <td class="px-3 py-2 uppercase whitespace-nowrap">Total Audited Register Attendance</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_lb:,}</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_lg:,}</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">{tot_v2_sch_lb + tot_v2_sch_lg:,}</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_mb:,}</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_mg:,}</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">{tot_v2_sch_mb + tot_v2_sch_mg:,}</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_ub:,}</td>
+    <td class="px-2 py-2 text-right font-mono whitespace-nowrap">{tot_v2_sch_ug:,}</td>
+    <td class="px-2 py-2 text-right bg-slate-200/60 font-mono font-bold whitespace-nowrap">{tot_v2_sch_ub + tot_v2_sch_ug:,}</td>
+    <td class="px-2 py-2 text-right text-blue-800 font-mono font-black whitespace-nowrap">{tot_v2_sch_b:,}</td>
+    <td class="px-2 py-2 text-right text-pink-800 font-mono font-black whitespace-nowrap">{tot_v2_sch_g:,}</td>
+    <td class="px-2.5 py-2 text-right text-slate-900 bg-sky-100 font-mono font-black text-xs whitespace-nowrap">{tot_v2_sch_tot:,}</td>
   </tr>
 """
 
@@ -1264,7 +1269,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">100% Present</span>
+              <span id="badge-orient-headteachers" class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">{ht_presence_pct}% Present</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Headteacher or deputy present</h4>
             <p class="text-xs text-slate-500 mb-3">Headteacher or deputy present</p>
@@ -1273,7 +1278,7 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-ht-yes">Present: <strong>{tot_orient_schools}</strong></span>
+            <span id="label-ht-yes">Present: <strong>{tot_ht_all} of {tot_orient_schools}</strong></span>
             <span id="label-patrons-count">Nutri Club Patrons: <strong>{tot_patrons_app}</strong></span>
           </div>
         </div>
@@ -1300,7 +1305,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">0 PWD VHTs</span>
+              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">{tot_o_vht_pwd_tot} PWD VHTs</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">VHTs with disabilities (PWDs)</h4>
             <p class="text-xs text-slate-500 mb-3">VHTs with disabilities by sex</p>
@@ -1309,8 +1314,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-vht-pwd-m">Male PWD: <strong>0</strong></span>
-            <span id="label-vht-pwd-f">Female PWD: <strong>0</strong></span>
+            <span id="label-vht-pwd-m">Male PWD: <strong>{tot_o_vht_pwd_m}</strong></span>
+            <span id="label-vht-pwd-f">Female PWD: <strong>{tot_o_vht_pwd_f}</strong></span>
           </div>
         </div>
 
@@ -1318,7 +1323,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">100% Agreed</span>
+              <span id="badge-orient-calendar" class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">{cal_agreed_pct}% Agreed</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Joint calendar agreement</h4>
             <p class="text-xs text-slate-500 mb-3">Did school leadership and VHTs agree on joint calendar?</p>
@@ -1327,7 +1332,7 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <span>Details of plan: <strong>Joint weekly calendars verified in all schools</strong></span>
+            <span id="label-calendar-details">Agreed: <strong>{cal_yes_cnt} of {tot_orient_schools} schools</strong> signed joint 4-week plan</span>
           </div>
         </div>
 
@@ -2069,7 +2074,7 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="flex items-center gap-2 text-xs">
               <span class="px-3 py-1 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200">
-                Audited Schools: 2 Logged (Kasimeri P/S, St Mary's P/S)
+                Audited Schools: {len(v2_sch_att_records)} Logged
               </span>
               <span class="px-3 py-1 bg-sky-50 text-sky-800 font-bold rounded-lg border border-sky-200">
                 Total Audited Weekly Attendance: {tot_v2_sch_tot:,} Pupils
@@ -2078,28 +2083,28 @@ html_code = f"""<!DOCTYPE html>
           </div>
 
           <div class="overflow-x-auto rounded-lg border border-slate-200 mb-2">
-            <table class="w-full text-xs text-left border-collapse">
+            <table class="w-full text-xs text-left border-collapse min-w-[980px]">
               <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 text-[11px]">
                 <tr>
-                  <th rowspan="2" class="p-3 border-r border-slate-200">Audited Primary School</th>
-                  <th colspan="3" class="p-2 text-center bg-blue-50/70 border-r border-slate-200">Lower Primary (ECD–P2)</th>
-                  <th colspan="3" class="p-2 text-center bg-sky-50/70 border-r border-slate-200">Middle Primary (P3–P4)</th>
-                  <th colspan="3" class="p-2 text-center bg-cyan-50/70 border-r border-slate-200">Upper Primary (P5–P7)</th>
-                  <th colspan="3" class="p-2 text-center bg-slate-100 font-extrabold">Total School Attendance</th>
+                  <th rowspan="2" class="px-3 py-2 border-r border-slate-200 whitespace-nowrap">Audited Primary School</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-blue-50/70 border-r border-slate-200 whitespace-nowrap">Lower Primary (ECD–P2)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-sky-50/70 border-r border-slate-200 whitespace-nowrap">Middle Primary (P3–P4)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-cyan-50/70 border-r border-slate-200 whitespace-nowrap">Upper Primary (P5–P7)</th>
+                  <th colspan="3" class="px-2 py-1.5 text-center bg-slate-100 font-extrabold whitespace-nowrap">Total School Attendance</th>
                 </tr>
                 <tr class="border-t border-slate-200 text-[10px]">
-                  <th class="p-2 text-right bg-blue-50/40">Boys</th>
-                  <th class="p-2 text-right bg-blue-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-blue-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right bg-sky-50/40">Boys</th>
-                  <th class="p-2 text-right bg-sky-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-sky-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right bg-cyan-50/40">Boys</th>
-                  <th class="p-2 text-right bg-cyan-50/40">Girls</th>
-                  <th class="p-2 text-right font-bold bg-cyan-50/80 border-r border-slate-200">Total</th>
-                  <th class="p-2 text-right font-bold text-blue-700 bg-slate-100">Boys</th>
-                  <th class="p-2 text-right font-bold text-pink-700 bg-slate-100">Girls</th>
-                  <th class="p-2 text-right font-black text-slate-900 bg-slate-200/80">Grand Total</th>
+                  <th class="px-2 py-1.5 text-right bg-blue-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-blue-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-blue-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right bg-sky-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-sky-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-sky-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right bg-cyan-50/40 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right bg-cyan-50/40 whitespace-nowrap">Girls</th>
+                  <th class="px-2 py-1.5 text-right font-bold bg-cyan-50/80 border-r border-slate-200 whitespace-nowrap">Total</th>
+                  <th class="px-2 py-1.5 text-right font-bold text-blue-700 bg-slate-100 whitespace-nowrap">Boys</th>
+                  <th class="px-2 py-1.5 text-right font-bold text-pink-700 bg-slate-100 whitespace-nowrap">Girls</th>
+                  <th class="px-2.5 py-1.5 text-right font-black text-slate-900 bg-slate-200/80 whitespace-nowrap">Grand Total</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-slate-700">
@@ -2111,7 +2116,7 @@ html_code = f"""<!DOCTYPE html>
             </table>
           </div>
           <p class="text-[11px] text-slate-500 italic">
-            <i class="fa-solid fa-circle-info mr-1 text-sky-600"></i><strong>Distinct Metric Tracking:</strong> This table reflects official school weekly register audits. Kotido Mixed P/S participated in the Big Bus Activation event (35 learners) but has not yet submitted their weekly register breakdown.
+            <i class="fa-solid fa-circle-info mr-1 text-sky-600"></i><strong>Distinct Metric Tracking:</strong> This table reflects official school weekly register audits recorded directly during Visit 2 school visits.
           </p>
         </div>
 
@@ -4689,7 +4694,7 @@ html_code = f"""<!DOCTYPE html>
           totVhtsF += (d.vhts_female || 0);
           totPwdLearners += (d.v2 ? ((d.v2.hc_lower_pwd || 0) + (d.v2.hc_mid_pwd || 0) + (d.v2.hc_up_pwd || 0)) : 0);
           totPwdAdults += (d.v2 ? (d.v2.teachers_pwd || 0) : 0);
-          if (d.headteachers) totOrientSchools += d.headteachers;
+          totOrientSchools += (d.orientations !== undefined ? d.orientations : (d.headteachers || 0));
         }}
       }}
 
@@ -4931,16 +4936,32 @@ html_code = f"""<!DOCTYPE html>
       
       const totHtPresent = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].headteachers || 0), 0);
       const totPatronsApp = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].patrons || 0), 0);
+      const totVhtPwdM = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].vhts_pwd_male || 0), 0);
+      const totVhtPwdF = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].vhts_pwd_female || 0), 0);
+      const totVhtPwdTot = totVhtPwdM + totVhtPwdF;
+      const totCalSigned = activeDistricts.reduce((acc, dName) => acc + (DISTRICT_DB[dName].calendars_signed || 0), 0);
+
+      const htPct = totOrientSchools > 0 ? ((totHtPresent / totOrientSchools) * 100).toFixed(1) : 0;
+      const calPct = totOrientSchools > 0 ? ((totCalSigned / totOrientSchools) * 100).toFixed(1) : 0;
+
+      const elHtBadge = document.getElementById('badge-orient-headteachers');
+      if (elHtBadge) elHtBadge.innerText = `${{htPct}}% Present`;
       const elHt = document.getElementById('label-ht-yes');
-      if (elHt) elHt.innerHTML = `Present: <strong>${{totHtPresent}}</strong>`;
+      if (elHt) elHt.innerHTML = `Present: <strong>${{totHtPresent}} of ${{totOrientSchools}}</strong>`;
       const elPat = document.getElementById('label-patrons-count');
       if (elPat) elPat.innerHTML = `Nutri Club Patrons: <strong>${{totPatronsApp}}</strong>`;
+
       const elVhtPwdBadge = document.getElementById('badge-vht-pwd-count');
-      if (elVhtPwdBadge) elVhtPwdBadge.innerText = '0 PWD VHTs';
+      if (elVhtPwdBadge) elVhtPwdBadge.innerText = `${{totVhtPwdTot}} PWD VHTs`;
       const elVhtPwdM = document.getElementById('label-vht-pwd-m');
-      if (elVhtPwdM) elVhtPwdM.innerHTML = 'Male PWD: <strong>0</strong>';
+      if (elVhtPwdM) elVhtPwdM.innerHTML = `Male PWD: <strong>${{totVhtPwdM}}</strong>`;
       const elVhtPwdF = document.getElementById('label-vht-pwd-f');
-      if (elVhtPwdF) elVhtPwdF.innerHTML = 'Female PWD: <strong>0</strong>';
+      if (elVhtPwdF) elVhtPwdF.innerHTML = `Female PWD: <strong>${{totVhtPwdF}}</strong>`;
+
+      const elCalBadge = document.getElementById('badge-orient-calendar');
+      if (elCalBadge) elCalBadge.innerText = `${{calPct}}% Agreed`;
+      const elCalDetails = document.getElementById('label-calendar-details');
+      if (elCalDetails) elCalDetails.innerHTML = `Agreed: <strong>${{totCalSigned}} of ${{totOrientSchools}} schools</strong> signed joint 4-week plan`;
 
       createHorizontalBarChart('chart-orient-teachers',
         ["Male Teachers", "Female Teachers"],
@@ -4965,14 +4986,14 @@ html_code = f"""<!DOCTYPE html>
 
       createHorizontalBarChart('chart-orient-vhts-pwd',
         ["Male VHTs with PWDs", "Female VHTs with PWDs"],
-        [0, 0],
+        [totVhtPwdM, totVhtPwdF],
         [WFP_BLUE, '#2389d4'],
         'VHTs with Disabilities'
       );
 
       createHorizontalBarChart('chart-orient-calendar',
         ["Agreed on joint calendar", "Did not agree / pending"],
-        [totOrientSchools, 0],
+        [totCalSigned, Math.max(0, totOrientSchools - totCalSigned)],
         [ACCENT_GREEN, '#cbd5e1'],
         'Agreements Signed'
       );

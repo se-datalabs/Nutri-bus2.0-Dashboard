@@ -121,6 +121,11 @@ district_pwd_learners = {d: 0 for d in ALL_DISTRICTS}
 district_pwd_adults = {d: 0 for d in ALL_DISTRICTS}
 district_headteachers = {d: 0 for d in ALL_DISTRICTS}
 district_patrons = {d: 0 for d in ALL_DISTRICTS}
+district_vhts_pwd_m = {d: 0 for d in ALL_DISTRICTS}
+district_vhts_pwd_f = {d: 0 for d in ALL_DISTRICTS}
+district_orientations = {d: 0 for d in ALL_DISTRICTS}
+district_calendar_yes = {d: 0 for d in ALL_DISTRICTS}
+district_calendar_no = {d: 0 for d in ALL_DISTRICTS}
 district_visits_conducted = {d: 0 for d in ALL_DISTRICTS}
 district_v1_count = {d: 0 for d in ALL_DISTRICTS}
 district_v2_count = {d: 0 for d in ALL_DISTRICTS}
@@ -276,15 +281,32 @@ for _, row in df.iterrows():
         district_vhts_m[dist] += vm
         district_vhts_f[dist] += vf
         reach = int(tm + tf + vm + vf)
-        pwd = 0
         district_p3_total[dist] += 1
         district_p3_pass[dist] += 1
+        district_orientations[dist] += 1
 
-        ht_val = str(row.get("Headteacher / Deputy Present", "")).strip().lower()
+        ht_val = str(row.get("Headteacher / Deputy Present", row.get("Headteacher or Deputy Present", ""))).strip().lower()
         if "yes" in ht_val:
             district_headteachers[dist] += 1
         pat_val = clean_val(row.get("Appointed School Nutri Club Patrons", 0))
         district_patrons[dist] += int(pat_val)
+
+        # VHTs with PWDs
+        vp_m = clean_val(row.get("Male VHTs with PWDs", 0))
+        vp_f = clean_val(row.get("Female VHTs with PWDs", 0))
+        district_vhts_pwd_m[dist] += int(vp_m)
+        district_vhts_pwd_f[dist] += int(vp_f)
+
+        # Joint calendar agreement
+        cal_val = ""
+        for c in row.index:
+            if "joint" in str(c).lower() and "agree" in str(c).lower():
+                cal_val = str(row.get(c, "")).strip().lower()
+                break
+        if "yes" in cal_val:
+            district_calendar_yes[dist] += 1
+        elif cal_val:
+            district_calendar_no[dist] += 1
 
         # Parse Exit Interviews in this row
         for prefix in ["row", "row_1", "row_2", "row_3", "row_4", "row_5"]:
@@ -761,8 +783,12 @@ for dist in ALL_DISTRICTS:
         "patrons": district_patrons[dist],
         "vhts_male": district_vhts_m[dist],
         "vhts_female": district_vhts_f[dist],
-        "vhts_pwd_male": 0,
-        "vhts_pwd_female": 0,
+        "vhts_pwd_male": district_vhts_pwd_m[dist],
+        "vhts_pwd_female": district_vhts_pwd_f[dist],
+        "vhts_pwd": district_vhts_pwd_m[dist] + district_vhts_pwd_f[dist],
+        "orientations": district_orientations[dist],
+        "calendars_signed": district_calendar_yes[dist],
+        "calendars_pending": district_calendar_no[dist],
         "exit_interviews": district_exit_interviews[dist],
         "visits": district_visits_conducted[dist],
         "target_visits": len(sch_list) * 3,
@@ -1854,7 +1880,7 @@ d_data["impact_analysis"] = {
             "title": "Pillar 3: Community Accountability & Climate-Smart Living",
             "metric_value": f"{p3_rate_overall}%",
             "metric_label": f"Commitment & Joint Calendars ({tot_orient_schools} Oriented Schools)",
-            "summary": f"100% of oriented school leadership and VHTs ({tot_orient_schools} schools) agreed on joint 4-week calendars with signed action plans.",
+            "summary": f"{round(cal_yes_cnt / max(1, tot_orient_schools) * 100, 1)}% of oriented school leadership and VHTs ({cal_yes_cnt} of {tot_orient_schools} schools) agreed on joint 4-week calendars with signed action plans.",
             "baseline": "0.0% Prior",
             "evidence_points": [
                 f"{tot_orient_schools} primary schools completed multi-stakeholder orientation sessions",
@@ -1931,8 +1957,8 @@ d_data["impact_analysis"] = {
                 },
                 {
                     "label": "Teachers in the Lead",
-                    "value": f"100% ({tot_orient_schools} Schools)",
-                    "detail": f"All {tot_orient_schools} oriented schools demonstrated active teacher and headteacher leadership"
+                    "value": f"{round(ht_yes_cnt / max(1, tot_orient_schools) * 100, 1)}% ({ht_yes_cnt} of {tot_orient_schools} Schools)",
+                    "detail": f"{ht_yes_cnt} of {tot_orient_schools} oriented schools confirmed headteacher or deputy leadership present"
                 },
                 {
                     "label": "What Children Learned",

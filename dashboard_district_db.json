@@ -22,6 +22,10 @@
     "vhts_female": 12.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KIRU P/S)": {
         "key": "Respondent 1 (KIRU P/S)",
@@ -287,8 +291,12 @@
     "patrons": 6,
     "vhts_male": 14.0,
     "vhts_female": 17.0,
-    "vhts_pwd_male": 0,
+    "vhts_pwd_male": 10,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 10,
+    "orientations": 3,
+    "calendars_signed": 2,
+    "calendars_pending": 1,
     "exit_interviews": {
       "Respondent 1 (KATIKIT P/S)": {
         "key": "Respondent 1 (KATIKIT P/S)",
@@ -919,6 +927,10 @@
     "vhts_female": 0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 0,
+    "calendars_signed": 0,
+    "calendars_pending": 0,
     "exit_interviews": {},
     "visits": 6,
     "target_visits": 39,
@@ -1532,6 +1544,10 @@
     "vhts_female": 9.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KARENGA BOYS P/S)": {
         "key": "Respondent 1 (KARENGA BOYS P/S)",
@@ -1753,6 +1769,10 @@
     "vhts_female": 8.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (KOTIDO MIXED P/S)": {
         "key": "Respondent 1 (KOTIDO MIXED P/S)",
@@ -2100,6 +2120,10 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 0,
+    "calendars_pending": 1,
     "exit_interviews": {
       "Respondent 1 (KASIMERI P/S)": {
         "key": "Respondent 1 (KASIMERI P/S)",
@@ -2684,6 +2708,10 @@
     "vhts_female": 2.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (NABILATUK TOWNSHIP P/S)": {
         "key": "Respondent 1 (NABILATUK TOWNSHIP P/S)",
@@ -2908,6 +2936,10 @@
     "vhts_female": 3.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (NAPIANANYA P/S)": {
         "key": "Respondent 1 (NAPIANANYA P/S)",
@@ -3163,6 +3195,10 @@
     "vhts_female": 5.0,
     "vhts_pwd_male": 0,
     "vhts_pwd_female": 0,
+    "vhts_pwd": 0,
+    "orientations": 1,
+    "calendars_signed": 1,
+    "calendars_pending": 0,
     "exit_interviews": {
       "Respondent 1 (LONGALOM P/S)": {
         "key": "Respondent 1 (LONGALOM P/S)",
