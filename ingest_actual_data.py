@@ -204,6 +204,36 @@ def extract_school_weekly_attendance(row):
         "att_girls": tot_g,
         "att_total": tot
     }
+
+def extract_meeting_days(row):
+    """
+    Extracts designated meeting days of the week across Kobo column variants:
+    'What does does it conduct its activities/<Day>', 'When does does it conduct its activities/<Day>',
+    and 'Designated Club Meeting Day(s) each week/<Day>'.
+    """
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    res = {d: 0 for d in days}
+    for d in days:
+        for prefix in [
+            "What does does it conduct its activities/",
+            "When does does it conduct its activities/",
+            "What does it conduct its activities/",
+            "When does it conduct its activities/",
+            "Designated Club Meeting Day(s) each week/",
+            "Designated Club Meeting Day(s)/",
+        ]:
+            col = prefix + d
+            if col in row and pd.notnull(row[col]) and clean_val(row[col]) == 1:
+                res[d] = 1
+                break
+        if res[d] == 0:
+            for text_col in ["What does does it conduct its activities", "When does does it conduct its activities", "Designated Club Meeting Day(s) each week"]:
+                if text_col in row and pd.notnull(row[text_col]):
+                    if d.lower() in str(row[text_col]).lower():
+                        res[d] = 1
+                        break
+    return res
+
 district_p1_total = {d: 0 for d in ALL_DISTRICTS}
 district_p2_pass = {d: 0 for d in ALL_DISTRICTS}
 district_p2_total = {d: 0 for d in ALL_DISTRICTS}
@@ -213,6 +243,7 @@ demo_sessions_list = []
 nutriclub_sessions_list = []
 msc_stories_list = []
 records_log = []
+v1_all_schools_records = []
 
 # --- PARSE EACH ROW BY INDEX ---
 for _, row in df.iterrows():
@@ -332,6 +363,17 @@ for _, row in df.iterrows():
         mem_f = clean_val(get_col_val(row, ["Total  female membership of the nutriclub", "Total female membership of the nutriclub", "female membership"], 25))
         tot_mem = int(mem_m + mem_f)
 
+        # Check practical activity checkboxes and free text
+        has_adere = clean_val(get_col_val(row, ["Practical Activity Delivered/Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing"], 0)) > 0 or "adere" in str(row.get("Practical Activity Delivered", "")).lower()
+        has_chore = clean_val(get_col_val(row, ["Practical Activity Delivered/Gender Chore Rebalancing: Boys sharing morning water/firewood chores"], 0)) > 0 or "chore" in str(row.get("Practical Activity Delivered", "")).lower()
+        has_climate = clean_val(get_col_val(row, ["Practical Activity Delivered/Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires"], 0)) > 0 or "firewood" in str(row.get("Practical Activity Delivered", "")).lower() or "climate" in str(row.get("Practical Activity Delivered", "")).lower()
+        has_peer = clean_val(get_col_val(row, ["Practical Activity Delivered/Peer Attendance Tracing: Checking and following up chronically absent classmates"], 0)) > 0 or "peer" in str(row.get("Practical Activity Delivered", "")).lower()
+        has_metu = clean_val(get_col_val(row, ["Practical Activity Delivered/Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat)"], 0)) > 0 or "metu" in str(row.get("Practical Activity Delivered", "")).lower()
+
+        nm_val = str(get_col_val(row, ["Did the school hold a nutri-moment ", "Did the school hold a nutri-moment", "hold a nutri-moment"], "")).strip().lower()
+        nm_date = str(get_col_val(row, ["Date Assembly Nutri-Moment was delivered", "Date Assembly Nutri-Moment"], "")).strip()
+        held_nm = 1 if (nm_val in ["yes", "true", "1", "held"] or (nm_date and nm_date != "nan" and nm_date != "")) else 0
+
         nutriclub_sessions_list.append({
             "entry_index": entry_index,
             "id": f"NC-{sub_id}",
@@ -352,6 +394,13 @@ for _, row in df.iterrows():
             "pwd_boys": pwd_b,
             "pwd_girls": pwd_g,
             "pwd": pwd,
+            "has_adere": 1 if has_adere else 0,
+            "has_chore": 1 if has_chore else 0,
+            "has_climate": 1 if has_climate else 0,
+            "has_peer": 1 if has_peer else 0,
+            "has_metu": 1 if has_metu else 0,
+            "assembly_nutri_moment": held_nm,
+            "assembly_nutri_moment_date": nm_date if nm_date != "nan" else "",
             "meeting_place": str(get_col_val(row, ["Designated Meeting Place on Compound", "meeting place"], "Under the tree")).strip(),
             "practical_activity": str(get_col_val(row, ["Practical Activity Delivered", "practical activity"], "Adere Calabash Dialogue & Gender Chore Rebalancing")).strip(),
             "home_action_assigned": str(get_col_val(row, ["What specific feasible food or chore action were members asked to try at home?", "action were members asked to try at home"], "Try kitchen gardens at home.")).strip(),
@@ -385,22 +434,28 @@ for _, row in df.iterrows():
 
             charts_iss = int(clean_val(get_col_val(row, ["Number of Total Take-Home NutriCharts", "Take-Home NutriCharts", "charts_iss"], 0)))
             classes_rcv = str(get_col_val(row, ["Classes Receiving Materials", "classes receiving"], "Lower (ECD-P2) Middle (P3-P4) Upper (P5-P7)"))
-            nc_act = str(get_col_val(row, ["Is the Nutri Club active", "nutriclub active"], "Yes")).strip()
-            nc_proc = str(get_col_val(row, ["process of creating a nutriclub", "creating a nutriclub"], "Yes")).strip()
-            plan_sgn = str(get_col_val(row, ["Signed 4-week institutional work plan", "work plan"], "Yes")).strip()
-            tf_disp = str(get_col_val(row, ["WFP Toll-Free displayed", "toll-free displayed"], "Yes")).strip()
+            nc_act_raw = str(get_col_val(row, ["Is the Nutri Club active", "nutriclub active"], "Yes")).strip()
+            nc_act = "Yes" if "yes" in nc_act_raw.lower() else "No"
+            nc_proc_raw = str(get_col_val(row, ["process of creating a nutriclub", "creating a nutriclub"], "No")).strip()
+            nc_proc = "Yes" if "yes" in nc_proc_raw.lower() else "No"
+            plan_sgn_raw = str(get_col_val(row, ["Signed 4-week institutional work plan", "work plan", "workplan"], "No")).strip()
+            plan_sgn = "Yes" if "yes" in plan_sgn_raw.lower() else "No"
+            tf_disp_raw = str(get_col_val(row, ["WFP Toll-Free displayed", "toll-free displayed"], "No")).strip()
+            tf_disp = "Yes" if "yes" in tf_disp_raw.lower() else "No"
             tf_loc = str(get_col_val(row, ["Where is it displayed"], "")).strip()
-            tf_kwn = str(get_col_val(row, ["actively known and referenced", "hotline actively known"], "Yes")).strip()
-            hd_queries = int(clean_val(get_col_val(row, ["feedback queries or help-desk", "queries logged", "feedback queries"], 0)))
-            mtg_days = str(get_col_val(row, ["conduct its activities", "conduct activities"], "")).strip()
-            mtg_wed = int(clean_val(get_col_val(row, ["conduct its activities/Wednesday", "conduct its activities / Wednesday"], 0)))
-            mtg_fri = int(clean_val(get_col_val(row, ["conduct its activities/Friday", "conduct its activities / Friday"], 0)))
+            tf_kwn_raw = str(get_col_val(row, ["actively known and referenced", "hotline actively known"], "No")).strip()
+            tf_kwn = "Yes" if "yes" in tf_kwn_raw.lower() else "No"
+            hd_queries = int(clean_val(get_col_val(row, ["feedback queries or help-desk", "queries logged", "feedback queries", "help-desk logs"], 0)))
+            
+            mtg_dict = extract_meeting_days(row)
+            mtg_days_list = [d for d in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] if mtg_dict[d] == 1]
+            mtg_days_str = ", ".join(mtg_days_list) if mtg_days_list else "Not specified"
 
             district_learners_reached[dist] += tot_pupils
             reach = tot_pupils
             pwd = 0
 
-            district_v1[dist] = {
+            v1_rec = {
                 "entry_index": entry_index,
                 "school": school_name,
                 "district": dist,
@@ -425,10 +480,17 @@ for _, row in df.iterrows():
                 "toll_free_location": tf_loc,
                 "toll_free_known": tf_kwn,
                 "helpdesk_queries": hd_queries,
-                "meeting_days": mtg_days,
-                "meeting_wed": mtg_wed,
-                "meeting_fri": mtg_fri
+                "meeting_days": mtg_days_list,
+                "meeting_days_str": mtg_days_str,
+                "meeting_mon": mtg_dict["Monday"],
+                "meeting_tue": mtg_dict["Tuesday"],
+                "meeting_wed": mtg_dict["Wednesday"],
+                "meeting_thu": mtg_dict["Thursday"],
+                "meeting_fri": mtg_dict["Friday"],
+                "meeting_sat": mtg_dict["Saturday"]
             }
+            v1_all_schools_records.append(v1_rec)
+            district_v1[dist] = v1_rec
 
         elif "visit 2" in milestone.lower() or "activation" in milestone.lower():
             district_v2_count[dist] += 1
@@ -623,6 +685,44 @@ for dist in ALL_DISTRICTS:
     schools_reached_count = len(district_schools_reached[dist])
     tot_pwd_dist = district_pwd_learners[dist] + district_pwd_adults[dist]
 
+    d_v1_schools = [s for s in v1_all_schools_records if s["district"] == dist]
+    if d_v1_schools:
+        d_v1_agg = {
+            "entry_index": d_v1_schools[0]["entry_index"],
+            "school": ", ".join(s["school"] for s in d_v1_schools),
+            "district": dist,
+            "schools_count": len(d_v1_schools),
+            "enrol_boys": sum(s["enrol_boys"] for s in d_v1_schools),
+            "enrol_girls": sum(s["enrol_girls"] for s in d_v1_schools),
+            "enrol_total": sum(s["enrol_total"] for s in d_v1_schools),
+            "att_boys": sum(s["att_boys"] for s in d_v1_schools),
+            "att_girls": sum(s["att_girls"] for s in d_v1_schools),
+            "att_total": sum(s["att_total"] for s in d_v1_schools),
+            "att_lower_b": sum(s["att_lower_b"] for s in d_v1_schools),
+            "att_lower_g": sum(s["att_lower_g"] for s in d_v1_schools),
+            "att_mid_b": sum(s["att_mid_b"] for s in d_v1_schools),
+            "att_mid_g": sum(s["att_mid_g"] for s in d_v1_schools),
+            "att_up_b": sum(s["att_up_b"] for s in d_v1_schools),
+            "att_up_g": sum(s["att_up_g"] for s in d_v1_schools),
+            "charts_issued": sum(s["charts_issued"] for s in d_v1_schools),
+            "classes_receiving": "Lower (ECD-P2) Middle (P3-P4) Upper (P5-P7)",
+            "nutriclub_active": "Yes" if any(s["nutriclub_active"] == "Yes" for s in d_v1_schools) else "No",
+            "nutriclub_creating": "Yes" if any(s["nutriclub_creating"] == "Yes" for s in d_v1_schools) else "No",
+            "work_plan_signed": "Yes" if any(s["work_plan_signed"] == "Yes" for s in d_v1_schools) else "No",
+            "toll_free_displayed": "Yes" if any(s["toll_free_displayed"] == "Yes" for s in d_v1_schools) else "No",
+            "toll_free_known": "Yes" if any(s["toll_free_known"] == "Yes" for s in d_v1_schools) else "No",
+            "helpdesk_queries": sum(s["helpdesk_queries"] for s in d_v1_schools),
+            "meeting_mon": sum(s["meeting_mon"] for s in d_v1_schools),
+            "meeting_tue": sum(s["meeting_tue"] for s in d_v1_schools),
+            "meeting_wed": sum(s["meeting_wed"] for s in d_v1_schools),
+            "meeting_thu": sum(s["meeting_thu"] for s in d_v1_schools),
+            "meeting_fri": sum(s["meeting_fri"] for s in d_v1_schools),
+            "meeting_sat": sum(s["meeting_sat"] for s in d_v1_schools),
+            "schools_data": d_v1_schools
+        }
+    else:
+        d_v1_agg = None
+
     district_db[dist] = {
         "dates": dates,
         "schools": schools_reached_count,
@@ -652,7 +752,8 @@ for dist in ALL_DISTRICTS:
         "v3_count": district_v3_count[dist],
         "nutriclubs": district_nutriclubs_count[dist],
         "target_nutriclubs": len(sch_list),
-        "v1": district_v1[dist],
+        "v1": d_v1_agg,
+        "v1_schools": d_v1_schools,
         "v2": district_v2[dist],
         "v3": district_v3[dist],
         "demos_metrics": None,
@@ -882,10 +983,40 @@ if "orientation" in d_data:
     part_cols = [c for c in o_rows.columns if 'partner networks' in c.lower()]
     part_yes_cnt = int(o_rows[part_cols[0]].astype(str).str.lower().str.contains('yes').sum()) if part_cols else 0
 
-    # Disseminated physical tools
-    tot_tool_metu = int(o_rows[df.columns[136]].fillna(0).astype(int).sum()) if len(df.columns) > 136 else 6
-    tot_tool_climate = int(o_rows[df.columns[138]].fillna(0).astype(int).sum()) if len(df.columns) > 138 else 2
-    tot_tool_boards = int(o_rows[df.columns[140]].fillna(0).astype(int).sum()) if len(df.columns) > 140 else 8
+    # Disseminated physical tools (lookup by column semantic name, not brittle integer index)
+    col_m = [c for c in o_rows.columns if 'metu handbook' in c.lower() or ('**number**' in c.lower() and 'row' not in c.lower())]
+    col_c = [c for c in o_rows.columns if 'climate-smart' in c.lower() or 'row-number' in c.lower()]
+    col_b = [c for c in o_rows.columns if 'toll-free' in c.lower() or 'row_1-number' in c.lower()]
+    tot_tool_metu = int(o_rows[col_m[0]].apply(clean_val).sum()) if col_m else 0
+    tot_tool_climate = int(o_rows[col_c[0]].apply(clean_val).sum()) if col_c else 0
+    tot_tool_boards = int(o_rows[col_b[0]].apply(clean_val).sum()) if col_b else 0
+
+    # Partner networks breakdown
+    part_deo_cnt = int(o_rows['List the partners/District Education Offices'].apply(clean_val).sum()) if 'List the partners/District Education Offices' in o_rows.columns else 0
+    part_hc_cnt = int(o_rows['List the partners/Health Centre Parish Focal Persons'].apply(clean_val).sum()) if 'List the partners/Health Centre Parish Focal Persons' in o_rows.columns else 0
+    part_unac_cnt = int(o_rows['List the partners/UNAC (Uganda National Action on Childhood Disability)'].apply(clean_val).sum()) if 'List the partners/UNAC (Uganda National Action on Childhood Disability)' in o_rows.columns else 0
+    part_afi_cnt = int(o_rows['List the partners/Afi (Action for Inclusion)'].apply(clean_val).sum()) if 'List the partners/Afi (Action for Inclusion)' in o_rows.columns else 0
+
+    d_data["orientation"]["partner_engagement"] = {
+        "engaged_schools_count": part_yes_cnt,
+        "total_schools_count": tot_orient,
+        "engaged_pct": round(part_yes_cnt / max(1, tot_orient) * 100, 1),
+        "deo_count": part_deo_cnt,
+        "deo_pct": round(part_deo_cnt / max(1, tot_orient) * 100, 1),
+        "hc_count": part_hc_cnt,
+        "hc_pct": round(part_hc_cnt / max(1, tot_orient) * 100, 1),
+        "unac_count": part_unac_cnt,
+        "unac_pct": round(part_unac_cnt / max(1, tot_orient) * 100, 1),
+        "afi_count": part_afi_cnt,
+        "afi_pct": round(part_afi_cnt / max(1, tot_orient) * 100, 1),
+        "engaged_schools_names": [get_school_name(r) for _, r in o_rows.iterrows() if 'yes' in str(r.get(part_cols[0], '')).lower()] if part_cols else []
+    }
+    d_data["orientation"]["disseminated_physical_tools"] = {
+        "metu_manuals": tot_tool_metu,
+        "climate_manuals": tot_tool_climate,
+        "toll_free_boards": tot_tool_boards,
+        "total_tools": tot_tool_metu + tot_tool_climate + tot_tool_boards
+    }
 
     d_data["orientation"]["kpis"] = {
         "total_orientations": tot_orient,
@@ -1321,26 +1452,27 @@ tot_v2_pwd = tot_v2_pwd_l + tot_v2_pwd_a
 tot_v2_attendance = tot_v2_pupils + tot_v2_staff + tot_v2_comm
 
 # VISIT 1 AGGREGATION
-v1_schools = []
-for idx_v, r_v in v1_rows.iterrows():
-    s_name = get_school_name(r_v)
-    d_name = str(r_v.get('District', '')).strip()
-    v1_schools.append(f"{s_name} ({d_name})")
+v1_schools = [f"{s['school']} ({s['district']})" for s in v1_all_schools_records]
 
-tot_v1_pupils = sum(d["v1"]["att_total"] for d in district_db.values() if d.get("v1"))
-tot_v1_boys = sum(d["v1"]["att_boys"] for d in district_db.values() if d.get("v1"))
-tot_v1_girls = sum(d["v1"]["att_girls"] for d in district_db.values() if d.get("v1"))
-tot_v1_enrol = sum(d["v1"]["enrol_total"] for d in district_db.values() if d.get("v1"))
-tot_v1_enrol_b = sum(d["v1"]["enrol_boys"] for d in district_db.values() if d.get("v1"))
-tot_v1_enrol_g = sum(d["v1"]["enrol_girls"] for d in district_db.values() if d.get("v1"))
-tot_v1_charts = sum(d["v1"]["charts_issued"] for d in district_db.values() if d.get("v1"))
-tot_v1_queries = sum(d["v1"]["helpdesk_queries"] for d in district_db.values() if d.get("v1"))
-v1_nc_act = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("nutriclub_active") == "Yes")
-v1_nc_proc = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("nutriclub_creating") == "Yes")
-v1_wp = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("work_plan_signed") == "Yes")
-v1_tf = sum(1 for d in district_db.values() if d.get("v1") and d["v1"].get("toll_free_displayed") == "Yes")
-v1_wed = sum(d["v1"].get("meeting_wed", 0) for d in district_db.values() if d.get("v1"))
-v1_fri = sum(d["v1"].get("meeting_fri", 0) for d in district_db.values() if d.get("v1"))
+tot_v1_pupils = sum(s["att_total"] for s in v1_all_schools_records)
+tot_v1_boys = sum(s["att_boys"] for s in v1_all_schools_records)
+tot_v1_girls = sum(s["att_girls"] for s in v1_all_schools_records)
+tot_v1_enrol = sum(s["enrol_total"] for s in v1_all_schools_records)
+tot_v1_enrol_b = sum(s["enrol_boys"] for s in v1_all_schools_records)
+tot_v1_enrol_g = sum(s["enrol_girls"] for s in v1_all_schools_records)
+tot_v1_charts = sum(s["charts_issued"] for s in v1_all_schools_records)
+tot_v1_queries = sum(s["helpdesk_queries"] for s in v1_all_schools_records)
+v1_nc_act = sum(1 for s in v1_all_schools_records if s.get("nutriclub_active") == "Yes")
+v1_nc_proc = sum(1 for s in v1_all_schools_records if s.get("nutriclub_creating") == "Yes")
+v1_wp = sum(1 for s in v1_all_schools_records if s.get("work_plan_signed") == "Yes")
+v1_tf = sum(1 for s in v1_all_schools_records if s.get("toll_free_displayed") == "Yes")
+v1_tf_kwn = sum(1 for s in v1_all_schools_records if s.get("toll_free_known") == "Yes")
+v1_mon = sum(s.get("meeting_mon", 0) for s in v1_all_schools_records)
+v1_tue = sum(s.get("meeting_tue", 0) for s in v1_all_schools_records)
+v1_wed = sum(s.get("meeting_wed", 0) for s in v1_all_schools_records)
+v1_thu = sum(s.get("meeting_thu", 0) for s in v1_all_schools_records)
+v1_fri = sum(s.get("meeting_fri", 0) for s in v1_all_schools_records)
+v1_sat = sum(s.get("meeting_sat", 0) for s in v1_all_schools_records)
 
 if "three_visit_contact" in d_data:
     d_data["three_visit_contact"]["pipeline_funnel"] = {
@@ -1350,7 +1482,7 @@ if "three_visit_contact" in d_data:
             "Visit 3: Final Closeout & Audits"
         ],
         "completed_schools": [
-            len(v1_rows),
+            len(v1_all_schools_records),
             len(v2_rows),
             0
         ]
@@ -1362,7 +1494,7 @@ if "three_visit_contact" in d_data:
             "Visit 3 Completed"
         ],
         "values": [
-            len(v1_rows),
+            len(v1_all_schools_records),
             len(v2_rows),
             0
         ]
@@ -1390,10 +1522,11 @@ if "three_visit_contact" in d_data:
         ]
     }
     d_data["three_visit_contact"]["visit1"] = {
-        "total_schools_completed": len(v1_rows),
+        "total_schools_completed": len(v1_all_schools_records),
         "target_schools": 64,
         "schools_list": v1_schools,
-        "status": f"{len(v1_rows)} School Logged ({', '.join(v1_schools)})",
+        "schools_data": v1_all_schools_records,
+        "status": f"{len(v1_all_schools_records)} Schools Logged ({', '.join(v1_schools)})",
         "enrolment": {
             "boys": tot_v1_enrol_b,
             "girls": tot_v1_enrol_g,
@@ -1406,39 +1539,42 @@ if "three_visit_contact" in d_data:
         },
         "charts_issued": tot_v1_charts,
         "nutriclub_active": {
-            "values": [v1_nc_act, max(0, len(v1_rows) - v1_nc_act)]
+            "values": [v1_nc_act, max(0, len(v1_all_schools_records) - v1_nc_act)]
         },
         "nutriclub_in_process": {
-            "values": [v1_nc_act, v1_nc_proc]
+            "values": [max(0, len(v1_all_schools_records) - v1_nc_proc), v1_nc_proc]
         },
         "signed_workplan": {
-            "values": [v1_wp, max(0, len(v1_rows) - v1_wp)]
+            "values": [v1_wp, max(0, len(v1_all_schools_records) - v1_wp)]
         },
         "charts_by_class": {
             "categories": ["Lower Primary (ECD-P2)", "Middle Primary (P3-P4)", "Upper Primary (P5-P7)"],
-            "values": [len(v1_rows), len(v1_rows), len(v1_rows)]
+            "values": [len(v1_all_schools_records), len(v1_all_schools_records), len(v1_all_schools_records)]
         },
         "activity_days": {
-            "categories": ["Mon", "Tue", "Wed", "Thu", "Fri"],
-            "values": [0, 0, v1_wed, 0, v1_fri]
+            "categories": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            "values": [v1_mon, v1_tue, v1_wed, v1_thu, v1_fri, v1_sat]
         },
         "tollfree_display": {
-            "values": [v1_tf, max(0, len(v1_rows) - v1_tf)]
+            "values": [v1_tf, max(0, len(v1_all_schools_records) - v1_tf)]
+        },
+        "tollfree_known": {
+            "values": [v1_tf_kwn, max(0, len(v1_all_schools_records) - v1_tf_kwn)]
         },
         "weekly_registered_attendance": {
             "categories": ["Lower Boys", "Lower Girls", "Middle Boys", "Middle Girls", "Upper Boys", "Upper Girls"],
             "values": [
-                sum(d["v1"]["att_lower_b"] for d in district_db.values() if d.get("v1")),
-                sum(d["v1"]["att_lower_g"] for d in district_db.values() if d.get("v1")),
-                sum(d["v1"]["att_mid_b"] for d in district_db.values() if d.get("v1")),
-                sum(d["v1"]["att_mid_g"] for d in district_db.values() if d.get("v1")),
-                sum(d["v1"]["att_up_b"] for d in district_db.values() if d.get("v1")),
-                sum(d["v1"]["att_up_g"] for d in district_db.values() if d.get("v1"))
+                sum(s["att_lower_b"] for s in v1_all_schools_records),
+                sum(s["att_lower_g"] for s in v1_all_schools_records),
+                sum(s["att_mid_b"] for s in v1_all_schools_records),
+                sum(s["att_mid_g"] for s in v1_all_schools_records),
+                sum(s["att_up_b"] for s in v1_all_schools_records),
+                sum(s["att_up_g"] for s in v1_all_schools_records)
             ]
         },
         "helpdesk_queries_logged": {
-            "categories": ["Feedback Queries Logged", "Hotline query", "NutriClub guidance", "Other"],
-            "values": [tot_v1_queries, 0, 0, 0]
+            "categories": [f"{s['school']} ({s['district']})" for s in v1_all_schools_records if s.get("helpdesk_queries", 0) > 0],
+            "values": [s["helpdesk_queries"] for s in v1_all_schools_records if s.get("helpdesk_queries", 0) > 0]
         }
     }
     d_data["three_visit_contact"]["visit2"] = {
@@ -1597,6 +1733,10 @@ if "nutriclub_sessions" in d_data:
             total_active_members_f += item.get("female_membership", 0)
 
     # Update KPIs
+    sess_one_cnt = sum(1 for s in nutriclub_sessions_list if "two" not in s.get("session_of_week", "").lower())
+    sess_two_cnt = sum(1 for s in nutriclub_sessions_list if "two" in s.get("session_of_week", "").lower())
+    total_assembly_nm = sum(s.get("assembly_nutri_moment", 0) for s in nutriclub_sessions_list)
+
     nc_data["kpis"] = {
         "total_sessions_logged": len(nutriclub_sessions_list),
         "target_schools": 64,
@@ -1607,7 +1747,12 @@ if "nutriclub_sessions" in d_data:
         "session_attendance": total_session_att,
         "attendance_boys": total_session_att_b,
         "attendance_girls": total_session_att_g,
-        "pwd_learners": total_session_pwd
+        "pwd_learners": total_session_pwd,
+        "pwd_boys": total_session_pwd_b,
+        "pwd_girls": total_session_pwd_g,
+        "sessions_one_count": sess_one_cnt,
+        "sessions_two_count": sess_two_cnt,
+        "assembly_nutri_moments": total_assembly_nm
     }
     nc_data["club_membership_gender"] = {
         "categories": ["Male Members", "Female Members"],
@@ -1621,6 +1766,34 @@ if "nutriclub_sessions" in d_data:
         "categories": ["Male Learners with Disabilities", "Female Learners with Disabilities"],
         "values": [total_session_pwd_b, total_session_pwd_g]
     }
+
+    # Aggregate practical activities dynamically across all logged sessions
+    act_adere_cnt = sum(s.get("has_adere", 0) for s in nutriclub_sessions_list)
+    act_chore_cnt = sum(s.get("has_chore", 0) for s in nutriclub_sessions_list)
+    act_climate_cnt = sum(s.get("has_climate", 0) for s in nutriclub_sessions_list)
+    act_peer_cnt = sum(s.get("has_peer", 0) for s in nutriclub_sessions_list)
+    act_metu_cnt = sum(s.get("has_metu", 0) for s in nutriclub_sessions_list)
+
+    nc_data["practical_activity_delivered"] = {
+        "categories": [
+            "Adere Calabash Dialogue (Resilience & Food Sharing)",
+            "Gender Chore Rebalancing (Boys Sharing Chores)",
+            "Climate-Smart Living (Firewood Saving)",
+            "Peer Attendance Tracing",
+            "Metu Porridge Plus (Wild Greens / Cowpeas)"
+        ],
+        "values": [act_adere_cnt, act_chore_cnt, act_climate_cnt, act_peer_cnt, act_metu_cnt]
+    }
+
+    # Aggregate home action trials dynamically
+    home_garden_cnt = sum(1 for s in nutriclub_sessions_list if "garden" in s.get("home_action_assigned", "").lower())
+    home_calendar_cnt = sum(1 for s in nutriclub_sessions_list if "calender" in s.get("home_action_assigned", "").lower() or "calendar" in s.get("home_action_assigned", "").lower())
+    awaiting_cnt = max(0, 64 - len(nutriclub_sessions_list))
+    nc_data["home_action_feedback"] = {
+        "categories": ["Home kitchen gardens tried", "Food calendar marking assigned", "Awaiting reporting"],
+        "values": [home_garden_cnt, home_calendar_cnt, awaiting_cnt]
+    }
+
     nc_data["sample_sessions"] = nutriclub_sessions_list
 
 # --- IMPACT ANALYSIS DYNAMIC AGGREGATION ---
@@ -1915,9 +2088,9 @@ d_data["impact_analysis"] = {
             "title": "Visit 1: Getting Started in Class",
             "desc": "Healthy food sorting, the Adere calabash game, and Home Charts given out",
             "data_collected": [
-                f"Children Audited: {tot_v1_pupils} weekly attendees ({tot_v1_enrol} total enrolled) at Katikit P/S",
-                f"Classroom Practice: {len(v1_rows)} school completed onboarding & audit ({', '.join(v1_schools)})",
-                f"Home Charts Given: {tot_v1_charts} classroom NutriCharts issued across Lower, Middle, Upper primary",
+                f"Children Audited: {tot_v1_pupils:,} weekly attendees ({tot_v1_enrol:,} total enrolled) across {len(v1_all_schools_records)} schools",
+                f"Classroom Practice: {len(v1_all_schools_records)} schools completed onboarding & audit ({', '.join(v1_schools)})",
+                f"Home Charts Given: {tot_v1_charts:,} classroom NutriCharts issued across Lower, Middle, Upper primary",
                 f"Patrons Appointed: {tot_patrons_app} teacher patrons appointed across {tot_orient_schools} orientation schools (plus {tot_clubs} club patrons)"
             ]
         },

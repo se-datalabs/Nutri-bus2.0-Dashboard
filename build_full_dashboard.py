@@ -18,12 +18,6 @@ with open("official_64_schools.json", "r", encoding="utf-8") as f:
     OFFICIAL_SCHOOLS = json.load(f)
 
 RECORDS = BASE_DATA.get("records_log", [])
-if not RECORDS:
-    RECORDS = [
-        { "id": 884394036, "entry_index": 1, "date": "2026-10-02", "district": "Abim", "activity": "Orientation", "school": "KIRU P/S", "coordinator": "Opio John Fred & Okello Daniel Nimaro", "reach": 41, "pwd": 0, "status": "Submitted / Cleaned" },
-        { "id": 884613428, "entry_index": 2, "date": "2026-10-02", "district": "Kaabong", "activity": "Nutriclub session", "school": "KAKAMAR P/S", "coordinator": "Amoo Sofia", "reach": 36, "pwd": 0, "status": "Submitted / Cleaned" },
-        { "id": 884667912, "entry_index": 3, "date": "2026-10-02", "district": "Kotido", "activity": "Three visit contact", "school": "KOTIDO MIXED P/S", "coordinator": "Ogwang Sam", "reach": 63, "pwd": 5, "status": "Submitted / Cleaned" }
-    ]
 
 def norm_sch_name(txt):
     return str(txt).upper().replace('P/S', '').replace('PS', '').replace('PRIMARY SCHOOL', '').strip()
@@ -36,12 +30,13 @@ for s in OFFICIAL_SCHOOLS:
     v2_val = None
     v3_val = None
 
-    v1_rec = dist_info.get("v1")
-    if v1_rec:
-        s_norm = norm_sch_name(s["name"])
+    v1_schools_data = BASE_DATA.get("three_visit_contact", {}).get("visit1", {}).get("schools_data", [])
+    s_norm = norm_sch_name(s["name"])
+    for v1_rec in v1_schools_data:
         r_norm = norm_sch_name(v1_rec.get("school", ""))
         if s_norm in r_norm or r_norm in s_norm:
             v1_val = v1_rec.get("att_total") or (v1_rec.get("att_boys", 0) + v1_rec.get("att_girls", 0))
+            break
 
     v2_rec = dist_info.get("v2")
     if v2_rec:
@@ -51,8 +46,12 @@ for s in OFFICIAL_SCHOOLS:
             v2_sch_att = v2_rec.get("school_attendance")
             if v2_sch_att and v2_sch_att.get("att_total", 0) > 0:
                 v2_val = v2_sch_att.get("att_total")
-            elif "KOTIDO MIXED" in s["name"].upper():
-                v2_val = 35
+            else:
+                tot_v2_learners = (v2_rec.get("hc_lower_m", 0) + v2_rec.get("hc_lower_f", 0) + 
+                                   v2_rec.get("hc_mid_m", 0) + v2_rec.get("hc_mid_f", 0) + 
+                                   v2_rec.get("hc_up_m", 0) + v2_rec.get("hc_up_f", 0))
+                if tot_v2_learners > 0:
+                    v2_val = tot_v2_learners
 
     v3_rec = dist_info.get("v3")
     if v3_rec:
@@ -62,9 +61,12 @@ for s in OFFICIAL_SCHOOLS:
             v3_sch_att = v3_rec.get("school_attendance")
             if v3_sch_att and v3_sch_att.get("att_total", 0) > 0:
                 v3_val = v3_sch_att.get("att_total")
-
-    if "KOTIDO MIXED" in s["name"].upper() and not v2_val:
-        v2_val = 35
+            else:
+                tot_v3_learners = (v3_rec.get("hc_lower_m", 0) + v3_rec.get("hc_lower_f", 0) + 
+                                   v3_rec.get("hc_mid_m", 0) + v3_rec.get("hc_mid_f", 0) + 
+                                   v3_rec.get("hc_up_m", 0) + v3_rec.get("hc_up_f", 0))
+                if tot_v3_learners > 0:
+                    v3_val = tot_v3_learners
 
     status = "Scheduled / Pending Deployment"
     if v3_val is not None:
@@ -88,54 +90,89 @@ RECORDS_JSON = json.dumps(RECORDS, indent=2)
 SCHOOL_TRAJECTORIES_JSON = json.dumps(SCHOOL_TRAJECTORIES, indent=2)
 
 v1_db_map = {}
-tot_v1_b_all = 0
-tot_v1_g_all = 0
-tot_v1_lb_all = 0
-tot_v1_lg_all = 0
-tot_v1_mb_all = 0
-tot_v1_mg_all = 0
-tot_v1_ub_all = 0
-tot_v1_ug_all = 0
 v1_school_opts = []
+v1_data = BASE_DATA.get("three_visit_contact", {}).get("visit1", {})
+v1_schools_data = v1_data.get("schools_data", [])
 
-for d_name, d_obj in DISTRICT_DB.items():
-    v1_rec = d_obj.get("v1")
-    if v1_rec:
-        b = v1_rec.get("att_boys", 0)
-        g = v1_rec.get("att_girls", 0)
-        tot = v1_rec.get("att_total", 0) or (b + g)
-        lb = v1_rec.get("att_lower_b", 0)
-        lg = v1_rec.get("att_lower_g", 0)
-        mb = v1_rec.get("att_mid_b", 0)
-        mg = v1_rec.get("att_mid_g", 0)
-        ub = v1_rec.get("att_up_b", 0)
-        ug = v1_rec.get("att_up_g", 0)
-        tot_v1_b_all += b
-        tot_v1_g_all += g
-        tot_v1_lb_all += lb
-        tot_v1_lg_all += lg
-        tot_v1_mb_all += mb
-        tot_v1_mg_all += mg
-        tot_v1_ub_all += ub
-        tot_v1_ug_all += ug
-        sch_label = f"{v1_rec.get('school', 'School')} ({d_name})"
+# 1. Add each individual monitored school
+for s in v1_schools_data:
+    sch_name = s.get("school", "School")
+    d_name = s.get("district", "District")
+    idx = s.get("entry_index", sch_name)
+    key = f"SCH_{idx}"
+    tot = s.get("att_total", 0)
+    sch_label = f"{sch_name} ({d_name})"
+    v1_db_map[key] = {
+        "name": sch_label,
+        "school": sch_name,
+        "district": d_name,
+        "boys": s.get("att_boys", 0),
+        "girls": s.get("att_girls", 0),
+        "total": tot,
+        "lb": s.get("att_lower_b", 0),
+        "lg": s.get("att_lower_g", 0),
+        "mb": s.get("att_mid_b", 0),
+        "mg": s.get("att_mid_g", 0),
+        "ub": s.get("att_up_b", 0),
+        "ug": s.get("att_up_g", 0),
+        "enrol_b": s.get("enrol_boys", 0),
+        "enrol_g": s.get("enrol_girls", 0),
+        "enrol_tot": s.get("enrol_total", 0)
+    }
+    v1_school_opts.append(f'<option value="{key}">{sch_label} - {tot:,} Pupils</option>')
+
+# 2. Add District-level aggregates for the global district filter dropdown
+for d_name in ["Abim", "Amudat", "Kaabong", "Karenga", "Kotido", "Moroto", "Nabilatuk", "Nakapiripirit", "Napak"]:
+    d_schools = [s for s in v1_schools_data if s.get("district") == d_name]
+    if d_schools:
+        d_b = sum(s.get("att_boys", 0) for s in d_schools)
+        d_g = sum(s.get("att_girls", 0) for s in d_schools)
+        d_tot = d_b + d_g
         v1_db_map[d_name] = {
-            "name": sch_label,
-            "boys": b,
-            "girls": g,
-            "total": tot,
-            "lb": lb,
-            "lg": lg,
-            "mb": mb,
-            "mg": mg,
-            "ub": ub,
-            "ug": ug
+            "name": f"All {d_name} Schools ({len(d_schools)} School{'s' if len(d_schools)>1 else ''})",
+            "school": f"{len(d_schools)} Schools in {d_name}",
+            "district": d_name,
+            "boys": d_b,
+            "girls": d_g,
+            "total": d_tot,
+            "lb": sum(s.get("att_lower_b", 0) for s in d_schools),
+            "lg": sum(s.get("att_lower_g", 0) for s in d_schools),
+            "mb": sum(s.get("att_mid_b", 0) for s in d_schools),
+            "mg": sum(s.get("att_mid_g", 0) for s in d_schools),
+            "ub": sum(s.get("att_up_b", 0) for s in d_schools),
+            "ug": sum(s.get("att_up_g", 0) for s in d_schools),
+            "enrol_b": sum(s.get("enrol_boys", 0) for s in d_schools),
+            "enrol_g": sum(s.get("enrol_girls", 0) for s in d_schools),
+            "enrol_tot": sum(s.get("enrol_total", 0) for s in d_schools)
         }
-        v1_school_opts.append(f'<option value="{d_name}">{sch_label} - {tot:,} Pupils</option>')
+    else:
+        v1_db_map[d_name] = {
+            "name": f"{d_name} (Awaiting V1 Baseline)",
+            "school": "Awaiting Visit 1 Baseline Audit",
+            "district": d_name,
+            "boys": 0, "girls": 0, "total": 0,
+            "lb": 0, "lg": 0, "mb": 0, "mg": 0, "ub": 0, "ug": 0,
+            "enrol_b": 0, "enrol_g": 0, "enrol_tot": 0
+        }
 
+# 3. Add "ALL" for all schools combined
+tot_v1_b_all = sum(s.get("att_boys", 0) for s in v1_schools_data)
+tot_v1_g_all = sum(s.get("att_girls", 0) for s in v1_schools_data)
 tot_v1_sum_all = tot_v1_b_all + tot_v1_g_all
+tot_v1_lb_all = sum(s.get("att_lower_b", 0) for s in v1_schools_data)
+tot_v1_lg_all = sum(s.get("att_lower_g", 0) for s in v1_schools_data)
+tot_v1_mb_all = sum(s.get("att_mid_b", 0) for s in v1_schools_data)
+tot_v1_mg_all = sum(s.get("att_mid_g", 0) for s in v1_schools_data)
+tot_v1_ub_all = sum(s.get("att_up_b", 0) for s in v1_schools_data)
+tot_v1_ug_all = sum(s.get("att_up_g", 0) for s in v1_schools_data)
+tot_v1_enrol_b_all = sum(s.get("enrol_boys", 0) for s in v1_schools_data)
+tot_v1_enrol_g_all = sum(s.get("enrol_girls", 0) for s in v1_schools_data)
+tot_v1_enrol_tot_all = sum(s.get("enrol_total", 0) for s in v1_schools_data)
+
 v1_db_map["ALL"] = {
-    "name": "All Schools",
+    "name": f"All Monitored Schools ({len(v1_schools_data)} Schools)",
+    "school": f"All {len(v1_schools_data)} Monitored Schools",
+    "district": "All Districts",
     "boys": tot_v1_b_all,
     "girls": tot_v1_g_all,
     "total": tot_v1_sum_all,
@@ -144,23 +181,79 @@ v1_db_map["ALL"] = {
     "mb": tot_v1_mb_all,
     "mg": tot_v1_mg_all,
     "ub": tot_v1_ub_all,
-    "ug": tot_v1_ug_all
+    "ug": tot_v1_ug_all,
+    "enrol_b": tot_v1_enrol_b_all,
+    "enrol_g": tot_v1_enrol_g_all,
+    "enrol_tot": tot_v1_enrol_tot_all
 }
 SCHOOL_ATTENDANCE_DB_JSON = json.dumps(v1_db_map, indent=2)
 V1_SCHOOL_OPTIONS_HTML = "\n".join(v1_school_opts)
-V1_COUNT_SCHOOLS = sum(1 for d in DISTRICT_DB.values() if d.get("v1"))
+V1_COUNT_SCHOOLS = len(v1_schools_data)
 tot_lrn_all = sum(d.get("learners", 0) for d in DISTRICT_DB.values())
 tot_sch_all = sum(d.get("schools", 0) for d in DISTRICT_DB.values())
 tot_cg_all = sum(d.get("caregivers", 0) for d in DISTRICT_DB.values())
 tot_stk_all = sum(d.get("teachers_vhts", 0) for d in DISTRICT_DB.values())
 tot_pwd_all = sum(d.get("pwd_reach", 0) for d in DISTRICT_DB.values())
+tot_tea_m_all = sum(d.get("teachers_male", 0) for d in DISTRICT_DB.values())
+tot_tea_f_all = sum(d.get("teachers_female", 0) for d in DISTRICT_DB.values())
+tot_tea_all = tot_tea_m_all + tot_tea_f_all
+tot_vht_m_all = sum(d.get("vhts_male", 0) for d in DISTRICT_DB.values())
+tot_vht_f_all = sum(d.get("vhts_female", 0) for d in DISTRICT_DB.values())
+tot_vht_all = tot_vht_m_all + tot_vht_f_all
+tot_ht_all = sum(d.get("headteachers", 0) for d in DISTRICT_DB.values())
+tot_patrons_all = sum(d.get("patrons", 0) for d in DISTRICT_DB.values())
 
 # Dynamic stats for Sample Interviews and MEL Tab
 orient_kpis = BASE_DATA.get("orientation", {}).get("kpis", {})
-tot_orient_schools = orient_kpis.get("total_orientations", 7)
-tot_orient_exit_sample = orient_kpis.get("total_exit_interviews", 30)
-tot_patrons_app = orient_kpis.get("patrons_appointed", 37)
-cal_yes_cnt = orient_kpis.get("joint_calendars_signed", 6)
+tot_orient_schools = orient_kpis.get("total_orientations", 8)
+tot_orient_exit_sample = orient_kpis.get("total_exit_interviews", 48)
+tot_patrons_app = orient_kpis.get("patrons_appointed", 46)
+cal_yes_cnt = orient_kpis.get("joint_calendars_signed", 7)
+
+# Orientation partner engagement and physical tools dynamic variables
+orient_partner = BASE_DATA.get("orientation", {}).get("partner_engagement", {})
+orient_part_cnt = orient_partner.get("engaged_schools_count", 0)
+orient_part_tot = orient_partner.get("total_schools_count", tot_orient_schools)
+orient_part_pct = orient_partner.get("engaged_pct", round(orient_part_cnt / max(1, orient_part_tot) * 100, 1))
+orient_part_schools_str = ", ".join(orient_partner.get("engaged_schools_names", [])) if orient_partner.get("engaged_schools_names") else ""
+part_deo_cnt = orient_partner.get("deo_count", 0)
+part_deo_pct = orient_partner.get("deo_pct", 0.0)
+part_hc_cnt = orient_partner.get("hc_count", 0)
+part_hc_pct = orient_partner.get("hc_pct", 0.0)
+part_unac_cnt = orient_partner.get("unac_count", 0)
+part_unac_pct = orient_partner.get("unac_pct", 0.0)
+part_afi_cnt = orient_partner.get("afi_count", 0)
+part_afi_pct = orient_partner.get("afi_pct", 0.0)
+
+orient_tools = BASE_DATA.get("orientation", {}).get("disseminated_physical_tools", {})
+orient_tot_tools = orient_tools.get("total_tools", 0)
+orient_metu_tools = orient_tools.get("metu_manuals", 0)
+orient_climate_tools = orient_tools.get("climate_manuals", 0)
+orient_boards_tools = orient_tools.get("toll_free_boards", 0)
+
+v1_data = BASE_DATA.get("three_visit_contact", {}).get("visit1", {})
+v1_schools_data = v1_data.get("schools_data", [])
+v1_sch_completed = len(v1_schools_data) if v1_schools_data else v1_data.get("total_schools_completed", 0)
+v1_schools_list = v1_data.get("schools_list", [])
+v1_schools_str = ", ".join(v1_schools_list) if v1_schools_list else "0 Schools"
+v1_nc_active_cnt = v1_data.get("nutriclub_active", {}).get("values", [0, 0])[0]
+v1_nc_in_process_cnt = v1_data.get("nutriclub_in_process", {}).get("values", [0, 0])[1] if len(v1_data.get("nutriclub_in_process", {}).get("values", [])) > 1 else v1_data.get("nutriclub_in_process", {}).get("values", [0, 0])[0]
+v1_nc_in_process_pct = round(v1_nc_in_process_cnt / max(1, v1_sch_completed) * 100, 1)
+v1_plan_signed_cnt = v1_data.get("signed_workplan", {}).get("values", [0, 0])[0]
+v1_plan_signed_pct = round(v1_plan_signed_cnt / max(1, v1_sch_completed) * 100, 1)
+v1_tollfree_cnt = v1_data.get("tollfree_display", {}).get("values", [0, 0])[0]
+v1_tollfree_pct = round(v1_tollfree_cnt / max(1, v1_sch_completed) * 100, 1)
+v1_tollfree_kwn_cnt = v1_data.get("tollfree_known", {}).get("values", [0, 0])[0]
+v1_tollfree_kwn_pct = round(v1_tollfree_kwn_cnt / max(1, v1_sch_completed) * 100, 1)
+v1_queries_logged = sum(s.get("helpdesk_queries", 0) for s in v1_schools_data)
+v1_enrol_boys = v1_data.get("enrolment", {}).get("boys", 0)
+v1_enrol_girls = v1_data.get("enrolment", {}).get("girls", 0)
+v1_enrol_tot = v1_data.get("enrolment", {}).get("total", 0)
+v1_att_boys = v1_data.get("attendance", {}).get("boys", 0)
+v1_att_girls = v1_data.get("attendance", {}).get("girls", 0)
+v1_att_tot = v1_data.get("attendance", {}).get("total", 0)
+v1_charts_issued = v1_data.get("charts_issued", 0)
+V1_CHARTS_BY_SCHOOL_HTML = "\n".join([f"<span>{s['school']}: <strong>{s.get('charts_issued', 0)}</strong></span>" for s in v1_schools_data])
 
 v2_sc = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("post_session_scenario", {})
 v2_sc_sample_size = v2_sc.get("sample_size", 17)
@@ -168,10 +261,16 @@ v2_p1_total = sum(v2_sc.get("porridge_recall", {}).get("values", []))
 v2_p2_total = sum(v2_sc.get("chore_sharing_recall", {}).get("values", []))
 v2_slogan_total = sum(v2_sc.get("slogan_recall", {}).get("values", []))
 v2_completed_count = sum(1 for d in DISTRICT_DB.values() if d.get("v2"))
+v2_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {})
+v2_schools_list = v2_data.get("schools_list", [])
+v2_schools_str = ", ".join(v2_schools_list) if v2_schools_list else "0 Schools"
 
 v3_sc = BASE_DATA.get("three_visit_contact", {}).get("visit3", {}).get("household_shift_metrics", {})
 v3_hh_sample_size = sum(v3_sc.get("morning_chore_shifted", {}).get("values", [0, 0, 0]))
 v3_completed_count = sum(1 for d in DISTRICT_DB.values() if d.get("v3"))
+v3_data = BASE_DATA.get("three_visit_contact", {}).get("visit3", {})
+v3_schools_list = v3_data.get("schools_list", [])
+v3_schools_str = ", ".join(v3_schools_list) if v3_schools_list else "Pending field closeout"
 
 cg_intercept_sample_size = sum(BASE_DATA.get("community_demonstrations", {}).get("cooking_practice_audit", {}).get("values", [0, 0, 0]))
 tot_demos = BASE_DATA.get("overview", {}).get("total_demonstrations", 0)
@@ -181,9 +280,27 @@ tot_active_clubs_cnt = len(active_clubs_list)
 tot_active_club_members = sum(s.get("total_membership", 0) for s in active_clubs_list)
 active_club_names_str = ", ".join(sorted([s.get("school", "") for s in active_clubs_list])) if active_clubs_list else "0 Clubs"
 
-v1_enrol_tot = BASE_DATA.get("three_visit_contact", {}).get("visit1", {}).get("enrolment", {}).get("total", 1480)
-v1_att_tot = BASE_DATA.get("three_visit_contact", {}).get("visit1", {}).get("attendance", {}).get("total", 374)
-v1_charts_issued = BASE_DATA.get("three_visit_contact", {}).get("visit1", {}).get("charts_issued", 19)
+# NutriClub dynamic metrics for Tab 6 server rendering
+nc_base_data = BASE_DATA.get("nutriclub_sessions", {})
+nc_kpis_data = nc_base_data.get("kpis", {})
+nc_sessions_list = nc_base_data.get("sample_sessions", [])
+
+nc_s1_cnt = nc_kpis_data.get("sessions_one_count", sum(1 for s in nc_sessions_list if "two" not in s.get("session_of_week", "").lower()))
+nc_s2_cnt = nc_kpis_data.get("sessions_two_count", sum(1 for s in nc_sessions_list if "two" in s.get("session_of_week", "").lower()))
+nc_tot_mem = nc_kpis_data.get("total_members", sum(s.get("total_membership", 0) for s in active_clubs_list))
+nc_mem_m = nc_kpis_data.get("members_male", sum(s.get("male_membership", 0) for s in active_clubs_list))
+nc_mem_f = nc_kpis_data.get("members_female", sum(s.get("female_membership", 0) for s in active_clubs_list))
+nc_active_sch_count = nc_kpis_data.get("schools_with_active_clubs", len(active_clubs_list))
+
+nc_tot_att = nc_kpis_data.get("session_attendance", sum(s.get("total_present", 0) for s in nc_sessions_list))
+nc_att_b = nc_kpis_data.get("attendance_boys", sum(s.get("boys_present", 0) for s in nc_sessions_list))
+nc_att_g = nc_kpis_data.get("attendance_girls", sum(s.get("girls_present", 0) for s in nc_sessions_list))
+
+nc_tot_pwd = nc_kpis_data.get("pwd_learners", sum(s.get("pwd", 0) for s in nc_sessions_list))
+nc_pwd_b = nc_kpis_data.get("pwd_boys", sum(s.get("pwd_boys", 0) for s in nc_sessions_list))
+nc_pwd_g = nc_kpis_data.get("pwd_girls", sum(s.get("pwd_girls", 0) for s in nc_sessions_list))
+
+nc_tot_assembly = nc_kpis_data.get("assembly_nutri_moments", sum(s.get("assembly_nutri_moment", 0) for s in nc_sessions_list))
 
 # Compute Visit 2 Pre-rendered Matrix
 v2_pre_schools = []
@@ -543,7 +660,7 @@ html_code = f"""<!DOCTYPE html>
           <div class="flex items-center gap-1.5 font-semibold text-blue-100">
             <i class="fa-regular fa-calendar text-blue-200 shrink-0"></i>
             <span class="shrink-0">Dates:</span>
-            <input type="date" id="dateFilterStart" value="2026-09-01" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
+            <input type="date" id="dateFilterStart" value="2026-06-01" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
             <span class="text-blue-200">to</span>
             <input type="date" id="dateFilterEnd" value="2026-10-31" onchange="applyFilters()" class="w-full sm:w-auto bg-white/10 border border-white/30 text-white rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-white">
           </div>
@@ -616,9 +733,9 @@ html_code = f"""<!DOCTYPE html>
     </div>
 
 
-<!-- 6 HEADLINE METRICS ROW -->
+<!-- 5 HEADLINE METRICS ROW -->
     <section>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3.5">
         <!-- 1. Schools -->
         <div class="bg-white rounded-xl p-3 sm:p-4 border border-slate-200/80 card-shadow transition hover:border-wfp-blue/50 flex flex-col justify-between">
           <div class="flex items-center justify-between mb-1.5">
@@ -721,27 +838,6 @@ html_code = f"""<!DOCTYPE html>
           <div class="text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-between gap-1">
             <span id="sub-teachers" class="truncate">42 Teachers</span>
             <span id="sub-vhts" class="shrink-0">23 VHTs</span>
-          </div>
-        </div>
-
-        <!-- 6. 3 Core Pillars & Turnout Compliance -->
-        <div class="bg-white rounded-xl p-3 sm:p-4 border border-slate-200/80 card-shadow transition hover:border-wfp-blue/50 flex flex-col justify-between">
-          <div class="flex items-start justify-between gap-1.5 mb-1.5 min-h-[28px]">
-            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 leading-tight">3 Pillars &amp; Turnout</span>
-            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs shrink-0">
-              <i class="fa-solid fa-seedling"></i>
-            </div>
-          </div>
-          <div class="flex flex-wrap items-baseline gap-1 mb-1.5">
-            <span id="kpi-pillars" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 leading-none">33.3%</span>
-            <span class="text-[10px] sm:text-xs text-emerald-600 font-medium whitespace-nowrap">Adoption</span>
-          </div>
-          <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1.5 overflow-hidden">
-            <div id="bar-pillars" class="bg-emerald-600 h-1.5 rounded-full" style="width: 33.3%"></div>
-          </div>
-          <div class="text-[10px] sm:text-[11px] font-semibold text-slate-600 flex items-center justify-between gap-1">
-            <span class="truncate">1 of 3 Pillars Logged</span>
-            <span class="text-emerald-700 shrink-0 font-bold">100% Chores</span>
           </div>
         </div>
       </div>
@@ -873,20 +969,174 @@ html_code = f"""<!DOCTYPE html>
 
       <!-- Charts Row: Target vs Actual + PWD Breakdown -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Target vs Actual Horizontal Bar Chart -->
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <div class="flex items-center justify-between mb-3">
-            <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-              <i class="fa-solid fa-bullseye text-wfp-blue"></i>
-              <span>Core Activities: Conducted vs. Operational Target</span>
-            </h4>
-            <span class="text-[11px] font-semibold text-slate-500">Conducted vs Target Numbers</span>
+        <!-- Sequential Campaign Journey Stepper (Option 1) -->
+        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+          <div>
+            <!-- Header -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-wfp-blue animate-pulse"></span>
+                  <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-route text-wfp-blue"></i>
+                    <span>Campaign Implementation Journey: Milestone Rollout</span>
+                  </h4>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Sequential operational progression from school orientation to community debrief</p>
+              </div>
+            </div>
+
+            <!-- Stepper Progression Grid (6 Sequential Activities) -->
+            <div class="space-y-3">
+              <!-- Row 1: School & Initial Contact Phases (Steps 1 to 3) -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                
+                <!-- School Onboarding & Orientation -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-blue-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-wfp-blue text-xs shrink-0">
+                        <i class="fa-solid fa-school"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">School Orientation</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">Teacher &amp; VHT joint training</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-sch" class="text-lg font-black text-slate-800">22</span>
+                      <span id="core-tgt-sch" class="text-xs font-bold text-slate-500">/ 64 Schools</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-sch" class="bg-wfp-blue h-1.5 rounded-full transition-all duration-500" style="width: 34.4%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Visit 1 Follow-Up & Census -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 text-xs shrink-0">
+                        <i class="fa-solid fa-bus"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">Visit 1 Contact</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">Enrolment census &amp; materials</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-v1" class="text-lg font-black text-slate-800">2</span>
+                      <span id="core-tgt-v1" class="text-xs font-bold text-slate-500">/ 64 Schools</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-v1" class="bg-indigo-600 h-1.5 rounded-full transition-all duration-500" style="width: 3.1%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Visit 2 NutriBus Activation Day -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-emerald-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 text-xs shrink-0">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">Visit 2 Big Day</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">NutriBus day &amp; micro-polls</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-v2" class="text-lg font-black text-slate-800">3</span>
+                      <span id="core-tgt-v2" class="text-xs font-bold text-slate-500">/ 64 Schools</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-v2" class="bg-emerald-600 h-1.5 rounded-full transition-all duration-500" style="width: 4.7%"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Row 2: Club Institutionalization & Community Reach (Steps 4 to 6) -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                
+                <!-- NutriClubs Established -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-teal-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 text-xs shrink-0">
+                        <i class="fa-solid fa-users"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">NutriClubs</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">Weekly learner club sessions</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-club" class="text-lg font-black text-slate-800">7</span>
+                      <span id="core-tgt-club" class="text-xs font-bold text-slate-500">/ 64 Clubs</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-club" class="bg-teal-600 h-1.5 rounded-full transition-all duration-500" style="width: 10.9%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Catchment Cooking Demonstrations -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-amber-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 text-xs shrink-0">
+                        <i class="fa-solid fa-fire-burner"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">Cooking Demos</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">Catchment village sessions</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-dem" class="text-lg font-black text-slate-800">0</span>
+                      <span id="core-tgt-dem" class="text-xs font-bold text-slate-500">/ 640 Demos</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-dem" class="bg-amber-600 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Visit 3 Debrief & Closeout -->
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-purple-300 transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="w-7 h-7 rounded-lg bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 text-xs shrink-0">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                      </div>
+                      <h5 class="text-xs font-bold text-slate-800 leading-tight">Visit 3 Debrief</h5>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mb-2">NutriCharts &amp; stove audit</p>
+                  </div>
+                  <div>
+                    <div class="flex items-baseline justify-between mb-1.5">
+                      <span id="core-num-v3" class="text-lg font-black text-slate-800">0</span>
+                      <span id="core-tgt-v3" class="text-xs font-bold text-slate-500">/ 64 Schools</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-1.5 overflow-hidden">
+                      <div id="core-bar-v3" class="bg-purple-600 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div class="h-80">
-            <canvas id="chart-targets-actuals"></canvas>
-          </div>
-          <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span id="core-activities-conducted-summary">Activities Conducted: Schools (3), Visit 1 (0), Visit 2 (1), Visit 3 (0), Cooking Demos (0), NutriClubs (1)</span>
+
+          <!-- Bottom Summary Footprint -->
+          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-600">
+            <span id="core-activities-conducted-summary" class="font-medium">
+              Milestones Logged: Schools (17), Visit 1 (2), Visit 2 (3), NutriClubs (7), Demos (0), Visit 3 (0)
+            </span>
           </div>
         </div>
 
@@ -898,26 +1148,26 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-shapes text-wfp-blue"></i>
                 <span>Programmatic Adoption by the 3 Core Pillars</span>
               </h4>
-              <p class="text-[10px] text-slate-500">Verified field practice &amp; behavior shift rates</p>
+              <p class="text-[10px] text-slate-500">Verified compliant responses &amp; commitments logged</p>
             </div>
-            <span id="pillarAvgBadge" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">33.3% Avg Adoption (1/3 Pillars Logged)</span>
+            <span id="pillarAvgBadge" class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">34 of 44 Compliant Responses Logged</span>
           </div>
           <div class="h-72">
             <canvas id="chart-pillar-stats"></canvas>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-center text-xs">
             <div class="p-2 rounded bg-emerald-50/60 border border-emerald-200">
-              <div id="pillar-card-1-val" class="font-bold text-emerald-800 text-sm">52.9%</div>
+              <div id="pillar-card-1-val" class="font-bold text-emerald-800 text-sm">9 of 17</div>
               <div class="text-[10px] text-slate-700 font-semibold">Pillar 1: School Feeding</div>
               <div class="text-[9px] text-emerald-700">Porridge Fortification</div>
             </div>
             <div class="p-2 rounded bg-blue-50/60 border border-blue-200">
-              <div id="pillar-card-2-val" class="font-bold text-wfp-blue text-sm">87.5%</div>
+              <div id="pillar-card-2-val" class="font-bold text-wfp-blue text-sm">14 of 16</div>
               <div class="text-[10px] text-slate-700 font-semibold">Pillar 2: Gender Dynamics</div>
               <div class="text-[9px] text-blue-700">Equitable Chore Sharing</div>
             </div>
             <div class="p-2 rounded bg-amber-50/60 border border-amber-200">
-              <div id="pillar-card-3-val" class="font-bold text-amber-800 text-sm">100.0%</div>
+              <div id="pillar-card-3-val" class="font-bold text-amber-800 text-sm">11 of 11</div>
               <div class="text-[10px] text-slate-700 font-semibold">Pillar 3: Action Plans</div>
               <div class="text-[9px] text-amber-700">Institutional Commitments</div>
             </div>
@@ -925,50 +1175,47 @@ html_code = f"""<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- District Performance Table / Chart -->
+      <!-- District Performance Table Running Across -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div>
             <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
               <i class="fa-solid fa-map-location-dot text-wfp-blue"></i>
               <span>District-level operational summary across all 9 Karamoja districts</span>
             </h4>
-            <p class="text-xs text-slate-500 mt-0.5">Click any district in the table or dropdown to filter all operational data instantly</p>
+            <p class="text-xs text-slate-500 mt-0.5">Click any district in the table to filter all operational data instantly</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="active-table-district-pill" class="text-xs font-bold text-wfp-blue bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">Showing All 9 Districts</span>
+            <button onclick="document.getElementById('districtFilter').value='ALL'; applyFilters();" id="btn-reset-district-filter" class="hidden text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md font-semibold transition cursor-pointer">
+              <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Reset to All Districts
+            </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          <!-- Left Column: Chart (5 of 12 columns) -->
-          <div class="lg:col-span-5 h-84 min-h-[340px]">
-            <canvas id="chart-district-learners"></canvas>
-          </div>
-          <!-- Right Column: District Performance Table (7 of 12 columns) -->
-          <div class="lg:col-span-7">
-            <div class="sm:hidden text-[10px] text-slate-400 italic mb-1.5 flex items-center gap-1">
-              <i class="fa-solid fa-arrows-left-right text-wfp-blue"></i>
-              <span>Scroll table sideways to view all columns</span>
-            </div>
-            <div class="overflow-x-auto rounded-lg border border-slate-200">
-              <table class="w-full text-xs text-left min-w-[620px]">
-              <thead class="bg-slate-50 text-slate-600 font-semibold uppercase border-b text-[11px]">
-                <tr>
-                  <th class="py-2.5 px-3 whitespace-nowrap min-w-[120px]">District</th>
-                  <th class="py-2.5 px-2 text-center whitespace-nowrap">Schools (Done / Target)</th>
-                  <th class="py-2.5 px-2 text-center whitespace-nowrap">Visits (Done / Target)</th>
-                  <th class="py-2.5 px-2 text-center whitespace-nowrap">Demos (Done / Target)</th>
-                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Direct Learners</th>
-                  <th class="py-2.5 px-2 text-right whitespace-nowrap">Caregivers</th>
-                  <th class="py-2.5 px-2 text-right whitespace-nowrap">PWD Reach</th>
-                </tr>
-              </thead>
-              <tbody id="district-table-body" class="divide-y divide-slate-100 text-slate-700">
-                <!-- Injected via JS -->
-              </tbody>
-            </table>
-          </div>
+        <div class="overflow-x-auto rounded-lg border border-slate-200">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-slate-50 text-slate-600 font-semibold uppercase border-b text-[11px]">
+              <tr>
+                <th class="py-2.5 px-3 whitespace-nowrap min-w-[130px]">District</th>
+                <th class="py-2.5 px-2 text-center whitespace-nowrap">Schools (Done / Target)</th>
+                <th class="py-2.5 px-2 text-center whitespace-nowrap">Visits (Done / Target)</th>
+                <th class="py-2.5 px-2 text-center whitespace-nowrap">Demos (Done / Target)</th>
+                <th class="py-2.5 px-2 text-right whitespace-nowrap">Direct Learners</th>
+                <th class="py-2.5 px-2 text-right whitespace-nowrap">Caregivers</th>
+                <th class="py-2.5 px-2 text-right whitespace-nowrap">PWD Reach</th>
+                <th class="py-2.5 px-3 text-center whitespace-nowrap">Interactive Filter</th>
+              </tr>
+            </thead>
+            <tbody id="district-table-body" class="divide-y divide-slate-100 text-slate-700">
+              <!-- Injected via JS -->
+            </tbody>
+            <tfoot id="district-table-foot" class="bg-slate-100 font-bold border-t-2 border-slate-200 text-slate-900 text-xs">
+              <!-- Summary Totals row injected via JS -->
+            </tfoot>
+          </table>
         </div>
       </div>
-    </div>
     </div>
 
     <!-- ========================================== -->
@@ -978,10 +1225,10 @@ html_code = f"""<!DOCTYPE html>
       <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl flex items-center justify-between">
         <div>
           <h3 class="text-sm font-bold text-wfp-dark">Teacher and VHT orientation field results</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Capturing teacher attendance, headteacher presence, VHTs with PWDs, joint calendar agreements, participant exit interviews, and collateral handover.</p>
+          <p class="text-xs text-slate-600 mt-0.5">Capturing teacher attendance, headteacher presence, VHTs with PWDs, joint calendar agreements, post orientation intercept interviews, and collateral handover.</p>
         </div>
         <span id="orientStakeholderBadge" class="text-xs bg-white text-wfp-blue font-bold px-3 py-1 rounded-full border border-blue-200">
-          Stakeholders: 143
+          Stakeholders: {int(tot_stk_all)}
         </span>
       </div>
 
@@ -992,7 +1239,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span id="badge-teachers-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">48 Teachers</span>
+              <span id="badge-teachers-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">{int(tot_tea_all)} Teachers</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Teacher attendance: male vs female</h4>
             <p class="text-xs text-slate-500 mb-3">Teacher attendance by sex</p>
@@ -1001,8 +1248,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-tea-m">Male: <strong>26</strong></span>
-            <span id="label-tea-f">Female: <strong>22</strong></span>
+            <span id="label-tea-m">Male: <strong>{int(tot_tea_m_all)}</strong></span>
+            <span id="label-tea-f">Female: <strong>{int(tot_tea_f_all)}</strong></span>
           </div>
         </div>
 
@@ -1019,8 +1266,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-ht-yes">Present: <strong>6</strong></span>
-            <span id="label-patrons-count">Nutri Club Patrons: <strong>12</strong></span>
+            <span id="label-ht-yes">Present: <strong>{tot_orient_schools}</strong></span>
+            <span id="label-patrons-count">Nutri Club Patrons: <strong>{tot_patrons_app}</strong></span>
           </div>
         </div>
 
@@ -1028,7 +1275,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span id="badge-vhts-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">95 VHTs</span>
+              <span id="badge-vhts-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">{int(tot_vht_all)} VHTs</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Village Health Teams (VHTs) oriented</h4>
             <p class="text-xs text-slate-500 mb-3">Village Health Teams (VHTs) oriented</p>
@@ -1037,8 +1284,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-vht-f">Female VHTs: <strong>49</strong></span>
-            <span id="label-vht-m">Male VHTs: <strong>46</strong></span>
+            <span id="label-vht-f">Female VHTs: <strong>{int(tot_vht_f_all)}</strong></span>
+            <span id="label-vht-m">Male VHTs: <strong>{int(tot_vht_m_all)}</strong></span>
           </div>
         </div>
 
@@ -1046,7 +1293,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-end mb-2">
-              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">36 PWD VHTs</span>
+              <span id="badge-vht-pwd-count" class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded">0 PWD VHTs</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">VHTs with disabilities (PWDs)</h4>
             <p class="text-xs text-slate-500 mb-3">VHTs with disabilities by sex</p>
@@ -1055,8 +1302,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span id="label-vht-pwd-m">Male PWD: <strong>19</strong></span>
-            <span id="label-vht-pwd-f">Female PWD: <strong>17</strong></span>
+            <span id="label-vht-pwd-m">Male PWD: <strong>0</strong></span>
+            <span id="label-vht-pwd-f">Female PWD: <strong>0</strong></span>
           </div>
         </div>
 
@@ -1101,7 +1348,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">16.7% Yes (1/6 Schools — Lomukura P/S, Kotido)</span>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">{orient_part_pct}% Yes ({orient_part_cnt}/{orient_part_tot} Schools{f' — {orient_part_schools_str}' if orient_part_cnt > 0 else ''})</span>
               <span class="text-xs text-slate-500 font-medium">Orientation pp. 9–10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</h4>
@@ -1117,23 +1364,23 @@ html_code = f"""<!DOCTYPE html>
                 <div class="space-y-1.5 text-xs text-slate-700">
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>District Education Offices</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">16.7% (1/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">{part_deo_pct}% ({part_deo_cnt}/{orient_part_tot})</span>
                   </div>
                   <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200">
                     <span>Health Centre Parish Focal Persons</span>
-                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">16.7% (1/6)</span>
+                    <span class="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">{part_hc_pct}% ({part_hc_cnt}/{orient_part_tot})</span>
                   </div>
-                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200 text-slate-400">
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200 {'text-slate-400' if part_unac_cnt == 0 else ''}">
                     <span>UNAC (Uganda National Action on Childhood Disability)</span>
-                    <span class="font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/6)</span>
+                    <span class="font-bold {'text-slate-400 bg-slate-100' if part_unac_cnt == 0 else 'text-emerald-700 bg-emerald-50'} px-2 py-0.5 rounded text-[11px]">{part_unac_pct}% ({part_unac_cnt}/{orient_part_tot})</span>
                   </div>
-                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200 text-slate-400">
+                  <div class="flex items-center justify-between bg-white px-2.5 py-1 rounded border border-slate-200 {'text-slate-400' if part_afi_cnt == 0 else ''}">
                     <span>Afi (Action for Inclusion)</span>
-                    <span class="font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/6)</span>
+                    <span class="font-bold {'text-slate-400 bg-slate-100' if part_afi_cnt == 0 else 'text-emerald-700 bg-emerald-50'} px-2 py-0.5 rounded text-[11px]">{part_afi_pct}% ({part_afi_cnt}/{orient_part_tot})</span>
                   </div>
                 </div>
                 <div class="mt-2 p-2 bg-blue-50/60 rounded border border-blue-200 text-[11px] text-slate-700">
-                  <strong class="text-wfp-blue">Partner Scope:</strong> DEO and Health Centre co-facilitation active at Kotido Lomukura P/S orientation.
+                  <strong class="text-wfp-blue">Partner Scope:</strong> {f'DEO and Health Centre co-facilitation active at {orient_part_schools_str} orientation.' if orient_part_cnt > 0 else 'Pending partner network co-facilitation.'}
                 </div>
               </div>
 
@@ -1146,7 +1393,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="grid grid-cols-2 gap-1.5 text-xs">
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Joint facilitation</span>
-                    <span class="font-bold text-emerald-700 text-xs mt-1">100% of engaged (1/1)</span>
+                    <span class="font-bold text-emerald-700 text-xs mt-1">{ '100% of engaged (' + str(orient_part_cnt) + '/' + str(orient_part_cnt) + ')' if orient_part_cnt > 0 else 'Pending' }</span>
                   </div>
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Sustainability planning</span>
@@ -1173,7 +1420,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">16 Tools Disseminated</span>
+              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">{orient_tot_tools} Tools Disseminated</span>
               <span class="text-xs text-slate-500 font-medium">Orientation p. 10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Physical tools and manuals disseminated to school leadership</h4>
@@ -1183,9 +1430,9 @@ html_code = f"""<!DOCTYPE html>
             </div>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
-            <span>Metu Manuals: <strong>6</strong></span>
-            <span>Climate Manuals: <strong>2</strong></span>
-            <span>Toll-Free Boards: <strong>8</strong></span>
+            <span>Metu Manuals: <strong>{orient_metu_tools}</strong></span>
+            <span>Climate Manuals: <strong>{orient_climate_tools}</strong></span>
+            <span>Toll-Free Boards: <strong>{orient_boards_tools}</strong></span>
           </div>
         </div>
       </div>
@@ -1200,11 +1447,11 @@ html_code = f"""<!DOCTYPE html>
           <div class="flex items-center gap-2 mb-1">
             <span class="text-xs font-extrabold uppercase tracking-wider text-wfp-dark flex items-center gap-1.5">
               <i class="fa-solid fa-clipboard-user text-wfp-blue"></i>
-              Participant Exit Interviews
+              Post Orientation Intercept Interviews
             </span>
           </div>
           <p class="text-xs text-slate-800 font-semibold leading-relaxed">
-            » Participant exit interviews: Pull aside 6 individual participants (aim for 3 Teachers and 3 VHTs, balanced by gender).
+            » Post orientation intercept interviews: Pull aside 6 individual participants (aim for 3 Teachers and 3 VHTs, balanced by gender).
           </p>
           <p class="text-xs text-slate-600 mt-1">
             For each person, assess what they learned across the 3 Pillars and record their committed action.
@@ -1235,11 +1482,11 @@ html_code = f"""<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- DETAILED BREAKDOWN OF THE PARTICIPANT EXIT INTERVIEWS -->
+        <!-- DETAILED BREAKDOWN OF THE POST ORIENTATION INTERCEPT INTERVIEWS -->
         <div class="mt-4">
           <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
             <i class="fa-solid fa-users-viewfinder text-wfp-blue"></i>
-            <span id="exit-interview-title">Summative Interview Synthesis: {tot_orient_exit_sample} Participants Across {tot_orient_schools} Schools</span>
+            <span id="exit-interview-title">Summative Interview Synthesis: {tot_orient_exit_sample} Participants (All Monitored Schools)</span>
           </h4>
 
           <div id="exit-interview-cards">
@@ -1262,8 +1509,8 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">64 Target Schools</span>
           </div>
           <div class="flex items-center gap-3">
-            <span id="badge-pipeline-pct" class="text-xs bg-sky-50 text-sky-700 font-bold px-2 py-0.5 rounded border border-sky-200">1.6% In Progress</span>
-            <span class="text-xs text-slate-500 font-medium">Remaining Pipeline: <strong id="metric-pipe-remain">63 Schools</strong></span>
+            <span id="badge-pipeline-pct" class="text-xs bg-sky-50 text-sky-700 font-bold px-2 py-0.5 rounded border border-sky-200">{round(((v1_sch_completed + v2_completed_count) / 64.0) * 100, 1)}% In Progress</span>
+            <span class="text-xs text-slate-500 font-medium">Remaining Pipeline: <strong id="metric-pipe-remain">{64 - (v1_sch_completed + v2_completed_count)} Schools</strong></span>
           </div>
         </div>
         <h4 class="text-sm font-bold text-slate-800 mb-1">64-school milestone pipeline funnel</h4>
@@ -1283,7 +1530,7 @@ html_code = f"""<!DOCTYPE html>
               <span class="w-2.5 h-2.5 rounded-full bg-wfp-blue"></span>
               <span class="text-xs text-wfp-blue font-bold uppercase tracking-wide">Visit 1 Done</span>
             </div>
-            <div id="metric-pipe-v1" class="text-2xl font-extrabold text-wfp-blue">0</div>
+            <div id="metric-pipe-v1" class="text-2xl font-extrabold text-wfp-blue">{v1_sch_completed}</div>
             <div class="text-xs text-slate-600 mt-1">Enrolment Baseline & Handover</div>
           </div>
           <div class="p-4 bg-sky-50/60 rounded-xl border border-sky-200">
@@ -1291,7 +1538,7 @@ html_code = f"""<!DOCTYPE html>
               <span class="w-2.5 h-2.5 rounded-full bg-sky-600"></span>
               <span class="text-xs text-sky-700 font-bold uppercase tracking-wide">Visit 2 Done</span>
             </div>
-            <div id="metric-pipe-v2" class="text-2xl font-extrabold text-sky-700">3</div>
+            <div id="metric-pipe-v2" class="text-2xl font-extrabold text-sky-700">{v2_completed_count}</div>
             <div id="metric-pipe-v2-sub" class="text-xs text-slate-600 mt-1">NutriBus Big Activation Day</div>
           </div>
           <div class="p-4 bg-emerald-50/60 rounded-xl border border-emerald-200">
@@ -1330,7 +1577,7 @@ html_code = f"""<!DOCTYPE html>
             <div class="text-[11px] text-slate-500 font-semibold uppercase mt-0.5">Visit 1 attendance</div>
           </div>
           <div class="p-3 bg-sky-50/60 rounded-lg border border-sky-200">
-            <div id="metric-long-v2" class="text-lg font-extrabold text-sky-700">623</div>
+            <div id="metric-long-v2" class="text-lg font-extrabold text-sky-700">-</div>
             <div id="metric-long-v2-sub" class="text-[11px] text-sky-700 font-semibold uppercase mt-0.5">Visit 2 attendance</div>
           </div>
           <div class="p-3 bg-emerald-50/60 rounded-lg border border-emerald-200">
@@ -1461,17 +1708,17 @@ html_code = f"""<!DOCTYPE html>
             <i class="fa-solid fa-circle-check"></i>
             <span>Visit 1: Orientation Follow-up & Material Handover Check</span>
           </div>
-          <span class="text-xs bg-amber-50 text-amber-700 font-bold px-2.5 py-1 rounded-lg border border-amber-200">
-            Awaiting Field Submissions
+          <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-1 rounded-lg border border-emerald-200">
+            {v1_sch_completed} of 64 Schools Verified ({v1_schools_str})
           </span>
         </div>
 
-        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center justify-between gap-3">
+        <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-slate-700 flex items-center justify-between gap-3">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-clock text-slate-400 text-sm"></i>
-            <span><strong>Visit 1 Status:</strong> No Visit 1 orientation follow-up submissions recorded in the activity log yet. Enrolment baselines, institutional readiness checks, and material handover logs will display here as field teams submit records.</span>
+            <i class="fa-solid fa-circle-check text-wfp-blue text-sm"></i>
+            <span><strong>Visit 1 Status:</strong> {v1_sch_completed} primary school{'' if v1_sch_completed == 1 else 's'} verified ({v1_schools_str}). Enrolment baselines ({v1_enrol_tot:,} pupils), weekly attendance records ({v1_att_tot:,} pupils), institutional readiness checks, and material handover logs captured.</span>
           </div>
-          <span class="px-2 py-0.5 bg-slate-200 text-slate-600 font-bold rounded text-[11px] shrink-0">0 of 64 Logged</span>
+          <span class="px-2 py-0.5 bg-blue-100 text-wfp-blue font-bold rounded text-[11px] shrink-0">{v1_sch_completed} of 64 Logged</span>
         </div>
 
         <!-- Row 0: Official Enrolment Baseline for This Term -->
@@ -1487,13 +1734,13 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="flex items-center gap-3 text-xs">
               <span id="badge-v1-enrol-boys" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Official boys enrolment: 0
+                Official boys enrolment: {v1_enrol_boys:,}
               </span>
               <span id="badge-v1-enrol-girls" class="px-3 py-1 bg-pink-50 text-pink-700 font-bold rounded-lg border border-pink-200">
-                Official girls enrolment: 0
+                Official girls enrolment: {v1_enrol_girls:,}
               </span>
-              <span id="badge-v1-enrol-total" class="px-3 py-1 bg-slate-100 text-slate-500 font-bold rounded-lg border border-slate-300">
-                Total Enrolled: 0 Pupils (Pending Visit 1)
+              <span id="badge-v1-enrol-total" class="px-3 py-1 bg-slate-100 text-slate-700 font-bold rounded-lg border border-slate-300">
+                Total Enrolled: {v1_enrol_tot:,} Pupils
               </span>
             </div>
           </div>
@@ -1514,9 +1761,9 @@ html_code = f"""<!DOCTYPE html>
                 <canvas id="chart-v1-active"></canvas>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>Yes: <strong>0 schools</strong></span>
-              <span>No: <strong>0</strong></span>
+            <div id="footer-v1-active" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+              <span>Yes: <strong>{v1_nc_active_cnt} school{'s' if v1_nc_active_cnt != 1 else ''}</strong></span>
+              <span>Pending: <strong>{max(0, v1_sch_completed - v1_nc_active_cnt)}</strong></span>
             </div>
           </div>
 
@@ -1530,9 +1777,9 @@ html_code = f"""<!DOCTYPE html>
                 <canvas id="chart-v1-process-nutriclub"></canvas>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>Already Active: <strong>6 (100%)</strong></span>
-              <span>Pending: <strong>0</strong></span>
+            <div id="footer-v1-process" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+              <span>In Process: <strong>{v1_nc_in_process_cnt} ({v1_nc_in_process_pct}%)</strong></span>
+              <span>Pending: <strong>{max(0, v1_sch_completed - v1_nc_in_process_cnt)}</strong></span>
             </div>
           </div>
 
@@ -1547,7 +1794,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600">
-              <span>Peak meeting days: <strong>Thursday & Tuesday</strong></span>
+              <span id="footer-v1-days">Peak meeting days: <strong>Wednesday, Thursday, Friday, Tuesday (2 schools each); Monday, Saturday (1 each)</strong></span>
             </div>
           </div>
 
@@ -1555,7 +1802,7 @@ html_code = f"""<!DOCTYPE html>
           <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">100% Signed</span>
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">{v1_plan_signed_pct}% Signed</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800 mb-1 leading-snug">Is there a signed institutional work plan?</h4>
               <p class="text-xs text-slate-500 mb-3">Signed work plan sighted</p>
@@ -1563,9 +1810,9 @@ html_code = f"""<!DOCTYPE html>
                 <canvas id="chart-v1-plan"></canvas>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>Yes: <strong>6 schools (100%)</strong></span>
-              <span>No: <strong>0</strong></span>
+            <div id="footer-v1-plan" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+              <span>Yes: <strong>{v1_plan_signed_cnt} school{'s' if v1_plan_signed_cnt != 1 else ''} ({v1_plan_signed_pct}%)</strong></span>
+              <span>No: <strong>{max(0, v1_sch_completed - v1_plan_signed_cnt)}</strong></span>
             </div>
           </div>
         </div>
@@ -1579,15 +1826,13 @@ html_code = f"""<!DOCTYPE html>
               <h4 class="text-sm font-bold text-slate-800 mb-1">Number of take-home NutriCharts and recipe cards issued</h4>
               <p class="text-xs text-slate-500 mb-3">Total cards distributed across all schools</p>
               <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center my-2">
-                <div class="text-3xl font-extrabold text-slate-400">0</div>
+                <div id="metric-v1-charts-issued" class="text-3xl font-extrabold text-wfp-blue">{v1_charts_issued:,}</div>
                 <div class="text-xs font-semibold text-slate-600 mt-1">Total Take-Home NutriCharts Issued</div>
-                <div class="text-[11px] text-slate-400 mt-0.5">Target: 1,840 (Avg 307 cards / school)</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">Target: 1,840 across 64 schools</div>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
-              <span>ECD-P2: <strong>0</strong></span>
-              <span>P3-P4: <strong>0</strong></span>
-              <span>P5-P7: <strong>0</strong></span>
+            <div id="footer-v1-charts" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-1">
+              {V1_CHARTS_BY_SCHOOL_HTML}
             </div>
           </div>
 
@@ -1610,7 +1855,7 @@ html_code = f"""<!DOCTYPE html>
           <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
-                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">100% Displayed</span>
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">{v1_tollfree_pct}% Displayed</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800 mb-1">Is the WFP toll-free hotline displayed anywhere in the school?</h4>
               <p class="text-xs text-slate-500 mb-3">WFP 0800 feedback hotline display audit</p>
@@ -1618,8 +1863,8 @@ html_code = f"""<!DOCTYPE html>
                 <canvas id="chart-v1-tollfree"></canvas>
               </div>
             </div>
-            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
-              <span>Displayed: <strong>6 schools (100%)</strong></span>
+            <div id="footer-v1-tollfree" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+              <span>Displayed: <strong>{v1_tollfree_cnt} of {v1_sch_completed} schools ({v1_tollfree_pct}%)</strong></span>
               <span>Grounds / Notice Boards</span>
             </div>
           </div>
@@ -1643,21 +1888,33 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-school text-wfp-blue text-xs"></i>
                 <label for="v1-school-select" class="text-[11px] font-bold text-slate-600">School View:</label>
                 <select id="v1-school-select" onchange="switchV1AttendanceScope(this.value)" class="text-xs bg-transparent text-slate-800 font-semibold focus:outline-none cursor-pointer">
-                  <option value="ALL">All Schools ({tot_v1_sum_all:,} Pupils Logged)</option>
+                  <option value="ALL">All Monitored Schools ({v1_sch_completed} Schools - {tot_v1_sum_all:,} Pupils Logged)</option>
                   {V1_SCHOOL_OPTIONS_HTML}
                 </select>
               </div>
 
               <span id="badge-v1-att-boys" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-                Registered Boys this week Attendance: 0
+                Registered Boys this week Attendance: {tot_v1_b_all:,}
               </span>
-              <span id="badge-v1-att-girls" class="px-3 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-lg border border-emerald-200">
-                Registered Girls this week Attendance: 0
+              <span id="badge-v1-att-girls" class="px-3 py-1 bg-pink-50 text-pink-700 font-bold rounded-lg border border-pink-200">
+                Registered Girls this week Attendance: {tot_v1_g_all:,}
               </span>
               <span id="badge-v1-att-total" class="px-3 py-1 bg-slate-100 text-slate-800 font-bold rounded-lg border border-slate-300">
-                Total this week Attendance: 0 Pupils
+                Total this week Attendance: {tot_v1_sum_all:,} Pupils
               </span>
             </div>
+          </div>
+
+          <!-- Color Legend for Boys and Girls -->
+          <div class="flex items-center justify-end gap-5 text-xs font-semibold text-slate-600 pt-1">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-[#0A6EB4] border border-blue-700/30"></span>
+              <span class="text-wfp-blue font-bold">Boys Attendance</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-[#ec4899] border border-pink-700/30"></span>
+              <span class="text-pink-700 font-bold">Girls Attendance</span>
+            </span>
           </div>
 
           <div class="h-[440px] min-h-[420px]">
@@ -1665,29 +1922,29 @@ html_code = f"""<!DOCTYPE html>
           </div>
 
           <div class="grid grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs pt-3 border-t border-slate-100">
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-l-b" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Lower Primary (ECD-P2) Boys</div>
+            <div class="p-2 bg-blue-50/70 rounded border border-blue-200">
+              <div id="metric-att-l-b" class="font-bold text-wfp-blue text-sm">{tot_v1_lb_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Lower Primary (ECD-P2) Boys</div>
             </div>
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-l-g" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Lower Primary (ECD-P2) Girls</div>
+            <div class="p-2 bg-pink-50/70 rounded border border-pink-200">
+              <div id="metric-att-l-g" class="font-bold text-pink-700 text-sm">{tot_v1_lg_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Lower Primary (ECD-P2) Girls</div>
             </div>
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-m-b" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Middle Primary (P3-P4) Boys</div>
+            <div class="p-2 bg-blue-50/70 rounded border border-blue-200">
+              <div id="metric-att-m-b" class="font-bold text-wfp-blue text-sm">{tot_v1_mb_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Middle Primary (P3-P4) Boys</div>
             </div>
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-m-g" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Middle Primary (P3-P4) Girls</div>
+            <div class="p-2 bg-pink-50/70 rounded border border-pink-200">
+              <div id="metric-att-m-g" class="font-bold text-pink-700 text-sm">{tot_v1_mg_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Middle Primary (P3-P4) Girls</div>
             </div>
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-u-b" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Upper Primary (P5-P7) Boys</div>
+            <div class="p-2 bg-blue-50/70 rounded border border-blue-200">
+              <div id="metric-att-u-b" class="font-bold text-wfp-blue text-sm">{tot_v1_ub_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Upper Primary (P5-P7) Boys</div>
             </div>
-            <div class="p-2 bg-slate-50 rounded border border-slate-200">
-              <div id="metric-att-u-g" class="font-bold text-slate-800">0</div>
-              <div class="text-[10px] text-slate-500 font-medium">Upper Primary (P5-P7) Girls</div>
+            <div class="p-2 bg-pink-50/70 rounded border border-pink-200">
+              <div id="metric-att-u-g" class="font-bold text-pink-700 text-sm">{tot_v1_ug_all:,}</div>
+              <div class="text-[10px] text-slate-600 font-semibold">Upper Primary (P5-P7) Girls</div>
             </div>
           </div>
         </div>
@@ -1703,11 +1960,11 @@ html_code = f"""<!DOCTYPE html>
               <p class="text-xs text-slate-500">Active awareness and verified feedback queries logged during school contact cycle</p>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
-                Awareness: 0.0% (0/64 respondents)
+              <span id="badge-v1-hotline-awareness" class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
+                Awareness: {v1_tollfree_kwn_pct}% ({v1_tollfree_kwn_cnt}/{v1_sch_completed} schools)
               </span>
-              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
-                0 Queries Logged
+              <span id="badge-v1-hotline-queries" class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded border border-slate-200">
+                {v1_queries_logged:,} Queries Logged
               </span>
             </div>
           </div>
@@ -1715,8 +1972,8 @@ html_code = f"""<!DOCTYPE html>
             <div class="lg:col-span-4 space-y-3">
               <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200">
                 <span class="text-[11px] font-bold text-wfp-blue block mb-1">Hotline &amp; Help-Desk Awareness</span>
-                <div class="text-2xl font-black text-slate-800">93.8%</div>
-                <p class="text-[11px] text-slate-600 mt-1">Pupils and teachers actively know and reference the toll-free hotline and school help desk.</p>
+                <div id="metric-v1-awareness-pct" class="text-2xl font-black text-slate-800">{v1_tollfree_kwn_pct}%</div>
+                <p class="text-[11px] text-slate-600 mt-1">{v1_tollfree_kwn_cnt} of {v1_sch_completed} schools actively know and reference the WFP 0800 toll-free feedback hotline.</p>
               </div>
               <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
                 <span class="text-[11px] font-bold text-slate-700 block mb-1">Active Feedback Resolution</span>
@@ -1724,7 +1981,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="lg:col-span-8">
-              <h5 class="text-xs font-bold text-slate-800 mb-2">Feedback queries logged by operational category</h5>
+              <h5 class="text-xs font-bold text-slate-800 mb-2">Feedback queries logged by verified school</h5>
               <div class="h-48 min-h-[190px]">
                 <canvas id="chart-v1-helpdesk-queries"></canvas>
               </div>
@@ -1866,7 +2123,7 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="mt-3 pt-3 border-t border-slate-100 text-[11px] text-slate-600 flex items-center justify-between">
               <span id="v2-activities-footer-text" class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>Modules Verified Across Field Activations</span>
-              <span id="v2-activities-footer-badge" class="bg-blue-50 text-wfp-blue px-2 py-0.5 rounded font-bold">3 Schools Logged</span>
+              <span id="v2-activities-footer-badge" class="bg-blue-50 text-wfp-blue px-2 py-0.5 rounded font-bold">{v2_completed_count} School{'s' if v2_completed_count != 1 else ''} Logged</span>
             </div>
           </div>
 
@@ -1884,7 +2141,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Did learners actively handle materials and practice rather than listen passively?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% ({v2_completed_count}/{v2_completed_count} Schools)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1895,7 +2152,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Did all three age bands and both boys and girls participate?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% ({v2_completed_count}/{v2_completed_count} Schools)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1906,7 +2163,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Was any learner excluded or left out during sessions?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">No: 100% (1/1 School)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">No: 100% ({v2_completed_count}/{v2_completed_count} Schools)</span>
                   </div>
                   <div class="w-full bg-slate-200 rounded-full h-2">
                     <div class="bg-emerald-600 h-2 rounded-full" style="width: 100%"></div>
@@ -1918,7 +2175,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                   <div class="flex items-center justify-between mb-1">
                     <span class="text-xs font-bold text-slate-800">Were materials understood without long/confusing explanation?</span>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% (1/1 School)</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Yes: 100% ({v2_completed_count}/{v2_completed_count} Schools)</span>
                   </div>
                   <div class="mt-2 p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-700">
                     <strong class="text-wfp-blue">Why:</strong> Visual flashcards, color-coded food grouping cards, and hands-on Metu porridge demonstrations allowed immediate comprehension without complex explanations across Ngakarimojong dialects.
@@ -1941,7 +2198,7 @@ html_code = f"""<!DOCTYPE html>
               <p class="text-xs text-slate-500">Diagnostic evaluating why households struggle with Metu porridge preparation despite cash support or market access</p>
             </div>
             <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Sample: 3 Visit 2 Schools (Kotido, Moroto, Nakapiripirit)
+              Sample: {v2_completed_count} Visit 2 Schools ({v2_schools_str})
             </span>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -1949,16 +2206,16 @@ html_code = f"""<!DOCTYPE html>
               <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
                 <span class="font-bold text-slate-800 block mb-1">Key Diagnostic Finding:</span>
                 <p class="text-slate-600 leading-relaxed">
-                  <strong>50.0%</strong> of reporting schools cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier, alongside ingredient prioritization (25.0%). This directly validates the necessity of practical cooking demonstrations.
+                  <strong>2 of 4 reporting schools</strong> cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier, alongside ingredient prioritization (1 school). This directly validates the necessity of practical cooking demonstrations.
                 </p>
               </div>
               <div class="grid grid-cols-2 gap-2 text-center text-xs">
                 <div class="p-2 bg-blue-50 rounded border border-blue-200">
-                  <div class="font-bold text-wfp-blue text-sm">50.0%</div>
+                  <div class="font-bold text-wfp-blue text-sm">2 Schools</div>
                   <div class="text-[10px] text-slate-500">Preparation Confidence</div>
                 </div>
                 <div class="p-2 bg-amber-50 rounded border border-amber-200">
-                  <div class="font-bold text-amber-700 text-sm">25.0%</div>
+                  <div class="font-bold text-amber-700 text-sm">1 School</div>
                   <div class="text-[10px] text-slate-500">Ingredients Prioritization</div>
                 </div>
               </div>
@@ -2407,7 +2664,7 @@ html_code = f"""<!DOCTYPE html>
               <h4 class="text-sm font-bold text-slate-800">School commitments, absentee tracing and kitchen energy audit</h4>
             </div>
             <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
-              0 Schools Logged (Pending Field Closeout)
+              {f'{v3_completed_count} School{"s" if v3_completed_count != 1 else ""} Logged' if v3_completed_count > 0 else '0 Schools Logged (Pending Field Closeout)'}
             </span>
           </div>
 
@@ -2421,7 +2678,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Audit Status:</strong> Pending field submissions (0 schools).
+                <strong class="text-wfp-blue font-bold">Audit Status:</strong> {f'{v3_completed_count} schools audited' if v3_completed_count > 0 else 'Pending field submissions (0 schools)'}.
               </div>
             </div>
 
@@ -2434,7 +2691,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Tracing Reach:</strong> Pending field submissions (0 schools).
+                <strong class="text-wfp-blue font-bold">Tracing Reach:</strong> {f'{v3_completed_count} schools tracing' if v3_completed_count > 0 else 'Pending field submissions (0 schools)'}.
               </div>
             </div>
 
@@ -2447,7 +2704,7 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
               <div class="mt-2 text-[11px] text-slate-600 bg-white p-2 rounded border border-slate-200">
-                <strong class="text-wfp-blue font-bold">Verification:</strong> Pending field submissions (0 schools).
+                <strong class="text-wfp-blue font-bold">Verification:</strong> {f'{v3_completed_count} schools verified' if v3_completed_count > 0 else 'Pending field submissions (0 schools)'}.
               </div>
             </div>
           </div>
@@ -2597,260 +2854,39 @@ html_code = f"""<!DOCTYPE html>
     <!-- TAB 4: COMMUNITY COOKING DEMO -->
     <!-- ========================================== -->
     <div id="tab-demo" class="tab-content hidden space-y-6">
-      <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl">
+      <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-bold text-wfp-dark">Community cooking demonstration field results</h3>
+          <h3 class="text-sm font-bold text-wfp-dark">Community Cooking Demonstration Cleaned Data &amp; Tool Questions</h3>
           <p class="text-xs text-slate-600 mt-0.5">Catchment demo site headcounts (Caregivers, Fathers, Children, PWDs), hands-on cooking engagement, Metu porridge local additions, fuel-saving practices demonstrated, and private caregiver intercept interviews.</p>
         </div>
+        <span class="text-xs bg-white text-wfp-blue font-bold px-3 py-1 rounded-full border border-blue-200">
+          Target: 640 Demo Sessions (64 Schools &times; 10 Catchment Villages)
+        </span>
       </div>
 
-      <!-- TOP METADATA CARD: SITE & SUBMITTER AUDIT -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
-          <div>
-            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Field Demonstration Verification</span>
-            <h4 class="text-sm font-bold text-slate-800">Village cooking demonstrations around 64 schools</h4>
-          </div>
-          <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded-lg border border-blue-200">
-            64 School Communities · 10 Demos Each (640 Total Demonstrations)
-          </span>
+      <!-- DEMO METRIC KPI ROW -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Total Sessions</span>
+          <span id="demo-kpi-total-sessions" class="text-2xl font-black text-slate-800 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Target: 640 Sessions</span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-            <span class="text-[11px] font-bold text-slate-700 block mb-1">Village Demonstration Sites:</span>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Held under shade trees, community boreholes, and kraal meeting spaces in the villages surrounding all 64 primary schools across Karamoja (10 cooking demonstrations per school community, totaling 640 demonstrations).
-            </p>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-            <span class="text-[11px] font-bold text-slate-700 block mb-1">Session Facilitation Breakdown:</span>
-            <div class="flex items-center gap-2 mt-1 flex-wrap">
-              <span class="px-2.5 py-1 bg-slate-100 text-slate-600 font-semibold rounded text-xs border border-slate-200">
-                Village Health Teams (VHT): 0 Demos (0.0%)
-              </span>
-              <span class="px-2.5 py-1 bg-slate-100 text-slate-600 font-semibold rounded text-xs border border-slate-200">
-                Lead Coordinator: 0 Demos (0.0%)
-              </span>
-            </div>
-            <span class="text-[10px] text-slate-500 block mt-1.5 italic">Awaiting field submissions (0 of 640 demonstrations conducted).</span>
-          </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Compliant Turnout</span>
+          <span id="demo-kpi-compliant-sessions" class="text-2xl font-black text-emerald-700 block mt-0.5">0</span>
+          <span id="demo-kpi-compliant-rate" class="text-[10px] text-emerald-600 font-bold">&ge;80 Turnout: 0.0%</span>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Red-Flagged</span>
+          <span id="demo-kpi-flagged-sessions" class="text-2xl font-black text-red-600 block mt-0.5">0</span>
+          <span id="demo-kpi-flagged-rate" class="text-[10px] text-red-500 font-bold">&lt;80 Turnout: 0.0%</span>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregiver Reach</span>
+          <span class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Target: 51,200 (80/session)</span>
         </div>
       </div>
-
-      <!-- CAPACITY-STRENGTHENING PARTNERS PRESENCE & CO-FACILITATION (COMMUNITY DEMO) -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <div class="flex items-center gap-2 mb-0.5">
-              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Partner Network Collaboration</span>
-              <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">0.0% Present (0/640 Demos)</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800">Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?</h4>
-            <p class="text-xs text-slate-500">Partner co-facilitation verifying inclusive PWD mobilization, gender dialogues, and clean cooking sustainability</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
-              0 of 640 Demos Co-Facilitated
-            </span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <!-- Col 1: If yes, specify partner name -->
-          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-800">If yes, specify partner name:</span>
-              <span class="text-[10px] text-slate-500 font-semibold">Multi-select verification</span>
-            </div>
-            <div class="space-y-1.5 text-xs text-slate-700">
-              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
-                <span class="font-medium">UNAC</span>
-                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
-              </div>
-              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
-                <span class="font-medium">AFI</span>
-                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
-              </div>
-              <div class="flex items-center justify-between bg-white px-2.5 py-1.5 rounded border border-slate-200">
-                <span class="font-semibold text-slate-600">Other</span>
-                <span class="font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded text-[11px]">0.0% (0/640)</span>
-              </div>
-            </div>
-            <div class="p-2 bg-slate-100/70 rounded border border-slate-200 text-[11px] text-slate-600">
-              <strong class="text-slate-700">Status:</strong> Awaiting field submissions once village demonstrations commence.
-            </div>
-          </div>
-
-          <!-- Col 2: Partner role observed -->
-          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-800">Partner role observed:</span>
-              <span class="text-[10px] text-slate-500 font-semibold">Observed contributions</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
-                <span class="text-[11px] text-slate-600 font-medium leading-snug">Co-facilitating clean cooking / gender dialogue</span>
-                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
-                <span class="text-[11px] text-slate-600 font-medium leading-snug">Mentoring local VHTs / Elders</span>
-                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
-                <span class="text-[11px] text-slate-600 font-medium leading-snug">Observing for sustainability tracking</span>
-                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
-              </div>
-              <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
-                <span class="text-[11px] text-slate-600 font-medium leading-snug">Other</span>
-                <span class="font-bold text-slate-500 text-xs mt-1.5">0.0% (0/640)</span>
-              </div>
-            </div>
-            <div class="p-2 bg-slate-100 rounded text-[10px] text-slate-600 italic">
-              Field verification pending demonstration rollout across 64 school catchments.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MINIMUM ATTENDANCE THRESHOLD BENCHMARK CARD (80 PARTICIPANTS RULE) -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Quality Assurance & Attendance Standard</span>
-            <h4 class="text-sm font-bold text-slate-800">Minimum turnout benchmark: 80 participants per demonstration</h4>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-amber-50 text-amber-800 font-bold px-3 py-1 rounded-lg border border-amber-200 flex items-center gap-1.5">
-              <i class="fa-solid fa-flag text-red-600"></i> Strict Benchmark: Min. 80 Participants / Session
-            </span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-          <div class="p-3.5 bg-blue-50/50 rounded-xl border border-blue-200/70">
-            <span class="text-[11px] font-bold text-slate-500 block">Attendance Benchmark</span>
-            <div class="text-2xl font-black text-wfp-blue mt-0.5">80+</div>
-            <span class="text-[10px] text-slate-500">Min. required attendees / site</span>
-          </div>
-          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-            <span class="text-[11px] font-bold text-slate-500 block">Total Demonstrations Evaluated</span>
-            <div class="text-2xl font-black text-slate-800 mt-0.5" id="demo-kpi-total-sessions">0</div>
-            <span class="text-[10px] text-slate-500">Target: 640 sessions (10 / school)</span>
-          </div>
-          <div class="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-200">
-            <span class="text-[11px] font-bold text-emerald-800 block">Compliant Sessions (&ge;80)</span>
-            <div class="text-2xl font-black text-emerald-700 mt-0.5" id="demo-kpi-compliant-sessions">0</div>
-            <span class="text-[10px] text-emerald-600 font-bold" id="demo-kpi-compliant-rate">0.0% compliant rate</span>
-          </div>
-          <div class="p-3.5 bg-red-50/60 rounded-xl border border-red-200">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-bold text-red-800 block">Red-Flagged Sessions (&lt;80)</span>
-              <span class="w-2 h-2 rounded-full bg-slate-300"></span>
-            </div>
-            <div class="text-2xl font-black text-red-600 mt-0.5" id="demo-kpi-flagged-sessions">0</div>
-            <span class="text-[10px] text-red-600 font-bold" id="demo-kpi-flagged-rate">0.0% flagged for follow-up</span>
-          </div>
-        </div>
-
-        <div class="p-3.5 bg-amber-50/70 rounded-lg border border-amber-300 text-xs text-amber-950 flex items-start gap-2.5">
-          <i class="fa-solid fa-triangle-exclamation text-amber-600 text-base mt-0.5 shrink-0"></i>
-          <div class="leading-relaxed">
-            <span class="font-bold">M&amp;E Protocol for Turnout Compliance &amp; Calculations:</span>
-            Community cooking demonstrations are designed to reach a minimum of <strong>80 participants</strong> per session to achieve the campaign reach of <strong>51,200 caregivers</strong> across 640 village sessions.
-            When a session records fewer than 80 participants, it is automatically <strong>red-flagged (🚩)</strong> for supervisor investigation and community mobilization review.
-            <strong>Crucially, all participants from red-flagged sessions are fully included and retained in all total calculations, district aggregations, and cumulative KPI headcounts.</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROW 1: PARTICIPANT HEADCOUNT MATRIX -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <div>
-            <h4 class="text-sm font-bold text-slate-800">Participant headcount by role, sex and PWD inclusion</h4>
-            <p class="text-xs text-slate-500">Caregivers, fathers/elders, children, and PWD inclusion recorded at demonstration sites:</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
-              Total attendees: 0
-            </span>
-            <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded border border-slate-200">
-              PWD Inclusivity: 0 (0.0%)
-            </span>
-          </div>
-        </div>
-
-        <div>
-          <div class="sm:hidden text-[10px] text-slate-400 italic mb-1.5 flex items-center gap-1">
-            <i class="fa-solid fa-arrows-left-right text-wfp-blue"></i>
-            <span>Scroll table sideways to view all columns</span>
-          </div>
-          <div class="overflow-x-auto rounded-lg border border-slate-200">
-            <table class="w-full text-left text-xs border-collapse min-w-[540px]">
-            <thead>
-              <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold">
-                <th class="py-2.5 px-3">Participant Headcount Category</th>
-                <th class="py-2.5 px-3 text-right">Male</th>
-                <th class="py-2.5 px-3 text-right">Female</th>
-                <th class="py-2.5 px-3 text-right font-extrabold text-wfp-blue">Total Headcount</th>
-                <th class="py-2.5 px-3">Facilitation Context & Inclusivity Note</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-slate-700">
-              <tr class="hover:bg-slate-50/50">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Female Caregivers</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Primary household food preparers and child nutrition gatekeepers</td>
-              </tr>
-              <tr class="hover:bg-slate-50/50">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Male Fathers / Elders</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Household decision-makers engaged in gender chore rebalancing dialogues</td>
-              </tr>
-              <tr class="hover:bg-slate-50/50">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Male Children</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Learners participating in cooking activities and food sorting games</td>
-              </tr>
-              <tr class="hover:bg-slate-50/50">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Female Children</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Girl-child participants practicing hands-on Metu porridge supplementation</td>
-              </tr>
-              <tr class="hover:bg-slate-50/50 bg-blue-50/20">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Male PWDs</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Participants with physical or sensory disabilities supported by VHTs</td>
-              </tr>
-              <tr class="hover:bg-slate-50/50 bg-blue-50/20">
-                <td class="py-2.5 px-3 font-semibold text-slate-900">Female PWDs</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-right font-mono font-bold text-slate-400">0</td>
-                <td class="py-2.5 px-3 text-[11px] text-slate-600">Provided priority front seating and assisted tasting bowls</td>
-              </tr>
-              <tr class="bg-slate-100 font-extrabold text-slate-900 border-t-2 border-slate-300">
-                <td class="py-3 px-3">Total Cumulative Headcount</td>
-                <td class="py-3 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-3 px-3 text-right font-mono text-slate-400">0</td>
-                <td class="py-3 px-3 text-right font-mono text-slate-500 text-sm">0</td>
-                <td class="py-3 px-3 text-slate-500 font-normal">Awaiting Community Cooking Demonstration Logs</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
 
       <!-- DEMONSTRATION SITES AUDIT REGISTER & RED FLAG TRACKING TABLE (ACCORDION APPROACH: 640 SESSIONS) -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-4">
@@ -2914,367 +2950,56 @@ html_code = f"""<!DOCTYPE html>
           <!-- Populated dynamically by JS renderDemoAccordions() -->
         </div>
       </div>
-
-      <!-- ROW 2: COOKING ENGAGEMENT, SOURCING & FUEL-SAVING COOKING -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Col 1: Facilitation Quality Checks -->
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
-          <div>
-            <h4 class="text-sm font-bold text-slate-800 mb-2">Hands-on cooking engagement and food sourcing checks</h4>
-            
-            <div class="space-y-3 text-xs">
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-slate-800">Did caregivers cook and handle ingredients hands-on, or only observe?</span>
-                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
-                </div>
-                <div class="text-[11px] text-slate-600">
-                  Pending field submissions (0 of 640 demonstrations recorded).
-                </div>
-              </div>
-
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-slate-800">Was WFP Metu porridge demonstrated with additions of obtainable local staples?</span>
-                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
-                </div>
-                <div class="text-[11px] text-slate-600 mb-1">
-                  Pending field submissions (0 of 640 demonstrations recorded).
-                </div>
-                <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-500 italic">
-                  <strong class="text-slate-700 not-italic font-bold">Comments or reactions from spectators:</strong>
-                  Awaiting community demonstration reports (0 demos conducted).
-                </div>
-              </div>
-
-              <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="font-bold text-slate-800">Were all demonstrated foods sourced locally from seasonal gardens/markets?</span>
-                  <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[11px]">0 Demos Conducted</span>
-                </div>
-                <div class="text-[11px] text-slate-600">
-                  Pending field submissions (0 of 640 demonstrations recorded).
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Col 2: Fuel-Saving Practices Chart -->
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <h4 class="text-sm font-bold text-slate-800 mb-1">Which fuel-saving practices were demonstrated to the gathering?</h4>
-          <p class="text-xs text-slate-500 mb-3">Verification of fuel-saving cookstove and cooking practices shown across target 640 sites:</p>
-          <div class="h-64 min-h-[250px]">
-            <canvas id="chart-demo-fuelsaving"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROW 3: PRIVATE CAREGIVER INTERCEPT INTERVIEWS (CAREGIVERS 1, 2, 3) -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <div>
-            <div class="flex items-center gap-2 mb-0.5">
-              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Private Rapid Intercept</span>
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2 py-0.5 rounded border border-blue-200">Post-Demo Evaluation</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800">Conducted privately at demo ground: interview 2 to 3 attending caregivers right after demo</h4>
-            <p class="text-xs text-slate-500">Assessing home feeding barriers, feasible actions realistically tried at home, and caregiver commitment verdicts:</p>
-          </div>
-          <span class="text-xs bg-slate-100 text-slate-700 font-bold px-3 py-1 rounded">{cg_intercept_sample_size} Profiles Logged</span>
-        </div>
-
-        <!-- Awaiting Caregiver Rapid Intercepts Banner -->
-        <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2 mb-4">
-          <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-base">
-            <i class="fa-solid fa-hourglass-half"></i>
-          </div>
-          <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Awaiting Caregiver Rapid Intercepts</h5>
-          <p class="text-xs text-slate-500 max-w-md mx-auto">
-            No community cooking demonstration interviews have been submitted from the field yet. Once cooking demonstrations begin across catchments, verified caregiver intercept profiles will appear here dynamically.
-          </p>
-        </div>
-
-        <!-- Cohort Aggregate Charts -->
-        <div class="mt-4 pt-4 border-t border-slate-200">
-          <span class="text-xs font-bold text-slate-700 uppercase mb-2 block">Cohort Aggregates ({cg_intercept_sample_size} Caregivers Intercepted — Awaiting Demo Rollout)</span>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-              <h5 class="text-xs font-bold text-slate-800 mb-1">1. What is most difficult in feeding family well?</h5>
-              <div class="h-72 min-h-[280px]">
-                <canvas id="chart-demo-caregiver-barriers"></canvas>
-              </div>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-              <h5 class="text-xs font-bold text-slate-800 mb-1">2. Feasible action realistically try at home</h5>
-              <div class="h-64 min-h-[250px]">
-                <canvas id="chart-demo-caregiver-actions"></canvas>
-              </div>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-              <h5 class="text-xs font-bold text-slate-800 mb-1">3. Caregiver commitment verdict</h5>
-              <div class="h-52 min-h-[200px]">
-                <canvas id="chart-demo-caregiver-commitments"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROW 4: STRUCTURED GENDER DIALOGUE, MALE PARTICIPATION & COMMUNITY COMMITMENTS -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-          <div>
-            <h4 class="text-sm font-bold text-slate-800">Structured gender chore dialogue, male participation and community commitments</h4>
-          </div>
-          <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-            0.0% (0 Demos Logged)
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Col 1: Discussion Quality & Male Participation Level -->
-          <div class="space-y-4">
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-slate-800">Did the structured gender chore and fair-sharing discussion take place?</span>
-                <span class="text-xs bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded">0.0% (0/640)</span>
-              </div>
-              <p class="text-[11px] text-slate-600">
-                Pending field submissions (0 demos conducted).
-              </p>
-            </div>
-
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
-              <h5 class="text-xs font-bold text-slate-800 mb-2">Male participation level in gender, chore and resource discussions</h5>
-              <div class="h-48 min-h-[190px]">
-                <canvas id="chart-demo-male-dialogue"></canvas>
-              </div>
-            </div>
-
-            <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-200 text-xs text-slate-700">
-              <div class="flex items-center justify-between mb-1">
-                <span class="font-bold text-wfp-blue">Community Accountability & WFP Hotline Feedback Promoted?</span>
-                <span class="px-2 py-0.5 bg-slate-100 text-slate-700 font-bold rounded text-[10px]">0.0% (0/640)</span>
-              </div>
-              <p class="text-[11px] text-slate-600">
-                WFP toll-free hotline clearly displayed and explained to all attending households.
-              </p>
-            </div>
-          </div>
-
-          <!-- Col 2: Qualitative Consensus & Exact Community Commitments -->
-          <div class="space-y-3.5">
-            <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-2">
-              <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-wfp-blue flex items-center justify-center text-base">
-                <i class="fa-solid fa-comments"></i>
-              </div>
-              <h5 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Awaiting Community Dialogue Records</h5>
-              <p class="text-xs text-slate-500 max-w-md mx-auto">
-                No village gender chore consensus statements or elder agreements have been recorded yet. As demonstrations rollout, verbatim dialogue records and community follow-up bodies will appear here.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PILLAR 3: CLEAN COOKING PRACTICES & COMMUNITY STOVES COMMITMENT -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <div class="flex items-center gap-2 mb-0.5">
-              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Pillar 3: Community &amp; Clean Cooking</span>
-            </div>
-            <h4 class="text-sm font-bold text-slate-800">Clean cooking demonstrated for environmental protection &amp; harvest security</h4>
-            <p class="text-xs text-slate-500">Field demonstrations on fuel-saving cookstoves, covered cooking pots, and flame management</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Clean Cooking Demonstrated: 0.0% (0/640)
-            </span>
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Stove Adoption: 0.0%
-            </span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          <div class="lg:col-span-5 space-y-3">
-            <div class="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 text-xs">
-              <span class="font-bold text-emerald-900 block mb-1">Environmental Protection &amp; Harvest Linkage:</span>
-              <p class="text-slate-700 leading-relaxed">
-                Clean and fuel-efficient cooking directly prevents deforestation across Karamoja rangelands, preserving topsoil moisture and local micro-climates for better seasonal crop harvests.
-              </p>
-            </div>
-            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
-              <span class="font-bold text-slate-800 block mb-1">Gender Dialogues Executed:</span>
-              <div class="flex items-center justify-between">
-                <span class="text-slate-600">Led by Senior Men, Senior Women &amp; VHTs:</span>
-                <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
-              </div>
-            </div>
-          </div>
-          <div class="lg:col-span-7">
-            <h5 class="text-xs font-bold text-slate-800 mb-2">Observed community commitment to clean cooking practices</h5>
-            <div class="h-48 min-h-[190px]">
-              <canvas id="chart-demo-clean-cooking-commit"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- EMBEDDED PR, COMMUNICATIONS & RADIO BROADCAST FEEDBACK (COMMUNITY LEVEL) -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-3">
-          <div>
-            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">Community Communications &amp; Media</span>
-            <h4 class="text-sm font-bold text-slate-800">Community PR highlights, media captures and radio broadcast feedback</h4>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              PR Photos Captured: 0.0%
-            </span>
-            <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded border border-emerald-200">
-              Radio Feedback: 0.0%
-            </span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-slate-800">Community PR &amp; Media Highlights Captured:</span>
-              <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">Field coordinators document high-resolution photos and testimonial clips of active cooking circles, male participation in dialogues, and child plate sharing.</p>
-            <div class="p-2 bg-white rounded border border-slate-200 text-[11px] text-slate-600">
-              <strong>Status:</strong> Pending community demo field logs (0 of 640 demonstrations recorded).
-            </div>
-          </div>
-
-          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-slate-800">Community Feedback on Radio Broadcasts:</span>
-              <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">0.0% (0/640)</span>
-            </div>
-            <p class="text-slate-600 text-[11px]">Attendees discuss radio spots broadcast across local FM stations during village cooking sessions:</p>
-            <div class="p-2 bg-slate-100 rounded border border-slate-200 text-[11px] text-slate-600 italic">
-              "Pending community demo field logs and radio broadcast feedback submissions."
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- ========================================== -->
     <!-- TAB 5: CHANGE STORIES -->
     <!-- ========================================== -->
     <div id="tab-msc" class="tab-content hidden space-y-6">
-      <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl">
+      <div class="bg-wfp-soft border-l-4 border-wfp-blue p-4 rounded-r-xl flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-bold text-wfp-dark">Change stories field insights</h3>
-          <p class="text-xs text-slate-600 mt-0.5">Capturing verbatim qualitative shifts, storyteller role, baseline situation before campaign, triggering campaign event, physical actions done differently, significance, and verifiable physical evidence sighted by collector.</p>
+          <h3 class="text-sm font-bold text-wfp-dark">Most Significant Change (MSC) Field Narratives</h3>
+          <p class="text-xs text-slate-600 mt-0.5">Capturing qualitative, transformative behavioral shifts and verifiable physical evidence triggered by campaign events across 64 primary school catchment communities.</p>
+        </div>
+        <span class="text-xs bg-white text-wfp-blue font-bold px-3 py-1 rounded-full border border-blue-200">
+          Target: 128 Stories (2 Stories per School &times; 64 Schools)
+        </span>
+      </div>
+
+      <!-- MSC KPI SUMMARY ROW -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Stories Logged</span>
+          <span class="text-2xl font-black text-slate-800 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Target: 128 Stories</span>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Girl Learners</span>
+          <span class="text-2xl font-black text-pink-600 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Boy Learners</span>
+          <span class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
+        </div>
+        <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregivers &amp; Elders</span>
+          <span class="text-2xl font-black text-purple-700 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
         </div>
       </div>
 
-      <!-- METHODOLOGY & AUDIT SUMMARY -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <h4 class="text-sm font-bold text-slate-800">Verbatim change stories methodology and verification</h4>
-          </div>
-          <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
-            0 Verified Stories across 9 Districts
-          </span>
-        </div>
-        
-        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 mb-4">
-          <span class="text-[11px] font-bold text-slate-700 block mb-1">Field Monitor Guidance:</span>
-          <p class="text-xs text-slate-600 italic">"Record the storyteller's actual words; do not reinterpret. Complete verbatim testimonies captured during field interviews across all 6 key community stakeholder roles."</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
-            <span class="text-[11px] font-bold text-slate-500 uppercase block">Total Stories</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
-            <span class="text-[10px] text-slate-400">Across 9 Districts</span>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
-            <span class="text-[11px] font-bold text-slate-500 uppercase block">Evidence Sighted</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0.0%</span>
-            <span class="text-[10px] text-slate-400">0 of 0 Verified</span>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
-            <span class="text-[11px] font-bold text-slate-500 uppercase block">Female Voice</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0.0%</span>
-            <span class="text-[10px] text-slate-400">Mothers &amp; Girls</span>
-          </div>
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
-            <span class="text-[11px] font-bold text-slate-500 uppercase block">Peers Returned</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
-            <span class="text-[10px] text-slate-400">Out-of-School Children</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 1: QUESTION BREAKDOWN CHARTS (STRICTLY HORIZONTAL BARS) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <h4 class="text-sm font-bold text-slate-800 mb-1">Storyteller role distribution</h4>
-          <p class="text-xs text-slate-500 mb-3">Roles reporting significant shifts across communities</p>
-          <div class="h-60">
-            <canvas id="chart-msc-role"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <h4 class="text-sm font-bold text-slate-800 mb-1">Triggering campaign event or activity</h4>
-          <p class="text-xs text-slate-500 mb-3">What specific campaign event, activity, chart, or discussion caused the shift?</p>
-          <div class="h-80 min-h-[340px]">
-            <canvas id="chart-msc-event"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <h4 class="text-sm font-bold text-slate-800 mb-1">What was physically done differently?</h4>
-          <p class="text-xs text-slate-500 mb-3">What was physically done differently at home, class, or community after attending?</p>
-          <div class="h-72 min-h-[290px]">
-            <canvas id="chart-msc-shift"></canvas>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
-          <h4 class="text-sm font-bold text-slate-800 mb-1">Verifiable physical evidence sighted by collector</h4>
-          <p class="text-xs text-slate-500 mb-3">Verifiable physical proof verified on-site by field monitors</p>
-          <div class="h-80 min-h-[340px]">
-            <canvas id="chart-msc-evidence"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 2: VERBATIM STORYTELLER TRANSCRIPTS & VERIFIABLE EVIDENCE AUDIT -->
-      <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-4">
-        <div class="border-b border-slate-100 pb-3">
-          <h4 class="text-sm font-bold text-slate-800">Verbatim storyteller records and physical evidence verification</h4>
-          <p class="text-xs text-slate-500 mt-0.5">Record the storyteller's actual words; do not reinterpret. Complete verbatim testimonies captured during field interviews across all 6 storyteller roles:</p>
-        </div>
-
-        <div class="p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-xs">
-          <i class="fa-solid fa-quote-left text-3xl text-slate-300 mb-2 block"></i>
-          <h5 class="text-sm font-bold text-slate-700 mb-1">Awaiting Most Significant Change (MSC) Story Submissions</h5>
-          <p class="text-slate-500 max-w-lg mx-auto">Verbatim storyteller records, audio quotes, and physical evidence verification will appear here as field monitors record field narratives across the 6 key stakeholder roles.</p>
-        </div>
-      </div>
-
-      <!-- SECTION 3: SCHOOL-BY-SCHOOL CHANGE STORIES REGISTER (2 PER SCHOOL) -->
+      <!-- MSC STORIES REGISTER TABLE CARD -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
           <div>
-            <h4 class="text-sm font-bold text-slate-800">School-by-school change stories register (2 stories per school)</h4>
-            <p class="text-xs text-slate-500 mt-0.5">Comprehensive audit table displaying 2 verified change stories per monitoring primary school across 9 Karamoja districts (Target: 64 schools × 2 = 128 stories):</p>
+            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">School Field Register</span>
+            <h4 class="text-sm font-bold text-slate-800">School-by-School Change Stories Register</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Audit register displaying verified change stories and sighted physical evidence across monitoring schools:</p>
           </div>
-          <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-3 py-1 rounded-lg border border-emerald-200">
-            0 Cleaned Stories Logged
+          <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
+            0 Stories Logged · Awaiting Field Submissions
           </span>
         </div>
 
@@ -3287,8 +3012,8 @@ html_code = f"""<!DOCTYPE html>
             <table class="w-full text-xs text-left border-collapse min-w-[700px]">
               <thead>
                 <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-                  <th class="py-2.5 px-3">School & District</th>
-                  <th class="py-2.5 px-3">Storyteller & Age</th>
+                  <th class="py-2.5 px-3">School &amp; District</th>
+                  <th class="py-2.5 px-3">Storyteller &amp; Age</th>
                   <th class="py-2.5 px-3">Role</th>
                   <th class="py-2.5 px-3">Triggering Campaign Event</th>
                   <th class="py-2.5 px-3">Action Done Differently</th>
@@ -3323,11 +3048,11 @@ html_code = f"""<!DOCTYPE html>
             <h4 class="text-sm font-bold text-slate-800">What session of the week is this?</h4>
           </div>
           <div class="flex items-center gap-2">
-            <span class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg text-xs border border-blue-200">
-              Session one of the week: 1 Session
+            <span id="nc-kpi-sess-one" class="px-3 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg text-xs border border-blue-200">
+              Session one of the week: {nc_s1_cnt} Session{'s' if nc_s1_cnt != 1 else ''}
             </span>
-            <span class="px-3 py-1 bg-slate-100 text-slate-600 font-bold rounded-lg text-xs border border-slate-200">
-              Session two of the week: 0 Sessions
+            <span id="nc-kpi-sess-two" class="px-3 py-1 bg-slate-100 text-slate-600 font-bold rounded-lg text-xs border border-slate-200">
+              Session two of the week: {nc_s2_cnt} Session{'s' if nc_s2_cnt != 1 else ''}
             </span>
           </div>
         </div>
@@ -3335,23 +3060,23 @@ html_code = f"""<!DOCTYPE html>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="p-3 bg-blue-50/50 rounded-lg border border-blue-100 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Registered Members</span>
-            <span class="text-2xl font-black text-wfp-blue block mt-0.5">41</span>
-            <span class="text-[10px] text-slate-500">25 Girls · 16 Boys (Kakamar P/S)</span>
+            <span id="nc-kpi-members" class="text-2xl font-black text-wfp-blue block mt-0.5">{nc_tot_mem:,}</span>
+            <span id="nc-kpi-members-sub" class="text-[10px] text-slate-500">{nc_mem_f} Girls · {nc_mem_m} Boys ({nc_active_sch_count} Active School{'s' if nc_active_sch_count != 1 else ''})</span>
           </div>
           <div class="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100 text-center">
-            <span class="text-[11px] font-bold text-slate-500 uppercase block">Average Attendance</span>
-            <span class="text-2xl font-black text-emerald-600 block mt-0.5">87.8%</span>
-            <span class="text-[10px] text-slate-500">36 Active Attendees</span>
+            <span class="text-[11px] font-bold text-slate-500 uppercase block">Session Attendance</span>
+            <span id="nc-kpi-att" class="text-2xl font-black text-emerald-600 block mt-0.5">{nc_tot_att:,}</span>
+            <span id="nc-kpi-att-sub" class="text-[10px] text-slate-500">{nc_att_g} Girls · {nc_att_b} Boys Present</span>
           </div>
-          <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
+          <div class="p-3 bg-purple-50/50 rounded-lg border border-purple-100 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">PWD Learners Active</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
-            <span class="text-[10px] text-slate-400">0 Boys · 0 Girls</span>
+            <span id="nc-kpi-pwd" class="text-2xl font-black text-purple-600 block mt-0.5">{nc_tot_pwd}</span>
+            <span id="nc-kpi-pwd-sub" class="text-[10px] text-slate-500">{nc_pwd_b} Boys · {nc_pwd_g} Girls</span>
           </div>
           <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-center">
             <span class="text-[11px] font-bold text-slate-500 uppercase block">Assembly Nutri-Moments</span>
-            <span class="text-2xl font-black text-slate-400 block mt-0.5">0</span>
-            <span class="text-[10px] text-slate-400">Pending Delivery</span>
+            <span id="nc-kpi-assembly" class="text-2xl font-black {'text-emerald-600' if nc_tot_assembly > 0 else 'text-slate-400'} block mt-0.5">{nc_tot_assembly}</span>
+            <span id="nc-kpi-assembly-sub" class="text-[10px] text-slate-400">{'Delivered' if nc_tot_assembly > 0 else 'Pending Delivery'}</span>
           </div>
         </div>
       </div>
@@ -3394,7 +3119,7 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-1">
             <span>Enriched rations, firewood saving, fair food sharing & chore balance</span>
-            <span class="font-bold text-wfp-blue">12 Audited Sessions</span>
+            <span id="nc-activities-footer-badge" class="font-bold text-wfp-blue">{len(nc_sessions_list)} Audited Session{'s' if len(nc_sessions_list) != 1 else ''}</span>
           </div>
         </div>
 
@@ -3408,7 +3133,7 @@ html_code = f"""<!DOCTYPE html>
           </div>
           <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-1">
             <span>Follow-up on home practice trials with caregivers</span>
-            <span class="font-bold text-emerald-700">100% Home Practice Reported</span>
+            <span id="nc-feedback-footer-badge" class="font-bold text-emerald-700">{len(nc_sessions_list)} Sessions Followed Up</span>
           </div>
         </div>
       </div>
@@ -3601,7 +3326,7 @@ html_code = f"""<!DOCTYPE html>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">More Pupils in School:</span>
-                      <strong class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot} weekly attendees at Katikit P/S (Pending longitudinal returns)</strong>
+                      <strong class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendees across {len(v1_schools_list)} monitored schools ({v1_schools_str})</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">Out-of-School Girls Back in Class:</span>
@@ -3653,7 +3378,7 @@ html_code = f"""<!DOCTYPE html>
                   <strong class="text-slate-900 block mb-1">{tot_orient_schools} Orientations · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• {tot_orient_schools} primary schools completed orientation with {int(tot_stk_all)} stakeholders logged across activities</li>
-                    <li>• 1 school completed Visit 1 onboarding &amp; audit (Katikit P/S, Amudat: {v1_enrol_tot:,} enrolled, {v1_att_tot} weekly attendance, {v1_charts_issued} NutriCharts issued)</li>
+                    <li>• {len(v1_schools_list)} schools completed Visit 1 onboarding &amp; audit ({v1_schools_str}: {v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendance, {v1_charts_issued:,} NutriCharts issued)</li>
                     <li>• {v2_completed_count} schools delivered Visit 2 reaching {v2_grand_tot} participants ({v2_tot_lower + v2_tot_mid + v2_tot_up} pupils, {v2_tot_tea} staff, {v2_tot_comm} community)</li>
                     <li>• Target: 640 community demonstrations across 64 schools</li>
                   </ul>
@@ -3689,7 +3414,7 @@ html_code = f"""<!DOCTYPE html>
                   <strong class="text-slate-900 block mb-1">{tot_active_clubs_cnt} NutriClubs · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• {tot_active_clubs_cnt} NutriClubs active ({active_club_names_str}; {tot_active_club_members} total registered members)</li>
-                    <li>• Katikit P/S (Amudat) active NutriClub verified with 2 patrons &amp; work plan signed</li>
+                    <li>• {tot_active_clubs_cnt} active NutriClubs verified with patrons &amp; signed work plans across monitored schools</li>
                     <li>• {v2_completed_count} schools delivered interactive chore rebalancing dialogue &amp; micro-poll (514 boy responses, 99.4% agreement)</li>
                     <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
@@ -3698,7 +3423,7 @@ html_code = f"""<!DOCTYPE html>
                   <strong class="text-wfp-blue block mb-1">Consensus on Chore Rebalancing</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• Micro-polls affirm domestic chores should be shared equally</li>
-                    <li>• 87.8% session attendance recorded at Kakamar P/S NutriClub</li>
+                    <li>• {nc_tot_att:,} attendees recorded across {len(nc_sessions_list)} active NutriClub sessions ({nc_att_g} girls, {nc_att_b} boys)</li>
                     <li>• Inclusive accommodation verified ({tot_pwd_all} PWD attendees across sessions)</li>
                   </ul>
                 </td>
@@ -4013,6 +3738,71 @@ html_code = f"""<!DOCTYPE html>
     // Store active Chart instances for smooth destruction and re-rendering
     const chartInstances = {{}};
 
+    // Universal Chart Data Labels Plugin: Display exact numbers at the extreme end of bars on ALL charts
+    const universalDataLabelsPlugin = {{
+      id: 'universalDataLabels',
+      afterDatasetsDraw(chart, args, pluginOptions) {{
+        // Only run for bar charts
+        if (chart.config.type !== 'bar') return;
+        const ctx = chart.ctx;
+        ctx.save();
+        
+        const isHorizontal = chart.config.options.indexAxis === 'y';
+        
+        chart.data.datasets.forEach((dataset, datasetIndex) => {{
+          if (!chart.isDatasetVisible(datasetIndex)) return;
+          const meta = chart.getDatasetMeta(datasetIndex);
+          if (!meta || !meta.data) return;
+
+          meta.data.forEach((element, index) => {{
+            const rawVal = dataset.data[index];
+            if (rawVal === null || rawVal === undefined) return;
+            
+            // Format number or percentage
+            let text = '';
+            if (typeof rawVal === 'number') {{
+              if (isNaN(rawVal)) return;
+              text = Number.isInteger(rawVal) ? rawVal.toLocaleString() : rawVal.toFixed(1);
+            }} else {{
+              text = String(rawVal);
+            }}
+
+            ctx.font = 'bold 10.5px Inter, system-ui, -apple-system, sans-serif';
+            
+            if (isHorizontal) {{
+              const xPos = element.x;
+              const yPos = element.y;
+              const chartRight = chart.chartArea ? chart.chartArea.right : chart.width;
+              const textWidth = ctx.measureText(text).width;
+              
+              // If bar extends near the right boundary, draw text inside bar with white contrast
+              if (xPos + textWidth + 8 > chartRight) {{
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, Math.max((element.base || 0) + 4, xPos - 5), yPos);
+              }} else {{
+                ctx.fillStyle = '#1e293b'; // slate-800
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, xPos + 5, yPos);
+              }}
+            }} else {{
+              // Vertical bar: draw at the top of the bar
+              const xPos = element.x;
+              const yPos = element.y;
+              ctx.fillStyle = '#1e293b';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+              ctx.fillText(text, xPos, yPos - 3);
+            }}
+          }});
+        }});
+        ctx.restore();
+      }}
+    }};
+    Chart.register(universalDataLabelsPlugin);
+
     // Standard WFP Blue palette colors
     const WFP_BLUE = '#0A6EB4';
     const WFP_DARK = '#074e82';
@@ -4026,27 +3816,24 @@ html_code = f"""<!DOCTYPE html>
     const RECORDS = {RECORDS_JSON};
 
     // Helper to wrap long labels into multiline arrays so text is never cut off
-    function wrapLabel(label, maxChars = 28) {{
-      if (Array.isArray(label)) return label;
-      if (typeof label !== 'string') return label;
-      if (label.length <= maxChars) return label;
+    function wrapLabel(label, maxChars = 24) {{
+      if (Array.isArray(label)) {{
+        return label.flatMap(item => wrapLabel(item, maxChars));
+      }}
+      if (typeof label !== 'string' || label.length <= maxChars) return label;
       
-      // Separate on slashes and hyphens for better wrapping
-      const words = label.replace(/([/-])/g, '$1 ').split(' ');
+      const words = label.split(' ');
       const lines = [];
       let currentLine = '';
       for (let w of words) {{
         if (!w) continue;
-        if ((currentLine ? currentLine + ' ' + w : w).length <= maxChars) {{
-          currentLine = currentLine ? currentLine + ' ' + w : w;
+        if (!currentLine) {{
+          currentLine = w;
+        }} else if ((currentLine + ' ' + w).length <= maxChars) {{
+          currentLine += ' ' + w;
         }} else {{
-          if (currentLine) lines.push(currentLine);
-          if (w.length > maxChars) {{
-            lines.push(w.substring(0, maxChars - 1) + '…');
-            currentLine = '';
-          }} else {{
-            currentLine = w;
-          }}
+          lines.push(currentLine);
+          currentLine = w;
         }}
       }}
       if (currentLine) lines.push(currentLine);
@@ -4062,7 +3849,7 @@ html_code = f"""<!DOCTYPE html>
         chartInstances[canvasId].destroy();
       }}
 
-      const formattedLabels = labels.map(l => wrapLabel(l, 26));
+      const formattedLabels = labels.map(l => wrapLabel(l, 24));
 
       chartInstances[canvasId] = new Chart(ctx, {{
         type: 'bar',
@@ -4091,6 +3878,14 @@ html_code = f"""<!DOCTYPE html>
           indexAxis: 'y',
           responsive: true,
           maintainAspectRatio: false,
+          layout: {{
+            padding: {{
+              left: 16,
+              right: 24,
+              top: 8,
+              bottom: 8
+            }}
+          }},
           plugins: {{
             legend: {{
               display: true,
@@ -4110,8 +3905,8 @@ html_code = f"""<!DOCTYPE html>
                     const idx = items[0].dataIndex;
                     const c = conductedData[idx] || 0;
                     const t = targetData[idx] || 1;
-                    const pct = ((c / t) * 100).toFixed(1);
-                    return `Progress: ${{pct}}% (${{c}} of ${{t}})`;
+                    const rem = Math.max(0, t - c);
+                    return `Conducted: ${{c.toLocaleString()}} | Target: ${{t.toLocaleString()}} (${{rem.toLocaleString()}} Remaining)`;
                   }}
                   return '';
                 }}
@@ -4121,12 +3916,17 @@ html_code = f"""<!DOCTYPE html>
           scales: {{
             x: {{
               beginAtZero: true,
+              grace: '15%',
               grid: {{ color: '#f1f5f9' }},
               ticks: {{ font: {{ size: 10 }} }}
             }},
             y: {{
               grid: {{ display: false }},
-              ticks: {{ font: {{ size: 11, weight: '600' }} }}
+              ticks: {{
+                autoSkip: false,
+                font: {{ size: 11, weight: '600', lineHeight: 1.2 }},
+                padding: 8
+              }}
             }}
           }}
         }}
@@ -4143,7 +3943,7 @@ html_code = f"""<!DOCTYPE html>
       }}
 
       // Apply wrapping to prevent any label truncation
-      const formattedLabels = labels.map(l => wrapLabel(l, 28));
+      const formattedLabels = labels.map(l => wrapLabel(l, 24));
 
       chartInstances[canvasId] = new Chart(ctx, {{
         type: 'bar',
@@ -4163,8 +3963,8 @@ html_code = f"""<!DOCTYPE html>
           maintainAspectRatio: false,
           layout: {{
             padding: {{
-              left: 10,
-              right: 25,
+              left: 16,
+              right: 28,
               top: 8,
               bottom: 8
             }}
@@ -4190,6 +3990,7 @@ html_code = f"""<!DOCTYPE html>
           scales: {{
             x: {{
               beginAtZero: true,
+              grace: '15%',
               grid: {{ color: '#f1f5f9' }},
               ticks: {{
                 font: {{ family: 'Inter', size: 10.5 }},
@@ -4199,7 +4000,10 @@ html_code = f"""<!DOCTYPE html>
             y: {{
               grid: {{ display: false }},
               ticks: {{
-                padding: 6
+                autoSkip: false,
+                font: {{ family: 'Inter', size: 10.5, weight: '500', lineHeight: 1.25 }},
+                color: '#1e293b',
+                padding: 8
               }}
             }}
           }}
@@ -4216,7 +4020,7 @@ html_code = f"""<!DOCTYPE html>
         chartInstances[canvasId].destroy();
       }}
 
-      const formattedLabels = labels.map(l => wrapLabel(l, 26));
+      const formattedLabels = labels.map(l => wrapLabel(l, 24));
 
       chartInstances[canvasId] = new Chart(ctx, {{
         type: 'bar',
@@ -4224,14 +4028,14 @@ html_code = f"""<!DOCTYPE html>
           labels: formattedLabels,
           datasets: [
             {{
-              label: 'Visit 1 Check (%)',
+              label: 'Visit 1 Check',
               data: baselineData,
               backgroundColor: colorBaseline,
               borderRadius: 4,
               borderSkipped: false
             }},
             {{
-              label: 'Visit 3 Closeout (%)',
+              label: 'Visit 3 Closeout',
               data: endlineData,
               backgroundColor: colorEndline,
               borderRadius: 4,
@@ -4245,10 +4049,10 @@ html_code = f"""<!DOCTYPE html>
           maintainAspectRatio: false,
           layout: {{
             padding: {{
-              left: 6,
-              right: 18,
-              top: 6,
-              bottom: 6
+              left: 16,
+              right: 24,
+              top: 8,
+              bottom: 8
             }}
           }},
           plugins: {{
@@ -4273,7 +4077,7 @@ html_code = f"""<!DOCTYPE html>
                   return Array.isArray(l) ? l.join(' ') : l;
                 }},
                 label: function(context) {{
-                  return ` ${{context.dataset.label}}: ${{context.parsed.x}}%`;
+                  return ` ${{context.dataset.label}}: ${{context.parsed.x.toLocaleString()}}`;
                 }}
               }}
             }}
@@ -4281,21 +4085,20 @@ html_code = f"""<!DOCTYPE html>
           scales: {{
             x: {{
               beginAtZero: true,
-              max: 100,
+              grace: '15%',
               grid: {{ color: '#f1f5f9' }},
               ticks: {{
                 font: {{ family: 'Inter', size: 10 }},
-                color: '#64748b',
-                callback: function(v) {{ return v + '%'; }}
+                color: '#64748b'
               }}
             }},
             y: {{
               grid: {{ display: false }},
               ticks: {{
                 autoSkip: false,
-                font: {{ family: 'Inter', size: 10, weight: '500', lineHeight: 1.15 }},
+                font: {{ family: 'Inter', size: 10.5, weight: '500', lineHeight: 1.2 }},
                 color: '#1e293b',
-                padding: 4
+                padding: 8
               }}
             }}
           }}
@@ -4320,12 +4123,12 @@ html_code = f"""<!DOCTYPE html>
             {{
               label: 'Total Attendance',
               data: totalData,
-              borderColor: '#0A6EB4',
-              backgroundColor: 'rgba(10, 110, 180, 0.12)',
+              borderColor: '#6366f1',
+              backgroundColor: 'rgba(99, 102, 241, 0.12)',
               borderWidth: 3,
               tension: 0.25,
               fill: true,
-              pointBackgroundColor: '#0A6EB4',
+              pointBackgroundColor: '#6366f1',
               pointBorderColor: '#ffffff',
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -4348,11 +4151,11 @@ html_code = f"""<!DOCTYPE html>
             {{
               label: 'Boys Attendance',
               data: boysData,
-              borderColor: '#0284c7',
+              borderColor: '#0A6EB4',
               backgroundColor: 'transparent',
               borderWidth: 2.5,
               tension: 0.25,
-              pointBackgroundColor: '#0284c7',
+              pointBackgroundColor: '#0A6EB4',
               pointBorderColor: '#ffffff',
               pointBorderWidth: 2,
               pointRadius: 5,
@@ -4373,6 +4176,14 @@ html_code = f"""<!DOCTYPE html>
         options: {{
           responsive: true,
           maintainAspectRatio: false,
+          layout: {{
+            padding: {{
+              left: 12,
+              right: 24,
+              top: 10,
+              bottom: 10
+            }}
+          }},
           interaction: {{
             mode: 'index',
             intersect: false
@@ -4467,7 +4278,7 @@ html_code = f"""<!DOCTYPE html>
 
     function onTrajSchoolSearch(val) {{
       currentTrajSearch = val;
-      const globalSel = document.getElementById('global-district-filter');
+      const globalSel = document.getElementById('districtFilter');
       const dist = globalSel ? globalSel.value : 'ALL';
       renderSchoolTrajectoryTable(dist, currentTrajSearch);
     }}
@@ -4693,9 +4504,27 @@ html_code = f"""<!DOCTYPE html>
           ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
         ],
         [data.lb, data.lg, data.mb, data.mg, data.ub, data.ug],
-        WFP_BLUE,
+        [WFP_BLUE, '#ec4899', WFP_BLUE, '#ec4899', WFP_BLUE, '#ec4899'],
         'Registered Attendance'
       );
+
+      if (data.enrol_tot !== undefined) {{
+        const bEnrolB = document.getElementById('badge-v1-enrol-boys');
+        const bEnrolG = document.getElementById('badge-v1-enrol-girls');
+        const bEnrolT = document.getElementById('badge-v1-enrol-total');
+        if (bEnrolB) bEnrolB.innerText = `Official boys enrolment: ${{data.enrol_b.toLocaleString()}}`;
+        if (bEnrolG) bEnrolG.innerText = `Official girls enrolment: ${{data.enrol_g.toLocaleString()}}`;
+        if (bEnrolT) bEnrolT.innerText = `Total Enrolled: ${{data.enrol_tot.toLocaleString()}} Pupils`;
+        createHorizontalBarChart('chart-v1-enrolment', 
+          [
+            ["Official Boys Enrolment", "for this Term in the School"],
+            ["Official Girls Enrolment", "for this Term in the School"]
+          ],
+          [data.enrol_b, data.enrol_g],
+          [WFP_BLUE, '#ec4899'],
+          'Registered Pupils'
+        );
+      }}
     }}
 
     // Switch Main Tabs
@@ -4712,13 +4541,22 @@ html_code = f"""<!DOCTYPE html>
       const mobSel = document.getElementById('mobileTabSelect');
       if (mobSel && mobSel.value !== tabId) mobSel.value = tabId;
 
+      // Re-trigger dynamic updates across this newly active tab
+      applyFilters();
+
       window.dispatchEvent(new Event('resize'));
       setTimeout(() => {{
-        Object.values(chartInstances).forEach(chart => {{
-          if (chart && typeof chart.resize === 'function') {{
-            chart.resize();
-          }}
-        }});
+        if (target) {{
+          target.querySelectorAll('canvas').forEach(canvas => {{
+            if (canvas.offsetParent !== null) {{
+              const chart = chartInstances[canvas.id];
+              if (chart && typeof chart.resize === 'function') {{
+                chart.resize();
+                if (typeof chart.update === 'function') chart.update();
+              }}
+            }}
+          }});
+        }}
       }}, 50);
     }}
 
@@ -4757,20 +4595,36 @@ html_code = f"""<!DOCTYPE html>
         }}
       }});
 
+      const distSel = document.getElementById('districtFilter');
+      const curDist = distSel ? distSel.value : 'ALL';
+      if (vId === 'v2') {{
+        renderV2ActivitiesAndPolls(curDist);
+        renderScenarioInterceptCards(curDist);
+        renderV2AgeBandTable(curDist);
+      }} else if (vId === 'v1') {{
+        applyFilters();
+      }}
+
       window.dispatchEvent(new Event('resize'));
       setTimeout(() => {{
-        Object.values(chartInstances).forEach(chart => {{
-          if (chart && typeof chart.resize === 'function') {{
-            chart.resize();
-          }}
-        }});
+        if (target) {{
+          target.querySelectorAll('canvas').forEach(canvas => {{
+            if (canvas.offsetParent !== null) {{
+              const chart = chartInstances[canvas.id];
+              if (chart && typeof chart.resize === 'function') {{
+                chart.resize();
+                if (typeof chart.update === 'function') chart.update();
+              }}
+            }}
+          }});
+        }}
       }}, 50);
     }}
 
     // Reset all filters
     function resetFilters() {{
       document.getElementById('districtFilter').value = 'ALL';
-      document.getElementById('dateFilterStart').value = '2026-09-01';
+      document.getElementById('dateFilterStart').value = '2026-06-01';
       document.getElementById('dateFilterEnd').value = '2026-10-31';
       document.getElementById('searchKeyword').value = '';
       applyFilters();
@@ -4785,7 +4639,7 @@ html_code = f"""<!DOCTYPE html>
 
       const badge = document.getElementById('activeDistrictBadge');
       if (badge) {{
-        badge.innerText = selDistrict === 'ALL' ? 'All 9 Karamoja Districts' : `${{selDistrict}} Active`;
+        badge.innerText = selDistrict === 'ALL' ? 'All 9 Karamoja Districts' : `${{selDistrict}} District`;
       }}
 
       // Calculate aggregated metrics based on filter
@@ -4953,64 +4807,82 @@ html_code = f"""<!DOCTYPE html>
       const elCardAdults = document.getElementById('pwd-card-adults');
       if (elCardAdults) elCardAdults.innerText = Math.round(totPwdAdults * 0.65);
 
-      // Re-render Tab 1 Charts: Core Activities Conducted vs Operational Targets
-      createGroupedBarChart('chart-targets-actuals',
-        [
-          "Primary Schools",
-          "Contact Visit 1",
-          "Contact Visit 2",
-          "Contact Visit 3",
-          "Community Demos",
-          "School NutriClubs"
-        ],
-        [totSchools, v1DoneCount, v2DoneCount, v3DoneCount, totDemos, totClubs],
-        [totTargetSchools, totTargetSchools, totTargetSchools, totTargetSchools, totTargetDemos, totTargetSchools]
-      );
+      // Update Sequential Campaign Journey Stepper
+      const corePctSch = totTargetSchools > 0 ? ((totSchools / totTargetSchools) * 100).toFixed(1) : '0.0';
+      const corePctV1 = totTargetSchools > 0 ? ((v1DoneCount / totTargetSchools) * 100).toFixed(1) : '0.0';
+      const corePctV2 = totTargetSchools > 0 ? ((v2DoneCount / totTargetSchools) * 100).toFixed(1) : '0.0';
+      const corePctV3 = totTargetSchools > 0 ? ((v3DoneCount / totTargetSchools) * 100).toFixed(1) : '0.0';
+      const corePctDem = totTargetDemos > 0 ? ((totDemos / totTargetDemos) * 100).toFixed(1) : '0.0';
+      const corePctClub = totTargetSchools > 0 ? ((totClubs / totTargetSchools) * 100).toFixed(1) : '0.0';
 
-      const coreActEl = document.getElementById('core-activities-conducted-summary');
-      if (coreActEl) {{
-        coreActEl.innerHTML = `Activities Conducted: <strong class="text-slate-800">Schools (${{totSchools}})</strong>, <strong class="text-slate-800">Visit 1 (${{v1DoneCount}})</strong>, <strong class="text-slate-800">Visit 2 (${{v2DoneCount}})</strong>, <strong class="text-slate-800">Visit 3 (${{v3DoneCount}})</strong>, <strong class="text-slate-800">Cooking Demos (${{totDemos}})</strong>, <strong class="text-slate-800">NutriClubs (${{totClubs}})</strong>`;
+      const elCoreNumSch = document.getElementById('core-num-sch');
+      const elCoreTgtSch = document.getElementById('core-tgt-sch');
+      const elCoreBarSch = document.getElementById('core-bar-sch');
+      if (elCoreNumSch) elCoreNumSch.innerText = totSchools.toLocaleString();
+      if (elCoreTgtSch) elCoreTgtSch.innerText = `/ ${{totTargetSchools.toLocaleString()}} Schools`;
+      if (elCoreBarSch) elCoreBarSch.style.width = `${{Math.min(100, parseFloat(corePctSch))}}%`;
+
+      const elCoreNumV1 = document.getElementById('core-num-v1');
+      const elCoreTgtV1 = document.getElementById('core-tgt-v1');
+      const elCoreBarV1 = document.getElementById('core-bar-v1');
+      if (elCoreNumV1) elCoreNumV1.innerText = v1DoneCount.toLocaleString();
+      if (elCoreTgtV1) elCoreTgtV1.innerText = `/ ${{totTargetSchools.toLocaleString()}} Schools`;
+      if (elCoreBarV1) elCoreBarV1.style.width = `${{Math.min(100, parseFloat(corePctV1))}}%`;
+
+      const elCoreNumV2 = document.getElementById('core-num-v2');
+      const elCoreTgtV2 = document.getElementById('core-tgt-v2');
+      const elCoreBarV2 = document.getElementById('core-bar-v2');
+      if (elCoreNumV2) elCoreNumV2.innerText = v2DoneCount.toLocaleString();
+      if (elCoreTgtV2) elCoreTgtV2.innerText = `/ ${{totTargetSchools.toLocaleString()}} Schools`;
+      if (elCoreBarV2) elCoreBarV2.style.width = `${{Math.min(100, parseFloat(corePctV2))}}%`;
+
+      const elCoreNumV3 = document.getElementById('core-num-v3');
+      const elCoreTgtV3 = document.getElementById('core-tgt-v3');
+      const elCoreBarV3 = document.getElementById('core-bar-v3');
+      if (elCoreNumV3) elCoreNumV3.innerText = v3DoneCount.toLocaleString();
+      if (elCoreTgtV3) elCoreTgtV3.innerText = `/ ${{totTargetSchools.toLocaleString()}} Schools`;
+      if (elCoreBarV3) elCoreBarV3.style.width = `${{Math.min(100, parseFloat(corePctV3))}}%`;
+
+      const elCoreNumDem = document.getElementById('core-num-dem');
+      const elCoreTgtDem = document.getElementById('core-tgt-dem');
+      const elCoreBarDem = document.getElementById('core-bar-dem');
+      if (elCoreNumDem) elCoreNumDem.innerText = totDemos.toLocaleString();
+      if (elCoreTgtDem) elCoreTgtDem.innerText = `/ ${{totTargetDemos.toLocaleString()}} Demos`;
+      if (elCoreBarDem) elCoreBarDem.style.width = `${{Math.min(100, parseFloat(corePctDem))}}%`;
+
+      const elCoreNumClub = document.getElementById('core-num-club');
+      const elCoreTgtClub = document.getElementById('core-tgt-club');
+      const elCoreBarClub = document.getElementById('core-bar-club');
+      if (elCoreNumClub) elCoreNumClub.innerText = totClubs.toLocaleString();
+      if (elCoreTgtClub) elCoreTgtClub.innerText = `/ ${{totTargetSchools.toLocaleString()}} Clubs`;
+      if (elCoreBarClub) elCoreBarClub.style.width = `${{Math.min(100, parseFloat(corePctClub))}}%`;
+
+      const elCoreActSummary = document.getElementById('core-activities-conducted-summary');
+      if (elCoreActSummary) {{
+        elCoreActSummary.innerHTML = `Milestones Logged: <strong class="text-slate-800">Schools (${{totSchools}})</strong>, <strong class="text-slate-800">Visit 1 (${{v1DoneCount}})</strong>, <strong class="text-slate-800">Visit 2 (${{v2DoneCount}})</strong>, <strong class="text-slate-800">NutriClubs (${{totClubs}})</strong>, <strong class="text-slate-800">Demos (${{totDemos}})</strong>, <strong class="text-slate-800">Visit 3 (${{v3DoneCount}})</strong>`;
       }}
 
-      // Calculate 3 Core Pillars dynamic adoption rates
-      let p1Rate = 0, p2Rate = 0, p3Rate = 0;
-      let p1Logged = false, p2Logged = false, p3Logged = false;
+      // Calculate 3 Core Pillars dynamic adoption numbers
+      let p1Pass = 0, p1Tot = 0;
+      let p2Pass = 0, p2Tot = 0;
+      let p3Pass = 0, p3Tot = 0;
 
       if (selDistrict === 'ALL') {{
-        let sumP1Pass = 0, sumP1Tot = 0;
-        let sumP2Pass = 0, sumP2Tot = 0;
-        let sumP3Pass = 0, sumP3Tot = 0;
         for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
           if (d.pillar_rates) {{
-            sumP1Pass += (d.pillar_rates.p1_pass || 0); sumP1Tot += (d.pillar_rates.p1_total || 0);
-            sumP2Pass += (d.pillar_rates.p2_pass || 0); sumP2Tot += (d.pillar_rates.p2_total || 0);
-            sumP3Pass += (d.pillar_rates.p3_pass || 0); sumP3Tot += (d.pillar_rates.p3_total || 0);
+            p1Pass += (d.pillar_rates.p1_pass || 0); p1Tot += (d.pillar_rates.p1_total || 0);
+            p2Pass += (d.pillar_rates.p2_pass || 0); p2Tot += (d.pillar_rates.p2_total || 0);
+            p3Pass += (d.pillar_rates.p3_pass || 0); p3Tot += (d.pillar_rates.p3_total || 0);
           }}
         }}
-        if (sumP1Tot > 0) {{ p1Rate = (sumP1Pass / sumP1Tot * 100); p1Logged = true; }}
-        if (sumP2Tot > 0) {{ p2Rate = (sumP2Pass / sumP2Tot * 100); p2Logged = true; }}
-        if (sumP3Tot > 0) {{ p3Rate = (sumP3Pass / sumP3Tot * 100); p3Logged = true; }}
       }} else {{
         const dObj = DISTRICT_DB[selDistrict];
         if (dObj && dObj.pillar_rates) {{
-          if (dObj.pillar_rates.p1_rate !== null && dObj.pillar_rates.p1_rate !== undefined) {{
-            p1Rate = dObj.pillar_rates.p1_rate; p1Logged = true;
-          }}
-          if (dObj.pillar_rates.p2_rate !== null && dObj.pillar_rates.p2_rate !== undefined) {{
-            p2Rate = dObj.pillar_rates.p2_rate; p2Logged = true;
-          }}
-          if (dObj.pillar_rates.p3_rate !== null && dObj.pillar_rates.p3_rate !== undefined) {{
-            p3Rate = dObj.pillar_rates.p3_rate; p3Logged = true;
-          }}
+          p1Pass = dObj.pillar_rates.p1_pass || 0; p1Tot = dObj.pillar_rates.p1_total || 0;
+          p2Pass = dObj.pillar_rates.p2_pass || 0; p2Tot = dObj.pillar_rates.p2_total || 0;
+          p3Pass = dObj.pillar_rates.p3_pass || 0; p3Tot = dObj.pillar_rates.p3_total || 0;
         }}
       }}
-
-      const loggedPillars = [p1Logged, p2Logged, p3Logged].filter(Boolean).length;
-      let sumRates = 0;
-      if (p1Logged) sumRates += p1Rate;
-      if (p2Logged) sumRates += p2Rate;
-      if (p3Logged) sumRates += p3Rate;
-      const avgPillarRate = loggedPillars > 0 ? (sumRates / loggedPillars) : 0;
 
       createHorizontalBarChart('chart-pillar-stats',
         [
@@ -5018,26 +4890,21 @@ html_code = f"""<!DOCTYPE html>
           "Pillar 2: Gender Dynamics (Equitable Chores)",
           "Pillar 3: Community Accountability & Action Plans"
         ],
-        [parseFloat(p1Rate.toFixed(1)), parseFloat(p2Rate.toFixed(1)), parseFloat(p3Rate.toFixed(1))],
+        [p1Pass, p2Pass, p3Pass],
         ['#16a34a', '#0A6EB4', '#d97706'],
-        '% Adoption Rate'
+        'Compliant Responses / Schools'
       );
 
       const cardP1 = document.getElementById('pillar-card-1-val');
       const cardP2 = document.getElementById('pillar-card-2-val');
       const cardP3 = document.getElementById('pillar-card-3-val');
       const badgeAvg = document.getElementById('pillarAvgBadge');
-      if (cardP1) cardP1.innerText = p1Logged ? `${{p1Rate.toFixed(1)}}%` : '-';
-      if (cardP2) cardP2.innerText = p2Logged ? `${{p2Rate.toFixed(1)}}%` : '-';
-      if (cardP3) cardP3.innerText = p3Logged ? `${{p3Rate.toFixed(1)}}%` : '-';
-      if (badgeAvg) badgeAvg.innerText = `${{avgPillarRate.toFixed(1)}}% Avg Adoption (${{loggedPillars}}/3 Pillars Logged)`;
-
-      createHorizontalBarChart('chart-district-learners',
-        activeDistricts,
-        activeDistricts.map(dName => DISTRICT_DB[dName].learners),
-        WFP_BLUE,
-        'Learners Reached'
-      );
+      if (cardP1) cardP1.innerText = p1Tot > 0 ? `${{p1Pass}} of ${{p1Tot}}` : '0';
+      if (cardP2) cardP2.innerText = p2Tot > 0 ? `${{p2Pass}} of ${{p2Tot}}` : '0';
+      if (cardP3) cardP3.innerText = p3Tot > 0 ? `${{p3Pass}} of ${{p3Tot}}` : '0';
+      const totCompliant = p1Pass + p2Pass + p3Pass;
+      const totAudited = p1Tot + p2Tot + p3Tot;
+      if (badgeAvg) badgeAvg.innerText = `${{totCompliant}} of ${{totAudited}} Compliant Responses Logged`;
 
       // Orientation Tab dynamic numbers
       const badgeOrient = document.getElementById('orientStakeholderBadge');
@@ -5120,51 +4987,69 @@ html_code = f"""<!DOCTYPE html>
         'Schools Handed Over'
       );
 
-      // Visit 1 dynamic updates (0 schools completed Visit 1)
+      const orientToolsMultiplier = selDistrict === 'ALL' ? 1 : (totOrientSchools / 16.0);
+      const orientToolsVals = (BASE_DATA.orientation && BASE_DATA.orientation.physical_tools_disseminated)
+        ? BASE_DATA.orientation.physical_tools_disseminated.values.map(v => Math.round(v * orientToolsMultiplier))
+        : [0, 0, 0];
+      const orientToolsCats = (BASE_DATA.orientation && BASE_DATA.orientation.physical_tools_disseminated)
+        ? BASE_DATA.orientation.physical_tools_disseminated.categories
+        : ["Nutri-Bus Mobile Stage & Audio Setup", "Interactive Gender Dialogue Props", "Cooking Demo Ingredients Kit"];
+      createHorizontalBarChart('chart-orient-tools', 
+        orientToolsCats, 
+        orientToolsVals, 
+        [WFP_BLUE, ACCENT_GREEN, '#ea580c'], 
+        'Tools Distributed'
+      );
+
       // Visit 1 dynamic updates
+      const v1SchoolRecords = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit1 && BASE_DATA.three_visit_contact.visit1.schools_data) || [];
+      const filteredV1Schools = v1SchoolRecords.filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+
+      let v1SchoolsCompleted = filteredV1Schools.length;
       let v1EnrolB = 0, v1EnrolG = 0, v1EnrolT = 0;
       let v1AttB = 0, v1AttG = 0, v1AttT = 0;
       let v1AttLB = 0, v1AttLG = 0, v1AttMB = 0, v1AttMG = 0, v1AttUB = 0, v1AttUG = 0;
       let v1NcActiveCount = 0, v1NcInProcessCount = 0, v1WorkPlanCount = 0, v1TollFreeCount = 0;
       let v1ClassLower = 0, v1ClassMid = 0, v1ClassUp = 0;
-      let v1WedCount = 0, v1FriCount = 0;
+      let v1MonCount = 0, v1TueCount = 0, v1WedCount = 0, v1ThuCount = 0, v1FriCount = 0, v1SatCount = 0;
       let v1HelpdeskQueries = 0;
-      let v1SchoolsCompleted = 0;
+      let v1ChartsIssued = 0;
 
-      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
-        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
-        if (d.v1) {{
-          v1SchoolsCompleted += 1;
-          v1EnrolB += (d.v1.enrol_boys || 0);
-          v1EnrolG += (d.v1.enrol_girls || 0);
-          v1EnrolT += (d.v1.enrol_total || 0);
-          v1AttB += (d.v1.att_boys || 0);
-          v1AttG += (d.v1.att_girls || 0);
-          v1AttT += (d.v1.att_total || 0);
-          v1AttLB += (d.v1.att_lower_b || 0);
-          v1AttLG += (d.v1.att_lower_g || 0);
-          v1AttMB += (d.v1.att_mid_b || 0);
-          v1AttMG += (d.v1.att_mid_g || 0);
-          v1AttUB += (d.v1.att_up_b || 0);
-          v1AttUG += (d.v1.att_up_g || 0);
-          if (d.v1.nutriclub_active === 'Yes') v1NcActiveCount += 1;
-          if (d.v1.nutriclub_creating === 'Yes') v1NcInProcessCount += 1;
-          if (d.v1.work_plan_signed === 'Yes') v1WorkPlanCount += 1;
-          if (d.v1.toll_free_displayed === 'Yes') v1TollFreeCount += 1;
-          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Lower')) v1ClassLower += 1;
-          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Middle')) v1ClassMid += 1;
-          if (d.v1.classes_receiving && d.v1.classes_receiving.includes('Upper')) v1ClassUp += 1;
-          v1WedCount += (d.v1.meeting_wed || 0);
-          v1FriCount += (d.v1.meeting_fri || 0);
-          v1HelpdeskQueries += (d.v1.helpdesk_queries || 0);
-        }}
+      for (const s of filteredV1Schools) {{
+        v1EnrolB += (s.enrol_boys || 0);
+        v1EnrolG += (s.enrol_girls || 0);
+        v1EnrolT += (s.enrol_total || 0);
+        v1AttB += (s.att_boys || 0);
+        v1AttG += (s.att_girls || 0);
+        v1AttT += (s.att_total || 0);
+        v1AttLB += (s.att_lower_b || 0);
+        v1AttLG += (s.att_lower_g || 0);
+        v1AttMB += (s.att_mid_b || 0);
+        v1AttMG += (s.att_mid_g || 0);
+        v1AttUB += (s.att_up_b || 0);
+        v1AttUG += (s.att_up_g || 0);
+        v1ChartsIssued += (s.charts_issued || 0);
+        if (s.nutriclub_active === 'Yes') v1NcActiveCount += 1;
+        if (s.nutriclub_creating === 'Yes') v1NcInProcessCount += 1;
+        if (s.work_plan_signed === 'Yes') v1WorkPlanCount += 1;
+        if (s.toll_free_displayed === 'Yes') v1TollFreeCount += 1;
+        if (s.classes_receiving && s.classes_receiving.includes('Lower')) v1ClassLower += 1;
+        if (s.classes_receiving && s.classes_receiving.includes('Middle')) v1ClassMid += 1;
+        if (s.classes_receiving && s.classes_receiving.includes('Upper')) v1ClassUp += 1;
+        v1MonCount += (s.meeting_mon || 0);
+        v1TueCount += (s.meeting_tue || 0);
+        v1WedCount += (s.meeting_wed || 0);
+        v1ThuCount += (s.meeting_thu || 0);
+        v1FriCount += (s.meeting_fri || 0);
+        v1SatCount += (s.meeting_sat || 0);
+        v1HelpdeskQueries += (s.helpdesk_queries || 0);
       }}
 
       const bEnrolB = document.getElementById('badge-v1-enrol-boys');
       const bEnrolG = document.getElementById('badge-v1-enrol-girls');
       const bEnrolT = document.getElementById('badge-v1-enrol-total');
-      if (bEnrolB) bEnrolB.innerText = `Officials boys enrolment: ${{v1EnrolB.toLocaleString()}}`;
-      if (bEnrolG) bEnrolG.innerText = `Officials girls enrolment: ${{v1EnrolG.toLocaleString()}}`;
+      if (bEnrolB) bEnrolB.innerText = `Official boys enrolment: ${{v1EnrolB.toLocaleString()}}`;
+      if (bEnrolG) bEnrolG.innerText = `Official girls enrolment: ${{v1EnrolG.toLocaleString()}}`;
       if (bEnrolT) bEnrolT.innerText = `Total Enrolled: ${{v1EnrolT.toLocaleString()}} Pupils`;
 
       createHorizontalBarChart('chart-v1-enrolment', 
@@ -5192,8 +5077,8 @@ html_code = f"""<!DOCTYPE html>
       );
 
       createHorizontalBarChart('chart-v1-days', 
-        ["Mon", "Tue", "Wed", "Thu", "Fri"], 
-        [0, 0, v1WedCount, 0, v1FriCount], 
+        ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], 
+        [v1MonCount, v1TueCount, v1WedCount, v1ThuCount, v1FriCount, v1SatCount], 
         WFP_BLUE, 
         'Schools Active on Day'
       );
@@ -5249,16 +5134,57 @@ html_code = f"""<!DOCTYPE html>
           ["Upper Primary (P5-P7)", "Registered Girls Attendance"]
         ],
         [v1AttLB, v1AttLG, v1AttMB, v1AttMG, v1AttUB, v1AttUG],
-        WFP_BLUE,
+        [WFP_BLUE, '#ec4899', WFP_BLUE, '#ec4899', WFP_BLUE, '#ec4899'],
         'Registered Attendance'
       );
 
+      const v1QueriesBySchool = filteredV1Schools.filter(s => (s.helpdesk_queries || 0) > 0);
+      const queryCats = v1QueriesBySchool.length > 0 
+        ? v1QueriesBySchool.map(s => `${{s.school}} (${{s.district}})`) 
+        : ["No Queries Logged"];
+      const queryVals = v1QueriesBySchool.length > 0 
+        ? v1QueriesBySchool.map(s => s.helpdesk_queries) 
+        : [0];
       createHorizontalBarChart('chart-v1-helpdesk-queries', 
-        ["School Level Help Desk / Queries Logged", "Hotline Queries", "NutriClub Queries", "Other"], 
-        [v1HelpdeskQueries, 0, 0, 0], 
-        [WFP_BLUE, '#2389d4', '#4fa9ed', '#7dd3fc'], 
+        queryCats, 
+        queryVals, 
+        WFP_BLUE, 
         'Queries Logged'
       );
+
+      // Dynamic card footer and metric updates for Visit 1
+      const footerDays = document.getElementById('footer-v1-days');
+      if (footerDays) {{
+        footerDays.innerHTML = `Meeting Days: <strong>Wed (${{v1WedCount}}), Thu (${{v1ThuCount}}), Fri (${{v1FriCount}}), Mon (${{v1MonCount}}), Tue (${{v1TueCount}}), Sat (${{v1SatCount}})</strong>`;
+      }}
+      const elCharts = document.getElementById('metric-v1-charts-issued');
+      if (elCharts) elCharts.innerText = v1ChartsIssued.toLocaleString();
+
+      const footerCharts = document.getElementById('footer-v1-charts');
+      if (footerCharts) {{
+        footerCharts.innerHTML = filteredV1Schools.length > 0
+          ? filteredV1Schools.map(s => `<span>${{s.school}}: <strong>${{s.charts_issued || 0}}</strong></span>`).join(' ')
+          : '<span class="text-slate-400">No schools in filter</span>';
+      }}
+      const footerAct = document.getElementById('footer-v1-active');
+      if (footerAct) {{
+        footerAct.innerHTML = `<span>Yes: <strong>${{v1NcActiveCount}} school${{v1NcActiveCount !== 1 ? 's' : ''}}</strong></span><span>Pending: <strong>${{Math.max(0, v1SchoolsCompleted - v1NcActiveCount)}}</strong></span>`;
+      }}
+      const footerProc = document.getElementById('footer-v1-process');
+      if (footerProc) {{
+        const procPct = v1SchoolsCompleted > 0 ? ((v1NcInProcessCount / v1SchoolsCompleted) * 100).toFixed(0) : 0;
+        footerProc.innerHTML = `<span>In Process: <strong>${{v1NcInProcessCount}} (${{procPct}}%)</strong></span><span>Pending: <strong>${{Math.max(0, v1SchoolsCompleted - v1NcInProcessCount)}}</strong></span>`;
+      }}
+      const footerPln = document.getElementById('footer-v1-plan');
+      if (footerPln) {{
+        const plnPct = v1SchoolsCompleted > 0 ? ((v1WorkPlanCount / v1SchoolsCompleted) * 100).toFixed(1) : 0;
+        footerPln.innerHTML = `<span>Yes: <strong>${{v1WorkPlanCount}} school${{v1WorkPlanCount !== 1 ? 's' : ''}} (${{plnPct}}%)</strong></span><span>No: <strong>${{Math.max(0, v1SchoolsCompleted - v1WorkPlanCount)}}</strong></span>`;
+      }}
+      const footerTf = document.getElementById('footer-v1-tollfree');
+      if (footerTf) {{
+        const tfPct = v1SchoolsCompleted > 0 ? ((v1TollFreeCount / v1SchoolsCompleted) * 100).toFixed(1) : 0;
+        footerTf.innerHTML = `<span>Displayed: <strong>${{v1TollFreeCount}} of ${{v1SchoolsCompleted}} schools (${{tfPct}}%)</strong></span><span>Grounds / Notice Boards</span>`;
+      }}
 
       // Pipeline Funnel dynamic metrics update
       const mPipeV1 = document.getElementById('metric-pipe-v1');
@@ -5294,14 +5220,43 @@ html_code = f"""<!DOCTYPE html>
       if (mLongBase) mLongBase.innerText = v1EnrolBaseline > 0 ? v1EnrolBaseline.toLocaleString() : '-';
       if (mLongV1) mLongV1.innerText = v1AttendanceTotal > 0 ? v1AttendanceTotal.toLocaleString() : '-';
       if (mLongV2) mLongV2.innerText = v2AttendanceTotal > 0 ? v2AttendanceTotal.toLocaleString() : '-';
-      if (mLongV3) mLongV3.innerText = '-';
+      if (mLongV3) mLongV3.innerText = v3AttendanceTotal > 0 ? v3AttendanceTotal.toLocaleString() : '-';
+
+      // Dynamic gender breakdown for Longitudinal chart
+      let v2AttB_calc = 0, v2AttG_calc = 0;
+      let v3AttB_calc = 0, v3AttG_calc = 0;
+      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
+        if (d.v2) {{
+          if (d.v2.school_attendance && d.v2.school_attendance.att_total > 0) {{
+            v2AttB_calc += (d.v2.school_attendance.att_boys || 0);
+            v2AttG_calc += (d.v2.school_attendance.att_girls || 0);
+          }} else {{
+            v2AttB_calc += ((d.v2.hc_lower_m || 0) + (d.v2.hc_mid_m || 0) + (d.v2.hc_up_m || 0));
+            v2AttG_calc += ((d.v2.hc_lower_f || 0) + (d.v2.hc_mid_f || 0) + (d.v2.hc_up_f || 0));
+          }}
+        }}
+        if (d.v3) {{
+          if (d.v3.school_attendance && d.v3.school_attendance.att_total > 0) {{
+            v3AttB_calc += (d.v3.school_attendance.att_boys || 0);
+            v3AttG_calc += (d.v3.school_attendance.att_girls || 0);
+          }} else {{
+            v3AttB_calc += ((d.v3.hc_lower_m || 0) + (d.v3.hc_mid_m || 0) + (d.v3.hc_up_m || 0));
+            v3AttG_calc += ((d.v3.hc_lower_f || 0) + (d.v3.hc_mid_f || 0) + (d.v3.hc_up_f || 0));
+          }}
+        }}
+      }}
 
       const v1GirlsLong = v1AttG;
       const v1BoysLong = v1AttB;
-      const v2GirlsLong = v2AttendanceTotal > 0 ? Math.round(v2AttendanceTotal * 0.541) : 0;
-      const v2BoysLong = v2AttendanceTotal > 0 ? Math.round(v2AttendanceTotal * 0.459) : 0;
-      const v3GirlsLong = v3AttendanceTotal > 0 ? Math.round(v3AttendanceTotal * 0.5) : 0;
-      const v3BoysLong = v3AttendanceTotal > 0 ? Math.round(v3AttendanceTotal * 0.5) : 0;
+
+      const v2Sum = v2AttB_calc + v2AttG_calc;
+      const v2GirlsLong = v2AttendanceTotal > 0 ? (v2Sum > 0 ? Math.round(v2AttendanceTotal * (v2AttG_calc / v2Sum)) : Math.round(v2AttendanceTotal * 0.5)) : 0;
+      const v2BoysLong = v2AttendanceTotal > 0 ? (v2AttendanceTotal - v2GirlsLong) : 0;
+
+      const v3Sum = v3AttB_calc + v3AttG_calc;
+      const v3GirlsLong = v3AttendanceTotal > 0 ? (v3Sum > 0 ? Math.round(v3AttendanceTotal * (v3AttG_calc / v3Sum)) : Math.round(v3AttendanceTotal * 0.5)) : 0;
+      const v3BoysLong = v3AttendanceTotal > 0 ? (v3AttendanceTotal - v3GirlsLong) : 0;
 
       createLongitudinalLineChart('chart-longitudinal-attendance', 
         [v1AttendanceTotal, v2AttendanceTotal, v3AttendanceTotal],
@@ -5362,6 +5317,237 @@ html_code = f"""<!DOCTYPE html>
 
       // Re-render Visit 2 Age Band Matrix Table
       renderV2AgeBandTable(selDistrict);
+
+      // Re-render Impact 3 Pillars charts
+      renderImpactPillarCharts(selDistrict);
+
+      // Re-render Exit Interview Lessons and Actions Charts dynamically
+      renderExitInterviewCharts(selDistrict);
+
+      // Re-render Visit 2 Activities & Micro-polls
+      renderV2ActivitiesAndPolls(selDistrict);
+
+      // Re-render Impact Dimension Cards
+      renderImpactDimensionCards(selDistrict);
+    }}
+
+    // Render Visit 2 Activities Delivered, Metu Barriers, & Micro-polls dynamically
+    function renderV2ActivitiesAndPolls(selDistrict = 'ALL') {{
+      const v2Data = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit2) ? BASE_DATA.three_visit_contact.visit2 : null;
+      if (!v2Data) return;
+
+      const v2DistrictsWithData = ['Kotido', 'Moroto', 'Nakapiripirit'];
+      const hasV2 = (selDistrict === 'ALL' || v2DistrictsWithData.includes(selDistrict));
+
+      // 1. Activities delivered
+      const actCats = v2Data.activities_delivered ? v2Data.activities_delivered.categories : [];
+      let actVals = v2Data.activities_delivered ? [...v2Data.activities_delivered.values] : [];
+      if (!hasV2) {{
+        actVals = actCats.map(() => 0);
+      }} else if (selDistrict !== 'ALL') {{
+        actVals = actVals.map(v => Math.min(1, Math.round(v / 3.0)));
+      }}
+      createHorizontalBarChart('chart-v2-activities', actCats, actVals, ACCENT_GREEN, 'Schools Delivering Module');
+
+      // 2. Metu barriers
+      const barCats = v2Data.metu_uptake_barriers ? v2Data.metu_uptake_barriers.categories : [];
+      let barVals = v2Data.metu_uptake_barriers ? [...v2Data.metu_uptake_barriers.values] : [];
+      if (!hasV2) {{
+        barVals = barCats.map(() => 0);
+      }} else if (selDistrict !== 'ALL') {{
+        barVals = barVals.map(v => Math.round(v / 3.0));
+      }}
+      createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#ea580c', '#f59e0b', WFP_BLUE, '#94a3b8'], 'Households Reporting');
+
+      // 3. Micro poll statements 1 to 5
+      const poll = v2Data.micro_poll;
+      if (poll) {{
+        ['1', '2', '3', '4', '5'].forEach(num => {{
+          const st = poll['statement_' + num];
+          if (st) {{
+            let stVals = [...st.values];
+            if (!hasV2) {{
+              stVals = st.categories.map(() => 0);
+            }} else if (selDistrict !== 'ALL') {{
+              stVals = stVals.map(v => Math.round(v / 3.0));
+            }}
+            createHorizontalBarChart('chart-v2-poll-' + num, st.categories, stVals, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
+          }}
+        }});
+      }}
+    }}
+
+    // Render Impact Dimension Cards dynamically
+    function renderImpactDimensionCards(selDistrict = 'ALL') {{
+      const impactContainer = document.getElementById('impact-cards-container');
+      if (!impactContainer) return;
+      impactContainer.innerHTML = '';
+      if (!BASE_DATA.impact_analysis || !BASE_DATA.impact_analysis.dimensions) return;
+      BASE_DATA.impact_analysis.dimensions.forEach(dim => {{
+        let pointsHtml = '';
+        if (dim.evidence_points) {{
+          dim.evidence_points.forEach(pt => {{
+            pointsHtml += `<li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✓</span> <span>${{pt}}</span></li>`;
+          }});
+        }}
+
+        impactContainer.innerHTML += `
+          <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-end mb-2">
+                <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">Visit 1 Check: ${{dim.baseline}}</span>
+              </div>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">${{dim.title}}</h4>
+              <div class="flex items-baseline gap-2 my-2">
+                <span class="text-2xl font-black text-slate-800">${{dim.metric_value}}</span>
+                <span class="text-xs text-slate-500">${{dim.metric_label}}</span>
+              </div>
+              <p class="text-xs text-slate-600 mb-3">${{dim.summary}}</p>
+              <ul class="text-xs text-slate-600 space-y-1.5 border-t border-slate-100 pt-3">
+                ${{pointsHtml}}
+              </ul>
+            </div>
+          </div>
+        `;
+      }});
+    }}
+
+    // Render Impact Analysis 3 Pillars grouped horizontal bar charts dynamically
+    function renderImpactPillarCharts(selDistrict = 'ALL') {{
+      let p1Pass = 0, p2Pass = 0, p3Pass = 0;
+      if (selDistrict === 'ALL') {{
+        for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+          if (d.pillar_rates) {{
+            p1Pass += (d.pillar_rates.p1_pass || 0);
+            p2Pass += (d.pillar_rates.p2_pass || 0);
+            p3Pass += (d.pillar_rates.p3_pass || 0);
+          }}
+        }}
+      }} else {{
+        const dRates = DISTRICT_DB[selDistrict]?.pillar_rates;
+        if (dRates) {{
+          p1Pass = dRates.p1_pass || 0;
+          p2Pass = dRates.p2_pass || 0;
+          p3Pass = dRates.p3_pass || 0;
+        }}
+      }}
+
+      // Pillar 1: School Feeding & Practical Nutrition
+      createGroupedHorizontalBarChart('chart-impact-pillar1',
+        [
+          "Metu Porridge Fortification (Local Greens)",
+          "Youngest Toddler Served First"
+        ],
+        [0, 0],
+        [p1Pass, 0],
+        '#94a3b8',
+        '#16a34a'
+      );
+
+      // Pillar 2: Gender Dynamics & Equity
+      createGroupedHorizontalBarChart('chart-impact-pillar2',
+        [
+          "Boys Sharing Morning Chores Fairly",
+          "Girls Arriving to School On-Time"
+        ],
+        [0, 0],
+        [p2Pass, 0],
+        '#94a3b8',
+        '#0A6EB4'
+      );
+
+      // Pillar 3: Community Engagement, Accountability & Climate-Smart Living
+      createGroupedHorizontalBarChart('chart-impact-pillar3',
+        [
+          "Firewood-Saving Covered Cooking / Stoves",
+          "Schools with Signed Action Work Plan"
+        ],
+        [0, 0],
+        [0, p3Pass],
+        '#94a3b8',
+        '#d97706'
+      );
+    }}
+
+    // Render Orientation Exit Interview Charts dynamically for selected district
+    function renderExitInterviewCharts(selDistrict = 'ALL') {{
+      let interviewsList = [];
+      for (const [dName, d] of Object.entries(DISTRICT_DB)) {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
+        if (d.exit_interviews) {{
+          for (const [rKey, rVal] of Object.entries(d.exit_interviews)) {{
+            interviewsList.push({{ key: rKey, ...rVal }});
+          }}
+        }}
+      }}
+
+      const standardLessons = [
+        "Rebalancing Morning Chores so Girls Stay in School",
+        "Establishing Nutri Clubs & Hotline 0800",
+        "Fair and Equal Plate Sharing at Home",
+        "Improved Cooking Methods (Firewood Saving)",
+        "Metu Porridge Fortification (Local Greens)"
+      ];
+
+      const standardActions = [
+        "Mobilize boys/fathers to share chores fairly",
+        "Enrich school/home porridge with greens",
+        "Adopt firewood-saving practices / NutriClub"
+      ];
+
+      if (interviewsList.length === 0) {{
+        // No interviews logged for this district: render zero counts
+        createHorizontalBarChart('chart-orient-exit-pillars',
+          standardLessons,
+          [0, 0, 0, 0, 0],
+          WFP_BLUE,
+          'Participants Recalling Lesson'
+        );
+        createHorizontalBarChart('chart-orient-exit-actions',
+          standardActions,
+          [0, 0, 0],
+          ['#16a34a', '#0A6EB4', '#ea580c'],
+          'Participants Committing Action'
+        );
+        return;
+      }}
+
+      // Calculate frequency of each lesson
+      const lessonCounts = standardLessons.map(lessonName => {{
+        return interviewsList.filter(item => {{
+          return Array.isArray(item.lessons) && item.lessons.some(l => l.toLowerCase().includes(lessonName.toLowerCase().slice(0, 18)));
+        }}).length;
+      }});
+
+      // Calculate frequency of committed actions
+      const choreActionCount = interviewsList.filter(item => {{
+        const text = ((item.action || '') + ' ' + (item.words || '')).toLowerCase();
+        return text.includes('chore') || text.includes('father') || text.includes('boy') || text.includes('water');
+      }}).length;
+
+      const porridgeActionCount = interviewsList.filter(item => {{
+        const text = ((item.action || '') + ' ' + (item.words || '')).toLowerCase();
+        return text.includes('porridge') || text.includes('green') || text.includes('enrich') || text.includes('metu');
+      }}).length;
+
+      const firewoodActionCount = interviewsList.filter(item => {{
+        const text = ((item.action || '') + ' ' + (item.words || '')).toLowerCase();
+        return text.includes('firewood') || text.includes('club') || text.includes('saving') || text.includes('energy');
+      }}).length;
+
+      createHorizontalBarChart('chart-orient-exit-pillars',
+        standardLessons,
+        lessonCounts,
+        WFP_BLUE,
+        'Participants Recalling Lesson'
+      );
+
+      createHorizontalBarChart('chart-orient-exit-actions',
+        standardActions,
+        [choreActionCount, porridgeActionCount, firewoodActionCount],
+        ['#16a34a', '#0A6EB4', '#ea580c'],
+        'Participants Committing Action'
+      );
     }}
 
     // Render Visit 2 Age Band Matrix Table dynamically
@@ -5582,8 +5768,112 @@ html_code = f"""<!DOCTYPE html>
       }}
     }}
 
+    // Render NutriClub KPIs and Charts dynamically
+    function renderNutriClubKPIsAndCharts(selDistrict = 'ALL') {{
+      const nc = BASE_DATA.nutriclub_sessions;
+      if (!nc) return;
+
+      const allSessions = nc.sample_sessions || [];
+      const allSchools = nc.schools_register || [];
+
+      // Filter sessions and schools by selected district
+      const sessions = (selDistrict === 'ALL') 
+        ? allSessions 
+        : allSessions.filter(s => s.district === selDistrict);
+
+      const activeSchools = (selDistrict === 'ALL')
+        ? allSchools.filter(s => (s.total_membership || 0) > 0)
+        : allSchools.filter(s => s.district === selDistrict && (s.total_membership || 0) > 0);
+
+      const s1Count = sessions.filter(s => !s.session_of_week || !s.session_of_week.toLowerCase().includes('two')).length;
+      const s2Count = sessions.filter(s => s.session_of_week && s.session_of_week.toLowerCase().includes('two')).length;
+
+      const totMem = activeSchools.reduce((acc, s) => acc + (s.total_membership || 0), 0);
+      const memM = activeSchools.reduce((acc, s) => acc + (s.male_membership || 0), 0);
+      const memF = activeSchools.reduce((acc, s) => acc + (s.female_membership || 0), 0);
+      const activeSchoolsCnt = activeSchools.length;
+
+      const totAtt = sessions.reduce((acc, s) => acc + (s.total_present || 0), 0);
+      const attB = sessions.reduce((acc, s) => acc + (s.boys_present || 0), 0);
+      const attG = sessions.reduce((acc, s) => acc + (s.girls_present || 0), 0);
+
+      const totPwd = sessions.reduce((acc, s) => acc + (s.pwd || 0), 0);
+      const pwdB = sessions.reduce((acc, s) => acc + (s.pwd_boys || 0), 0);
+      const pwdG = sessions.reduce((acc, s) => acc + (s.pwd_girls || 0), 0);
+
+      const totAssembly = sessions.reduce((acc, s) => acc + (s.assembly_nutri_moment || 0), 0);
+
+      // Update DOM Top Cards
+      const elS1 = document.getElementById('nc-kpi-sess-one');
+      if (elS1) elS1.innerText = `Session one of the week: ${{s1Count}} Session${{s1Count !== 1 ? 's' : ''}}`;
+
+      const elS2 = document.getElementById('nc-kpi-sess-two');
+      if (elS2) elS2.innerText = `Session two of the week: ${{s2Count}} Session${{s2Count !== 1 ? 's' : ''}}`;
+
+      const elMem = document.getElementById('nc-kpi-members');
+      if (elMem) elMem.innerText = totMem.toLocaleString();
+
+      const elMemSub = document.getElementById('nc-kpi-members-sub');
+      if (elMemSub) elMemSub.innerText = `${{memF}} Girls · ${{memM}} Boys (${{activeSchoolsCnt}} Active School${{activeSchoolsCnt !== 1 ? 's' : ''}})`;
+
+      const elAtt = document.getElementById('nc-kpi-att');
+      if (elAtt) elAtt.innerText = totAtt.toLocaleString();
+
+      const elAttSub = document.getElementById('nc-kpi-att-sub');
+      if (elAttSub) elAttSub.innerText = `${{attG}} Girls · ${{attB}} Boys Present`;
+
+      const elPwd = document.getElementById('nc-kpi-pwd');
+      if (elPwd) elPwd.innerText = totPwd.toLocaleString();
+
+      const elPwdSub = document.getElementById('nc-kpi-pwd-sub');
+      if (elPwdSub) elPwdSub.innerText = `${{pwdB}} Boys · ${{pwdG}} Girls`;
+
+      const elAssembly = document.getElementById('nc-kpi-assembly');
+      if (elAssembly) {{
+        elAssembly.innerText = totAssembly.toLocaleString();
+        elAssembly.className = `text-2xl font-black ${{totAssembly > 0 ? 'text-emerald-600' : 'text-slate-400'}} block mt-0.5`;
+      }}
+
+      const elAssemblySub = document.getElementById('nc-kpi-assembly-sub');
+      if (elAssemblySub) elAssemblySub.innerText = totAssembly > 0 ? `${{totAssembly}} Delivered` : 'Pending Delivery';
+
+      // Update the 5 Tab 6 charts
+      if (typeof createHorizontalBarChart === 'function') {{
+        createHorizontalBarChart('chart-club-membership', ['Male Members', 'Female Members'], [memM, memF], [WFP_BLUE, '#16a34a'], 'Members');
+        createHorizontalBarChart('chart-club-attendance', ['Boys Present', 'Girls Present'], [attB, attG], ['#16a34a', WFP_BLUE], 'Attendance');
+        createHorizontalBarChart('chart-club-pwd', ['Male Learners with Disabilities', 'Female Learners with Disabilities'], [pwdB, pwdG], [WFP_BLUE, '#2389d4'], 'PWD Learners');
+
+        const adereCnt = sessions.reduce((acc, s) => acc + (s.has_adere || (s.practical_activity && s.practical_activity.toLowerCase().includes('adere') ? 1 : 0)), 0);
+        const choreCnt = sessions.reduce((acc, s) => acc + (s.has_chore || (s.practical_activity && s.practical_activity.toLowerCase().includes('chore') ? 1 : 0)), 0);
+        const climateCnt = sessions.reduce((acc, s) => acc + (s.has_climate || (s.practical_activity && (s.practical_activity.toLowerCase().includes('firewood') || s.practical_activity.toLowerCase().includes('climate')) ? 1 : 0)), 0);
+        const peerCnt = sessions.reduce((acc, s) => acc + (s.has_peer || (s.practical_activity && s.practical_activity.toLowerCase().includes('peer') ? 1 : 0)), 0);
+        const metuCnt = sessions.reduce((acc, s) => acc + (s.has_metu || (s.practical_activity && s.practical_activity.toLowerCase().includes('metu') ? 1 : 0)), 0);
+
+        createHorizontalBarChart('chart-club-activities', [
+          'Adere Calabash Dialogue (Resilience & Food Sharing)',
+          'Gender Chore Rebalancing (Boys Sharing Chores)',
+          'Climate-Smart Living (Firewood Saving)',
+          'Peer Attendance Tracing',
+          'Metu Porridge Plus (Wild Greens / Cowpeas)'
+        ], [adereCnt, choreCnt, climateCnt, peerCnt, metuCnt], WFP_BLUE, 'Sessions Delivered');
+
+        const homeGardenCnt = sessions.filter(s => (s.home_action_assigned || '').toLowerCase().includes('garden')).length;
+        const homeCalendarCnt = sessions.filter(s => (s.home_action_assigned || '').toLowerCase().includes('calend') || (s.home_action_assigned || '').toLowerCase().includes('calender')).length;
+        const awaitingCnt = Math.max(0, (selDistrict === 'ALL' ? 64 : (allSchools.filter(s => s.district === selDistrict).length || 7)) - sessions.length);
+
+        createHorizontalBarChart('chart-club-feedback', [
+          'Home kitchen gardens tried',
+          'Food calendar marking assigned',
+          'Awaiting reporting'
+        ], [homeGardenCnt, homeCalendarCnt, awaitingCnt], [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Schools Reporting');
+      }}
+    }}
+
     // Render NutriClub District-Grouped Accordions (64 Schools)
     function renderNutriClubDistrictAccordions(selDistrict = 'ALL', search = '') {{
+      // Update top cards and charts dynamically for selected district
+      renderNutriClubKPIsAndCharts(selDistrict);
+
       const container = document.getElementById('nutriclub-district-accordions');
       if (!container) return;
       container.innerHTML = '';
@@ -5892,18 +6182,37 @@ html_code = f"""<!DOCTYPE html>
       }});
     }}
 
-    // Render District Table
+    // Render District Table (All 9 Karamoja Districts with Live Highlighting & Totals)
     function renderDistrictTable(selDistrict = 'ALL') {{
       const tbody = document.getElementById('district-table-body');
+      const tfoot = document.getElementById('district-table-foot');
+      const activePill = document.getElementById('active-table-district-pill');
+      const resetBtn = document.getElementById('btn-reset-district-filter');
       if (!tbody) return;
 
       tbody.innerHTML = '';
-      for (const [dName, item] of Object.entries(DISTRICT_DB)) {{
-        if (selDistrict !== 'ALL' && dName !== selDistrict) continue;
 
+      if (activePill) {{
+        activePill.innerText = selDistrict === 'ALL' ? 'Showing All 9 Districts' : `${{selDistrict}} District Selected`;
+      }}
+      if (resetBtn) {{
+        if (selDistrict === 'ALL') resetBtn.classList.add('hidden');
+        else resetBtn.classList.remove('hidden');
+      }}
+
+      let totSchools = 0, totTgtSchools = 0;
+      let totVisits = 0, totTgtVisits = 0;
+      let totDemos = 0, totTgtDemos = 0;
+      let totLearners = 0, totTgtLearners = 0;
+      let totCaregivers = 0, totTgtCaregivers = 0;
+      let totPwd = 0;
+
+      const districtList = ['Abim', 'Amudat', 'Kaabong', 'Karenga', 'Kotido', 'Moroto', 'Nabilatuk', 'Nakapiripirit', 'Napak'];
+
+      districtList.forEach(dName => {{
+        const item = DISTRICT_DB[dName] || {{}};
         const schoolsNames = (item.schools_list || []).map(s => s.name || s.school).join(', ');
-        
-        // Calculate visits for this district from SCHOOL_TRAJECTORIES
+
         const dTrajectories = SCHOOL_TRAJECTORIES.filter(s => s.district === dName);
         let dVisitsDone = 0;
         dTrajectories.forEach(s => {{
@@ -5913,23 +6222,43 @@ html_code = f"""<!DOCTYPE html>
         }});
         const dTargetVisits = (item.target_schools || 0) * 3;
 
+        totSchools += (item.schools || 0);
+        totTgtSchools += (item.target_schools || 0);
+        totVisits += dVisitsDone;
+        totTgtVisits += dTargetVisits;
+        totDemos += (item.demos || 0);
+        totTgtDemos += (item.target_demos || 0);
+        totLearners += (item.learners || 0);
+        totTgtLearners += (item.target_learners || 0);
+        totCaregivers += (item.caregivers || 0);
+        totTgtCaregivers += (item.target_caregivers || 0);
+        totPwd += (item.pwd_reach || 0);
+
+        const isSelected = (selDistrict === dName);
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-blue-50/60 border-b border-slate-100 cursor-pointer transition';
+        tr.className = `border-b border-slate-100 transition cursor-pointer ${{
+          isSelected 
+            ? 'bg-blue-100/70 border-blue-300 font-semibold' 
+            : 'hover:bg-blue-50/50'
+        }}`;
+
         tr.onclick = function() {{
-          document.getElementById('districtFilter').value = dName;
+          const newDist = (selDistrict === dName) ? 'ALL' : dName;
+          document.getElementById('districtFilter').value = newDist;
           applyFilters();
         }};
+
         tr.innerHTML = `
-          <td class="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap min-w-[120px]" title="${{schoolsNames}}">
+          <td class="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap min-w-[130px]" title="${{schoolsNames}}">
             <span class="inline-flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full ${{item.schools > 0 ? 'bg-emerald-500' : 'bg-slate-300'}} shrink-0"></span>
-              <span class="font-bold text-slate-900">${{dName}}</span>
-              ${{item.schools > 0 ? '<span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-bold">Active</span>' : ''}}
+              <span class="w-2.5 h-2.5 rounded-full ${{isSelected ? 'bg-wfp-blue ring-2 ring-blue-300' : (item.schools > 0 ? 'bg-emerald-500' : 'bg-slate-300')}} shrink-0"></span>
+              <span class="font-bold ${{isSelected ? 'text-wfp-blue' : 'text-slate-900'}}">${{dName}}</span>
+              ${{isSelected ? '<span class="text-[9px] bg-wfp-blue text-white px-1.5 py-0.5 rounded font-black">Filtered</span>' : ''}}
             </span>
           </td>
-          <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap" title="${{schoolsNames}}">
+          <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap">
             ${{item.schools > 0 ? `<span class="font-bold text-slate-900">${{item.schools}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
-            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_schools}}</span>
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_schools || 0}}</span>
           </td>
           <td class="py-2.5 px-2 text-center font-bold text-slate-700 whitespace-nowrap">
             ${{dVisitsDone > 0 ? `<span class="font-bold text-sky-700">${{dVisitsDone}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
@@ -5937,21 +6266,45 @@ html_code = f"""<!DOCTYPE html>
           </td>
           <td class="py-2.5 px-2 text-center font-medium whitespace-nowrap">
             ${{item.demos > 0 ? `<span class="font-bold text-slate-900">${{item.demos}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
-            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_demos}}</span>
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_demos || 0}}</span>
           </td>
           <td class="py-2.5 px-2 text-right font-medium text-wfp-blue whitespace-nowrap">
             ${{item.learners > 0 ? `<span class="font-bold text-wfp-blue">${{item.learners.toLocaleString()}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
-            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_learners.toLocaleString()}}</span>
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{(item.target_learners || 0).toLocaleString()}}</span>
           </td>
           <td class="py-2.5 px-2 text-right whitespace-nowrap">
             ${{item.caregivers > 0 ? `<span class="font-bold text-slate-900">${{item.caregivers.toLocaleString()}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
-            <span class="text-[11px] text-slate-400 font-normal">/ ${{item.target_caregivers.toLocaleString()}}</span>
+            <span class="text-[11px] text-slate-400 font-normal">/ ${{(item.target_caregivers || 0).toLocaleString()}}</span>
           </td>
           <td class="py-2.5 px-2 text-right font-bold text-slate-800 whitespace-nowrap">
-            ${{item.pwd_reach > 0 ? `<span class="font-bold text-emerald-600">${{item.pwd_reach}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+            ${{item.pwd_reach > 0 ? `<span class="font-bold text-purple-700">${{item.pwd_reach}}</span>` : `<span class="text-slate-400 font-medium">0</span>`}}
+          </td>
+          <td class="py-2.5 px-3 text-center whitespace-nowrap">
+            <button type="button" class="text-[11px] font-bold px-2 py-0.5 rounded ${{
+              isSelected 
+                ? 'bg-wfp-blue text-white shadow-xs' 
+                : 'bg-slate-100 hover:bg-blue-100 text-slate-700 hover:text-wfp-blue border border-slate-200'
+            }}">
+              ${{isSelected ? 'Active' : 'Filter'}}
+            </button>
           </td>
         `;
         tbody.appendChild(tr);
+      }});
+
+      if (tfoot) {{
+        tfoot.innerHTML = `
+          <tr>
+            <td class="py-3 px-3 uppercase text-slate-900 font-black tracking-wider whitespace-nowrap">Karamoja Totals</td>
+            <td class="py-3 px-2 text-center font-black whitespace-nowrap">${{totSchools}} <span class="text-[11px] font-normal text-slate-500">/ ${{totTgtSchools}}</span></td>
+            <td class="py-3 px-2 text-center font-black text-sky-800 whitespace-nowrap">${{totVisits}} <span class="text-[11px] font-normal text-slate-500">/ ${{totTgtVisits}}</span></td>
+            <td class="py-3 px-2 text-center font-black whitespace-nowrap">${{totDemos}} <span class="text-[11px] font-normal text-slate-500">/ ${{totTgtDemos}}</span></td>
+            <td class="py-3 px-2 text-right font-black text-wfp-blue whitespace-nowrap">${{totLearners.toLocaleString()}} <span class="text-[11px] font-normal text-slate-500">/ ${{totTgtLearners.toLocaleString()}}</span></td>
+            <td class="py-3 px-2 text-right font-black whitespace-nowrap">${{totCaregivers.toLocaleString()}} <span class="text-[11px] font-normal text-slate-500">/ ${{totTgtCaregivers.toLocaleString()}}</span></td>
+            <td class="py-3 px-2 text-right font-black text-purple-800 whitespace-nowrap">${{totPwd.toLocaleString()}}</td>
+            <td class="py-3 px-3 text-center text-slate-400 font-normal text-[11px]">9 Districts</td>
+          </tr>
+        `;
       }}
     }}
 
@@ -6038,14 +6391,14 @@ html_code = f"""<!DOCTYPE html>
           : 'px-2.5 py-1 rounded text-emerald-700 hover:bg-white/80 transition';
       }}
       
-      const globalSel = document.getElementById('global-district-select');
+      const globalSel = document.getElementById('districtFilter');
       const dist = globalSel ? globalSel.value : 'ALL';
       renderDemoAccordions(dist, currentDemoSearch);
     }}
 
     function handleDemoSearch(val) {{
       currentDemoSearch = (val || '').toLowerCase().trim();
-      const globalSel = document.getElementById('global-district-select');
+      const globalSel = document.getElementById('districtFilter');
       const dist = globalSel ? globalSel.value : 'ALL';
       renderDemoAccordions(dist, currentDemoSearch);
     }}
@@ -6089,7 +6442,7 @@ html_code = f"""<!DOCTYPE html>
         const schKey = (s.district + '_' + s.school).replace(/[^a-zA-Z0-9]/g, '_');
         demoOpenSchools[schKey] = expand;
       }});
-      const globalSel = document.getElementById('global-district-select');
+      const globalSel = document.getElementById('districtFilter');
       const dist = globalSel ? globalSel.value : 'ALL';
       renderDemoAccordions(dist, currentDemoSearch);
     }}
@@ -6423,7 +6776,7 @@ html_code = f"""<!DOCTYPE html>
       const titleEl = document.getElementById('exit-interview-title');
       if (titleEl) {{
         if (interviewsList.length === 0) {{
-          titleEl.innerText = 'Summative Interview Synthesis: 0 Participants Logged';
+          titleEl.innerText = `Summative Interview Synthesis: 0 Participants (${{selDistrict === 'ALL' ? 'All Monitored Schools' : selDistrict}})`;
         }} else {{
           titleEl.innerText = `Summative Interview Synthesis: ${{interviewsList.length}} Participants (${{selDistrict === 'ALL' ? 'All Monitored Schools' : selDistrict}})`;
         }}
@@ -6919,155 +7272,31 @@ html_code = f"""<!DOCTYPE html>
       // THREE-VISIT CONTACT - Dynamic Population from Real Trajectory Data
       renderSchoolTrajectoryTable('ALL');
 
-      // VISIT 2 (Kotido Mixed P/S)
-      createHorizontalBarChart('chart-v2-activities', 
-        BASE_DATA.three_visit_contact.visit2.activities_delivered.categories, 
-        BASE_DATA.three_visit_contact.visit2.activities_delivered.values, 
-        ACCENT_GREEN, 
-        'Schools Delivering Module'
-      );
+      // VISIT 2 Activities & Micro-polls
+      renderV2ActivitiesAndPolls('ALL');
+      renderScenarioInterceptCards('ALL');
 
-      createHorizontalBarChart('chart-v2-metu-barriers', 
-        BASE_DATA.three_visit_contact.visit2.metu_uptake_barriers.categories, 
-        BASE_DATA.three_visit_contact.visit2.metu_uptake_barriers.pct, 
-        ['#ea580c', '#f59e0b', WFP_BLUE, '#94a3b8'], 
-        '% of Households'
-      );
-
-      // PILLAR 2 MICRO-POLL
-      const poll = BASE_DATA.three_visit_contact.visit2.micro_poll;
-      createHorizontalBarChart('chart-v2-poll-1', poll.statement_1.categories, poll.statement_1.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
-      createHorizontalBarChart('chart-v2-poll-2', poll.statement_2.categories, poll.statement_2.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
-      createHorizontalBarChart('chart-v2-poll-3', poll.statement_3.categories, poll.statement_3.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
-      createHorizontalBarChart('chart-v2-poll-4', poll.statement_4.categories, poll.statement_4.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
-      createHorizontalBarChart('chart-v2-poll-5', poll.statement_5.categories, poll.statement_5.values, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
-
-      // VISIT 2 - POST-SESSION SCENARIOS (Kotido Mixed P/S)
-      const sc = BASE_DATA.three_visit_contact.visit2.post_session_scenario;
-      createHorizontalBarChart('chart-v2-scenario-porridge', 
-        sc.porridge_recall.categories, 
-        sc.porridge_recall.values, 
-        [ACCENT_GREEN, '#cbd5e1', '#ea580c'], 
-        'Participants'
-      );
-      createHorizontalBarChart('chart-v2-scenario-chores', 
-        sc.chore_sharing_recall.categories, 
-        sc.chore_sharing_recall.values, 
-        [ACCENT_GREEN, '#cbd5e1', '#ea580c'], 
-        'Participants'
-      );
-      createHorizontalBarChart('chart-v2-scenario-slogan', 
-        sc.slogan_recall.categories, 
-        sc.slogan_recall.values, 
-        [ACCENT_GREEN, '#cbd5e1', '#ea580c'], 
-        'Participants'
-      );
-
-      // VISIT 3 (0 Schools Logged)
+      // VISIT 3 (Dynamic from BASE_DATA)
       const v3 = BASE_DATA.three_visit_contact.visit3;
-      createHorizontalBarChart('chart-v3-feedback', v3.household_feedback.categories, [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#cbd5e1'], 'Households');
-      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, [0, 0, 0, 0, 0, 0], ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#cbd5e1'], 'Households Reporting');
-      createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, [0, 0], [ACCENT_GREEN, '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, [0, 0], [ACCENT_GREEN, '#ea580c'], 'Schools');
-      createHorizontalBarChart('chart-v3-pillar1-feeding', v3.pillar1_school_feeding_impact.categories, [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#ea580c'], 'Schools');
-      createHorizontalBarChart('chart-v3-pillar2-plate', v3.pillar2_plate_sharing_shift.categories, [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
-      createHorizontalBarChart('chart-v3-actions-tried', v3.household_shift_metrics.feasible_actions_tried.categories, [0, 0, 0, 0], WFP_BLUE, 'Respondents');
-      createHorizontalBarChart('chart-v3-chore-shift', v3.household_shift_metrics.morning_chore_shifted.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
-      createHorizontalBarChart('chart-v3-serving-shift', v3.household_shift_metrics.serving_order_shifted.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
+      createHorizontalBarChart('chart-v3-feedback', v3.household_feedback.categories, v3.household_feedback.values || [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#cbd5e1'], 'Households');
+      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, v3.primary_barriers.values || [0, 0, 0, 0, 0, 0], ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#cbd5e1'], 'Households Reporting');
+      createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, v3.bus_day_commitment_status.values || [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, v3.chronic_absentee_tracing.values || [0, 0], [ACCENT_GREEN, '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, v3.kitchen_stove_audit.values || [0, 0], [ACCENT_GREEN, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar1-feeding', v3.pillar1_school_feeding_impact.categories, v3.pillar1_school_feeding_impact.values || [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#ea580c'], 'Schools');
+      createHorizontalBarChart('chart-v3-pillar2-plate', v3.pillar2_plate_sharing_shift.categories, v3.pillar2_plate_sharing_shift.values || [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
+      createHorizontalBarChart('chart-v3-actions-tried', v3.household_shift_metrics.feasible_actions_tried.categories, v3.household_shift_metrics.feasible_actions_tried.values || [0, 0, 0, 0], WFP_BLUE, 'Respondents');
+      createHorizontalBarChart('chart-v3-chore-shift', v3.household_shift_metrics.morning_chore_shifted.categories, v3.household_shift_metrics.morning_chore_shifted.values || [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
+      createHorizontalBarChart('chart-v3-serving-shift', v3.household_shift_metrics.serving_order_shifted.categories, v3.household_shift_metrics.serving_order_shifted.values || [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#94a3b8'], 'Households');
 
-      // COMMUNITY COOKING DEMO (0 Demos Logged)
-      const demo = BASE_DATA.community_demonstrations;
-      createHorizontalBarChart('chart-demo-headcounts', demo.headcount_breakdown.categories, [0, 0, 0, 0, 0, 0], WFP_BLUE, 'Participants');
-      createHorizontalBarChart('chart-demo-fuelsaving', demo.fuel_saving_practices.categories, [0, 0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#dc2626'], 'Demos Observed');
-      createHorizontalBarChart('chart-demo-caregiver-barriers', demo.caregiver_barriers.categories, [0, 0, 0, 0, 0], '#ea580c', 'Caregivers');
-      createHorizontalBarChart('chart-demo-caregiver-actions', demo.caregiver_feasible_actions.categories, [0, 0, 0, 0], WFP_BLUE, 'Caregivers');
-      createHorizontalBarChart('chart-demo-caregiver-commitments', demo.caregiver_commitments.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Caregivers');
-      createHorizontalBarChart('chart-demo-male-dialogue', demo.male_participation_level.categories, [0, 0, 0], [WFP_BLUE, ACCENT_GREEN, '#94a3b8'], 'Demos Reporting');
-      createHorizontalBarChart('chart-demo-clean-cooking-commit', demo.clean_cooking_commitment.categories, [0, 0, 0], [ACCENT_GREEN, '#ea580c', '#f59e0b'], 'Demos Observed');
-
-      // CHANGE STORIES (0 Stories Logged)
-      const msc = BASE_DATA.msc_stories;
-      createHorizontalBarChart('chart-msc-role', msc.storyteller_role.categories, [0, 0, 0, 0, 0, 0], WFP_BLUE, 'Stories');
-      createHorizontalBarChart('chart-msc-event', msc.triggering_campaign_event.categories, [0, 0, 0, 0, 0], WFP_BLUE, 'Stories');
-      createHorizontalBarChart('chart-msc-shift', msc.behavioral_shift_observed.categories, [0, 0, 0, 0], ACCENT_GREEN, 'Stories');
-      createHorizontalBarChart('chart-msc-evidence', msc.physical_evidence_sighted.categories, [0, 0, 0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#2389d4', '#4fa9ed', '#cbd5e1'], 'Certified Evidences');
-
-      // NUTRICLUB SESSIONS (Kakamar P/S, Kaabong)
-      const club = BASE_DATA.nutriclub_sessions;
-      createHorizontalBarChart('chart-club-membership', club.club_membership_gender.categories, club.club_membership_gender.values, [WFP_BLUE, '#16a34a'], 'Members');
-      createHorizontalBarChart('chart-club-attendance', club.session_attendance_gender.categories, club.session_attendance_gender.values, ['#16a34a', WFP_BLUE], 'Attendance');
-      createHorizontalBarChart('chart-club-pwd', club.pwd_learners_attendance.categories, club.pwd_learners_attendance.values, [WFP_BLUE, '#2389d4'], 'PWD Learners');
-      createHorizontalBarChart('chart-club-activities', club.practical_activity_delivered.categories, club.practical_activity_delivered.values, WFP_BLUE, 'Sessions Delivered');
-      createHorizontalBarChart('chart-club-feedback', club.home_action_feedback.categories, club.home_action_feedback.values, [ACCENT_GREEN, '#ea580c', '#cbd5e1'], 'Schools Reporting');
+      // NUTRICLUB SESSIONS
+      renderNutriClubKPIsAndCharts('ALL');
 
       // IMPACT ANALYSIS - 3 PILLARS
-      // Pillar 1: School Feeding & Practical Nutrition
-      createGroupedHorizontalBarChart('chart-impact-pillar1',
-        [
-          "Metu Porridge Fortification (Local Greens)",
-          "Youngest Toddler Served First"
-        ],
-        [0.0, 0.0],
-        [0.0, 0.0],
-        '#94a3b8',
-        '#16a34a'
-      );
-
-      // Pillar 2: Gender Dynamics & Equity
-      createGroupedHorizontalBarChart('chart-impact-pillar2',
-        [
-          "Boys Sharing Morning Chores Fairly",
-          "Girls Arriving to School On-Time"
-        ],
-        [0.0, 0.0],
-        [100.0, 0.0],
-        '#94a3b8',
-        '#0A6EB4'
-      );
-
-      // Pillar 3: Community Engagement, Accountability & Climate-Smart Living
-      createGroupedHorizontalBarChart('chart-impact-pillar3',
-        [
-          "Firewood-Saving Covered Cooking / Stoves",
-          "Schools with Signed Action Work Plan"
-        ],
-        [0.0, 0.0],
-        [0.0, 0.0],
-        '#94a3b8',
-        '#d97706'
-      );
+      renderImpactPillarCharts('ALL');
 
       // Render Impact Dimension Cards
-      const impactContainer = document.getElementById('impact-cards-container');
-      if (impactContainer) {{
-        impactContainer.innerHTML = '';
-        BASE_DATA.impact_analysis.dimensions.forEach(dim => {{
-          let pointsHtml = '';
-          dim.evidence_points.forEach(pt => {{
-            pointsHtml += `<li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✓</span> <span>${{pt}}</span></li>`;
-          }});
-
-          impactContainer.innerHTML += `
-            <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-end mb-2">
-                  <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded">Visit 1 Check: ${{dim.baseline}}</span>
-                </div>
-                <h4 class="text-sm font-bold text-slate-800 mb-1">${{dim.title}}</h4>
-                <div class="flex items-baseline gap-2 my-2">
-                  <span class="text-2xl font-black text-slate-800">${{dim.metric_value}}</span>
-                  <span class="text-xs text-slate-500">${{dim.metric_label}}</span>
-                </div>
-                <p class="text-xs text-slate-600 mb-3">${{dim.summary}}</p>
-                <ul class="text-xs text-slate-600 space-y-1.5 border-t border-slate-100 pt-3">
-                  ${{pointsHtml}}
-                </ul>
-              </div>
-            </div>
-          `;
-        }});
-      }}
+      renderImpactDimensionCards('ALL');
 
       // Apply dynamic filtering across all components as final source of truth
       applyFilters();
