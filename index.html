@@ -844,7 +844,7 @@
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">20.0% Yes (2/10 Schools — KOTIDO MIXED P/S, CHEPKARARAT P/S)</span>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">20.0% Yes (2/10 Schools)</span>
               <span class="text-xs text-slate-500 font-medium">Orientation pp. 9–10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</h4>
@@ -1198,14 +1198,14 @@
             <span>Visit 1: Orientation Follow-up & Material Handover Check</span>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-1 rounded-lg border border-emerald-200">
-            10 of 64 Schools Verified (KATIKIT P/S (Amudat), KAMACHARIKOL P/S (Kaabong), LOPUTUK P/S (Moroto), ALAKAS P/S (Amudat), NAWANATAU P/S (Moroto), CHILD JESUS P/S (Moroto), NADUNGET P/S (Moroto), KALAPATA P/S (Kaabong), PAJAR P/S (Kaabong), KACHIKOL P/S (Kaabong))
+            10 of 64 Schools Verified
           </span>
         </div>
 
         <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-slate-700 flex items-center justify-between gap-3">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-circle-check text-wfp-blue text-sm"></i>
-            <span><strong>Visit 1 Status:</strong> 10 primary schools verified (KATIKIT P/S (Amudat), KAMACHARIKOL P/S (Kaabong), LOPUTUK P/S (Moroto), ALAKAS P/S (Amudat), NAWANATAU P/S (Moroto), CHILD JESUS P/S (Moroto), NADUNGET P/S (Moroto), KALAPATA P/S (Kaabong), PAJAR P/S (Kaabong), KACHIKOL P/S (Kaabong)). Enrolment baselines (13,915 pupils), weekly attendance records (11,183 pupils), institutional readiness checks, and material handover logs captured.</span>
+            <span><strong>Visit 1 Status:</strong> 10 primary schools verified. Enrolment baselines (13,915 pupils), weekly attendance records (11,183 pupils), institutional readiness checks, and material handover logs captured.</span>
           </div>
           <span class="px-2 py-0.5 bg-blue-100 text-wfp-blue font-bold rounded text-[11px] shrink-0">10 of 64 Logged</span>
         </div>
@@ -1517,9 +1517,6 @@
               <p class="text-xs text-slate-500">Live headcount audit of on-compound participants attending the Big Bus activation day event (Interactive session reach, NOT school register count):</p>
             </div>
             <div class="flex items-center gap-2 text-xs">
-              <span id="v2-headcount-pill" class="px-3 py-1 bg-purple-50 text-purple-800 font-bold rounded-lg border border-purple-200">
-                Total Activation Headcount: 12363 (KATIKIT P/S, ALAKAS P/S, NAMODO P/S, CHEPKARARAT P/S, KAMACHARIKOL P/S, PAJAR P/S, KACHIKOL P/S, Kotido mixed PS, KOTIDO GIRLS P/S, KASIMERI P/S, LOPUTUK P/S, NAWANATAU P/S, CHILD JESUS P/S, NADUNGET P/S, ST MARYS P/S)
-              </span>
               <span id="v2-pwd-pill" class="px-3 py-1 bg-purple-50 text-purple-700 font-bold rounded-lg border border-purple-200">
                 Total PWD Participants: 453 (3.7%)
               </span>
@@ -2164,9 +2161,6 @@
               <h4 class="text-sm font-bold text-slate-800">Primary reasons for low uptake or preparation know-how of WFP's Metu porridge</h4>
               <p class="text-xs text-slate-500">Diagnostic evaluating why households struggle with Metu porridge preparation despite cash support or market access</p>
             </div>
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Sample: 5 Visit 2 Schools (Kotido mixed PS (Kotido), KASIMERI P/S (Moroto), ST MARYS P/S (Nakapiripirit), KATIKIT P/S (Amudat), ALAKAS P/S (Amudat), NAMODO P/S (Amudat), LOPUTUK P/S (Moroto), NAWANATAU P/S (Moroto), CHEPKARARAT P/S (Amudat), CHILD JESUS P/S (Moroto), NADUNGET P/S (Moroto), KASIMERI P/S (Moroto), KAMACHARIKOL P/S (Kaabong), PAJAR P/S (Kaabong), KACHIKOL P/S (Kaabong), KOTIDO GIRLS P/S (Kotido))
-            </span>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-5 space-y-3">
@@ -7381,7 +7375,7 @@
         44,
         45
       ],
-      "last_synced": "2026-10-08 04:23:06"
+      "last_synced": "2026-10-08 04:35:03"
     }
   },
   "overview": {
@@ -16993,7 +16987,7 @@
       const pillPwd = document.getElementById('v2-pwd-pill');
 
       if (schoolsLogged.length === 0) {
-        if (pillHeadcount) pillHeadcount.innerText = `Total Activation Headcount: 0 (Awaiting Visit 2 in ${selDistrict})`;
+        if (pillHeadcount) pillHeadcount.innerText = `Total Activation Headcount: 0`;
         if (pillPwd) pillPwd.innerText = `Total PWD Participants: 0 (0.0%)`;
         tbody.innerHTML = `
           <tr>
@@ -17035,7 +17029,7 @@
       const grandPwdPct = grandTotal > 0 ? ((grandPwd / grandTotal) * 100).toFixed(1) : '0.0';
 
       if (pillHeadcount) {
-        pillHeadcount.innerText = `Total Activation Headcount: ${grandTotal} (${schoolsLogged.join(', ')})`;
+        pillHeadcount.innerText = `Total Activation Headcount: ${grandTotal.toLocaleString()}`;
       }
       if (pillPwd) {
         pillPwd.innerText = `Total PWD Participants: ${grandPwd} (${grandPwdPct}%)`;

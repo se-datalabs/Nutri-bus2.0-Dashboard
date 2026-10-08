@@ -446,8 +446,8 @@ v2_tfoot_pre_html = f"""
     <td class="p-3 text-center"><span class="px-2 py-0.5 rounded text-[11px] font-black bg-purple-100 text-purple-800">{v2_grand_pwd_pct}% PWD</span></td>
   </tr>
 """
-v2_pill_headcount_text = f"Total Activation Headcount: {v2_grand_tot} ({', '.join(v2_pre_schools)})" if v2_pre_schools else "Total Activation Headcount: 0 (Awaiting Visit 2)"
-v2_pill_pwd_text = f"Total PWD Participants: {v2_grand_pwd} ({v2_grand_pwd_pct}%)"
+v2_pill_headcount_text = f"Total Activation Headcount: {v2_grand_tot:,}" if v2_pre_schools else "Total Activation Headcount: 0"
+v2_pill_pwd_text = f"Total PWD Participants: {v2_grand_pwd:,} ({v2_grand_pwd_pct}%)"
 
 # Pre-render Visit 2 Registered School Weekly Attendance (Register Audit)
 v2_sch_att_records = []
@@ -1401,7 +1401,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">{orient_part_pct}% Yes ({orient_part_cnt}/{orient_part_tot} Schools{f' — {orient_part_schools_str}' if orient_part_cnt > 0 else ''})</span>
+              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">{orient_part_pct}% Yes ({orient_part_cnt}/{orient_part_tot} Schools)</span>
               <span class="text-xs text-slate-500 font-medium">Orientation pp. 9–10</span>
             </div>
             <h4 class="text-sm font-bold text-slate-800 mb-1">Were partner networks (e.g., UNAC, Afi) engaged in this orientation for capacity strengthening and sustainability?</h4>
@@ -1755,14 +1755,14 @@ html_code = f"""<!DOCTYPE html>
             <span>Visit 1: Orientation Follow-up & Material Handover Check</span>
           </div>
           <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-1 rounded-lg border border-emerald-200">
-            {v1_sch_completed} of 64 Schools Verified ({v1_schools_str})
+            {v1_sch_completed} of 64 Schools Verified
           </span>
         </div>
 
         <div class="p-3.5 bg-blue-50/60 rounded-xl border border-blue-200 text-xs text-slate-700 flex items-center justify-between gap-3">
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-circle-check text-wfp-blue text-sm"></i>
-            <span><strong>Visit 1 Status:</strong> {v1_sch_completed} primary school{'' if v1_sch_completed == 1 else 's'} verified ({v1_schools_str}). Enrolment baselines ({v1_enrol_tot:,} pupils), weekly attendance records ({v1_att_tot:,} pupils), institutional readiness checks, and material handover logs captured.</span>
+            <span><strong>Visit 1 Status:</strong> {v1_sch_completed} primary school{'' if v1_sch_completed == 1 else 's'} verified. Enrolment baselines ({v1_enrol_tot:,} pupils), weekly attendance records ({v1_att_tot:,} pupils), institutional readiness checks, and material handover logs captured.</span>
           </div>
           <span class="px-2 py-0.5 bg-blue-100 text-wfp-blue font-bold rounded text-[11px] shrink-0">{v1_sch_completed} of 64 Logged</span>
         </div>
@@ -2056,9 +2056,6 @@ html_code = f"""<!DOCTYPE html>
               <p class="text-xs text-slate-500">Live headcount audit of on-compound participants attending the Big Bus activation day event (Interactive session reach, NOT school register count):</p>
             </div>
             <div class="flex items-center gap-2 text-xs">
-              <span id="v2-headcount-pill" class="px-3 py-1 bg-purple-50 text-purple-800 font-bold rounded-lg border border-purple-200">
-                {v2_pill_headcount_text}
-              </span>
               <span id="v2-pwd-pill" class="px-3 py-1 bg-purple-50 text-purple-700 font-bold rounded-lg border border-purple-200">
                 {v2_pill_pwd_text}
               </span>
@@ -2241,9 +2238,6 @@ html_code = f"""<!DOCTYPE html>
               <h4 class="text-sm font-bold text-slate-800">Primary reasons for low uptake or preparation know-how of WFP's Metu porridge</h4>
               <p class="text-xs text-slate-500">Diagnostic evaluating why households struggle with Metu porridge preparation despite cash support or market access</p>
             </div>
-            <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-3 py-1 rounded border border-blue-200">
-              Sample: {v2_completed_count} Visit 2 Schools ({v2_schools_str})
-            </span>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-5 space-y-3">
@@ -5893,7 +5887,7 @@ html_code = f"""<!DOCTYPE html>
       const pillPwd = document.getElementById('v2-pwd-pill');
 
       if (schoolsLogged.length === 0) {{
-        if (pillHeadcount) pillHeadcount.innerText = `Total Activation Headcount: 0 (Awaiting Visit 2 in ${{selDistrict}})`;
+        if (pillHeadcount) pillHeadcount.innerText = `Total Activation Headcount: 0`;
         if (pillPwd) pillPwd.innerText = `Total PWD Participants: 0 (0.0%)`;
         tbody.innerHTML = `
           <tr>
@@ -5935,7 +5929,7 @@ html_code = f"""<!DOCTYPE html>
       const grandPwdPct = grandTotal > 0 ? ((grandPwd / grandTotal) * 100).toFixed(1) : '0.0';
 
       if (pillHeadcount) {{
-        pillHeadcount.innerText = `Total Activation Headcount: ${{grandTotal}} (${{schoolsLogged.join(', ')}})`;
+        pillHeadcount.innerText = `Total Activation Headcount: ${{grandTotal.toLocaleString()}}`;
       }}
       if (pillPwd) {{
         pillPwd.innerText = `Total PWD Participants: ${{grandPwd}} (${{grandPwdPct}}%)`;
