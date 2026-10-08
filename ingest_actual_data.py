@@ -1134,22 +1134,19 @@ if tot_demos == 0:
             },
             "specified_partners": {
                 "question": "If yes, specify partner name",
-                "categories": ["UNAC", "AFI", "Other"],
-                "values": [0, 0, 0],
-                "pct": ["0.0%", "0.0%", "0.0%"],
-                "other_specified": "Pending field submissions"
+                "categories": ["UNAC", "AFI"],
+                "values": [0, 0],
+                "pct": ["0.0%", "0.0%"]
             },
             "partner_role_observed": {
                 "question": "Partner role observed",
                 "categories": [
                     "Co-facilitating clean cooking/gender dialogue",
                     "Mentoring local VHTs/Elders",
-                    "Observing for sustainability tracking",
-                    "Other"
+                    "Observing for sustainability tracking"
                 ],
-                "values": [0, 0, 0, 0],
-                "pct": ["0.0%", "0.0%", "0.0%", "0.0%"],
-                "other_specified": "Pending field verification"
+                "values": [0, 0, 0],
+                "pct": ["0.0%", "0.0%", "0.0%"]
             }
         },
         "headcount_breakdown": {
@@ -1345,21 +1342,29 @@ for short_lbl, col_sub in act_keys:
     act_vals.append(cnt)
 
 barr_keys = [
-    ('Lack of preparation confidence/skills', 'Lack of preparation confidence/skills'),
-    ('Ingredients not prioritized at household level', 'Ingredients not prioritized at household level'),
-    ('Other', 'Other'),
-    ('Taste preference barriers', 'Taste preference barriers')
+    ('Ingredients not prioritized at household level', 'Ingredients not prioritized at household level', None),
+    ('Taste preference barriers', 'Taste preference barriers', None),
+    ('Lack of preparation confidence/skills', 'Lack of preparation confidence/skills', None),
+    ('Other', 'Other', 'Specify12')
 ]
-barr_cats = [k[0] for k in barr_keys]
+barr_cats = []
 barr_vals = []
-for lbl, sub in barr_keys:
+for lbl, sub, spec_col in barr_keys:
     m_cols = [c for c in df.columns if 'primary reason' in c.lower() and sub in c]
     cnt = 0
     for idx_v, r_v in v2_rows.iterrows():
         for mc in m_cols:
             if r_v.get(mc) == 1.0 or str(r_v.get(mc)).strip() == '1':
-                cnt += 1
+                if spec_col:
+                    val_spec = str(r_v.get(spec_col, '')).strip()
+                    if val_spec and val_spec.lower() not in ['nan', 'none', '']:
+                        cnt += 1
+                else:
+                    cnt += 1
                 break
+    if lbl == 'Other' and cnt == 0:
+        continue # Omit Other when specify is blank/empty
+    barr_cats.append(lbl)
     barr_vals.append(cnt)
 tot_barr_responses = sum(barr_vals)
 barr_pct = [round((v / tot_barr_responses * 100), 1) if tot_barr_responses > 0 else 0.0 for v in barr_vals]

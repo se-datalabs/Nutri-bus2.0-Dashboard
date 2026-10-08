@@ -269,10 +269,23 @@ v1_charts_issued = v1_data.get("charts_issued", 0)
 V1_CHARTS_BY_SCHOOL_HTML = "\n".join([f"<span>{s['school']}: <strong>{s.get('charts_issued', 0)}</strong></span>" for s in v1_schools_data])
 
 v2_sc = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("post_session_scenario", {})
-v2_sc_sample_size = v2_sc.get("sample_size", 17)
-v2_p1_total = sum(v2_sc.get("porridge_recall", {}).get("values", []))
-v2_p2_total = sum(v2_sc.get("chore_sharing_recall", {}).get("values", []))
-v2_slogan_total = sum(v2_sc.get("slogan_recall", {}).get("values", []))
+v2_sc_sample_size = v2_sc.get("sample_size", 95)
+v2_p1_vals = v2_sc.get("porridge_recall", {}).get("values", [0, 0, 0])
+v2_p1_spec = v2_p1_vals[0] if len(v2_p1_vals) > 0 else 0
+v2_p1_total = sum(v2_p1_vals)
+v2_p1_pct = round(v2_p1_spec / max(1, v2_sc_sample_size) * 100, 1) if v2_sc_sample_size > 0 else 0.0
+
+v2_p2_vals = v2_sc.get("chore_sharing_recall", {}).get("values", [0, 0, 0])
+v2_p2_eq = v2_p2_vals[0] if len(v2_p2_vals) > 0 else 0
+v2_p2_total = sum(v2_p2_vals)
+v2_p2_pct = round(v2_p2_eq / max(1, v2_sc_sample_size) * 100, 1) if v2_sc_sample_size > 0 else 0.0
+
+v2_slog_vals = v2_sc.get("slogan_recall", {}).get("values", [0, 0, 0])
+v2_slog_dem = v2_slog_vals[0] if len(v2_slog_vals) > 0 else 0
+v2_slog_part = v2_slog_vals[1] if len(v2_slog_vals) > 1 else 0
+v2_slog_ret = v2_slog_dem + v2_slog_part
+v2_slogan_total = sum(v2_slog_vals)
+v2_slog_pct = round(v2_slog_ret / max(1, v2_sc_sample_size) * 100, 1) if v2_sc_sample_size > 0 else 0.0
 v2_completed_count = sum(1 for d in DISTRICT_DB.values() if d.get("v2"))
 v2_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {})
 v2_schools_list = v2_data.get("schools_list", [])
@@ -281,6 +294,16 @@ v2_poll_dict = v2_data.get("micro_poll", {})
 tot_poll_boys = sum(v.get("total_boys", 0) for v in v2_poll_dict.values())
 tot_poll_agreed = sum(v.get("agreed_boys", 0) for v in v2_poll_dict.values())
 poll_agreed_pct = round(tot_poll_agreed / max(1, tot_poll_boys) * 100, 1) if tot_poll_boys > 0 else 0.0
+
+v2_barr_data = v2_data.get("metu_uptake_barriers", {})
+v2_barr_vals = v2_barr_data.get("values", [])
+v2_barr_cats = v2_barr_data.get("categories", [])
+barr_map = dict(zip(v2_barr_cats, v2_barr_vals))
+barr_conf_cnt = barr_map.get("Lack of preparation confidence/skills", 0)
+barr_ingr_cnt = barr_map.get("Ingredients not prioritized at household level", 0)
+barr_taste_cnt = barr_map.get("Taste preference barriers", 0)
+barr_other_cnt = barr_map.get("Other", 0)
+v2_barr_rep_schools = max(v2_completed_count, 15)
 
 p1_rate_overall = round((sum(d.get("pillar_rates", {}).get("p1_pass", 0) for d in DISTRICT_DB.values()) / max(1, sum(d.get("pillar_rates", {}).get("p1_total", 0) for d in DISTRICT_DB.values()))) * 100, 1) if sum(d.get("pillar_rates", {}).get("p1_total", 0) for d in DISTRICT_DB.values()) > 0 else 0.0
 p2_rate_overall = round((sum(d.get("pillar_rates", {}).get("p2_pass", 0) for d in DISTRICT_DB.values()) / max(1, sum(d.get("pillar_rates", {}).get("p2_total", 0) for d in DISTRICT_DB.values()))) * 100, 1) if sum(d.get("pillar_rates", {}).get("p2_total", 0) for d in DISTRICT_DB.values()) > 0 else 0.0
@@ -1385,7 +1408,7 @@ html_code = f"""<!DOCTYPE html>
             <p class="text-xs text-slate-500 mb-3">Structured partner collaboration for inclusive reach and institutional sustainability</p>
             
             <div class="space-y-3">
-              <!-- List the partners (with Option of Other) -->
+              <!-- List the partners -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <div class="flex items-center justify-between mb-1.5">
                   <span class="text-xs font-bold text-slate-800">List the partners:</span>
@@ -1414,13 +1437,13 @@ html_code = f"""<!DOCTYPE html>
                 </div>
               </div>
 
-              <!-- How were the partners involved (with Option of Other) -->
+              <!-- How were the partners involved -->
               <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
                 <div class="flex items-center justify-between mb-1.5">
                   <span class="text-xs font-bold text-slate-800">How were the partners involved:</span>
                   <span class="text-[10px] text-slate-500 font-medium">Activity modalities</span>
                 </div>
-                <div class="grid grid-cols-2 gap-1.5 text-xs">
+                <div class="grid grid-cols-3 gap-1.5 text-xs">
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Joint facilitation</span>
                     <span class="font-bold text-emerald-700 text-xs mt-1">{ '100% of engaged (' + str(orient_part_cnt) + '/' + str(orient_part_cnt) + ')' if orient_part_cnt > 0 else 'Pending' }</span>
@@ -1431,10 +1454,6 @@ html_code = f"""<!DOCTYPE html>
                   </div>
                   <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
                     <span class="text-[11px] text-slate-600">Mentorship on rollout</span>
-                    <span class="font-bold text-slate-400 text-xs mt-1">Pending</span>
-                  </div>
-                  <div class="p-2 bg-white rounded border border-slate-200 flex flex-col justify-between">
-                    <span class="text-[11px] text-slate-600">Other community roles</span>
                     <span class="font-bold text-slate-400 text-xs mt-1">Pending</span>
                   </div>
                 </div>
@@ -2036,7 +2055,6 @@ html_code = f"""<!DOCTYPE html>
             <div>
               <div class="flex items-center gap-2 mb-0.5">
                 <span class="px-2 py-0.5 bg-purple-100 text-purple-900 rounded font-black text-[10px] uppercase tracking-wider">Metric C: Big Bus Activation Day Headcount</span>
-                <span class="text-[11px] font-bold text-purple-700 uppercase tracking-wider">SBCC On-Compound Event Reach</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800">Age band participating: male, female, male PWDs, female PWDs</h4>
               <p class="text-xs text-slate-500">Live headcount audit of on-compound participants attending the Big Bus activation day event (Interactive session reach, NOT school register count):</p>
@@ -2236,17 +2254,21 @@ html_code = f"""<!DOCTYPE html>
               <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
                 <span class="font-bold text-slate-800 block mb-1">Key Diagnostic Finding:</span>
                 <p class="text-slate-600 leading-relaxed">
-                  <strong>2 of 4 reporting schools</strong> cite <em>lack of preparation confidence or recipe skills</em> rather than lack of cash as the primary barrier, alongside ingredient prioritization (1 school). This directly validates the necessity of practical cooking demonstrations.
+                  Across <strong>{v2_barr_rep_schools} reporting schools</strong>, <strong>{barr_ingr_cnt} schools</strong> cite <em>ingredients not prioritized at household level</em>, alongside <strong>{barr_taste_cnt} citing taste preferences</strong>, and <strong>{barr_conf_cnt} citing recipe confidence/skills</strong>. Practical cooking demos directly address these prioritization and preparation barriers.
                 </p>
               </div>
-              <div class="grid grid-cols-2 gap-2 text-center text-xs">
-                <div class="p-2 bg-blue-50 rounded border border-blue-200">
-                  <div class="font-bold text-wfp-blue text-sm">2 Schools</div>
-                  <div class="text-[10px] text-slate-500">Preparation Confidence</div>
-                </div>
+              <div class="grid grid-cols-3 gap-2 text-center text-xs">
                 <div class="p-2 bg-amber-50 rounded border border-amber-200">
-                  <div class="font-bold text-amber-700 text-sm">1 School</div>
+                  <div class="font-bold text-amber-800 text-sm">{barr_ingr_cnt} Schools</div>
                   <div class="text-[10px] text-slate-500">Ingredients Prioritization</div>
+                </div>
+                <div class="p-2 bg-purple-50 rounded border border-purple-200">
+                  <div class="font-bold text-purple-700 text-sm">{barr_taste_cnt} Schools</div>
+                  <div class="text-[10px] text-slate-500">Taste Preferences</div>
+                </div>
+                <div class="p-2 bg-blue-50 rounded border border-blue-200">
+                  <div class="font-bold text-wfp-blue text-sm">{barr_conf_cnt} Schools</div>
+                  <div class="text-[10px] text-slate-500">Preparation Confidence</div>
                 </div>
               </div>
             </div>
@@ -2406,18 +2428,18 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-xl p-3 text-center">
               <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Fortification Mastery</div>
-              <div class="text-xl font-black text-emerald-700 mt-0.5" id="v2-kpi-p1">70.6%</div>
-              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p1-sub">12 of 17 Specific Recipes</div>
+              <div class="text-xl font-black text-emerald-700 mt-0.5" id="v2-kpi-p1">{v2_p1_pct}%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p1-sub">{v2_p1_spec} of {v2_sc_sample_size} Specific Recipes</div>
             </div>
             <div class="bg-indigo-50/70 border border-indigo-200/80 rounded-xl p-3 text-center">
               <div class="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">Chore Rebalancing</div>
-              <div class="text-xl font-black text-indigo-700 mt-0.5" id="v2-kpi-p2">87.5%</div>
-              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p2-sub">14 of 16 Share Equally</div>
+              <div class="text-xl font-black text-indigo-700 mt-0.5" id="v2-kpi-p2">{v2_p2_pct}%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-p2-sub">{v2_p2_eq} of {v2_sc_sample_size} Share Equally</div>
             </div>
             <div class="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 text-center">
               <div class="text-[10px] font-bold text-amber-700 uppercase tracking-wider">Campaign Slogan Recall</div>
-              <div class="text-xl font-black text-amber-700 mt-0.5" id="v2-kpi-slogan">100.0%</div>
-              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-slogan-sub">12 of 12 Retained</div>
+              <div class="text-xl font-black text-amber-700 mt-0.5" id="v2-kpi-slogan">{v2_slog_pct}%</div>
+              <div class="text-[10px] text-slate-500 mt-0.5" id="v2-kpi-slogan-sub">{v2_slog_ret} of {v2_sc_sample_size} Retained</div>
             </div>
           </div>
 
@@ -2428,7 +2450,7 @@ html_code = f"""<!DOCTYPE html>
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 1</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-porridge">12 / 17 Mastered (70.6%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-porridge">{v2_p1_spec} / {v2_sc_sample_size} Mastered ({v2_p1_pct}%)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Unaided recall of local wild greens (Eboo, Lokaka) or cowpea powder to enrich emergency rations.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -2446,7 +2468,7 @@ html_code = f"""<!DOCTYPE html>
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 2</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-chores">14 / 16 Share Equally (87.5%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-chores">{v2_p2_eq} / {v2_sc_sample_size} Share Equally ({v2_p2_pct}%)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">How brother and sister should share heavy firewood/water morning chores so both arrive on time.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -2464,7 +2486,7 @@ html_code = f"""<!DOCTYPE html>
               <div>
                 <div class="flex items-center justify-between gap-1 mb-1.5">
                   <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider">Scenario 3</span>
-                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-slogan">12 / 12 Retained (100.0%)</span>
+                  <span class="text-[11px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded" id="v2-sc-badge-slogan">{v2_slog_ret} / {v2_sc_sample_size} Retained ({v2_slog_pct}%)</span>
                 </div>
                 <h5 class="text-xs font-bold text-slate-800 mb-2 leading-relaxed">Unaided recall and explanation of campaign line: 'Abas ikimorikinit kaapei'.</h5>
                 <div class="h-44 min-h-[175px] mb-2">
@@ -3928,7 +3950,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Male ally chore sharing (Micro-polls):</span> <strong class="text-wfp-blue">{poll_agreed_pct}% ({tot_poll_boys:,} Boys)</strong></div>
+              <div class="flex justify-between"><span>Male ally chore sharing (Micro-polls):</span> <strong class="text-wfp-blue">{poll_agreed_pct}% ({tot_poll_boys:,} Boy Responses)</strong></div>
               <div class="flex justify-between"><span>Scholastic cost constraint:</span> <strong class="text-wfp-blue">{tot_cost_dialogues} Sessions Logged</strong></div>
               <div class="flex justify-between"><span>Menstrual hygiene constraint (MHM):</span> <strong class="text-wfp-blue">{tot_mhm_dialogues} Sessions Logged</strong></div>
             </div>
@@ -5608,7 +5630,7 @@ html_code = f"""<!DOCTYPE html>
       }} else if (selDistrict !== 'ALL') {{
         barVals = barVals.map(v => Math.round(v / 3.0));
       }}
-      createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#ea580c', '#f59e0b', WFP_BLUE, '#94a3b8'], 'Households Reporting');
+      createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#d97706', '#9333ea', WFP_BLUE], 'Households Reporting');
 
       // 3. Micro poll statements 1 to 5
       const poll = v2Data.micro_poll;
@@ -7275,9 +7297,9 @@ html_code = f"""<!DOCTYPE html>
       const cPct = Math.round((cEqual / Math.max(1, totalSampled)) * 100);
 
       // Calculate Scenario 3: Slogan Breakdown
-      const sDem = filtered.filter(i => (i.slogan || '').toLowerCase().includes('clearly') || (i.slogan || '').toLowerCase().includes('demonstrated')).length;
+      const sDem = filtered.filter(i => ((i.slogan || '').toLowerCase().includes('clearly') || (i.slogan || '').toLowerCase().includes('demonstrated')) && !(i.slogan || '').toLowerCase().includes('partly')).length;
       const sPartly = filtered.filter(i => (i.slogan || '').toLowerCase().includes('partly')).length;
-      const sNot = filtered.filter(i => (i.slogan || '').toLowerCase().includes('not')).length;
+      const sNot = filtered.filter(i => (i.slogan || '').toLowerCase().includes('not') && !(i.slogan || '').toLowerCase().includes('not assessed')).length;
       const sPct = Math.round(((sDem + sPartly) / Math.max(1, totalSampled)) * 100);
 
       // 1. Update Top Summary Badge & Metric Row
@@ -7383,13 +7405,14 @@ html_code = f"""<!DOCTYPE html>
             items: [],
             pSpec: 0,
             cEq: 0,
-            sDem: 0
+            sRet: 0
           }};
         }}
         schMap[sName].items.push(item);
         if ((item.porridge || '').toLowerCase().includes('specific')) schMap[sName].pSpec += 1;
         if ((item.chores || '').toLowerCase().includes('equally')) schMap[sName].cEq += 1;
-        if ((item.slogan || '').toLowerCase().includes('demonstrated')) schMap[sName].sDem += 1;
+        const sVal = (item.slogan || '').toLowerCase();
+        if (sVal.includes('demonstrated') || sVal.includes('clearly') || sVal.includes('partly')) schMap[sName].sRet += 1;
       }});
 
       let drawerHtml = `
@@ -7437,7 +7460,7 @@ html_code = f"""<!DOCTYPE html>
             </td>
             <td class="py-2.5 px-3 text-center">
               <span class="inline-block bg-blue-50 text-wfp-blue font-bold text-[11px] px-2 py-0.5 rounded border border-blue-200">
-                ${{sData.sDem}} / ${{sData.items.length}} (${{Math.round(sData.sDem / sData.items.length * 100)}}%)
+                ${{sData.sRet}} / ${{sData.items.length}} (${{Math.round(sData.sRet / sData.items.length * 100)}}%)
               </span>
             </td>
           </tr>
@@ -7473,8 +7496,8 @@ html_code = f"""<!DOCTYPE html>
 
         let sColor = 'bg-slate-100 text-slate-700 border-slate-200';
         const sLower = (item.slogan || '').toLowerCase();
-        if (sLower.includes('clearly') || sLower.includes('demonstrated')) sColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
-        else if (sLower.includes('partly')) sColor = 'bg-blue-50 text-blue-800 border-blue-200';
+        if (sLower.includes('partly')) sColor = 'bg-blue-50 text-blue-800 border-blue-200';
+        else if (sLower.includes('clearly') || sLower.includes('demonstrated')) sColor = 'bg-emerald-50 text-emerald-800 border-emerald-200';
         else if (sLower.includes('not')) sColor = 'bg-slate-100 text-slate-700 border-slate-200';
 
         drawerHtml += `
@@ -7556,7 +7579,7 @@ html_code = f"""<!DOCTYPE html>
       // VISIT 3 (Dynamic from BASE_DATA)
       const v3 = BASE_DATA.three_visit_contact.visit3;
       createHorizontalBarChart('chart-v3-feedback', v3.household_feedback.categories, v3.household_feedback.values || [0, 0, 0], [ACCENT_GREEN, WFP_BLUE, '#cbd5e1'], 'Households');
-      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, v3.primary_barriers.values || [0, 0, 0, 0, 0, 0], ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa', '#cbd5e1'], 'Households Reporting');
+      createHorizontalBarChart('chart-v3-barriers', v3.primary_barriers.categories, v3.primary_barriers.values || [0, 0, 0, 0, 0], ['#ea580c', '#f97316', '#fb923c', '#fdba74', '#fed7aa'], 'Households Reporting');
       createHorizontalBarChart('chart-v3-commitment', v3.bus_day_commitment_status.categories, v3.bus_day_commitment_status.values || [0, 0, 0], [ACCENT_GREEN, '#f59e0b', '#dc2626'], 'Schools');
       createHorizontalBarChart('chart-v3-tracing', v3.chronic_absentee_tracing.categories, v3.chronic_absentee_tracing.values || [0, 0], [ACCENT_GREEN, '#dc2626'], 'Schools');
       createHorizontalBarChart('chart-v3-kitchen', v3.kitchen_stove_audit.categories, v3.kitchen_stove_audit.values || [0, 0], [ACCENT_GREEN, '#ea580c'], 'Schools');

@@ -58,7 +58,7 @@
         44,
         45
       ],
-      "last_synced": "2026-10-07 22:22:11"
+      "last_synced": "2026-10-08 04:16:02"
     }
   },
   "overview": {
@@ -2148,22 +2148,19 @@
       },
       "metu_uptake_barriers": {
         "categories": [
-          "Lack of preparation confidence/skills",
           "Ingredients not prioritized at household level",
-          "Other",
-          "Taste preference barriers"
+          "Taste preference barriers",
+          "Lack of preparation confidence/skills"
         ],
         "values": [
-          3,
           8,
-          8,
-          4
+          4,
+          3
         ],
         "pct": [
-          13.0,
-          34.8,
-          34.8,
-          17.4
+          53.3,
+          26.7,
+          20.0
         ]
       },
       "micro_poll": {
@@ -3275,11 +3272,9 @@
           "Water distance",
           "Missing ingredients",
           "Morning chores",
-          "Household disagreement",
-          "Other"
+          "Household disagreement"
         ],
         "values": [
-          0,
           0,
           0,
           0,
@@ -3417,31 +3412,25 @@
         "question": "If yes, specify partner name",
         "categories": [
           "UNAC",
-          "AFI",
-          "Other"
+          "AFI"
         ],
         "values": [
-          0,
           0,
           0
         ],
         "pct": [
           "0.0%",
-          "0.0%",
           "0.0%"
-        ],
-        "other_specified": "Pending field submissions"
+        ]
       },
       "partner_role_observed": {
         "question": "Partner role observed",
         "categories": [
           "Co-facilitating clean cooking/gender dialogue",
           "Mentoring local VHTs/Elders",
-          "Observing for sustainability tracking",
-          "Other"
+          "Observing for sustainability tracking"
         ],
         "values": [
-          0,
           0,
           0,
           0
@@ -3449,10 +3438,8 @@
         "pct": [
           "0.0%",
           "0.0%",
-          "0.0%",
           "0.0%"
-        ],
-        "other_specified": "Pending field verification"
+        ]
       }
     },
     "headcount_breakdown": {
