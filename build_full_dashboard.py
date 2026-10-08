@@ -1432,9 +1432,6 @@ html_code = f"""<!DOCTYPE html>
                     <span class="font-bold {'text-slate-400 bg-slate-100' if part_afi_cnt == 0 else 'text-emerald-700 bg-emerald-50'} px-2 py-0.5 rounded text-[11px]">{part_afi_pct}% ({part_afi_cnt}/{orient_part_tot})</span>
                   </div>
                 </div>
-                <div class="mt-2 p-2 bg-blue-50/60 rounded border border-blue-200 text-[11px] text-slate-700">
-                  <strong class="text-wfp-blue">Partner Scope:</strong> {f'DEO and Health Centre co-facilitation active at {orient_part_schools_str} orientation.' if orient_part_cnt > 0 else 'Pending partner network co-facilitation.'}
-                </div>
               </div>
 
               <!-- How were the partners involved -->
@@ -1776,7 +1773,6 @@ html_code = f"""<!DOCTYPE html>
             <div>
               <div class="flex items-center gap-2 mb-0.5">
                 <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-black text-[10px] uppercase tracking-wider">Metric A: School Enrolment Baseline</span>
-                <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">Census Captured at Visit 1 Only</span>
               </div>
               <h4 class="text-sm font-bold text-slate-800">Official boys enrolment and girls enrolment for this term</h4>
               <p class="text-xs text-slate-500">Official registered enrolment baseline census established during Visit 1 orientation follow-up (constant denominator across all contact cycles)</p>
