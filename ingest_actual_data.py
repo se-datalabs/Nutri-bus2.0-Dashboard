@@ -1345,6 +1345,7 @@ barr_keys = [
     ('Ingredients not prioritized at household level', 'Ingredients not prioritized at household level', None),
     ('Taste preference barriers', 'Taste preference barriers', None),
     ('Lack of preparation confidence/skills', 'Lack of preparation confidence/skills', None),
+    ('Limited access to the cooking materials', 'Limited access to the cooking materials', None),
     ('Other', 'Other', 'Specify12')
 ]
 barr_cats = []
@@ -1357,7 +1358,7 @@ for lbl, sub, spec_col in barr_keys:
             if r_v.get(mc) == 1.0 or str(r_v.get(mc)).strip() == '1':
                 if spec_col:
                     val_spec = str(r_v.get(spec_col, '')).strip()
-                    if val_spec and val_spec.lower() not in ['nan', 'none', '']:
+                    if val_spec and val_spec.lower() not in ['nan', 'none', ''] and 'cooking materials' not in val_spec.lower():
                         cnt += 1
                 else:
                     cnt += 1

@@ -302,6 +302,7 @@ barr_map = dict(zip(v2_barr_cats, v2_barr_vals))
 barr_conf_cnt = barr_map.get("Lack of preparation confidence/skills", 0)
 barr_ingr_cnt = barr_map.get("Ingredients not prioritized at household level", 0)
 barr_taste_cnt = barr_map.get("Taste preference barriers", 0)
+barr_cook_cnt = barr_map.get("Limited access to the cooking materials", 0)
 barr_other_cnt = barr_map.get("Other", 0)
 v2_barr_rep_schools = max(v2_completed_count, 15)
 
@@ -2244,10 +2245,10 @@ html_code = f"""<!DOCTYPE html>
               <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
                 <span class="font-bold text-slate-800 block mb-1">Key Diagnostic Finding:</span>
                 <p class="text-slate-600 leading-relaxed">
-                  Across <strong>{v2_barr_rep_schools} reporting schools</strong>, <strong>{barr_ingr_cnt} schools</strong> cite <em>ingredients not prioritized at household level</em>, alongside <strong>{barr_taste_cnt} citing taste preferences</strong>, <strong>{barr_conf_cnt} citing recipe confidence/skills</strong>{f', and <strong>{barr_other_cnt} citing limited cooking materials</strong> (specified in field tool)' if barr_other_cnt > 0 else ''}. Practical cooking demos directly address these prioritization and preparation barriers.
+                  Across <strong>{v2_barr_rep_schools} reporting schools</strong>, <strong>{barr_ingr_cnt} schools</strong> cite <em>ingredients not prioritized at household level</em>, alongside <strong>{barr_taste_cnt} citing taste preferences</strong>, <strong>{barr_conf_cnt} citing recipe confidence/skills</strong>{f', and <strong>{barr_cook_cnt} citing limited access to cooking materials</strong>' if barr_cook_cnt > 0 else ''}{f', and <strong>{barr_other_cnt} citing other factors</strong>' if barr_other_cnt > 0 else ''}. Practical cooking demos directly address these prioritization and preparation barriers.
                 </p>
               </div>
-              <div class="grid { 'grid-cols-2 gap-2' if barr_other_cnt > 0 else 'grid-cols-3 gap-2' } text-center text-xs">
+              <div class="grid { 'grid-cols-2 gap-2' if (barr_cook_cnt > 0 or barr_other_cnt > 0) else 'grid-cols-3 gap-2' } text-center text-xs">
                 <div class="p-2 bg-amber-50 rounded border border-amber-200">
                   <div class="font-bold text-amber-800 text-sm">{barr_ingr_cnt} Schools</div>
                   <div class="text-[10px] text-slate-500">Ingredients Prioritization</div>
@@ -2260,9 +2261,13 @@ html_code = f"""<!DOCTYPE html>
                   <div class="font-bold text-wfp-blue text-sm">{barr_conf_cnt} Schools</div>
                   <div class="text-[10px] text-slate-500">Preparation Confidence</div>
                 </div>
+                {f'''<div class="p-2 bg-rose-50 rounded border border-rose-200">
+                  <div class="font-bold text-rose-800 text-sm">{barr_cook_cnt} School{'s' if barr_cook_cnt > 1 else ''}</div>
+                  <div class="text-[10px] text-slate-500">Cooking Materials Access</div>
+                </div>''' if barr_cook_cnt > 0 else ''}
                 {f'''<div class="p-2 bg-slate-100 rounded border border-slate-200">
                   <div class="font-bold text-slate-700 text-sm">{barr_other_cnt} School{'s' if barr_other_cnt > 1 else ''}</div>
-                  <div class="text-[10px] text-slate-500">Cooking Materials (Specified)</div>
+                  <div class="text-[10px] text-slate-500">Other (Specified)</div>
                 </div>''' if barr_other_cnt > 0 else ''}
               </div>
             </div>
@@ -5624,7 +5629,7 @@ html_code = f"""<!DOCTYPE html>
       }} else if (selDistrict !== 'ALL') {{
         barVals = barVals.map(v => Math.round(v / 3.0));
       }}
-      createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#d97706', '#9333ea', WFP_BLUE, '#64748b'], 'Households Reporting');
+      createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#d97706', '#9333ea', WFP_BLUE, '#e11d48', '#64748b'], 'Households Reporting');
 
       // 3. Micro poll statements 1 to 5
       const poll = v2Data.micro_poll;
