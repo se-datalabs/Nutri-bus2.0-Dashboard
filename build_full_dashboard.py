@@ -266,7 +266,7 @@ v1_att_boys = v1_data.get("attendance", {}).get("boys", 0)
 v1_att_girls = v1_data.get("attendance", {}).get("girls", 0)
 v1_att_tot = v1_data.get("attendance", {}).get("total", 0)
 v1_charts_issued = v1_data.get("charts_issued", 0)
-V1_CHARTS_BY_SCHOOL_HTML = "\n".join([f"<span>{s['school']}: <strong>{s.get('charts_issued', 0)}</strong></span>" for s in v1_schools_data])
+V1_CHARTS_BY_SCHOOL_HTML = ""
 
 v2_sc = BASE_DATA.get("three_visit_contact", {}).get("visit2", {}).get("post_session_scenario", {})
 v2_sc_sample_size = v2_sc.get("sample_size", 95)
@@ -1647,20 +1647,8 @@ html_code = f"""<!DOCTYPE html>
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
         <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
           <div>
-            <div class="flex items-center gap-2 mb-0.5">
-              <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider">64 schools longitudinal roster</span>
-              <span class="text-xs bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-200">District Accordions</span>
-            </div>
             <h4 class="text-sm font-bold text-slate-800">School-by-school attendance trajectory across Visit 1, 2 and 3</h4>
             <p class="text-xs text-slate-500">Weekly attendance tracking organized by district (click any district to expand or collapse schools):</p>
-          </div>
-          <div class="flex items-center gap-2 text-xs flex-wrap">
-            <span class="px-2.5 py-1 bg-blue-50 text-wfp-blue font-bold rounded-lg border border-blue-200">
-              64 schools target
-            </span>
-            <span id="traj-active-cohort-pill" class="px-2.5 py-1 bg-sky-50 text-sky-800 font-bold rounded-lg border border-sky-200">
-              3 active cohorts (Kotido, Moroto, Nakapiripirit)
-            </span>
           </div>
         </div>
 
@@ -1772,9 +1760,6 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
-              <div class="flex items-center gap-2 mb-0.5">
-                <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-black text-[10px] uppercase tracking-wider">Metric A: School Enrolment Baseline</span>
-              </div>
               <h4 class="text-sm font-bold text-slate-800">Official boys enrolment and girls enrolment for this term</h4>
               <p class="text-xs text-slate-500">Official registered enrolment baseline census established during Visit 1 orientation follow-up (constant denominator across all contact cycles)</p>
             </div>
@@ -1877,9 +1862,7 @@ html_code = f"""<!DOCTYPE html>
                 <div class="text-[11px] text-slate-400 mt-0.5">Target: 1,840 across 64 schools</div>
               </div>
             </div>
-            <div id="footer-v1-charts" class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-1">
-              {V1_CHARTS_BY_SCHOOL_HTML}
-            </div>
+            <div id="footer-v1-charts" class="hidden"></div>
           </div>
 
           <!-- Question 5: Classes Receiving Materials -->
@@ -1920,11 +1903,7 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-6 border border-slate-200/80 card-shadow space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <div class="flex items-center gap-2 mb-1">
-                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 rounded font-black text-[10px] uppercase tracking-wider">Metric B: School Register Attendance</span>
-                <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Visit 1 Baseline Register Audit</span>
-                <span id="badge-v1-scope-label" class="hidden text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded border border-blue-200"></span>
-              </div>
+              <span id="badge-v1-scope-label" class="hidden text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded border border-blue-200"></span>
               <h4 class="text-base font-bold text-slate-800">School attendance: registered boys and girls weekly attendance</h4>
               <p class="text-xs text-slate-500">Weekly attendance headcounts by grade band (ECD-P2, P3-P4, P5-P7) and sex recorded directly from official school registers during Visit 1</p>
             </div>
@@ -2095,10 +2074,6 @@ html_code = f"""<!DOCTYPE html>
         <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
-              <div class="flex items-center gap-2 mb-0.5">
-                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 rounded font-black text-[10px] uppercase tracking-wider">Metric B: School Register Attendance</span>
-                <span class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider">Visit 2 Mid-Cycle Register Audit</span>
-              </div>
               <h4 class="text-sm font-bold text-slate-800">School attendance: registered boys and girls weekly attendance (Visit 2 Audit)</h4>
               <p class="text-xs text-slate-500">Official weekly attendance headcounts by grade band and sex recorded directly from official school registers during Visit 2 school visits:</p>
             </div>
@@ -4648,8 +4623,8 @@ html_code = f"""<!DOCTYPE html>
         }});
 
         const statusPill = distActiveSchools > 0
-          ? `<span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200 text-xs flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600 text-[10px]"></i> ${{distActiveSchools}} Active Cohort (${{distVisitsDone}} Visit Conducted)</span>`
-          : `<span class="px-2.5 py-0.5 bg-slate-100 text-slate-500 font-medium rounded-lg text-[11px]">0 Visits Conducted</span>`;
+          ? `<span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-800 font-bold rounded-lg border border-emerald-200 text-xs flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600 text-[10px]"></i> Active</span>`
+          : `<span class="px-2.5 py-0.5 bg-slate-100 text-slate-500 font-medium rounded-lg text-xs">Pending</span>`;
 
         card.innerHTML = `
           <button type="button" 
@@ -4660,12 +4635,11 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-map-location-dot"></i>
               </span>
               <div>
-                <h5 class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <h5 class="text-xs font-bold text-slate-900">
                   <span>${{dName}} District</span>
-                  <span class="text-[11px] font-normal text-slate-500">(${{dSchools.length}} Primary Schools)</span>
                 </h5>
                 <p class="text-[11px] text-slate-500 mt-0.5">
-                  Total Baseline Enrolment: <strong class="text-slate-700">${{totEnrol.toLocaleString()}}</strong> Pupils · Cohort Coverage Target: 3 Visits per School
+                  Weekly Register Attendance Tracking
                 </p>
               </div>
             </div>
@@ -5434,9 +5408,7 @@ html_code = f"""<!DOCTYPE html>
 
       const footerCharts = document.getElementById('footer-v1-charts');
       if (footerCharts) {{
-        footerCharts.innerHTML = filteredV1Schools.length > 0
-          ? filteredV1Schools.map(s => `<span>${{s.school}}: <strong>${{s.charts_issued || 0}}</strong></span>`).join(' ')
-          : '<span class="text-slate-400">No schools in filter</span>';
+        footerCharts.innerHTML = '';
       }}
       const footerAct = document.getElementById('footer-v1-active');
       if (footerAct) {{
@@ -5540,15 +5512,6 @@ html_code = f"""<!DOCTYPE html>
       // Re-render school trajectory table
       renderSchoolTrajectoryTable(selDistrict);
 
-      const trajPill = document.getElementById('traj-active-cohort-pill');
-      if (trajPill) {{
-        const activeSchools = filteredTrajectorySchools.filter(s => s.v1 !== null || s.v2 !== null || s.v3 !== null);
-        if (activeSchools.length > 0) {{
-          trajPill.innerText = `${{activeSchools.length}} active cohort${{activeSchools.length > 1 ? 's' : ''}} (${{activeSchools.map(s => s.name).join(', ')}})`;
-        }} else {{
-          trajPill.innerText = '0 active cohorts';
-        }}
-      }}
 
       // Sync V1 School Scope with District filter if applicable
       const schoolSel = document.getElementById('v1-school-select');
@@ -6396,19 +6359,18 @@ html_code = f"""<!DOCTYPE html>
                 <i class="fa-solid fa-map-location-dot"></i>
               </span>
               <div>
-                <h5 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <h5 class="text-sm font-bold text-slate-900">
                   <span>${{dName}} District</span>
-                  <span class="text-[11px] font-normal text-slate-500">(${{dSchools.length}} Monitored Primary Schools)</span>
                 </h5>
                 <p class="text-[11px] text-slate-500 mt-0.5">
-                  ${{totMembers}} Registered Club Members · ${{totPwds}} Learners with Disabilities · ${{dSchools.length * 2}} Sessions Completed
+                  Monitored Primary Schools NutriClubs
                 </p>
               </div>
             </div>
             <div class="flex items-center gap-3">
-              <span class="text-xs bg-blue-50 text-wfp-blue font-bold px-2.5 py-0.5 rounded-lg border border-blue-200">
-                ${{dSchools.length * 2}} Sessions Logged
-              </span>
+              ${{totMembers > 0 
+                ? `<span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-0.5 rounded-lg border border-emerald-200">Active NutriClubs</span>` 
+                : `<span class="text-xs bg-slate-100 text-slate-500 font-medium px-2.5 py-0.5 rounded-lg">Pending Setup</span>`}}
               <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200 ${{isOpen ? 'rotate-180' : ''}}" id="chevron-dist-${{dName}}"></i>
             </div>
           </button>
@@ -6902,16 +6864,9 @@ html_code = f"""<!DOCTYPE html>
                   <i class="fa-solid fa-map-pin"></i>
                 </span>
                 <span class="font-extrabold text-sm text-slate-900">${{dist}} District</span>
-                <span class="text-xs bg-white px-2 py-0.5 rounded border border-slate-300 font-bold text-slate-700">
-                  ${{schoolNames.length}} Schools · ${{dSessionsCount}} Demos
+                <span class="text-xs bg-blue-50 text-wfp-blue px-2.5 py-0.5 rounded-lg border border-blue-200 font-bold">
+                  ${{dSessionsCount}} Demonstrations (${{dAttendees.toLocaleString()}} Attendees)
                 </span>
-                <span class="text-xs bg-blue-50 text-wfp-blue px-2 py-0.5 rounded border border-blue-200 font-bold">
-                  ${{dAttendees.toLocaleString()}} Attendees
-                </span>
-                <span class="text-xs bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200 font-bold">
-                  ${{dCompliant}} Compliant
-                </span>
-                ${{dFlagged > 0 ? `<span class="text-xs bg-red-100 text-red-800 px-2 py-0.5 rounded border border-red-300 font-black">🚩 ${{dFlagged}} Flagged</span>` : ''}}
               </div>
               <div class="text-slate-400 pl-2">
                 <i id="demo-dist-chev-${{dist}}" class="fa-solid ${{isDistOpen ? 'fa-chevron-down text-wfp-blue' : 'fa-chevron-right text-slate-400'}} transition-transform"></i>
@@ -6950,17 +6905,10 @@ html_code = f"""<!DOCTYPE html>
                     <i class="fa-solid fa-school"></i>
                   </span>
                   <span class="font-bold text-xs text-slate-900">${{schName}}</span>
-                  <span class="text-[11px] text-slate-500 font-normal">(${{subc}} Sc)</span>
+                  <span class="text-[11px] text-slate-500 font-normal">(${{subc}})</span>
                   <span class="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-semibold">
-                    ${{sessions.length}} Demos
+                    ${{sessions.length}} Session${{sessions.length > 1 ? 's' : ''}}
                   </span>
-                  <span class="text-[10px] bg-blue-50 text-wfp-blue px-2 py-0.5 rounded border border-blue-100 font-bold">
-                    ${{schAttendees.toLocaleString()}} Attendees
-                  </span>
-                  <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-100 font-semibold">
-                    ${{schCompliant}} Compliant
-                  </span>
-                  ${{schFlagged > 0 ? `<span class="text-[10px] bg-red-50 text-red-700 px-2 py-0.5 rounded border border-red-200 font-bold">🚩 ${{schFlagged}} Flagged</span>` : ''}}
                 </div>
                 <div class="text-slate-400 pl-2">
                   <i id="demo-sch-chev-${{schKey}}" class="fa-solid ${{isSchOpen ? 'fa-chevron-down text-wfp-blue' : 'fa-chevron-right text-slate-400'}} text-xs transition-transform"></i>
