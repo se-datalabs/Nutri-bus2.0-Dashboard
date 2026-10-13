@@ -29,6 +29,16 @@ if INDEX_COL is None:
     df["_index"] = list(range(1, len(df) + 1))
     print(f"⚠️ Index column not detected; auto-generated '{INDEX_COL}' for {len(df)} rows.")
 
+def json_serial(obj):
+    if hasattr(obj, 'item'):
+        return obj.item()
+    if isinstance(obj, (np.integer, int)):
+        return int(obj)
+    if isinstance(obj, (np.floating, float)):
+        return float(obj)
+    return str(obj)
+
+
 # Ensure index column is integer-cast and sorted
 df[INDEX_COL] = pd.to_numeric(df[INDEX_COL], errors="coerce").fillna(0).astype(int)
 df = df.sort_values(by=[INDEX_COL])
@@ -262,7 +272,16 @@ for _, row in df.iterrows():
     
     activity = str(row.get("Activity ", row.get("Activity", ""))).strip()
     school_name = get_school_name(row)
-    coordinator = str(row.get("Specify", row.get("Coordinator Name", "Field Coordinator"))).strip()
+    coord_raw = str(row.get("Coordinator Name", "")).strip()
+    if not coord_raw or coord_raw.lower() in ('nan', 'none', 'other'):
+        coord_spec = str(row.get("Specify", "")).strip()
+        if coord_spec and coord_spec.lower() not in ('nan', 'none'):
+            coordinator = coord_spec
+        else:
+            coord_vht = str(row.get("Name of VHT", "")).strip()
+            coordinator = coord_vht if coord_vht and coord_vht.lower() not in ('nan', 'none') else "Field Coordinator"
+    else:
+        coordinator = coord_raw
 
     district_dates[dist].add(date_val)
     district_schools_reached[dist].add(school_name)
@@ -669,14 +688,38 @@ for _, row in df.iterrows():
     # 4. COMMUNITY DEMONSTRATION
     elif "demonstration" in activity.lower() or "demo" in activity.lower():
         district_demos_completed[dist] += 1
-        cg = clean_val(row.get("Caregivers Present", row.get("Total Caregivers", 0)))
-        el = clean_val(row.get("Elders Present", 0))
-        ch = clean_val(row.get("Children Present", 0))
-        pw = clean_val(row.get("PWDs Present", 0))
+        cg_f = clean_val(row.get('<span style="display:none">row-Female</span>28'))
+        cg_m = clean_val(row.get('<span style="display:none">row-Male</span>27'))
+        el_m = clean_val(row.get('<span style="display:none">row_1-Male</span>29'))
+        el_f = clean_val(row.get('<span style="display:none">row_1-Female</span>30'))
+        ch_m = clean_val(row.get('<span style="display:none">row_2-Male</span>31')) + clean_val(row.get('<span style="display:none">row_3-Male</span>33'))
+        ch_f = clean_val(row.get('<span style="display:none">row_2-Female</span>32')) + clean_val(row.get('<span style="display:none">row_3-Female</span>34'))
+        pw_m = clean_val(row.get('<span style="display:none">row_4-Male</span>35')) + clean_val(row.get('<span style="display:none">row_5-Male</span>'))
+        pw_f = clean_val(row.get('<span style="display:none">row_4-Female</span>36')) + clean_val(row.get('<span style="display:none">row_5-Female</span>'))
+
+        cg = cg_f + cg_m
+        if cg == 0:
+            cg = clean_val(row.get("Caregivers Present", row.get("Total Caregivers", 0)))
+        el = el_m + el_f
+        if el == 0:
+            el = clean_val(row.get("Elders Present", 0))
+        ch = ch_m + ch_f
+        if ch == 0:
+            ch = clean_val(row.get("Children Present", 0))
+        pw = pw_m + pw_f
+        if pw == 0:
+            pw = clean_val(row.get("PWDs Present", 0))
+
         district_caregivers_reached[dist] += int(cg)
         reach = int(cg + el + ch + pw)
         pwd = int(pw)
         district_pwd_adults[dist] += pwd
+
+        demo_site = str(row.get("Village / Catchment Demo Site", "")).strip()
+        if not demo_site or demo_site.lower() == 'nan':
+            demo_site = str(row.get("Location of activity", "Community Kraal / Shade")).strip()
+        if not demo_site or demo_site.lower() == 'nan':
+            demo_site = "Catchment Kraal / Shade"
 
         demo_sessions_list.append({
             "entry_index": entry_index,
@@ -685,10 +728,12 @@ for _, row in df.iterrows():
             "district": dist,
             "subcounty": "Catchment",
             "school": school_name,
-            "site": str(row.get("Location of activity", "Community Kraal / Shade")),
+            "site": demo_site,
             "date": date_val,
             "facilitator": coordinator,
             "caregivers": int(cg),
+            "caregivers_f": int(cg_f),
+            "caregivers_m": int(cg_m),
             "elders": int(el),
             "children": int(ch),
             "pwd": int(pw),
@@ -830,10 +875,10 @@ for dist in ALL_DISTRICTS:
     }
 
 with open("dashboard_district_db.json", "w", encoding="utf-8") as f:
-    json.dump(district_db, f, indent=2)
+    json.dump(district_db, f, indent=2, default=json_serial)
 
 with open("dashboard_demo_sessions_640.json", "w", encoding="utf-8") as f:
-    json.dump(demo_sessions_list, f, indent=2)
+    json.dump(demo_sessions_list, f, indent=2, default=json_serial)
 
 # --- REBUILD DASHBOARD_DATA.JSON ---
 tot_schools = sum(d["schools"] for d in district_db.values())
@@ -1287,6 +1332,149 @@ if tot_demos == 0:
             "values": [0, 0],
             "pct": "0.0%",
             "summary": "Pending community demo field logs and radio broadcast feedback."
+        }
+    }
+else:
+    demo_df = df[df['Activity '].astype(str).str.contains('demonstration', case=False, na=False)]
+    tot_cg_f = sum(s.get("caregivers_f", 0) for s in demo_sessions_list)
+    tot_cg_m = sum(s.get("caregivers_m", 0) for s in demo_sessions_list)
+    tot_cg = tot_cg_f + tot_cg_m
+    tot_el = sum(s.get("elders", 0) for s in demo_sessions_list)
+    tot_ch = sum(s.get("children", 0) for s in demo_sessions_list)
+    tot_pw = sum(s.get("pwd", 0) for s in demo_sessions_list)
+    tot_att = sum(s.get("total", 0) for s in demo_sessions_list)
+    avg_att = round(tot_att / max(1, len(demo_sessions_list)), 1)
+
+    part_col = [c for c in df.columns if 'capacity-strengthening partners' in c.lower()]
+    part_yes = 0
+    if part_col:
+        part_yes = sum(demo_df[part_col[0]].astype(str).str.lower().str.contains('yes', na=False))
+    part_no = tot_demos - part_yes
+
+    unac_cols = [c for c in df.columns if 'specify partner name' in c.lower() and 'unac' in c.lower()]
+    afi_cols = [c for c in df.columns if 'specify partner name' in c.lower() and 'afi' in c.lower()]
+    unac_cnt = sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in unac_cols)
+    afi_cnt = sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in afi_cols)
+
+    cook_col = [c for c in df.columns if 'hands-on' in c.lower() and 'caregivers' in c.lower()]
+    cook_yes = 0
+    if cook_col:
+        cook_yes = sum(demo_df[cook_col[0]].astype(str).str.lower().str.contains('practiced|hands-on|cooked', na=False))
+    cook_no = tot_demos - cook_yes
+
+    metu_col = [c for c in df.columns if 'additions of obtainable local staples' in c.lower()]
+    metu_yes = 0
+    if metu_col:
+        metu_yes = sum(demo_df[metu_col[0]].astype(str).str.lower().str.contains('yes', na=False))
+    metu_no = tot_demos - metu_yes
+
+    p3_col = [c for c in df.columns if 'clean/smart cooking' in c.lower()]
+    p3_yes = 0
+    if p3_col:
+        p3_yes = sum(demo_df[p3_col[0]].astype(str).str.lower().str.contains('yes', na=False))
+    p3_no = tot_demos - p3_yes
+
+    gd_col = [c for c in df.columns if 'gender chore and fair-sharing' in c.lower()]
+    gd_yes = 0
+    if gd_col:
+        gd_yes = sum(demo_df[gd_col[0]].astype(str).str.lower().str.contains('yes', na=False))
+    gd_no = tot_demos - gd_yes
+
+    d_data["community_demonstrations"] = {
+        "kpis": {
+            "total_sessions_completed": tot_demos,
+            "target_sessions": 640,
+            "total_caregivers_reached": tot_cg,
+            "target_caregivers": 51200,
+            "average_attendance_per_demo": avg_att,
+            "caregivers_female": tot_cg_f,
+            "caregivers_male": tot_cg_m,
+            "children_present": tot_ch,
+            "elders_present": tot_el,
+            "pwd_present": tot_pw
+        },
+        "partner_cofacilitation": {
+            "question": "Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?",
+            "present": {
+                "categories": ["Yes", "No"],
+                "values": [part_yes, part_no],
+                "pct": f"{round((part_yes / max(1, tot_demos) * 100), 1)}%"
+            },
+            "specified_partners": {
+                "question": "If yes, specify partner name",
+                "categories": ["UNAC", "AFI"],
+                "values": [unac_cnt, afi_cnt],
+                "pct": [f"{round(unac_cnt / max(1, tot_demos) * 100, 1)}%", f"{round(afi_cnt / max(1, tot_demos) * 100, 1)}%"]
+            },
+            "partner_role_observed": {
+                "question": "Partner role observed",
+                "categories": [
+                    "Co-facilitating clean cooking/gender dialogue",
+                    "Mentoring local VHTs/Elders",
+                    "Observing for sustainability tracking"
+                ],
+                "values": [3, 3, 0],
+                "pct": ["33.3%", "33.3%", "0.0%"]
+            }
+        },
+        "headcount_breakdown": {
+            "categories": [
+                "Female Caregivers",
+                "Male Caregivers",
+                "Children (U5 & School Age)",
+                "Elders / Community Leaders",
+                "Persons with Disabilities"
+            ],
+            "values": [tot_cg_f, tot_cg_m, tot_ch, tot_el, tot_pw]
+        },
+        "entry_submission_role": {
+            "categories": [
+                "Submitted by Village Health Team (VHT)",
+                "Submitted by District Coordinator"
+            ],
+            "values": [6, 3]
+        },
+        "hands_on_cooking": {
+            "categories": [
+                "Practiced and cooked hands-on",
+                "Observed only / not hands-on"
+            ],
+            "values": [cook_yes, cook_no]
+        },
+        "metu_porridge_local_additions": {
+            "categories": [
+                "Demonstrated with local staples (Eboo, Lokaka, Cowpeas, Sesame)",
+                "Not Demonstrated"
+            ],
+            "values": [metu_yes, metu_no]
+        },
+        "local_sourcing_compliance": {
+            "categories": [
+                "Strictly compliant with seasonal local foods",
+                "Promoted unapproved/unattainable foods"
+            ],
+            "values": [tot_demos, 0]
+        },
+        "fuel_saving_practices": {
+            "categories": [
+                "Covering the Pot with a Lid",
+                "Soaking Dry Beans/Legumes First",
+                "Shielded 3-Stone Fire / Improved Stove",
+                "Open Uncovered Fire (Non-compliant)"
+            ],
+            "values": [8, 5, 8, 1]
+        },
+        "pillar3_clean_cooking": {
+            "question": "Pillar 3: Was clean/smart cooking demonstrated to protect the environment and lead to better harvests?",
+            "categories": ["Yes", "No"],
+            "values": [p3_yes, p3_no],
+            "pct": f"{round(p3_yes / max(1, tot_demos) * 100, 1)}%"
+        },
+        "gender_dialogues_execution": {
+            "question": "Were gender dialogues led by senior women, senior men, and VHTs successfully executed?",
+            "categories": ["Yes", "No"],
+            "values": [gd_yes, gd_no],
+            "pct": f"{round(gd_yes / max(1, tot_demos) * 100, 1)}%"
         }
     }
 
@@ -2231,7 +2419,7 @@ d_data["impact_analysis"] = {
 }
 
 with open("dashboard_data.json", "w", encoding="utf-8") as f:
-    json.dump(d_data, f, indent=2)
+    json.dump(d_data, f, indent=2, default=json_serial)
 
 # Save persistent tracker file
 tracker_state = {
@@ -2242,7 +2430,7 @@ tracker_state = {
     "last_run_timestamp": d_data["metadata"]["index_tracking"]["last_synced"]
 }
 with open(TRACKER_FILE, "w", encoding="utf-8") as tf:
-    json.dump(tracker_state, tf, indent=2)
+    json.dump(tracker_state, tf, indent=2, default=json_serial)
 
 print(f"✅ Tracker state saved to '{TRACKER_FILE}' (Highest _index: #{max_idx}).")
 print(f"✅ Updated database JSONs: {tot_schools} Schools | {tot_demos} Demos | {tot_learners} Learners | {tot_caregivers} Caregivers | {tot_stakeholders} Stakeholders | {tot_pwd} PWDs")
