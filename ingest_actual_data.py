@@ -105,17 +105,80 @@ def get_col_val(row, patterns, default=""):
 def norm_sch_name(txt):
     return str(txt).upper().replace('P/S', '').replace('PS', '').replace('PRIMARY SCHOOL', '').strip()
 
-def get_school_name(row):
-    dist = str(row.get("District", "")).strip()
+SCHOOL_ALIASES = {
+    ('Karenga', 'kawalakol'): 'KOCHOLO P/S',
+    ('Karenga', 'kawalakol p/s'): 'KOCHOLO P/S',
+    ('Karenga', 'kawalakol ps'): 'KOCHOLO P/S',
+    ('Karenga', 'kocholo'): 'KOCHOLO P/S',
+    ('Nakapiripirit', 'kakomomgole'): 'LOKADWARAN P/S',
+    ('Nakapiripirit', 'kakomomgole p/s'): 'LOKADWARAN P/S',
+    ('Nakapiripirit', 'kakomongole'): 'LOKADWARAN P/S',
+    ('Nakapiripirit', 'lokadwaran'): 'LOKADWARAN P/S',
+}
+
+def resolve_canonical_school(raw_name, dist=None):
+    if not raw_name or str(raw_name).strip().lower() in ('unknown school', 'nan', 'none', ''):
+        return "Unknown School"
+    raw_str = str(raw_name).strip()
+    
+    # 1. Alias check
+    for (d, a), canonical in SCHOOL_ALIASES.items():
+        if (d is None or dist is None or str(d).lower() == str(dist).lower()) and a.lower() in raw_str.lower():
+            return canonical
+
+    # 2. District official schools check
+    cand_schools = DISTRICT_SCHOOLS.get(dist, OFFICIAL_SCHOOLS)
+    if cand_schools and isinstance(cand_schools[0], dict):
+        cand_names = [s['name'] for s in cand_schools]
+    else:
+        cand_names = cand_schools
+
+    norm_raw = norm_sch_name(raw_str)
+    
+    # Exact norm match
+    for s_name in cand_names:
+        if norm_sch_name(s_name) == norm_raw:
+            return s_name
+            
+    # Substring match within candidate schools
+    for s_name in cand_names:
+        s_norm = norm_sch_name(s_name)
+        if s_norm and (s_norm in norm_raw or norm_raw in s_norm):
+            return s_name
+
+    # 3. Fallback across all official schools
+    all_names = [s['name'] for s in OFFICIAL_SCHOOLS]
+    for s_name in all_names:
+        if norm_sch_name(s_name) == norm_raw:
+            return s_name
+    for s_name in all_names:
+        s_norm = norm_sch_name(s_name)
+        if s_norm and (s_norm in norm_raw or norm_raw in s_norm):
+            return s_name
+            
+    return raw_str
+
+def get_school_name(row, dist=None):
+    if not dist:
+        dist = str(row.get("District", "")).strip()
+    raw = None
     if dist in row and pd.notnull(row[dist]):
-        return str(row[dist]).strip()
-    for d in ALL_DISTRICTS:
-        if d in row and pd.notnull(row[d]):
-            return str(row[d]).strip()
-    for col in row.index:
-        if "school" in col.lower() and pd.notnull(row[col]):
-            return str(row[col]).strip()
-    return "Unknown School"
+        raw = str(row[dist]).strip()
+    if not raw:
+        for d in ALL_DISTRICTS:
+            if d in row and pd.notnull(row[d]):
+                raw = str(row[d]).strip()
+                if not dist:
+                    dist = d
+                break
+    if not raw:
+        for col in row.index:
+            if "school" in str(col).lower() and pd.notnull(row[col]):
+                raw = str(row[col]).strip()
+                break
+    if not raw:
+        return "Unknown School"
+    return resolve_canonical_school(raw, dist)
 
 # Data containers
 district_dates = {d: set() for d in ALL_DISTRICTS}
@@ -271,7 +334,7 @@ for _, row in df.iterrows():
         dist = "Abim"  # fallback
     
     activity = str(row.get("Activity ", row.get("Activity", ""))).strip()
-    school_name = get_school_name(row)
+    school_name = get_school_name(row, dist)
     coord_raw = str(row.get("Coordinator Name", "")).strip()
     if not coord_raw or coord_raw.lower() in ('nan', 'none', 'other'):
         coord_spec = str(row.get("Specify", "")).strip()
@@ -284,7 +347,8 @@ for _, row in df.iterrows():
         coordinator = coord_raw
 
     district_dates[dist].add(date_val)
-    district_schools_reached[dist].add(school_name)
+    if school_name and school_name != "Unknown School":
+        district_schools_reached[dist].add(school_name)
 
     reach = 0
     pwd = 0
@@ -1099,7 +1163,7 @@ if "orientation" in d_data:
         "unac_pct": round(part_unac_cnt / max(1, tot_orient) * 100, 1),
         "afi_count": part_afi_cnt,
         "afi_pct": round(part_afi_cnt / max(1, tot_orient) * 100, 1),
-        "engaged_schools_names": [get_school_name(r) for _, r in o_rows.iterrows() if 'yes' in str(r.get(part_cols[0], '')).lower()] if part_cols else []
+        "engaged_schools_names": [get_school_name(r, dist) for _, r in o_rows.iterrows() if 'yes' in str(r.get(part_cols[0], '')).lower()] if part_cols else []
     }
     d_data["orientation"]["disseminated_physical_tools"] = {
         "metu_manuals": tot_tool_metu,
@@ -1504,8 +1568,8 @@ v2_rows = df[df.apply(is_v2_row, axis=1)]
 
 v2_schools = []
 for idx_v, r_v in v2_rows.iterrows():
-    s_name = get_school_name(r_v)
     d_name = str(r_v.get('District', '')).strip()
+    s_name = get_school_name(r_v, d_name)
     v2_schools.append(f"{s_name} ({d_name})")
 
 act_keys = [
@@ -1625,8 +1689,8 @@ slogan_none = 0
 
 v2_respondents = []
 for idx_v, r_v in v2_rows.iterrows():
-    s_name = get_school_name(r_v)
     d_name = str(r_v.get('District', '')).strip()
+    s_name = get_school_name(r_v, d_name)
     p1_cols = [c for c in df.columns if 'plain porridge' in c.lower() and pd.notnull(r_v[c])]
     for c in p1_cols:
         v = str(r_v[c]).lower()

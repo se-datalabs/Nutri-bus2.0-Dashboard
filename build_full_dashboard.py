@@ -43,7 +43,7 @@ for s in OFFICIAL_SCHOOLS:
     for v2_rec in v2_schools_data:
         r_norm = norm_sch_name(v2_rec.get("school", ""))
         rec_dist = v2_rec.get("district", "")
-        is_match = (s_norm in r_norm or r_norm in s_norm) if (r_norm and r_norm != "NAN") else (rec_dist == dist == "Kotido")
+        is_match = bool(r_norm and r_norm != "NAN" and (s_norm in r_norm or r_norm in s_norm))
         if is_match and (rec_dist == dist or dist == ""):
             v2_sch_att = v2_rec.get("school_attendance")
             sch_enrol = s.get("total", s.get("enrolment", 1000))

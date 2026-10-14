@@ -3602,7 +3602,7 @@
       "2026-10-13",
       "2026-10-14"
     ],
-    "schools": 13,
+    "schools": 12,
     "target_schools": 12,
     "demos": 0,
     "target_demos": 120,
@@ -3729,10 +3729,10 @@
     "v1_schools": [],
     "v2": {
       "entry_index": 3,
-      "school": "Kotido mixed PS, KOTIDO GIRLS P/S, LOKIDING P/S, LOKITELAEBU P/S, RENGEN P/S",
+      "school": "KOTIDO MIXED P/S, KOTIDO GIRLS P/S, LOKIDING P/S, LOKITELAEBU P/S, RENGEN P/S",
       "district": "Kotido",
       "schools": [
-        "Kotido mixed PS",
+        "KOTIDO MIXED P/S",
         "KOTIDO GIRLS P/S",
         "LOKIDING P/S",
         "LOKITELAEBU P/S",
@@ -5370,7 +5370,7 @@
     "target_nutriclubs": 5,
     "v1": {
       "entry_index": 75,
-      "school": "NAPIANANYA P/S, LORENG P/S, kakomomgole P/S, LEMUSUI P/S",
+      "school": "NAPIANANYA P/S, LORENG P/S, LOKADWARAN P/S, LEMUSUI P/S",
       "district": "Nakapiripirit",
       "schools_count": 4,
       "enrol_boys": 2771,
@@ -5476,7 +5476,7 @@
         },
         {
           "entry_index": 119,
-          "school": "kakomomgole P/S",
+          "school": "LOKADWARAN P/S",
           "district": "Nakapiripirit",
           "enrol_boys": 475,
           "enrol_girls": 439,
@@ -5627,7 +5627,7 @@
       },
       {
         "entry_index": 119,
-        "school": "kakomomgole P/S",
+        "school": "LOKADWARAN P/S",
         "district": "Nakapiripirit",
         "enrol_boys": 475,
         "enrol_girls": 439,
@@ -5702,13 +5702,13 @@
     ],
     "v2": {
       "entry_index": 9,
-      "school": "ST MARYS P/S, NAPIANANYA P/S, LORENG P/S, kakomomgole P/S",
+      "school": "ST MARYS P/S, NAPIANANYA P/S, LORENG P/S, LOKADWARAN P/S",
       "district": "Nakapiripirit",
       "schools": [
         "ST MARYS P/S",
         "NAPIANANYA P/S",
         "LORENG P/S",
-        "kakomomgole P/S"
+        "LOKADWARAN P/S"
       ],
       "hc_lower_m": 1166,
       "hc_lower_f": 1051,

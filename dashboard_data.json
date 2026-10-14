@@ -10,7 +10,7 @@
       "column": "_index",
       "last_processed_index": 147,
       "total_submissions_tracked": 147,
-      "new_entries_this_batch": 21,
+      "new_entries_this_batch": 0,
       "tracked_indices": [
         1,
         2,
@@ -160,7 +160,7 @@
         146,
         147
       ],
-      "last_synced": "2026-10-14 20:52:28"
+      "last_synced": "2026-10-14 21:28:39"
     }
   },
   "overview": {
@@ -168,10 +168,10 @@
       {
         "id": "schools",
         "title": "Schools Reached",
-        "value": 64,
+        "value": 63,
         "target": 64,
         "unit": "schools",
-        "progress_pct": 100.0,
+        "progress_pct": 98.4,
         "icon": "fa-school",
         "badge": "Active Deployment",
         "context": "3 unique schools reporting: KIRU P/S (Abim), KAKAMAR P/S (Kaabong), KOTIDO MIXED P/S (Kotido)"
@@ -312,9 +312,9 @@
       },
       {
         "district": "Kotido",
-        "schools_reached": 13,
+        "schools_reached": 12,
         "target_schools": 12,
-        "school_progress_pct": 108.3,
+        "school_progress_pct": 100.0,
         "demos_completed": 0,
         "target_demos": 120,
         "demo_progress_pct": 0.0,
@@ -403,7 +403,7 @@
         1200
       ],
       "actuals": [
-        64,
+        63,
         78,
         31,
         22,
@@ -413,7 +413,7 @@
         1024
       ],
       "pct": [
-        100.0,
+        98.4,
         40.6,
         4.8,
         34.4,
@@ -1534,7 +1534,7 @@
         "KIRU P/S (Abim)",
         "MORULEM GIRLS' P/S (Abim)",
         "LORENG P/S (Nakapiripirit)",
-        "kakomomgole P/S (Nakapiripirit)",
+        "LOKADWARAN P/S (Nakapiripirit)",
         "TOROI P/S (Kaabong)",
         "LOTIM P/S (Kaabong)",
         "NABILATUK TOWNSHIP P/S (Nabilatuk)",
@@ -2760,7 +2760,7 @@
         },
         {
           "entry_index": 119,
-          "school": "kakomomgole P/S",
+          "school": "LOKADWARAN P/S",
           "district": "Nakapiripirit",
           "enrol_boys": 475,
           "enrol_girls": 439,
@@ -3092,7 +3092,7 @@
           "meeting_sat": 0
         }
       ],
-      "status": "42 Schools Logged (KATIKIT P/S (Amudat), KAMACHARIKOL P/S (Kaabong), LOPUTUK P/S (Moroto), ALAKAS P/S (Amudat), NAWANATAU P/S (Moroto), CHILD JESUS P/S (Moroto), NADUNGET P/S (Moroto), KALAPATA P/S (Kaabong), PAJAR P/S (Kaabong), KACHIKOL P/S (Kaabong), NARENGEPAK P/S (Kaabong), LORENGEDWAT P/S (Nabilatuk), NATIRAE P/S (Nabilatuk), KATHILE P/S (Kaabong), ALAKAS P/S (Amudat), KOPOTH P/S (Kaabong), LOCHOM P/S (Kaabong), LONGALOM P/S (Napak), LOPEEI P/S (Napak), NAPIANANYA P/S (Nakapiripirit), ROGOM P/S (Abim), NAPONGAE P/S (Nabilatuk), OTALABAR P/S (Abim), MORULEM BOYS P/S (Abim), ALEREK P/S (Abim), AWACH P/S (Abim), KAPUAT P/S (Napak), LORENGECHORA P/S (Napak), PUPUKAMUYA P/S (Abim), OBOLOKOME P/S (Abim), KIRU P/S (Abim), MORULEM GIRLS' P/S (Abim), LORENG P/S (Nakapiripirit), kakomomgole P/S (Nakapiripirit), TOROI P/S (Kaabong), LOTIM P/S (Kaabong), NABILATUK TOWNSHIP P/S (Nabilatuk), ACEGERTOLIM P/S (Nabilatuk), LOMODOCH P/S (Kaabong), KALOTOM P/S (Napak), NAMODO P/S (Amudat), LEMUSUI P/S (Nakapiripirit))",
+      "status": "42 Schools Logged (KATIKIT P/S (Amudat), KAMACHARIKOL P/S (Kaabong), LOPUTUK P/S (Moroto), ALAKAS P/S (Amudat), NAWANATAU P/S (Moroto), CHILD JESUS P/S (Moroto), NADUNGET P/S (Moroto), KALAPATA P/S (Kaabong), PAJAR P/S (Kaabong), KACHIKOL P/S (Kaabong), NARENGEPAK P/S (Kaabong), LORENGEDWAT P/S (Nabilatuk), NATIRAE P/S (Nabilatuk), KATHILE P/S (Kaabong), ALAKAS P/S (Amudat), KOPOTH P/S (Kaabong), LOCHOM P/S (Kaabong), LONGALOM P/S (Napak), LOPEEI P/S (Napak), NAPIANANYA P/S (Nakapiripirit), ROGOM P/S (Abim), NAPONGAE P/S (Nabilatuk), OTALABAR P/S (Abim), MORULEM BOYS P/S (Abim), ALEREK P/S (Abim), AWACH P/S (Abim), KAPUAT P/S (Napak), LORENGECHORA P/S (Napak), PUPUKAMUYA P/S (Abim), OBOLOKOME P/S (Abim), KIRU P/S (Abim), MORULEM GIRLS' P/S (Abim), LORENG P/S (Nakapiripirit), LOKADWARAN P/S (Nakapiripirit), TOROI P/S (Kaabong), LOTIM P/S (Kaabong), NABILATUK TOWNSHIP P/S (Nabilatuk), ACEGERTOLIM P/S (Nabilatuk), LOMODOCH P/S (Kaabong), KALOTOM P/S (Napak), NAMODO P/S (Amudat), LEMUSUI P/S (Nakapiripirit))",
       "enrolment": {
         "boys": 29520,
         "girls": 26309,
@@ -3207,7 +3207,7 @@
       "schools_completed": 36,
       "target_schools": 64,
       "schools_list": [
-        "Kotido mixed PS (Kotido)",
+        "KOTIDO MIXED P/S (Kotido)",
         "KASIMERI P/S (Moroto)",
         "ST MARYS P/S (Nakapiripirit)",
         "KATIKIT P/S (Amudat)",
@@ -3237,7 +3237,7 @@
         "LORENGECHORA P/S (Napak)",
         "LOKIDING P/S (Kotido)",
         "LORENG P/S (Nakapiripirit)",
-        "kakomomgole P/S (Nakapiripirit)",
+        "LOKADWARAN P/S (Nakapiripirit)",
         "LOTIM P/S (Kaabong)",
         "TOROI P/S (Kaabong)",
         "LOKITELAEBU P/S (Kotido)",
@@ -3247,7 +3247,7 @@
       "schools_data": [
         {
           "entry_index": 3,
-          "school": "Kotido mixed PS",
+          "school": "KOTIDO MIXED P/S",
           "district": "Kotido",
           "date": "2026-10-02",
           "pupils_total": 35,
@@ -4194,7 +4194,7 @@
         },
         {
           "entry_index": 120,
-          "school": "kakomomgole P/S",
+          "school": "LOKADWARAN P/S",
           "district": "Nakapiripirit",
           "date": "2026-10-13",
           "pupils_total": 933,
@@ -4801,8 +4801,8 @@
         },
         "respondents": [
           {
-            "id": "Kotido mixed PS - Learner 1",
-            "school": "Kotido mixed PS",
+            "id": "KOTIDO MIXED P/S - Learner 1",
+            "school": "KOTIDO MIXED P/S",
             "district": "Kotido",
             "role": "Learner 1",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -4810,8 +4810,8 @@
             "slogan": "Not assessed"
           },
           {
-            "id": "Kotido mixed PS - Learner 2",
-            "school": "Kotido mixed PS",
+            "id": "KOTIDO MIXED P/S - Learner 2",
+            "school": "KOTIDO MIXED P/S",
             "district": "Kotido",
             "role": "Learner 2",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -4819,8 +4819,8 @@
             "slogan": "Not assessed"
           },
           {
-            "id": "Kotido mixed PS - Learner 3",
-            "school": "Kotido mixed PS",
+            "id": "KOTIDO MIXED P/S - Learner 3",
+            "school": "KOTIDO MIXED P/S",
             "district": "Kotido",
             "role": "Learner 3",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -4828,8 +4828,8 @@
             "slogan": "Not assessed"
           },
           {
-            "id": "Kotido mixed PS - Learner 4",
-            "school": "Kotido mixed PS",
+            "id": "KOTIDO MIXED P/S - Learner 4",
+            "school": "KOTIDO MIXED P/S",
             "district": "Kotido",
             "role": "Learner 4",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -4837,8 +4837,8 @@
             "slogan": "Not assessed"
           },
           {
-            "id": "Kotido mixed PS - Adult 1",
-            "school": "Kotido mixed PS",
+            "id": "KOTIDO MIXED P/S - Adult 1",
+            "school": "KOTIDO MIXED P/S",
             "district": "Kotido",
             "role": "Adult 1",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -6412,8 +6412,8 @@
             "slogan": "Not yet (incorrect, silent, or unaware)"
           },
           {
-            "id": "kakomomgole P/S - Learner 1",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Learner 1",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Learner 1",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -6421,8 +6421,8 @@
             "slogan": "Not yet (incorrect, silent, or unaware)"
           },
           {
-            "id": "kakomomgole P/S - Learner 2",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Learner 2",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Learner 2",
             "porridge": "Incorrect, silences, or names unavailable foods",
@@ -6430,8 +6430,8 @@
             "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
-            "id": "kakomomgole P/S - Learner 3",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Learner 3",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Learner 3",
             "porridge": "Gives a general/vague idea; lacks a concrete action",
@@ -6439,8 +6439,8 @@
             "slogan": "Partly demonstrated (vague or needed prompting)"
           },
           {
-            "id": "kakomomgole P/S - Learner 4",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Learner 4",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Learner 4",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -6448,8 +6448,8 @@
             "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
-            "id": "kakomomgole P/S - Adult 1",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Adult 1",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Adult 1",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -6457,8 +6457,8 @@
             "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
-            "id": "kakomomgole P/S - Adult 2",
-            "school": "kakomomgole P/S",
+            "id": "LOKADWARAN P/S - Adult 2",
+            "school": "LOKADWARAN P/S",
             "district": "Nakapiripirit",
             "role": "Adult 2",
             "porridge": "Explains a specific, actionable practice without prompting",
@@ -7107,9 +7107,9 @@
       "total_sessions_logged": 22,
       "target_schools": 64,
       "schools_with_active_clubs": 15,
-      "total_members": 435,
-      "members_male": 180,
-      "members_female": 255,
+      "total_members": 476,
+      "members_male": 196,
+      "members_female": 280,
       "session_attendance": 1299,
       "attendance_boys": 645,
       "attendance_girls": 654,
@@ -7126,8 +7126,8 @@
         "Female Members"
       ],
       "values": [
-        180,
-        255
+        196,
+        280
       ]
     },
     "session_attendance_gender": {
@@ -7437,7 +7437,7 @@
       {
         "entry_index": 21,
         "id": "NC-887875691",
-        "school": "kawalakol P/S",
+        "school": "KOCHOLO P/S",
         "district": "Karenga",
         "subcounty": "Catchment",
         "session_of_week": "Session one of the week",
@@ -7693,7 +7693,7 @@
       {
         "entry_index": 79,
         "id": "NC-892141499",
-        "school": "kawalakol P/S",
+        "school": "KOCHOLO P/S",
         "district": "Karenga",
         "subcounty": "Catchment",
         "session_of_week": "Session two of the week",
@@ -8480,16 +8480,42 @@
         "district": "Karenga",
         "subcounty": "Kawalakol",
         "selection": "Base 5",
-        "patron_name": "To be appointed",
-        "meeting_place": "Pending designation",
+        "patron_name": "nan",
+        "meeting_place": "Under the tree",
         "total_enrolled": 1703,
         "attendance_rate": "61%",
-        "total_membership": 0,
-        "male_membership": 0,
-        "female_membership": 0,
+        "total_membership": 41,
+        "male_membership": 16,
+        "female_membership": 25,
         "total_pwd": 0,
-        "session_one": null,
-        "session_two": null
+        "session_one": {
+          "date_conducted": "2026-10-07",
+          "start_time": "13:30 PM",
+          "end_time": "14:30 PM",
+          "designated_meeting_place": "School compound",
+          "club_patron_name": "Lokiru Alfred and Amony winfred",
+          "boys_present": 71,
+          "girls_present": 74,
+          "male_pwd": 1,
+          "female_pwd": 0,
+          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+          "home_action_assigned": "They were tasked to go and practice sharing work at home and also mark the food calenders and return to school",
+          "coordinator_notes": "Children were excited about the event because most started participating because of awards of gifts"
+        },
+        "session_two": {
+          "date_conducted": "2026-10-13",
+          "start_time": "10:30 AM",
+          "end_time": "12:00 PM",
+          "designated_meeting_place": "Under the tree",
+          "club_patron_name": "nan",
+          "boys_present": 0,
+          "girls_present": 0,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+          "home_action_assigned": "Try kitchen gardens at home.",
+          "coordinator_notes": "Kitchen gardens or demonstration gardens be opened in most schools since most have water for watering"
+        }
       },
       {
         "id": "sch-31",
@@ -9299,12 +9325,12 @@
         "question": "How much did we do?",
         "subtitle": "What was done on the ground",
         "cadence": "Verified field submissions log",
-        "status_badge": "64 of 64 Schools Active",
+        "status_badge": "63 of 64 Schools Active",
         "key_metrics": [
           {
             "label": "Schools Reached",
-            "value": "64 Schools",
-            "detail": "64 primary schools reached out of 64 total target schools"
+            "value": "63 Schools",
+            "detail": "63 primary schools reached out of 64 total target schools"
           },
           {
             "label": "School Contact Visits",
@@ -9329,7 +9355,7 @@
           {
             "label": "Active NutriClubs",
             "value": "22 Clubs Active",
-            "detail": "15 active club(s) with 435 registered members (Target: 64 clubs)"
+            "detail": "15 active club(s) with 476 registered members (Target: 64 clubs)"
           },
           {
             "label": "Teachers & VHTs Oriented",
@@ -9471,7 +9497,7 @@
           "headline": "36 Visits \u00b7 22 Active NutriClubs",
           "data_points": [
             "36 primary schools completed Visit 2 Big Activation Day",
-            "22 active school clubs established (435 registered members across active schools)",
+            "22 active school clubs established (476 registered members across active schools)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
@@ -9564,7 +9590,7 @@
           "Attendance Growth: - (Awaiting Visit 3 closeouts)",
           "Charts Returned: 0 returned (Pending Visit 3 closeout audits)",
           "School Commitments: Pending endline verification (0 schools)",
-          "Club Continuity: 22 NutriClubs active (435 registered members across active schools)"
+          "Club Continuity: 22 NutriClubs active (476 registered members across active schools)"
         ]
       },
       {
@@ -9624,7 +9650,7 @@
       "date": "2026-10-02",
       "district": "Kotido",
       "activity": "Three visit contact",
-      "school": "Kotido mixed PS",
+      "school": "KOTIDO MIXED P/S",
       "coordinator": "Ogwang Sam",
       "reach": 63,
       "pwd": 5,
@@ -9858,7 +9884,7 @@
       "date": "2026-10-07",
       "district": "Karenga",
       "activity": "Nutriclub session",
-      "school": "kawalakol P/S",
+      "school": "KOCHOLO P/S",
       "coordinator": "Lopeyok Martin",
       "reach": 145,
       "pwd": 1,
@@ -10612,7 +10638,7 @@
       "date": "2026-10-13",
       "district": "Karenga",
       "activity": "Nutriclub session",
-      "school": "kawalakol P/S",
+      "school": "KOCHOLO P/S",
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
@@ -10807,7 +10833,7 @@
       "date": "2026-10-13",
       "district": "Karenga",
       "activity": "Community demonstration",
-      "school": "kawalakol P/S",
+      "school": "KOCHOLO P/S",
       "coordinator": "Lopeyok Martin",
       "reach": 429,
       "pwd": 0,
@@ -10833,7 +10859,7 @@
       "date": "2026-10-13",
       "district": "Karenga",
       "activity": "Community demonstration",
-      "school": "kawalakol P/S",
+      "school": "KOCHOLO P/S",
       "coordinator": "Lopeyok Martin",
       "reach": 478,
       "pwd": 2,
@@ -10859,7 +10885,7 @@
       "date": "2026-10-20",
       "district": "Karenga",
       "activity": "Community demonstration",
-      "school": "kawalakol P/S",
+      "school": "KOCHOLO P/S",
       "coordinator": "Lopeyok Martin",
       "reach": 517,
       "pwd": 3,
@@ -11132,7 +11158,7 @@
       "date": "2026-10-07",
       "district": "Nakapiripirit",
       "activity": "Three visit contact",
-      "school": "kakomomgole P/S",
+      "school": "LOKADWARAN P/S",
       "coordinator": "Lobur stephen",
       "reach": 846,
       "pwd": 0,
@@ -11145,7 +11171,7 @@
       "date": "2026-10-13",
       "district": "Nakapiripirit",
       "activity": "Three visit contact",
-      "school": "kakomomgole P/S",
+      "school": "LOKADWARAN P/S",
       "coordinator": "Lobur stephen",
       "reach": 944,
       "pwd": 1,
@@ -11240,7 +11266,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 3440,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11253,7 +11279,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2148,
       "pwd": 67,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11266,7 +11292,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 176,
       "pwd": 6,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11279,7 +11305,7 @@
       "coordinator": "Priscilla",
       "reach": 1226,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11292,7 +11318,7 @@
       "coordinator": "Priscilla",
       "reach": 21,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11305,7 +11331,7 @@
       "coordinator": "Priscilla",
       "reach": 90,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11318,7 +11344,7 @@
       "coordinator": "Priscilla",
       "reach": 40,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11331,7 +11357,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11344,7 +11370,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 222,
       "pwd": 4,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11357,7 +11383,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 168,
       "pwd": 6,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11370,7 +11396,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2342,
       "pwd": 77,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11383,7 +11409,7 @@
       "coordinator": "Priscilla",
       "reach": 104,
       "pwd": 1,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11396,7 +11422,7 @@
       "coordinator": "Priscilla",
       "reach": 65,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11409,7 +11435,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 17,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11422,7 +11448,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 583,
       "pwd": 25,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11435,7 +11461,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 560,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11448,7 +11474,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 146,
       "pwd": 11,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11461,7 +11487,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 173,
       "pwd": 23,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11474,7 +11500,7 @@
       "coordinator": "Priscilla",
       "reach": 94,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11487,7 +11513,7 @@
       "coordinator": "Priscilla",
       "reach": 97,
       "pwd": 2,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -11500,7 +11526,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1580,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     }
   ],
