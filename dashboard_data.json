@@ -9,8 +9,8 @@
     "index_tracking": {
       "column": "_index",
       "last_processed_index": 188,
-      "total_submissions_tracked": 188,
-      "new_entries_this_batch": 0,
+      "total_submissions_tracked": 184,
+      "new_entries_this_batch": 184,
       "tracked_indices": [
         1,
         2,
@@ -18,7 +18,6 @@
         4,
         5,
         6,
-        7,
         8,
         9,
         10,
@@ -39,12 +38,10 @@
         25,
         26,
         27,
-        28,
         29,
         30,
         31,
         32,
-        33,
         34,
         35,
         36,
@@ -58,7 +55,6 @@
         44,
         45,
         46,
-        47,
         48,
         49,
         50,
@@ -201,7 +197,7 @@
         187,
         188
       ],
-      "last_synced": "2026-10-15 08:37:14"
+      "last_synced": "2026-10-15 08:50:26"
     }
   },
   "overview": {
@@ -220,10 +216,10 @@
       {
         "id": "visits",
         "title": "School Contact Visits",
-        "value": 84,
+        "value": 80,
         "target": 192,
         "unit": "visits",
-        "progress_pct": 43.8,
+        "progress_pct": 41.7,
         "icon": "fa-bus",
         "badge": "3-Visit Cycle",
         "context": "1 activation visit at Kotido Mixed P/S completed out of 192 total scheduled visits across 64 schools"
@@ -242,10 +238,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 102074,
+        "value": 98705,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 126.21,
+        "progress_pct": 122.05,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -253,10 +249,10 @@
       {
         "id": "caregivers",
         "title": "Caregivers Reached",
-        "value": 4239,
+        "value": 4185,
         "target": 51200,
         "unit": "caregivers",
-        "progress_pct": 8.28,
+        "progress_pct": 8.17,
         "icon": "fa-person-breastfeeding",
         "badge": "Community Reach",
         "context": "4 community members attended Visit 2 at Kotido mixed PS; community demo records pending"
@@ -264,10 +260,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 1034.0,
+        "value": 946.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 134.6,
+        "progress_pct": 123.2,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -275,10 +271,10 @@
       {
         "id": "pwd",
         "title": "Persons with Disabilities (PWD)",
-        "value": 1306,
+        "value": 922,
         "target": 1200,
         "unit": "individuals",
-        "progress_pct": 108.83,
+        "progress_pct": 76.83,
         "icon": "fa-wheelchair",
         "badge": "3 Learners / 2 Adults",
         "context": "2 mid-primary learners, 1 upper-primary learner, and 2 teachers with PWD identified at Kotido Mixed P/S"
@@ -317,10 +313,10 @@
         "demos_completed": 9,
         "target_demos": 50,
         "demo_progress_pct": 18.0,
-        "learners_reached": 10253,
-        "caregivers_reached": 585,
-        "stakeholders_trained": 466.0,
-        "pwd_reach": 697,
+        "learners_reached": 7287,
+        "caregivers_reached": 579,
+        "stakeholders_trained": 421.0,
+        "pwd_reach": 320,
         "status": "Active (Reports Received)"
       },
       {
@@ -373,10 +369,10 @@
         "demos_completed": 10,
         "target_demos": 50,
         "demo_progress_pct": 20.0,
-        "learners_reached": 12007,
-        "caregivers_reached": 562,
-        "stakeholders_trained": 123.0,
-        "pwd_reach": 44,
+        "learners_reached": 11604,
+        "caregivers_reached": 514,
+        "stakeholders_trained": 80.0,
+        "pwd_reach": 37,
         "status": "Active (Reports Received)"
       },
       {
@@ -445,23 +441,23 @@
       ],
       "actuals": [
         63,
-        84,
+        80,
         48,
         40,
-        102074,
-        4239,
-        1034.0,
-        1306
+        98705,
+        4185,
+        946.0,
+        922
       ],
       "pct": [
         98.4,
-        43.8,
+        41.7,
         7.5,
         62.5,
-        126.21,
-        8.28,
-        134.6,
-        108.83
+        122.05,
+        8.17,
+        123.2,
+        76.83
       ]
     }
   },
@@ -1500,7 +1496,7 @@
       ],
       "completed_schools": [
         43,
-        41,
+        37,
         0
       ]
     },
@@ -1512,17 +1508,17 @@
       ],
       "total_attendance": [
         60360,
-        37157,
+        33788,
         0
       ],
       "boys": [
         32481,
-        19764,
+        18057,
         0
       ],
       "girls": [
         27879,
-        17393,
+        15731,
         0
       ]
     },
@@ -1534,7 +1530,7 @@
       ],
       "values": [
         43,
-        41,
+        37,
         0
       ]
     },
@@ -3280,18 +3276,15 @@
       }
     },
     "visit2": {
-      "schools_completed": 41,
+      "schools_completed": 37,
       "target_schools": 64,
       "schools_list": [
         "KOTIDO MIXED P/S (Kotido)",
-        "KASIMERI P/S (Moroto)",
         "ST MARYS P/S (Nakapiripirit)",
         "KATIKIT P/S (Amudat)",
         "ALAKAS P/S (Amudat)",
-        "NAMODO P/S (Amudat)",
         "LOPUTUK P/S (Moroto)",
         "NAWANATAU P/S (Moroto)",
-        "CHEPKARARAT P/S (Amudat)",
         "CHILD JESUS P/S (Moroto)",
         "NADUNGET P/S (Moroto)",
         "KASIMERI P/S (Moroto)",
@@ -3299,7 +3292,6 @@
         "PAJAR P/S (Kaabong)",
         "KACHIKOL P/S (Kaabong)",
         "KOTIDO GIRLS P/S (Kotido)",
-        "KARITA P/S (Amudat)",
         "NARENGEPAK P/S (Kaabong)",
         "KATHILE P/S (Kaabong)",
         "NATIRAE P/S (Nabilatuk)",
@@ -3344,38 +3336,6 @@
           "hc_up_m": 10,
           "hc_up_f": 15,
           "school_attendance": null
-        },
-        {
-          "entry_index": 7,
-          "school": "KASIMERI P/S",
-          "district": "Moroto",
-          "date": "2026-09-30",
-          "pupils_total": 403,
-          "pupils_boys": 202,
-          "pupils_girls": 201,
-          "teachers_total": 43,
-          "comm_total": 48,
-          "pwd_total": 7,
-          "hc_lower_m": 0,
-          "hc_lower_f": 0,
-          "hc_mid_m": 89,
-          "hc_mid_f": 107,
-          "hc_up_m": 113,
-          "hc_up_f": 94,
-          "school_attendance": {
-            "att_lower_b": 809,
-            "att_lower_g": 771,
-            "att_lower_tot": 1580,
-            "att_mid_b": 1445,
-            "att_mid_g": 1255,
-            "att_mid_tot": 2700,
-            "att_up_b": 1125,
-            "att_up_g": 1653,
-            "att_up_tot": 2778,
-            "att_boys": 3379,
-            "att_girls": 3679,
-            "att_total": 7058
-          }
         },
         {
           "entry_index": 9,
@@ -3427,18 +3387,18 @@
           "hc_up_m": 65,
           "hc_up_f": 53,
           "school_attendance": {
-            "att_lower_b": 1636,
-            "att_lower_g": 1581,
-            "att_lower_tot": 3217,
-            "att_mid_b": 1108,
-            "att_mid_g": 1104,
-            "att_mid_tot": 2212,
-            "att_up_b": 888,
-            "att_up_g": 916,
-            "att_up_tot": 1804,
-            "att_boys": 3632,
-            "att_girls": 3601,
-            "att_total": 7233
+            "att_lower_b": 920,
+            "att_lower_g": 1062,
+            "att_lower_tot": 1982,
+            "att_mid_b": 741,
+            "att_mid_g": 704,
+            "att_mid_tot": 1445,
+            "att_up_b": 480,
+            "att_up_g": 497,
+            "att_up_tot": 977,
+            "att_boys": 2141,
+            "att_girls": 2263,
+            "att_total": 4404
           }
         },
         {
@@ -3474,38 +3434,6 @@
           }
         },
         {
-          "entry_index": 28,
-          "school": "NAMODO P/S",
-          "district": "Amudat",
-          "date": "2026-10-31",
-          "pupils_total": 991,
-          "pupils_boys": 481,
-          "pupils_girls": 510,
-          "teachers_total": 15,
-          "comm_total": 3,
-          "pwd_total": 27,
-          "hc_lower_m": 253,
-          "hc_lower_f": 244,
-          "hc_mid_m": 116,
-          "hc_mid_f": 133,
-          "hc_up_m": 112,
-          "hc_up_f": 133,
-          "school_attendance": {
-            "att_lower_b": 253,
-            "att_lower_g": 144,
-            "att_lower_tot": 397,
-            "att_mid_b": 102,
-            "att_mid_g": 107,
-            "att_mid_tot": 209,
-            "att_up_b": 112,
-            "att_up_g": 133,
-            "att_up_tot": 245,
-            "att_boys": 467,
-            "att_girls": 384,
-            "att_total": 851
-          }
-        },
-        {
           "entry_index": 29,
           "school": "LOPUTUK P/S",
           "district": "Moroto",
@@ -3523,18 +3451,18 @@
           "hc_up_m": 25,
           "hc_up_f": 27,
           "school_attendance": {
-            "att_lower_b": 194,
-            "att_lower_g": 191,
-            "att_lower_tot": 385,
-            "att_mid_b": 53,
-            "att_mid_g": 37,
-            "att_mid_tot": 90,
-            "att_up_b": 24,
-            "att_up_g": 27,
-            "att_up_tot": 51,
-            "att_boys": 271,
-            "att_girls": 255,
-            "att_total": 526
+            "att_lower_b": 809,
+            "att_lower_g": 771,
+            "att_lower_tot": 1580,
+            "att_mid_b": 795,
+            "att_mid_g": 880,
+            "att_mid_tot": 1675,
+            "att_up_b": 1039,
+            "att_up_g": 1562,
+            "att_up_tot": 2601,
+            "att_boys": 2643,
+            "att_girls": 3213,
+            "att_total": 5856
           }
         },
         {
@@ -3567,38 +3495,6 @@
             "att_boys": 480,
             "att_girls": 495,
             "att_total": 975
-          }
-        },
-        {
-          "entry_index": 33,
-          "school": "CHEPKARARAT P/S",
-          "district": "Amudat",
-          "date": "2026-10-07",
-          "pupils_total": 952,
-          "pupils_boys": 467,
-          "pupils_girls": 485,
-          "teachers_total": 16,
-          "comm_total": 3,
-          "pwd_total": 146,
-          "hc_lower_m": 209,
-          "hc_lower_f": 212,
-          "hc_mid_m": 140,
-          "hc_mid_f": 147,
-          "hc_up_m": 118,
-          "hc_up_f": 126,
-          "school_attendance": {
-            "att_lower_b": 209,
-            "att_lower_g": 212,
-            "att_lower_tot": 421,
-            "att_mid_b": 140,
-            "att_mid_g": 147,
-            "att_mid_tot": 287,
-            "att_up_b": 118,
-            "att_up_g": 126,
-            "att_up_tot": 244,
-            "att_boys": 467,
-            "att_girls": 485,
-            "att_total": 952
           }
         },
         {
@@ -3823,38 +3719,6 @@
             "att_boys": 3711,
             "att_girls": 2541,
             "att_total": 6252
-          }
-        },
-        {
-          "entry_index": 47,
-          "school": "KARITA P/S",
-          "district": "Amudat",
-          "date": "2026-10-08",
-          "pupils_total": 1023,
-          "pupils_boys": 557,
-          "pupils_girls": 466,
-          "teachers_total": 14,
-          "comm_total": 0,
-          "pwd_total": 204,
-          "hc_lower_m": 254,
-          "hc_lower_f": 163,
-          "hc_mid_m": 125,
-          "hc_mid_f": 143,
-          "hc_up_m": 178,
-          "hc_up_f": 160,
-          "school_attendance": {
-            "att_lower_b": 254,
-            "att_lower_g": 163,
-            "att_lower_tot": 417,
-            "att_mid_b": 125,
-            "att_mid_g": 146,
-            "att_mid_tot": 271,
-            "att_up_b": 178,
-            "att_up_g": 160,
-            "att_up_tot": 338,
-            "att_boys": 557,
-            "att_girls": 469,
-            "att_total": 1026
           }
         },
         {
@@ -4626,53 +4490,53 @@
           }
         }
       ],
-      "total_pupils_attended": 37157,
-      "pwd_learners": 1002,
-      "teachers_present": 644,
-      "community_present": 414,
-      "total_attendance": 38215,
-      "pwd_total": 1064,
-      "pwd_rate_pct": 2.8,
+      "total_pupils_attended": 33788,
+      "pwd_learners": 625,
+      "teachers_present": 556,
+      "community_present": 360,
+      "total_attendance": 34704,
+      "pwd_total": 680,
+      "pwd_rate_pct": 2.0,
       "age_bands_matrix": [
         {
           "age_band": "Lower Primary (ECD\u2013P2)",
-          "male": 8968,
-          "female": 7718,
-          "total": 16686,
-          "male_pwd": 257,
-          "female_pwd": 175
+          "male": 8252,
+          "female": 7099,
+          "total": 15351,
+          "male_pwd": 192,
+          "female_pwd": 118
         },
         {
           "age_band": "Middle Primary (P3\u2013P4)",
-          "male": 5704,
-          "female": 5111,
-          "total": 10815,
-          "male_pwd": 155,
-          "female_pwd": 111
+          "male": 5234,
+          "female": 4581,
+          "total": 9815,
+          "male_pwd": 107,
+          "female_pwd": 65
         },
         {
           "age_band": "Upper Primary (P5\u2013P7)",
-          "male": 5092,
-          "female": 4564,
-          "total": 9656,
-          "male_pwd": 162,
-          "female_pwd": 142
+          "male": 4571,
+          "female": 4051,
+          "total": 8622,
+          "male_pwd": 79,
+          "female_pwd": 64
         },
         {
           "age_band": "Teachers Present",
-          "male": 341,
-          "female": 303,
-          "total": 644,
-          "male_pwd": 19,
+          "male": 305,
+          "female": 251,
+          "total": 556,
+          "male_pwd": 17,
           "female_pwd": 21
         },
         {
           "age_band": "Community Members",
-          "male": 200,
-          "female": 214,
-          "total": 414,
-          "male_pwd": 14,
-          "female_pwd": 8
+          "male": 168,
+          "female": 192,
+          "total": 360,
+          "male_pwd": 13,
+          "female_pwd": 4
         }
       ],
       "activities_delivered": {
@@ -4686,13 +4550,13 @@
           "Learners actively handled materials"
         ],
         "values": [
-          40,
-          15,
-          20,
-          32,
-          31,
-          13,
-          40
+          36,
+          11,
+          17,
+          29,
+          27,
+          10,
+          37
         ]
       },
       "metu_uptake_barriers": {
@@ -4703,16 +4567,16 @@
           "Limited access to the cooking materials"
         ],
         "values": [
-          23,
+          19,
           15,
-          6,
+          4,
           10
         ],
         "pct": [
-          42.6,
-          27.8,
-          11.1,
-          18.5
+          39.6,
+          31.2,
+          8.3,
+          20.8
         ]
       },
       "micro_poll": {
@@ -4727,23 +4591,21 @@
           ],
           "values": [
             1573,
-            2698,
+            2579,
             2,
-            2,
+            0,
             124
           ],
-          "total_boys": 4399,
-          "agreed_boys": 4271,
+          "total_boys": 4278,
+          "agreed_boys": 4152,
           "pct_agreed": 97.1,
           "reason_in_words": "Nakapiripirit: \"The girl may not concentrate like aboy\"",
           "all_reasons": [
             "Nakapiripirit: \"The girl may not concentrate like aboy\"",
             "Amudat: \"both have equal rights to education\"",
             "Amudat: \"gender is not promoted\"",
-            "Amudat: \"both children should be treated equally\"",
             "Moroto: \"they should also attend school early\"",
             "Moroto: \"we all have to succeeds oin education\"",
-            "Amudat: \"it promotes responsibility\"",
             "Moroto: \"girls must also be at school\"",
             "Moroto: \"if my parents decide who remians at home, you cannot refuse\"",
             "Moroto: \"it is good to share roles at home and school\"",
@@ -4751,7 +4613,6 @@
             "Kaabong: \"Because we want equal education for all, we all need to work together and leave for school early so that we get equal chances of better performance for all, to promote girl child education\"",
             "Kaabong: \"Because both of  should finish work together before going to school, it is bad to leave your sister behind to work alone because she will become late and gets punished at school\"",
             "Kotido: \"Many accepted that girls should go schools\"",
-            "Amudat: \"no it leaves girls behind\"",
             "Kaabong: \"It will encourage early marriages, A girl can miss some lessons in the morning, makes a girl to drop out of school, Makes the girl to overthink and gives her psychological torture, makes a girl to resort to marriage, it's unfair because it will promote gender inequality\"",
             "Kaabong: \"It is because it will lead to early marriage, girls will end up dropping out of school, girls will end up getting pregnant at an early age\"",
             "Nabilatuk: \"It makes them miss school or classes, it exposes them to early marriage,\"",
@@ -4789,23 +4650,21 @@
           ],
           "values": [
             1237,
-            2990,
+            2784,
             2,
             9,
             98
           ],
-          "total_boys": 4336,
-          "agreed_boys": 4227,
-          "pct_agreed": 97.5,
+          "total_boys": 4130,
+          "agreed_boys": 4021,
+          "pct_agreed": 97.4,
           "reason_in_words": "Nakapiripirit: \"To make work easy\"",
           "all_reasons": [
             "Nakapiripirit: \"To make work easy\"",
             "Amudat: \"promotes friendship at home\"",
             "Amudat: \"All of them should be given orpotunity to do house chores  for,self reliance and avoid dependancy\"",
-            "Amudat: \"beacuse these children should fill that both of them have responsibilities besides their sex\"",
             "Moroto: \"girls are favored with food especilly  at home\"",
             "Moroto: \"girls eat alot\"",
-            "Amudat: \"it promotes qeuality\"",
             "Moroto: \"girls dont like porriage\"",
             "Moroto: \"if there is available food to eat or porriage\"",
             "Moroto: \"i agree to help my sister to cook and eat together\"",
@@ -4813,7 +4672,6 @@
             "Kaabong: \"It is very bad to leave your sister alone at home while you go to school, to promote love between boys and girls, to ensure equal performance\"",
             "Kaabong: \"Because it's not safe for girls to move alone to school, when you finish work early you will be able to get time for revising, my sister is always happy every time we move to school together\"",
             "Kotido: \"Yes\"",
-            "Amudat: \"yes,both have rights to equal educatio\"",
             "Kaabong: \"To promote gender equality, for safety purposes, it's good to walk together\"",
             "Kaabong: \"It is important so that we all make it early to class, so as to simplify work,\"",
             "Nabilatuk: \"They all report to school early to attend to classes, they finish work together.\"",
@@ -4851,23 +4709,21 @@
           ],
           "values": [
             971,
-            3145,
+            2932,
             23,
             7,
             98
           ],
-          "total_boys": 4244,
-          "agreed_boys": 4116,
-          "pct_agreed": 97.0,
+          "total_boys": 4031,
+          "agreed_boys": 3903,
+          "pct_agreed": 96.8,
           "reason_in_words": "Nakapiripirit: \"To offer campany to and security to girls from rapiest\"",
           "all_reasons": [
             "Nakapiripirit: \"To offer campany to and security to girls from rapiest\"",
             "Amudat: \"it promotes respect for both\"",
             "Amudat: \"it promotes reliability of boys\"",
-            "Amudat: \"all sex should be treated equally\"",
             "Moroto: \"it is good to support each other with chores\"",
             "Moroto: \"girls are the ones who work often at home\"",
-            "Amudat: \"it promotes leadership\"",
             "Moroto: \"we use charcoal for cooking at home\"",
             "Moroto: \"it is good for all children to help at home work\"",
             "Moroto: \"but girls are the ones who fetch forewood always\"",
@@ -4875,7 +4731,6 @@
             "Kaabong: \"We should move or work together for security and protection purposes, to promote peace at home, to promote equal responsibilities at home, promotes equal treatment among boys and girls\"",
             "Kaabong: \"It is because collecting firewood alone in the bush is not safe for girls because they can be abducted on the way, it's good to collect firewood together in order to protect each other, as boys it's good to collect firewood with the girls because it's easy for us to cut as the girls gather and we carry together\"",
             "Kotido: \"Many agreed\"",
-            "Amudat: \"yes both have to be responsible\"",
             "Kaabong: \"Both boys and girls have a right to work together, Because it's a collective responsibility for both girls and boys to do chores at home\"",
             "Kaabong: \"In order to simply work, to avoid quarrels at home, to make sure that we collect enough firewood, collecting firewood together is good because the food being cooked is for everyone\"",
             "Nabilatuk: \"That is the work for girls, we cook because some of them don't have girls at home\"",
@@ -4913,23 +4768,21 @@
           ],
           "values": [
             2332,
-            2370,
-            4,
+            2181,
+            3,
             1,
             98
           ],
-          "total_boys": 4805,
-          "agreed_boys": 4702,
-          "pct_agreed": 97.9,
+          "total_boys": 4615,
+          "agreed_boys": 4513,
+          "pct_agreed": 97.8,
           "reason_in_words": "Nakapiripirit: \"Share work with my sister\"",
           "all_reasons": [
             "Nakapiripirit: \"Share work with my sister\"",
             "Amudat: \"it promotes displine\"",
             "Amudat: \"it promotes displine among children\"",
-            "Amudat: \"girls should be left behind alone\"",
             "Moroto: \"my sister should also pass very well at school\"",
             "Moroto: \"if she also helps me in other home chores, i will help her too\"",
-            "Amudat: \"it reduces work load\"",
             "Moroto: \"but my mother pays someone who can collect water from the borehole\"",
             "Moroto: \"i have to help my brother\"",
             "Moroto: \"if my sister also is doing another work i can help to fetch water\"",
@@ -4937,7 +4790,6 @@
             "Kaabong: \"For girls not to be punished, to show love to our sisters, to show respect to our sisters, to promote togetherness\"",
             "Kaabong: \"I will fetch water because my sister will be doing other chores at home, when I go to the borehole I will helping my sister to also prepare and go to school in time\"",
             "Kotido: \"Many accepted to help girls fetch water\"",
-            "Amudat: \"Equality should be for all chilren\"",
             "Kaabong: \"To avoid my sister from being punished for late coming\"",
             "Kaabong: \"To reduce absenteeism from girls, to avoid girls from coming late to school, To improve on her performance in class, to prevent girls from being attacked by wrong doers along the way, to allow the girl to rest\"",
             "Nabilatuk: \"Help their sisters makes them feel loved at home and also they are able to report school early, they have the morale to do work\"",
@@ -4975,23 +4827,21 @@
           ],
           "values": [
             1209,
-            3290,
-            103,
+            3139,
+            27,
             8,
             98
           ],
-          "total_boys": 4708,
-          "agreed_boys": 4499,
-          "pct_agreed": 95.6,
+          "total_boys": 4481,
+          "agreed_boys": 4348,
+          "pct_agreed": 97.0,
           "reason_in_words": "Nakapiripirit: \"Girls are not to look after animas while boys go to school\"",
           "all_reasons": [
             "Nakapiripirit: \"Girls are not to look after animas while boys go to school\"",
             "Amudat: \"promotes hardwork\"",
             "Amudat: \"it avoids work laod on one gender\"",
-            "Amudat: \"all of them have rights for education\"",
             "Moroto: \"Girls are not suppose to be with the animals for long hours\"",
             "Moroto: \"not good work for the girls\"",
-            "Amudat: \"it promote cost share\"",
             "Moroto: \"my mother may punish me\"",
             "Moroto: \"herding cattle is not good work for girls\"",
             "Moroto: \"all children must be at school not to take care of animals\"",
@@ -4999,7 +4849,6 @@
             "Kaabong: \"To reduce the rates of school dropouts, to control early pregnancies, to reduce early marriages\"",
             "Kaabong: \"I will report because missing school will make her to perform poorly in class, I will speak up because it is a girls right to be in school always\"",
             "Kotido: \"They  accepted to make a follow up\"",
-            "Amudat: \"girls should go to school to become leaders tomorow\"",
             "Kaabong: \"Because both boys and girls have an equal right to education,  if we don't report this issue girls will end up dropping out of school silently,  it will help prevent early marriages\"",
             "Kaabong: \"To make sure that the girl gets back to school,  if I don't speak up the girl will end up getting pregnant at an early age, Because even a girl has a right to education\"",
             "Nabilatuk: \"Because they will rape in the bush, she will miss school,\"",
@@ -5028,7 +4877,7 @@
         }
       },
       "post_session_scenario": {
-        "sample_size": 245,
+        "sample_size": 221,
         "porridge_recall": {
           "categories": [
             "Specific Actionable Fortification",
@@ -5036,9 +4885,9 @@
             "Incorrect / Unavailable Foods"
           ],
           "values": [
-            130,
-            85,
-            30
+            126,
+            69,
+            26
           ]
         },
         "chore_sharing_recall": {
@@ -5048,9 +4897,9 @@
             "Leaves Work Only to Girls"
           ],
           "values": [
-            152,
-            58,
-            34
+            131,
+            57,
+            32
           ]
         },
         "slogan_recall": {
@@ -5060,8 +4909,8 @@
             "Not Demonstrated"
           ],
           "values": [
-            154,
-            55,
+            133,
+            52,
             31
           ]
         },
@@ -5110,60 +4959,6 @@
             "porridge": "Explains a specific, actionable practice without prompting",
             "chores": "States that boys and girls share water/wood chores equally before leaving",
             "slogan": "Not assessed"
-          },
-          {
-            "id": "KASIMERI P/S - Learner 1",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Learner 1",
-            "porridge": "Explains a specific, actionable practice without prompting",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KASIMERI P/S - Learner 2",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Learner 2",
-            "porridge": "Incorrect, silences, or names unavailable foods",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Partly demonstrated (vague or needed prompting)"
-          },
-          {
-            "id": "KASIMERI P/S - Learner 3",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Learner 3",
-            "porridge": "Incorrect, silences, or names unavailable foods",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Partly demonstrated (vague or needed prompting)"
-          },
-          {
-            "id": "KASIMERI P/S - Learner 4",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Learner 4",
-            "porridge": "Incorrect, silences, or names unavailable foods",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Partly demonstrated (vague or needed prompting)"
-          },
-          {
-            "id": "KASIMERI P/S - Adult 1",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Adult 1",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KASIMERI P/S - Adult 2",
-            "school": "KASIMERI P/S",
-            "district": "Moroto",
-            "role": "Adult 2",
-            "porridge": "Incorrect, silences, or names unavailable foods",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
             "id": "ST MARYS P/S - Learner 1",
@@ -5328,60 +5123,6 @@
             "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
-            "id": "NAMODO P/S - Learner 1",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Learner 1",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "NAMODO P/S - Learner 2",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Learner 2",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "NAMODO P/S - Learner 3",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Learner 3",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "NAMODO P/S - Learner 4",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Learner 4",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "NAMODO P/S - Adult 1",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Adult 1",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "NAMODO P/S - Adult 2",
-            "school": "NAMODO P/S",
-            "district": "Amudat",
-            "role": "Adult 2",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
             "id": "LOPUTUK P/S - Learner 1",
             "school": "LOPUTUK P/S",
             "district": "Moroto",
@@ -5488,60 +5229,6 @@
             "porridge": "Gives a general/vague idea; lacks a concrete action",
             "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
             "slogan": "Partly demonstrated (vague or needed prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Learner 1",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Learner 1",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Learner 2",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Learner 2",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Learner 3",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Learner 3",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Learner 4",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Learner 4",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "Says girls should stay home or doesn't know",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Adult 1",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Adult 1",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "CHEPKARARAT P/S - Adult 2",
-            "school": "CHEPKARARAT P/S",
-            "district": "Amudat",
-            "role": "Adult 2",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
             "id": "CHILD JESUS P/S - Learner 1",
@@ -5919,60 +5606,6 @@
             "role": "Adult 2",
             "porridge": "Explains a specific, actionable practice without prompting",
             "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Learner 1",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Learner 1",
-            "porridge": "Explains a specific, actionable practice without prompting",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Learner 2",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Learner 2",
-            "porridge": "Explains a specific, actionable practice without prompting",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Learner 3",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Learner 3",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Learner 4",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Learner 4",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Adult 1",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Adult 1",
-            "porridge": "Explains a specific, actionable practice without prompting",
-            "chores": "States that boys and girls share water/wood chores equally before leaving",
-            "slogan": "Demonstrated (explained clearly and accurately without prompting)"
-          },
-          {
-            "id": "KARITA P/S - Adult 2",
-            "school": "KARITA P/S",
-            "district": "Amudat",
-            "role": "Adult 2",
-            "porridge": "Gives a general/vague idea; lacks a concrete action",
-            "chores": "Says girls should stay home or doesn't know",
             "slogan": "Demonstrated (explained clearly and accurately without prompting)"
           },
           {
@@ -10578,26 +10211,26 @@
     "dimensions": [
       {
         "title": "Pillar 1: School Feeding",
-        "metric_value": "53.1%",
-        "metric_label": "Meal Protection & METU-1 (41 Activation Schools)",
-        "summary": "53.1% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
+        "metric_value": "57.0%",
+        "metric_label": "Meal Protection & METU-1 (37 Activation Schools)",
+        "summary": "57.0% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
         "baseline": "Pending Visit 1",
         "evidence_points": [
-          "Protecting school meals: 130 learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
+          "Protecting school meals: 126 learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
           "Balanced plate & clubs: 40 active NutriClubs established with demo gardens; OFSP & iron-rich beans tracked (14 OFSP, 22 iron beans logged)",
           "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 9 schools for reporting meal theft or mismanagement (0 complaints logged)"
         ]
       },
       {
         "title": "Pillar 2: Gender",
-        "metric_value": "62.3%",
-        "metric_label": "Fair Sharing & Allyship (41 Activation Schools)",
-        "summary": "62.3% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
+        "metric_value": "59.5%",
+        "metric_label": "Fair Sharing & Allyship (37 Activation Schools)",
+        "summary": "59.5% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
         "baseline": "Pending Visit 1",
         "evidence_points": [
-          "Fair sharing at the table: 152 of 210 interviewed learners affirmed boys and girls must eat equally and simultaneously",
-          "Male allies in action: 22,492 boy responses logged across 5 micro-polls with 97.0% agreement (21,815 agreements) committing to share morning water and firewood chores",
-          "Addressing practical constraints: Dialogues with fathers and male teachers tackling domestic labour (22,492 boys), schooling costs (22 sessions), and menstrual hygiene (7 sessions)"
+          "Fair sharing at the table: 131 of 188 interviewed learners affirmed boys and girls must eat equally and simultaneously",
+          "Male allies in action: 21,535 boy responses logged across 5 micro-polls with 97.2% agreement (20,937 agreements) committing to share morning water and firewood chores",
+          "Addressing practical constraints: Dialogues with fathers and male teachers tackling domestic labour (21,535 boys), schooling costs (22 sessions), and menstrual hygiene (7 sessions)"
         ]
       },
       {
@@ -10628,13 +10261,13 @@
           },
           {
             "label": "School Contact Visits",
-            "value": "84 Visits Conducted",
-            "detail": "43 Visit 1 School Onboarding completed, 41 Visit 2 Big Activation Days completed (Target: 192 total visits)"
+            "value": "80 Visits Conducted",
+            "detail": "43 Visit 1 School Onboarding completed, 37 Visit 2 Big Activation Days completed (Target: 192 total visits)"
           },
           {
             "label": "Children Reached",
-            "value": "102,074 Pupils",
-            "detail": "60360 weekly attendees (56883 enrolled) at Visit 1, 37157 in Visit 2 activations, 4557 in NutriClub sessions (Target: 80,875)"
+            "value": "98,705 Pupils",
+            "detail": "60360 weekly attendees (56883 enrolled) at Visit 1, 33788 in Visit 2 activations, 4557 in NutriClub sessions (Target: 80,875)"
           },
           {
             "label": "Village Cooking Demos",
@@ -10643,8 +10276,8 @@
           },
           {
             "label": "Caregivers Reached",
-            "value": "4239 Caregivers",
-            "detail": "4239 community caregivers attended Visit 2 activations (Target: 51,200)"
+            "value": "4185 Caregivers",
+            "detail": "4185 community caregivers attended Visit 2 activations (Target: 51,200)"
           },
           {
             "label": "Active NutriClubs",
@@ -10653,13 +10286,13 @@
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "1034.0 Stakeholders",
+            "value": "946.0 Stakeholders",
             "detail": "Oriented across 9 primary schools (Target: 768)"
           },
           {
             "label": "Persons with Disabilities",
-            "value": "1306 PWDs Reached",
-            "detail": "1002 learners and 62 adults included across sessions"
+            "value": "922 PWDs Reached",
+            "detail": "625 learners and 55 adults included across sessions"
           }
         ],
         "verification_source": "Verified field activity forms, sign-in sheets, and monitor observation logs."
@@ -10687,8 +10320,8 @@
           },
           {
             "label": "What Children Learned",
-            "value": "53.1% Unaided Recall",
-            "detail": "53.1% of learners in post-session intercepts correctly explained core nutrition messages"
+            "value": "57.0% Unaided Recall",
+            "detail": "57.0% of learners in post-session intercepts correctly explained core nutrition messages"
           },
           {
             "label": "Fair & Accessible for All",
@@ -10721,8 +10354,8 @@
           },
           {
             "label": "Boys Helping with Morning Chores",
-            "value": "97.0% Consensus",
-            "detail": "97.0% agreement across 22,492 boy responses in Visit 2 micro-polls that domestic chores must be shared"
+            "value": "97.2% Consensus",
+            "detail": "97.2% agreement across 21,535 boy responses in Visit 2 micro-polls that domestic chores must be shared"
           },
           {
             "label": "Girls Arriving on Time for Class",
@@ -10759,17 +10392,17 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "9 Orientations \u00b7 41 Activations",
+          "headline": "9 Orientations \u00b7 37 Activations",
           "data_points": [
             "9 schools oriented on Metu porridge fortification and clean cooking",
-            "41 schools delivered Visit 2 Big Activation Day (37157 pupils engaged)",
+            "37 schools delivered Visit 2 Big Activation Day (33788 pupils engaged)",
             "0 of 640 community cooking demonstrations conducted to date"
           ]
         },
         "how_well": {
-          "headline": "53.1% Unaided Recall \u00b7 100% Local Foods",
+          "headline": "57.0% Unaided Recall \u00b7 100% Local Foods",
           "data_points": [
-            "53.1% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
+            "57.0% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
             "100% compliance with easy-to-find wild greens and zero unattainable ingredients",
             "Community demonstration hands-on cooking pending rollout"
           ]
@@ -10788,9 +10421,9 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "41 Visits \u00b7 40 Active NutriClubs",
+          "headline": "37 Visits \u00b7 40 Active NutriClubs",
           "data_points": [
-            "41 primary schools completed Visit 2 Big Activation Day",
+            "37 primary schools completed Visit 2 Big Activation Day",
             "40 active school clubs established (778 registered members across active schools)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
@@ -10799,14 +10432,14 @@
           "headline": "9 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
             "All 9 oriented schools confirmed active teacher & headteacher leadership",
-            "1306 persons with disabilities accommodated and actively participating",
+            "922 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
         },
         "what_changed": {
           "headline": "Longitudinal Tracking Initiated",
           "data_points": [
-            "Longitudinal attendance tracking initiated (97517 learners logged in Visit 1 & Visit 2)",
+            "Longitudinal attendance tracking initiated (94148 learners logged in Visit 1 & Visit 2)",
             "Punctuality and attendance rebound to be audited at Visit 3",
             "Out-of-school girl tracing pending closeout reports"
           ]
@@ -10817,17 +10450,17 @@
         "icon": "fa-venus-mars",
         "theme_color": "purple",
         "how_much": {
-          "headline": "41 Activation Dialogues \u00b7 4239 Caregivers",
+          "headline": "37 Activation Dialogues \u00b7 4185 Caregivers",
           "data_points": [
-            "Structured chore rebalancing dialogues delivered across 41 schools",
-            "4239 community caregivers and elders attended school activations",
+            "Structured chore rebalancing dialogues delivered across 37 schools",
+            "4185 community caregivers and elders attended school activations",
             "Target: 640 community discussions in villages around 64 schools"
           ]
         },
         "how_well": {
-          "headline": "62.3% Chore Agreement \u00b7 0 Hotline Complaints",
+          "headline": "59.5% Chore Agreement \u00b7 0 Hotline Complaints",
           "data_points": [
-            "62.3% agreement in micro-polls that chores should be shared equally",
+            "59.5% agreement in micro-polls that chores should be shared equally",
             "Dialogue conducted constructively without assigning blame to individuals",
             "WFP toll-free hotline (0800) promoted with zero retaliation complaints"
           ]
@@ -10835,7 +10468,7 @@
         "what_changed": {
           "headline": "Consensus on Domestic Sharing",
           "data_points": [
-            "152 of 210 polled learners agreed boys must help with morning water/wood",
+            "131 of 188 polled learners agreed boys must help with morning water/wood",
             "School pledges signed committing to equitable chore support",
             "Household morning chore division to be audited during Visit 3 closeouts"
           ]
@@ -10870,9 +10503,9 @@
         "title": "Visit 2: NutriBus Day Activation",
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
-          "Attendance Logged: 37157 learners counted across 41 schools",
-          "What Pupils Remembered: 53.1% unaided recall of core messages (130 actionable fortification recipes)",
-          "School Pledges: 41 school commitments signed",
+          "Attendance Logged: 33788 learners counted across 37 schools",
+          "What Pupils Remembered: 57.0% unaided recall of core messages (126 actionable fortification recipes)",
+          "School Pledges: 37 school commitments signed",
           "Village Cooking Demos: 0 demos logged (Target: 640 sites)"
         ]
       },
@@ -10893,7 +10526,7 @@
         "desc": "Village gatherings, male participation, and saving firewood",
         "data_collected": [
           "Community Demos: 0 cooking demonstrations held (Target: 640)",
-          "Caregivers Reached: 4239 caregivers attended school activations",
+          "Caregivers Reached: 4185 caregivers attended school activations",
           "Home Follow-Up: Awaiting community demonstration rollout",
           "Hotline Redress: 0 complaints logged on WFP hotline (0800)"
         ]
@@ -10904,7 +10537,7 @@
         "desc": "Radio broadcasts, local language, and including people with disabilities",
         "data_collected": [
           "Radio Broadcasts: Transmission logs pending broadcast collation",
-          "Disability Inclusion: 1306 persons with disabilities accommodated",
+          "Disability Inclusion: 922 persons with disabilities accommodated",
           "Local Language: 100% of sessions delivered in Ngakarimojong dialects",
           "Saving Firewood: Fuel saving practices to be audited during community demos"
         ]
@@ -10922,7 +10555,7 @@
       "coordinator": "Opio John Fred and Okello Daniel Nimaro",
       "reach": 41,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -10935,7 +10568,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 36,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -10948,7 +10581,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 63,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -10961,7 +10594,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 24,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -10974,7 +10607,7 @@
       "coordinator": "AWAS FRANCIS",
       "reach": 23,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -10987,20 +10620,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 60,
       "pwd": 0,
-      "is_new": false,
-      "status": "Verified / Ingested"
-    },
-    {
-      "entry_index": 7,
-      "id": 885200260,
-      "date": "2026-09-30",
-      "district": "Moroto",
-      "activity": "Three visit contact",
-      "school": "KASIMERI P/S",
-      "coordinator": "Evaline",
-      "reach": 494,
-      "pwd": 7,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11013,7 +10633,7 @@
       "coordinator": "Evalyne",
       "reach": 21,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11026,7 +10646,7 @@
       "coordinator": "Lobur stephen",
       "reach": 185,
       "pwd": 119,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11039,7 +10659,7 @@
       "coordinator": "Lobur stephen",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11052,7 +10672,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 10,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11065,7 +10685,7 @@
       "coordinator": "cheparen pauline",
       "reach": 374,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11078,7 +10698,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 114,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11091,7 +10711,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 216,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11104,7 +10724,7 @@
       "coordinator": "Priscilla",
       "reach": 25,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11117,7 +10737,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 117,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11130,7 +10750,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 57,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11143,7 +10763,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 62,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11156,7 +10776,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 185,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11169,7 +10789,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1202,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11182,7 +10802,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 145,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11195,7 +10815,7 @@
       "coordinator": "ABIA FRANCIS AND OKELLO VINCENT",
       "reach": 28,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11208,7 +10828,7 @@
       "coordinator": "Evaline",
       "reach": 521,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11221,7 +10841,7 @@
       "coordinator": "cheparen pauline",
       "reach": 380,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11234,7 +10854,7 @@
       "coordinator": "cheparen pauline",
       "reach": 998,
       "pwd": 95,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11247,7 +10867,7 @@
       "coordinator": "cheparen pauline",
       "reach": 1039,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11260,20 +10880,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 5,
       "pwd": 0,
-      "is_new": false,
-      "status": "Verified / Ingested"
-    },
-    {
-      "entry_index": 28,
-      "id": 887974623,
-      "date": "2026-10-31",
-      "district": "Amudat",
-      "activity": "Three visit contact",
-      "school": "NAMODO P/S",
-      "coordinator": "cheparen pauline",
-      "reach": 1009,
-      "pwd": 27,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11286,7 +10893,7 @@
       "coordinator": "Evaline",
       "reach": 547,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11299,7 +10906,7 @@
       "coordinator": "Cheparen pauline",
       "reach": 35,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11312,7 +10919,7 @@
       "coordinator": "Evaline",
       "reach": 933,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11325,20 +10932,7 @@
       "coordinator": "Evaline",
       "reach": 1069,
       "pwd": 4,
-      "is_new": false,
-      "status": "Verified / Ingested"
-    },
-    {
-      "entry_index": 33,
-      "id": 888016271,
-      "date": "2026-10-07",
-      "district": "Amudat",
-      "activity": "Three visit contact",
-      "school": "CHEPKARARAT P/S",
-      "coordinator": "cheparen",
-      "reach": 971,
-      "pwd": 146,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11351,7 +10945,7 @@
       "coordinator": "Evaline",
       "reach": 1344,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11364,7 +10958,7 @@
       "coordinator": "Evaline",
       "reach": 1367,
       "pwd": 7,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11377,7 +10971,7 @@
       "coordinator": "Evaline",
       "reach": 1556,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11390,7 +10984,7 @@
       "coordinator": "Evaline",
       "reach": 1201,
       "pwd": 12,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11403,7 +10997,7 @@
       "coordinator": "evaline",
       "reach": 1611,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11416,7 +11010,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 629,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11429,7 +11023,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1556,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11442,7 +11036,7 @@
       "coordinator": "Emma",
       "reach": 1597,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11455,7 +11049,7 @@
       "coordinator": "Ngole Paula",
       "reach": 213,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11468,7 +11062,7 @@
       "coordinator": "Ngole Paula",
       "reach": 1061,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11481,7 +11075,7 @@
       "coordinator": "Ngole Paula",
       "reach": 301,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11494,7 +11088,7 @@
       "coordinator": "Ochen Moses Tom and Ogwang Sam",
       "reach": 1325,
       "pwd": 23,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11507,20 +11101,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 6,
       "pwd": 0,
-      "is_new": false,
-      "status": "Verified / Ingested"
-    },
-    {
-      "entry_index": 47,
-      "id": 888693909,
-      "date": "2026-10-08",
-      "district": "Amudat",
-      "activity": "Three visit contact",
-      "school": "KARITA P/S",
-      "coordinator": "cheparen pauline",
-      "reach": 1037,
-      "pwd": 204,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11533,7 +11114,7 @@
       "coordinator": "Ngole Paula",
       "reach": 1485,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11546,7 +11127,7 @@
       "coordinator": "Awas Francis",
       "reach": 1235,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11559,7 +11140,7 @@
       "coordinator": "Awas Francis",
       "reach": 1849,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11572,7 +11153,7 @@
       "coordinator": "Ngole Paula",
       "reach": 719,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11585,7 +11166,7 @@
       "coordinator": "Ngole Paula",
       "reach": 723,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11598,7 +11179,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 70,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11611,7 +11192,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 55,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11624,7 +11205,7 @@
       "coordinator": "Ngole Paula",
       "reach": 307,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11637,7 +11218,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1023,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11650,7 +11231,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11663,7 +11244,7 @@
       "coordinator": "Awas Francis",
       "reach": 1875,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11676,7 +11257,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 509,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11689,7 +11270,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1018,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11702,7 +11283,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 760,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11715,7 +11296,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1310,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11728,7 +11309,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 14,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11741,7 +11322,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 672,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11754,7 +11335,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 14,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11767,7 +11348,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 66,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11780,7 +11361,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 78,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11793,7 +11374,7 @@
       "coordinator": "Priscilla",
       "reach": 1275,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11806,7 +11387,7 @@
       "coordinator": "Priscilla",
       "reach": 1278,
       "pwd": 9,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11819,7 +11400,7 @@
       "coordinator": "Priscilla",
       "reach": 1081,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11832,7 +11413,7 @@
       "coordinator": "Priscilla",
       "reach": 570,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11845,7 +11426,7 @@
       "coordinator": "priscilla",
       "reach": 81,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11858,7 +11439,7 @@
       "coordinator": "Priscilla",
       "reach": 123,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11871,7 +11452,7 @@
       "coordinator": "Priscilla",
       "reach": 54,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11884,7 +11465,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1194,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11897,7 +11478,7 @@
       "coordinator": "Lobur stephen",
       "reach": 587,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11910,7 +11491,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11923,7 +11504,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11936,7 +11517,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11949,7 +11530,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11962,7 +11543,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11975,7 +11556,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 93,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -11988,7 +11569,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 127,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12001,7 +11582,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 107,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12014,7 +11595,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 162,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12027,7 +11608,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 143,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12040,7 +11621,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 132,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12053,7 +11634,7 @@
       "coordinator": "Opio John Fred",
       "reach": 382,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12066,7 +11647,7 @@
       "coordinator": "Opio John fred",
       "reach": 88,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12079,7 +11660,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 369,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12092,7 +11673,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 504,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12105,7 +11686,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 443,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12118,7 +11699,7 @@
       "coordinator": "Awas Francis",
       "reach": 1028,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12131,7 +11712,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 429,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12144,7 +11725,7 @@
       "coordinator": "Opio John Fred",
       "reach": 1096,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12157,7 +11738,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 478,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12170,7 +11751,7 @@
       "coordinator": "Opio John Fred",
       "reach": 1163,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12183,7 +11764,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 517,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12196,7 +11777,7 @@
       "coordinator": "Opio John Fred",
       "reach": 671,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12209,7 +11790,7 @@
       "coordinator": "Okello Daniel NImaro",
       "reach": 3686,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12222,7 +11803,7 @@
       "coordinator": "Priscilla",
       "reach": 1212,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12235,7 +11816,7 @@
       "coordinator": "priscilla",
       "reach": 518,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12248,7 +11829,7 @@
       "coordinator": "priscilla",
       "reach": 1218,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12261,7 +11842,7 @@
       "coordinator": "Priscilla",
       "reach": 419,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12274,7 +11855,7 @@
       "coordinator": "Priscilla",
       "reach": 67,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12287,7 +11868,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2720,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12300,7 +11881,7 @@
       "coordinator": "priscilla",
       "reach": 64,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12313,7 +11894,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2284,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12326,7 +11907,7 @@
       "coordinator": "Evaline",
       "reach": 81,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12339,7 +11920,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 3766,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12352,7 +11933,7 @@
       "coordinator": "Evaline",
       "reach": 62,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12365,7 +11946,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2712,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12378,7 +11959,7 @@
       "coordinator": "Evaline",
       "reach": 30,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12391,7 +11972,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12404,7 +11985,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 152,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12417,7 +11998,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1132,
       "pwd": 47,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12430,7 +12011,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1578,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12443,7 +12024,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1811,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12456,7 +12037,7 @@
       "coordinator": "Lobur stephen",
       "reach": 846,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12469,7 +12050,7 @@
       "coordinator": "Lobur stephen",
       "reach": 944,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12482,7 +12063,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1239,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12495,7 +12076,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1357,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12508,7 +12089,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 826,
       "pwd": 8,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12521,7 +12102,7 @@
       "coordinator": "Awas Francis",
       "reach": 1117,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12534,7 +12115,7 @@
       "coordinator": "Awas Francis",
       "reach": 674,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12547,7 +12128,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 863,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12560,7 +12141,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 3440,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12573,7 +12154,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2148,
       "pwd": 67,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12586,7 +12167,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 176,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12599,7 +12180,7 @@
       "coordinator": "Priscilla",
       "reach": 1226,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12612,7 +12193,7 @@
       "coordinator": "Priscilla",
       "reach": 21,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12625,7 +12206,7 @@
       "coordinator": "Priscilla",
       "reach": 90,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12638,7 +12219,7 @@
       "coordinator": "Priscilla",
       "reach": 40,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12651,7 +12232,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12664,7 +12245,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 222,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12677,7 +12258,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 168,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12690,7 +12271,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2342,
       "pwd": 77,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12703,7 +12284,7 @@
       "coordinator": "Priscilla",
       "reach": 104,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12716,7 +12297,7 @@
       "coordinator": "Priscilla",
       "reach": 65,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12729,7 +12310,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12742,7 +12323,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 583,
       "pwd": 25,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12755,7 +12336,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 560,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12768,7 +12349,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 146,
       "pwd": 11,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12781,7 +12362,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 173,
       "pwd": 23,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12794,7 +12375,7 @@
       "coordinator": "Priscilla",
       "reach": 94,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12807,7 +12388,7 @@
       "coordinator": "Priscilla",
       "reach": 97,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12820,7 +12401,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1580,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12833,7 +12414,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1628,
       "pwd": 79,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12846,7 +12427,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1051,
       "pwd": 60,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12859,7 +12440,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1583,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12872,7 +12453,7 @@
       "coordinator": "Lobur stephen",
       "reach": 63,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12885,7 +12466,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 142,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12898,7 +12479,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 135,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12911,7 +12492,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 154,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12924,7 +12505,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 168,
       "pwd": 10,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12937,7 +12518,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 161,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12950,7 +12531,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 176,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12963,7 +12544,7 @@
       "coordinator": "Evaline",
       "reach": 84,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12976,7 +12557,7 @@
       "coordinator": "Evaline",
       "reach": 74,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -12989,7 +12570,7 @@
       "coordinator": "Evaline",
       "reach": 75,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13002,7 +12583,7 @@
       "coordinator": "Evaline",
       "reach": 1429,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13015,7 +12596,7 @@
       "coordinator": "Evaline",
       "reach": 77,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13028,7 +12609,7 @@
       "coordinator": "Evaline",
       "reach": 73,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13041,7 +12622,7 @@
       "coordinator": "Evaline",
       "reach": 66,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13054,7 +12635,7 @@
       "coordinator": "Evaline",
       "reach": 68,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13067,7 +12648,7 @@
       "coordinator": "Evaline",
       "reach": 81,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13080,7 +12661,7 @@
       "coordinator": "Evaline",
       "reach": 79,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13093,7 +12674,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13106,7 +12687,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 132,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13119,7 +12700,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 223,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13132,7 +12713,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 923,
       "pwd": 18,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13145,7 +12726,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13158,7 +12739,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1231,
       "pwd": 55,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13171,7 +12752,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13184,7 +12765,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 781,
       "pwd": 21,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13197,7 +12778,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13210,7 +12791,7 @@
       "coordinator": "Awas Francis",
       "reach": 1119,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13223,7 +12804,7 @@
       "coordinator": "Awas Francis",
       "reach": 571,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13236,7 +12817,7 @@
       "coordinator": "Awas Francis",
       "reach": 60,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13249,7 +12830,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13262,7 +12843,7 @@
       "coordinator": "Priscilla",
       "reach": 47,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13275,7 +12856,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13288,7 +12869,7 @@
       "coordinator": "Priscilla",
       "reach": 38,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13301,7 +12882,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13314,7 +12895,7 @@
       "coordinator": "Priscilla",
       "reach": 46,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13327,7 +12908,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13340,7 +12921,7 @@
       "coordinator": "Priscilla",
       "reach": 53,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13353,7 +12934,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     }
   ],
