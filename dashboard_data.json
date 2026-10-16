@@ -10,7 +10,7 @@
       "column": "_index",
       "last_processed_index": 299,
       "total_submissions_tracked": 294,
-      "new_entries_this_batch": 0,
+      "new_entries_this_batch": 294,
       "tracked_indices": [
         1,
         2,
@@ -307,7 +307,7 @@
         298,
         299
       ],
-      "last_synced": "2026-10-16 15:44:31"
+      "last_synced": "2026-10-16 15:56:12"
     }
   },
   "overview": {
@@ -13760,7 +13760,7 @@
       "coordinator": "Opio John Fred and Okello Daniel Nimaro",
       "reach": 41,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13773,7 +13773,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 36,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13786,7 +13786,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 24,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13799,7 +13799,7 @@
       "coordinator": "AWAS FRANCIS",
       "reach": 23,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13812,7 +13812,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 60,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13825,7 +13825,7 @@
       "coordinator": "Evalyne",
       "reach": 21,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13838,7 +13838,7 @@
       "coordinator": "Lobur stephen",
       "reach": 185,
       "pwd": 119,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13851,7 +13851,7 @@
       "coordinator": "Lobur stephen",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13864,7 +13864,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 10,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13877,7 +13877,7 @@
       "coordinator": "cheparen pauline",
       "reach": 374,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13890,7 +13890,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 114,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13903,7 +13903,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 216,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13916,7 +13916,7 @@
       "coordinator": "Priscilla",
       "reach": 25,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13929,7 +13929,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 117,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13942,7 +13942,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 57,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13955,7 +13955,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 62,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13968,7 +13968,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 185,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13981,7 +13981,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1202,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -13994,7 +13994,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 145,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14007,7 +14007,7 @@
       "coordinator": "ABIA FRANCIS AND OKELLO VINCENT",
       "reach": 28,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14020,7 +14020,7 @@
       "coordinator": "Evaline",
       "reach": 521,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14033,7 +14033,7 @@
       "coordinator": "cheparen pauline",
       "reach": 380,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14046,7 +14046,7 @@
       "coordinator": "cheparen pauline",
       "reach": 998,
       "pwd": 95,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14059,7 +14059,7 @@
       "coordinator": "cheparen pauline",
       "reach": 1039,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14072,7 +14072,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 5,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14085,7 +14085,7 @@
       "coordinator": "Evaline",
       "reach": 547,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14098,7 +14098,7 @@
       "coordinator": "Cheparen pauline",
       "reach": 35,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14111,7 +14111,7 @@
       "coordinator": "Evaline",
       "reach": 933,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14124,7 +14124,7 @@
       "coordinator": "Evaline",
       "reach": 1069,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14137,7 +14137,7 @@
       "coordinator": "Evaline",
       "reach": 1344,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14150,7 +14150,7 @@
       "coordinator": "Evaline",
       "reach": 1367,
       "pwd": 7,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14163,7 +14163,7 @@
       "coordinator": "Evaline",
       "reach": 1556,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14176,7 +14176,7 @@
       "coordinator": "Evaline",
       "reach": 1201,
       "pwd": 12,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14189,7 +14189,7 @@
       "coordinator": "evaline",
       "reach": 1611,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14202,7 +14202,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 629,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14215,7 +14215,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1556,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14228,7 +14228,7 @@
       "coordinator": "Emma",
       "reach": 1597,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14241,7 +14241,7 @@
       "coordinator": "Ngole Paula",
       "reach": 213,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14254,7 +14254,7 @@
       "coordinator": "Ngole Paula",
       "reach": 1061,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14267,7 +14267,7 @@
       "coordinator": "Ngole Paula",
       "reach": 301,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14280,7 +14280,7 @@
       "coordinator": "Ochen Moses Tom and Ogwang Sam",
       "reach": 1325,
       "pwd": 23,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14293,7 +14293,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 6,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14306,7 +14306,7 @@
       "coordinator": "Ngole Paula",
       "reach": 1485,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14319,7 +14319,7 @@
       "coordinator": "Awas Francis",
       "reach": 1235,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14332,7 +14332,7 @@
       "coordinator": "Awas Francis",
       "reach": 1849,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14345,7 +14345,7 @@
       "coordinator": "Ngole Paula",
       "reach": 719,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14358,7 +14358,7 @@
       "coordinator": "Ngole Paula",
       "reach": 723,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14371,7 +14371,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 70,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14384,7 +14384,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 55,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14397,7 +14397,7 @@
       "coordinator": "Ngole Paula",
       "reach": 307,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14410,7 +14410,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1023,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14423,7 +14423,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14436,7 +14436,7 @@
       "coordinator": "Awas Francis",
       "reach": 1875,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14449,7 +14449,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 509,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14462,7 +14462,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1018,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14475,7 +14475,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 760,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14488,7 +14488,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1310,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14501,7 +14501,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 14,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14514,7 +14514,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 672,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14527,7 +14527,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 14,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14540,7 +14540,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 66,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14553,7 +14553,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 78,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14566,7 +14566,7 @@
       "coordinator": "Priscilla",
       "reach": 1275,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14579,7 +14579,7 @@
       "coordinator": "Priscilla",
       "reach": 1278,
       "pwd": 9,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14592,7 +14592,7 @@
       "coordinator": "Priscilla",
       "reach": 1081,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14605,7 +14605,7 @@
       "coordinator": "Priscilla",
       "reach": 570,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14618,7 +14618,7 @@
       "coordinator": "priscilla",
       "reach": 81,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14631,7 +14631,7 @@
       "coordinator": "Priscilla",
       "reach": 123,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14644,7 +14644,7 @@
       "coordinator": "Priscilla",
       "reach": 54,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14657,7 +14657,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1194,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14670,7 +14670,7 @@
       "coordinator": "Lobur stephen",
       "reach": 587,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14683,7 +14683,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14696,7 +14696,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14709,7 +14709,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14722,7 +14722,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14735,7 +14735,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14748,7 +14748,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 93,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14761,7 +14761,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 127,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14774,7 +14774,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 107,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14787,7 +14787,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 162,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14800,7 +14800,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 143,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14813,7 +14813,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 132,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14826,7 +14826,7 @@
       "coordinator": "Opio John Fred",
       "reach": 382,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14839,7 +14839,7 @@
       "coordinator": "Opio John fred",
       "reach": 88,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14852,7 +14852,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 369,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14865,7 +14865,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 504,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14878,7 +14878,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 443,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14891,7 +14891,7 @@
       "coordinator": "Awas Francis",
       "reach": 1028,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14904,7 +14904,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 429,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14917,7 +14917,7 @@
       "coordinator": "Opio John Fred",
       "reach": 1096,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14930,7 +14930,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 478,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14943,7 +14943,7 @@
       "coordinator": "Opio John Fred",
       "reach": 1163,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14956,7 +14956,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 517,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14969,7 +14969,7 @@
       "coordinator": "Opio John Fred",
       "reach": 671,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14982,7 +14982,7 @@
       "coordinator": "Okello Daniel NImaro",
       "reach": 3686,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -14995,7 +14995,7 @@
       "coordinator": "Priscilla",
       "reach": 1212,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15008,7 +15008,7 @@
       "coordinator": "priscilla",
       "reach": 518,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15021,7 +15021,7 @@
       "coordinator": "priscilla",
       "reach": 1218,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15034,7 +15034,7 @@
       "coordinator": "Priscilla",
       "reach": 419,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15047,7 +15047,7 @@
       "coordinator": "Priscilla",
       "reach": 67,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15060,7 +15060,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2720,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15073,7 +15073,7 @@
       "coordinator": "priscilla",
       "reach": 64,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15086,7 +15086,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2284,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15099,7 +15099,7 @@
       "coordinator": "Evaline",
       "reach": 81,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15112,7 +15112,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 3766,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15125,7 +15125,7 @@
       "coordinator": "Evaline",
       "reach": 62,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15138,7 +15138,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 2712,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15151,7 +15151,7 @@
       "coordinator": "Evaline",
       "reach": 30,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15164,7 +15164,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15177,7 +15177,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 152,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15190,7 +15190,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1132,
       "pwd": 47,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15203,7 +15203,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1578,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15216,7 +15216,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1811,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15229,7 +15229,7 @@
       "coordinator": "Lobur stephen",
       "reach": 846,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15242,7 +15242,7 @@
       "coordinator": "Lobur stephen",
       "reach": 944,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15255,7 +15255,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1239,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15268,7 +15268,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1357,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15281,7 +15281,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 826,
       "pwd": 8,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15294,7 +15294,7 @@
       "coordinator": "Awas Francis",
       "reach": 1117,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15307,7 +15307,7 @@
       "coordinator": "Awas Francis",
       "reach": 674,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15320,7 +15320,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 863,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15333,7 +15333,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 3440,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15346,7 +15346,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2148,
       "pwd": 67,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15359,7 +15359,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 176,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15372,7 +15372,7 @@
       "coordinator": "Priscilla",
       "reach": 1226,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15385,7 +15385,7 @@
       "coordinator": "Priscilla",
       "reach": 21,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15398,7 +15398,7 @@
       "coordinator": "Priscilla",
       "reach": 90,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15411,7 +15411,7 @@
       "coordinator": "Priscilla",
       "reach": 40,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15424,7 +15424,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15437,7 +15437,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 222,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15450,7 +15450,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 168,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15463,7 +15463,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2342,
       "pwd": 77,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15476,7 +15476,7 @@
       "coordinator": "Priscilla",
       "reach": 104,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15489,7 +15489,7 @@
       "coordinator": "Priscilla",
       "reach": 65,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15502,7 +15502,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 17,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15515,7 +15515,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 583,
       "pwd": 25,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15528,7 +15528,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 560,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15541,7 +15541,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 146,
       "pwd": 11,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15554,7 +15554,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 173,
       "pwd": 23,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15567,7 +15567,7 @@
       "coordinator": "Priscilla",
       "reach": 94,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15580,7 +15580,7 @@
       "coordinator": "Priscilla",
       "reach": 97,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15593,7 +15593,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1580,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15606,7 +15606,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1628,
       "pwd": 79,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15619,7 +15619,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1051,
       "pwd": 60,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15632,7 +15632,7 @@
       "coordinator": "Lobur stephen",
       "reach": 1583,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15645,7 +15645,7 @@
       "coordinator": "Lobur stephen",
       "reach": 63,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15658,7 +15658,7 @@
       "coordinator": "Okello Daniel Nimaro",
       "reach": 142,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15671,7 +15671,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 135,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15684,7 +15684,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 154,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15697,7 +15697,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 168,
       "pwd": 10,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15710,7 +15710,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 161,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15723,7 +15723,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 176,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15736,7 +15736,7 @@
       "coordinator": "Evaline",
       "reach": 84,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15749,7 +15749,7 @@
       "coordinator": "Evaline",
       "reach": 74,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15762,7 +15762,7 @@
       "coordinator": "Evaline",
       "reach": 75,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15775,7 +15775,7 @@
       "coordinator": "Evaline",
       "reach": 1429,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15788,7 +15788,7 @@
       "coordinator": "Evaline",
       "reach": 77,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15801,7 +15801,7 @@
       "coordinator": "Evaline",
       "reach": 73,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15814,7 +15814,7 @@
       "coordinator": "Evaline",
       "reach": 66,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15827,7 +15827,7 @@
       "coordinator": "Evaline",
       "reach": 68,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15840,7 +15840,7 @@
       "coordinator": "Evaline",
       "reach": 81,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15853,7 +15853,7 @@
       "coordinator": "Evaline",
       "reach": 79,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15866,7 +15866,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15879,7 +15879,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 132,
       "pwd": 6,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15892,7 +15892,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 223,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15905,7 +15905,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 923,
       "pwd": 18,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15918,7 +15918,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15931,7 +15931,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1231,
       "pwd": 55,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15944,7 +15944,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15957,7 +15957,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 781,
       "pwd": 21,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15970,7 +15970,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15983,7 +15983,7 @@
       "coordinator": "Awas Francis",
       "reach": 1119,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -15996,7 +15996,7 @@
       "coordinator": "Awas Francis",
       "reach": 571,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16009,7 +16009,7 @@
       "coordinator": "Awas Francis",
       "reach": 60,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16022,7 +16022,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16035,7 +16035,7 @@
       "coordinator": "Priscilla",
       "reach": 47,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16048,7 +16048,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16061,7 +16061,7 @@
       "coordinator": "Priscilla",
       "reach": 38,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16074,7 +16074,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16087,7 +16087,7 @@
       "coordinator": "Priscilla",
       "reach": 46,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16100,7 +16100,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16113,7 +16113,7 @@
       "coordinator": "Priscilla",
       "reach": 53,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16126,7 +16126,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16139,7 +16139,7 @@
       "coordinator": "Awas Francis",
       "reach": 96,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16152,7 +16152,7 @@
       "coordinator": "Awas Francis",
       "reach": 97,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16165,7 +16165,7 @@
       "coordinator": "Awas Francis",
       "reach": 1034,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16178,7 +16178,7 @@
       "coordinator": "Priscilla",
       "reach": 83,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16191,7 +16191,7 @@
       "coordinator": "Lobur stephen",
       "reach": 167,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16204,7 +16204,7 @@
       "coordinator": "Priscilla",
       "reach": 103,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16217,7 +16217,7 @@
       "coordinator": "Priscilla",
       "reach": 110,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16230,7 +16230,7 @@
       "coordinator": "Priscilla",
       "reach": 91,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16243,7 +16243,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 979,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16256,7 +16256,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16269,7 +16269,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1058,
       "pwd": 8,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16282,7 +16282,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16295,7 +16295,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1455,
       "pwd": 25,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16308,7 +16308,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16321,7 +16321,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1254,
       "pwd": 7,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16334,7 +16334,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16347,7 +16347,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1124,
       "pwd": 14,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16360,7 +16360,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16373,7 +16373,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2874,
       "pwd": 41,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16386,7 +16386,7 @@
       "coordinator": "Priscilla",
       "reach": 101,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16399,7 +16399,7 @@
       "coordinator": "Priscilla",
       "reach": 94,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16412,7 +16412,7 @@
       "coordinator": "Priscilla",
       "reach": 98,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16425,7 +16425,7 @@
       "coordinator": "Priscilla",
       "reach": 100,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16438,7 +16438,7 @@
       "coordinator": "Priscilla",
       "reach": 104,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16451,7 +16451,7 @@
       "coordinator": "Awas Francis",
       "reach": 109,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16464,7 +16464,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 80,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16477,7 +16477,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 35,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16490,7 +16490,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16503,7 +16503,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 35,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16516,7 +16516,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1164,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16529,7 +16529,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16542,7 +16542,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 1023,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16555,7 +16555,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 35,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16568,7 +16568,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 53,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16581,7 +16581,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 53,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16594,7 +16594,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 60,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16607,7 +16607,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16620,7 +16620,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 80,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16633,7 +16633,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16646,7 +16646,7 @@
       "coordinator": "Awas Francis",
       "reach": 94,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16659,7 +16659,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16672,7 +16672,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16685,7 +16685,7 @@
       "coordinator": "Awas Francis",
       "reach": 53,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16698,7 +16698,7 @@
       "coordinator": "Awas Francis",
       "reach": 47,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16711,7 +16711,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16724,7 +16724,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16737,7 +16737,7 @@
       "coordinator": "Priscilla",
       "reach": 1293,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16750,7 +16750,7 @@
       "coordinator": "Lobur stephen",
       "reach": 67,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16763,7 +16763,7 @@
       "coordinator": "Lobur stephen",
       "reach": 69,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16776,7 +16776,7 @@
       "coordinator": "Evaline",
       "reach": 37,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16789,7 +16789,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16802,7 +16802,7 @@
       "coordinator": "Evaline",
       "reach": 67,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16815,7 +16815,7 @@
       "coordinator": "Evaline",
       "reach": 60,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16828,7 +16828,7 @@
       "coordinator": "Evaline",
       "reach": 80,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16841,7 +16841,7 @@
       "coordinator": "Evaline",
       "reach": 55,
       "pwd": -3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16854,7 +16854,7 @@
       "coordinator": "Evaline",
       "reach": 62,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16867,7 +16867,7 @@
       "coordinator": "Evaline",
       "reach": 63,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16880,7 +16880,7 @@
       "coordinator": "Evaline",
       "reach": 58,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16893,7 +16893,7 @@
       "coordinator": "Evaline",
       "reach": 67,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16906,7 +16906,7 @@
       "coordinator": "Evaline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16919,7 +16919,7 @@
       "coordinator": "Evaline",
       "reach": 34,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16932,7 +16932,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1836,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16945,7 +16945,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1338,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16958,7 +16958,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1051,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16971,7 +16971,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1835,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16984,7 +16984,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 1294,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -16997,7 +16997,7 @@
       "coordinator": "Lopeyok Martin",
       "reach": 1197,
       "pwd": 5,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17010,7 +17010,7 @@
       "coordinator": "Awas Francis",
       "reach": 1139,
       "pwd": 8,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17023,7 +17023,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 2658,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17036,7 +17036,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 313,
       "pwd": 25,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17049,7 +17049,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 298,
       "pwd": 44,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17062,7 +17062,7 @@
       "coordinator": "Lobur stephen",
       "reach": 111,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17075,7 +17075,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 1338,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17088,7 +17088,7 @@
       "coordinator": "Evaline",
       "reach": 84,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17101,7 +17101,7 @@
       "coordinator": "Evaline",
       "reach": 65,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17114,7 +17114,7 @@
       "coordinator": "Evaline",
       "reach": 63,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17127,7 +17127,7 @@
       "coordinator": "Evaline",
       "reach": 75,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17140,7 +17140,7 @@
       "coordinator": "Evaline",
       "reach": 58,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17153,7 +17153,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 750,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17166,7 +17166,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 2026,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17179,7 +17179,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 35,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17192,7 +17192,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17205,7 +17205,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17218,7 +17218,7 @@
       "coordinator": "Priscilla",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17231,7 +17231,7 @@
       "coordinator": "Priscilla",
       "reach": 108,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17244,7 +17244,7 @@
       "coordinator": "Priscilla",
       "reach": 116,
       "pwd": 2,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17257,7 +17257,7 @@
       "coordinator": "Priscilla",
       "reach": 112,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17270,7 +17270,7 @@
       "coordinator": "Awas Francis",
       "reach": 105,
       "pwd": 11,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17283,7 +17283,7 @@
       "coordinator": "Priscilla",
       "reach": 102,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17296,7 +17296,7 @@
       "coordinator": "Priscilla",
       "reach": 110,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17309,7 +17309,7 @@
       "coordinator": "Awas Francis",
       "reach": 105,
       "pwd": 9,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17322,7 +17322,7 @@
       "coordinator": "Priscilla",
       "reach": 101,
       "pwd": 1,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17335,7 +17335,7 @@
       "coordinator": "Priscilla",
       "reach": 91,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17348,7 +17348,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 62,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17361,7 +17361,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17374,7 +17374,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1264,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17387,7 +17387,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 64,
       "pwd": 3,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17400,7 +17400,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17413,7 +17413,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 64,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17426,7 +17426,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1633,
       "pwd": 38,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17439,7 +17439,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 58,
       "pwd": 4,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17452,7 +17452,7 @@
       "coordinator": "Cheparen Pauline",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17465,7 +17465,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1496,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17478,7 +17478,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1659,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17491,7 +17491,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 984,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17504,7 +17504,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 1601,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17517,7 +17517,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 63,
       "pwd": 22,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17530,7 +17530,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17543,7 +17543,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 63,
       "pwd": 9,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17556,7 +17556,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 0,
       "pwd": 0,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     },
     {
@@ -17569,7 +17569,7 @@
       "coordinator": "Ochen moses tom",
       "reach": 2029,
       "pwd": 48,
-      "is_new": false,
+      "is_new": true,
       "status": "Verified / Ingested"
     }
   ],

@@ -7665,14 +7665,14 @@
         "att_lower_g": 182,
         "att_lower_tot": 365,
         "att_mid_b": 190,
-        "att_mid_g": 187263,
-        "att_mid_tot": 187453,
+        "att_mid_g": 187,
+        "att_mid_tot": 377,
         "att_up_b": 263,
         "att_up_g": 263,
         "att_up_tot": 526,
         "att_boys": 636,
-        "att_girls": 187708,
-        "att_total": 188344
+        "att_girls": 632,
+        "att_total": 1268
       }
     },
     "demos_metrics": null,
