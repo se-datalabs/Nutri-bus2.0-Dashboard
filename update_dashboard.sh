@@ -1,10 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# ==============================================================================
+# Public Health Emergencies (PHE) - Dashboard Update Command
+#
+# Usage:
+#   ./update_dashboard.sh
+#   or
+#   ./update_dashboard.sh "/path/to/Public_Health_Emergencies.xlsx"
+# ==============================================================================
+
 set -e
 
-echo "🚌 1/2 Ingesting latest field data from Nutribus_2.0_Activity.xlsx..."
-python3 ingest_actual_data.py
+# Change directory to this script's directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
-echo "📊 2/2 Rebuilding HTML dashboard (index.html)..."
-python3 build_full_dashboard.py
+echo "============================================================"
+echo "🔄 Updating PHE Analytics Dashboard..."
+echo "============================================================"
 
-echo "✅ Dashboard update complete! index.html and database JSONs are up to date."
+# Run the python parser
+if command -v python3 &>/dev/null; then
+  python3 update_dashboard.py "$@"
+else
+  echo "❌ Error: python3 is not found in PATH."
+  exit 1
+fi
