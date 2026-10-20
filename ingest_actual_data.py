@@ -905,6 +905,27 @@ for _, row in df.iterrows():
         if not demo_site or demo_site.lower() == 'nan':
             demo_site = "Catchment Kraal / Shade"
 
+        cook_val = str(get_col_val(row, ["Did caregivers cook and handle ingredients hands-on, or only observe?"], "")).lower()
+        is_hands_on = ("practiced" in cook_val or "hands-on" in cook_val or "cooked" in cook_val)
+        local_val = str(get_col_val(row, ["Were all demonstrated foods sourced locally from seasonal gardens/markets?"], "")).lower()
+        is_local = ("yes" in local_val or "strictly compliant" in local_val)
+        metu_val = str(get_col_val(row, ["Was WFP Metu porridge demonstrated with additions of obtainable local staples"], "")).lower()
+        is_metu = ("yes" in metu_val)
+        p3_val = str(get_col_val(row, ["Was clean/smart cooking demonstrated to protect the environment"], "")).lower()
+        is_p3_clean = ("yes" in p3_val)
+        gd_val = str(get_col_val(row, ["Did the structured gender chore and fair-sharing discussion take place?"], "")).lower()
+        is_gd = ("yes" in gd_val)
+        is_ofsp = str(row.get("Demonstrated foods/Orange-fleshed sweet potato (OFSP)", "")).strip() in ("1", "1.0", "True")
+        is_beans = str(row.get("Demonstrated foods/Iron-rich beans", "")).strip() in ("1", "1.0", "True")
+        is_lead_m = str(row.get("Who led the gender dialogues/Lead Mothers present", "")).strip() in ("1", "1.0", "True")
+        is_cost = str(row.get("What else was discussed in dialogue/Cost  of scholastic materials", "")).strip() in ("1", "1.0", "True")
+        is_mhm = str(row.get("What else was discussed in dialogue/Menstrual hygiene management", "")).strip() in ("1", "1.0", "True")
+        hl_val = str(get_col_val(row, ["Community Accountability & WFP Hotline 0800 210 210 Feedback Promoted?"], "")).lower()
+        is_hl_210 = ("yes" in hl_val)
+        rad_d_val = str(get_col_val(row, ["Did community members mention or give feedback on the campaign radio broadcasts during the gathering?"], "")).lower()
+        is_rad_d = ("yes" in rad_d_val)
+        rad_d_cnt = int(clean_val(get_col_val(row, ["How many indicated they heard the radio campaign on radio"], 0)))
+
         demo_sessions_list.append({
             "entry_index": entry_index,
             "id": f"DEMO-{sub_id}",
@@ -923,7 +944,20 @@ for _, row in df.iterrows():
             "pwd": int(pw),
             "total": reach,
             "flagged": reach < 80,
-            "status": "✅ Compliant (≥80)" if reach >= 80 else "🚩 Turnout Gap (<80)"
+            "status": "✅ Compliant (≥80)" if reach >= 80 else "🚩 Turnout Gap (<80)",
+            "hands_on": is_hands_on,
+            "local_foods": is_local,
+            "metu_demo": is_metu,
+            "clean_cooking": is_p3_clean,
+            "gender_dialogue": is_gd,
+            "ofsp": is_ofsp,
+            "iron_beans": is_beans,
+            "lead_mothers": is_lead_m,
+            "cost_dialogue": is_cost,
+            "mhm_dialogue": is_mhm,
+            "hotline_promoted": is_hl_210,
+            "radio_heard": is_rad_d,
+            "radio_listeners": rad_d_cnt
         })
 
     # Log record with entry_index
@@ -1589,8 +1623,34 @@ else:
     gd_col = [c for c in df.columns if 'gender chore and fair-sharing' in c.lower()]
     gd_yes = 0
     if gd_col:
-        gd_yes = sum(demo_df[gd_col[0]].astype(str).str.lower().str.contains('yes', na=False))
+        gd_yes = int(sum(demo_df[gd_col[0]].astype(str).str.lower().str.contains('yes', na=False)))
     gd_no = tot_demos - gd_yes
+
+    local_col = [c for c in df.columns if 'sourced locally from seasonal' in c.lower()]
+    local_yes = tot_demos
+    if local_col:
+        local_yes = int(sum(demo_df[local_col[0]].astype(str).str.lower().str.contains('yes|strictly compliant', na=False)))
+    local_no = max(0, tot_demos - local_yes)
+
+    who_col = [c for c in df.columns if 'who was on ground' in c.lower()]
+    vht_sub_cnt = int(sum(demo_df[who_col[0]].astype(str).str.lower().str.contains('vht', na=False))) if who_col else 0
+    coord_sub_cnt = max(0, tot_demos - vht_sub_cnt)
+
+    role_cofac_col = [c for c in df.columns if 'partner role observed/co-facilitating' in c.lower()]
+    role_ment_col = [c for c in df.columns if 'partner role observed/mentoring' in c.lower()]
+    role_obs_col = [c for c in df.columns if 'partner role observed/observing' in c.lower()]
+    r_cofac = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in role_cofac_col))
+    r_ment = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in role_ment_col))
+    r_obs = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in role_obs_col))
+
+    fs_stove_col = [c for c in df.columns if 'fuel-saving practices' in c.lower() and 'improved cookstove' in c.lower()]
+    fs_dry_col = [c for c in df.columns if 'fuel-saving practices' in c.lower() and 'pre-drying' in c.lower()]
+    fs_pot_col = [c for c in df.columns if 'fuel-saving practices' in c.lower() and 'pot covering' in c.lower()]
+    fs_3stone_col = [c for c in df.columns if 'fuel-saving practices' in c.lower() and 'traditional 3-stone' in c.lower()]
+    fs_stove = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in fs_stove_col))
+    fs_dry = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in fs_dry_col))
+    fs_pot = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in fs_pot_col))
+    fs_3stone = int(sum(demo_df[c].apply(lambda v: 1 if pd.notnull(v) and str(v).strip() in ['1', '1.0', 'True'] else 0).sum() for c in fs_3stone_col))
 
     d_data["community_demonstrations"] = {
         "kpis": {
@@ -1609,13 +1669,13 @@ else:
             "question": "Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?",
             "present": {
                 "categories": ["Yes", "No"],
-                "values": [part_yes, part_no],
+                "values": [int(part_yes), int(part_no)],
                 "pct": f"{round((part_yes / max(1, tot_demos) * 100), 1)}%"
             },
             "specified_partners": {
                 "question": "If yes, specify partner name",
                 "categories": ["UNAC", "AFI"],
-                "values": [unac_cnt, afi_cnt],
+                "values": [int(unac_cnt), int(afi_cnt)],
                 "pct": [f"{round(unac_cnt / max(1, tot_demos) * 100, 1)}%", f"{round(afi_cnt / max(1, tot_demos) * 100, 1)}%"]
             },
             "partner_role_observed": {
@@ -1625,8 +1685,12 @@ else:
                     "Mentoring local VHTs/Elders",
                     "Observing for sustainability tracking"
                 ],
-                "values": [3, 3, 0],
-                "pct": ["33.3%", "33.3%", "0.0%"]
+                "values": [r_cofac, r_ment, r_obs],
+                "pct": [
+                    f"{round(r_cofac / max(1, tot_demos) * 100, 1)}%",
+                    f"{round(r_ment / max(1, tot_demos) * 100, 1)}%",
+                    f"{round(r_obs / max(1, tot_demos) * 100, 1)}%"
+                ]
             }
         },
         "headcount_breakdown": {
@@ -1644,48 +1708,48 @@ else:
                 "Submitted by Village Health Team (VHT)",
                 "Submitted by District Coordinator"
             ],
-            "values": [6, 3]
+            "values": [vht_sub_cnt, coord_sub_cnt]
         },
         "hands_on_cooking": {
             "categories": [
                 "Practiced and cooked hands-on",
                 "Observed only / not hands-on"
             ],
-            "values": [cook_yes, cook_no]
+            "values": [int(cook_yes), int(cook_no)]
         },
         "metu_porridge_local_additions": {
             "categories": [
                 "Demonstrated with local staples (Eboo, Lokaka, Cowpeas, Sesame)",
                 "Not Demonstrated"
             ],
-            "values": [metu_yes, metu_no]
+            "values": [int(metu_yes), int(metu_no)]
         },
         "local_sourcing_compliance": {
             "categories": [
                 "Strictly compliant with seasonal local foods",
                 "Promoted unapproved/unattainable foods"
             ],
-            "values": [tot_demos, 0]
+            "values": [local_yes, local_no]
         },
         "fuel_saving_practices": {
             "categories": [
-                "Covering the Pot with a Lid",
-                "Soaking Dry Beans/Legumes First",
-                "Shielded 3-Stone Fire / Improved Stove",
-                "Open Uncovered Fire (Non-compliant)"
+                "Improved Cookstove Consuming Less Firewood",
+                "Proper Fuelwood Pre-Drying & Airflow",
+                "Retained Heat & Pot Covering with Lid",
+                "Traditional 3-Stone Fire Used (Non-compliant)"
             ],
-            "values": [8, 5, 8, 1]
+            "values": [fs_stove, fs_dry, fs_pot, fs_3stone]
         },
         "pillar3_clean_cooking": {
             "question": "Pillar 3: Was clean/smart cooking demonstrated to protect the environment and lead to better harvests?",
             "categories": ["Yes", "No"],
-            "values": [p3_yes, p3_no],
+            "values": [int(p3_yes), int(p3_no)],
             "pct": f"{round(p3_yes / max(1, tot_demos) * 100, 1)}%"
         },
         "gender_dialogues_execution": {
             "question": "Were gender dialogues led by senior women, senior men, and VHTs successfully executed?",
             "categories": ["Yes", "No"],
-            "values": [gd_yes, gd_no],
+            "values": [int(gd_yes), int(gd_no)],
             "pct": f"{round(gd_yes / max(1, tot_demos) * 100, 1)}%"
         }
     }
@@ -2424,7 +2488,7 @@ if "nutriclub_sessions" in d_data:
     nc_data["sample_sessions"] = nutriclub_sessions_list
 
 # --- IMPACT ANALYSIS DYNAMIC AGGREGATION ---
-tot_orient_schools = sum(1 for d in district_db.values() if d["schools"] > 0 and (d["teachers_male"] + d["teachers_female"] > 0))
+tot_orient_schools = sum(district_orientations.values())
 v2_completed_count = len(v2_rows)
 p1_rate_overall = round((sum(d["pillar_rates"]["p1_pass"] for d in district_db.values()) / max(1, sum(d["pillar_rates"]["p1_total"] for d in district_db.values()))) * 100, 1) if sum(d["pillar_rates"]["p1_total"] for d in district_db.values()) > 0 else 0.0
 p2_rate_overall = round((sum(d["pillar_rates"]["p2_pass"] for d in district_db.values()) / max(1, sum(d["pillar_rates"]["p2_total"] for d in district_db.values()))) * 100, 1) if sum(d["pillar_rates"]["p2_total"] for d in district_db.values()) > 0 else 0.0
@@ -2473,11 +2537,12 @@ d_data["impact_analysis"] = {
             "metric_value": f"{p1_rate_overall}%",
             "metric_label": f"Meal Protection & METU-1 ({v2_completed_count} Activation Schools)",
             "summary": f"{p1_rate_overall}% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
-            "baseline": "Pending Visit 1",
+            "baseline": f"{len(v1_rows)} Schools Audited",
             "evidence_points": [
                 f"Protecting school meals: {p1_specific} learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
-                f"Balanced plate & clubs: {tot_clubs} active NutriClubs established with demo gardens; OFSP & iron-rich beans tracked ({tot_ofsp} OFSP, {tot_iron_beans} iron beans logged)",
-                f"Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across {tot_orient_schools} schools for reporting meal theft or mismanagement ({tot_theft_queries} complaints logged)"
+                f"Balanced plate & clubs: {len(active_schools_set)} active NutriClubs established ({total_active_members} members); OFSP & iron-rich beans tracked ({tot_ofsp} OFSP, {tot_iron_beans} iron beans logged)",
+                f"Visit 3 verification: {tot_v3_charts_returned} of {tot_v3_charts_issued} Home Charts returned ({v3_return_rate}%) across {len(v3_all_schools_records)} closeout schools; {v3_srv_yes}/{len(v3_all_hh_interviews)} confirmed youngest child served first",
+                f"Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across {tot_orient_schools} orientation schools & {tot_hotline_210_promoted} village demos ({tot_theft_queries} meal theft complaints)"
             ]
         },
         {
@@ -2485,24 +2550,25 @@ d_data["impact_analysis"] = {
             "metric_value": f"{p2_rate_overall}%",
             "metric_label": f"Fair Sharing & Allyship ({v2_completed_count} Activation Schools)",
             "summary": f"{p2_rate_overall}% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
-            "baseline": "Pending Visit 1",
+            "baseline": f"{len(v1_rows)} Schools Audited",
             "evidence_points": [
                 f"Fair sharing at the table: {p2_equal} of {p2_equal + p2_hurry} interviewed learners affirmed boys and girls must eat equally and simultaneously",
                 f"Male allies in action: {tot_poll_boys:,} boy responses logged across 5 micro-polls with {poll_agreed_pct}% agreement ({tot_poll_agreed:,} agreements) committing to share morning water and firewood chores",
-                f"Addressing practical constraints: Dialogues with fathers and male teachers tackling domestic labour ({tot_poll_boys:,} boys), schooling costs ({tot_cost_dialogues} sessions), and menstrual hygiene ({tot_mhm_dialogues} sessions)"
+                f"Visit 3 household shift: 100% ({v3_chr_yes}/{len(v3_all_hh_interviews)}) of closeout interviewees confirmed morning chore sharing shifted & {v3_trace_yes}/{len(v3_all_schools_records)} schools actively trace absentees",
+                f"Addressing practical constraints: Dialogues tackling domestic labour ({tot_poll_boys:,} boys), schooling costs ({tot_cost_dialogues} sessions), and menstrual hygiene ({tot_mhm_dialogues} sessions)"
             ]
         },
         {
             "title": "Pillar 3: Community Engagement",
             "metric_value": f"{p3_rate_overall}%",
-            "metric_label": f"Community Action & Stoves ({tot_orient_schools} Oriented Schools)",
-            "summary": f"{round(cal_yes_cnt / max(1, tot_orient_schools) * 100, 1)}% of school leadership and VHTs agreed on joint action calendars, driving community behaviour change across 640 targeted cooking demonstrations.",
+            "metric_label": f"Community Action & Stoves ({tot_demos} Demos · {tot_orient_schools} Orientations)",
+            "summary": f"{round(cal_yes_cnt / max(1, tot_orient_schools) * 100, 1)}% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across {tot_demos} of 640 cooking demonstrations.",
             "baseline": "0.0% Prior",
             "evidence_points": [
-                f"640 Cooking Demonstrations target led by 256 VHT/lead-mother pairs (rollout underway; {tot_lead_mothers} sessions with lead mothers co-facilitating)",
-                f"Community dialogues with men & elders: {cal_yes_cnt} of {tot_orient_schools} schools established joint 4-week action plans and consensus",
-                f"Clean & smart cooking practices: Retained-heat cooking, dry firewood management, and moving away from open 3-stone fires promoted",
-                f"METU-1 recipe chart routine: {tot_v1_charts:,} take-home NutriCharts issued for household routine adoption"
+                f"{tot_demos} of 640 Cooking Demonstrations conducted ({cook_yes} hands-on cooking, {local_yes} strictly local foods, {tot_lead_mothers} sessions with lead mothers co-facilitating)",
+                f"Community dialogues with men & elders: {gd_yes} of {tot_demos} village demos held structured gender/consensus dialogues; {cal_yes_cnt} of {tot_orient_schools} oriented schools signed 4-week joint plans",
+                f"Clean & smart cooking practices: {p3_yes} of {tot_demos} demos demonstrated firewood-saving practices & {v3_kit_yes} of {len(v3_all_schools_records)} Visit 3 school kitchens verified improved stoves",
+                f"METU-1 recipe chart routine: {tot_v1_charts:,} take-home NutriCharts issued at Visit 1 ({tot_v3_charts_returned}/{tot_v3_charts_issued} returned at Visit 3 closeout)"
             ]
         }
     ],

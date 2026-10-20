@@ -423,7 +423,7 @@
         414,
         415
       ],
-      "last_synced": "2026-10-20 10:26:21"
+      "last_synced": "2026-10-20 13:31:15"
     }
   },
   "overview": {
@@ -10535,14 +10535,14 @@
           "Observing for sustainability tracking"
         ],
         "values": [
-          3,
-          3,
-          0
+          33,
+          31,
+          30
         ],
         "pct": [
-          "33.3%",
-          "33.3%",
-          "0.0%"
+          "21.4%",
+          "20.1%",
+          "19.5%"
         ]
       }
     },
@@ -10568,8 +10568,8 @@
         "Submitted by District Coordinator"
       ],
       "values": [
-        6,
-        3
+        125,
+        29
       ]
     },
     "hands_on_cooking": {
@@ -10598,22 +10598,22 @@
         "Promoted unapproved/unattainable foods"
       ],
       "values": [
-        154,
-        0
+        139,
+        15
       ]
     },
     "fuel_saving_practices": {
       "categories": [
-        "Covering the Pot with a Lid",
-        "Soaking Dry Beans/Legumes First",
-        "Shielded 3-Stone Fire / Improved Stove",
-        "Open Uncovered Fire (Non-compliant)"
+        "Improved Cookstove Consuming Less Firewood",
+        "Proper Fuelwood Pre-Drying & Airflow",
+        "Retained Heat & Pot Covering with Lid",
+        "Traditional 3-Stone Fire Used (Non-compliant)"
       ],
       "values": [
-        8,
-        5,
-        8,
-        1
+        107,
+        48,
+        46,
+        78
       ]
     },
     "pillar3_clean_cooking": {
@@ -16855,11 +16855,12 @@
         "metric_value": "51.2%",
         "metric_label": "Meal Protection & METU-1 (55 Activation Schools)",
         "summary": "51.2% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
-        "baseline": "Pending Visit 1",
+        "baseline": "61 Schools Audited",
         "evidence_points": [
           "Protecting school meals: 169 learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
-          "Balanced plate & clubs: 120 active NutriClubs established with demo gardens; OFSP & iron-rich beans tracked (59 OFSP, 90 iron beans logged)",
-          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 9 schools for reporting meal theft or mismanagement (0 complaints logged)"
+          "Balanced plate & clubs: 47 active NutriClubs established (1975 members); OFSP & iron-rich beans tracked (59 OFSP, 90 iron beans logged)",
+          "Visit 3 verification: 30 of 70 Home Charts returned (42.9%) across 4 closeout schools; 24/24 confirmed youngest child served first",
+          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 16 orientation schools & 140 village demos (0 meal theft complaints)"
         ]
       },
       {
@@ -16867,24 +16868,25 @@
         "metric_value": "62.6%",
         "metric_label": "Fair Sharing & Allyship (55 Activation Schools)",
         "summary": "62.6% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
-        "baseline": "Pending Visit 1",
+        "baseline": "61 Schools Audited",
         "evidence_points": [
           "Fair sharing at the table: 206 of 287 interviewed learners affirmed boys and girls must eat equally and simultaneously",
           "Male allies in action: 33,461 boy responses logged across 5 micro-polls with 94.7% agreement (31,689 agreements) committing to share morning water and firewood chores",
-          "Addressing practical constraints: Dialogues with fathers and male teachers tackling domestic labour (33,461 boys), schooling costs (80 sessions), and menstrual hygiene (47 sessions)"
+          "Visit 3 household shift: 100% (24/24) of closeout interviewees confirmed morning chore sharing shifted & 4/4 schools actively trace absentees",
+          "Addressing practical constraints: Dialogues tackling domestic labour (33,461 boys), schooling costs (80 sessions), and menstrual hygiene (47 sessions)"
         ]
       },
       {
         "title": "Pillar 3: Community Engagement",
         "metric_value": "100.0%",
-        "metric_label": "Community Action & Stoves (9 Oriented Schools)",
-        "summary": "144.4% of school leadership and VHTs agreed on joint action calendars, driving community behaviour change across 640 targeted cooking demonstrations.",
+        "metric_label": "Community Action & Stoves (154 Demos \u00b7 16 Orientations)",
+        "summary": "81.2% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across 154 of 640 cooking demonstrations.",
         "baseline": "0.0% Prior",
         "evidence_points": [
-          "640 Cooking Demonstrations target led by 256 VHT/lead-mother pairs (rollout underway; 83 sessions with lead mothers co-facilitating)",
-          "Community dialogues with men & elders: 13 of 9 schools established joint 4-week action plans and consensus",
-          "Clean & smart cooking practices: Retained-heat cooking, dry firewood management, and moving away from open 3-stone fires promoted",
-          "METU-1 recipe chart routine: 1,705 take-home NutriCharts issued for household routine adoption"
+          "154 of 640 Cooking Demonstrations conducted (97 hands-on cooking, 139 strictly local foods, 83 sessions with lead mothers co-facilitating)",
+          "Community dialogues with men & elders: 141 of 154 village demos held structured gender/consensus dialogues; 13 of 16 oriented schools signed 4-week joint plans",
+          "Clean & smart cooking practices: 119 of 154 demos demonstrated firewood-saving practices & 3 of 4 Visit 3 school kitchens verified improved stoves",
+          "METU-1 recipe chart routine: 1,705 take-home NutriCharts issued at Visit 1 (30/70 returned at Visit 3 closeout)"
         ]
       }
     ],
@@ -16928,7 +16930,7 @@
           {
             "label": "Teachers & VHTs Oriented",
             "value": "1275.0 Stakeholders",
-            "detail": "Oriented across 9 primary schools (Target: 768)"
+            "detail": "Oriented across 16 primary schools (Target: 768)"
           },
           {
             "label": "Persons with Disabilities",
@@ -16956,8 +16958,8 @@
           },
           {
             "label": "Teachers in the Lead",
-            "value": "133.3% (12 of 9 Schools)",
-            "detail": "12 of 9 oriented schools confirmed headteacher or deputy leadership present"
+            "value": "75.0% (12 of 16 Schools)",
+            "detail": "12 of 16 oriented schools confirmed headteacher or deputy leadership present"
           },
           {
             "label": "What Children Learned",
@@ -17033,9 +17035,9 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "9 Orientations \u00b7 55 Activations \u00b7 4 Closeouts",
+          "headline": "16 Orientations \u00b7 55 Activations \u00b7 4 Closeouts",
           "data_points": [
-            "9 schools oriented on Metu porridge fortification and clean cooking",
+            "16 schools oriented on Metu porridge fortification and clean cooking",
             "55 schools delivered Visit 2 Big Activation Day (63,249 pupils engaged)",
             "154 of 640 community cooking demonstrations conducted to date"
           ]
@@ -17070,9 +17072,9 @@
           ]
         },
         "how_well": {
-          "headline": "9 Schools Oriented \u00b7 100% Inclusive",
+          "headline": "16 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
-            "12 of 9 oriented schools confirmed active teacher & headteacher leadership",
+            "12 of 16 oriented schools confirmed active teacher & headteacher leadership",
             "6910 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
@@ -17136,7 +17138,7 @@
           "Children Audited: 86,054 weekly attendees (85,376 total enrolled) across 61 schools",
           "Classroom Practice: 61 schools completed onboarding & audit",
           "Home Charts Given: 1,705 classroom NutriCharts issued across Lower, Middle, Upper primary",
-          "Patrons Appointed: 62 teacher patrons appointed across 9 orientation schools (plus 120 club sessions)"
+          "Patrons Appointed: 62 teacher patrons appointed across 16 orientation schools (plus 120 club sessions)"
         ]
       },
       {

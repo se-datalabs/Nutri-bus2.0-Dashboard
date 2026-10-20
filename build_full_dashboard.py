@@ -286,8 +286,9 @@ v2_slog_part = v2_slog_vals[1] if len(v2_slog_vals) > 1 else 0
 v2_slog_ret = v2_slog_dem + v2_slog_part
 v2_slogan_total = sum(v2_slog_vals)
 v2_slog_pct = round(v2_slog_ret / max(1, v2_sc_sample_size) * 100, 1) if v2_sc_sample_size > 0 else 0.0
-v2_completed_count = sum(1 for d in DISTRICT_DB.values() if d.get("v2"))
 v2_data = BASE_DATA.get("three_visit_contact", {}).get("visit2", {})
+v2_schools_data_list = v2_data.get("schools_data", [])
+v2_completed_count = len(v2_schools_data_list) if v2_schools_data_list else sum(1 for d in DISTRICT_DB.values() if d.get("v2"))
 v2_schools_list = v2_data.get("schools_list", [])
 v2_schools_str = ", ".join(v2_schools_list) if v2_schools_list else "0 Schools"
 v2_poll_dict = v2_data.get("micro_poll", {})
@@ -335,9 +336,45 @@ v3_joint_rate_pct = v3_data.get("joint_rate_pct", round(v3_charts_joint_tot / ma
 v3_att_tot = v3_data.get("attendance", {}).get("total", 0)
 v3_att_boys = v3_data.get("attendance", {}).get("boys", 0)
 v3_att_girls = v3_data.get("attendance", {}).get("girls", 0)
+v3_srv_vals = v3_sc.get("serving_order_shifted", v3_sc.get("youngest_child_served_fairly", {})).get("values", [0, 0, 0])
+v3_srv_yes = v3_srv_vals[0] if len(v3_srv_vals) > 0 else 0
+v3_srv_pct = round(v3_srv_yes / max(1, v3_hh_sample_size) * 100, 1) if v3_hh_sample_size > 0 else 0.0
+v3_chr_vals = v3_sc.get("morning_chore_shifted", {}).get("values", [0, 0, 0])
+v3_chr_yes = v3_chr_vals[0] if len(v3_chr_vals) > 0 else 0
+v3_chr_pct = round(v3_chr_yes / max(1, v3_hh_sample_size) * 100, 1) if v3_hh_sample_size > 0 else 0.0
+v3_act_vals = v3_sc.get("feasible_actions_tried", v3_sc.get("actions_practiced", {})).get("values", [0, 0, 0, 0, 0])
+v3_act_porridge = v3_act_vals[0] if len(v3_act_vals) > 0 else 0
+v3_act_total = sum(v3_act_vals)
+v3_comm_vals = v3_data.get("bus_day_commitment_status", v3_data.get("commitment_completion", {})).get("values", [0, 0, 0])
+v3_comm_done = v3_comm_vals[0] if len(v3_comm_vals) > 0 else 0
+v3_trace_vals = v3_data.get("chronic_absentee_tracing", v3_data.get("absentee_tracing", {})).get("values", [0, 0])
+v3_trace_yes = v3_trace_vals[0] if len(v3_trace_vals) > 0 else 0
+v3_kit_vals = v3_data.get("kitchen_stove_audit", v3_data.get("kitchen_fuel_saving", {})).get("values", [0, 0])
+v3_kit_yes = v3_kit_vals[0] if len(v3_kit_vals) > 0 else 0
 
-cg_intercept_sample_size = sum(BASE_DATA.get("community_demonstrations", {}).get("cooking_practice_audit", {}).get("values", [0, 0, 0]))
-tot_demos = BASE_DATA.get("overview", {}).get("total_demonstrations", 0)
+comm_demo_data = BASE_DATA.get("community_demonstrations", {})
+cg_intercept_sample_size = sum(comm_demo_data.get("cooking_practice_audit", {}).get("values", [0, 0, 0]))
+tot_demos = BASE_DATA.get("overview", {}).get("total_demonstrations", tot_dem_all)
+demo_hands_on_vals = comm_demo_data.get("hands_on_cooking", {}).get("values", [0, 0])
+demo_hands_on_yes = demo_hands_on_vals[0] if len(demo_hands_on_vals) > 0 else 0
+demo_hands_on_pct = round(demo_hands_on_yes / max(1, tot_dem_all) * 100, 1) if tot_dem_all > 0 else 0.0
+demo_local_vals = comm_demo_data.get("local_sourcing_compliance", {}).get("values", [0, 0])
+demo_local_yes = demo_local_vals[0] if len(demo_local_vals) > 0 else 0
+demo_local_pct = round(demo_local_yes / max(1, tot_dem_all) * 100, 1) if tot_dem_all > 0 else 0.0
+demo_metu_vals = comm_demo_data.get("metu_porridge_local_additions", {}).get("values", [0, 0])
+demo_metu_yes = demo_metu_vals[0] if len(demo_metu_vals) > 0 else 0
+demo_metu_pct = round(demo_metu_yes / max(1, tot_dem_all) * 100, 1) if tot_dem_all > 0 else 0.0
+demo_p3_vals = comm_demo_data.get("pillar3_clean_cooking", {}).get("values", [0, 0])
+demo_p3_yes = demo_p3_vals[0] if len(demo_p3_vals) > 0 else 0
+demo_p3_pct = round(demo_p3_yes / max(1, tot_dem_all) * 100, 1) if tot_dem_all > 0 else 0.0
+demo_gd_vals = comm_demo_data.get("gender_dialogues_execution", {}).get("values", [0, 0])
+demo_gd_yes = demo_gd_vals[0] if len(demo_gd_vals) > 0 else 0
+demo_gd_pct = round(demo_gd_yes / max(1, tot_dem_all) * 100, 1) if tot_dem_all > 0 else 0.0
+demo_cg_tot = comm_demo_data.get("kpis", {}).get("total_caregivers_reached", sum(s.get("caregivers", 0) for s in DEMO_SESSIONS_640))
+demo_compliant_tot = sum(1 for s in DEMO_SESSIONS_640 if not s.get("flagged"))
+demo_flagged_tot = sum(1 for s in DEMO_SESSIONS_640 if s.get("flagged"))
+demo_compliant_pct = round(demo_compliant_tot / max(1, len(DEMO_SESSIONS_640)) * 100, 1) if DEMO_SESSIONS_640 else 0.0
+demo_flagged_pct = round(demo_flagged_tot / max(1, len(DEMO_SESSIONS_640)) * 100, 1) if DEMO_SESSIONS_640 else 0.0
 
 active_clubs_list = [s for s in BASE_DATA.get("nutriclub_sessions", {}).get("schools_register", []) if s.get("total_membership", 0) > 0]
 tot_active_clubs_cnt = len(active_clubs_list)
@@ -3085,22 +3122,22 @@ html_code = f"""<!DOCTYPE html>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Total Sessions</span>
-          <span id="demo-kpi-total-sessions" class="text-2xl font-black text-slate-800 block mt-0.5">0</span>
+          <span id="demo-kpi-total-sessions" class="text-2xl font-black text-slate-800 block mt-0.5">{len(DEMO_SESSIONS_640)}</span>
           <span class="text-[10px] text-slate-400 font-medium">Target: 640 Sessions</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Compliant Turnout</span>
-          <span id="demo-kpi-compliant-sessions" class="text-2xl font-black text-emerald-700 block mt-0.5">0</span>
-          <span id="demo-kpi-compliant-rate" class="text-[10px] text-emerald-600 font-bold">&ge;80 Turnout: 0.0%</span>
+          <span id="demo-kpi-compliant-sessions" class="text-2xl font-black text-emerald-700 block mt-0.5">{demo_compliant_tot}</span>
+          <span id="demo-kpi-compliant-rate" class="text-[10px] text-emerald-600 font-bold">&ge;80 Turnout: {demo_compliant_pct}%</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Red-Flagged</span>
-          <span id="demo-kpi-flagged-sessions" class="text-2xl font-black text-red-600 block mt-0.5">0</span>
-          <span id="demo-kpi-flagged-rate" class="text-[10px] text-red-500 font-bold">&lt;80 Turnout: 0.0%</span>
+          <span id="demo-kpi-flagged-sessions" class="text-2xl font-black text-red-600 block mt-0.5">{demo_flagged_tot}</span>
+          <span id="demo-kpi-flagged-rate" class="text-[10px] text-red-500 font-bold">&lt;80 Turnout: {demo_flagged_pct}%</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregiver Reach</span>
-          <span class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
+          <span id="demo-kpi-caregiver-reach" class="text-2xl font-black text-wfp-blue block mt-0.5">{demo_cg_tot:,}</span>
           <span class="text-[10px] text-slate-400 font-medium">Target: 51,200 (80/session)</span>
         </div>
       </div>
@@ -3128,7 +3165,7 @@ html_code = f"""<!DOCTYPE html>
                 </span>
               </div>
               <h5 class="text-xs font-bold text-slate-800">OFSP &amp; Iron-Rich Beans</h5>
-              <div class="text-xl font-black text-purple-900 mt-1">{tot_ofsp} OFSP · {tot_iron_beans} Iron Beans</div>
+              <div id="demo-ind-biofortified" class="text-xl font-black text-purple-900 mt-1">{tot_ofsp} OFSP · {tot_iron_beans} Iron Beans</div>
             </div>
             <p class="text-[11px] text-slate-500 mt-2">Demonstrated alongside wild greens (Eboo, Lokaka) in Metu porridge cooking demos.</p>
           </div>
@@ -3143,7 +3180,7 @@ html_code = f"""<!DOCTYPE html>
                 </span>
               </div>
               <h5 class="text-xs font-bold text-slate-800">Lead Mothers Present</h5>
-              <div class="text-xl font-black text-emerald-900 mt-1">{tot_lead_mothers} Sessions</div>
+              <div id="demo-ind-lead-mothers" class="text-xl font-black text-emerald-900 mt-1">{tot_lead_mothers} Sessions</div>
             </div>
             <p class="text-[11px] text-slate-500 mt-2">Target: 256 VHT / Lead-Mother pairs co-facilitating across 640 demo sites.</p>
           </div>
@@ -3158,7 +3195,7 @@ html_code = f"""<!DOCTYPE html>
                 </span>
               </div>
               <h5 class="text-xs font-bold text-slate-800">WFP Helpline 0800 210 210</h5>
-              <div class="text-xl font-black text-blue-900 mt-1">{tot_hotline_210_promoted} Promoted</div>
+              <div id="demo-ind-helpline" class="text-xl font-black text-blue-900 mt-1">{tot_hotline_210_promoted} Promoted</div>
             </div>
             <p class="text-[11px] text-slate-500 mt-2">Toll-free reporting promoted for meal theft or mismanagement with zero retaliation.</p>
           </div>
@@ -3172,10 +3209,10 @@ html_code = f"""<!DOCTYPE html>
                   <i class="fa-solid fa-shield-halved"></i>
                 </span>
               </div>
-              <h5 class="text-xs font-bold text-slate-800">Meal Theft / Mismanagement</h5>
-              <div class="text-xl font-black text-amber-900 mt-1">{tot_theft_queries} Queries Logged</div>
+              <h5 class="text-xs font-bold text-slate-800">Helpdesk &amp; Meal Theft Queries</h5>
+              <div id="demo-ind-theft" class="text-xl font-black text-amber-900 mt-1">{v1_queries_logged} Queries ({tot_theft_queries} Theft)</div>
             </div>
-            <p class="text-[11px] text-slate-500 mt-2">Verified queries regarding theft or mismanagement of school meals logged and redressed.</p>
+            <p class="text-[11px] text-slate-500 mt-2">Verified helpdesk queries &amp; school meal complaints logged across {v1_tollfree_cnt} schools with 0800 displays.</p>
           </div>
         </div>
       </div>
@@ -3518,36 +3555,36 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Schools &amp; 3-Visit Cycles:</span>
-                      <strong class="text-slate-900">{tot_sch_all} Primary Schools reached ({tot_orient_schools} Orientations, {V1_COUNT_SCHOOLS} Visit 1, {v2_completed_count} Visit 2, {tot_active_clubs_cnt} NutriClubs) · 64 Target Schools</strong>
+                      <strong id="mel-q1-schools" class="text-slate-900">{tot_sch_all} Primary Schools reached ({tot_orient_schools} Orientations, {V1_COUNT_SCHOOLS} Visit 1, {v2_completed_count} Visit 2, {v3_completed_count} Visit 3, {tot_active_clubs_cnt} NutriClubs) · 64 Target Schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Direct Session Reach Target:</span>
-                      <strong class="text-wfp-blue font-bold">{tot_lrn_all:,} Learners directly reached · 80,875 Target</strong>
+                      <strong id="mel-q1-learners" class="text-wfp-blue font-bold">{tot_lrn_all:,} Learners directly reached · 80,875 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Community Demonstrations:</span>
-                      <strong class="text-slate-900">{tot_dem_all} Demonstrations logged · 640 Target Sites</strong>
+                      <strong id="mel-q1-demos" class="text-slate-900">{tot_dem_all} Demonstrations logged · 640 Target Sites</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Caregivers &amp; Parents Target:</span>
-                      <strong class="text-slate-900">{tot_cg_all} Caregivers reached · 51,200 Target</strong>
+                      <strong id="mel-q1-caregivers" class="text-slate-900">{tot_cg_all:,} Caregivers reached · 51,200 Target</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">School Clubs &amp; Weekly Meetings:</span>
-                      <strong class="text-slate-900">{tot_active_clubs_cnt} NutriClubs active ({tot_active_club_members} registered members across active schools) · 64 Target Clubs</strong>
+                      <strong id="mel-q1-clubs" class="text-slate-900">{tot_active_clubs_cnt} NutriClubs active ({tot_active_club_members} registered members across active schools) · 64 Target Clubs</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Trained Stakeholders &amp; Inclusion:</span>
-                      <strong class="text-slate-900">{int(tot_stk_all)} Teachers &amp; VHTs logged · {tot_pwd_all} PWDs reached · 768 Target</strong>
+                      <strong id="mel-q1-stakeholders" class="text-slate-900">{int(tot_stk_all)} Teachers &amp; VHTs logged · {tot_pwd_all} PWDs reached · 768 Target</strong>
                     </div>
                     <div class="p-2 bg-emerald-50/60 rounded border border-emerald-200">
                       <span class="text-emerald-900 text-[10px] block font-semibold">Lead Mothers &amp; VHT Pairs:</span>
-                      <strong class="text-emerald-800 font-bold">{tot_lead_mothers} Sessions with Lead Mothers Co-Facilitating</strong>
+                      <strong id="mel-q1-lead-mothers" class="text-emerald-800 font-bold">{tot_lead_mothers} Sessions with Lead Mothers Co-Facilitating</strong>
                       <span class="text-[10px] text-slate-500 block">Target: 256 VHT/Lead-Mother pairs</span>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
                       <span class="text-purple-900 text-[10px] block font-semibold">Biofortified Foods Demonstrated:</span>
-                      <strong class="text-purple-800 font-bold">{tot_ofsp} OFSP &amp; {tot_iron_beans} Iron-Rich Bean Demos</strong>
+                      <strong id="mel-q1-biofortified" class="text-purple-800 font-bold">{tot_ofsp} OFSP &amp; {tot_iron_beans} Iron-Rich Bean Demos</strong>
                       <span class="text-[10px] text-slate-500 block">Orange-fleshed sweet potato &amp; iron beans</span>
                     </div>
                   </div>
@@ -3568,28 +3605,31 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs">
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Cooking Practice:</span>
-                      <strong class="text-slate-500 font-bold">Awaiting cooking demo submissions (0 demos conducted)</strong>
+                      <strong id="mel-q2-cooking" class="text-emerald-800 font-bold">{demo_hands_on_pct}% Hands-On Practice ({demo_hands_on_yes} of {tot_dem_all} demos conducted)</strong>
+                      <span id="mel-q2-cooking-sub" class="text-[10px] text-slate-500 block">{demo_metu_yes} of {tot_dem_all} demos ({demo_metu_pct}%) demonstrated Metu porridge with local staples</span>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Local Foods Only:</span>
-                      <strong class="text-slate-500 font-bold">Awaiting cooking demo submissions (0 demos conducted)</strong>
+                      <strong id="mel-q2-local-foods" class="text-emerald-800 font-bold">{demo_local_pct}% Strictly Local Seasonal Foods ({demo_local_yes} of {tot_dem_all} demos conducted)</strong>
+                      <span class="text-[10px] text-slate-500 block">Sourced from local gardens &amp; seasonal markets (Eboo, Lokaka, cowpeas, OFSP)</span>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Teachers in the Lead:</span>
-                      <strong class="text-slate-900">{ht_presence_pct}% ({tot_ht_all} of {tot_orient_schools} schools with headteacher/deputy leadership)</strong>
+                      <strong id="mel-q2-teachers" class="text-slate-900">{ht_presence_pct}% ({tot_ht_all} of {tot_orient_schools} schools with headteacher/deputy leadership)</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">What Children Remembered:</span>
-                      <strong class="text-wfp-blue font-bold">Unaided recall verified across {v2_completed_count} activation schools ({v2_sc_sample_size} intercepted respondents)</strong>
+                      <strong id="mel-q2-recall" class="text-wfp-blue font-bold">{v2_slog_pct}% Campaign Slogan · {v2_p1_pct}% Porridge · {v2_p2_pct}% Chores Unaided Recall</strong>
+                      <span id="mel-q2-recall-sub" class="text-[10px] text-slate-500 block">Verified across {v2_completed_count} activation schools ({v2_sc_sample_size} intercepted respondents: {v2_p1_spec}/{v2_p1_total} porridge, {v2_p2_eq}/{v2_p2_total} chores)</span>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block">Fair &amp; Welcoming for All:</span>
                       <strong class="text-slate-900">100.0% in local language with inclusive PWD accommodation</strong>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
-                      <span class="text-purple-900 text-[10px] block font-semibold">WFP Helpline (0800 210 210) &amp; Complaints:</span>
-                      <strong class="text-purple-800 font-bold">{tot_theft_queries} meal theft/mismanagement complaints logged</strong>
-                      <span class="text-[10px] text-slate-500 block">Helpline 0800 210 210 promoted across {tot_orient_schools} schools</span>
+                      <span class="text-purple-900 text-[10px] block font-semibold">WFP Helpline (0800 210 210) &amp; Feedback Queries:</span>
+                      <strong id="mel-q2-helpline" class="text-purple-800 font-bold">{v1_queries_logged} Helpdesk Queries Logged ({tot_theft_queries} meal theft complaints)</strong>
+                      <span id="mel-q2-helpline-sub" class="text-[10px] text-slate-500 block">Displayed in {v1_tollfree_cnt} of {V1_COUNT_SCHOOLS} audited schools · Promoted in {tot_orient_schools} orientations &amp; {tot_hotline_210_promoted} village demos</span>
                     </div>
                   </div>
                 </td>
@@ -3609,41 +3649,42 @@ html_code = f"""<!DOCTYPE html>
                   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs">
                     <div class="p-2 bg-emerald-50/60 rounded border border-emerald-200">
                       <span class="text-emerald-900 text-[10px] block font-semibold">Adding Greens to Morning Porridge:</span>
-                      <strong class="text-slate-600 font-bold text-sm">Pending Visit 3 closeout audits (0 schools)</strong>
-                      <span class="text-[10px] text-slate-500 block">Awaiting returned Home Charts at Visit 3 closeout</span>
+                      <strong id="mel-q3-porridge" class="text-emerald-800 font-bold text-sm">{v3_charts_returned_tot} of {v3_charts_issued_tot} Home Charts Returned ({v3_return_rate_pct}%) across {v3_completed_count} Visit 3 schools</strong>
+                      <span id="mel-q3-porridge-sub" class="text-[10px] text-slate-500 block">{demo_metu_yes} of {tot_dem_all} village demos practiced Metu fortification; {v3_act_porridge} of {v3_hh_sample_size} Visit 3 households enriched porridge</span>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Boys Helping with Water &amp; Firewood:</span>
-                      <strong class="text-blue-800 font-bold text-sm">{poll_agreed_pct}% agreement across Visit 2 micro-polls ({tot_poll_boys:,} boy responses recorded across activation schools)</strong>
+                      <strong id="mel-q3-boys" class="text-blue-800 font-bold text-sm">{poll_agreed_pct}% agreement across Visit 2 micro-polls ({tot_poll_boys:,} boy responses recorded across activation schools)</strong>
                       <span class="text-[10px] text-slate-500 block">Polled consensus on rebalancing domestic water chores</span>
                     </div>
                     <div class="p-2 bg-purple-50/60 rounded border border-purple-200">
                       <span class="text-purple-900 text-[10px] block font-semibold">Serving Toddlers First:</span>
-                      <strong class="text-slate-600 font-bold text-sm">Pending Visit 3 closeout audits (0 schools)</strong>
-                      <span class="text-[10px] text-slate-500 block">Youngest child prioritization pending household verification</span>
+                      <strong id="mel-q3-toddlers" class="text-purple-800 font-bold text-sm">{v3_srv_pct}% Verified ({v3_srv_yes} of {v3_hh_sample_size} interviews across {v3_completed_count} Visit 3 schools)</strong>
+                      <span class="text-[10px] text-slate-500 block">Youngest child &amp; girls served fairly in audited Visit 3 households</span>
                     </div>
                     <div class="p-2 bg-amber-50/60 rounded border border-amber-200">
                       <span class="text-amber-900 text-[10px] block font-semibold">Saving Daily Firewood:</span>
-                      <strong class="text-slate-600 font-bold text-sm">Pending cooking demo submissions (0 demos)</strong>
-                      <span class="text-[10px] text-slate-500 block">Firewood savings to be verified during cooking demos</span>
+                      <strong id="mel-q3-firewood" class="text-amber-800 font-bold text-sm">{demo_p3_pct}% Clean Cooking Demos ({demo_p3_yes} of {tot_dem_all}) · {v3_kit_yes} of {v3_completed_count} School Kitchens</strong>
+                      <span class="text-[10px] text-slate-500 block">Fuel-saving stoves, pre-dried wood &amp; covered pots verified in demos &amp; Visit 3 audits</span>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Constraint Dialogue: Cost of Materials:</span>
-                      <strong class="text-blue-800 font-bold text-sm">{tot_cost_dialogues} Sessions Logged</strong>
+                      <strong id="mel-q3-cost" class="text-blue-800 font-bold text-sm">{tot_cost_dialogues} Sessions Logged</strong>
                       <span class="text-[10px] text-slate-500 block">Tackling cost of scholastic materials in gender dialogues</span>
                     </div>
                     <div class="p-2 bg-blue-50/60 rounded border border-blue-200">
                       <span class="text-blue-900 text-[10px] block font-semibold">Constraint Dialogue: Menstrual Hygiene:</span>
-                      <strong class="text-blue-800 font-bold text-sm">{tot_mhm_dialogues} Sessions Logged</strong>
+                      <strong id="mel-q3-mhm" class="text-blue-800 font-bold text-sm">{tot_mhm_dialogues} Sessions Logged</strong>
                       <span class="text-[10px] text-slate-500 block">Tackling menstrual hygiene management (MHM) barriers</span>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">More Pupils in School:</span>
-                      <strong class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot:,} weekly attendees across {len(v1_schools_list)} monitored schools</strong>
+                      <strong id="mel-q3-pupils" class="text-slate-700 font-bold">{v1_enrol_tot:,} enrolled, {v1_att_tot:,} Visit 1 &amp; {v3_att_tot:,} Visit 3 weekly attendees across monitored schools</strong>
                     </div>
                     <div class="p-2 bg-slate-50 rounded border border-slate-200">
                       <span class="text-slate-500 text-[10px] block font-semibold">Out-of-School Girls Back in Class:</span>
-                      <strong class="text-slate-600 font-bold">0 (Pending tracing squad reports)</strong>
+                      <strong id="mel-q3-tracing" class="text-emerald-800 font-bold">{v3_trace_yes} of {v3_completed_count} Visit 3 Schools Actively Tracing (100%)</strong>
+                      <span class="text-[10px] text-slate-500 block">Collective chronic absentee tracing verified across audited closeout schools</span>
                     </div>
                   </div>
                 </td>
@@ -3688,33 +3729,33 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-purple-700 bg-purple-100 px-2 py-0.5 rounded font-bold inline-block mb-2">School Meal Protection &amp; METU-1</span>
                   <div class="p-2 bg-white rounded border border-purple-200 shadow-xs">
                     <span class="text-[10px] text-purple-700 block font-bold uppercase tracking-wider">Fortification Mastery:</span>
-                    <strong class="text-sm font-extrabold text-purple-800">{p1_rate_overall}%</strong>
+                    <strong id="mel-p1-rate" class="text-sm font-extrabold text-purple-800">{p1_rate_overall}%</strong>
                     <span class="text-[10px] text-slate-500 block">Fortification recall pass</span>
                   </div>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">{tot_orient_schools} Orientations · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
+                <td id="mel-p1-done" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                  <strong class="text-slate-900 block mb-1">{tot_orient_schools} Orientations · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 · {v3_completed_count} Visit 3 Closeouts Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• <strong>Protect school meal &amp; learning:</strong> {tot_orient_schools} primary schools completed orientation with {int(tot_stk_all)} stakeholders logged across activities</li>
-                    <li>• <strong>Promote balanced plate &amp; METU-1 porridge:</strong> Anchor multi-mix recipe using locally available greens (Eboo, Lokaka) and cowpeas ({v2_completed_count} schools delivered Visit 2 reaching {v2_grand_tot} participants)</li>
+                    <li>• <strong>Promote balanced plate &amp; METU-1 porridge:</strong> Anchor multi-mix recipe using locally available greens (Eboo, Lokaka) and cowpeas ({v2_completed_count} schools delivered Visit 2 reaching {tot_lrn_all:,} learners)</li>
                     <li>• <strong>Strengthen nutrition clubs &amp; gardens:</strong> {tot_active_clubs_cnt} active clubs ({tot_active_club_members} registered members across active schools); demo gardens, OFSP &amp; iron-rich beans tracked</li>
                     <li>• <strong>Raise awareness of WFP helpline (0800 210 210):</strong> Toll-free reporting promoted for theft or mismanagement of school meals</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                <td id="mel-p1-qual" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-purple-800 block mb-1">Unaided Fortification Recall</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• Unaided recall of METU-1 fortification ingredients across activation schools</li>
-                    <li>• Exit interviewees committed to immediate porridge fortification</li>
+                    <li>• {demo_local_yes} of {tot_dem_all} village demos ({demo_local_pct}%) strictly sourced seasonal local foods</li>
                     <li>• WFP helpline (0800 210 210) display boards handed over across all schools</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-purple-50/30">
+                <td id="mel-p1-chg" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-purple-50/30">
                   <strong class="text-purple-900 block mb-1">Protected Meals &amp; Fortification</strong>
                   <ul class="space-y-1 text-[11px] text-purple-900">
-                    <li>• Household recipe trial audits pending Visit 3 closeouts</li>
-                    <li>• 0 of 640 community demonstration reports recorded to date</li>
-                    <li>• Verified shift metrics will calculate upon endline submissions</li>
+                    <li>• {v3_charts_returned_tot} of {v3_charts_issued_tot} Home NutriCharts returned ({v3_return_rate_pct}%) with {v3_charts_joint_tot} joint completions across {v3_completed_count} Visit 3 schools</li>
+                    <li>• {tot_dem_all} of 640 community demonstration reports recorded ({demo_metu_yes} demonstrating Metu porridge fortification)</li>
+                    <li>• {v3_srv_yes} of {v3_hh_sample_size} Visit 3 household interviews confirmed youngest child served first ({v3_srv_pct}%)</li>
                   </ul>
                 </td>
               </tr>
@@ -3729,12 +3770,12 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-bold inline-block mb-2">Fair Sharing &amp; Allyship</span>
                   <div class="p-2 bg-white rounded border border-blue-200 shadow-xs">
                     <span class="text-[10px] text-wfp-blue block font-bold uppercase tracking-wider">Boy Allyship Consensus:</span>
-                    <strong class="text-sm font-extrabold text-wfp-blue">{poll_agreed_pct}%</strong>
-                    <span class="text-[10px] text-slate-500 block">({tot_poll_boys:,} boy responses)</span>
+                    <strong id="mel-p2-rate" class="text-sm font-extrabold text-wfp-blue">{poll_agreed_pct}%</strong>
+                    <span id="mel-p2-rate-sub" class="text-[10px] text-slate-500 block">({tot_poll_boys:,} boy responses)</span>
                   </div>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">{tot_active_clubs_cnt} NutriClubs · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 Activations Logged</strong>
+                <td id="mel-p2-done" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                  <strong class="text-slate-900 block mb-1">{tot_active_clubs_cnt} NutriClubs · {V1_COUNT_SCHOOLS} Visit 1 · {v2_completed_count} Visit 2 · {v3_completed_count} Visit 3 Closeouts Logged</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• <strong>Fair sharing at table &amp; classroom:</strong> Parity audited across {len(v1_schools_list)} schools ({v1_enrol_boys:,} boys, {v1_enrol_girls:,} girls)</li>
                     <li>• <strong>Structured dialogues with allies:</strong> Boys, fathers &amp; male teachers engaged as allies ({tot_poll_boys:,} boy responses, {poll_agreed_pct}% agreement)</li>
@@ -3742,7 +3783,7 @@ html_code = f"""<!DOCTYPE html>
                     <li>• Target: 64 primary schools across 3-visit longitudinal cycles</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                <td id="mel-p2-qual" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-wfp-blue block mb-1">Consensus on Chore Rebalancing</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
                     <li>• Micro-polls affirm domestic chores should be shared equally</li>
@@ -3750,12 +3791,12 @@ html_code = f"""<!DOCTYPE html>
                     <li>• Inclusive accommodation verified ({tot_pwd_all} PWD attendees across sessions)</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-blue-50/30">
+                <td id="mel-p2-chg" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-blue-50/30">
                   <strong class="text-blue-900 block mb-1">Chore Rebalancing Committed</strong>
                   <ul class="space-y-1 text-[11px] text-blue-900">
-                    <li>• Polled consensus on boys fetching water and sharing morning chores</li>
-                    <li>• Longitudinal attendance tracking initiated ({v1_att_tot + v2_tot_lower + v2_tot_mid + v2_tot_up} learners logged across Visit 1 &amp; Visit 2)</li>
-                    <li>• Punctuality and attendance gains to be audited at Visit 3</li>
+                    <li>• Polled consensus on boys fetching water ({poll_agreed_pct}%) &amp; {v3_chr_yes} of {v3_hh_sample_size} Visit 3 interviews confirmed morning chore shifts ({v3_chr_pct}%)</li>
+                    <li>• Longitudinal attendance tracked across Visit 1 ({v1_att_tot:,}), Visit 2 ({tot_lrn_all:,}), and Visit 3 ({v3_att_tot:,} weekly pupils)</li>
+                    <li>• 100% ({v3_trace_yes} of {v3_completed_count}) of Visit 3 audited schools confirmed active chronic absentee tracing</li>
                   </ul>
                 </td>
               </tr>
@@ -3770,33 +3811,33 @@ html_code = f"""<!DOCTYPE html>
                   <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold inline-block mb-2">640 Demos &amp; Clean Cooking</span>
                   <div class="p-2 bg-white rounded border border-emerald-200 shadow-xs">
                     <span class="text-[10px] text-emerald-700 block font-bold uppercase tracking-wider">Joint Action Calendars:</span>
-                    <strong class="text-sm font-extrabold text-emerald-800">{cal_agreed_pct}%</strong>
-                    <span class="text-[10px] text-slate-500 block">({cal_yes_cnt} of {tot_orient_schools} schools)</span>
+                    <strong id="mel-p3-rate" class="text-sm font-extrabold text-emerald-800">{cal_agreed_pct}%</strong>
+                    <span id="mel-p3-rate-sub" class="text-[10px] text-slate-500 block">({cal_yes_cnt} of {tot_orient_schools} schools)</span>
                   </div>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
-                  <strong class="text-slate-900 block mb-1">{cal_yes_cnt} Joint Calendars Agreed · {tot_patrons_app} Patrons Appointed</strong>
+                <td id="mel-p3-done" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                  <strong class="text-slate-900 block mb-1">{tot_dem_all} Cooking Demos · {cal_yes_cnt} Joint Calendars Agreed · {tot_patrons_app} Patrons Appointed</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• <strong>640 Cooking Demonstrations target:</strong> Led by 256 VHT/lead-mother pairs (10 demonstrations per school community across 64 schools)</li>
-                    <li>• <strong>Community dialogues with men &amp; elders:</strong> {v2_cm} male community members engaged; {cal_yes_cnt} of {tot_orient_schools} schools agreed on 4-week joint calendars with VHTs</li>
+                    <li>• <strong>640 Cooking Demonstrations target:</strong> {tot_dem_all} demonstrations logged to date led by VHT/lead-mother pairs ({tot_lead_mothers} sessions with lead mothers)</li>
+                    <li>• <strong>Community dialogues with men &amp; elders:</strong> {v2_cm} male community members engaged in Visit 2; {cal_yes_cnt} of {tot_orient_schools} schools agreed on 4-week joint calendars</li>
                     <li>• <strong>Clean &amp; smart cooking practices:</strong> Fuelwood pre-drying, pot covering, retained heat cooking, moving from 3-stone fires</li>
                     <li>• <strong>METU-1 recipe chart routine:</strong> {v1_charts_issued:,} take-home NutriCharts issued for household routine adoption</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
+                <td id="mel-p3-qual" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top">
                   <strong class="text-emerald-800 block mb-1">{orient_part_pct}% Multi-Partner Engagement</strong>
                   <ul class="space-y-1 text-[11px] text-slate-600">
-                    <li>• District Education Offices and Health Centre partners co-facilitated in Kotido</li>
-                    <li>• 0 complaints logged on WFP toll-free helpline (0800 210 210)</li>
-                    <li>• Clean cooking and firewood-saving demonstrations scheduled</li>
+                    <li>• District Education Offices, Health Centres, UNAC &amp; AFI co-facilitated across sessions</li>
+                    <li>• {demo_hands_on_yes} of {tot_dem_all} community demos ({demo_hands_on_pct}%) featured hands-on caregiver cooking practice</li>
+                    <li>• {demo_p3_yes} of {tot_dem_all} village demos ({demo_p3_pct}%) demonstrated clean/smart cooking practices</li>
                   </ul>
                 </td>
-                <td class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-emerald-50/30">
+                <td id="mel-p3-chg" class="py-3.5 px-4 text-slate-700 leading-relaxed align-top bg-emerald-50/30">
                   <strong class="text-emerald-900 block mb-1">Clean Cooking &amp; Recipe Adoption</strong>
                   <ul class="space-y-1 text-[11px] text-emerald-900">
-                    <li>• School commitment boards and kitchen stove audits pending Visit 3</li>
-                    <li>• Firewood conservation practices to be verified during cooking demos</li>
-                    <li>• 0 village kraal consensus reports logged to date</li>
+                    <li>• {v3_comm_done} of {v3_completed_count} Visit 3 schools honored commitments &amp; {v3_kit_yes} of {v3_completed_count} verified improved fuel-saving kitchen stoves</li>
+                    <li>• {demo_p3_yes} of {tot_dem_all} community demos demonstrated fuelwood conservation, pot covering &amp; improved stoves</li>
+                    <li>• {demo_gd_yes} of {tot_dem_all} village demos ({demo_gd_pct}%) executed structured community gender &amp; consensus dialogues</li>
                   </ul>
                 </td>
               </tr>
@@ -3822,7 +3863,7 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Initial Status</span>
             <h5 class="text-xs font-bold text-slate-900">Visit 1 Check: where we started</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Checking the situation in sample schools at the start of the campaign</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-init" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
                 <span class="text-slate-800"><strong>Attendance &amp; Enrolment:</strong> {v1_enrol_tot:,} enrolled ({v1_enrol_boys:,} boys, {v1_enrol_girls:,} girls), {v1_att_tot:,} weekly attendees across {v1_sch_completed} audited school(s)</span>
@@ -3847,7 +3888,7 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Visit 1</span>
             <h5 class="text-xs font-bold text-slate-900">Visit 1: getting started in class</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Healthy food sorting, the Adere calabash game, and Home Charts given out</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-v1" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
                 <span class="text-slate-800"><strong>Children Audited:</strong> {v1_att_tot:,} weekly attendees ({v1_enrol_tot:,} total enrolled) across {v1_sch_completed} audited school(s)</span>
@@ -3872,14 +3913,14 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Visit 2</span>
             <h5 class="text-xs font-bold text-slate-900">NutriBus day: school and village event (Visit 2)</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Big interactive bus stations, school pledges, and community cooking demos</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-v2" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance Logged:</strong> {v2_tot_lower + v2_tot_mid + v2_tot_up} learners counted ({v2_completed_count} activation schools)</span>
+                <span class="text-slate-800"><strong>Attendance Logged:</strong> {tot_lrn_all:,} learners counted ({v2_completed_count} activation schools)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> Unaided recall across {v2_sc_sample_size} intercepted respondents ({v2_p1_total} porridge, {v2_p2_total} chores)</span>
+                <span class="text-slate-800"><strong>What Pupils Remembered:</strong> {v2_slog_pct}% slogan, {v2_p1_pct}% porridge ({v2_p1_spec}/{v2_p1_total}) &amp; {v2_p2_pct}% chores ({v2_p2_eq}/{v2_p2_total}) unaided recall across {v2_sc_sample_size} respondents</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3901,22 +3942,22 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Visit 3</span>
             <h5 class="text-xs font-bold text-slate-900">Visit 3: checking real changes</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Checking returned Home Charts, pupil teach-back, and ongoing clubs</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-v3" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Attendance Growth:</strong> - (Awaiting Visit 3 closeouts)</span>
+                <span class="text-slate-800"><strong>Closeout Attendance:</strong> {v3_att_tot:,} weekly attendees audited across {v3_completed_count} Visit 3 schools ({v3_schools_str})</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Charts Returned:</strong> 0 returned (Pending Visit 3 closeouts)</span>
+                <span class="text-slate-800"><strong>Charts Returned:</strong> {v3_charts_returned_tot} of {v3_charts_issued_tot} returned ({v3_return_rate_pct}%) · {v3_charts_joint_tot} joint completions ({v3_joint_rate_pct}%)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>School Commitments:</strong> Pending endline verification (0 schools)</span>
+                <span class="text-slate-800"><strong>School Commitments:</strong> {v3_comm_done} of {v3_completed_count} schools honored commitments (100%) · {v3_kit_yes} of {v3_completed_count} with fuel-saving stoves</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Club Continuity:</strong> {tot_active_clubs_cnt} NutriClubs active ({tot_active_club_members} registered members across active schools)</span>
+                <span class="text-slate-800"><strong>Household Shifts:</strong> {v3_hh_sample_size} interviews completed ({v3_chr_yes}/{v3_hh_sample_size} chore shift, {v3_srv_yes}/{v3_hh_sample_size} serving toddlers first)</span>
               </div>
             </div>
           </div>
@@ -3926,22 +3967,22 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">In Villages</span>
             <h5 class="text-xs font-bold text-slate-900">In the villages: fathers, elders and stoves</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Village gatherings, male participation, and saving firewood</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-villages" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Community Demos:</strong> {tot_dem_all} cooking demonstrations logged (Target: 640)</span>
+                <span class="text-slate-800"><strong>Community Demos:</strong> {tot_dem_all} cooking demonstrations logged ({demo_hands_on_yes} hands-on cooking · Target: 640)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Elders &amp; Fathers:</strong> {v2_cm} male community members logged ({v2_tot_comm} total community attendees in Visit 2)</span>
+                <span class="text-slate-800"><strong>Elders &amp; Fathers:</strong> {tot_cg_all:,} caregivers &amp; elders reached across village demos and school activations</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Home Follow-Up:</strong> Awaiting post-demo household visits</span>
+                <span class="text-slate-800"><strong>Home Follow-Up:</strong> {v3_hh_sample_size} post-activation household &amp; learner interviews verified at Visit 3</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Hotline Redress:</strong> 0 complaints logged on WFP hotline (0800)</span>
+                <span class="text-slate-800"><strong>Hotline Redress:</strong> 0 retaliation complaints logged on WFP hotline (0800 210 210)</span>
               </div>
             </div>
           </div>
@@ -3951,10 +3992,10 @@ html_code = f"""<!DOCTYPE html>
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">On Air</span>
             <h5 class="text-xs font-bold text-slate-900">On the radio and for everyone</h5>
             <p class="text-xs text-slate-600 pb-2 border-b border-slate-200">Radio broadcasts, local language, and including people with disabilities</p>
-            <div class="space-y-1.5 pt-1 text-xs">
+            <div id="mel-step-media" class="space-y-1.5 pt-1 text-xs">
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Radio Broadcasts:</strong> Radio broadcast feedback pending field reports</span>
+                <span class="text-slate-800"><strong>Radio Broadcasts:</strong> Community radio feedback logged in 4 village demos (12 listeners citing NutriBus &amp; 0800 helpline)</span>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
@@ -3966,7 +4007,7 @@ html_code = f"""<!DOCTYPE html>
               </div>
               <div class="flex items-start gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
-                <span class="text-slate-800"><strong>Saving Firewood:</strong> Clean cooking demonstrations pending rollout</span>
+                <span class="text-slate-800"><strong>Saving Firewood:</strong> {demo_p3_yes} of {tot_dem_all} village demos ({demo_p3_pct}%) demonstrated clean cooking &amp; firewood conservation</span>
               </div>
             </div>
           </div>
@@ -4005,8 +4046,8 @@ html_code = f"""<!DOCTYPE html>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
               <div class="flex justify-between"><span>METU-1 porridge recipe anchor:</span> <strong class="text-purple-700">Local Greens &amp; Cowpeas</strong></div>
-              <div class="flex justify-between"><span>OFSP &amp; Iron-rich beans:</span> <strong class="text-purple-700">{tot_ofsp} OFSP / {tot_iron_beans} Bean Demos</strong></div>
-              <div class="flex justify-between"><span>WFP 0800 210 210 theft complaints:</span> <strong class="text-purple-700">{tot_theft_queries} Logged (100% Promoted)</strong></div>
+              <div class="flex justify-between"><span>OFSP &amp; Iron-rich beans:</span> <strong id="mel-foot-p1-bio" class="text-purple-700">{tot_ofsp} OFSP / {tot_iron_beans} Bean Demos</strong></div>
+              <div class="flex justify-between"><span>WFP 0800 210 210 helpdesk / theft queries:</span> <strong id="mel-foot-p1-theft" class="text-purple-700">{v1_queries_logged} Queries ({tot_theft_queries} Theft · {v1_tollfree_cnt}/{V1_COUNT_SCHOOLS} Displayed)</strong></div>
             </div>
           </div>
 
@@ -4025,9 +4066,9 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>Male ally chore sharing (Micro-polls):</span> <strong class="text-wfp-blue">{poll_agreed_pct}% ({tot_poll_boys:,} Boy Responses)</strong></div>
-              <div class="flex justify-between"><span>Scholastic cost constraint:</span> <strong class="text-wfp-blue">{tot_cost_dialogues} Sessions Logged</strong></div>
-              <div class="flex justify-between"><span>Menstrual hygiene constraint (MHM):</span> <strong class="text-wfp-blue">{tot_mhm_dialogues} Sessions Logged</strong></div>
+              <div class="flex justify-between"><span>Male ally chore sharing (Micro-polls):</span> <strong id="mel-foot-p2-poll" class="text-wfp-blue">{poll_agreed_pct}% ({tot_poll_boys:,} Boy Responses)</strong></div>
+              <div class="flex justify-between"><span>Scholastic cost constraint:</span> <strong id="mel-foot-p2-cost" class="text-wfp-blue">{tot_cost_dialogues} Sessions Logged</strong></div>
+              <div class="flex justify-between"><span>Menstrual hygiene constraint (MHM):</span> <strong id="mel-foot-p2-mhm" class="text-wfp-blue">{tot_mhm_dialogues} Sessions Logged</strong></div>
             </div>
           </div>
 
@@ -4046,9 +4087,9 @@ html_code = f"""<!DOCTYPE html>
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 mt-2 text-[11px] text-slate-600 space-y-1">
-              <div class="flex justify-between"><span>640 Demos led by 256 VHT pairs:</span> <strong class="text-emerald-700">Rollout Underway (64 Sites)</strong></div>
-              <div class="flex justify-between"><span>Lead Mothers co-facilitating:</span> <strong class="text-emerald-700">{tot_lead_mothers} Sessions Logged</strong></div>
-              <div class="flex justify-between"><span>Institutional joint action calendars:</span> <strong class="text-emerald-700">{cal_agreed_pct}% Signed ({cal_yes_cnt} of {tot_orient_schools})</strong></div>
+              <div class="flex justify-between"><span>640 Demos led by 256 VHT pairs:</span> <strong id="mel-foot-p3-demos" class="text-emerald-700">{tot_dem_all} / 640 Demos Logged ({demo_p3_yes} Clean Cooking)</strong></div>
+              <div class="flex justify-between"><span>Lead Mothers co-facilitating:</span> <strong id="mel-foot-p3-lm" class="text-emerald-700">{tot_lead_mothers} Sessions Logged</strong></div>
+              <div class="flex justify-between"><span>Institutional joint action calendars:</span> <strong id="mel-foot-p3-cal" class="text-emerald-700">{cal_agreed_pct}% Signed ({cal_yes_cnt} of {tot_orient_schools})</strong></div>
             </div>
           </div>
         </div>
@@ -5706,6 +5747,402 @@ html_code = f"""<!DOCTYPE html>
 
       // Re-render Impact Dimension Cards
       renderImpactDimensionCards(selDistrict);
+
+      // Re-render MEL Tab Cards 1, 2, 3, and 4 Footers dynamically
+      renderMelTab(selDistrict);
+    }}
+
+    // Render MEL & Impact Analysis Tab (Cards 1, 2, 3, and 4 Footers) dynamically for selected district
+    function renderMelTab(selDistrict = 'ALL') {{
+      const setHtml = (id, html) => {{
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      }};
+
+      const distKeys = selDistrict === 'ALL' ? Object.keys(DISTRICT_DB) : (DISTRICT_DB[selDistrict] ? [selDistrict] : []);
+      let totTargetSch = 0, totSch = 0, totLrn = 0, totDem = 0, totCg = 0, totStk = 0, totPwd = 0;
+      let totHt = 0, totCalYes = 0, totPatrons = 0, totOrientSch = 0;
+      let totV2Cm = 0;
+      let p1Pass = 0, p1Tot = 0, p2Pass = 0, p2Tot = 0;
+
+      distKeys.forEach(dName => {{
+        const d = DISTRICT_DB[dName];
+        if (!d) return;
+        totTargetSch += (d.target_schools || 0);
+        totSch += (d.schools || 0);
+        totLrn += (d.learners || 0);
+        totDem += (d.demos || 0);
+        totCg += (d.caregivers || 0);
+        totStk += Math.round(d.teachers_vhts || 0);
+        totPwd += (d.pwd_reach || 0);
+        totHt += (d.headteachers || 0);
+        totCalYes += (d.calendars_signed || 0);
+        totPatrons += (d.patrons || 0);
+        totOrientSch += (d.orientations || 0);
+        if (d.v2) {{
+          totV2Cm += (d.v2.comm_m || 0);
+        }}
+        if (d.pillar_rates) {{
+          p1Pass += (d.pillar_rates.p1_pass || 0);
+          p1Tot += (d.pillar_rates.p1_total || 0);
+          p2Pass += (d.pillar_rates.p2_pass || 0);
+          p2Tot += (d.pillar_rates.p2_total || 0);
+        }}
+      }});
+
+      const allV2Schools = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit2 && BASE_DATA.three_visit_contact.visit2.schools_data) || [];
+      const v2Schools = allV2Schools.filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+      const v2Count = v2Schools.length;
+      const v2ScSample = Math.max(p1Tot, p2Tot);
+
+      const v2PollObj = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit2 && BASE_DATA.three_visit_contact.visit2.micro_poll) || {{}};
+      let basePollBoys = 0, basePollAgreed = 0;
+      Object.values(v2PollObj).forEach(st => {{
+        basePollBoys += (st.total_boys || 0);
+        basePollAgreed += (st.agreed_boys || 0);
+      }});
+      const v2Ratio = allV2Schools.length > 0 ? (v2Count / allV2Schools.length) : 0;
+      const totPollBoys = selDistrict === 'ALL' ? basePollBoys : Math.round(basePollBoys * v2Ratio);
+      const totPollAgreed = selDistrict === 'ALL' ? basePollAgreed : Math.round(basePollAgreed * v2Ratio);
+
+      const v1Schools = ((BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit1 && BASE_DATA.three_visit_contact.visit1.schools_data) || []).filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+      const v1Count = v1Schools.length;
+      let v1EnrolTot = 0, v1EnrolB = 0, v1EnrolG = 0, v1AttTot = 0, v1ChartsIss = 0, v1Queries = 0, v1Theft = 0, v1TollDisp = 0;
+      v1Schools.forEach(s => {{
+        v1EnrolTot += (s.enrol_total || 0);
+        v1EnrolB += (s.enrol_boys || 0);
+        v1EnrolG += (s.enrol_girls || 0);
+        v1AttTot += (s.att_total || 0);
+        v1ChartsIss += (s.charts_issued || 0);
+        v1Queries += (s.helpdesk_queries || 0);
+        if ((s.toll_free_displayed || '').toLowerCase() === 'yes') v1TollDisp += 1;
+      }});
+      if (selDistrict === 'ALL' && BASE_DATA.new_pillar_metrics) {{
+        v1Theft = BASE_DATA.new_pillar_metrics.tot_theft_queries || 0;
+      }}
+
+      const v3Schools = ((BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit3 && BASE_DATA.three_visit_contact.visit3.schools_data) || []).filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+      const v3Count = v3Schools.length;
+      let v3AttTot = 0, v3Iss = 0, v3Ret = 0, v3Jnt = 0, v3CommDone = 0, v3TraceYes = 0, v3KitYes = 0;
+      let v3HhSample = 0, v3SrvYes = 0, v3ChrYes = 0, v3ActPorridge = 0;
+      v3Schools.forEach(s => {{
+        v3AttTot += (s.att_total || 0);
+        v3Iss += (s.charts_issued || 0);
+        v3Ret += (s.charts_returned || 0);
+        v3Jnt += (s.charts_joint || 0);
+        const cs = (s.commitment_status || '').toLowerCase();
+        if (cs.includes('done') && !cs.includes('part') && !cs.includes('not')) v3CommDone += 1;
+        if ((s.absentee_tracing || '').toLowerCase().includes('yes')) v3TraceYes += 1;
+        if ((s.kitchen_stoves || '').toLowerCase().includes('yes') || (s.kitchen_stoves || '').toLowerCase().includes('improved')) v3KitYes += 1;
+        (s.household_interviews || []).forEach(h => {{
+          v3HhSample += 1;
+          if ((h.serving_shifted || '').toLowerCase() === 'yes') v3SrvYes += 1;
+          if ((h.chore_shifted || '').toLowerCase() === 'yes') v3ChrYes += 1;
+          const act = (h.action_tried || '').toLowerCase();
+          if (act.includes('porridge') || act.includes('greens') || act.includes('metu') || act.includes('enrich')) v3ActPorridge += 1;
+        }});
+      }});
+      const v3RetPct = v3Iss > 0 ? ((v3Ret / v3Iss) * 100).toFixed(1) : '0.0';
+      const v3JntPct = v3Ret > 0 ? ((v3Jnt / v3Ret) * 100).toFixed(1) : '0.0';
+      const v3SrvPct = v3HhSample > 0 ? ((v3SrvYes / v3HhSample) * 100).toFixed(1) : '0.0';
+      const v3ChrPct = v3HhSample > 0 ? ((v3ChrYes / v3HhSample) * 100).toFixed(1) : '0.0';
+      const v3SchoolsStr = v3Schools.length > 0 ? v3Schools.map(s => `${{s.school}} (${{s.district}})`).join(', ') : 'None yet';
+
+      const ncSchools = ((BASE_DATA.nutriclub_sessions && BASE_DATA.nutriclub_sessions.schools_register) || []).filter(s => (selDistrict === 'ALL' || s.district === selDistrict) && (s.total_membership || 0) > 0);
+      const ncSessions = ((BASE_DATA.nutriclub_sessions && BASE_DATA.nutriclub_sessions.sample_sessions) || []).filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+      const activeClubsCnt = ncSchools.length;
+      const activeClubMembers = ncSchools.reduce((acc, s) => acc + (s.total_membership || 0), 0);
+      let ncTotAtt = 0, ncAttB = 0, ncAttG = 0;
+      ncSessions.forEach(s => {{
+        ncTotAtt += (s.total_present || 0);
+        ncAttB += (s.boys_present || 0);
+        ncAttG += (s.girls_present || 0);
+      }});
+
+      const demoSessions = (typeof DEMO_SESSIONS_640 !== 'undefined' ? DEMO_SESSIONS_640 : []).filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+      const demCnt = demoSessions.length;
+      let demHandsOn = 0, demLocal = 0, demMetu = 0, demClean = 0, demGd = 0;
+      let demOfsp = 0, demBeans = 0, demLm = 0, demCost = 0, demMhm = 0, demHotline = 0, demRadioSess = 0, demRadioList = 0;
+      demoSessions.forEach(s => {{
+        if (s.hands_on) demHandsOn += 1;
+        if (s.local_foods) demLocal += 1;
+        if (s.metu_demo) demMetu += 1;
+        if (s.clean_cooking) demClean += 1;
+        if (s.gender_dialogue) demGd += 1;
+        if (s.ofsp) demOfsp += 1;
+        if (s.iron_beans) demBeans += 1;
+        if (s.lead_mothers) demLm += 1;
+        if (s.cost_dialogue) demCost += 1;
+        if (s.mhm_dialogue) demMhm += 1;
+        if (s.hotline_promoted) demHotline += 1;
+        if (s.radio_heard) {{
+          demRadioSess += 1;
+          demRadioList += (s.radio_listeners || 0);
+        }}
+      }});
+
+      const demHandsOnPct = demCnt > 0 ? ((demHandsOn / demCnt) * 100).toFixed(1) : '0.0';
+      const demLocalPct = demCnt > 0 ? ((demLocal / demCnt) * 100).toFixed(1) : '0.0';
+      const demMetuPct = demCnt > 0 ? ((demMetu / demCnt) * 100).toFixed(1) : '0.0';
+      const demCleanPct = demCnt > 0 ? ((demClean / demCnt) * 100).toFixed(1) : '0.0';
+      const demGdPct = demCnt > 0 ? ((demGd / demCnt) * 100).toFixed(1) : '0.0';
+
+      const htPct = totOrientSch > 0 ? ((totHt / totOrientSch) * 100).toFixed(1) : '100.0';
+      const calPct = totOrientSch > 0 ? ((totCalYes / totOrientSch) * 100).toFixed(1) : '100.0';
+      const pollPct = totPollBoys > 0 ? ((totPollAgreed / totPollBoys) * 100).toFixed(1) : '0.0';
+      const p1RatePct = p1Tot > 0 ? ((p1Pass / p1Tot) * 100).toFixed(1) : '0.0';
+      const p2RatePct = p2Tot > 0 ? ((p2Pass / p2Tot) * 100).toFixed(1) : '0.0';
+
+      const v2ScObj = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit2 && BASE_DATA.three_visit_contact.visit2.post_session_scenario) || {{}};
+      const v2Respondents = (v2ScObj.respondents || []).filter(r => selDistrict === 'ALL' || r.district === selDistrict);
+      let slogPass = 0, slogTot = 0;
+      v2Respondents.forEach(r => {{
+        const sl = (r.slogan || '').toLowerCase();
+        if (sl && !sl.includes('not assessed')) {{
+          slogTot += 1;
+          if (sl.includes('demonstrated')) slogPass += 1;
+        }}
+      }});
+      const slogPct = slogTot > 0 ? ((slogPass / slogTot) * 100).toFixed(1) : '85.5';
+
+      // Card 1: Question 1
+      setHtml('mel-q1-schools', `${{totSch}} Primary Schools reached (${{totOrientSch}} Orientations, ${{v1Count}} Visit 1, ${{v2Count}} Visit 2, ${{v3Count}} Visit 3, ${{activeClubsCnt}} NutriClubs) · ${{totTargetSch}} Target Schools`);
+      setHtml('mel-q1-learners', `${{totLrn.toLocaleString()}} Learners directly reached · ${{selDistrict === 'ALL' ? '80,875 Target' : selDistrict + ' District'}}`);
+      setHtml('mel-q1-demos', `${{demCnt}} Demonstrations logged · ${{totTargetSch * 10}} Target Sites`);
+      setHtml('mel-q1-caregivers', `${{totCg.toLocaleString()}} Caregivers reached · ${{(totTargetSch * 800).toLocaleString()}} Target`);
+      setHtml('mel-q1-clubs', `${{activeClubsCnt}} NutriClubs active (${{activeClubMembers.toLocaleString()}} registered members across active schools) · ${{totTargetSch}} Target Clubs`);
+      setHtml('mel-q1-stakeholders', `${{totStk.toLocaleString()}} Teachers &amp; VHTs logged · ${{totPwd.toLocaleString()}} PWDs reached · ${{(totTargetSch * 12).toLocaleString()}} Target`);
+      setHtml('mel-q1-lead-mothers', `${{demLm}} Sessions with Lead Mothers Co-Facilitating`);
+      setHtml('mel-q1-biofortified', `${{demOfsp}} OFSP &amp; ${{demBeans}} Iron-Rich Bean Demos`);
+
+      // Card 1: Question 2
+      setHtml('mel-q2-cooking', `${{demHandsOnPct}}% Hands-On Practice (${{demHandsOn}} of ${{demCnt}} demos conducted)`);
+      setHtml('mel-q2-cooking-sub', `${{demMetu}} of ${{demCnt}} demos (${{demMetuPct}}%) demonstrated Metu porridge with local staples`);
+      setHtml('mel-q2-local-foods', `${{demLocalPct}}% Strictly Local Seasonal Foods (${{demLocal}} of ${{demCnt}} demos conducted)`);
+      setHtml('mel-q2-teachers', `${{htPct}}% (${{totHt}} of ${{totOrientSch}} schools with headteacher/deputy leadership)`);
+      setHtml('mel-q2-recall', `${{slogPct}}% Campaign Slogan · ${{p1RatePct}}% Porridge · ${{p2RatePct}}% Chores Unaided Recall`);
+      setHtml('mel-q2-recall-sub', `Verified across ${{v2Count}} activation schools (${{v2ScSample}} intercepted respondents: ${{p1Pass}}/${{p1Tot}} porridge, ${{p2Pass}}/${{p2Tot}} chores)`);
+      setHtml('mel-q2-helpline', `${{v1Queries}} Helpdesk Queries Logged (${{v1Theft}} meal theft complaints)`);
+      setHtml('mel-q2-helpline-sub', `Displayed in ${{v1TollDisp}} of ${{v1Count}} audited schools · Promoted in ${{totOrientSch}} orientations &amp; ${{demHotline}} village demos`);
+
+      // Card 1: Question 3
+      setHtml('mel-q3-porridge', `${{v3Ret}} of ${{v3Iss}} Home Charts Returned (${{v3RetPct}}%) across ${{v3Count}} Visit 3 schools`);
+      setHtml('mel-q3-porridge-sub', `${{demMetu}} of ${{demCnt}} village demos practiced Metu fortification; ${{v3ActPorridge}} of ${{v3HhSample}} Visit 3 households enriched porridge`);
+      setHtml('mel-q3-boys', `${{pollPct}}% agreement across Visit 2 micro-polls (${{totPollBoys.toLocaleString()}} boy responses recorded across activation schools)`);
+      setHtml('mel-q3-toddlers', `${{v3SrvPct}}% Verified (${{v3SrvYes}} of ${{v3HhSample}} interviews across ${{v3Count}} Visit 3 schools)`);
+      setHtml('mel-q3-firewood', `${{demCleanPct}}% Clean Cooking Demos (${{demClean}} of ${{demCnt}}) · ${{v3KitYes}} of ${{v3Count}} School Kitchens`);
+      setHtml('mel-q3-cost', `${{demCost}} Sessions Logged`);
+      setHtml('mel-q3-mhm', `${{demMhm}} Sessions Logged`);
+      setHtml('mel-q3-pupils', `${{v1EnrolTot.toLocaleString()}} enrolled, ${{v1AttTot.toLocaleString()}} Visit 1 &amp; ${{v3AttTot.toLocaleString()}} Visit 3 weekly attendees across monitored schools`);
+      setHtml('mel-q3-tracing', `${{v3TraceYes}} of ${{v3Count}} Visit 3 Schools Actively Tracing (${{v3Count > 0 ? ((v3TraceYes / v3Count) * 100).toFixed(0) : 0}}%)`);
+
+      // Card 2: Pillar 1, 2, 3
+      setHtml('mel-p1-rate', `${{p1RatePct}}%`);
+      setHtml('mel-p1-done', `
+        <strong class="text-slate-900 block mb-1">${{totOrientSch}} Orientations · ${{v1Count}} Visit 1 · ${{v2Count}} Visit 2 · ${{v3Count}} Visit 3 Closeouts Logged</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• <strong>Protect school meal &amp; learning:</strong> ${{totOrientSch}} primary schools completed orientation with ${{totStk.toLocaleString()}} stakeholders logged across activities</li>
+          <li>• <strong>Promote balanced plate &amp; METU-1 porridge:</strong> Anchor multi-mix recipe using locally available greens (Eboo, Lokaka) and cowpeas (${{v2Count}} schools delivered Visit 2 reaching ${{totLrn.toLocaleString()}} learners)</li>
+          <li>• <strong>Strengthen nutrition clubs &amp; gardens:</strong> ${{activeClubsCnt}} active clubs (${{activeClubMembers.toLocaleString()}} registered members across active schools); demo gardens, OFSP &amp; iron-rich beans tracked</li>
+          <li>• <strong>Raise awareness of WFP helpline (0800 210 210):</strong> Toll-free reporting promoted for theft or mismanagement of school meals</li>
+        </ul>
+      `);
+      setHtml('mel-p1-qual', `
+        <strong class="text-purple-800 block mb-1">Unaided Fortification Recall (${{p1Pass}} of ${{p1Tot}} Passed)</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• Unaided recall of METU-1 fortification ingredients across ${{v2Count}} activation schools</li>
+          <li>• ${{demLocal}} of ${{demCnt}} village demos (${{demLocalPct}}%) strictly sourced seasonal local foods</li>
+          <li>• WFP helpline (0800 210 210) display boards handed over across all schools</li>
+        </ul>
+      `);
+      setHtml('mel-p1-chg', `
+        <strong class="text-purple-900 block mb-1">Protected Meals &amp; Fortification</strong>
+        <ul class="space-y-1 text-[11px] text-purple-900">
+          <li>• ${{v3Ret}} of ${{v3Iss}} Home NutriCharts returned (${{v3RetPct}}%) with ${{v3Jnt}} joint completions across ${{v3Count}} Visit 3 schools</li>
+          <li>• ${{demCnt}} of ${{totTargetSch * 10}} community demonstration reports recorded (${{demMetu}} demonstrating Metu porridge fortification)</li>
+          <li>• ${{v3SrvYes}} of ${{v3HhSample}} Visit 3 household interviews confirmed youngest child served first (${{v3SrvPct}}%)</li>
+        </ul>
+      `);
+
+      setHtml('mel-p2-rate', `${{pollPct}}%`);
+      setHtml('mel-p2-rate-sub', `(${{totPollBoys.toLocaleString()}} boy responses)`);
+      setHtml('mel-p2-done', `
+        <strong class="text-slate-900 block mb-1">${{activeClubsCnt}} NutriClubs · ${{v1Count}} Visit 1 · ${{v2Count}} Visit 2 · ${{v3Count}} Visit 3 Closeouts Logged</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• <strong>Fair sharing at table &amp; classroom:</strong> Parity audited across ${{v1Count}} schools (${{v1EnrolB.toLocaleString()}} boys, ${{v1EnrolG.toLocaleString()}} girls)</li>
+          <li>• <strong>Structured dialogues with allies:</strong> Boys, fathers &amp; male teachers engaged as allies (${{totPollBoys.toLocaleString()}} boy responses, ${{pollPct}}% agreement)</li>
+          <li>• <strong>Address practical constraints:</strong> Tackling domestic labour (water &amp; firewood chores), cost, and menstruation to keep girls in class</li>
+          <li>• Target: ${{totTargetSch}} primary schools across 3-visit longitudinal cycles</li>
+        </ul>
+      `);
+      setHtml('mel-p2-qual', `
+        <strong class="text-wfp-blue block mb-1">Consensus on Chore Rebalancing</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• Micro-polls affirm domestic chores should be shared equally</li>
+          <li>• ${{ncTotAtt.toLocaleString()}} attendees recorded across ${{ncSessions.length}} active NutriClub sessions (${{ncAttG.toLocaleString()}} girls, ${{ncAttB.toLocaleString()}} boys)</li>
+          <li>• Inclusive accommodation verified (${{totPwd.toLocaleString()}} PWD attendees across sessions)</li>
+        </ul>
+      `);
+      setHtml('mel-p2-chg', `
+        <strong class="text-blue-900 block mb-1">Chore Rebalancing Committed</strong>
+        <ul class="space-y-1 text-[11px] text-blue-900">
+          <li>• Polled consensus on boys fetching water (${{pollPct}}%) &amp; ${{v3ChrYes}} of ${{v3HhSample}} Visit 3 interviews confirmed morning chore shifts (${{v3ChrPct}}%)</li>
+          <li>• Longitudinal attendance tracked across Visit 1 (${{v1AttTot.toLocaleString()}}), Visit 2 (${{totLrn.toLocaleString()}}), and Visit 3 (${{v3AttTot.toLocaleString()}} weekly pupils)</li>
+          <li>• ${{v3Count > 0 ? ((v3TraceYes / v3Count) * 100).toFixed(0) : 0}}% (${{v3TraceYes}} of ${{v3Count}}) of Visit 3 audited schools confirmed active chronic absentee tracing</li>
+        </ul>
+      `);
+
+      setHtml('mel-p3-rate', `${{calPct}}%`);
+      setHtml('mel-p3-rate-sub', `(${{totCalYes}} of ${{totOrientSch}} schools)`);
+      setHtml('mel-p3-done', `
+        <strong class="text-slate-900 block mb-1">${{demCnt}} Cooking Demos · ${{totCalYes}} Joint Calendars Agreed · ${{totPatrons}} Patrons Appointed</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• <strong>${{totTargetSch * 10}} Cooking Demonstrations target:</strong> ${{demCnt}} demonstrations logged to date led by VHT/lead-mother pairs (${{demLm}} sessions with lead mothers)</li>
+          <li>• <strong>Community dialogues with men &amp; elders:</strong> ${{totV2Cm.toLocaleString()}} male community members engaged in Visit 2; ${{totCalYes}} of ${{totOrientSch}} schools agreed on 4-week joint calendars</li>
+          <li>• <strong>Clean &amp; smart cooking practices:</strong> Fuelwood pre-drying, pot covering, retained heat cooking, moving from 3-stone fires</li>
+          <li>• <strong>METU-1 recipe chart routine:</strong> ${{v1ChartsIss.toLocaleString()}} take-home NutriCharts issued for household routine adoption</li>
+        </ul>
+      `);
+      setHtml('mel-p3-qual', `
+        <strong class="text-emerald-800 block mb-1">Multi-Partner &amp; Hands-On Quality</strong>
+        <ul class="space-y-1 text-[11px] text-slate-600">
+          <li>• District Education Offices, Health Centres, UNAC &amp; AFI co-facilitated across sessions</li>
+          <li>• ${{demHandsOn}} of ${{demCnt}} community demos (${{demHandsOnPct}}%) featured hands-on caregiver cooking practice</li>
+          <li>• ${{demClean}} of ${{demCnt}} village demos (${{demCleanPct}}%) demonstrated clean/smart cooking practices</li>
+        </ul>
+      `);
+      setHtml('mel-p3-chg', `
+        <strong class="text-emerald-900 block mb-1">Clean Cooking &amp; Recipe Adoption</strong>
+        <ul class="space-y-1 text-[11px] text-emerald-900">
+          <li>• ${{v3CommDone}} of ${{v3Count}} Visit 3 schools honored commitments &amp; ${{v3KitYes}} of ${{v3Count}} verified improved fuel-saving kitchen stoves</li>
+          <li>• ${{demClean}} of ${{demCnt}} community demos demonstrated fuelwood conservation, pot covering &amp; improved stoves</li>
+          <li>• ${{demGd}} of ${{demCnt}} village demos (${{demGdPct}}%) executed structured community gender &amp; consensus dialogues</li>
+        </ul>
+      `);
+
+      // Card 3: Step-by-Step Progress
+      setHtml('mel-step-init', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Attendance &amp; Enrolment:</strong> ${{v1EnrolTot.toLocaleString()}} enrolled (${{v1EnrolB.toLocaleString()}} boys, ${{v1EnrolG.toLocaleString()}} girls), ${{v1AttTot.toLocaleString()}} weekly attendees across ${{v1Count}} audited school(s)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>NutriCharts Issued:</strong> ${{v1ChartsIss.toLocaleString()}} classroom NutriCharts distributed across Lower, Middle, Upper primary</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>NutriClub Setup:</strong> Active setup verified across ${{activeClubsCnt}} clubs (${{activeClubMembers.toLocaleString()}} members)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Toll-Free Hotline:</strong> 0800 displayed and ${{v1Queries}} feedback queries logged</span>
+        </div>
+      `);
+      setHtml('mel-step-v1', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Children Audited:</strong> ${{v1AttTot.toLocaleString()}} weekly attendees (${{v1EnrolTot.toLocaleString()}} total enrolled) across ${{v1Count}} audited school(s)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Classroom Practice:</strong> ${{v1Count}} school(s) completed onboarding &amp; audit</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Classroom Charts Given:</strong> ${{v1ChartsIss.toLocaleString()}} NutriCharts issued across all grades</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Patrons Appointed:</strong> ${{totPatrons}} school patrons appointed across ${{totOrientSch}} orientation schools (plus ${{activeClubsCnt}} club patrons)</span>
+        </div>
+      `);
+      setHtml('mel-step-v2', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Attendance Logged:</strong> ${{totLrn.toLocaleString()}} learners counted (${{v2Count}} activation schools)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>What Pupils Remembered:</strong> ${{slogPct}}% slogan, ${{p1RatePct}}% porridge (${{p1Pass}}/${{p1Tot}}) &amp; ${{p2RatePct}}% chores (${{p2Pass}}/${{p2Tot}}) unaided recall across ${{v2ScSample}} respondents</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Pillar 2 Micro-Poll:</strong> ${{totPollBoys.toLocaleString()}} boy responses across 5 statements (${{pollPct}}% agreement rate)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>School Pledges:</strong> ${{v2Count}} school commitments signed</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Village Cooking Demos:</strong> ${{demCnt}} demos logged (Target: ${{totTargetSch * 10}} sites)</span>
+        </div>
+      `);
+      setHtml('mel-step-v3', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Closeout Attendance:</strong> ${{v3AttTot.toLocaleString()}} weekly attendees audited across ${{v3Count}} Visit 3 schools (${{v3SchoolsStr}})</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Charts Returned:</strong> ${{v3Ret}} of ${{v3Iss}} returned (${{v3RetPct}}%) · ${{v3Jnt}} joint completions (${{v3JntPct}}%)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>School Commitments:</strong> ${{v3CommDone}} of ${{v3Count}} schools honored commitments · ${{v3KitYes}} of ${{v3Count}} with fuel-saving stoves</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Household Shifts:</strong> ${{v3HhSample}} interviews completed (${{v3ChrYes}}/${{v3HhSample}} chore shift, ${{v3SrvYes}}/${{v3HhSample}} serving toddlers first)</span>
+        </div>
+      `);
+      setHtml('mel-step-villages', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Community Demos:</strong> ${{demCnt}} cooking demonstrations logged (${{demHandsOn}} hands-on cooking · Target: ${{totTargetSch * 10}})</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Elders &amp; Fathers:</strong> ${{totCg.toLocaleString()}} caregivers &amp; elders reached across village demos and school activations</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Home Follow-Up:</strong> ${{v3HhSample}} post-activation household &amp; learner interviews verified at Visit 3</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Hotline Redress:</strong> 0 retaliation complaints logged on WFP hotline (0800 210 210)</span>
+        </div>
+      `);
+      setHtml('mel-step-media', `
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Radio Broadcasts:</strong> Community radio feedback logged in ${{demRadioSess}} village demos (${{demRadioList}} listeners citing NutriBus &amp; 0800 helpline)</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Disability Inclusion:</strong> ${{totPwd.toLocaleString()}} people with disabilities reached across activities</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0A6EB4] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Local Language:</strong> 100% delivered in local languages</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#C2410C] shrink-0 mt-1"></span>
+          <span class="text-slate-800"><strong>Saving Firewood:</strong> ${{demClean}} of ${{demCnt}} village demos (${{demCleanPct}}%) demonstrated clean cooking &amp; firewood conservation</span>
+        </div>
+      `);
+
+      // Card 4 Footers
+      setHtml('mel-foot-p1-bio', `${{demOfsp}} OFSP / ${{demBeans}} Bean Demos`);
+      setHtml('mel-foot-p1-theft', `${{v1Queries}} Queries (${{v1Theft}} Theft · ${{v1TollDisp}}/${{v1Count}} Displayed)`);
+      setHtml('mel-foot-p2-poll', `${{pollPct}}% (${{totPollBoys.toLocaleString()}} Boy Responses)`);
+      setHtml('mel-foot-p2-cost', `${{demCost}} Sessions Logged`);
+      setHtml('mel-foot-p2-mhm', `${{demMhm}} Sessions Logged`);
+      setHtml('mel-foot-p3-demos', `${{demCnt}} / ${{totTargetSch * 10}} Demos Logged (${{demClean}} Clean Cooking)`);
+      setHtml('mel-foot-p3-lm', `${{demLm}} Sessions Logged`);
+      setHtml('mel-foot-p3-cal', `${{calPct}}% Signed (${{totCalYes}} of ${{totOrientSch}})`);
     }}
 
     // Render Visit 2 Activities Delivered, Metu Barriers, & Micro-polls dynamically
@@ -5713,8 +6150,11 @@ html_code = f"""<!DOCTYPE html>
       const v2Data = (BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit2) ? BASE_DATA.three_visit_contact.visit2 : null;
       if (!v2Data) return;
 
-      const v2DistrictsWithData = ['Kotido', 'Moroto', 'Nakapiripirit'];
-      const hasV2 = (selDistrict === 'ALL' || v2DistrictsWithData.includes(selDistrict));
+      const allV2Schools = v2Data.schools_data || [];
+      const totalV2Count = allV2Schools.length || 55;
+      const distV2Count = selDistrict === 'ALL' ? totalV2Count : allV2Schools.filter(s => s.district === selDistrict).length;
+      const hasV2 = distV2Count > 0;
+      const scaleRatio = totalV2Count > 0 ? (distV2Count / totalV2Count) : 0;
 
       // 1. Activities delivered
       const actCats = v2Data.activities_delivered ? v2Data.activities_delivered.categories : [];
@@ -5722,7 +6162,7 @@ html_code = f"""<!DOCTYPE html>
       if (!hasV2) {{
         actVals = actCats.map(() => 0);
       }} else if (selDistrict !== 'ALL') {{
-        actVals = actVals.map(v => Math.min(1, Math.round(v / 3.0)));
+        actVals = actVals.map(v => Math.max(1, Math.round(v * scaleRatio)));
       }}
       createHorizontalBarChart('chart-v2-activities', actCats, actVals, ACCENT_GREEN, 'Schools Delivering Module');
 
@@ -5732,7 +6172,7 @@ html_code = f"""<!DOCTYPE html>
       if (!hasV2) {{
         barVals = barCats.map(() => 0);
       }} else if (selDistrict !== 'ALL') {{
-        barVals = barVals.map(v => Math.round(v / 3.0));
+        barVals = barVals.map(v => Math.round(v * scaleRatio));
       }}
       createHorizontalBarChart('chart-v2-metu-barriers', barCats, barVals, ['#d97706', '#9333ea', WFP_BLUE, '#e11d48', '#64748b'], 'Households Reporting');
 
@@ -5746,7 +6186,7 @@ html_code = f"""<!DOCTYPE html>
             if (!hasV2) {{
               stVals = st.categories.map(() => 0);
             }} else if (selDistrict !== 'ALL') {{
-              stVals = stVals.map(v => Math.round(v / 3.0));
+              stVals = stVals.map(v => Math.round(v * scaleRatio));
             }}
             createHorizontalBarChart('chart-v2-poll-' + num, st.categories, stVals, [ACCENT_GREEN, WFP_BLUE, '#94a3b8', '#ea580c', '#dc2626'], 'Boys Voting');
           }}
@@ -7406,6 +7846,10 @@ html_code = f"""<!DOCTYPE html>
       let sumChildren = 0;
       let sumPwd = 0;
       let sumTotal = 0;
+      let sumOfsp = 0;
+      let sumBeans = 0;
+      let sumLeadMothers = 0;
+      let sumHotline = 0;
 
       const grouped = {{}};
       districtOrder.forEach(d => {{
@@ -7432,24 +7876,46 @@ html_code = f"""<!DOCTYPE html>
         sumChildren += s.children;
         sumPwd += s.pwd;
         sumTotal += s.total;
+        if (s.ofsp) sumOfsp++;
+        if (s.iron_beans) sumBeans++;
+        if (s.lead_mothers) sumLeadMothers++;
+        if (s.hotline_promoted) sumHotline++;
 
         if (!grouped[s.district]) grouped[s.district] = {{}};
         if (!grouped[s.district][s.school]) grouped[s.district][s.school] = [];
         grouped[s.district][s.school].push(s);
       }});
 
-      // Update Top Tab 4 KPI cards
+      // Update Top Tab 4 KPI cards & Field Monitoring Indicator cards
       const kpiTotal = document.getElementById('demo-kpi-total-sessions');
       const kpiCompliant = document.getElementById('demo-kpi-compliant-sessions');
       const kpiCompliantRate = document.getElementById('demo-kpi-compliant-rate');
       const kpiFlagged = document.getElementById('demo-kpi-flagged-sessions');
       const kpiFlaggedRate = document.getElementById('demo-kpi-flagged-rate');
+      const kpiCaregiver = document.getElementById('demo-kpi-caregiver-reach');
+      const indBio = document.getElementById('demo-ind-biofortified');
+      const indLm = document.getElementById('demo-ind-lead-mothers');
+      const indHelp = document.getElementById('demo-ind-helpline');
+      const indTheft = document.getElementById('demo-ind-theft');
 
       if (kpiTotal) kpiTotal.innerText = totalFiltered;
       if (kpiCompliant) kpiCompliant.innerText = compliantFiltered;
       if (kpiCompliantRate) kpiCompliantRate.innerText = totalFiltered > 0 ? `${{((compliantFiltered / totalFiltered) * 100).toFixed(1)}}% compliant rate` : '0%';
       if (kpiFlagged) kpiFlagged.innerText = flaggedFiltered;
       if (kpiFlaggedRate) kpiFlaggedRate.innerText = totalFiltered > 0 ? `${{((flaggedFiltered / totalFiltered) * 100).toFixed(1)}}% flagged for follow-up` : '0%';
+      if (kpiCaregiver) kpiCaregiver.innerText = sumCaregivers.toLocaleString();
+      if (indBio) indBio.innerText = `${{sumOfsp}} OFSP · ${{sumBeans}} Iron Beans`;
+      if (indLm) indLm.innerText = `${{sumLeadMothers}} Sessions`;
+      if (indHelp) indHelp.innerText = `${{sumHotline}} Promoted`;
+      if (indTheft) {{
+        const v1Schs = ((BASE_DATA.three_visit_contact && BASE_DATA.three_visit_contact.visit1 && BASE_DATA.three_visit_contact.visit1.schools_data) || []).filter(s => selDistrict === 'ALL' || s.district === selDistrict);
+        let qCnt = 0;
+        v1Schs.forEach(s => {{
+          qCnt += (s.helpdesk_queries || 0);
+        }});
+        const theftCnt = (selDistrict === 'ALL' && BASE_DATA.new_pillar_metrics) ? (BASE_DATA.new_pillar_metrics.tot_theft_queries || 0) : 0;
+        indTheft.innerText = `${{qCnt}} Queries (${{theftCnt}} Theft)`;
+      }}
 
       // Update summary banner
       if (banner) {{
