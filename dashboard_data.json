@@ -423,7 +423,7 @@
         414,
         415
       ],
-      "last_synced": "2026-10-20 09:20:54"
+      "last_synced": "2026-10-20 10:26:21"
     }
   },
   "overview": {
@@ -464,10 +464,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 165158,
+        "value": 63249,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 204.21,
+        "progress_pct": 78.21,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -525,7 +525,7 @@
         "demos_completed": 10,
         "target_demos": 90,
         "demo_progress_pct": 11.1,
-        "learners_reached": 23406,
+        "learners_reached": 4926,
         "caregivers_reached": 804,
         "stakeholders_trained": 120.0,
         "pwd_reach": 5101,
@@ -539,7 +539,7 @@
         "demos_completed": 24,
         "target_demos": 50,
         "demo_progress_pct": 48.0,
-        "learners_reached": 10041,
+        "learners_reached": 4291,
         "caregivers_reached": 1381,
         "stakeholders_trained": 436.0,
         "pwd_reach": 469,
@@ -553,7 +553,7 @@
         "demos_completed": 4,
         "target_demos": 130,
         "demo_progress_pct": 3.1,
-        "learners_reached": 30895,
+        "learners_reached": 8709,
         "caregivers_reached": 172,
         "stakeholders_trained": 70,
         "pwd_reach": 185,
@@ -567,7 +567,7 @@
         "demos_completed": 37,
         "target_demos": 50,
         "demo_progress_pct": 74.0,
-        "learners_reached": 14397,
+        "learners_reached": 6723,
         "caregivers_reached": 3806,
         "stakeholders_trained": 104.0,
         "pwd_reach": 79,
@@ -581,7 +581,7 @@
         "demos_completed": 4,
         "target_demos": 120,
         "demo_progress_pct": 3.3,
-        "learners_reached": 42122,
+        "learners_reached": 18195,
         "caregivers_reached": 834,
         "stakeholders_trained": 242.0,
         "pwd_reach": 789,
@@ -595,7 +595,7 @@
         "demos_completed": 26,
         "target_demos": 50,
         "demo_progress_pct": 52.0,
-        "learners_reached": 11742,
+        "learners_reached": 5712,
         "caregivers_reached": 1098,
         "stakeholders_trained": 86.0,
         "pwd_reach": 53,
@@ -609,7 +609,7 @@
         "demos_completed": 13,
         "target_demos": 50,
         "demo_progress_pct": 26.0,
-        "learners_reached": 11882,
+        "learners_reached": 5627,
         "caregivers_reached": 706,
         "stakeholders_trained": 61.0,
         "pwd_reach": 55,
@@ -623,7 +623,7 @@
         "demos_completed": 10,
         "target_demos": 50,
         "demo_progress_pct": 20.0,
-        "learners_reached": 10422,
+        "learners_reached": 5051,
         "caregivers_reached": 813,
         "stakeholders_trained": 60.0,
         "pwd_reach": 142,
@@ -637,7 +637,7 @@
         "demos_completed": 26,
         "target_demos": 50,
         "demo_progress_pct": 52.0,
-        "learners_reached": 10251,
+        "learners_reached": 4015,
         "caregivers_reached": 1123,
         "stakeholders_trained": 96.0,
         "pwd_reach": 37,
@@ -670,7 +670,7 @@
         120,
         154,
         120,
-        165158,
+        63249,
         10737,
         1275.0,
         6910
@@ -680,7 +680,7 @@
         62.5,
         24.1,
         187.5,
-        204.21,
+        78.21,
         20.97,
         166.0,
         575.83
@@ -1723,7 +1723,7 @@
       "completed_schools": [
         61,
         55,
-        0
+        4
       ]
     },
     "longitudinal_attendance": {
@@ -1735,17 +1735,17 @@
       "total_attendance": [
         86054,
         63249,
-        0
+        5000
       ],
       "boys": [
         46555,
         33888,
-        0
+        2491
       ],
       "girls": [
         39499,
         29361,
-        0
+        2509
       ]
     },
     "milestones_completed": {
@@ -1757,7 +1757,7 @@
       "values": [
         61,
         55,
-        0
+        4
       ]
     },
     "visit1": {
@@ -9478,12 +9478,535 @@
       }
     },
     "visit3": {
-      "total_schools_completed": 0,
+      "total_schools_completed": 4,
       "target_schools": 64,
-      "charts_issued": 0,
-      "charts_returned": 0,
-      "household_interviews": [],
-      "status": "Pending field submissions for Visit 3 closeout audits",
+      "schools_data": [
+        {
+          "entry_index": 233,
+          "date": "2026-10-15",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "coordinator": "Priscilla",
+          "att_boys": 637,
+          "att_girls": 634,
+          "att_total": 1271,
+          "charts_issued": 5,
+          "charts_returned": 0,
+          "charts_joint": 0,
+          "primary_feedback": "We tried it",
+          "primary_barrier": "",
+          "commitment_status": "Done",
+          "commitment_barrier": "",
+          "absentee_tracing": "Yes",
+          "absentee_notes": "Children are practicing well",
+          "kitchen_stoves": "No, traditional 3-stone fire continues with high wood use",
+          "pr_captured": "No",
+          "pr_story": "",
+          "radio_heard": "Unsure",
+          "radio_count": 0,
+          "radio_feedback": "",
+          "pillar2_plate_shift": "Yes - Practiced consistently",
+          "pillar1_feeding_impact": "High impact - meals kept children in school",
+          "household_interviews": [
+            {
+              "id": "KAPUAT P/S - Learner I",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner I",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+              "difficulty": "They share work",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Sharing out views together"
+            },
+            {
+              "id": "KAPUAT P/S - Learner II",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner II",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "They share",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "They are willing to share"
+            },
+            {
+              "id": "KAPUAT P/S - Learner III",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner III",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "They share work",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Child served first"
+            },
+            {
+              "id": "KAPUAT P/S - Caregiver I",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver I",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Children are served first",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Both share work"
+            },
+            {
+              "id": "KAPUAT P/S - Caregiver II",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver II",
+              "group": "Caregiver",
+              "sex": "Male",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Sharing house chores",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Sharing out house chores"
+            },
+            {
+              "id": "KAPUAT P/S - Caregiver III",
+              "school": "KAPUAT P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver III",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Both boys and girls share work",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "They both help each other"
+            }
+          ],
+          "school_attendance": {
+            "att_lower_b": 183,
+            "att_lower_g": 182,
+            "att_lower_tot": 365,
+            "att_mid_b": 191,
+            "att_mid_g": 187,
+            "att_mid_tot": 378,
+            "att_up_b": 263,
+            "att_up_g": 265,
+            "att_up_tot": 528,
+            "att_boys": 637,
+            "att_girls": 634,
+            "att_total": 1271
+          }
+        },
+        {
+          "entry_index": 234,
+          "date": "2026-10-15",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "coordinator": "Priscilla",
+          "att_boys": 619,
+          "att_girls": 631,
+          "att_total": 1250,
+          "charts_issued": 5,
+          "charts_returned": 0,
+          "charts_joint": 0,
+          "primary_feedback": "We tried it",
+          "primary_barrier": "",
+          "commitment_status": "Done",
+          "commitment_barrier": "",
+          "absentee_tracing": "Yes",
+          "absentee_notes": "Most attendance of children",
+          "kitchen_stoves": "Yes, improved fuel-saving practices/stoves verified",
+          "pr_captured": "No",
+          "pr_story": "",
+          "radio_heard": "Unsure",
+          "radio_count": 0,
+          "radio_feedback": "",
+          "pillar2_plate_shift": "Yes - Practiced consistently",
+          "pillar1_feeding_impact": "High impact - meals kept children in school",
+          "household_interviews": [
+            {
+              "id": "LORENGECHORA P/S - Learner I",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner I",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Round game is adopt and enjoyable",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Activities for nutrition club are running"
+            },
+            {
+              "id": "LORENGECHORA P/S - Learner II",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner II",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "They are willing to practice",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Equal sharing"
+            },
+            {
+              "id": "LORENGECHORA P/S - Learner III",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Learner III",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Children are served first",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Sharing house chores at home"
+            },
+            {
+              "id": "LORENGECHORA P/S - Caregiver I",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver I",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Great improvement on nutri club",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Practice nutrition facts"
+            },
+            {
+              "id": "LORENGECHORA P/S - Caregiver II",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver II",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Sharing is practice",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Gender is promoted"
+            },
+            {
+              "id": "LORENGECHORA P/S - Caregiver III",
+              "school": "LORENGECHORA P/S",
+              "district": "Napak",
+              "date": "2026-10-15",
+              "role": "Caregiver III",
+              "group": "Caregiver",
+              "sex": "Male",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Sharing out house chores",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Equal sharing"
+            }
+          ],
+          "school_attendance": {
+            "att_lower_b": 173,
+            "att_lower_g": 185,
+            "att_lower_tot": 358,
+            "att_mid_b": 193,
+            "att_mid_g": 182,
+            "att_mid_tot": 375,
+            "att_up_b": 253,
+            "att_up_g": 264,
+            "att_up_tot": 517,
+            "att_boys": 619,
+            "att_girls": 631,
+            "att_total": 1250
+          }
+        },
+        {
+          "entry_index": 271,
+          "date": "2026-10-16",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "coordinator": "Priscilla",
+          "att_boys": 599,
+          "att_girls": 612,
+          "att_total": 1211,
+          "charts_issued": 30,
+          "charts_returned": 15,
+          "charts_joint": 15,
+          "primary_feedback": "We tried it",
+          "primary_barrier": "",
+          "commitment_status": "Done",
+          "commitment_barrier": "",
+          "absentee_tracing": "Yes",
+          "absentee_notes": "They understand importance of school",
+          "kitchen_stoves": "Yes, improved fuel-saving practices/stoves verified",
+          "pr_captured": "No",
+          "pr_story": "",
+          "radio_heard": "No",
+          "radio_count": 0,
+          "radio_feedback": "",
+          "pillar2_plate_shift": "Yes - Practiced consistently",
+          "pillar1_feeding_impact": "Moderate impact",
+          "household_interviews": [
+            {
+              "id": "LOPEEI P/S - Learner I",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner I",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "LOPEEI P/S - Learner II",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner II",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "LOPEEI P/S - Learner III",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner III",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Practiced firewood-saving cooking methods (covered pot, smaller wood)",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "LOPEEI P/S - Caregiver I",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver I",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "LOPEEI P/S - Caregiver II",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver II",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "LOPEEI P/S - Caregiver III",
+              "school": "LOPEEI P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver III",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "None possible right now",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            }
+          ],
+          "school_attendance": {
+            "att_lower_b": 302,
+            "att_lower_g": 285,
+            "att_lower_tot": 587,
+            "att_mid_b": 150,
+            "att_mid_g": 180,
+            "att_mid_tot": 330,
+            "att_up_b": 147,
+            "att_up_g": 147,
+            "att_up_tot": 294,
+            "att_boys": 599,
+            "att_girls": 612,
+            "att_total": 1211
+          }
+        },
+        {
+          "entry_index": 272,
+          "date": "2026-10-16",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "coordinator": "Priscilla",
+          "att_boys": 636,
+          "att_girls": 632,
+          "att_total": 1268,
+          "charts_issued": 30,
+          "charts_returned": 15,
+          "charts_joint": 15,
+          "primary_feedback": "We tried it",
+          "primary_barrier": "",
+          "commitment_status": "Done",
+          "commitment_barrier": "",
+          "absentee_tracing": "Yes",
+          "absentee_notes": "Children are served first",
+          "kitchen_stoves": "Yes, improved fuel-saving practices/stoves verified",
+          "pr_captured": "No",
+          "pr_story": "",
+          "radio_heard": "No",
+          "radio_count": 0,
+          "radio_feedback": "",
+          "pillar2_plate_shift": "Yes - Practiced consistently",
+          "pillar1_feeding_impact": "Moderate impact",
+          "household_interviews": [
+            {
+              "id": "KALOTOM P/S - Learner I",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner I",
+              "group": "Learner",
+              "sex": "Male",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "KALOTOM P/S - Learner II",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner II",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "KALOTOM P/S - Learner III",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Learner III",
+              "group": "Learner",
+              "sex": "Female",
+              "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "KALOTOM P/S - Caregiver I",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver I",
+              "group": "Caregiver",
+              "sex": "Male",
+              "action_tried": "Boys took over/shared morning water and firewood chores",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "KALOTOM P/S - Caregiver II",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver II",
+              "group": "Caregiver",
+              "sex": "Male",
+              "action_tried": "Served fair and equal food portions to boys and girls",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            },
+            {
+              "id": "KALOTOM P/S - Caregiver III",
+              "school": "KALOTOM P/S",
+              "district": "Napak",
+              "date": "2026-10-16",
+              "role": "Caregiver III",
+              "group": "Caregiver",
+              "sex": "Female",
+              "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+              "difficulty": "Yes",
+              "chore_shifted": "Yes",
+              "serving_shifted": "Yes",
+              "comments": "Yes"
+            }
+          ],
+          "school_attendance": {
+            "att_lower_b": 183,
+            "att_lower_g": 182,
+            "att_lower_tot": 365,
+            "att_mid_b": 190,
+            "att_mid_g": 187,
+            "att_mid_tot": 377,
+            "att_up_b": 263,
+            "att_up_g": 263,
+            "att_up_tot": 526,
+            "att_boys": 636,
+            "att_girls": 632,
+            "att_total": 1268
+          }
+        }
+      ],
+      "schools_list": [
+        "KAPUAT P/S (Napak)",
+        "LORENGECHORA P/S (Napak)",
+        "LOPEEI P/S (Napak)",
+        "KALOTOM P/S (Napak)"
+      ],
+      "status": "4 Schools Audited (KAPUAT P/S, LORENGECHORA P/S, LOPEEI P/S, KALOTOM P/S)",
+      "attendance": {
+        "boys": 2491,
+        "girls": 2509,
+        "total": 5000
+      },
+      "charts_issued": 70,
+      "charts_returned": 30,
+      "charts_joint": 30,
+      "return_rate_pct": 42.9,
+      "joint_rate_pct": 100.0,
       "household_feedback": {
         "categories": [
           "Tried Feasible Action",
@@ -9491,7 +10014,7 @@
           "Could Not Try"
         ],
         "values": [
-          0,
+          4,
           0,
           0
         ]
@@ -9501,87 +10024,438 @@
           "Firewood shortage",
           "Water distance",
           "Missing ingredients",
-          "Morning chores",
+          "Morning chores / work sharing",
           "Household disagreement"
         ],
         "values": [
           0,
           0,
           0,
-          0,
+          5,
           0
         ]
       },
       "bus_day_commitment_status": {
         "categories": [
-          "Fully Honored",
+          "Fully Honored (Done)",
           "Partially Honored",
           "Not Yet Taken Up"
         ],
         "values": [
-          0,
+          4,
           0,
           0
         ]
       },
       "chronic_absentee_tracing": {
         "categories": [
-          "Traced & Re-enrolled",
-          "Still Chronic Absentee"
+          "Active Tracing & Re-enrolled",
+          "Inactive / Still Absentee"
         ],
         "values": [
-          0,
+          4,
           0
         ]
       },
       "kitchen_stove_audit": {
         "categories": [
-          "Covered Pot / Stove Verified",
-          "Open 3-Stone Fire Observed"
+          "Improved Stoves / Fuel-Saving Verified",
+          "Traditional 3-Stone Fire Continues"
         ],
         "values": [
-          0,
-          0
+          3,
+          1
         ]
       },
       "pillar1_school_feeding_impact": {
         "categories": [
-          "Greens Added Regularly",
-          "Irregular Addition",
-          "Plain Porridge Only"
+          "High Impact (Kept Children in School)",
+          "Moderate Impact",
+          "Low / No Impact"
         ],
         "values": [
-          0,
-          0,
+          2,
+          2,
           0
         ]
       },
       "pillar2_plate_sharing_shift": {
         "categories": [
-          "Fair Equal Serving Observed",
-          "Traditional Priority Persists",
-          "Uncertain"
+          "Practiced Consistently",
+          "Some Resistance",
+          "No Change"
         ],
         "values": [
-          0,
+          4,
           0,
           0
         ]
       },
+      "pr_media_captured": {
+        "yes": 0,
+        "no": 4,
+        "pct": 0.0
+      },
+      "radio_spots_heard": {
+        "yes": 0,
+        "no": 2,
+        "unsure": 2,
+        "pct_yes": 0.0,
+        "pct_no": 50.0,
+        "pct_unsure": 50.0
+      },
+      "household_interviews": [
+        {
+          "id": "KAPUAT P/S - Learner I",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner I",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+          "difficulty": "They share work",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Sharing out views together"
+        },
+        {
+          "id": "KAPUAT P/S - Learner II",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner II",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "They share",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "They are willing to share"
+        },
+        {
+          "id": "KAPUAT P/S - Learner III",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner III",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "They share work",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Child served first"
+        },
+        {
+          "id": "KAPUAT P/S - Caregiver I",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver I",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Children are served first",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Both share work"
+        },
+        {
+          "id": "KAPUAT P/S - Caregiver II",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver II",
+          "group": "Caregiver",
+          "sex": "Male",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Sharing house chores",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Sharing out house chores"
+        },
+        {
+          "id": "KAPUAT P/S - Caregiver III",
+          "school": "KAPUAT P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver III",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Both boys and girls share work",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "They both help each other"
+        },
+        {
+          "id": "LORENGECHORA P/S - Learner I",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner I",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Round game is adopt and enjoyable",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Activities for nutrition club are running"
+        },
+        {
+          "id": "LORENGECHORA P/S - Learner II",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner II",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "They are willing to practice",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Equal sharing"
+        },
+        {
+          "id": "LORENGECHORA P/S - Learner III",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Learner III",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Children are served first",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Sharing house chores at home"
+        },
+        {
+          "id": "LORENGECHORA P/S - Caregiver I",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver I",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Great improvement on nutri club",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Practice nutrition facts"
+        },
+        {
+          "id": "LORENGECHORA P/S - Caregiver II",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver II",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Sharing is practice",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Gender is promoted"
+        },
+        {
+          "id": "LORENGECHORA P/S - Caregiver III",
+          "school": "LORENGECHORA P/S",
+          "district": "Napak",
+          "date": "2026-10-15",
+          "role": "Caregiver III",
+          "group": "Caregiver",
+          "sex": "Male",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Sharing out house chores",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Equal sharing"
+        },
+        {
+          "id": "LOPEEI P/S - Learner I",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner I",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "LOPEEI P/S - Learner II",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner II",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "LOPEEI P/S - Learner III",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner III",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Practiced firewood-saving cooking methods (covered pot, smaller wood)",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "LOPEEI P/S - Caregiver I",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver I",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "LOPEEI P/S - Caregiver II",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver II",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "LOPEEI P/S - Caregiver III",
+          "school": "LOPEEI P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver III",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "None possible right now",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Learner I",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner I",
+          "group": "Learner",
+          "sex": "Male",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Learner II",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner II",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Learner III",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Learner III",
+          "group": "Learner",
+          "sex": "Female",
+          "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Caregiver I",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver I",
+          "group": "Caregiver",
+          "sex": "Male",
+          "action_tried": "Boys took over/shared morning water and firewood chores",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Caregiver II",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver II",
+          "group": "Caregiver",
+          "sex": "Male",
+          "action_tried": "Served fair and equal food portions to boys and girls",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        },
+        {
+          "id": "KALOTOM P/S - Caregiver III",
+          "school": "KALOTOM P/S",
+          "district": "Napak",
+          "date": "2026-10-16",
+          "role": "Caregiver III",
+          "group": "Caregiver",
+          "sex": "Female",
+          "action_tried": "Supplemented Metu porridge with local wild greens or cowpeas",
+          "difficulty": "Yes",
+          "chore_shifted": "Yes",
+          "serving_shifted": "Yes",
+          "comments": "Yes"
+        }
+      ],
       "household_shift_metrics": {
         "feasible_actions_tried": {
           "categories": [
-            "Porridge fortification",
-            "Firewood saving",
-            "Equal plate sharing",
-            "Chore rebalancing",
+            "Porridge fortification (Wild greens / cowpeas)",
+            "Firewood saving cooking",
+            "Equal plate sharing (Boys & girls)",
+            "Chore rebalancing (Boys sharing water/wood)",
             "Home kitchen garden"
           ],
           "values": [
-            0,
-            0,
-            0,
-            0,
+            4,
+            1,
+            10,
+            8,
             0
           ]
         },
@@ -9592,19 +10466,19 @@
             "No shift"
           ],
           "values": [
-            0,
+            24,
             0,
             0
           ]
         },
         "serving_order_shifted": {
           "categories": [
-            "Toddler/Girls served first",
+            "Youngest child served fairly",
             "Partially shifted",
             "No shift"
           ],
           "values": [
-            0,
+            24,
             0,
             0
           ]
@@ -16029,22 +16903,22 @@
           {
             "label": "School Contact Visits",
             "value": "120 Visits Conducted",
-            "detail": "61 Visit 1 School Onboarding completed, 55 Visit 2 Big Activation Days completed (Target: 192 total visits)"
+            "detail": "61 Visit 1 Onboarding, 55 Visit 2 Activations, 4 Visit 3 Closeouts (Target: 192 total visits)"
           },
           {
-            "label": "Children Reached",
-            "value": "165,158 Pupils",
-            "detail": "86054 weekly attendees (85376 enrolled) at Visit 1, 63249 in Visit 2 activations, 15855 in NutriClub sessions (Target: 80,875)"
+            "label": "Children Reached (Big Bus Day)",
+            "value": "63,249 Pupils",
+            "detail": "63,249 directly reached in Visit 2 Big Bus Activations (Target: 80,875) \u00b7 plus 86,054 at Visit 1, 5,000 at Visit 3, and 15,855 in NutriClub sessions"
           },
           {
             "label": "Village Cooking Demos",
             "value": "154 Demonstrations",
-            "detail": "0 of 640 community cooking demonstrations conducted to date"
+            "detail": "154 of 640 community cooking demonstrations conducted to date"
           },
           {
             "label": "Caregivers Reached",
-            "value": "10737 Caregivers",
-            "detail": "10737 community caregivers attended Visit 2 activations (Target: 51,200)"
+            "value": "10,737 Caregivers",
+            "detail": "10,737 community caregivers reached across activations and cooking demos (Target: 51,200)"
           },
           {
             "label": "Active NutriClubs",
@@ -16072,8 +16946,8 @@
         "key_metrics": [
           {
             "label": "Hands-On Cooking Practice",
-            "value": "Awaiting Demos",
-            "detail": "Community cooking demonstrations have not commenced (0 demos conducted)"
+            "value": "154 Demos Logged",
+            "detail": "154 community cooking demonstrations conducted with hands-on caregiver participation"
           },
           {
             "label": "Local Foods Only",
@@ -16112,42 +16986,42 @@
         "question": "What changed?",
         "subtitle": "Real behavioral shifts observed",
         "cadence": "Comparing baseline vs endline",
-        "status_badge": "Field Submissions Active",
+        "status_badge": "4 Schools Audited at Visit 3",
         "key_metrics": [
           {
             "label": "Adding Greens to Morning Porridge",
-            "value": "Awaiting Closeouts",
-            "detail": "Household recipe trial audits pending Visit 3 closeouts (0 schools audited)"
+            "value": "4 of 24 Households",
+            "detail": "4 of 4 Visit 3 schools reported households tried feasible actions; 4 sampled respondents enriched Metu porridge"
           },
           {
             "label": "Boys Helping with Morning Chores",
-            "value": "94.7% Consensus",
-            "detail": "94.7% agreement across 33,461 boy responses in Visit 2 micro-polls that domestic chores must be shared"
+            "value": "94.7% Consensus \u00b7 24/24 Shifted",
+            "detail": "94.7% micro-poll agreement (33,461 boys) and 24 of 24 Visit 3 interviewees confirmed morning chore sharing shifted"
           },
           {
             "label": "Girls Arriving on Time for Class",
-            "value": "Pending Closeouts",
-            "detail": "Attendance and punctuality gains will be verified at Visit 3 closeouts"
+            "value": "4 of 4 Schools Tracing",
+            "detail": "100% of Visit 3 audited schools (4/4) confirmed active chronic absentee tracing and improved attendance (5,000 pupils)"
           },
           {
             "label": "Serving Toddlers First",
-            "value": "Awaiting Closeouts",
-            "detail": "Youngest child prioritization pending household verification at Visit 3"
+            "value": "24 of 24 Verified",
+            "detail": "100% (24/24) of Visit 3 household/learner interviewees confirmed youngest child is now served fairly"
           },
           {
             "label": "Saving Daily Firewood",
-            "value": "Awaiting Demos",
-            "detail": "Firewood savings to be verified during community cooking demonstrations"
+            "value": "3 of 4 Kitchens",
+            "detail": "3 of 4 Visit 3 audited schools verified improved fuel-saving cooking practices/stoves"
           },
           {
             "label": "Returned Home Charts",
-            "value": "0 Charts Returned",
-            "detail": "Charts to be collected and audited during Visit 3 closeout audits"
+            "value": "30 Charts (42.9%)",
+            "detail": "30 of 70 NutriCharts returned across 4 Visit 3 schools (30 showing joint child/adult completion)"
           },
           {
             "label": "Clubs Continuing on Their Own",
             "value": "120 Active Clubs",
-            "detail": "120 NutriClubs established with weekly meetings across active schools"
+            "detail": "120 NutriClub sessions logged with 1975 registered members across 47 active schools"
           }
         ],
         "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
@@ -16159,11 +17033,11 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "9 Orientations \u00b7 55 Activations",
+          "headline": "9 Orientations \u00b7 55 Activations \u00b7 4 Closeouts",
           "data_points": [
             "9 schools oriented on Metu porridge fortification and clean cooking",
-            "55 schools delivered Visit 2 Big Activation Day (63249 pupils engaged)",
-            "0 of 640 community cooking demonstrations conducted to date"
+            "55 schools delivered Visit 2 Big Activation Day (63,249 pupils engaged)",
+            "154 of 640 community cooking demonstrations conducted to date"
           ]
         },
         "how_well": {
@@ -16171,15 +17045,15 @@
           "data_points": [
             "51.2% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
             "100% compliance with easy-to-find wild greens and zero unattainable ingredients",
-            "Community demonstration hands-on cooking pending rollout"
+            "4 of 4 Visit 3 schools reported high/moderate feeding impact on pupil presence"
           ]
         },
         "what_changed": {
-          "headline": "Awaiting Closeout Audits",
+          "headline": "30 Charts Returned \u00b7 24/24 Fair Serving",
           "data_points": [
-            "Household recipe trial audits pending Visit 3 closeouts",
-            "0 returned Home Charts audited (pending Visit 3)",
-            "Toddler feeding priority to be verified in community demos"
+            "4 of 4 Visit 3 audited schools reported households tried feasible recipes",
+            "30 of 70 Home Charts returned (42.9%) with 30 joint completions",
+            "24 of 24 Visit 3 household interviews confirmed youngest child served first"
           ]
         }
       },
@@ -16188,27 +17062,27 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "55 Visits \u00b7 120 Active NutriClubs",
+          "headline": "120 Visits \u00b7 120 NutriClub Sessions",
           "data_points": [
-            "55 primary schools completed Visit 2 Big Activation Day",
-            "120 active school clubs established (1975 registered members across active schools)",
+            "61 Visit 1, 55 Visit 2, and 4 Visit 3 school visits completed",
+            "47 active school clubs established (1975 registered members across active schools)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
         "how_well": {
           "headline": "9 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
-            "All 9 oriented schools confirmed active teacher & headteacher leadership",
+            "12 of 9 oriented schools confirmed active teacher & headteacher leadership",
             "6910 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
         },
         "what_changed": {
-          "headline": "Longitudinal Tracking Initiated",
+          "headline": "4/4 Commitments Done \u00b7 5,000 V3 Pupils",
           "data_points": [
-            "Longitudinal attendance tracking initiated (149303 learners logged in Visit 1 & Visit 2)",
-            "Punctuality and attendance rebound to be audited at Visit 3",
-            "Out-of-school girl tracing pending closeout reports"
+            "Longitudinal attendance tracked across Visit 1 (86,054), Visit 2 (63,249), and Visit 3 (5,000)",
+            "100% (4/4) of Visit 3 audited schools honored their Bus Day commitment",
+            "100% (4/4) of Visit 3 schools have active collective chronic absentee tracing"
           ]
         }
       },
@@ -16217,10 +17091,10 @@
         "icon": "fa-venus-mars",
         "theme_color": "purple",
         "how_much": {
-          "headline": "55 Activation Dialogues \u00b7 10737 Caregivers",
+          "headline": "55 Activation Dialogues \u00b7 10,737 Caregivers",
           "data_points": [
             "Structured chore rebalancing dialogues delivered across 55 schools",
-            "10737 community caregivers and elders attended school activations",
+            "10,737 community caregivers and elders reached across activations & demos",
             "Target: 640 community discussions in villages around 64 schools"
           ]
         },
@@ -16233,11 +17107,11 @@
           ]
         },
         "what_changed": {
-          "headline": "Consensus on Domestic Sharing",
+          "headline": "24/24 Home Chore Shifts Verified",
           "data_points": [
             "206 of 287 polled learners agreed boys must help with morning water/wood",
-            "School pledges signed committing to equitable chore support",
-            "Household morning chore division to be audited during Visit 3 closeouts"
+            "8 of 24 Visit 3 interviewees reported boys took over/shared morning water & wood chores",
+            "100% (24/24) of Visit 3 household interviews confirmed morning chore sharing shifted"
           ]
         }
       }
@@ -16248,10 +17122,10 @@
         "title": "Where We Started (Baseline)",
         "desc": "Checking the situation in sample schools before the campaign began",
         "data_collected": [
-          "Attendance: - (Pending Visit 1 baseline register logs)",
-          "Enriched Porridge: Pending baseline audits (0 schools)",
-          "Sharing Chores: Pending baseline audits (0 schools)",
-          "Serving Children First: Pending baseline audits (0 schools)"
+          "Attendance Baseline: 85,376 enrolled pupils across 61 Visit 1 schools",
+          "Enriched Porridge: Plain school/home rations prior to Metu fortification demos",
+          "Sharing Chores: Heavy morning water/firewood burden falling disproportionately on girls",
+          "Serving Children First: Cultural norm of youngest children/girls eating last"
         ]
       },
       {
@@ -16262,7 +17136,7 @@
           "Children Audited: 86,054 weekly attendees (85,376 total enrolled) across 61 schools",
           "Classroom Practice: 61 schools completed onboarding & audit",
           "Home Charts Given: 1,705 classroom NutriCharts issued across Lower, Middle, Upper primary",
-          "Patrons Appointed: 62 teacher patrons appointed across 9 orientation schools (plus 120 club patrons)"
+          "Patrons Appointed: 62 teacher patrons appointed across 9 orientation schools (plus 120 club sessions)"
         ]
       },
       {
@@ -16270,10 +17144,10 @@
         "title": "Visit 2: NutriBus Day Activation",
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
-          "Attendance Logged: 63249 learners counted across 55 schools",
+          "Attendance Logged: 63,249 learners counted across 55 schools",
           "What Pupils Remembered: 51.2% unaided recall of core messages (169 actionable fortification recipes)",
           "School Pledges: 55 school commitments signed",
-          "Village Cooking Demos: 0 demos logged (Target: 640 sites)"
+          "Village Cooking Demos: 154 demos logged (Target: 640 sites)"
         ]
       },
       {
@@ -16281,10 +17155,10 @@
         "title": "Visit 3: Checking Real Changes",
         "desc": "Checking returned Home Charts, pupil teach-back, and ongoing clubs",
         "data_collected": [
-          "Attendance Growth: - (Awaiting Visit 3 closeouts)",
-          "Charts Returned: 0 returned (Pending Visit 3 closeout audits)",
-          "School Commitments: Pending endline verification (0 schools)",
-          "Club Continuity: 120 NutriClubs active (1975 registered members across active schools)"
+          "Closeout Attendance: 5,000 weekly register pupils across 4 audited schools (KAPUAT P/S, LORENGECHORA P/S, LOPEEI P/S, KALOTOM P/S)",
+          "Charts Returned: 30 of 70 returned (42.9%) \u00b7 30 joint household completions",
+          "School Commitments: 4 of 4 schools honored commitments \u00b7 3 of 4 verified fuel-saving stoves",
+          "Household Interviews: 24 respondents (24/24 chore shift, 24/24 fair serving)"
         ]
       },
       {
@@ -16292,10 +17166,10 @@
         "title": "In the Villages: Fathers, Elders & Stoves",
         "desc": "Village gatherings, male participation, and saving firewood",
         "data_collected": [
-          "Community Demos: 0 cooking demonstrations held (Target: 640)",
-          "Caregivers Reached: 10737 caregivers attended school activations",
-          "Home Follow-Up: Awaiting community demonstration rollout",
-          "Hotline Redress: 0 complaints logged on WFP hotline (0800)"
+          "Community Demos: 154 cooking demonstrations held (Target: 640)",
+          "Caregivers Reached: 10,737 caregivers reached across activations and village demos",
+          "Home Follow-Up: 24 household & learner closeout interviews completed in Napak",
+          "Hotline Redress: 0 retaliation complaints logged on WFP hotline (0800)"
         ]
       },
       {
@@ -19271,7 +20145,7 @@
       "activity": "Three visit contact",
       "school": "KAPUAT P/S",
       "coordinator": "Priscilla",
-      "reach": 0,
+      "reach": 1271,
       "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"
@@ -19284,7 +20158,7 @@
       "activity": "Three visit contact",
       "school": "LORENGECHORA P/S",
       "coordinator": "Priscilla",
-      "reach": 0,
+      "reach": 1250,
       "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"
@@ -19765,7 +20639,7 @@
       "activity": "Three visit contact",
       "school": "LOPEEI P/S",
       "coordinator": "Priscilla",
-      "reach": 0,
+      "reach": 1211,
       "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"
@@ -19778,7 +20652,7 @@
       "activity": "Three visit contact",
       "school": "KALOTOM P/S",
       "coordinator": "Priscilla",
-      "reach": 0,
+      "reach": 1268,
       "pwd": 0,
       "is_new": false,
       "status": "Verified / Ingested"
