@@ -51,6 +51,8 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 496,2026-10-21,Kaabong,Catchment,KATHILE P/S,Nakosowan cell,VHT,Looking Joseph,Ngole Paula,80
 502,2026-10-21,Kaabong,Catchment,KATHILE P/S,Jerusalem,VHT,Loiki  Joseph,Ngole Paula,74
 510,2026-10-21,Kaabong,Catchment,KATHILE P/S,Kathile west cell,VHT,Loiki Joseph,Ngole Paula,75
+521,2026-10-21,Kaabong,Catchment,KATHILE P/S,Nasuguru cell,VHT,Loiki Joseph,Ngole Paula,78
+530,2026-10-21,Kaabong,Catchment,KATHILE P/S,Lopelipel cell,VHT,Loiki Joseph,Ngole Paula,77
 433,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,KAILOB,VHT,Lopiran Joseph,Amoo Sofia,80
 434,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,Kaiwele,VHT,Lorot Samuel,Amoo Sofia,69
 319,2026-10-17,Kaabong,Catchment,LOTIM P/S,Lotim centre,Cordinator,Not specified (Coordinator led),Amoo Sofia,113
@@ -95,6 +97,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 316,2026-10-17,Karenga,Catchment,NALAKAS P/S,Kda,Cordinator,Not specified (Coordinator led),Lopeyok Martin,136
 352,2026-10-17,Kotido,Catchment,KANAIR P/S,Pothokor,VHT,Lokiru John and Namuya Gilbert Germine,Ochen moses tom,216
 353,2026-10-16,Kotido,Catchment,KOTIDO GIRLS P/S,Lokiding trading centre,VHT,Oluka Emmanuel,Ogwang Sam,306
+524,2026-10-21,Kotido,Catchment,LOKIDING P/S,Lokiding 2,VHT,Achuun Lucy Brenda and Aermun Lowas,Ogwang Sam,221
 258,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kawich,VHT,Adong lilly grace,Ochen moses tom,313
 259,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Nyakwae,VHT,Adong lilly grace,Ochen moses tom,298
 495,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kopsang,VHT,Adong lilly grace,Ochen moses tom,183
@@ -118,11 +121,13 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 266,2026-10-15,Moroto,Catchment,CHILD JESUS P/S,singila,VHT,Mary Goretti,Evaline,58
 382,2026-10-16,Moroto,Catchment,CHILD JESUS P/S,kamswahili juu,VHT,Claudia,Evaline,73
 419,2026-10-18,Moroto,Catchment,CHILD JESUS P/S,singila,VHT,Claudia,Evaline,61
+520,2026-10-21,Moroto,Catchment,CHILD JESUS P/S,singila,VHT,Lomonyang Moses,Evaline,65
 244,2026-10-15,Moroto,Catchment,KASIMERI P/S,kambisi village,VHT,Moses,Evaline,62
 245,2026-10-15,Moroto,Catchment,KASIMERI P/S,Lokitede,VHT,Cecellia,Evaline,63
 246,2026-10-15,Moroto,Catchment,KASIMERI P/S,Kamsawhili chin,VHT,claudia,Evaline,58
 247,2026-10-15,Moroto,Catchment,KASIMERI P/S,Nakapelimen village,VHT,Mary goreti,Evaline,67
 383,2026-10-17,Moroto,Catchment,KASIMERI P/S,kambisi,VHT,Cecilia,Evaline,69
+519,2026-10-20,Moroto,Catchment,KASIMERI P/S,Kambisi,VHT,Lomonyang Moses,Evaline,71
 158,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Lokwakwa village,VHT,Albino,Evaline,84
 159,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Loputuk health centre,VHT,Lokol Racheal,Evaline,74
 160,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Kaipetar village,VHT,Angom Hellen,Evaline,75
@@ -162,20 +167,31 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 279,2026-10-14,Nabilatuk,Catchment,NATIRAE P/S,Natirae primary school catchment area,VHT,"Peter achia, Michael Lochuge and Raphael Longole",Awas Francis,105
 151,2026-10-14,Nakapiripirit,Catchment,LEMUSUI P/S,Lemusui trading centre,Cordinator,Not specified (Coordinator led),Lobur stephen,63
 445,2026-10-20,Nakapiripirit,Catchment,LEMUSUI P/S,Lemusui subcounty offices,VHT,Cheptoo Evaline and cherotich Catherine,Lobur stephen,81
+527,2026-10-21,Nakapiripirit,Catchment,LEMUSUI P/S,Gogoth village,VHT,"Cheptoo Evaline, cherotich catherine and loreng musa",Lobur stephen,85
+528,2026-10-21,Nakapiripirit,Catchment,LEMUSUI P/S,Alapat village,VHT,"Cheptoo evaline, cherotich catherine and loreng musa",Lobur stephen,79
+529,2026-10-21,Nakapiripirit,Catchment,LEMUSUI P/S,Morwakimat village,VHT,"Cheptoo evaline, cherotich catherine and loreng musa",Lobur stephen,74
+531,2026-10-21,Nakapiripirit,Catchment,LEMUSUI P/S,Katabok village,VHT,"Cheptoo Evaline, cherotich catherine and loreng musa",Lobur stephen,75
 438,2026-10-20,Nakapiripirit,Catchment,LOKADWARAN P/S,Lokaale village trees,VHT,Angella Joseph and iriama simon peter,Lobur stephen,95
 441,2026-10-20,Nakapiripirit,Catchment,LOKADWARAN P/S,Longeem village main meeting site,VHT,Iriama simon peter and Angella Joseph,Lobur stephen,129
 443,2026-10-20,Nakapiripirit,Catchment,LOKADWARAN P/S,Arecheck village,VHT,Angella Joseph and iriama simon peter,Lobur stephen,89
 444,2026-10-20,Nakapiripirit,Catchment,LOKADWARAN P/S,Loowoi village,VHT,Iriama simon peter and Angella joseph,Lobur stephen,107
+533,2026-10-21,Nakapiripirit,Catchment,LOKADWARAN P/S,Center where they sell local bear,VHT,Iriama simon peter and Angella joseph,Lobur stephen,72
 492,2026-10-21,Nakapiripirit,Catchment,LORENG P/S,Loreng village community trees,VHT,Iriama Allan stephen and Keke Lucy,Lobur stephen,120
+518,2026-10-21,Nakapiripirit,Catchment,LORENG P/S,Lokibuyo village,VHT,Iriama allan Stephen and keke lucy,Lobur stephen,102
+523,2026-10-21,Nakapiripirit,Catchment,LORENG P/S,Market area of lokibuyo village,VHT,Iriama allan stephen and keke lucy,Lobur stephen,122
+525,2026-10-21,Nakapiripirit,Catchment,LORENG P/S,Lobooloin village,VHT,Iriama allan stephen and keke lucy,Lobur stephen,104
+526,2026-10-21,Nakapiripirit,Catchment,LORENG P/S,Awoyareng village trees,VHT,Iriama allan stephen and keke lucy,Lobur stephen,94
 236,2026-10-15,Nakapiripirit,Catchment,NAPIANANYA P/S,Nakuri village. In the saving group,Cordinator,Not specified (Coordinator led),Lobur stephen,67
 237,2026-10-15,Nakapiripirit,Catchment,NAPIANANYA P/S,Apiechorait village. Road side,Cordinator,Not specified (Coordinator led),Lobur stephen,69
 260,2026-10-14,Nakapiripirit,Catchment,NAPIANANYA P/S,Market place,VHT,Aleper pius and Nakiru luja,Lobur stephen,111
 301,2026-10-16,Nakapiripirit,Catchment,NAPIANANYA P/S,Ariechek village,VHT,Aleper pius and Nakiru luja,Lobur stephen,84
 413,2026-10-19,Nakapiripirit,Catchment,NAPIANANYA P/S,Kakomokwe village,VHT,Aleper pius and Nakiru luja,Lobur stephen,66
+532,2026-10-21,Nakapiripirit,Catchment,NAPIANANYA P/S,Nakuri natapar farmers saving group,VHT,"Aleper pius, Nakiru luja",Lobur stephen,82
 193,2026-10-14,Nakapiripirit,Catchment,ST MARYS P/S,Health center iv,VHT,Nakalei Hellen,Lobur stephen,167
 300,2026-10-16,Nakapiripirit,Catchment,ST MARYS P/S,Nakayot,VHT,Adyaka James and Nakalei Hellen,Lobur stephen,149
 304,2026-10-16,Nakapiripirit,Catchment,ST MARYS P/S,"Namalu trading center east, market place",VHT,Nakalei gellen and Adyaka james,Lobur stephen,200
 356,2026-10-17,Nakapiripirit,Catchment,ST MARYS P/S,Alakara church ministries namalu,VHT,"Nakalei Hellen, and Adyaka james",Lobur stephen,772
+534,2026-10-21,Nakapiripirit,Catchment,ST MARYS P/S,Heath center iv antinental day,VHT,"Nakalei Hellen, Adyaka James",Lobur stephen,98
 132,2026-10-14,Napak,Catchment,KALOTOM P/S,Lopiida market,VHT,Joseph,Priscilla,90
 192,2026-10-15,Napak,Catchment,KALOTOM P/S,Kangole chin,VHT,Joseph,Priscilla,83
 194,2026-10-15,Napak,Catchment,KALOTOM P/S,Entebbe Area,VHT,Joseph,Priscilla,103
@@ -205,6 +221,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 509,2026-10-21,Napak,Catchment,LONGALOM P/S,Namoni,VHT,John Bosco,Priscilla,95
 511,2026-10-21,Napak,Catchment,LONGALOM P/S,Kamera,VHT,John Bosco,Priscilla,80
 512,2026-10-21,Napak,Catchment,LONGALOM P/S,Logolei,VHT,John Bosco,Priscilla,93
+514,2026-10-21,Napak,Catchment,LONGALOM P/S,Kololo,VHT,John Bosco,Priscilla,91
 73,2026-10-12,Napak,Catchment,LOPEEI P/S,Lepeei,VHT,Longok Jacinta and lobere william,Priscilla,123
 273,2026-10-16,Napak,Catchment,LOPEEI P/S,Logolosimet,VHT,Jacinta,Priscilla,108
 274,2026-10-16,Napak,Catchment,LOPEEI P/S,Lokarukoi,VHT,Jacinta,Priscilla,116
@@ -223,3 +240,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 424,2026-10-20,Napak,Catchment,LORENGECHORA P/S,Lobok,VHT,Philip,Priscilla,103
 460,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Lolet,VHT,Vicky,Priscilla,90
 461,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Kokorio,VHT,Vicky,Priscilla,104
+515,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Kamwhili,VHT,Vicky,Priscilla,91
+516,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Katanga,VHT,Vicky,Priscilla,91
+517,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Lopiida,VHT,Vicky,Priscilla,81
+522,2026-10-21,Napak,Catchment,LORENGECHORA P/S,Kopokwa,VHT,Vicky,Priscilla,93
