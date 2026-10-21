@@ -8,9 +8,9 @@
     "last_updated": "2026-10-02",
     "index_tracking": {
       "column": "_index",
-      "last_processed_index": 451,
-      "total_submissions_tracked": 446,
-      "new_entries_this_batch": 8,
+      "last_processed_index": 474,
+      "total_submissions_tracked": 469,
+      "new_entries_this_batch": 15,
       "tracked_indices": [
         1,
         2,
@@ -457,9 +457,32 @@
         448,
         449,
         450,
-        451
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474
       ],
-      "last_synced": "2026-10-21 09:02:34"
+      "last_synced": "2026-10-21 13:18:12"
     }
   },
   "overview": {
@@ -489,10 +512,10 @@
       {
         "id": "demos",
         "title": "Demonstration Sites",
-        "value": 178,
+        "value": 190,
         "target": 640,
         "unit": "sites",
-        "progress_pct": 27.8,
+        "progress_pct": 29.7,
         "icon": "fa-utensils",
         "badge": "Awaiting Submissions",
         "context": "Community cooking demonstration logs pending field submission"
@@ -511,10 +534,10 @@
       {
         "id": "caregivers",
         "title": "Caregivers Reached",
-        "value": 11602,
+        "value": 12120,
         "target": 51200,
         "unit": "caregivers",
-        "progress_pct": 22.66,
+        "progress_pct": 23.67,
         "icon": "fa-person-breastfeeding",
         "badge": "Community Reach",
         "context": "4 community members attended Visit 2 at Kotido mixed PS; community demo records pending"
@@ -522,10 +545,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 1288.0,
+        "value": 1299.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 167.7,
+        "progress_pct": 169.1,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -533,10 +556,10 @@
       {
         "id": "pwd",
         "title": "Persons with Disabilities (PWD)",
-        "value": 6975,
+        "value": 7009,
         "target": 1200,
         "unit": "individuals",
-        "progress_pct": 581.25,
+        "progress_pct": 584.08,
         "icon": "fa-wheelchair",
         "badge": "3 Learners / 2 Adults",
         "context": "2 mid-primary learners, 1 upper-primary learner, and 2 teachers with PWD identified at Kotido Mixed P/S"
@@ -563,7 +586,7 @@
         "demo_progress_pct": 11.1,
         "learners_reached": 4926,
         "caregivers_reached": 804,
-        "stakeholders_trained": 120.0,
+        "stakeholders_trained": 122.0,
         "pwd_reach": 5101,
         "status": "Active (Reports Received)"
       },
@@ -577,8 +600,8 @@
         "demo_progress_pct": 50.0,
         "learners_reached": 4291,
         "caregivers_reached": 1421,
-        "stakeholders_trained": 436.0,
-        "pwd_reach": 479,
+        "stakeholders_trained": 441.0,
+        "pwd_reach": 482,
         "status": "Active (Reports Received)"
       },
       {
@@ -586,11 +609,11 @@
         "schools_reached": 13,
         "target_schools": 13,
         "school_progress_pct": 100.0,
-        "demos_completed": 7,
+        "demos_completed": 8,
         "target_demos": 130,
-        "demo_progress_pct": 5.4,
+        "demo_progress_pct": 6.2,
         "learners_reached": 8709,
-        "caregivers_reached": 217,
+        "caregivers_reached": 243,
         "stakeholders_trained": 75,
         "pwd_reach": 198,
         "status": "Active (Reports Received)"
@@ -614,13 +637,13 @@
         "schools_reached": 12,
         "target_schools": 12,
         "school_progress_pct": 100.0,
-        "demos_completed": 5,
+        "demos_completed": 6,
         "target_demos": 120,
-        "demo_progress_pct": 4.2,
+        "demo_progress_pct": 5.0,
         "learners_reached": 18517,
-        "caregivers_reached": 903,
+        "caregivers_reached": 938,
         "stakeholders_trained": 248.0,
-        "pwd_reach": 819,
+        "pwd_reach": 831,
         "status": "Active (Reports Received)"
       },
       {
@@ -642,13 +665,13 @@
         "schools_reached": 5,
         "target_schools": 5,
         "school_progress_pct": 100.0,
-        "demos_completed": 13,
+        "demos_completed": 17,
         "target_demos": 50,
-        "demo_progress_pct": 26.0,
+        "demo_progress_pct": 34.0,
         "learners_reached": 5627,
-        "caregivers_reached": 706,
+        "caregivers_reached": 964,
         "stakeholders_trained": 61.0,
-        "pwd_reach": 55,
+        "pwd_reach": 68,
         "status": "Active (Reports Received)"
       },
       {
@@ -670,13 +693,13 @@
         "schools_reached": 5,
         "target_schools": 5,
         "school_progress_pct": 100.0,
-        "demos_completed": 36,
+        "demos_completed": 42,
         "target_demos": 50,
-        "demo_progress_pct": 72.0,
+        "demo_progress_pct": 84.0,
         "learners_reached": 4015,
-        "caregivers_reached": 1486,
-        "stakeholders_trained": 96.0,
-        "pwd_reach": 42,
+        "caregivers_reached": 1685,
+        "stakeholders_trained": 100.0,
+        "pwd_reach": 48,
         "status": "Active (Reports Received)"
       }
     ],
@@ -704,22 +727,22 @@
       "actuals": [
         64,
         125,
-        178,
-        127,
+        190,
+        138,
         63571,
-        11602,
-        1288.0,
-        6975
+        12120,
+        1299.0,
+        7009
       ],
       "pct": [
         100.0,
         65.1,
-        27.8,
-        198.4,
+        29.7,
+        215.6,
         78.6,
-        22.66,
-        167.7,
-        581.25
+        23.67,
+        169.1,
+        584.08
       ]
     }
   },
@@ -10768,16 +10791,16 @@
   },
   "community_demonstrations": {
     "kpis": {
-      "total_sessions_completed": 178,
+      "total_sessions_completed": 190,
       "target_sessions": 640,
-      "total_caregivers_reached": 10744,
+      "total_caregivers_reached": 11262,
       "target_caregivers": 51200,
-      "average_attendance_per_demo": 132.7,
-      "caregivers_female": 4080,
-      "caregivers_male": 6664,
-      "children_present": 6229,
-      "elders_present": 6141,
-      "pwd_present": 509
+      "average_attendance_per_demo": 131.1,
+      "caregivers_female": 4129,
+      "caregivers_male": 7133,
+      "children_present": 6599,
+      "elders_present": 6514,
+      "pwd_present": 540
     },
     "partner_cofacilitation": {
       "question": "Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?",
@@ -10787,10 +10810,10 @@
           "No"
         ],
         "values": [
-          51,
-          127
+          54,
+          136
         ],
-        "pct": "28.7%"
+        "pct": "28.4%"
       },
       "specified_partners": {
         "question": "If yes, specify partner name",
@@ -10800,11 +10823,11 @@
         ],
         "values": [
           24,
-          22
+          25
         ],
         "pct": [
-          "13.5%",
-          "12.4%"
+          "12.6%",
+          "13.2%"
         ]
       },
       "partner_role_observed": {
@@ -10815,14 +10838,14 @@
           "Observing for sustainability tracking"
         ],
         "values": [
-          33,
-          33,
-          35
+          36,
+          34,
+          36
         ],
         "pct": [
-          "18.5%",
-          "18.5%",
-          "19.7%"
+          "18.9%",
+          "17.9%",
+          "18.9%"
         ]
       }
     },
@@ -10835,11 +10858,11 @@
         "Persons with Disabilities"
       ],
       "values": [
-        4080,
-        6664,
-        6229,
-        6141,
-        509
+        4129,
+        7133,
+        6599,
+        6514,
+        540
       ]
     },
     "entry_submission_role": {
@@ -10848,7 +10871,7 @@
         "Submitted by District Coordinator"
       ],
       "values": [
-        148,
+        160,
         30
       ]
     },
@@ -10858,8 +10881,8 @@
         "Observed only / not hands-on"
       ],
       "values": [
-        107,
-        71
+        113,
+        77
       ]
     },
     "metu_porridge_local_additions": {
@@ -10868,8 +10891,8 @@
         "Not Demonstrated"
       ],
       "values": [
-        135,
-        43
+        146,
+        44
       ]
     },
     "local_sourcing_compliance": {
@@ -10878,8 +10901,8 @@
         "Promoted unapproved/unattainable foods"
       ],
       "values": [
-        153,
-        25
+        161,
+        29
       ]
     },
     "fuel_saving_practices": {
@@ -10890,10 +10913,10 @@
         "Traditional 3-Stone Fire Used (Non-compliant)"
       ],
       "values": [
-        126,
-        50,
-        51,
-        91
+        137,
+        54,
+        55,
+        101
       ]
     },
     "pillar3_clean_cooking": {
@@ -10903,10 +10926,10 @@
         "No"
       ],
       "values": [
-        142,
-        36
+        152,
+        38
       ],
-      "pct": "79.8%"
+      "pct": "80.0%"
     },
     "gender_dialogues_execution": {
       "question": "Were gender dialogues led by senior women, senior men, and VHTs successfully executed?",
@@ -10915,10 +10938,10 @@
         "No"
       ],
       "values": [
-        165,
+        177,
         13
       ],
-      "pct": "92.7%"
+      "pct": "93.2%"
     }
   },
   "msc_stories": {
@@ -10997,21 +11020,21 @@
   },
   "nutriclub_sessions": {
     "kpis": {
-      "total_sessions_logged": 127,
+      "total_sessions_logged": 138,
       "target_schools": 64,
-      "schools_with_active_clubs": 51,
-      "total_members": 2117,
-      "members_male": 875,
-      "members_female": 1242,
-      "session_attendance": 16064,
-      "attendance_boys": 9036,
-      "attendance_girls": 7028,
-      "pwd_learners": 420,
-      "pwd_boys": 260,
+      "schools_with_active_clubs": 53,
+      "total_members": 2333,
+      "members_male": 1007,
+      "members_female": 1326,
+      "session_attendance": 16527,
+      "attendance_boys": 9254,
+      "attendance_girls": 7273,
+      "pwd_learners": 423,
+      "pwd_boys": 263,
       "pwd_girls": 160,
-      "sessions_one_count": 62,
-      "sessions_two_count": 65,
-      "assembly_nutri_moments": 65
+      "sessions_one_count": 69,
+      "sessions_two_count": 69,
+      "assembly_nutri_moments": 69
     },
     "club_membership_gender": {
       "categories": [
@@ -11019,8 +11042,8 @@
         "Female Members"
       ],
       "values": [
-        875,
-        1242
+        1007,
+        1326
       ]
     },
     "session_attendance_gender": {
@@ -11029,8 +11052,8 @@
         "Girls Present"
       ],
       "values": [
-        9036,
-        7028
+        9254,
+        7273
       ]
     },
     "pwd_learners_attendance": {
@@ -11039,7 +11062,7 @@
         "Female Learners with Disabilities"
       ],
       "values": [
-        260,
+        263,
         160
       ]
     },
@@ -11066,11 +11089,11 @@
         "Metu Porridge Plus (Wild Greens / Cowpeas)"
       ],
       "values": [
-        64,
-        81,
-        66,
-        47,
-        51
+        69,
+        87,
+        73,
+        50,
+        56
       ]
     },
     "home_action_feedback": {
@@ -11080,7 +11103,7 @@
         "Awaiting reporting"
       ],
       "values": [
-        60,
+        62,
         6,
         0
       ]
@@ -15166,6 +15189,358 @@
         "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
         "home_action_assigned": "Try kitchen gardens at home.",
         "coordinator_notes": "Some patrons required some papers for conducting nutrion sessions"
+      },
+      {
+        "entry_index": 455,
+        "id": "NC-897883449",
+        "school": "NAMODO P/S",
+        "district": "Amudat",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-20",
+        "start_time": "16:30 PM",
+        "end_time": "17:00 PM",
+        "patron": "Chekwoti Juliet and Chebet Gilbert",
+        "membership_male": 26,
+        "membership_female": 28,
+        "total_membership": 54,
+        "boys_present": 26,
+        "girls_present": 28,
+        "total_present": 54,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 0,
+        "has_chore": 0,
+        "has_climate": 0,
+        "has_peer": 0,
+        "has_metu": 1,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "under the tree in the compound",
+        "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat)",
+        "home_action_assigned": "cooking porrideg with millet flour,suger,cooking oil and fresh milk",
+        "coordinator_notes": "Metu porridge materials is expensive and hard to find"
+      },
+      {
+        "entry_index": 456,
+        "id": "NC-897892133",
+        "school": "CHEPKARARAT P/S",
+        "district": "Amudat",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-20",
+        "start_time": "15:40 PM",
+        "end_time": "17:00 PM",
+        "patron": "Amuka Martin and Chekweboi Victoria",
+        "membership_male": 27,
+        "membership_female": 38,
+        "total_membership": 65,
+        "boys_present": 27,
+        "girls_present": 38,
+        "total_present": 65,
+        "pwd_boys": 3,
+        "pwd_girls": 0,
+        "pwd": 3,
+        "has_adere": 0,
+        "has_chore": 0,
+        "has_climate": 1,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "Under the tree",
+        "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
+        "home_action_assigned": "they were taught meaning of climate change,how to cop up with climate change,mitigation ,productivity and how  to protect enivironment",
+        "coordinator_notes": "none"
+      },
+      {
+        "entry_index": 457,
+        "id": "NC-897898217",
+        "school": "KARITA P/S",
+        "district": "Amudat",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-20",
+        "start_time": "16:00 PM",
+        "end_time": "17:00 PM",
+        "patron": "Akorikin Isaac and Okiror Daniel",
+        "membership_male": 25,
+        "membership_female": 35,
+        "total_membership": 60,
+        "boys_present": 25,
+        "girls_present": 35,
+        "total_present": 60,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 1,
+        "has_chore": 0,
+        "has_climate": 0,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "P.7 classroom",
+        "practical_activity": "Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing",
+        "home_action_assigned": "importance of eating food into our bodies in both boys and girls ,as it promotes goodhealth,strong body",
+        "coordinator_notes": "none"
+      },
+      {
+        "entry_index": 458,
+        "id": "NC-897909659",
+        "school": "KATIKIT P/S",
+        "district": "Amudat",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-20",
+        "start_time": "16:00 PM",
+        "end_time": "17:30 PM",
+        "patron": "Mutai Kelvin and Fred Masaba",
+        "membership_male": 25,
+        "membership_female": 28,
+        "total_membership": 53,
+        "boys_present": 25,
+        "girls_present": 28,
+        "total_present": 53,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 0,
+        "has_chore": 0,
+        "has_climate": 1,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "under the tree",
+        "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
+        "home_action_assigned": "Meaning of climate change, cop up to climate change, and enironmental protection",
+        "coordinator_notes": "none"
+      },
+      {
+        "entry_index": 459,
+        "id": "NC-897914187",
+        "school": "ALAKAS P/S",
+        "district": "Amudat",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-20",
+        "start_time": "16:00 PM",
+        "end_time": "17:00 PM",
+        "patron": "Atang Paula and Eca Filex",
+        "membership_male": 30,
+        "membership_female": 30,
+        "total_membership": 60,
+        "boys_present": 30,
+        "girls_present": 30,
+        "total_present": 60,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 0,
+        "has_chore": 0,
+        "has_climate": 1,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "under the tree",
+        "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
+        "home_action_assigned": "mitigation to climate change,produtivity and protection of surounding enironment",
+        "coordinator_notes": "none"
+      },
+      {
+        "entry_index": 466,
+        "id": "NC-897999424",
+        "school": "ALEREK P/S",
+        "district": "Abim",
+        "subcounty": "Catchment",
+        "session_of_week": "Session two of the week",
+        "date": "2026-10-21",
+        "start_time": "10:30 AM",
+        "end_time": "12:00 PM",
+        "patron": "nan",
+        "membership_male": 16,
+        "membership_female": 25,
+        "total_membership": 41,
+        "boys_present": 0,
+        "girls_present": 0,
+        "total_present": 0,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 0,
+        "has_chore": 1,
+        "has_climate": 0,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 1,
+        "assembly_nutri_moment_date": "2026-10-20 00:00:00",
+        "meeting_place": "Under the tree",
+        "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+        "home_action_assigned": "Try kitchen gardens at home.",
+        "coordinator_notes": "Children like the event and many of them wants the event to continue"
+      },
+      {
+        "entry_index": 467,
+        "id": "NC-898005332",
+        "school": "OTALABAR P/S",
+        "district": "Abim",
+        "subcounty": "Catchment",
+        "session_of_week": "Session two of the week",
+        "date": "2026-10-21",
+        "start_time": "10:30 AM",
+        "end_time": "12:00 PM",
+        "patron": "nan",
+        "membership_male": 16,
+        "membership_female": 25,
+        "total_membership": 41,
+        "boys_present": 0,
+        "girls_present": 0,
+        "total_present": 0,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 0,
+        "has_chore": 1,
+        "has_climate": 0,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 1,
+        "assembly_nutri_moment_date": "2026-10-20 00:00:00",
+        "meeting_place": "Under the tree",
+        "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+        "home_action_assigned": "Try kitchen gardens at home.",
+        "coordinator_notes": "Both the school administrators and pupils love the event and propose that if it could be done termly would be very oka"
+      },
+      {
+        "entry_index": 468,
+        "id": "NC-898038870",
+        "school": "LONGALOM P/S",
+        "district": "Napak",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-21",
+        "start_time": "14:05 PM",
+        "end_time": "16:59 PM",
+        "patron": "James Opio",
+        "membership_male": 40,
+        "membership_female": 20,
+        "total_membership": 60,
+        "boys_present": 20,
+        "girls_present": 20,
+        "total_present": 40,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 1,
+        "has_chore": 1,
+        "has_climate": 1,
+        "has_peer": 0,
+        "has_metu": 1,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "20",
+        "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+        "home_action_assigned": "Metu porridge",
+        "coordinator_notes": "They were advised to practice nutrition facts at home and school"
+      },
+      {
+        "entry_index": 472,
+        "id": "NC-898044506",
+        "school": "LOPEEI P/S",
+        "district": "Napak",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week Session two of the week",
+        "date": "2026-10-21",
+        "start_time": "14:02 PM",
+        "end_time": "16:02 PM",
+        "patron": "Denis",
+        "membership_male": 30,
+        "membership_female": 30,
+        "total_membership": 60,
+        "boys_present": 25,
+        "girls_present": 26,
+        "total_present": 51,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 1,
+        "has_chore": 1,
+        "has_climate": 1,
+        "has_peer": 1,
+        "has_metu": 1,
+        "assembly_nutri_moment": 1,
+        "assembly_nutri_moment_date": "2026-10-13 00:00:00",
+        "meeting_place": "Classroom",
+        "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+        "home_action_assigned": "Try to plant vegetables and sweet potatoes",
+        "coordinator_notes": "They will practicing well at home.they need support of seeds"
+      },
+      {
+        "entry_index": 473,
+        "id": "NC-898048589",
+        "school": "LONGALOM P/S",
+        "district": "Napak",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week Session two of the week",
+        "date": "2026-10-21",
+        "start_time": "14:07 PM",
+        "end_time": "17:19 PM",
+        "patron": "James",
+        "membership_male": 40,
+        "membership_female": 20,
+        "total_membership": 60,
+        "boys_present": 18,
+        "girls_present": 19,
+        "total_present": 37,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 1,
+        "has_chore": 1,
+        "has_climate": 1,
+        "has_peer": 1,
+        "has_metu": 1,
+        "assembly_nutri_moment": 1,
+        "assembly_nutri_moment_date": "2026-10-14 00:00:00",
+        "meeting_place": "Classroom",
+        "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+        "home_action_assigned": "Plant fruit trees and grow vegetables",
+        "coordinator_notes": "They are struggling with the weather to practice planting vegetables"
+      },
+      {
+        "entry_index": 474,
+        "id": "NC-898050730",
+        "school": "KALOTOM P/S",
+        "district": "Napak",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week",
+        "date": "2026-10-21",
+        "start_time": "14:11 PM",
+        "end_time": "17:11 PM",
+        "patron": "Lucy",
+        "membership_male": 25,
+        "membership_female": 25,
+        "total_membership": 50,
+        "boys_present": 22,
+        "girls_present": 21,
+        "total_present": 43,
+        "pwd_boys": 0,
+        "pwd_girls": 0,
+        "pwd": 0,
+        "has_adere": 1,
+        "has_chore": 1,
+        "has_climate": 1,
+        "has_peer": 1,
+        "has_metu": 1,
+        "assembly_nutri_moment": 0,
+        "assembly_nutri_moment_date": "",
+        "meeting_place": "Classroom",
+        "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+        "home_action_assigned": "Grow vegetables",
+        "coordinator_notes": "They need seeds to grow vegetables"
       }
     ],
     "schools_register": [
@@ -15205,16 +15580,29 @@
         "district": "Abim",
         "subcounty": "Abim Sc",
         "selection": "Base 5",
-        "patron_name": "To be appointed",
-        "meeting_place": "Pending designation",
+        "patron_name": "nan",
+        "meeting_place": "Under the tree",
         "total_enrolled": 2247,
         "attendance_rate": "72%",
-        "total_membership": 0,
-        "male_membership": 0,
-        "female_membership": 0,
+        "total_membership": 41,
+        "male_membership": 16,
+        "female_membership": 25,
         "total_pwd": 0,
         "session_one": null,
-        "session_two": null
+        "session_two": {
+          "date_conducted": "2026-10-21",
+          "start_time": "10:30 AM",
+          "end_time": "12:00 PM",
+          "designated_meeting_place": "Under the tree",
+          "club_patron_name": "nan",
+          "boys_present": 0,
+          "girls_present": 0,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+          "home_action_assigned": "Try kitchen gardens at home.",
+          "coordinator_notes": "Both the school administrators and pupils love the event and propose that if it could be done termly would be very oka"
+        }
       },
       {
         "id": "sch-3",
@@ -15350,16 +15738,29 @@
         "district": "Abim",
         "subcounty": "Alerek",
         "selection": "Balance",
-        "patron_name": "To be appointed",
-        "meeting_place": "Pending designation",
+        "patron_name": "nan",
+        "meeting_place": "Under the tree",
         "total_enrolled": 1701,
         "attendance_rate": "142%",
-        "total_membership": 0,
-        "male_membership": 0,
-        "female_membership": 0,
+        "total_membership": 41,
+        "male_membership": 16,
+        "female_membership": 25,
         "total_pwd": 0,
         "session_one": null,
-        "session_two": null
+        "session_two": {
+          "date_conducted": "2026-10-21",
+          "start_time": "10:30 AM",
+          "end_time": "12:00 PM",
+          "designated_meeting_place": "Under the tree",
+          "club_patron_name": "nan",
+          "boys_present": 0,
+          "girls_present": 0,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+          "home_action_assigned": "Try kitchen gardens at home.",
+          "coordinator_notes": "Children like the event and many of them wants the event to continue"
+        }
       },
       {
         "id": "sch-10",
@@ -15367,27 +15768,27 @@
         "district": "Amudat",
         "subcounty": "Amudat Tc",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Mutai Kelvin and Fred Masaba",
+        "meeting_place": "under the tree",
         "total_enrolled": 1539,
         "attendance_rate": "61%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 53,
+        "male_membership": 25,
+        "female_membership": 28,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-13",
+          "date_conducted": "2026-10-20",
           "start_time": "16:00 PM",
-          "end_time": "17:00 PM",
-          "designated_meeting_place": "under the tree at school compound",
+          "end_time": "17:30 PM",
+          "designated_meeting_place": "under the tree",
           "club_patron_name": "Mutai Kelvin and Fred Masaba",
           "boys_present": 25,
           "girls_present": 28,
-          "male_pwd": 1,
-          "female_pwd": 2,
+          "male_pwd": 0,
+          "female_pwd": 0,
           "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
-          "home_action_assigned": "Proteinous food",
-          "coordinator_notes": "nan"
+          "home_action_assigned": "Meaning of climate change, cop up to climate change, and enironmental protection",
+          "coordinator_notes": "none"
         },
         "session_two": {
           "date_conducted": "2026-10-15",
@@ -15410,27 +15811,27 @@
         "district": "Amudat",
         "subcounty": "Amudat",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Atang Paula and Eca Filex",
+        "meeting_place": "under the tree",
         "total_enrolled": 1406,
         "attendance_rate": "32%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 60,
+        "male_membership": 30,
+        "female_membership": 30,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-13",
-          "start_time": "15:00 PM",
-          "end_time": "16:00 PM",
+          "date_conducted": "2026-10-20",
+          "start_time": "16:00 PM",
+          "end_time": "17:00 PM",
           "designated_meeting_place": "under the tree",
-          "club_patron_name": "Aca Filex And Atang",
+          "club_patron_name": "Atang Paula and Eca Filex",
           "boys_present": 30,
-          "girls_present": 28,
-          "male_pwd": 2,
-          "female_pwd": 2,
-          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
-          "home_action_assigned": "Millet porridge,",
-          "coordinator_notes": "Lack of metu porridge Materials"
+          "girls_present": 30,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
+          "home_action_assigned": "mitigation to climate change,produtivity and protection of surounding enironment",
+          "coordinator_notes": "none"
         },
         "session_two": {
           "date_conducted": "2026-10-15",
@@ -15453,26 +15854,26 @@
         "district": "Amudat",
         "subcounty": "Karita",
         "selection": "Base 5",
-        "patron_name": "nan",
+        "patron_name": "Amuka Martin and Chekweboi Victoria",
         "meeting_place": "Under the tree",
         "total_enrolled": 1336,
         "attendance_rate": "77%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
-        "total_pwd": 0,
+        "total_membership": 65,
+        "male_membership": 27,
+        "female_membership": 38,
+        "total_pwd": 3,
         "session_one": {
-          "date_conducted": "2026-10-13",
-          "start_time": "15:30 PM",
+          "date_conducted": "2026-10-20",
+          "start_time": "15:40 PM",
           "end_time": "17:00 PM",
-          "designated_meeting_place": "under the tree at school compound",
-          "club_patron_name": "Amuka Martin and Chekwemboi Victotria",
-          "boys_present": 42,
+          "designated_meeting_place": "Under the tree",
+          "club_patron_name": "Amuka Martin and Chekweboi Victoria",
+          "boys_present": 27,
           "girls_present": 38,
-          "male_pwd": 1,
-          "female_pwd": 3,
-          "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
-          "home_action_assigned": "Metu porridge",
+          "male_pwd": 3,
+          "female_pwd": 0,
+          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
+          "home_action_assigned": "they were taught meaning of climate change,how to cop up with climate change,mitigation ,productivity and how  to protect enivironment",
           "coordinator_notes": "none"
         },
         "session_two": {
@@ -15496,27 +15897,27 @@
         "district": "Amudat",
         "subcounty": "Karita",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Chekwoti Juliet and Chebet Gilbert",
+        "meeting_place": "under the tree in the compound",
         "total_enrolled": 1188,
         "attendance_rate": "45%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 54,
+        "male_membership": 26,
+        "female_membership": 28,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-13",
-          "start_time": "16:00 PM",
+          "date_conducted": "2026-10-20",
+          "start_time": "16:30 PM",
           "end_time": "17:00 PM",
-          "designated_meeting_place": "under the tree",
+          "designated_meeting_place": "under the tree in the compound",
           "club_patron_name": "Chekwoti Juliet and Chebet Gilbert",
-          "boys_present": 29,
-          "girls_present": 30,
-          "male_pwd": 2,
-          "female_pwd": 2,
-          "practical_activity": "Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires",
-          "home_action_assigned": "Seeds of vegetables and trees",
-          "coordinator_notes": "inadiquate water to water the seeds planted"
+          "boys_present": 26,
+          "girls_present": 28,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat)",
+          "home_action_assigned": "cooking porrideg with millet flour,suger,cooking oil and fresh milk",
+          "coordinator_notes": "Metu porridge materials is expensive and hard to find"
         },
         "session_two": {
           "date_conducted": "2026-10-15",
@@ -15539,26 +15940,26 @@
         "district": "Amudat",
         "subcounty": "Karita",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Akorikin Isaac and Okiror Daniel",
+        "meeting_place": "P.7 classroom",
         "total_enrolled": 1186,
         "attendance_rate": "54%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 60,
+        "male_membership": 25,
+        "female_membership": 35,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-13",
-          "start_time": "15:15 PM",
-          "end_time": "16:00 PM",
-          "designated_meeting_place": "under the tree",
+          "date_conducted": "2026-10-20",
+          "start_time": "16:00 PM",
+          "end_time": "17:00 PM",
+          "designated_meeting_place": "P.7 classroom",
           "club_patron_name": "Akorikin Isaac and Okiror Daniel",
           "boys_present": 25,
           "girls_present": 35,
           "male_pwd": 0,
           "female_pwd": 0,
-          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
-          "home_action_assigned": "preparing metu porriage",
+          "practical_activity": "Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing",
+          "home_action_assigned": "importance of eating food into our bodies in both boys and girls ,as it promotes goodhealth,strong body",
           "coordinator_notes": "none"
         },
         "session_two": {
@@ -17231,13 +17632,13 @@
         "district": "Napak",
         "subcounty": "Lopei",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Denis",
+        "meeting_place": "Classroom",
         "total_enrolled": 1463,
         "attendance_rate": "89%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 60,
+        "male_membership": 30,
+        "female_membership": 30,
         "total_pwd": 0,
         "session_one": {
           "date_conducted": "2026-10-15",
@@ -17254,18 +17655,18 @@
           "coordinator_notes": "Inform the parents about importance of a balance diet"
         },
         "session_two": {
-          "date_conducted": "2026-10-15",
-          "start_time": "10:30 AM",
-          "end_time": "12:00 PM",
-          "designated_meeting_place": "Under the tree",
-          "club_patron_name": "nan",
-          "boys_present": 0,
-          "girls_present": 0,
+          "date_conducted": "2026-10-21",
+          "start_time": "14:02 PM",
+          "end_time": "16:02 PM",
+          "designated_meeting_place": "Classroom",
+          "club_patron_name": "Denis",
+          "boys_present": 25,
+          "girls_present": 26,
           "male_pwd": 0,
           "female_pwd": 0,
-          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
-          "home_action_assigned": "Try kitchen gardens at home.",
-          "coordinator_notes": "Plant vegetables at home"
+          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
+          "home_action_assigned": "Try to plant vegetables and sweet potatoes",
+          "coordinator_notes": "They will practicing well at home.they need support of seeds"
         }
       },
       {
@@ -17274,41 +17675,41 @@
         "district": "Napak",
         "subcounty": "Lokopo",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "James",
+        "meeting_place": "Classroom",
         "total_enrolled": 1371,
         "attendance_rate": "66%",
-        "total_membership": 41,
-        "male_membership": 16,
-        "female_membership": 25,
+        "total_membership": 60,
+        "male_membership": 40,
+        "female_membership": 20,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-15",
-          "start_time": "02:02 AM",
-          "end_time": "04:03 AM",
+          "date_conducted": "2026-10-21",
+          "start_time": "14:05 PM",
+          "end_time": "16:59 PM",
+          "designated_meeting_place": "20",
+          "club_patron_name": "James Opio",
+          "boys_present": 20,
+          "girls_present": 20,
+          "male_pwd": 0,
+          "female_pwd": 0,
+          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+          "home_action_assigned": "Metu porridge",
+          "coordinator_notes": "They were advised to practice nutrition facts at home and school"
+        },
+        "session_two": {
+          "date_conducted": "2026-10-21",
+          "start_time": "14:07 PM",
+          "end_time": "17:19 PM",
           "designated_meeting_place": "Classroom",
           "club_patron_name": "James",
-          "boys_present": 22,
-          "girls_present": 25,
+          "boys_present": 18,
+          "girls_present": 19,
           "male_pwd": 0,
           "female_pwd": 0,
           "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
-          "home_action_assigned": "Try sorghum porridge",
-          "coordinator_notes": "School ratios or food to be given to children to support their feeding at home"
-        },
-        "session_two": {
-          "date_conducted": "2026-10-15",
-          "start_time": "10:30 AM",
-          "end_time": "12:00 PM",
-          "designated_meeting_place": "Under the tree",
-          "club_patron_name": "nan",
-          "boys_present": 0,
-          "girls_present": 0,
-          "male_pwd": 0,
-          "female_pwd": 0,
-          "practical_activity": "Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
-          "home_action_assigned": "Try kitchen gardens at home.",
-          "coordinator_notes": "Both boys and girls to participate in house chores at school and home"
+          "home_action_assigned": "Plant fruit trees and grow vegetables",
+          "coordinator_notes": "They are struggling with the weather to practice planting vegetables"
         }
       },
       {
@@ -17317,27 +17718,27 @@
         "district": "Napak",
         "subcounty": "Ngoleriet",
         "selection": "Base 5",
-        "patron_name": "nan",
-        "meeting_place": "Under the tree",
+        "patron_name": "Lucy",
+        "meeting_place": "Classroom",
         "total_enrolled": 1258,
         "attendance_rate": "74%",
-        "total_membership": 41,
-        "male_membership": 16,
+        "total_membership": 50,
+        "male_membership": 25,
         "female_membership": 25,
         "total_pwd": 0,
         "session_one": {
-          "date_conducted": "2026-10-15",
-          "start_time": "02:30 AM",
-          "end_time": "05:05 AM",
-          "designated_meeting_place": "Both classroom and under the tree",
+          "date_conducted": "2026-10-21",
+          "start_time": "14:11 PM",
+          "end_time": "17:11 PM",
+          "designated_meeting_place": "Classroom",
           "club_patron_name": "Lucy",
-          "boys_present": 25,
-          "girls_present": 28,
-          "male_pwd": 1,
-          "female_pwd": 1,
+          "boys_present": 22,
+          "girls_present": 21,
+          "male_pwd": 0,
+          "female_pwd": 0,
           "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
-          "home_action_assigned": "Nutritious food like metu porridge",
-          "coordinator_notes": "Drought has affected most families."
+          "home_action_assigned": "Grow vegetables",
+          "coordinator_notes": "They need seeds to grow vegetables"
         },
         "session_two": {
           "date_conducted": "2026-10-15",
@@ -17440,9 +17841,9 @@
         "baseline": "65 Schools Audited",
         "evidence_points": [
           "Protecting school meals: 175 learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
-          "Balanced plate & clubs: 51 active NutriClubs established (2117 members); OFSP & iron-rich beans tracked (75 OFSP, 108 iron beans logged)",
+          "Balanced plate & clubs: 53 active NutriClubs established (2333 members); OFSP & iron-rich beans tracked (85 OFSP, 120 iron beans logged)",
           "Visit 3 verification: 30 of 70 Home Charts returned (42.9%) across 4 closeout schools; 24/24 confirmed youngest child served first",
-          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 16 orientation schools & 161 village demos (0 meal theft complaints)"
+          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 16 orientation schools & 173 village demos (0 meal theft complaints)"
         ]
       },
       {
@@ -17455,19 +17856,19 @@
           "Fair sharing at the table: 209 of 291 interviewed learners affirmed boys and girls must eat equally and simultaneously",
           "Male allies in action: 33,498 boy responses logged across 5 micro-polls with 94.7% agreement (31,708 agreements) committing to share morning water and firewood chores",
           "Visit 3 household shift: 100% (24/24) of closeout interviewees confirmed morning chore sharing shifted & 4/4 schools actively trace absentees",
-          "Addressing practical constraints: Dialogues tackling domestic labour (33,498 boys), schooling costs (96 sessions), and menstrual hygiene (61 sessions)"
+          "Addressing practical constraints: Dialogues tackling domestic labour (33,498 boys), schooling costs (107 sessions), and menstrual hygiene (71 sessions)"
         ]
       },
       {
         "title": "Pillar 3: Community Engagement",
         "metric_value": "100.0%",
-        "metric_label": "Community Action & Stoves (178 Demos \u00b7 16 Orientations)",
-        "summary": "81.2% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across 178 of 640 cooking demonstrations.",
+        "metric_label": "Community Action & Stoves (190 Demos \u00b7 16 Orientations)",
+        "summary": "81.2% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across 190 of 640 cooking demonstrations.",
         "baseline": "0.0% Prior",
         "evidence_points": [
-          "178 of 640 Cooking Demonstrations conducted (107 hands-on cooking, 153 strictly local foods, 99 sessions with lead mothers co-facilitating)",
-          "Community dialogues with men & elders: 165 of 178 village demos held structured gender/consensus dialogues; 13 of 16 oriented schools signed 4-week joint plans",
-          "Clean & smart cooking practices: 142 of 178 demos demonstrated firewood-saving practices & 3 of 4 Visit 3 school kitchens verified improved stoves",
+          "190 of 640 Cooking Demonstrations conducted (113 hands-on cooking, 161 strictly local foods, 110 sessions with lead mothers co-facilitating)",
+          "Community dialogues with men & elders: 177 of 190 village demos held structured gender/consensus dialogues; 13 of 16 oriented schools signed 4-week joint plans",
+          "Clean & smart cooking practices: 152 of 190 demos demonstrated firewood-saving practices & 3 of 4 Visit 3 school kitchens verified improved stoves",
           "METU-1 recipe chart routine: 1,835 take-home NutriCharts issued at Visit 1 (30/70 returned at Visit 3 closeout)"
         ]
       }
@@ -17492,31 +17893,31 @@
           {
             "label": "Children Reached (Big Bus Day)",
             "value": "63,571 Pupils",
-            "detail": "63,571 directly reached in Visit 2 Big Bus Activations (Target: 80,875) \u00b7 plus 93,301 at Visit 1, 5,000 at Visit 3, and 16,064 in NutriClub sessions"
+            "detail": "63,571 directly reached in Visit 2 Big Bus Activations (Target: 80,875) \u00b7 plus 93,301 at Visit 1, 5,000 at Visit 3, and 16,527 in NutriClub sessions"
           },
           {
             "label": "Village Cooking Demos",
-            "value": "178 Demonstrations",
-            "detail": "178 of 640 community cooking demonstrations conducted to date"
+            "value": "190 Demonstrations",
+            "detail": "190 of 640 community cooking demonstrations conducted to date"
           },
           {
             "label": "Caregivers Reached",
-            "value": "11,602 Caregivers",
-            "detail": "11,602 community caregivers reached across activations and cooking demos (Target: 51,200)"
+            "value": "12,120 Caregivers",
+            "detail": "12,120 community caregivers reached across activations and cooking demos (Target: 51,200)"
           },
           {
             "label": "Active NutriClubs",
-            "value": "127 Clubs Active",
-            "detail": "51 active club(s) with 2117 registered members (Target: 64 clubs)"
+            "value": "138 Clubs Active",
+            "detail": "53 active club(s) with 2333 registered members (Target: 64 clubs)"
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "1288.0 Stakeholders",
+            "value": "1299.0 Stakeholders",
             "detail": "Oriented across 16 primary schools (Target: 768)"
           },
           {
             "label": "Persons with Disabilities",
-            "value": "6975 PWDs Reached",
+            "value": "7009 PWDs Reached",
             "detail": "5811 learners and 235 adults included across sessions"
           }
         ],
@@ -17530,8 +17931,8 @@
         "key_metrics": [
           {
             "label": "Hands-On Cooking Practice",
-            "value": "178 Demos Logged",
-            "detail": "178 community cooking demonstrations conducted with hands-on caregiver participation"
+            "value": "190 Demos Logged",
+            "detail": "190 community cooking demonstrations conducted with hands-on caregiver participation"
           },
           {
             "label": "Local Foods Only",
@@ -17555,8 +17956,8 @@
           },
           {
             "label": "Teacher Patrons in Charge",
-            "value": "51 Appointed Club Patrons",
-            "detail": "Club patrons active across 51 schools with established clubs"
+            "value": "53 Appointed Club Patrons",
+            "detail": "Club patrons active across 53 schools with established clubs"
           },
           {
             "label": "Safe with No Retaliation",
@@ -17604,8 +18005,8 @@
           },
           {
             "label": "Clubs Continuing on Their Own",
-            "value": "127 Active Clubs",
-            "detail": "127 NutriClub sessions logged with 2117 registered members across 51 active schools"
+            "value": "138 Active Clubs",
+            "detail": "138 NutriClub sessions logged with 2333 registered members across 53 active schools"
           }
         ],
         "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
@@ -17621,7 +18022,7 @@
           "data_points": [
             "16 schools oriented on Metu porridge fortification and clean cooking",
             "56 schools delivered Visit 2 Big Activation Day (63,571 pupils engaged)",
-            "178 of 640 community cooking demonstrations conducted to date"
+            "190 of 640 community cooking demonstrations conducted to date"
           ]
         },
         "how_well": {
@@ -17646,10 +18047,10 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "125 Visits \u00b7 127 NutriClub Sessions",
+          "headline": "125 Visits \u00b7 138 NutriClub Sessions",
           "data_points": [
             "65 Visit 1, 56 Visit 2, and 4 Visit 3 school visits completed",
-            "51 active school clubs established (2117 registered members across active schools)",
+            "53 active school clubs established (2333 registered members across active schools)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
         },
@@ -17657,7 +18058,7 @@
           "headline": "16 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
             "12 of 16 oriented schools confirmed active teacher & headteacher leadership",
-            "6975 persons with disabilities accommodated and actively participating",
+            "7009 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
         },
@@ -17675,10 +18076,10 @@
         "icon": "fa-venus-mars",
         "theme_color": "purple",
         "how_much": {
-          "headline": "56 Activation Dialogues \u00b7 11,602 Caregivers",
+          "headline": "56 Activation Dialogues \u00b7 12,120 Caregivers",
           "data_points": [
             "Structured chore rebalancing dialogues delivered across 56 schools",
-            "11,602 community caregivers and elders reached across activations & demos",
+            "12,120 community caregivers and elders reached across activations & demos",
             "Target: 640 community discussions in villages around 64 schools"
           ]
         },
@@ -17720,7 +18121,7 @@
           "Children Audited: 93,301 weekly attendees (93,086 total enrolled) across 65 schools",
           "Classroom Practice: 65 schools completed onboarding & audit",
           "Home Charts Given: 1,835 classroom NutriCharts issued across Lower, Middle, Upper primary",
-          "Patrons Appointed: 62 teacher patrons appointed across 16 orientation schools (plus 127 club sessions)"
+          "Patrons Appointed: 62 teacher patrons appointed across 16 orientation schools (plus 138 club sessions)"
         ]
       },
       {
@@ -17731,7 +18132,7 @@
           "Attendance Logged: 63,571 learners counted across 56 schools",
           "What Pupils Remembered: 52.1% unaided recall of core messages (175 actionable fortification recipes)",
           "School Pledges: 56 school commitments signed",
-          "Village Cooking Demos: 178 demos logged (Target: 640 sites)"
+          "Village Cooking Demos: 190 demos logged (Target: 640 sites)"
         ]
       },
       {
@@ -17750,8 +18151,8 @@
         "title": "In the Villages: Fathers, Elders & Stoves",
         "desc": "Village gatherings, male participation, and saving firewood",
         "data_collected": [
-          "Community Demos: 178 cooking demonstrations held (Target: 640)",
-          "Caregivers Reached: 11,602 caregivers reached across activations and village demos",
+          "Community Demos: 190 cooking demonstrations held (Target: 640)",
+          "Caregivers Reached: 12,120 caregivers reached across activations and village demos",
           "Home Follow-Up: 24 household & learner closeout interviews completed in Napak",
           "Hotline Redress: 0 retaliation complaints logged on WFP hotline (0800)"
         ]
@@ -17762,7 +18163,7 @@
         "desc": "Radio broadcasts, local language, and including people with disabilities",
         "data_collected": [
           "Radio Broadcasts: Transmission logs pending broadcast collation",
-          "Disability Inclusion: 6975 persons with disabilities accommodated",
+          "Disability Inclusion: 7009 persons with disabilities accommodated",
           "Local Language: 100% of sessions delivered in Ngakarimojong dialects",
           "Saving Firewood: Fuel saving practices to be audited during community demos"
         ]
@@ -23474,7 +23875,7 @@
       "coordinator": "Lobur stephen",
       "reach": 107,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23487,7 +23888,7 @@
       "coordinator": "Lobur stephen",
       "reach": 81,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23500,7 +23901,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 1972,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23513,7 +23914,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2009,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23526,7 +23927,7 @@
       "coordinator": "Ogwang Sam",
       "reach": 2129,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23539,7 +23940,7 @@
       "coordinator": "Lobur stephen",
       "reach": 43,
       "pwd": 1,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23552,7 +23953,7 @@
       "coordinator": "Lobur stephen",
       "reach": 0,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -23565,17 +23966,316 @@
       "coordinator": "Ochen moses tom",
       "reach": 362,
       "pwd": 7,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 452,
+      "id": 897846165,
+      "date": "2026-10-12",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "LORENGEDWAT P/S",
+      "coordinator": "Awas Francis",
+      "reach": 169,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 453,
+      "id": 897856051,
+      "date": "2026-10-13",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "LORENGEDWAT P/S",
+      "coordinator": "Awas Francis",
+      "reach": 101,
+      "pwd": 2,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 454,
+      "id": 897867315,
+      "date": "2026-10-14",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "LORENGEDWAT P/S",
+      "coordinator": "Awas Francis",
+      "reach": 110,
+      "pwd": 2,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 455,
+      "id": 897883449,
+      "date": "2026-10-20",
+      "district": "Amudat",
+      "activity": "Nutriclub session",
+      "school": "NAMODO P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 54,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 456,
+      "id": 897892133,
+      "date": "2026-10-20",
+      "district": "Amudat",
+      "activity": "Nutriclub session",
+      "school": "CHEPKARARAT P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 65,
+      "pwd": 3,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 457,
+      "id": 897898217,
+      "date": "2026-10-20",
+      "district": "Amudat",
+      "activity": "Nutriclub session",
+      "school": "KARITA P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 60,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 458,
+      "id": 897909659,
+      "date": "2026-10-20",
+      "district": "Amudat",
+      "activity": "Nutriclub session",
+      "school": "KATIKIT P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 53,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 459,
+      "id": 897914187,
+      "date": "2026-10-20",
+      "district": "Amudat",
+      "activity": "Nutriclub session",
+      "school": "ALAKAS P/S",
+      "coordinator": "Cheparen Pauline",
+      "reach": 60,
+      "pwd": 0,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 460,
+      "id": 897940582,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "LORENGECHORA P/S",
+      "coordinator": "Priscilla",
+      "reach": 90,
+      "pwd": 2,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 461,
+      "id": 897947217,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "LORENGECHORA P/S",
+      "coordinator": "Priscilla",
+      "reach": 104,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 462,
+      "id": 897959893,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "KALOTOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 104,
+      "pwd": 3,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 463,
+      "id": 897967100,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "KALOTOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 95,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 464,
+      "id": 897971878,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "KALOTOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 99,
+      "pwd": 1,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 465,
+      "id": 897976900,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Community demonstration",
+      "school": "KALOTOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 91,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 466,
+      "id": 897999424,
+      "date": "2026-10-21",
+      "district": "Abim",
+      "activity": "Nutriclub session",
+      "school": "ALEREK P/S",
+      "coordinator": "Opio John Fred",
+      "reach": 0,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 467,
+      "id": 898005332,
+      "date": "2026-10-21",
+      "district": "Abim",
+      "activity": "Nutriclub session",
+      "school": "OTALABAR P/S",
+      "coordinator": "Opio John Fred",
+      "reach": 0,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 468,
+      "id": 898038870,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Nutriclub session",
+      "school": "LONGALOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 40,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 469,
+      "id": 898039058,
+      "date": "2026-10-19",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "NAPONGAE P/S",
+      "coordinator": "Awas Francis",
+      "reach": 81,
+      "pwd": 9,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 470,
+      "id": 898041143,
+      "date": "2026-10-21",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KAKAMAR P/S",
+      "coordinator": "Amoo Sofia",
+      "reach": 82,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 471,
+      "id": 898042597,
+      "date": "2026-10-20",
+      "district": "Kotido",
+      "activity": "Community demonstration",
+      "school": "NAPUMPUM P/S",
+      "coordinator": "Ochen moses tom",
+      "reach": 166,
+      "pwd": 12,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 472,
+      "id": 898044506,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Nutriclub session",
+      "school": "LOPEEI P/S",
+      "coordinator": "Priscilla",
+      "reach": 51,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 473,
+      "id": 898048589,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Nutriclub session",
+      "school": "LONGALOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 37,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 474,
+      "id": 898050730,
+      "date": "2026-10-21",
+      "district": "Napak",
+      "activity": "Nutriclub session",
+      "school": "KALOTOM P/S",
+      "coordinator": "Priscilla",
+      "reach": 43,
+      "pwd": 0,
       "is_new": true,
       "status": "Verified / Ingested"
     }
   ],
   "new_pillar_metrics": {
-    "tot_ofsp": 75,
-    "tot_iron_beans": 108,
-    "tot_lead_mothers": 99,
-    "tot_cost_dialogues": 96,
-    "tot_mhm_dialogues": 61,
+    "tot_ofsp": 85,
+    "tot_iron_beans": 120,
+    "tot_lead_mothers": 110,
+    "tot_cost_dialogues": 107,
+    "tot_mhm_dialogues": 71,
     "tot_theft_queries": 0,
-    "tot_hotline_210_promoted": 161
+    "tot_hotline_210_promoted": 173
   }
 }
