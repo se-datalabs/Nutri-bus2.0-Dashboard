@@ -53,6 +53,8 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 510,2026-10-21,Kaabong,Catchment,KATHILE P/S,Kathile west cell,VHT,Loiki Joseph,Ngole Paula,75
 521,2026-10-21,Kaabong,Catchment,KATHILE P/S,Nasuguru cell,VHT,Loiki Joseph,Ngole Paula,78
 530,2026-10-21,Kaabong,Catchment,KATHILE P/S,Lopelipel cell,VHT,Loiki Joseph,Ngole Paula,77
+543,2026-10-22,Kaabong,Catchment,KATHILE P/S,Nasuguru cell,VHT,Keem Joseline,Ngole Paula,78
+544,2026-10-22,Kaabong,Catchment,KATHILE P/S,Kathile west cell,VHT,Keem joseline,Ngole Paula,72
 433,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,KAILOB,VHT,Lopiran Joseph,Amoo Sofia,80
 434,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,Kaiwele,VHT,Lorot Samuel,Amoo Sofia,69
 319,2026-10-17,Kaabong,Catchment,LOTIM P/S,Lotim centre,Cordinator,Not specified (Coordinator led),Amoo Sofia,113
@@ -98,6 +100,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 352,2026-10-17,Kotido,Catchment,KANAIR P/S,Pothokor,VHT,Lokiru John and Namuya Gilbert Germine,Ochen moses tom,216
 353,2026-10-16,Kotido,Catchment,KOTIDO GIRLS P/S,Lokiding trading centre,VHT,Oluka Emmanuel,Ogwang Sam,306
 524,2026-10-21,Kotido,Catchment,LOKIDING P/S,Lokiding 2,VHT,Achuun Lucy Brenda and Aermun Lowas,Ogwang Sam,221
+538,2026-10-22,Kotido,Catchment,LOKIDING P/S,Nakosoburin,VHT,"Aeumun Lowas,Lopio Romano and Achuun Lucy Brenda",Ogwang Sam,221
 258,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kawich,VHT,Adong lilly grace,Ochen moses tom,313
 259,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Nyakwae,VHT,Adong lilly grace,Ochen moses tom,298
 495,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kopsang,VHT,Adong lilly grace,Ochen moses tom,183
@@ -115,6 +118,10 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 484,2026-10-19,Kotido,Catchment,NAPUMPUM P/S,Trading centre,VHT,Lotimong calvin,Ochen moses tom,172
 488,2026-10-20,Kotido,Catchment,NAPUMPUM P/S,Lokopo village,VHT,Lotimong calvin,Ochen moses tom,167
 489,2026-10-21,Kotido,Catchment,NAPUMPUM P/S,Kopoko,VHT,Lotimong calvin,Ochen moses tom,107
+539,2026-10-21,Kotido,Catchment,RENGEN P/S,Loodoi,VHT,Nadweny Sarah and Lochen Emmanuel,Ogwang Sam,190
+540,2026-10-20,Kotido,Catchment,RENGEN P/S,LOOBORE,VHT,NADWENY SARAH,Ogwang Sam,240
+541,2026-10-08,Kotido,Catchment,RENGEN P/S,Chillapus,VHT,Nadweny Sarah,Ogwang Sam,206
+542,2026-10-09,Kotido,Catchment,RENGEN P/S,Kadakori,VHT,Igira Paul,Ogwang Sam,216
 162,2026-10-14,Moroto,Catchment,CHILD JESUS P/S,Nakapelimen,VHT,Claudia,Evaline,77
 163,2026-10-14,Moroto,Catchment,CHILD JESUS P/S,nakapelimen center,VHT,Cecillia Angella,Evaline,73
 164,2026-10-14,Moroto,Catchment,CHILD JESUS P/S,Kambisi village,VHT,Moses,Evaline,66
