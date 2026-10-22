@@ -3,12 +3,16 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 129,2026-10-13,Abim,Catchment,AWACH P/S,Obokoloth central,VHT,Zadok Okello,Okello Daniel Nimaro,176
 136,2026-10-14,Abim,Catchment,AWACH P/S,Amonicek,VHT,Akun Silvia,Okello Daniel Nimaro,168
 389,2026-10-17,Abim,Catchment,AWACH P/S,Obokoloth Central,VHT,Akun Silvia,Okello Daniel Nimaro,238
+555,2026-10-20,Abim,Catchment,AWACH P/S,Awach Market,VHT,Piikwo Benjamin Okello,Okello Daniel Nimaro,230
+556,2026-10-20,Abim,Catchment,AWACH P/S,Namuwongo,VHT,Piikwo Benjamin Okello,Okello Daniel Nimaro,164
 135,2026-10-14,Abim,Catchment,KIRU P/S,Mission cell,VHT,Adong Agness Vicky,Okello Daniel Nimaro,222
 152,2026-10-14,Abim,Catchment,KIRU P/S,Obangangeo,VHT,Adong Nancy Jenny,Okello Daniel Nimaro,142
+569,2026-10-20,Abim,Catchment,KIRU P/S,Mission ward,VHT,Loyweka Daffin Cliford,Okello Daniel Nimaro,172
 388,2026-10-16,Abim,Catchment,MORULEM BOYS P/S,Morulem,Cordinator,Not specified (Coordinator led),Evaline,83
 387,2026-10-16,Abim,Catchment,MORULEM GIRLS' P/S,Morulem trading center,Cordinator,Not specified (Coordinator led),Evaline,91
 386,2026-10-16,Abim,Catchment,OBOLOKOME P/S,Obolokome,Cordinator,Not specified (Coordinator led),Evaline,123
 89,2026-10-12,Abim,Catchment,ROGOM P/S,Tyen Kworo Village,VHT,Atyang Santina,Opio John fred,88
+581,2026-10-21,Abim,Catchment,ROGOM P/S,Rogom central,VHT,Otto Alfred,Opio John Fred,144
 323,2026-10-15,Amudat,Catchment,CHEPKARARAT P/S,Natekol,Cordinator,Not specified (Coordinator led),Cheparen Pauline,235
 330,2026-10-15,Amudat,Catchment,CHEPKARARAT P/S,Kokwochaya,VHT,pekon peter,Cheparen Pauline,136
 332,2026-10-15,Amudat,Catchment,CHEPKARARAT P/S,Kokwochaya,VHT,Pekon Peter,Cheparen Pauline,154
@@ -28,6 +32,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 493,2026-10-20,Amudat,Catchment,KATIKIT P/S,Angarap,VHT,Cheploke Rael,Cheparen Pauline,124
 494,2026-10-20,Amudat,Catchment,KATIKIT P/S,Angarap,VHT,Cheploke Rael,Cheparen Pauline,158
 497,2026-10-21,Amudat,Catchment,KATIKIT P/S,Angarap,VHT,Cheploke Rael,Cheparen Pauline,142
+572,2026-10-20,Amudat,Catchment,KATIKIT P/S,Jumbe,VHT,cheptilak Rebecca Lomongura,Cheparen Pauline,120
 143,2026-10-14,Amudat,Catchment,NAMODO P/S,Apeikar village Namodo,VHT,Cheploke Magret,Cheparen Pauline,146
 144,2026-10-14,Amudat,Catchment,NAMODO P/S,Apeikar,Cordinator,Not specified (Coordinator led),Cheparen Pauline,173
 153,2026-10-14,Amudat,Catchment,NAMODO P/S,"Apeikar village,Karita subcounty",VHT,Cheploke Magret,Cheparen Pauline,135
@@ -48,6 +53,15 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 507,2026-10-21,Kaabong,Catchment,KAKAMAR P/S,Kanakora,VHT,Lowany mariko,Amoo Sofia,83
 513,2026-10-21,Kaabong,Catchment,KAKAMAR P/S,Kakamar center,VHT,Ilukori peter,Amoo Sofia,79
 310,2026-10-16,Kaabong,Catchment,KALAPATA P/S,Kalapata centre,VHT,Lotyang Samuel lobokomoe,Amoo Sofia,89
+558,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Napeiratil,VHT,Lochokio alfreda,Amoo Sofia,74
+559,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Tilianyang,VHT,Lochokio alfreda,Amoo Sofia,97
+560,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Kapelimong and lorengechora,VHT,Logiel clementina,Amoo Sofia,146
+567,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Nachukul,VHT,Logiel clementina,Amoo Sofia,105
+570,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Komeresia,VHT,Logiel clementina,Amoo Sofia,95
+571,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Kamacharikol ward u,VHT,Lochoro alfreda,Amoo Sofia,93
+575,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Nachukul East,VHT,Logiel clementina,Amoo Sofia,118
+579,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Kamacharikol centre,VHT,DADI PETER BEN,Amoo Sofia,182
+580,2026-10-22,Kaabong,Catchment,KAMACHARIKOL P/S,Peikale,VHT,DADI PETER BEN,Amoo Sofia,123
 496,2026-10-21,Kaabong,Catchment,KATHILE P/S,Nakosowan cell,VHT,Looking Joseph,Ngole Paula,80
 502,2026-10-21,Kaabong,Catchment,KATHILE P/S,Jerusalem,VHT,Loiki  Joseph,Ngole Paula,74
 510,2026-10-21,Kaabong,Catchment,KATHILE P/S,Kathile west cell,VHT,Loiki Joseph,Ngole Paula,75
@@ -55,6 +69,9 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 530,2026-10-21,Kaabong,Catchment,KATHILE P/S,Lopelipel cell,VHT,Loiki Joseph,Ngole Paula,77
 543,2026-10-22,Kaabong,Catchment,KATHILE P/S,Nasuguru cell,VHT,Keem Joseline,Ngole Paula,78
 544,2026-10-22,Kaabong,Catchment,KATHILE P/S,Kathile west cell,VHT,Keem joseline,Ngole Paula,72
+548,2026-10-22,Kaabong,Catchment,KATHILE P/S,Kathile east,VHT,Keem Joseline,Ngole Paula,80
+549,2026-10-22,Kaabong,Catchment,KATHILE P/S,Jerusalem cell,VHT,Keem Joseline,Ngole Paula,68
+554,2026-10-22,Kaabong,Catchment,KATHILE P/S,Nakoreto cell,VHT,Keem Joseline,Ngole Paula,69
 433,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,KAILOB,VHT,Lopiran Joseph,Amoo Sofia,80
 434,2026-10-20,Kaabong,Catchment,LOMODOCH P/S,Kaiwele,VHT,Lorot Samuel,Amoo Sofia,69
 319,2026-10-17,Kaabong,Catchment,LOTIM P/S,Lotim centre,Cordinator,Not specified (Coordinator led),Amoo Sofia,113
@@ -67,6 +84,7 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 336,2026-10-17,Karenga,Catchment,KARENGA BOYS P/S,Telele cell,VHT,Nayang Agnes logwee,Lopeyok Martin,103
 337,2026-10-17,Karenga,Catchment,KARENGA BOYS P/S,Kamukoi South,VHT,Achan jorcy lorita,Lopeyok Martin,117
 339,2026-10-17,Karenga,Catchment,KARENGA BOYS P/S,Kamukoi central,Cordinator,Not specified (Coordinator led),Lopeyok Martin,226
+562,2026-10-22,Karenga,Catchment,KARENGA BOYS P/S,Kangole North,VHT,Ayoo Anna grace,Lopeyok Martin,114
 85,2026-10-13,Karenga,Catchment,KARENGA GIRLS P/S,Kamukoi North,VHT,Nayang Agnes logwee,Lopeyok Martin,162
 86,2026-10-13,Karenga,Catchment,KARENGA GIRLS P/S,New karenga cell,VHT,Nagwee lilly,Lopeyok Martin,143
 87,2026-10-13,Karenga,Catchment,KARENGA GIRLS P/S,Loyoro South,Cordinator,Not specified (Coordinator led),Lopeyok Martin,132
@@ -98,9 +116,22 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 315,2026-10-17,Karenga,Catchment,NALAKAS P/S,Katanga cell,Cordinator,Not specified (Coordinator led),Lopeyok Martin,292
 316,2026-10-17,Karenga,Catchment,NALAKAS P/S,Kda,Cordinator,Not specified (Coordinator led),Lopeyok Martin,136
 352,2026-10-17,Kotido,Catchment,KANAIR P/S,Pothokor,VHT,Lokiru John and Namuya Gilbert Germine,Ochen moses tom,216
+546,2026-10-16,Kotido,Catchment,KANAIR P/S,Kadosa,VHT,Lokiru john,Ochen moses tom,130
+547,2026-10-20,Kotido,Catchment,KANAIR P/S,Kanair central,VHT,Namuya Gilbert Germine,Ochen moses tom,145
+550,2026-10-13,Kotido,Catchment,KANAIR P/S,Kanair Central Market,VHT,Lochoro mario,Ochen moses tom,139
+551,2026-10-19,Kotido,Catchment,KANAIR P/S,Kanair Central Market,VHT,Lokiru john,Ochen moses tom,198
+552,2026-10-19,Kotido,Catchment,KANAIR P/S,Kanair Central Market,VHT,Namuya Gilbert Germine,Ochen moses tom,183
+553,2026-10-20,Kotido,Catchment,KANAIR P/S,Nakochil,VHT,Lochoro Mario,Ochen moses tom,155
+557,2026-10-21,Kotido,Catchment,KANAIR P/S,Kamukur,VHT,Lokiru john,Ochen moses tom,172
 353,2026-10-16,Kotido,Catchment,KOTIDO GIRLS P/S,Lokiding trading centre,VHT,Oluka Emmanuel,Ogwang Sam,306
 524,2026-10-21,Kotido,Catchment,LOKIDING P/S,Lokiding 2,VHT,Achuun Lucy Brenda and Aermun Lowas,Ogwang Sam,221
 538,2026-10-22,Kotido,Catchment,LOKIDING P/S,Nakosoburin,VHT,"Aeumun Lowas,Lopio Romano and Achuun Lucy Brenda",Ogwang Sam,221
+561,2026-10-15,Kotido,Catchment,LOKITELAEBU P/S,Nataba,VHT,TEKO PAUL,Ogwang Sam,464
+563,2026-10-16,Kotido,Catchment,LOKITELAEBU P/S,Kesimen,VHT,Teko Paul,Ogwang Sam,409
+565,2026-10-19,Kotido,Catchment,LOKITELAEBU P/S,KALOJUKA,VHT,Ngorok Sunday Paul,Ogwang Sam,219
+566,2026-10-22,Kotido,Catchment,LOKITELAEBU P/S,Naramalira,VHT,Ngorok Sunday Paul,Ogwang Sam,194
+568,2026-10-20,Kotido,Catchment,LOKITELAEBU P/S,Naapapong,VHT,Ngorok Sunday Paul,Ogwang Sam,263
+564,2026-10-22,Kotido,Catchment,LOMUKURA P/S,Kadapawala,VHT,Teko Paul,Ogwang Sam,260
 258,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kawich,VHT,Adong lilly grace,Ochen moses tom,313
 259,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Nyakwae,VHT,Adong lilly grace,Ochen moses tom,298
 495,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Kopsang,VHT,Adong lilly grace,Ochen moses tom,183
