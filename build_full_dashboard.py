@@ -3299,23 +3299,23 @@ html_code = f"""<!DOCTYPE html>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Stories Logged</span>
-          <span class="text-2xl font-black text-slate-800 block mt-0.5">0</span>
+          <span id="msc-kpi-logged" class="text-2xl font-black text-slate-800 block mt-0.5">0</span>
           <span class="text-[10px] text-slate-400 font-medium">Target: 128 Stories</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Girl Learners</span>
-          <span class="text-2xl font-black text-pink-600 block mt-0.5">0</span>
-          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
+          <span id="msc-kpi-girls" class="text-2xl font-black text-pink-600 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Verified Stories</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
           <span class="text-[11px] font-bold text-slate-500 uppercase block">Boy Learners</span>
-          <span class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
-          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
+          <span id="msc-kpi-boys" class="text-2xl font-black text-wfp-blue block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Verified Stories</span>
         </div>
         <div class="bg-white rounded-xl p-4 border border-slate-200/80 card-shadow text-center">
-          <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregivers &amp; Elders</span>
-          <span class="text-2xl font-black text-purple-700 block mt-0.5">0</span>
-          <span class="text-[10px] text-slate-400 font-medium">Awaiting Stories</span>
+          <span class="text-[11px] font-bold text-slate-500 uppercase block">Caregivers &amp; Adults</span>
+          <span id="msc-kpi-caregivers" class="text-2xl font-black text-purple-700 block mt-0.5">0</span>
+          <span class="text-[10px] text-slate-400 font-medium">Verified Stories</span>
         </div>
       </div>
 
@@ -3327,8 +3327,8 @@ html_code = f"""<!DOCTYPE html>
             <h4 class="text-sm font-bold text-slate-800">School-by-School Change Stories Register</h4>
             <p class="text-xs text-slate-500 mt-0.5">Audit register displaying verified change stories and sighted physical evidence across monitoring schools:</p>
           </div>
-          <span class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
-            0 Stories Logged · Awaiting Field Submissions
+          <span id="msc-register-count-badge" class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
+            0 Stories Logged · Target: 128 Stories
           </span>
         </div>
 
@@ -7050,6 +7050,25 @@ html_code = f"""<!DOCTYPE html>
 
       const stories = (BASE_DATA.msc_stories && BASE_DATA.msc_stories.stories_register) ? BASE_DATA.msc_stories.stories_register : [];
       const searchLower = (search || '').toLowerCase().trim();
+
+      const storiesForKpi = (selDistrict === 'ALL') ? stories : stories.filter(s => s.district === selDistrict);
+
+      const elTotal = document.getElementById('msc-kpi-logged');
+      if (elTotal) elTotal.innerText = storiesForKpi.length.toLocaleString();
+
+      const elGirls = document.getElementById('msc-kpi-girls');
+      if (elGirls) elGirls.innerText = storiesForKpi.filter(s => (s.role || '').toLowerCase().includes('girl')).length.toLocaleString();
+
+      const elBoys = document.getElementById('msc-kpi-boys');
+      if (elBoys) elBoys.innerText = storiesForKpi.filter(s => (s.role || '').toLowerCase().includes('boy')).length.toLocaleString();
+
+      const elAdults = document.getElementById('msc-kpi-caregivers');
+      if (elAdults) elAdults.innerText = storiesForKpi.filter(s => !(s.role || '').toLowerCase().includes('girl') && !(s.role || '').toLowerCase().includes('boy')).length.toLocaleString();
+
+      const elBadge = document.getElementById('msc-register-count-badge');
+      if (elBadge) {{
+        elBadge.innerHTML = `${{storiesForKpi.length}} Stories Logged · Target: ${{selDistrict === 'ALL' ? '128 Stories (2 per school)' : '2 Stories / School'}}`;
+      }}
 
       if (!stories || stories.length === 0) {{
         tbody.innerHTML = `

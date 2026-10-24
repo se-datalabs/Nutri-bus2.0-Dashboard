@@ -960,6 +960,50 @@ for _, row in df.iterrows():
             "radio_listeners": rad_d_cnt
         })
 
+    # 5. MOST SIGNIFICANT CHANGE STORIES
+    elif "significant" in activity.lower() or "msc" in activity.lower():
+        role = str(row.get("Storyteller Role", "Community Member")).strip()
+        name_age = str(row.get("Storyteller names and age", "")).strip()
+        sit_before = str(row.get("Describe the situation before the campaign:    What was the normal household diet, daily chore burden (water/firewood),    or school attendance pattern?", "")).strip()
+        
+        event_detail = str(row.get("What specific campaign event, activity, chart, or discussion caused the shift?47", "")).strip()
+        event_raw = str(get_col_val(row, [
+            "What specific campaign event, activity, chart, or discussion caused the shift?47",
+            "What specific campaign event, activity, chart, or discussion caused the shift?",
+            "What specific nutribus event, activity, chart, or discussion caused the shift"
+        ], "NutriBus Activation")).strip()
+        event_str = event_detail if event_detail and event_detail.lower() not in ('nan', 'none') else event_raw
+
+        action_detail = str(row.get("What was physically done differently at home, class, or community after attending the nutribus activitiies", "")).strip()
+        action_raw = str(row.get("What was physically done differently at home, class, or community after attending?", "")).strip()
+        action_str = action_detail if action_detail and action_detail.lower() not in ('nan', 'none') else action_raw
+
+        why_sig = str(row.get("Why is this change significant to you?", "")).strip()
+        evidence_raw = str(row.get("Verifiable Physical Evidence Sighted by Collector", "Physical observation verified")).strip()
+        collector_comm = str(row.get("Any other comments or observations about that event to inform future activities ", "")).strip()
+
+        is_school = any(w in role.lower() for w in ["learner", "teacher", "patron", "headteacher", "pupil", "student"])
+        story_type = "School Story" if is_school else "Community Catchment Story"
+        reach = 1
+
+        msc_stories_list.append({
+            "id": f"MSC-{sub_id}",
+            "entry_index": entry_index,
+            "school": school_name,
+            "district": dist,
+            "date": date_val,
+            "name_and_age": name_age,
+            "role": role,
+            "story_type": story_type,
+            "situation_before": sit_before,
+            "event": event_str,
+            "action_done": action_str,
+            "why_significant": why_sig,
+            "evidence": evidence_raw,
+            "collector_notes": collector_comm,
+            "collector": coordinator
+        })
+
     # Log record with entry_index
     records_log.append({
         "entry_index": entry_index,
@@ -2869,6 +2913,48 @@ d_data["impact_analysis"] = {
             ]
         }
     ]
+}
+
+# --- MSC STORIES POPULATION ---
+tot_msc_logged = len(msc_stories_list)
+msc_target = 128  # Target: 2 stories per school * 64 schools
+
+role_counts = {
+    "Girl Learner": sum(1 for s in msc_stories_list if "girl" in s["role"].lower()),
+    "Boy Learner": sum(1 for s in msc_stories_list if "boy" in s["role"].lower()),
+    "Female Caregiver / Mother": sum(1 for s in msc_stories_list if "caregiver" in s["role"].lower() or "mother" in s["role"].lower()),
+    "Father / Male Elder": sum(1 for s in msc_stories_list if "father" in s["role"].lower() or "elder" in s["role"].lower()),
+    "Teacher / Club Patron": sum(1 for s in msc_stories_list if "teacher" in s["role"].lower() or "patron" in s["role"].lower()),
+    "Local Leader": sum(1 for s in msc_stories_list if "leader" in s["role"].lower())
+}
+
+d_data["msc_stories"] = {
+    "kpis": {
+        "total_stories_recorded": tot_msc_logged,
+        "target_stories": msc_target,
+        "unique_storytellers": len(set(s["name_and_age"] for s in msc_stories_list if s["name_and_age"])),
+        "physically_verified_pct": round(100.0 * sum(1 for s in msc_stories_list if s.get("evidence") and "none" not in s["evidence"].lower()) / max(1, tot_msc_logged), 1) if tot_msc_logged > 0 else 0.0
+    },
+    "storyteller_role": {
+        "categories": list(role_counts.keys()),
+        "values": list(role_counts.values())
+    },
+    "triggering_campaign_event": {
+        "categories": [
+            "NutriBus Big Activation Day",
+            "Community Cooking Demonstration",
+            "NutriClub Weekly Session",
+            "Teacher & VHT Orientation"
+        ],
+        "values": [
+            sum(1 for s in msc_stories_list if "activation" in s["event"].lower() or "bus" in s["event"].lower()),
+            sum(1 for s in msc_stories_list if "demo" in s["event"].lower() or "metu" in s["event"].lower() or "porridge" in s["event"].lower()),
+            sum(1 for s in msc_stories_list if "club" in s["event"].lower()),
+            sum(1 for s in msc_stories_list if "orientation" in s["event"].lower() or "dialogue" in s["event"].lower())
+        ]
+    },
+    "featured_stories": msc_stories_list[:3],
+    "stories_register": msc_stories_list
 }
 
 with open("dashboard_data.json", "w", encoding="utf-8") as f:

@@ -140,6 +140,11 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 500,2026-10-16,Kotido,Catchment,LOOKOROK P/S,Loveless central,VHT,Lopera zakariya,Ochen moses tom,142
 503,2026-10-17,Kotido,Catchment,LOOKOROK P/S,Nayeeche,VHT,Lopera zakariya,Ochen moses tom,126
 505,2026-10-17,Kotido,Catchment,LOOKOROK P/S,Nyakwae north,VHT,Lokiya John bosco,Ochen moses tom,141
+588,2026-10-09,Kotido,Catchment,MARY MOTHER OF GOD P/S,Tesio,VHT,LOCHAM PHILIP,Ogwang Sam,191
+590,2026-10-12,Kotido,Catchment,MARY MOTHER OF GOD P/S,LOKATAP,VHT,TESIO,Ogwang Sam,108
+610,2026-10-19,Kotido,Catchment,MARY MOTHER OF GOD P/S,Wumwum 2,VHT,LOCHAM PHILIP,Ogwang Sam,168
+620,2026-10-14,Kotido,Catchment,MARY MOTHER OF GOD P/S,LOOKORE EAST,VHT,LOMEYO JEREMIAH ALONSO,Ogwang Sam,150
+621,2026-10-22,Kotido,Catchment,NAKAPELIMORU P/S,Kalogwala,VHT,Koriang Emmanuel,Ochen moses tom,199
 437,2026-10-20,Kotido,Catchment,NAPUMPUM P/S,Napumpum north,VHT,Longoli John bosco,Ochen moses tom,171
 471,2026-10-20,Kotido,Catchment,NAPUMPUM P/S,"Nupumpum p/s, kotyang village",VHT,Longoli John bosco,Ochen moses tom,166
 476,2026-10-21,Kotido,Catchment,NAPUMPUM P/S,Kocil village,VHT,Longoli John bosco,Ochen moses tom,153
@@ -160,17 +165,25 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 382,2026-10-16,Moroto,Catchment,CHILD JESUS P/S,kamswahili juu,VHT,Claudia,Evaline,73
 419,2026-10-18,Moroto,Catchment,CHILD JESUS P/S,singila,VHT,Claudia,Evaline,61
 520,2026-10-21,Moroto,Catchment,CHILD JESUS P/S,singila,VHT,Lomonyang Moses,Evaline,65
+594,2026-10-22,Moroto,Catchment,CHILD JESUS P/S,nakapelimen,VHT,Mary Goreti Aliat,Evaline,103
+595,2026-10-23,Moroto,Catchment,CHILD JESUS P/S,kamswahili juu,VHT,Cecillia Aporon,Evaline,87
+596,2026-10-23,Moroto,Catchment,CHILD JESUS P/S,kamswahili Chin,VHT,Claudia Nate,Evaline,93
 244,2026-10-15,Moroto,Catchment,KASIMERI P/S,kambisi village,VHT,Moses,Evaline,62
 245,2026-10-15,Moroto,Catchment,KASIMERI P/S,Lokitede,VHT,Cecellia,Evaline,63
 246,2026-10-15,Moroto,Catchment,KASIMERI P/S,Kamsawhili chin,VHT,claudia,Evaline,58
 247,2026-10-15,Moroto,Catchment,KASIMERI P/S,Nakapelimen village,VHT,Mary goreti,Evaline,67
 383,2026-10-17,Moroto,Catchment,KASIMERI P/S,kambisi,VHT,Cecilia,Evaline,69
 519,2026-10-20,Moroto,Catchment,KASIMERI P/S,Kambisi,VHT,Lomonyang Moses,Evaline,71
+598,2026-10-23,Moroto,Catchment,KASIMERI P/S,Nachogorom,Cordinator,Not specified (Coordinator led),Evaline,84
+599,2026-10-23,Moroto,Catchment,KASIMERI P/S,Lokitede,VHT,Moses Lomonyang,Evaline,64
+600,2026-10-23,Moroto,Catchment,KASIMERI P/S,kamsawhili,VHT,Nate Claudia,Evaline,80
 158,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Lokwakwa village,VHT,Albino,Evaline,84
 159,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Loputuk health centre,VHT,Lokol Racheal,Evaline,74
 160,2026-10-14,Moroto,Catchment,LOPUTUK P/S,Kaipetar village,VHT,Angom Hellen,Evaline,75
 384,2026-10-16,Moroto,Catchment,LOPUTUK P/S,Aworobu,VHT,lokol Racheal,Evaline,65
 385,2026-10-17,Moroto,Catchment,LOPUTUK P/S,Nadiket,VHT,Albino,Evaline,65
+602,2026-10-23,Moroto,Catchment,LOPUTUK P/S,Loputuk center,VHT,Albino Angolekori,Evaline,85
+603,2026-10-23,Moroto,Catchment,LOPUTUK P/S,Namatwai,VHT,Lokol Racheal,Evaline,85
 109,2026-10-13,Moroto,Catchment,NADUNGET P/S,Lokilala village,Cordinator,Not specified (Coordinator led),Evaline,81
 262,2026-10-14,Moroto,Catchment,NADUNGET P/S,Lokilala,VHT,Lotipo Rosa,Evaline,84
 263,2026-10-15,Moroto,Catchment,NADUNGET P/S,Lolain village,VHT,Nakut Angellina,Evaline,65
@@ -179,12 +192,16 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 416,2026-10-19,Moroto,Catchment,NADUNGET P/S,Nakapelimen,VHT,Simon peter,Evaline,67
 417,2026-10-19,Moroto,Catchment,NADUNGET P/S,Nadunget market,Cordinator,Not specified (Coordinator led),Evaline,91
 418,2026-10-19,Moroto,Catchment,NADUNGET P/S,Lolain village,VHT,Abngellina Nakut,Evaline,64
+608,2026-10-23,Moroto,Catchment,NADUNGET P/S,Nadunget centre,VHT,Loptipo Rosa,Evaline,80
+609,2026-10-23,Moroto,Catchment,NADUNGET P/S,Loputiput,VHT,ASimon peteeer Logira,Evaline,84
 111,2026-10-13,Moroto,Catchment,NAWANATAU P/S,Kamera village,Cordinator,Not specified (Coordinator led),Evaline,62
 165,2026-10-14,Moroto,Catchment,NAWANATAU P/S,Lotirir,VHT,Lomuria Micheal,Evaline,68
 166,2026-10-14,Moroto,Catchment,NAWANATAU P/S,nawanatau center,VHT,Anna,Evaline,81
 241,2026-10-15,Moroto,Catchment,NAWANATAU P/S,Nabore village,VHT,Lomuria Micheal,Evaline,60
 242,2026-10-15,Moroto,Catchment,NAWANATAU P/S,Lotirir,VHT,Anna Adongar,Evaline,80
 243,2026-10-15,Moroto,Catchment,NAWANATAU P/S,lokilalala,VHT,John Lokiru,Evaline,55
+605,2026-10-23,Moroto,Catchment,NAWANATAU P/S,Lotirir,VHT,Adongar Anna,Evaline,75
+606,2026-10-23,Moroto,Catchment,NAWANATAU P/S,Kamera,VHT,Lomuria Micheal,Evaline,78
 390,2026-10-19,Nabilatuk,Catchment,ACEGERTOLIM P/S,Acegeretolim catchment area/welthunger,VHT,"Alehouse Cyril,longole Joyce and Nakalei",Awas Francis,190
 391,2026-10-16,Nabilatuk,Catchment,ACEGERTOLIM P/S,ACEGERETOLIM PRIMARY SCHOOL/AJIMJIM,VHT,"Alehouse Cyril, Longole Joyce and Nakalei",Awas Francis,95
 392,2026-10-16,Nabilatuk,Catchment,ACEGERTOLIM P/S,ACEGERETOLIM PRIMARY SCHOOL CATCHMENT AREA/LOTEEDE,VHT,"Alehouse Cyril, Longole Joyce and Nakalei Lina",Awas Francis,90
@@ -196,6 +213,9 @@ Entry Index,Date,District,Subcounty,Catchment School,Community Demo Site / Villa
 394,2026-10-16,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,NABILATUK TOWNSHIP PRIMARY SCHOOL/OPD NABILATUK H/CIV,VHT,"Mudong Sarah, achuka Moses and Lotee Joseph",Awas Francis,102
 396,2026-10-15,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,NABILATUK TOWNSHIP PRIMARY SCHOOL CATCHMENT AREA/LOLET,VHT,"Mudong Sarah, Achuka Moses and Lotee Joseph",Awas Francis,91
 399,2026-10-13,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,NABILATUK TOWNSHIP PRIMARY SCHOOL CATCHMENT AREA/,VHT,"Mudong Sarah, Achuka Moses and Lotee Joseph",Awas Francis,108
+589,2026-10-19,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,AFI food distribution point in Ariamao,VHT,"Achuka Moses, Mudong Sarah and Lotee Joseph",Awas Francis,227
+591,2026-10-20,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,Nabilatuk central ward/ Nabilatuk Township primary school catchment area,VHT,"Achuka Moses, Mudong Sarah and Lotee Joseph",Awas Francis,95
+611,2026-10-20,Nabilatuk,Catchment,NABILATUK TOWNSHIP P/S,Lodisi/Nabilatuk Township Catchment Area,VHT,"Achuka Moses, Mudong Sarah and Lotee Joseph",Awas Francis,103
 189,2026-10-12,Nabilatuk,Catchment,NAPONGAE P/S,Napongae village,VHT,"Lokee Michael,Loduk John and Adiaka Rapheal",Awas Francis,96
 190,2026-10-13,Nabilatuk,Catchment,NAPONGAE P/S,Napongae north village,VHT,"Lokee Michael,Loduk John, Adiaka Rapheal",Awas Francis,97
 228,2026-10-15,Nabilatuk,Catchment,NAPONGAE P/S,Napongae primary school catchment area,VHT,Lokee Michael and Adiaka Rapheal,Awas Francis,94
