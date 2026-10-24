@@ -254,6 +254,9 @@ def extract_school_weekly_attendance(row):
         r5_g = clean_val(row.get('<span style="display:none">row_5-Girls</span>', 0))
 
         # Check if Table A contains complete matrix entry (e.g. Kasimeri P/S in Moroto: Mid 650/375, Upper 86/91)
+        if r2_g == 187263:  # Kalotom P/S entry #272 typo: typed 187263 instead of 187 (accidentally concatenated with 263)
+            r2_g = 187.0
+
         if r2_g == 375:
             att_lb = 0
             att_lg = 0

@@ -9644,7 +9644,7 @@
     "learners": 4015,
     "learners_v1": 6012,
     "learners_v2": 4015,
-    "learners_v3": 193347,
+    "learners_v3": 6271,
     "learners_nutriclub": 483,
     "target_learners": 4942,
     "target_enrolled": 6459,
@@ -10330,15 +10330,15 @@
       "district": "Napak",
       "schools_count": 5,
       "att_boys": 3128,
-      "att_girls": 190219,
-      "att_total": 193347,
+      "att_girls": 3143,
+      "att_total": 6271,
       "charts_issued": 105,
       "charts_returned": 45,
       "charts_joint": 45,
       "school_attendance": {
         "att_boys": 3128,
-        "att_girls": 190219,
-        "att_total": 193347
+        "att_girls": 3143,
+        "att_total": 6271
       },
       "schools_data": [
         {
@@ -10729,8 +10729,8 @@
           "district": "Napak",
           "coordinator": "Priscilla",
           "att_boys": 636,
-          "att_girls": 187708,
-          "att_total": 188344,
+          "att_girls": 632,
+          "att_total": 1268,
           "charts_issued": 30,
           "charts_returned": 15,
           "charts_joint": 15,
@@ -10839,14 +10839,14 @@
             "att_lower_g": 182,
             "att_lower_tot": 365,
             "att_mid_b": 190,
-            "att_mid_g": 187263,
-            "att_mid_tot": 187453,
+            "att_mid_g": 187,
+            "att_mid_tot": 377,
             "att_up_b": 263,
             "att_up_g": 263,
             "att_up_tot": 526,
             "att_boys": 636,
-            "att_girls": 187708,
-            "att_total": 188344
+            "att_girls": 632,
+            "att_total": 1268
           }
         },
         {
@@ -11367,8 +11367,8 @@
         "district": "Napak",
         "coordinator": "Priscilla",
         "att_boys": 636,
-        "att_girls": 187708,
-        "att_total": 188344,
+        "att_girls": 632,
+        "att_total": 1268,
         "charts_issued": 30,
         "charts_returned": 15,
         "charts_joint": 15,
@@ -11477,14 +11477,14 @@
           "att_lower_g": 182,
           "att_lower_tot": 365,
           "att_mid_b": 190,
-          "att_mid_g": 187263,
-          "att_mid_tot": 187453,
+          "att_mid_g": 187,
+          "att_mid_tot": 377,
           "att_up_b": 263,
           "att_up_g": 263,
           "att_up_tot": 526,
           "att_boys": 636,
-          "att_girls": 187708,
-          "att_total": 188344
+          "att_girls": 632,
+          "att_total": 1268
         }
       },
       {
