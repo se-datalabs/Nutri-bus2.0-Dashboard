@@ -1,5 +1,80 @@
 import json
 import pandas as pd
+import openpyxl
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
+
+def apply_professional_styles(ws):
+    header_fill = PatternFill(start_color="0A6EB4", end_color="0A6EB4", fill_type="solid")
+    header_font = Font(name="Arial", size=11, bold=True, color="FFFFFF")
+    data_font = Font(name="Arial", size=10, color="1E293B")
+    
+    thin_border_side = Side(border_style="thin", color="CBD5E1")
+    border = Border(left=thin_border_side, right=thin_border_side, top=thin_border_side, bottom=thin_border_side)
+    
+    # Status fills
+    missing_fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
+    missing_font = Font(name="Arial", size=10, bold=True, color="991B1B")
+    
+    success_fill = PatternFill(start_color="DCFCE7", end_color="DCFCE7", fill_type="solid")
+    success_font = Font(name="Arial", size=10, bold=True, color="166534")
+    
+    pending_fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
+    pending_font = Font(name="Arial", size=10, bold=True, color="92400E")
+    
+    # Freeze top row
+    ws.freeze_panes = "A2"
+    
+    # Format header row
+    ws.row_dimensions[1].height = 28
+    for col_idx in range(1, ws.max_column + 1):
+        cell = ws.cell(row=1, column=col_idx)
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        cell.border = border
+        
+    # Format data rows
+    for row_idx in range(2, ws.max_row + 1):
+        ws.row_dimensions[row_idx].height = 20
+        for col_idx in range(1, ws.max_column + 1):
+            cell = ws.cell(row=row_idx, column=col_idx)
+            cell.font = data_font
+            cell.border = border
+            val_str = str(cell.value or "").strip()
+            
+            # Text alignment
+            if isinstance(cell.value, (int, float)):
+                cell.alignment = Alignment(horizontal="right", vertical="center")
+            elif any(w in val_str.lower() for w in ["yes", "no", "logged", "missing", "pending"]):
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+            else:
+                cell.alignment = Alignment(horizontal="left", vertical="center")
+                
+            # Conditional coloring
+            if "missing" in val_str.lower():
+                cell.fill = missing_fill
+                cell.font = missing_font
+            elif any(w in val_str.lower() for w in ["yes", "logged", "completed", "target achieved"]):
+                cell.fill = success_fill
+                cell.font = success_font
+            elif any(w in val_str.lower() for w in ["pending", "partial"]):
+                cell.fill = pending_fill
+                cell.font = pending_font
+
+    # Set column widths with maximum wrap cap
+    for col in ws.columns:
+        col_letter = get_column_letter(col[0].column)
+        max_len = 0
+        for cell in col:
+            val = str(cell.value or "")
+            if len(val) > max_len:
+                max_len = len(val)
+        col_width = min(max(max_len + 4, 12), 48)
+        ws.column_dimensions[col_letter].width = col_width
+
+    # Enable autofilter
+    ws.auto_filter.ref = ws.dimensions
 
 def update_all_extracts():
     print("📑 Updating Master Extraction Spreadsheets and CSVs...")
@@ -88,6 +163,28 @@ def update_all_extracts():
     df_visits = pd.DataFrame(visit_matrix)
     df_msc = pd.DataFrame(msc_tracking)
 
+    # Detailed MSC Stories Register (5 stories)
+    msc_detailed_rows = []
+    for s in msc_stories:
+        msc_detailed_rows.append({
+            "Story ID": s.get("id", ""),
+            "Entry Index": s.get("entry_index", ""),
+            "Date": s.get("date", ""),
+            "District": s.get("district", ""),
+            "School": s.get("school", ""),
+            "Storyteller Name & Age": s.get("name_and_age", ""),
+            "Storyteller Role": s.get("role", ""),
+            "Story Type": s.get("story_type", ""),
+            "Triggering Campaign Event": s.get("event", ""),
+            "Practical Action Done Differently": s.get("action_done", ""),
+            "Why Significant (Verbatim Quote)": s.get("why_significant", ""),
+            "Verifiable Physical Evidence Sighted": s.get("evidence", ""),
+            "Collector Observations / Notes": s.get("collector_notes", ""),
+            "Situation Before Campaign": s.get("situation_before", ""),
+            "Field Coordinator": s.get("collector", "")
+        })
+    df_msc_detailed = pd.DataFrame(msc_detailed_rows)
+
     # VHTs & Community Demos (305)
     act_col = [c for c in df.columns if c.strip().lower() == "activity"][0]
     demos_df = df[df[act_col].astype(str).str.contains("Community demonstration|demonstration|demo", case=False, na=False)].copy()
@@ -146,22 +243,55 @@ def update_all_extracts():
         })
     df_teachers = pd.DataFrame(teacher_rows)
 
-    # Master Workbook
-    with pd.ExcelWriter("VHTs_Teachers_and_Demos_Master_Extract.xlsx", engine="openpyxl") as writer:
+    # Master Workbook (5 Tabs)
+    master_file = "VHTs_Teachers_and_Demos_Master_Extract.xlsx"
+    with pd.ExcelWriter(master_file, engine="openpyxl") as writer:
         df_visits.to_excel(writer, sheet_name="Missing Visits & MSC Status", index=False)
         df_msc.to_excel(writer, sheet_name="Missing MSC Stories (128 Tgt)", index=False)
+        df_msc_detailed.to_excel(writer, sheet_name="MSC Stories Register (5)", index=False)
         df_vhts.to_excel(writer, sheet_name=f"VHTs & Demos ({len(df_vhts)})", index=False)
         df_teachers.to_excel(writer, sheet_name="Teachers & Club Patrons (64)", index=False)
 
+    # Apply professional styling to Master Workbook
+    wb_master = openpyxl.load_workbook(master_file)
+    for sheet_name in wb_master.sheetnames:
+        apply_professional_styles(wb_master[sheet_name])
+    wb_master.save(master_file)
+
     # Standalone Extracts
-    df_vhts.to_excel("VHTs_and_Community_Demos_Extract.xlsx", index=False)
+    # 1. Demos
+    demos_file = "VHTs_and_Community_Demos_Extract.xlsx"
+    df_vhts.to_excel(demos_file, index=False)
+    wb_demos = openpyxl.load_workbook(demos_file)
+    apply_professional_styles(wb_demos.active)
+    wb_demos.save(demos_file)
     df_vhts.to_csv("VHTs_and_Community_Demos_Extract.csv", index=False)
-    df_teachers.to_excel("Teachers_and_School_Patrons_Extract.xlsx", index=False)
+
+    # 2. Teachers
+    teachers_file = "Teachers_and_School_Patrons_Extract.xlsx"
+    df_teachers.to_excel(teachers_file, index=False)
+    wb_teachers = openpyxl.load_workbook(teachers_file)
+    apply_professional_styles(wb_teachers.active)
+    wb_teachers.save(teachers_file)
     df_teachers.to_csv("Teachers_and_School_Patrons_Extract.csv", index=False)
-    df_msc.to_excel("Missing_MSC_Stories_Tracking.xlsx", index=False)
+
+    # 3. MSC Tracking
+    msc_track_file = "Missing_MSC_Stories_Tracking.xlsx"
+    df_msc.to_excel(msc_track_file, index=False)
+    wb_msc_track = openpyxl.load_workbook(msc_track_file)
+    apply_professional_styles(wb_msc_track.active)
+    wb_msc_track.save(msc_track_file)
     df_msc.to_csv("Missing_MSC_Stories_Tracking.csv", index=False)
 
-    print(f"✅ Master extraction complete: {len(df_vhts)} Demos | {len(df_teachers)} Teachers | {len(df_visits)} Schools tracked.")
+    # 4. MSC Detailed Stories
+    msc_det_file = "Most_Significant_Change_Stories_Extract.xlsx"
+    df_msc_detailed.to_excel(msc_det_file, index=False)
+    wb_msc_det = openpyxl.load_workbook(msc_det_file)
+    apply_professional_styles(wb_msc_det.active)
+    wb_msc_det.save(msc_det_file)
+    df_msc_detailed.to_csv("Most_Significant_Change_Stories_Extract.csv", index=False)
+
+    print(f"✅ Master extraction complete: {len(df_vhts)} Demos | {len(df_teachers)} Teachers | {len(df_visits)} Schools | {len(df_msc_detailed)} MSC Stories.")
 
 if __name__ == "__main__":
     update_all_extracts()

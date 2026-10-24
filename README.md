@@ -1,13 +1,13 @@
 # WFP Nutribus 2.0 Activity & Inclusive Impact Dashboard
 
-An interactive monitoring and impact evaluation dashboard developed for the **World Food Programme (WFP) Uganda** under the **Nutribus 2.0 Social and Behaviour Change Communication (SBCC)** campaign across the **9 Karamoja districts** (Abim, Amudat, Kaabong, Kotido, Moroto, Nabilatuk, Nakapiripirit, Napak, Karenga).
+An interactive monitoring, reporting, and impact evaluation dashboard developed for the **World Food Programme (WFP) Uganda** under the **Nutribus 2.0 Social and Behaviour Change Communication (SBCC)** campaign across the **9 Karamoja districts** (Abim, Amudat, Kaabong, Kotido, Moroto, Nabilatuk, Nakapiripirit, Napak, Karenga).
 
 ---
 
 ## 🎨 Design & Data Specifications
 - **Brand Palette:** WFP Blue (`#0A6EB4`) with supporting official accents (`#074E82`, `#16A34A`, `#D97706`).
 - **Strict Chart Guidelines:** **Zero pie charts**. Only **horizontal bar charts** with category labels placed on the vertical Y-axis.
-- **Granular Question Cards:** Every section and individual question from the 36-page KoBo data collection tool has its own dedicated card, KPI badge, and horizontal bar chart.
+- **Granular Question Cards:** Every section and individual question from the KoBo data collection tool has its own dedicated card, KPI badge, and horizontal bar chart.
 
 ---
 
@@ -24,26 +24,73 @@ python3 -m http.server 8080
 # Open http://localhost:8080 in your browser
 ```
 
-### Option 2: Updating the Dashboard with New Data
+### Option 2: Updating the Dashboard and Master Extraction Documents
 Whenever new data is added or modified in `Nutribus_2.0_Activity.xlsx`:
 ```bash
-# Simply run the update script in the terminal:
+# Simply run the automated 3-step pipeline in the terminal:
 ./update_dashboard.sh
 ```
-This automatically ingests the latest Excel data, updates `dashboard_data.json` and `dashboard_district_db.json`, and rebuilds the standalone `index.html`.
+This automatically:
+1. Ingests all field submissions into JSON databases (`dashboard_data.json`, `dashboard_district_db.json`, `dashboard_demo_sessions_640.json`).
+2. Rebuilds the standalone HTML dashboard (`index.html`).
+3. Generates and formats all Master Excel extracts and tracking workbooks (`VHTs_Teachers_and_Demos_Master_Extract.xlsx`, etc.).
 
 ---
 
-## 📊 Core Headline Indicators & Targets
+## 📊 Core Headline Indicators & Field Progress
 
-| Headline Indicator | Current Cleaned Reach | Operations Target | Status |
+| Headline Indicator | Current Logged Reach | Operations Target | Status / Progress |
 | :--- | :---: | :---: | :--- |
-| **Schools Reached** | **6** | 64 schools | 9.4% Progress |
-| **Demonstrations** | **60** | 640 sites | 9.4% Progress |
-| **Learners Reached** | **5,840** | 80,875 learners | 7.2% Progress |
-| **Caregivers Reached** | **165** | 51,200 adults | Catchment Active |
-| **Teachers & VHTs** | **143** | Key stakeholders | 48 Teachers \| 95 VHTs |
-| **Total PWD Reach** | **248** | Inclusive Reach | 78 M / 68 F Learners, 36 VHTs, 66 Adults |
+| **Official Schools Reached** | **64** | 64 schools | **100.0% Progress** (All 9 districts covered) |
+| **School Contact Visits** | **131** | 192 visits | **68.2% Progress** (Visit 1: 63, Visit 2: 59, Visit 3: 7) |
+| **Community Demonstrations** | **305** | 640 sites | **47.7% Progress** (Active across all 64 catchments) |
+| **NutriClub Sessions** | **159** | 64 schools | **248.4% Progress** (Active student clubs operating) |
+| **Learners Reached** | **71,800** | 80,875 learners | **88.8% Progress** (35,420 Girls / 36,380 Boys) |
+| **Caregivers Reached** | **17,972** | 51,200 adults | **35.1% Progress** (13,858 Females / 4,114 Males) |
+| **Teachers & VHT Stakeholders** | **1,387** | 768 key actors | **180.6% Progress** (Oriented & mobilized) |
+| **Total PWD Reach** | **15,604** | 1,200 individuals | **1,300.3% Progress** (Inclusive accommodation) |
+| **Most Significant Change (MSC) Stories** | **5** | 128 stories | **3.9% Progress** (Target: 2 stories per school) |
+
+---
+
+## 📁 Master Extraction Workbooks & Tracking Documents
+
+The repository automatically generates synchronized, professionally styled Excel and CSV workbooks on every update run:
+
+1. **Combined Master Workbook (5 Tabs):**
+   - `VHTs_Teachers_and_Demos_Master_Extract.xlsx`
+     - **Tab 1: `Missing Visits & MSC Status`** (Tracks all 64 schools across Visit 1, Visit 2, Visit 3 Closeout, School Story, Community Story, and MSC Progress).
+     - **Tab 2: `Missing MSC Stories (128 Tgt)`** (Tracks School Story vs Community Catchment Story target vs actual and follow-up actions across all 64 schools).
+     - **Tab 3: `MSC Stories Register (5)`** (Complete qualitative narratives, storyteller demographics, verbatim quotes, and physical evidence sighted).
+     - **Tab 4: `VHTs & Demos (305)`** (All 305 community cooking demonstrations with dates, demo sites, catchment schools, named VHTs, and coordinators).
+     - **Tab 5: `Teachers & Club Patrons (64)`** (All 64 schools with named teacher NutriClub patrons and club membership counts).
+
+2. **Dedicated Standalone Extraction Files:**
+   - **MSC Stories Tracking:** `Missing_MSC_Stories_Tracking.xlsx` / `Missing_MSC_Stories_Tracking.csv`
+   - **Detailed MSC Narratives:** `Most_Significant_Change_Stories_Extract.xlsx` / `Most_Significant_Change_Stories_Extract.csv`
+   - **VHTs & Community Demos:** `VHTs_and_Community_Demos_Extract.xlsx` / `VHTs_and_Community_Demos_Extract.csv`
+   - **Teachers & School Patrons:** `Teachers_and_School_Patrons_Extract.xlsx` / `Teachers_and_School_Patrons_Extract.csv`
+
+---
+
+## 🔍 Missing Entries & Priority Follow-Up Action
+
+### 1. Missing Visit 1 (Baseline Onboarding): **1 School**
+- Kotido District: **`KOTIDO GIRLS P/S`**
+
+### 2. Missing Visit 2 (NutriBus Day Activation): **5 Schools**
+- Abim District (4 schools): **`ALEREK P/S`**, **`MORULEM BOYS P/S`**, **`OBOLOKOME P/S`**, **`OTALABAR P/S`**
+- Kotido District (1 school): **`KOTIDO MIXED P/S`**
+
+### 3. Visit 3 (Closeout Audit): **7 Schools Completed**
+- Napak District (All 5 schools): `KALOTOM P/S`, `KAPUAT P/S`, `LONGALOM P/S`, `LOPEEI P/S`, `LORENGECHORA P/S`
+- Kotido District (2 schools): `NAPUMPUM P/S`, `LOMUKURA P/S`
+- Remaining 57 schools: In progress / pending closeout schedule.
+
+### 4. Most Significant Change Stories: **123 Stories Needed**
+- **Target:** 2 stories per school (1 School Story + 1 Community Catchment Story) × 64 schools = **128 stories**.
+- **Napak District (5 schools):** Each school has completed 1 story; each needs 1 remaining story (`KALOTOM P/S` needs a School Story; `KAPUAT P/S`, `LONGALOM P/S`, `LOPEEI P/S`, `LORENGECHORA P/S` need a Community Story).
+- **Other 8 Districts (59 schools):** Pending both School and Community stories.
 
 ---
 
@@ -62,27 +109,27 @@ This automatically ingests the latest Excel data, updates `dashboard_data.json` 
    - Campaign collateral handover compliance (forms, posters, manuals, WFP 0800 boards).
 
 3. **🚌 3. Three-Visit School Contact Data & Tool Questions**
-   - **Visit 1 (Follow-up & Handover):** NutriClub active days, signed 4-week work plans, 1,840 NutriCharts issued by grade band, WFP toll-free display verification, and baseline attendance registers.
-   - **Visit 2 (NutriBus Big Activation Day):** Activation headcounts by age band & PWDs, session delivery checklist, active handling vs passive observation, **Pillar 2 Micro-Poll (5 statements with 180 boys sampled)**, and unaided post-session scenario recall.
-   - **Visit 3 (Materials Collection & Closing Audit):** 86.2% NutriChart return rate, 89.0% joint household completion, primary household feedback and barriers, status of written Bus Day school commitments, collective chronic absentee tracing, and school kitchen fuel-saving stove audits.
+   - **Visit 1 (Follow-up & Handover):** NutriClub active days, signed 4-week work plans, NutriCharts issued by grade band, WFP toll-free display verification, and baseline attendance registers.
+   - **Visit 2 (NutriBus Big Activation Day):** Activation headcounts by age band & PWDs, session delivery checklist, active handling vs passive observation, **Pillar 2 Micro-Poll**, and unaided post-session scenario recall.
+   - **Visit 3 (Materials Collection & Closing Audit):** NutriChart return rate, joint household completion, primary household feedback and barriers, status of written Bus Day school commitments, collective chronic absentee tracing, and school kitchen fuel-saving stove audits.
 
 4. **🍲 4. Community Cooking Demonstration Cleaned Data & Tool Questions**
    - Catchment demo site headcounts (Caregivers, Fathers, Children, PWDs).
    - VHT vs Coordinator entry submissions.
-   - 90% hands-on cooking practice, 100% Metu porridge local fortification (Eboo, Lokaka, cowpeas, roasted sesame).
+   - Hands-on cooking practice, 100% Metu porridge local fortification (Eboo, Lokaka, cowpeas, roasted sesame).
    - Fuel-saving practices demonstrated (improved cookstoves, fuelwood pre-drying, pot covering).
-   - Private caregiver intercept interviews (150 interviewed): barriers, feasible actions, commitment verdict.
+   - Private caregiver intercept interviews: barriers, feasible actions, commitment verdict.
    - Structured gender chore discussions and intra-household food serving hierarchy shifts (youngest child first).
 
-5. **📖 5. Most Significant Change (MSC) Qualitative Tracker**
-   - Storyteller roles (Caregivers, Girls, Boys, Fathers, Teachers, Leaders) and ages.
-   - Triggering campaign events and observed physical behavioral shifts.
-   - Verifiable physical evidence sighted on-site by collector (100% verified).
-   - Featured case stories with verbatim transcripts.
+5. **📖 5. Most Significant Change (MSC) Qualitative Tracker & Register**
+   - School-by-school qualitative change narratives and verifiable evidence audit table.
+   - Storyteller role filters (Girl Learners, Boy Learners, Caregivers, Teachers, Local Leaders).
+   - Dynamic KPI counters tracking stories logged vs target (128 stories).
+   - Detailed evidence sighted (fortified cooking pots, fuel-saving stoves, school registers).
 
 6. **🤝 6. NutriClub Sessions Cleaned Data & Tool Questions**
-   - Session 1 and Session 2 tracking across 6 schools (12 sessions).
-   - Club patron appointments, membership by sex (312 members), PWD learners (38 learners).
+   - Session 1 and Session 2 tracking across all 64 schools (159 sessions).
+   - Club patron appointments, membership by sex, PWD learners.
    - Practical activity delivered checklist and home action feedback from parents.
    - Whole-School Assembly Nutri-Moments: core nutrition and gender messages shared.
 
