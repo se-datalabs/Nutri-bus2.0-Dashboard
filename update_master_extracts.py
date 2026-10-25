@@ -61,6 +61,9 @@ def apply_professional_styles(ws):
             elif any(w in val_str.lower() for w in ["pending", "partial"]):
                 cell.fill = pending_fill
                 cell.font = pending_font
+            elif "total" in val_str.lower() and (row_idx == ws.max_row or col_idx == 1):
+                cell.fill = PatternFill(start_color="E2E8F0", end_color="E2E8F0", fill_type="solid")
+                cell.font = Font(name="Arial", size=10, bold=True, color="0F172A")
 
     # Set column widths with maximum wrap cap
     for col in ws.columns:
@@ -243,9 +246,153 @@ def update_all_extracts():
         })
     df_teachers = pd.DataFrame(teacher_rows)
 
-    # Master Workbook (5 Tabs)
+    # District Coordinators & Entries Per Activity
+    def normalize_coordinator_name(raw_c, raw_s):
+        val = raw_s if str(raw_c).strip().lower() in ("other", "nan", "none", "") and pd.notnull(raw_s) else raw_c
+        val = str(val).strip() if pd.notnull(val) else ""
+        vl = val.lower()
+        if "lopeyok" in vl or "martin" in vl:
+            return "Lopeyok Martin"
+        elif "priscilla" in vl:
+            return "Priscilla"
+        elif "cheparen" in vl or "pauline" in vl:
+            return "Cheparen Pauline"
+        elif "evaline" in vl or "evalyne" in vl:
+            return "Evaline"
+        elif "amoo" in vl or "sofia" in vl:
+            return "Amoo Sofia"
+        elif "ngole" in vl or "paula" in vl:
+            return "Ngole Paula"
+        elif "lobu" in vl or "stephen" in vl:
+            return "Lobur Stephen"
+        elif "awas" in vl:
+            return "Awas Francis"
+        elif "ochen" in vl and "ogwang" in vl:
+            return "Ochen Moses Tom & Ogwang Sam"
+        elif "ochen" in vl:
+            return "Ochen Moses Tom"
+        elif "ogwang" in vl:
+            return "Ogwang Sam"
+        elif "opio" in vl and "okello" in vl:
+            return "Opio John Fred & Okello Daniel Nimaro"
+        elif "opio" in vl:
+            return "Opio John Fred"
+        elif "okello" in vl and "abia" not in vl and "vincent" not in vl:
+            return "Okello Daniel Nimaro"
+        elif "abia" in vl or "vincent" in vl:
+            return "Abia Francis & Okello Vincent"
+        elif "emma" in vl or "semakula" in vl:
+            return "Ngole Paula"
+        return val if val else "Unspecified"
+
+    def classify_activity(act_raw, milestone_raw):
+        act = str(act_raw).strip()
+        m = str(milestone_raw).strip() if pd.notnull(milestone_raw) else ""
+        if "Orientation" in act:
+            return "Teacher & VHT Orientation"
+        elif "Three visit" in act or "visit" in act.lower():
+            if "Visit 1" in m:
+                return "School Visit 1 (Follow-up)"
+            elif "Visit 2" in m:
+                return "School Visit 2 (Big Activation)"
+            elif "Visit 3" in m:
+                return "School Visit 3 (Closing Audit)"
+            return "Three Visit (Other)"
+        elif "Nutriclub" in act:
+            return "NutriClub Sessions"
+        elif "Community" in act or "demo" in act.lower():
+            return "Community Cooking Demos"
+        elif "change" in act.lower() or "msc" in act.lower() or "stories" in act.lower():
+            return "MSC Stories"
+        return act if act else "Other Activity"
+
+    def get_school_location(row, dist):
+        raw = None
+        if dist in row and pd.notnull(row[dist]):
+            raw = str(row[dist]).strip()
+        if not raw:
+            for d in ["Abim", "Amudat", "Kaabong", "Karenga", "Kotido", "Moroto", "Nabilatuk", "Nakapiripirit", "Napak"]:
+                if d in row and pd.notnull(row[d]):
+                    raw = str(row[d]).strip()
+                    break
+        if not raw:
+            for col in row.index:
+                if "school" in str(col).lower() and pd.notnull(row[col]):
+                    raw = str(row[col]).strip()
+                    break
+        if not raw and pd.notnull(row.get("Village / Catchment Demo Site")):
+            raw = str(row.get("Village / Catchment Demo Site")).strip()
+        return raw if raw else "Catchment Area"
+
+    coord_col = [c for c in df.columns if "coordinator name" in c.lower()][0]
+    spec_col = [c for c in df.columns if c.strip().lower() == "specify"][0]
+    dist_col = [c for c in df.columns if c.strip().lower() == "district"][0]
+    m_col = [c for c in df.columns if "milestone being conducted" in c.lower()][0]
+
+    from collections import defaultdict
+    matrix = defaultdict(lambda: defaultdict(int))
+    rows_log = []
+
+    for _, r in df.iterrows():
+        idx = int(r["_index"])
+        dt = str(r.get("Date", "")).split(" ")[0]
+        dist = str(r.get(dist_col, "")).strip()
+        coord = normalize_coordinator_name(r.get(coord_col), r.get(spec_col))
+        act_type = classify_activity(r.get(act_col), r.get(m_col))
+        loc = get_school_location(r, dist)
+
+        matrix[(dist, coord)][act_type] += 1
+        matrix[(dist, coord)]["Total"] += 1
+
+        rows_log.append({
+            "Entry Index": idx,
+            "Date": dt,
+            "District": dist,
+            "District Coordinator": coord,
+            "Activity Category": str(r.get(act_col, "")).strip(),
+            "Activity / Milestone": act_type,
+            "School / Demo Site": loc,
+            "Submission Status": "Logged & Verified"
+        })
+
+    activity_cols = [
+        "Teacher & VHT Orientation",
+        "School Visit 1 (Follow-up)",
+        "School Visit 2 (Big Activation)",
+        "School Visit 3 (Closing Audit)",
+        "NutriClub Sessions",
+        "Community Cooking Demos",
+        "MSC Stories"
+    ]
+
+    summary_rows = []
+    for (dist, coord), acts in sorted(matrix.items()):
+        row_data = {
+            "District": dist,
+            "District Coordinator": coord
+        }
+        for ac in activity_cols:
+            row_data[ac] = acts.get(ac, 0)
+        row_data["Total Entries Logged"] = acts["Total"]
+        summary_rows.append(row_data)
+
+    total_row = {
+        "District": "TOTAL (Karamoja Region)",
+        "District Coordinator": "All District Coordinators"
+    }
+    for ac in activity_cols:
+        total_row[ac] = sum(r[ac] for r in summary_rows)
+    total_row["Total Entries Logged"] = sum(r["Total Entries Logged"] for r in summary_rows)
+    summary_rows.append(total_row)
+
+    df_coord_summary = pd.DataFrame(summary_rows)
+    df_coord_log = pd.DataFrame(rows_log).sort_values(["District", "District Coordinator", "Entry Index"])
+
+    # Master Workbook (7 Tabs)
     master_file = "VHTs_Teachers_and_Demos_Master_Extract.xlsx"
     with pd.ExcelWriter(master_file, engine="openpyxl") as writer:
+        df_coord_summary.to_excel(writer, sheet_name="Coordinator Activity Summary", index=False)
+        df_coord_log.to_excel(writer, sheet_name=f"Coordinator Entries Log ({len(df_coord_log)})", index=False)
         df_visits.to_excel(writer, sheet_name="Missing Visits & MSC Status", index=False)
         df_msc.to_excel(writer, sheet_name="Missing MSC Stories (128 Tgt)", index=False)
         df_msc_detailed.to_excel(writer, sheet_name="MSC Stories Register (5)", index=False)
@@ -258,7 +405,7 @@ def update_all_extracts():
         apply_professional_styles(wb_master[sheet_name])
     wb_master.save(master_file)
 
-    print(f"✅ Combined Master Workbook updated: {master_file} ({len(df_vhts)} Demos | {len(df_teachers)} Teachers | {len(df_visits)} Schools | {len(df_msc_detailed)} MSC Stories).")
+    print(f"✅ Combined Master Workbook updated: {master_file} ({len(df_coord_summary)} Coordinator Rows | {len(df_vhts)} Demos | {len(df_teachers)} Teachers | {len(df_visits)} Schools | {len(df_msc_detailed)} MSC Stories).")
 
 if __name__ == "__main__":
     update_all_extracts()
