@@ -3319,42 +3319,32 @@ html_code = f"""<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- MSC STORIES REGISTER TABLE CARD -->
+      <!-- MSC STORIES REGISTER ACCORDIONS (DISTRICT-BY-DISTRICT - 128 TARGET) -->
       <div class="bg-white rounded-xl p-5 border border-slate-200/80 card-shadow space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
           <div>
-            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">School Field Register</span>
+            <span class="text-[11px] font-bold text-wfp-blue uppercase tracking-wider block">School Field Register · District Accordions</span>
             <h4 class="text-sm font-bold text-slate-800">School-by-School Change Stories Register</h4>
-            <p class="text-xs text-slate-500 mt-0.5">Audit register displaying verified change stories and sighted physical evidence across monitoring schools:</p>
+            <p class="text-xs text-slate-500 mt-0.5">District accordions tracking the full 128-story target (1 School Story + 1 Community Catchment Story per school across 64 schools):</p>
           </div>
-          <span id="msc-register-count-badge" class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
-            0 Stories Logged · Target: 128 Stories
-          </span>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="toggleAllMscAccordions(true)" type="button" class="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-angles-down text-slate-500"></i>
+              <span>Expand All</span>
+            </button>
+            <button onclick="toggleAllMscAccordions(false)" type="button" class="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-angles-up text-slate-500"></i>
+              <span>Collapse All</span>
+            </button>
+            <span id="msc-register-count-badge" class="text-xs bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-lg border border-slate-200">
+              0 Stories Logged · Target: 128 Stories
+            </span>
+          </div>
         </div>
 
-        <div>
-          <div class="sm:hidden text-[10px] text-slate-400 italic mb-1.5 flex items-center gap-1">
-            <i class="fa-solid fa-arrows-left-right text-wfp-blue"></i>
-            <span>Scroll table sideways to read full change stories and evidence</span>
-          </div>
-          <div class="overflow-x-auto rounded-lg border border-slate-200">
-            <table class="w-full text-xs text-left border-collapse min-w-[700px]">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
-                  <th class="py-2.5 px-3">School &amp; District</th>
-                  <th class="py-2.5 px-3">Storyteller &amp; Age</th>
-                  <th class="py-2.5 px-3">Role</th>
-                  <th class="py-2.5 px-3">Triggering Campaign Event</th>
-                  <th class="py-2.5 px-3">Action Done Differently</th>
-                  <th class="py-2.5 px-3">Why Significant (Verbatim Quote)</th>
-                  <th class="py-2.5 px-3">Verifiable Evidence Sighted</th>
-                </tr>
-              </thead>
-              <tbody id="change-stories-table-body" class="divide-y divide-slate-100 text-slate-700">
-                <!-- Populated via renderChangeStoriesTable -->
-              </tbody>
-            </table>
-          </div>
+        <!-- District Accordions Container -->
+        <div id="msc-district-accordions-container" class="space-y-3.5">
+          <!-- Dynamically populated via renderChangeStoriesTable -->
         </div>
       </div>
     </div>
@@ -7042,11 +7032,40 @@ html_code = f"""<!DOCTYPE html>
       `;
     }}
 
-    // Render School-by-School Change Stories Table
+    // Global toggle for all MSC accordions
+    function toggleAllMscAccordions(expand = true) {{
+      const panels = document.querySelectorAll('.msc-accordion-panel');
+      const chevrons = document.querySelectorAll('.msc-accordion-chevron');
+      panels.forEach(p => {{
+        if (expand) p.classList.remove('hidden');
+        else p.classList.add('hidden');
+      }});
+      chevrons.forEach(c => {{
+        if (expand) c.classList.add('rotate-180');
+        else c.classList.remove('rotate-180');
+      }});
+    }}
+
+    // Toggle individual district accordion
+    function toggleMscDistrictAccordion(dist) {{
+      const panel = document.getElementById(`msc-panel-${{dist}}`);
+      const chevron = document.getElementById(`msc-chevron-${{dist}}`);
+      if (!panel) return;
+      const isHidden = panel.classList.contains('hidden');
+      if (isHidden) {{
+        panel.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      }} else {{
+        panel.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }}
+    }}
+
+    // Render School-by-School Change Stories District Accordions
     function renderChangeStoriesTable(selDistrict = 'ALL', search = '') {{
-      const tbody = document.getElementById('change-stories-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
+      const container = document.getElementById('msc-district-accordions-container');
+      if (!container) return;
+      container.innerHTML = '';
 
       const stories = (BASE_DATA.msc_stories && BASE_DATA.msc_stories.stories_register) ? BASE_DATA.msc_stories.stories_register : [];
       const searchLower = (search || '').toLowerCase().trim();
@@ -7070,18 +7089,6 @@ html_code = f"""<!DOCTYPE html>
         elBadge.innerHTML = `${{storiesForKpi.length}} Stories Logged · Target: ${{selDistrict === 'ALL' ? '128 Stories (2 per school)' : '2 Stories / School'}}`;
       }}
 
-      if (!stories || stories.length === 0) {{
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7" class="text-center py-10 text-slate-400 text-xs">
-              <i class="fa-solid fa-book-open text-3xl text-slate-300 mb-2 block"></i>
-              No Most Significant Change (MSC) stories submitted yet. Awaiting field narratives from monitoring visits.
-            </td>
-          </tr>
-        `;
-        return;
-      }}
-
       const badgeColors = {{
         'Girl Learner': 'bg-pink-50 text-pink-700 border-pink-200',
         'Boy Learner': 'bg-blue-50 text-wfp-blue border-blue-200',
@@ -7091,53 +7098,271 @@ html_code = f"""<!DOCTYPE html>
         'Local Leader': 'bg-teal-50 text-teal-800 border-teal-200'
       }};
 
-      let matchCount = 0;
-      stories.forEach(s => {{
-        if (selDistrict !== 'ALL' && s.district !== selDistrict) return;
+      const districtOrder = ['Abim', 'Amudat', 'Kaabong', 'Karenga', 'Kotido', 'Moroto', 'Nabilatuk', 'Nakapiripirit', 'Napak'];
+      let totalRenderedDistricts = 0;
+
+      districtOrder.forEach(dName => {{
+        if (selDistrict !== 'ALL' && dName !== selDistrict) return;
+
+        const distInfo = DISTRICT_DB[dName] || {{}};
+        const rawSchools = distInfo.schools_list || [];
+        const schoolsNames = rawSchools.map(s => typeof s === 'object' ? (s.name || s.school || '') : String(s)).filter(Boolean);
+        const distTarget = (distInfo.target_schools || distInfo.schools || schoolsNames.length || 5) * 2;
+
+        let distStories = stories.filter(s => s.district === dName);
+
         if (searchLower) {{
-          const matchStr = (s.school + ' ' + s.district + ' ' + s.name_and_age + ' ' + s.role + ' ' + s.action_done + ' ' + s.event + ' ' + s.why_significant).toLowerCase();
-          if (!matchStr.includes(searchLower)) return;
+          distStories = distStories.filter(s => {{
+            const matchStr = (
+              (s.school || '') + ' ' + 
+              (s.district || '') + ' ' + 
+              (s.name_and_age || '') + ' ' + 
+              (s.role || '') + ' ' + 
+              (s.situation_before || '') + ' ' + 
+              (s.action_done || '') + ' ' + 
+              (s.event || '') + ' ' + 
+              (s.why_significant || '') + ' ' + 
+              (s.evidence || '') + ' ' +
+              (s.collector_notes || '')
+            ).toLowerCase();
+            return matchStr.includes(searchLower);
+          }});
+
+          if (distStories.length === 0 && !dName.toLowerCase().includes(searchLower) && !schoolsNames.some(sn => sn.toLowerCase().includes(searchLower))) {{
+            return;
+          }}
         }}
-        matchCount++;
 
-        const badgeClass = badgeColors[s.role] || 'bg-slate-50 text-slate-700 border-slate-200';
+        totalRenderedDistricts++;
+        const storiesCount = distStories.length;
+        const pct = Math.round((storiesCount / distTarget) * 100);
 
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-blue-50/40 transition border-b border-slate-100 text-xs';
-        tr.innerHTML = `
-          <td class="py-2.5 px-3 font-semibold text-slate-800">
-            <div>${{s.school}}</div>
-            <div class="text-[11px] text-slate-500 font-normal">${{s.district}} District</div>
-          </td>
-          <td class="py-2.5 px-3 font-bold text-slate-900 whitespace-nowrap">${{s.name_and_age}}</td>
-          <td class="py-2.5 px-3 whitespace-nowrap">
-            <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${{badgeClass}}">${{s.role}}</span>
-          </td>
-          <td class="py-2.5 px-3 text-slate-700 max-w-xs">
-            <span class="text-[11px] font-medium text-wfp-blue block">${{s.event}}</span>
-          </td>
-          <td class="py-2.5 px-3 text-slate-700 max-w-xs">
-            <span class="text-[11px] text-emerald-800 font-medium block">${{s.action_done}}</span>
-          </td>
-          <td class="py-2.5 px-3 text-slate-600 italic text-[11px] max-w-sm">
-            "${{s.why_significant}}"
-          </td>
-          <td class="py-2.5 px-3 text-slate-700">
-            <div class="text-[11px] font-semibold text-slate-800">${{s.evidence}}</div>
-            <div class="text-[10px] text-slate-500 italic">${{s.collector_notes}}</div>
-          </td>
+        // Auto-expand if district has stories, or if filtered by district, or if searching
+        const isOpen = (storiesCount > 0) || (selDistrict !== 'ALL') || (searchLower.length > 0);
+
+        const card = document.createElement('div');
+        card.className = 'border border-slate-200/90 rounded-xl overflow-hidden shadow-2xs bg-white';
+        card.id = `msc-accordion-${{dName}}`;
+
+        let storiesTableHtml = '';
+        if (storiesCount > 0) {{
+          let rowsHtml = '';
+          distStories.forEach(s => {{
+            const badgeClass = badgeColors[s.role] || 'bg-slate-50 text-slate-700 border-slate-200';
+            rowsHtml += `
+              <tr class="hover:bg-blue-50/30 transition border-b border-slate-200/80 text-xs align-top">
+                <!-- Column 1: School & District Context -->
+                <td class="py-3.5 px-3.5 font-semibold text-slate-800 align-top">
+                  <div class="text-sm font-bold text-slate-900 tracking-tight">${{s.school}}</div>
+                  <div class="text-[11px] text-slate-500 font-medium mt-0.5"><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>${{s.district}} District</div>
+                  <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${{s.story_type === 'School Story' ? 'bg-blue-50 text-wfp-blue border border-blue-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}}">
+                      ${{s.story_type || 'School Story'}}
+                    </span>
+                    <span class="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                      <i class="fa-regular fa-calendar mr-1 text-slate-400"></i>${{s.date || 'Field Date'}}
+                    </span>
+                  </div>
+                  ${{s.collector ? `
+                    <div class="text-[10px] text-slate-400 mt-2 flex items-center gap-1">
+                      <i class="fa-solid fa-user-check text-slate-400"></i>
+                      <span>Lead: ${{s.collector}}</span>
+                    </div>
+                  ` : ''}}
+                </td>
+
+                <!-- Column 2: Storyteller Profile -->
+                <td class="py-3.5 px-3.5 align-top">
+                  <div class="font-bold text-slate-900 text-xs">${{s.name_and_age}}</div>
+                  <div class="mt-1.5">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${{badgeClass}} inline-block shadow-2xs">
+                      ${{s.role}}
+                    </span>
+                  </div>
+                  <div class="text-[10px] text-slate-400 mt-2 font-mono">ID: ${{s.id || 'MSC'}}</div>
+                </td>
+
+                <!-- Column 3: 1. Situation Before Campaign -->
+                <td class="py-3.5 px-3.5 align-top bg-amber-50/20 border-x border-amber-100/50">
+                  <div class="bg-amber-50/80 border border-amber-200/80 rounded-lg p-2.5 text-slate-700 space-y-1.5">
+                    <span class="text-[10px] font-bold text-amber-900 uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-clock-rotate-left text-amber-700"></i> Baseline Challenge
+                    </span>
+                    <p class="text-xs text-slate-800 leading-relaxed font-normal">${{s.situation_before || 'Before the campaign, no specific baseline challenge was logged.'}}</p>
+                  </div>
+                </td>
+
+                <!-- Column 4: 2. Triggering Campaign Catalyst -->
+                <td class="py-3.5 px-3.5 align-top bg-blue-50/20 border-r border-blue-100/50">
+                  <div class="bg-blue-50/80 border border-blue-200/80 rounded-lg p-2.5 text-slate-700 space-y-1.5">
+                    <span class="text-[10px] font-bold text-wfp-blue uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-bullhorn text-wfp-blue"></i> Campaign Catalyst
+                    </span>
+                    <p class="text-xs text-slate-900 font-semibold leading-relaxed">${{s.event || 'NutriBus Campaign Activity'}}</p>
+                  </div>
+                </td>
+
+                <!-- Column 5: 3. Action Done Differently (The Shift) -->
+                <td class="py-3.5 px-3.5 align-top bg-emerald-50/20 border-r border-emerald-100/50">
+                  <div class="bg-emerald-50/80 border border-emerald-200/80 rounded-lg p-2.5 text-slate-800 space-y-1.5">
+                    <span class="text-[10px] font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-arrow-right-arrow-left text-emerald-700"></i> Adopted Shift
+                    </span>
+                    <p class="text-xs text-emerald-950 font-bold leading-relaxed">${{s.action_done || 'Practical shift adopted.'}}</p>
+                  </div>
+                </td>
+
+                <!-- Column 6: 4. Why Significant (Quote) -->
+                <td class="py-3.5 px-3.5 align-top bg-purple-50/20 border-r border-purple-100/50">
+                  <div class="bg-purple-50/80 border border-purple-200/80 rounded-lg p-2.5 text-slate-800 space-y-1.5">
+                    <span class="text-[10px] font-bold text-purple-900 uppercase tracking-wider flex items-center gap-1">
+                      <i class="fa-solid fa-quote-left text-purple-700"></i> Personal Significance
+                    </span>
+                    <p class="text-xs text-purple-950 italic font-medium leading-relaxed">"${{s.why_significant || 'This change is significant to our household/school.'}}"</p>
+                  </div>
+                </td>
+
+                <!-- Column 7: 5. Physical Evidence & Notes -->
+                <td class="py-3.5 px-3.5 align-top bg-slate-50/30">
+                  <div class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 space-y-2">
+                    <div>
+                      <span class="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1">
+                        <i class="fa-solid fa-clipboard-check text-emerald-600"></i> Sighted Evidence
+                      </span>
+                      <div class="text-xs font-semibold text-emerald-800 mt-1 flex items-start gap-1.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-xs mt-0.5 shrink-0"></i>
+                        <span>${{s.evidence || 'Physical observation verified'}}</span>
+                      </div>
+                    </div>
+                    ${{s.collector_notes ? `
+                      <div class="border-t border-slate-200 pt-1.5 mt-1">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Field Notes:</span>
+                        <p class="text-[11px] text-slate-600 italic leading-snug mt-0.5">${{s.collector_notes}}</p>
+                      </div>
+                    ` : ''}}
+                  </div>
+                </td>
+              </tr>
+            `;
+          }});
+
+          storiesTableHtml = `
+            <div>
+              <div class="sm:hidden text-[10px] text-slate-400 italic mb-1.5 flex items-center gap-1">
+                <i class="fa-solid fa-arrows-left-right text-wfp-blue"></i>
+                <span>Scroll table sideways to read all columns</span>
+              </div>
+              <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-xs">
+                <table class="w-full text-xs text-left border-collapse min-w-[1350px]">
+                  <thead>
+                    <tr class="bg-slate-100/90 text-slate-700 font-bold border-b border-slate-200 text-xs">
+                      <th class="py-3 px-3.5 w-48 text-slate-800">School &amp; District</th>
+                      <th class="py-3 px-3.5 w-44 text-slate-800">Storyteller Profile</th>
+                      <th class="py-3 px-3.5 w-72 text-amber-900 bg-amber-50/50 border-x border-amber-100/60">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-4 h-4 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center text-[10px] font-black">1</span>
+                          <span>Situation Before Campaign</span>
+                        </div>
+                      </th>
+                      <th class="py-3 px-3.5 w-56 text-wfp-blue bg-blue-50/50 border-r border-blue-100/60">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-4 h-4 rounded-full bg-blue-200 text-wfp-blue flex items-center justify-center text-[10px] font-black">2</span>
+                          <span>Triggering Campaign Catalyst</span>
+                        </div>
+                      </th>
+                      <th class="py-3 px-3.5 w-60 text-emerald-900 bg-emerald-50/50 border-r border-emerald-100/60">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-4 h-4 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center text-[10px] font-black">3</span>
+                          <span>Action Done Differently</span>
+                        </div>
+                      </th>
+                      <th class="py-3 px-3.5 w-64 text-purple-900 bg-purple-50/50 border-r border-purple-100/60">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-4 h-4 rounded-full bg-purple-200 text-purple-800 flex items-center justify-center text-[10px] font-black">4</span>
+                          <span>Why Significant (Quote)</span>
+                        </div>
+                      </th>
+                      <th class="py-3 px-3.5 w-64 text-slate-800 bg-slate-50">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-4 h-4 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-black">5</span>
+                          <span>Verifiable Evidence &amp; Notes</span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 text-slate-700">
+                    ${{rowsHtml}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }} else {{
+          storiesTableHtml = `
+            <div class="bg-white rounded-xl p-4 border border-dashed border-slate-200 text-slate-600 space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-school text-wfp-blue"></i>
+                  <span>${{dName}} Monitoring Schools Awaiting Stories (${{schoolsNames.length}} Schools · ${{distTarget}} Target Stories):</span>
+                </span>
+                <span class="text-[11px] text-amber-700 font-semibold bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
+                  Target: 1 School Story + 1 Community Catchment Story per school
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                ${{schoolsNames.map(s => `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-50 text-slate-700 border border-slate-200">${{s}}</span>`).join('')}}
+              </div>
+              <div class="text-[11px] text-slate-500 pt-1 flex items-center gap-1.5 italic">
+                <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
+                <span>Field qualitative collection scheduled during monitoring visits and closeout audits.</span>
+              </div>
+            </div>
+          `;
+        }}
+
+        card.innerHTML = `
+          <button type="button" 
+                  onclick="toggleMscDistrictAccordion('${{dName}}')" 
+                  class="w-full p-4 flex flex-wrap items-center justify-between gap-3 bg-slate-50/80 hover:bg-blue-50/50 transition text-left border-b border-slate-200 cursor-pointer">
+            <div class="flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg ${{storiesCount > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-wfp-blue'}} flex items-center justify-center font-bold text-sm shadow-2xs shrink-0">
+                <i class="fa-solid ${{storiesCount > 0 ? 'fa-book-bookmark' : 'fa-map-location-dot'}}"></i>
+              </span>
+              <div>
+                <h5 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                  <span>${{dName}} District</span>
+                </h5>
+                <p class="text-[11px] text-slate-500 mt-0.5">
+                  ${{schoolsNames.length}} Monitoring Schools · Target: ${{distTarget}} Stories (2 per school)
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              ${{storiesCount > 0 
+                ? `<span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-1 rounded-lg border border-emerald-200 flex items-center gap-1.5"><i class="fa-solid fa-check-circle text-emerald-600"></i> ${{storiesCount}} of ${{distTarget}} Stories Logged (${{pct}}%)</span>` 
+                : `<span class="text-xs bg-amber-50 text-amber-800 font-semibold px-2.5 py-1 rounded-lg border border-amber-200 flex items-center gap-1.5"><i class="fa-solid fa-clock text-amber-600"></i> 0 of ${{distTarget}} Stories Pending</span>`}}
+              <div class="w-16 bg-slate-200 rounded-full h-2 overflow-hidden hidden sm:block">
+                <div class="bg-wfp-blue h-2 rounded-full" style="width: ${{Math.min(100, pct)}}%"></div>
+              </div>
+              <i class="msc-accordion-chevron fa-solid fa-chevron-down text-slate-400 transition-transform duration-200 ${{isOpen ? 'rotate-180' : ''}}" id="msc-chevron-${{dName}}"></i>
+            </div>
+          </button>
+
+          <div id="msc-panel-${{dName}}" class="msc-accordion-panel p-4 space-y-3 ${{isOpen ? '' : 'hidden'}} bg-slate-50/30">
+            ${{storiesTableHtml}}
+          </div>
         `;
-        tbody.appendChild(tr);
+
+        container.appendChild(card);
       }});
 
-      if (matchCount === 0) {{
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td colspan="7" class="py-6 text-center text-slate-400 italic text-xs">
-            No change stories matched the selected filters.
-          </td>
+      if (totalRenderedDistricts === 0) {{
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-500 text-xs">
+            <i class="fa-solid fa-book-open text-slate-400 text-2xl mb-2 block"></i>
+            No change stories or monitoring schools matched the selected district and keyword filter.
+          </div>
         `;
-        tbody.appendChild(tr);
       }}
     }}
 

@@ -37,18 +37,18 @@ This automatically:
 
 ---
 
-## 📊 Core Headline Indicators & Field Progress (755 Submissions Ingested)
+## 📊 Core Headline Indicators & Field Progress (760 Submissions Ingested)
 
 | Headline Indicator | Current Cleaned Reach | Operations Target | Status / Progress |
 | :--- | :---: | :---: | :--- |
 | **Official Schools Reached** | **64** | 64 schools | **100.0% Progress** (All 9 districts covered) |
 | **School Contact Visits** | **138** | 192 visits | **71.9% Progress** (Visit 1: 65, Visit 2: 61, Visit 3: 12) |
-| **Community Demonstrations** | **402** | 640 sites | **62.8% Progress** (Active across all 64 catchments) |
-| **NutriClub Sessions** | **194** | 64 schools | **303.1% Progress** (Active student clubs operating) |
+| **Community Demonstrations** | **405** | 640 sites | **63.3% Progress** (Active across all 64 catchments) |
+| **NutriClub Sessions** | **196** | 64 schools | **306.3% Progress** (Active student clubs operating) |
 | **Learners Reached** | **74,044** | 80,875 learners | **91.6% Progress** |
-| **Caregivers Reached** | **22,753** | 51,200 adults | **44.4% Progress** |
-| **Teachers & VHT Stakeholders** | **1,449** | 768 key actors | **188.7% Progress** (Oriented & mobilized) |
-| **Total PWD Reach** | **16,244** | 1,200 individuals | **1,353.7% Progress** (Inclusive accommodation) |
+| **Caregivers Reached** | **22,890** | 51,200 adults | **44.7% Progress** |
+| **Teachers & VHT Stakeholders** | **1,451** | 768 key actors | **188.9% Progress** (Oriented & mobilized) |
+| **Total PWD Reach** | **16,248** | 1,200 individuals | **1,354.0% Progress** (Inclusive accommodation) |
 | **Most Significant Change (MSC) Stories** | **5** | 128 stories | **3.9% Progress** (Target: 2 stories per school) |
 
 ---
@@ -59,11 +59,11 @@ All verification, monitoring audit, and partner reporting is unified in a single
 
 👉 **`VHTs_Teachers_and_Demos_Master_Extract.xlsx`** (7 Formatted Tabs)
 1. **Tab 1: `Coordinator Activity Summary`** (Executive summary matrix of total submissions logged by each District Coordinator broken down by activity type).
-2. **Tab 2: `Coordinator Entries Log (755)`** (Full registry of all 755 submissions with entry index, date, district, coordinator, activity type, and school/site).
+2. **Tab 2: `Coordinator Entries Log (760)`** (Full registry of all 760 submissions with entry index, date, district, coordinator, activity type, and school/site).
 3. **Tab 3: `Missing Visits & MSC Status`** (Tracks all 64 schools across Visit 1, Visit 2, Visit 3 Closeout, School Story, Community Story, and MSC Progress).
 4. **Tab 4: `Missing MSC Stories (128 Tgt)`** (Tracks School Story vs Community Catchment Story target vs actual and follow-up actions across all 64 schools).
 5. **Tab 5: `MSC Stories Register (5)`** (Complete qualitative narratives, storyteller demographics, verbatim quotes, and physical evidence sighted).
-6. **Tab 6: `VHTs & Demos (402)`** (All 402 community cooking demonstrations with dates, demo sites, catchment schools, named VHTs, and coordinators).
+6. **Tab 6: `VHTs & Demos (405)`** (All 405 community cooking demonstrations with dates, demo sites, catchment schools, named VHTs, and coordinators).
 7. **Tab 7: `Teachers & Club Patrons (64)`** (All 64 schools with named teacher NutriClub patrons and club membership counts).
 
 ---
