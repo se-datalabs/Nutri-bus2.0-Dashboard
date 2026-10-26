@@ -37,19 +37,19 @@ This automatically:
 
 ---
 
-## 📊 Core Headline Indicators & Field Progress (780 Submissions Ingested)
+## 📊 Core Headline Indicators & Field Progress (811 Submissions Ingested)
 
 | Headline Indicator | Current Cleaned Reach | Operations Target | Status / Progress |
 | :--- | :---: | :---: | :--- |
 | **Official Schools Reached** | **64** | 64 schools | **100.0% Progress** (All 9 districts covered) |
-| **School Contact Visits** | **140** | 192 visits | **72.9% Progress** (Visit 1: 65, Visit 2: 63, Visit 3: 12) |
-| **Community Demonstrations** | **422** | 640 sites | **65.9% Progress** (Active across all 64 catchments) |
-| **NutriClub Sessions** | **197** | 64 schools | **307.8% Progress** (Active student clubs operating) |
+| **School Contact Visits** | **141** | 192 visits | **73.4% Progress** (Visit 1: 65, Visit 2: 63, Visit 3: 13) |
+| **Community Demonstrations** | **438** | 640 sites | **68.4% Progress** (Active across all 64 catchments) |
+| **NutriClub Sessions** | **207** | 64 schools | **323.4% Progress** (Active student clubs operating) |
 | **Learners Reached** | **79,102** | 80,875 learners | **97.8% Progress** |
-| **Caregivers Reached** | **23,889** | 51,200 adults | **46.7% Progress** |
-| **Teachers & VHT Stakeholders** | **1,512** | 768 key actors | **196.9% Progress** (Oriented & mobilized) |
-| **Total PWD Reach** | **21,454** | 1,200 individuals | **1,787.8% Progress** (Inclusive accommodation) |
-| **Most Significant Change (MSC) Stories** | **5** | 128 stories | **3.9% Progress** (Target: 2 stories per school) |
+| **Caregivers Reached** | **24,949** | 51,200 adults | **48.7% Progress** |
+| **Teachers & VHT Stakeholders** | **1,522** | 768 key actors | **198.2% Progress** (Oriented & mobilized) |
+| **Total PWD Reach** | **21,577** | 1,200 individuals | **1,798.1% Progress** (Inclusive accommodation) |
+| **Most Significant Change (MSC) Stories** | **9** | 128 stories | **7.0% Progress** (Target: 2 stories per school) |
 
 ---
 
@@ -59,11 +59,11 @@ All verification, monitoring audit, and partner reporting is unified in a single
 
 👉 **`VHTs_Teachers_and_Demos_Master_Extract.xlsx`** (7 Formatted Tabs)
 1. **Tab 1: `Coordinator Activity Summary`** (Executive summary matrix of total submissions logged by each District Coordinator broken down by activity type).
-2. **Tab 2: `Coordinator Entries Log (780)`** (Full registry of all 780 submissions with entry index, date, district, coordinator, activity type, and school/site).
+2. **Tab 2: `Coordinator Entries Log (811)`** (Full registry of all 811 submissions with entry index, date, district, coordinator, activity type, and school/site).
 3. **Tab 3: `Missing Visits & MSC Status`** (Tracks all 64 schools across Visit 1, Visit 2, Visit 3 Closeout, School Story, Community Story, and MSC Progress).
 4. **Tab 4: `Missing MSC Stories (128 Tgt)`** (Tracks School Story vs Community Catchment Story target vs actual and follow-up actions across all 64 schools).
-5. **Tab 5: `MSC Stories Register (5)`** (Complete qualitative narratives, storyteller demographics, verbatim quotes, and physical evidence sighted).
-6. **Tab 6: `VHTs & Demos (422)`** (All 422 community cooking demonstrations with dates, demo sites, catchment schools, named VHTs, and coordinators).
+5. **Tab 5: `MSC Stories Register (9)`** (Complete qualitative narratives, storyteller demographics, verbatim quotes, and physical evidence sighted).
+6. **Tab 6: `VHTs & Demos (438)`** (All 438 community cooking demonstrations with dates, demo sites, catchment schools, named VHTs, and coordinators).
 7. **Tab 7: `Teachers & Club Patrons (64)`** (All 64 schools with named teacher NutriClub patrons and club membership counts).
 
 ---
@@ -75,18 +75,21 @@ All verification, monitoring audit, and partner reporting is unified in a single
 
 ### 2. Missing Visit 2 (NutriBus Day Activation): **2 Schools**
 - Abim District (2 schools remaining): **`OBOLOKOME P/S`**, **`OTALABAR P/S`** (`MORULEM BOYS P/S` completed in entry #768; `ALEREK P/S` completed in entry #696)
-*(Kotido Mixed P/S logged Visit 2, reducing pending count from 5 to 4).*
 
-### 3. Visit 3 (Closeout Audit): **12 Schools Completed**
+### 3. Visit 3 (Closeout Audit): **13 Schools Completed**
 - **Napak District (5 of 5 schools completed - 100%):** `KALOTOM P/S`, `KAPUAT P/S`, `LONGALOM P/S`, `LOPEEI P/S`, `LORENGECHORA P/S`
 - **Karenga District (5 of 5 schools completed - 100%):** `KARENGA BOYS P/S`, `KARENGA GIRLS P/S`, `KAWALAKOL P/S`, `LOBALANGIT P/S`, `NALAKAS P/S`
 - **Kotido District (2 schools completed):** `NAPUMPUM P/S`, `LOMUKURA P/S`
-- Remaining 52 schools: In progress / pending closeout schedule.
+- **Abim District (1 school completed):** `ROGOM P/S` (Entry #806)
+- Remaining 51 schools: In progress / pending closeout schedule.
 
-### 4. Most Significant Change Stories: **123 Stories Needed**
+### 4. Most Significant Change Stories: **119 Stories Needed**
 - **Target:** 2 stories per school (1 School Story + 1 Community Catchment Story) × 64 schools = **128 stories**.
-- **Napak District (5 schools):** Each school has completed 1 story; each needs 1 remaining story (`KALOTOM P/S` needs a School Story; `KAPUAT P/S`, `LONGALOM P/S`, `LOPEEI P/S`, `LORENGECHORA P/S` need a Community Story).
-- **Other 8 Districts (59 schools):** Pending both School and Community stories.
+- **Completed Target Schools (2 schools completed 100%):**
+  - **Kaabong District:** `KAKAMAR P/S` (2 of 2: Lokol Lokodo & Lobwal Joseph) and `KAMACHARIKOL P/S` (2 of 2: Piramoe John Leo & Nakong Hellen).
+- **Partial Target Schools (5 schools):**
+  - **Napak District:** `KALOTOM P/S` (needs School Story); `KAPUAT P/S`, `LONGALOM P/S`, `LOPEEI P/S`, `LORENGECHORA P/S` (each needs 1 Community Story).
+- **Other 7 Districts (57 schools):** Pending both School and Community stories.
 
 ---
 

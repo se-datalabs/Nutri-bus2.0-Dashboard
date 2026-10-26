@@ -395,7 +395,7 @@ def update_all_extracts():
         df_coord_log.to_excel(writer, sheet_name=f"Coordinator Entries Log ({len(df_coord_log)})", index=False)
         df_visits.to_excel(writer, sheet_name="Missing Visits & MSC Status", index=False)
         df_msc.to_excel(writer, sheet_name="Missing MSC Stories (128 Tgt)", index=False)
-        df_msc_detailed.to_excel(writer, sheet_name="MSC Stories Register (5)", index=False)
+        df_msc_detailed.to_excel(writer, sheet_name=f"MSC Stories Register ({len(df_msc_detailed)})", index=False)
         df_vhts.to_excel(writer, sheet_name=f"VHTs & Demos ({len(df_vhts)})", index=False)
         df_teachers.to_excel(writer, sheet_name="Teachers & Club Patrons (64)", index=False)
 
