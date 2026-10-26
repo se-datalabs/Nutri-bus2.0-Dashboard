@@ -8,9 +8,9 @@
     "last_updated": "2026-10-02",
     "index_tracking": {
       "column": "_index",
-      "last_processed_index": 765,
-      "total_submissions_tracked": 760,
-      "new_entries_this_batch": 5,
+      "last_processed_index": 785,
+      "total_submissions_tracked": 780,
+      "new_entries_this_batch": 20,
       "tracked_indices": [
         1,
         2,
@@ -771,9 +771,29 @@
         762,
         763,
         764,
-        765
+        765,
+        766,
+        767,
+        768,
+        769,
+        770,
+        771,
+        772,
+        773,
+        774,
+        775,
+        776,
+        777,
+        778,
+        779,
+        780,
+        781,
+        782,
+        783,
+        784,
+        785
       ],
-      "last_synced": "2026-10-25 15:48:11"
+      "last_synced": "2026-10-26 08:30:38"
     }
   },
   "overview": {
@@ -792,10 +812,10 @@
       {
         "id": "visits",
         "title": "School Contact Visits",
-        "value": 138,
+        "value": 140,
         "target": 192,
         "unit": "visits",
-        "progress_pct": 71.9,
+        "progress_pct": 72.9,
         "icon": "fa-bus",
         "badge": "3-Visit Cycle",
         "context": "1 activation visit at Kotido Mixed P/S completed out of 192 total scheduled visits across 64 schools"
@@ -803,10 +823,10 @@
       {
         "id": "demos",
         "title": "Demonstration Sites",
-        "value": 405,
+        "value": 422,
         "target": 640,
         "unit": "sites",
-        "progress_pct": 63.3,
+        "progress_pct": 65.9,
         "icon": "fa-utensils",
         "badge": "Awaiting Submissions",
         "context": "Community cooking demonstration logs pending field submission"
@@ -814,10 +834,10 @@
       {
         "id": "learners",
         "title": "Learners Directly Reached",
-        "value": 74044,
+        "value": 79102,
         "target": 80875,
         "unit": "learners",
-        "progress_pct": 91.55,
+        "progress_pct": 97.81,
         "icon": "fa-children",
         "badge": "Session Attendance",
         "context": "36 learners at Kakamar P/S NutriClub + 35 learners at Kotido Mixed P/S Big Activation Day"
@@ -825,10 +845,10 @@
       {
         "id": "caregivers",
         "title": "Caregivers Reached",
-        "value": 22890,
+        "value": 23889,
         "target": 51200,
         "unit": "caregivers",
-        "progress_pct": 44.71,
+        "progress_pct": 46.66,
         "icon": "fa-person-breastfeeding",
         "badge": "Community Reach",
         "context": "4 community members attended Visit 2 at Kotido mixed PS; community demo records pending"
@@ -836,10 +856,10 @@
       {
         "id": "stakeholders",
         "title": "Teachers & VHTs Oriented",
-        "value": 1451.0,
+        "value": 1512.0,
         "target": 768,
         "unit": "cadres",
-        "progress_pct": 188.9,
+        "progress_pct": 196.9,
         "icon": "fa-chalkboard-user",
         "badge": "42 Teachers / 23 VHTs",
         "context": "18 teachers & 23 VHTs in Abim; 24 teachers in Kotido"
@@ -847,10 +867,10 @@
       {
         "id": "pwd",
         "title": "Persons with Disabilities (PWD)",
-        "value": 16248,
+        "value": 21454,
         "target": 1200,
         "unit": "individuals",
-        "progress_pct": 1354.0,
+        "progress_pct": 1787.83,
         "icon": "fa-wheelchair",
         "badge": "3 Learners / 2 Adults",
         "context": "2 mid-primary learners, 1 upper-primary learner, and 2 teachers with PWD identified at Kotido Mixed P/S"
@@ -872,13 +892,13 @@
         "schools_reached": 9,
         "target_schools": 9,
         "school_progress_pct": 100.0,
-        "demos_completed": 22,
+        "demos_completed": 28,
         "target_demos": 90,
-        "demo_progress_pct": 24.4,
-        "learners_reached": 15208,
-        "caregivers_reached": 1748,
-        "stakeholders_trained": 221.0,
-        "pwd_reach": 12960,
+        "demo_progress_pct": 31.1,
+        "learners_reached": 20266,
+        "caregivers_reached": 2287,
+        "stakeholders_trained": 281.0,
+        "pwd_reach": 18157,
         "status": "Active (Reports Received)"
       },
       {
@@ -900,13 +920,13 @@
         "schools_reached": 13,
         "target_schools": 13,
         "school_progress_pct": 100.0,
-        "demos_completed": 60,
+        "demos_completed": 68,
         "target_demos": 130,
-        "demo_progress_pct": 46.2,
+        "demo_progress_pct": 52.3,
         "learners_reached": 8900,
-        "caregivers_reached": 2061,
-        "stakeholders_trained": 80,
-        "pwd_reach": 456,
+        "caregivers_reached": 2372,
+        "stakeholders_trained": 81,
+        "pwd_reach": 463,
         "status": "Active (Reports Received)"
       },
       {
@@ -956,13 +976,13 @@
         "schools_reached": 5,
         "target_schools": 5,
         "school_progress_pct": 100.0,
-        "demos_completed": 33,
+        "demos_completed": 36,
         "target_demos": 50,
-        "demo_progress_pct": 66.0,
+        "demo_progress_pct": 72.0,
         "learners_reached": 5627,
-        "caregivers_reached": 2018,
+        "caregivers_reached": 2167,
         "stakeholders_trained": 63.0,
-        "pwd_reach": 137,
+        "pwd_reach": 139,
         "status": "Active (Reports Received)"
       },
       {
@@ -1017,23 +1037,23 @@
       ],
       "actuals": [
         64,
-        138,
-        405,
-        196,
-        74044,
-        22890,
-        1451.0,
-        16248
+        140,
+        422,
+        197,
+        79102,
+        23889,
+        1512.0,
+        21454
       ],
       "pct": [
         100.0,
-        71.9,
-        63.3,
-        306.2,
-        91.55,
-        44.71,
-        188.9,
-        1354.0
+        72.9,
+        65.9,
+        307.8,
+        97.81,
+        46.66,
+        196.9,
+        1787.83
       ]
     }
   },
@@ -2072,7 +2092,7 @@
       ],
       "completed_schools": [
         65,
-        61,
+        63,
         12
       ]
     },
@@ -2084,17 +2104,17 @@
       ],
       "total_attendance": [
         93301,
-        74044,
+        79102,
         12626
       ],
       "boys": [
         50622,
-        39481,
+        42010,
         6452
       ],
       "girls": [
         42679,
-        34563,
+        37092,
         6174
       ]
     },
@@ -2106,7 +2126,7 @@
       ],
       "values": [
         65,
-        61,
+        63,
         12
       ]
     },
@@ -4685,7 +4705,7 @@
       }
     },
     "visit2": {
-      "schools_completed": 61,
+      "schools_completed": 63,
       "target_schools": 64,
       "schools_list": [
         "ST MARYS P/S (Nakapiripirit)",
@@ -4748,7 +4768,9 @@
         "KIRU P/S (Abim)",
         "ROGOM P/S (Abim)",
         "ALEREK P/S (Abim)",
-        "ALEREK P/S (Abim)"
+        "ALEREK P/S (Abim)",
+        "MORULEM GIRLS' P/S (Abim)",
+        "MORULEM BOYS P/S (Abim)"
       ],
       "schools_data": [
         {
@@ -6433,18 +6455,18 @@
           "hc_up_m": 374,
           "hc_up_f": 374,
           "school_attendance": {
-            "att_lower_b": 2697,
-            "att_lower_g": 2545,
-            "att_lower_tot": 5242,
-            "att_mid_b": 2206,
-            "att_mid_g": 2140,
-            "att_mid_tot": 4346,
-            "att_up_b": 2229,
-            "att_up_g": 2123,
-            "att_up_tot": 4352,
-            "att_boys": 7132,
-            "att_girls": 6808,
-            "att_total": 13940
+            "att_lower_b": 3548,
+            "att_lower_g": 3396,
+            "att_lower_tot": 6944,
+            "att_mid_b": 3031,
+            "att_mid_g": 2965,
+            "att_mid_tot": 5996,
+            "att_up_b": 3075,
+            "att_up_g": 2969,
+            "att_up_tot": 6044,
+            "att_boys": 9654,
+            "att_girls": 9330,
+            "att_total": 18984
           }
         },
         {
@@ -6702,55 +6724,119 @@
             "att_girls": 360,
             "att_total": 829
           }
+        },
+        {
+          "entry_index": 767,
+          "school": "MORULEM GIRLS' P/S",
+          "district": "Abim",
+          "date": "2026-10-16",
+          "pupils_total": 2728,
+          "pupils_boys": 1364,
+          "pupils_girls": 1364,
+          "teachers_total": 24,
+          "comm_total": 16,
+          "pwd_total": 2768,
+          "hc_lower_m": 504,
+          "hc_lower_f": 504,
+          "hc_mid_m": 409,
+          "hc_mid_f": 409,
+          "hc_up_m": 451,
+          "hc_up_f": 451,
+          "school_attendance": {
+            "att_lower_b": 504,
+            "att_lower_g": 504,
+            "att_lower_tot": 1008,
+            "att_mid_b": 405,
+            "att_mid_g": 405,
+            "att_mid_tot": 810,
+            "att_up_b": 450,
+            "att_up_g": 450,
+            "att_up_tot": 900,
+            "att_boys": 1359,
+            "att_girls": 1359,
+            "att_total": 2718
+          }
+        },
+        {
+          "entry_index": 768,
+          "school": "MORULEM BOYS P/S",
+          "district": "Abim",
+          "date": "2026-10-16",
+          "pupils_total": 2330,
+          "pupils_boys": 1165,
+          "pupils_girls": 1165,
+          "teachers_total": 36,
+          "comm_total": 14,
+          "pwd_total": 2407,
+          "hc_lower_m": 347,
+          "hc_lower_f": 347,
+          "hc_mid_m": 422,
+          "hc_mid_f": 422,
+          "hc_up_m": 396,
+          "hc_up_f": 396,
+          "school_attendance": {
+            "att_lower_b": 347,
+            "att_lower_g": 347,
+            "att_lower_tot": 694,
+            "att_mid_b": 420,
+            "att_mid_g": 420,
+            "att_mid_tot": 840,
+            "att_up_b": 396,
+            "att_up_g": 396,
+            "att_up_tot": 792,
+            "att_boys": 1163,
+            "att_girls": 1163,
+            "att_total": 2326
+          }
         }
       ],
-      "total_pupils_attended": 74044,
-      "pwd_learners": 13575,
-      "teachers_present": 905,
-      "community_present": 903,
-      "total_attendance": 75852,
-      "pwd_total": 13885,
-      "pwd_rate_pct": 18.3,
+      "total_pupils_attended": 79102,
+      "pwd_learners": 18660,
+      "teachers_present": 965,
+      "community_present": 933,
+      "total_attendance": 81000,
+      "pwd_total": 19060,
+      "pwd_rate_pct": 23.5,
       "age_bands_matrix": [
         {
           "age_band": "Lower Primary (ECD\u2013P2)",
-          "male": 16285,
-          "female": 14214,
-          "total": 30499,
-          "male_pwd": 2543,
-          "female_pwd": 2436
+          "male": 17136,
+          "female": 15065,
+          "total": 32201,
+          "male_pwd": 3421,
+          "female_pwd": 3287
         },
         {
           "age_band": "Middle Primary (P3\u2013P4)",
-          "male": 11560,
-          "female": 10440,
-          "total": 22000,
-          "male_pwd": 1999,
-          "female_pwd": 1945
+          "male": 12391,
+          "female": 11271,
+          "total": 23662,
+          "male_pwd": 2830,
+          "female_pwd": 2776
         },
         {
           "age_band": "Upper Primary (P5\u2013P7)",
-          "male": 11636,
-          "female": 9909,
-          "total": 21545,
-          "male_pwd": 2342,
-          "female_pwd": 2310
+          "male": 12483,
+          "female": 10756,
+          "total": 23239,
+          "male_pwd": 3189,
+          "female_pwd": 3157
         },
         {
           "age_band": "Teachers Present",
-          "male": 507,
-          "female": 398,
-          "total": 905,
-          "male_pwd": 90,
-          "female_pwd": 91
+          "male": 537,
+          "female": 428,
+          "total": 965,
+          "male_pwd": 120,
+          "female_pwd": 121
         },
         {
           "age_band": "Community Members",
-          "male": 425,
-          "female": 478,
-          "total": 903,
-          "male_pwd": 71,
-          "female_pwd": 58
+          "male": 440,
+          "female": 493,
+          "total": 933,
+          "male_pwd": 86,
+          "female_pwd": 73
         }
       ],
       "activities_delivered": {
@@ -6764,10 +6850,10 @@
           "Learners actively handled materials"
         ],
         "values": [
-          58,
+          60,
           21,
-          31,
-          48,
+          32,
+          49,
           44,
           19,
           54
@@ -6781,16 +6867,16 @@
           "Limited access to the cooking materials"
         ],
         "values": [
-          43,
+          45,
           23,
-          14,
+          15,
           24
         ],
         "pct": [
-          41.3,
-          22.1,
-          13.5,
-          23.1
+          42.1,
+          21.5,
+          14.0,
+          22.4
         ]
       },
       "micro_poll": {
@@ -6805,13 +6891,13 @@
           ],
           "values": [
             1614,
-            4157,
+            4159,
             319,
             522,
             376
           ],
-          "total_boys": 6988,
-          "agreed_boys": 5771,
+          "total_boys": 6990,
+          "agreed_boys": 5773,
           "pct_agreed": 82.6,
           "reason_in_words": "Nakapiripirit: \"The girl may not concentrate like aboy\"",
           "all_reasons": [
@@ -6883,13 +6969,13 @@
           ],
           "values": [
             1599,
-            5284,
+            5286,
             17,
             9,
             115
           ],
-          "total_boys": 7024,
-          "agreed_boys": 6883,
+          "total_boys": 7026,
+          "agreed_boys": 6885,
           "pct_agreed": 98.0,
           "reason_in_words": "Nakapiripirit: \"To make work easy\"",
           "all_reasons": [
@@ -6961,13 +7047,13 @@
           ],
           "values": [
             2140,
-            4095,
+            4097,
             23,
             7,
             115
           ],
-          "total_boys": 6380,
-          "agreed_boys": 6235,
+          "total_boys": 6382,
+          "agreed_boys": 6237,
           "pct_agreed": 97.7,
           "reason_in_words": "Nakapiripirit: \"To offer campany to and security to girls from rapiest\"",
           "all_reasons": [
@@ -7039,13 +7125,13 @@
           ],
           "values": [
             2391,
-            4300,
+            4302,
             3,
             1,
             115
           ],
-          "total_boys": 6810,
-          "agreed_boys": 6691,
+          "total_boys": 6812,
+          "agreed_boys": 6693,
           "pct_agreed": 98.3,
           "reason_in_words": "Nakapiripirit: \"Share work with my sister\"",
           "all_reasons": [
@@ -7117,13 +7203,13 @@
           ],
           "values": [
             1246,
-            5185,
+            5187,
             43,
             11,
             115
           ],
-          "total_boys": 6600,
-          "agreed_boys": 6431,
+          "total_boys": 6602,
+          "agreed_boys": 6433,
           "pct_agreed": 97.4,
           "reason_in_words": "Nakapiripirit: \"Girls are not to look after animas while boys go to school\"",
           "all_reasons": [
@@ -7186,7 +7272,7 @@
         }
       },
       "post_session_scenario": {
-        "sample_size": 366,
+        "sample_size": 378,
         "porridge_recall": {
           "categories": [
             "Specific Actionable Fortification",
@@ -7195,8 +7281,8 @@
           ],
           "values": [
             185,
-            121,
-            60
+            125,
+            68
           ]
         },
         "chore_sharing_recall": {
@@ -7206,8 +7292,8 @@
             "Leaves Work Only to Girls"
           ],
           "values": [
-            233,
-            83,
+            244,
+            84,
             49
           ]
         },
@@ -7219,7 +7305,7 @@
           ],
           "values": [
             200,
-            114,
+            126,
             52
           ]
         },
@@ -10517,6 +10603,114 @@
             "porridge": "Explains a specific, actionable practice without prompting",
             "chores": "States that boys and girls share water/wood chores equally before leaving",
             "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Learner 1",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Learner 1",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Learner 2",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Learner 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Learner 3",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Learner 3",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Learner 4",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Learner 4",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Adult 1",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Adult 1",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM GIRLS' P/S - Adult 2",
+            "school": "MORULEM GIRLS' P/S",
+            "district": "Abim",
+            "role": "Adult 2",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Learner 1",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Learner 1",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "Says \"hurry up\" or \"wake up early\" without mentioning sharing the work",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Learner 2",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Learner 2",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Learner 3",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Learner 3",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Learner 4",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Learner 4",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Adult 1",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Adult 1",
+            "porridge": "Incorrect, silences, or names unavailable foods",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
+          },
+          {
+            "id": "MORULEM BOYS P/S - Adult 2",
+            "school": "MORULEM BOYS P/S",
+            "district": "Abim",
+            "role": "Adult 2",
+            "porridge": "Gives a general/vague idea; lacks a concrete action",
+            "chores": "States that boys and girls share water/wood chores equally before leaving",
+            "slogan": "Partly demonstrated (vague or needed prompting)"
           }
         ]
       }
@@ -13228,16 +13422,16 @@
   },
   "community_demonstrations": {
     "kpis": {
-      "total_sessions_completed": 405,
+      "total_sessions_completed": 422,
       "target_sessions": 640,
-      "total_caregivers_reached": 21987,
+      "total_caregivers_reached": 22956,
       "target_caregivers": 51200,
-      "average_attendance_per_demo": 127.7,
-      "caregivers_female": 9131,
-      "caregivers_male": 12856,
-      "children_present": 14551,
-      "elders_present": 13327,
-      "pwd_present": 1842
+      "average_attendance_per_demo": 126.7,
+      "caregivers_female": 9697,
+      "caregivers_male": 13259,
+      "children_present": 14856,
+      "elders_present": 13774,
+      "pwd_present": 1872
     },
     "partner_cofacilitation": {
       "question": "Were capacity-strengthening partners (e.g., UNAC, Afi) present and co-facilitating this community demonstration?",
@@ -13247,10 +13441,10 @@
           "No"
         ],
         "values": [
-          135,
-          270
+          141,
+          281
         ],
-        "pct": "33.3%"
+        "pct": "33.4%"
       },
       "specified_partners": {
         "question": "If yes, specify partner name",
@@ -13259,11 +13453,11 @@
           "AFI"
         ],
         "values": [
-          29,
-          72
+          31,
+          75
         ],
         "pct": [
-          "7.2%",
+          "7.3%",
           "17.8%"
         ]
       },
@@ -13275,14 +13469,14 @@
           "Observing for sustainability tracking"
         ],
         "values": [
+          93,
           89,
-          85,
-          66
+          67
         ],
         "pct": [
           "22.0%",
-          "21.0%",
-          "16.3%"
+          "21.1%",
+          "15.9%"
         ]
       }
     },
@@ -13295,11 +13489,11 @@
         "Persons with Disabilities"
       ],
       "values": [
-        9131,
-        12856,
-        14551,
-        13327,
-        1842
+        9697,
+        13259,
+        14856,
+        13774,
+        1872
       ]
     },
     "entry_submission_role": {
@@ -13308,7 +13502,7 @@
         "Submitted by District Coordinator"
       ],
       "values": [
-        370,
+        387,
         35
       ]
     },
@@ -13318,8 +13512,8 @@
         "Observed only / not hands-on"
       ],
       "values": [
-        218,
-        187
+        222,
+        200
       ]
     },
     "metu_porridge_local_additions": {
@@ -13328,8 +13522,8 @@
         "Not Demonstrated"
       ],
       "values": [
-        297,
-        108
+        307,
+        115
       ]
     },
     "local_sourcing_compliance": {
@@ -13338,8 +13532,8 @@
         "Promoted unapproved/unattainable foods"
       ],
       "values": [
-        328,
-        77
+        341,
+        81
       ]
     },
     "fuel_saving_practices": {
@@ -13350,10 +13544,10 @@
         "Traditional 3-Stone Fire Used (Non-compliant)"
       ],
       "values": [
-        314,
-        122,
-        106,
-        189
+        323,
+        127,
+        110,
+        199
       ]
     },
     "pillar3_clean_cooking": {
@@ -13363,10 +13557,10 @@
         "No"
       ],
       "values": [
-        345,
-        60
+        355,
+        67
       ],
-      "pct": "85.2%"
+      "pct": "84.1%"
     },
     "gender_dialogues_execution": {
       "question": "Were gender dialogues led by senior women, senior men, and VHTs successfully executed?",
@@ -13375,8 +13569,8 @@
         "No"
       ],
       "values": [
-        384,
-        21
+        400,
+        22
       ],
       "pct": "94.8%"
     }
@@ -13563,21 +13757,21 @@
   },
   "nutriclub_sessions": {
     "kpis": {
-      "total_sessions_logged": 196,
+      "total_sessions_logged": 197,
       "target_schools": 64,
       "schools_with_active_clubs": 56,
       "total_members": 2440,
       "members_male": 1066,
       "members_female": 1374,
-      "session_attendance": 19016,
-      "attendance_boys": 10428,
-      "attendance_girls": 8588,
-      "pwd_learners": 521,
-      "pwd_boys": 312,
+      "session_attendance": 19045,
+      "attendance_boys": 10445,
+      "attendance_girls": 8600,
+      "pwd_learners": 522,
+      "pwd_boys": 313,
       "pwd_girls": 209,
       "sessions_one_count": 92,
-      "sessions_two_count": 104,
-      "assembly_nutri_moments": 104
+      "sessions_two_count": 105,
+      "assembly_nutri_moments": 105
     },
     "club_membership_gender": {
       "categories": [
@@ -13595,8 +13789,8 @@
         "Girls Present"
       ],
       "values": [
-        10428,
-        8588
+        10445,
+        8600
       ]
     },
     "pwd_learners_attendance": {
@@ -13605,7 +13799,7 @@
         "Female Learners with Disabilities"
       ],
       "values": [
-        312,
+        313,
         209
       ]
     },
@@ -13633,8 +13827,8 @@
       ],
       "values": [
         95,
-        121,
-        104,
+        122,
+        105,
         81,
         73
       ]
@@ -19940,6 +20134,38 @@
         "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
         "home_action_assigned": "Try kitchen gardens at home.",
         "coordinator_notes": "All returned the food calenders to school"
+      },
+      {
+        "entry_index": 771,
+        "id": "NC-900746486",
+        "school": "KACHIKOL P/S",
+        "district": "Kaabong",
+        "subcounty": "Catchment",
+        "session_of_week": "Session one of the week Session two of the week",
+        "date": "2026-10-25",
+        "start_time": "16:00 PM",
+        "end_time": "17:00 PM",
+        "patron": "Okello Robert and Lewendi Sivanus",
+        "membership_male": 18,
+        "membership_female": 12,
+        "total_membership": 30,
+        "boys_present": 17,
+        "girls_present": 12,
+        "total_present": 29,
+        "pwd_boys": 1,
+        "pwd_girls": 0,
+        "pwd": 1,
+        "has_adere": 0,
+        "has_chore": 1,
+        "has_climate": 1,
+        "has_peer": 0,
+        "has_metu": 0,
+        "assembly_nutri_moment": 1,
+        "assembly_nutri_moment_date": "2026-10-23 00:00:00",
+        "meeting_place": "Classroom",
+        "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+        "home_action_assigned": "Sharing household chores at home",
+        "coordinator_notes": "Conducting a cooking demonstration in school as well"
       }
     ],
     "schools_register": [
@@ -20730,8 +20956,8 @@
         "district": "Kaabong",
         "subcounty": "Kaabong West",
         "selection": "Balance",
-        "patron_name": "Okello Robert",
-        "meeting_place": "Under the tree",
+        "patron_name": "Okello Robert and Lewendi Sivanus",
+        "meeting_place": "Classroom",
         "total_enrolled": 1777,
         "attendance_rate": "44%",
         "total_membership": 30,
@@ -20740,18 +20966,18 @@
         "total_pwd": 1,
         "session_one": null,
         "session_two": {
-          "date_conducted": "2026-10-17",
+          "date_conducted": "2026-10-25",
           "start_time": "16:00 PM",
           "end_time": "17:00 PM",
-          "designated_meeting_place": "Under the tree",
-          "club_patron_name": "Okello Robert",
+          "designated_meeting_place": "Classroom",
+          "club_patron_name": "Okello Robert and Lewendi Sivanus",
           "boys_present": 17,
           "girls_present": 12,
           "male_pwd": 1,
           "female_pwd": 0,
-          "practical_activity": "Metu Porridge Plus: Enriched emergency rations with local wild greens         (Eboo, Lokaka) or cowpeas (Strictly zero unapproved foods/meat) Climate-Smart Living: Firewood-saving cooking methods & moving from 3-stone fires Adere Calabash Dialogue: Collective responsibility, resilience & fair food sharing Gender Chore Rebalancing: Boys sharing morning water/firewood chores Peer Attendance Tracing: Checking and following up chronically absent classmates",
-          "home_action_assigned": "Regular school attendance and revising books at home",
-          "coordinator_notes": "nan"
+          "practical_activity": "Gender Chore Rebalancing: Boys sharing morning water/firewood chores",
+          "home_action_assigned": "Sharing household chores at home",
+          "coordinator_notes": "Conducting a cooking demonstration in school as well"
         }
       },
       {
@@ -22299,40 +22525,40 @@
     "dimensions": [
       {
         "title": "Pillar 1: School Feeding",
-        "metric_value": "50.5%",
-        "metric_label": "Meal Protection & METU-1 (61 Activation Schools)",
-        "summary": "50.5% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
+        "metric_value": "48.9%",
+        "metric_label": "Meal Protection & METU-1 (63 Activation Schools)",
+        "summary": "48.9% of monitored learners demonstrated practical recall of school meal protection, balanced plates, and METU-1 multi-mix porridge enrichment using locally available foods.",
         "baseline": "65 Schools Audited",
         "evidence_points": [
           "Protecting school meals: 185 learners recalled specific local greens (Eboo, Lokaka) and cowpeas for METU-1 porridge fortification",
-          "Balanced plate & clubs: 56 active NutriClubs established (2440 members); OFSP & iron-rich beans tracked (146 OFSP, 218 iron beans logged)",
+          "Balanced plate & clubs: 56 active NutriClubs established (2440 members); OFSP & iron-rich beans tracked (149 OFSP, 224 iron beans logged)",
           "Visit 3 verification: 150 of 217 Home Charts returned (69.1%) across 12 closeout schools; 67/72 confirmed youngest child served first",
-          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 16 orientation schools & 375 village demos (20 meal theft complaints)"
+          "Helpline awareness: WFP toll-free helpline (0800 210 210) promoted across 16 orientation schools & 389 village demos (20 meal theft complaints)"
         ]
       },
       {
         "title": "Pillar 2: Gender",
-        "metric_value": "63.8%",
-        "metric_label": "Fair Sharing & Allyship (61 Activation Schools)",
-        "summary": "63.8% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
+        "metric_value": "64.7%",
+        "metric_label": "Fair Sharing & Allyship (63 Activation Schools)",
+        "summary": "64.7% consensus recorded across male allies (boys, fathers, male teachers) affirming fair sharing at the table and in the classroom, addressing practical constraints (labour, cost, menstruation).",
         "baseline": "65 Schools Audited",
         "evidence_points": [
-          "Fair sharing at the table: 233 of 316 interviewed learners affirmed boys and girls must eat equally and simultaneously",
-          "Male allies in action: 33,802 boy responses logged across 5 micro-polls with 94.7% agreement (32,011 agreements) committing to share morning water and firewood chores",
+          "Fair sharing at the table: 244 of 328 interviewed learners affirmed boys and girls must eat equally and simultaneously",
+          "Male allies in action: 33,812 boy responses logged across 5 micro-polls with 94.7% agreement (32,021 agreements) committing to share morning water and firewood chores",
           "Visit 3 household shift: 100% (62/72) of closeout interviewees confirmed morning chore sharing shifted & 10/12 schools actively trace absentees",
-          "Addressing practical constraints: Dialogues tackling domestic labour (33,802 boys), schooling costs (233 sessions), and menstrual hygiene (149 sessions)"
+          "Addressing practical constraints: Dialogues tackling domestic labour (33,812 boys), schooling costs (239 sessions), and menstrual hygiene (152 sessions)"
         ]
       },
       {
         "title": "Pillar 3: Community Engagement",
         "metric_value": "100.0%",
-        "metric_label": "Community Action & Stoves (405 Demos \u00b7 16 Orientations)",
-        "summary": "81.2% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across 405 of 640 cooking demonstrations.",
+        "metric_label": "Community Action & Stoves (422 Demos \u00b7 16 Orientations)",
+        "summary": "81.2% of oriented schools and VHTs agreed on joint action calendars, driving community behaviour change across 422 of 640 cooking demonstrations.",
         "baseline": "0.0% Prior",
         "evidence_points": [
-          "405 of 640 Cooking Demonstrations conducted (218 hands-on cooking, 328 strictly local foods, 212 sessions with lead mothers co-facilitating)",
-          "Community dialogues with men & elders: 384 of 405 village demos held structured gender/consensus dialogues; 13 of 16 oriented schools signed 4-week joint plans",
-          "Clean & smart cooking practices: 345 of 405 demos demonstrated firewood-saving practices & 11 of 12 Visit 3 school kitchens verified improved stoves",
+          "422 of 640 Cooking Demonstrations conducted (222 hands-on cooking, 341 strictly local foods, 222 sessions with lead mothers co-facilitating)",
+          "Community dialogues with men & elders: 400 of 422 village demos held structured gender/consensus dialogues; 13 of 16 oriented schools signed 4-week joint plans",
+          "Clean & smart cooking practices: 355 of 422 demos demonstrated firewood-saving practices & 11 of 12 Visit 3 school kitchens verified improved stoves",
           "METU-1 recipe chart routine: 1,835 take-home NutriCharts issued at Visit 1 (150/217 returned at Visit 3 closeout)"
         ]
       }
@@ -22351,38 +22577,38 @@
           },
           {
             "label": "School Contact Visits",
-            "value": "138 Visits Conducted",
-            "detail": "65 Visit 1 Onboarding, 61 Visit 2 Activations, 12 Visit 3 Closeouts (Target: 192 total visits)"
+            "value": "140 Visits Conducted",
+            "detail": "65 Visit 1 Onboarding, 63 Visit 2 Activations, 12 Visit 3 Closeouts (Target: 192 total visits)"
           },
           {
             "label": "Children Reached (Big Bus Day)",
-            "value": "74,044 Pupils",
-            "detail": "74,044 directly reached in Visit 2 Big Bus Activations (Target: 80,875) \u00b7 plus 93,301 at Visit 1, 12,626 at Visit 3, and 19,016 in NutriClub sessions"
+            "value": "79,102 Pupils",
+            "detail": "79,102 directly reached in Visit 2 Big Bus Activations (Target: 80,875) \u00b7 plus 93,301 at Visit 1, 12,626 at Visit 3, and 19,045 in NutriClub sessions"
           },
           {
             "label": "Village Cooking Demos",
-            "value": "405 Demonstrations",
-            "detail": "405 of 640 community cooking demonstrations conducted to date"
+            "value": "422 Demonstrations",
+            "detail": "422 of 640 community cooking demonstrations conducted to date"
           },
           {
             "label": "Caregivers Reached",
-            "value": "22,890 Caregivers",
-            "detail": "22,890 community caregivers reached across activations and cooking demos (Target: 51,200)"
+            "value": "23,889 Caregivers",
+            "detail": "23,889 community caregivers reached across activations and cooking demos (Target: 51,200)"
           },
           {
             "label": "Active NutriClubs",
-            "value": "196 Clubs Active",
+            "value": "197 Clubs Active",
             "detail": "56 active club(s) with 2440 registered members (Target: 64 clubs)"
           },
           {
             "label": "Teachers & VHTs Oriented",
-            "value": "1451.0 Stakeholders",
+            "value": "1512.0 Stakeholders",
             "detail": "Oriented across 16 primary schools (Target: 768)"
           },
           {
             "label": "Persons with Disabilities",
-            "value": "16248 PWDs Reached",
-            "detail": "13575 learners and 310 adults included across sessions"
+            "value": "21454 PWDs Reached",
+            "detail": "18660 learners and 400 adults included across sessions"
           }
         ],
         "verification_source": "Verified field activity forms, sign-in sheets, and monitor observation logs."
@@ -22395,8 +22621,8 @@
         "key_metrics": [
           {
             "label": "Hands-On Cooking Practice",
-            "value": "405 Demos Logged",
-            "detail": "405 community cooking demonstrations conducted with hands-on caregiver participation"
+            "value": "422 Demos Logged",
+            "detail": "422 community cooking demonstrations conducted with hands-on caregiver participation"
           },
           {
             "label": "Local Foods Only",
@@ -22410,8 +22636,8 @@
           },
           {
             "label": "What Children Learned",
-            "value": "50.5% Unaided Recall",
-            "detail": "50.5% of learners in post-session intercepts correctly explained core nutrition messages"
+            "value": "48.9% Unaided Recall",
+            "detail": "48.9% of learners in post-session intercepts correctly explained core nutrition messages"
           },
           {
             "label": "Fair & Accessible for All",
@@ -22445,7 +22671,7 @@
           {
             "label": "Boys Helping with Morning Chores",
             "value": "94.7% Consensus \u00b7 62/72 Shifted",
-            "detail": "94.7% micro-poll agreement (33,802 boys) and 62 of 72 Visit 3 interviewees confirmed morning chore sharing shifted"
+            "detail": "94.7% micro-poll agreement (33,812 boys) and 62 of 72 Visit 3 interviewees confirmed morning chore sharing shifted"
           },
           {
             "label": "Girls Arriving on Time for Class",
@@ -22469,8 +22695,8 @@
           },
           {
             "label": "Clubs Continuing on Their Own",
-            "value": "196 Active Clubs",
-            "detail": "196 NutriClub sessions logged with 2440 registered members across 56 active schools"
+            "value": "197 Active Clubs",
+            "detail": "197 NutriClub sessions logged with 2440 registered members across 56 active schools"
           }
         ],
         "verification_source": "Longitudinal attendance registers, NutriChart audits, and Visit 3 closeout forms."
@@ -22482,17 +22708,17 @@
         "icon": "fa-apple-whole",
         "theme_color": "emerald",
         "how_much": {
-          "headline": "16 Orientations \u00b7 61 Activations \u00b7 12 Closeouts",
+          "headline": "16 Orientations \u00b7 63 Activations \u00b7 12 Closeouts",
           "data_points": [
             "16 schools oriented on Metu porridge fortification and clean cooking",
-            "61 schools delivered Visit 2 Big Activation Day (74,044 pupils engaged)",
-            "405 of 640 community cooking demonstrations conducted to date"
+            "63 schools delivered Visit 2 Big Activation Day (79,102 pupils engaged)",
+            "422 of 640 community cooking demonstrations conducted to date"
           ]
         },
         "how_well": {
-          "headline": "50.5% Unaided Recall \u00b7 100% Local Foods",
+          "headline": "48.9% Unaided Recall \u00b7 100% Local Foods",
           "data_points": [
-            "50.5% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
+            "48.9% unaided recall of local greens (Eboo, Lokaka) in post-session intercepts",
             "100% compliance with easy-to-find wild greens and zero unattainable ingredients",
             "12 of 12 Visit 3 schools reported high/moderate feeding impact on pupil presence"
           ]
@@ -22511,9 +22737,9 @@
         "icon": "fa-graduation-cap",
         "theme_color": "blue",
         "how_much": {
-          "headline": "138 Visits \u00b7 196 NutriClub Sessions",
+          "headline": "140 Visits \u00b7 197 NutriClub Sessions",
           "data_points": [
-            "65 Visit 1, 61 Visit 2, and 12 Visit 3 school visits completed",
+            "65 Visit 1, 63 Visit 2, and 12 Visit 3 school visits completed",
             "56 active school clubs established (2440 registered members across active schools)",
             "Target: 64 primary schools completing all 3 visits (192 visits total)"
           ]
@@ -22522,14 +22748,14 @@
           "headline": "16 Schools Oriented \u00b7 100% Inclusive",
           "data_points": [
             "12 of 16 oriented schools confirmed active teacher & headteacher leadership",
-            "16248 persons with disabilities accommodated and actively participating",
+            "21454 persons with disabilities accommodated and actively participating",
             "Zero learners excluded during interactive activation sessions"
           ]
         },
         "what_changed": {
           "headline": "11/12 Commitments Done \u00b7 12,626 V3 Pupils",
           "data_points": [
-            "Longitudinal attendance tracked across Visit 1 (93,301), Visit 2 (74,044), and Visit 3 (12,626)",
+            "Longitudinal attendance tracked across Visit 1 (93,301), Visit 2 (79,102), and Visit 3 (12,626)",
             "100% (11/12) of Visit 3 audited schools honored their Bus Day commitment",
             "100% (10/12) of Visit 3 schools have active collective chronic absentee tracing"
           ]
@@ -22540,17 +22766,17 @@
         "icon": "fa-venus-mars",
         "theme_color": "purple",
         "how_much": {
-          "headline": "61 Activation Dialogues \u00b7 22,890 Caregivers",
+          "headline": "63 Activation Dialogues \u00b7 23,889 Caregivers",
           "data_points": [
-            "Structured chore rebalancing dialogues delivered across 61 schools",
-            "22,890 community caregivers and elders reached across activations & demos",
+            "Structured chore rebalancing dialogues delivered across 63 schools",
+            "23,889 community caregivers and elders reached across activations & demos",
             "Target: 640 community discussions in villages around 64 schools"
           ]
         },
         "how_well": {
-          "headline": "63.8% Chore Agreement \u00b7 0 Hotline Complaints",
+          "headline": "64.7% Chore Agreement \u00b7 0 Hotline Complaints",
           "data_points": [
-            "63.8% agreement in micro-polls that chores should be shared equally",
+            "64.7% agreement in micro-polls that chores should be shared equally",
             "Dialogue conducted constructively without assigning blame to individuals",
             "WFP toll-free hotline (0800) promoted with zero retaliation complaints"
           ]
@@ -22558,7 +22784,7 @@
         "what_changed": {
           "headline": "62/72 Home Chore Shifts Verified",
           "data_points": [
-            "233 of 316 polled learners agreed boys must help with morning water/wood",
+            "244 of 328 polled learners agreed boys must help with morning water/wood",
             "26 of 72 Visit 3 interviewees reported boys took over/shared morning water & wood chores",
             "100% (62/72) of Visit 3 household interviews confirmed morning chore sharing shifted"
           ]
@@ -22585,7 +22811,7 @@
           "Children Audited: 93,301 weekly attendees (93,086 total enrolled) across 65 schools",
           "Classroom Practice: 65 schools completed onboarding & audit",
           "Home Charts Given: 1,835 classroom NutriCharts issued across Lower, Middle, Upper primary",
-          "Patrons Appointed: 62 teacher patrons appointed across 16 orientation schools (plus 196 club sessions)"
+          "Patrons Appointed: 62 teacher patrons appointed across 16 orientation schools (plus 197 club sessions)"
         ]
       },
       {
@@ -22593,10 +22819,10 @@
         "title": "Visit 2: NutriBus Day Activation",
         "desc": "Big interactive bus stations, school pledges, and community cooking demos",
         "data_collected": [
-          "Attendance Logged: 74,044 learners counted across 61 schools",
-          "What Pupils Remembered: 50.5% unaided recall of core messages (185 actionable fortification recipes)",
-          "School Pledges: 61 school commitments signed",
-          "Village Cooking Demos: 405 demos logged (Target: 640 sites)"
+          "Attendance Logged: 79,102 learners counted across 63 schools",
+          "What Pupils Remembered: 48.9% unaided recall of core messages (185 actionable fortification recipes)",
+          "School Pledges: 63 school commitments signed",
+          "Village Cooking Demos: 422 demos logged (Target: 640 sites)"
         ]
       },
       {
@@ -22615,8 +22841,8 @@
         "title": "In the Villages: Fathers, Elders & Stoves",
         "desc": "Village gatherings, male participation, and saving firewood",
         "data_collected": [
-          "Community Demos: 405 cooking demonstrations held (Target: 640)",
-          "Caregivers Reached: 22,890 caregivers reached across activations and village demos",
+          "Community Demos: 422 cooking demonstrations held (Target: 640)",
+          "Caregivers Reached: 23,889 caregivers reached across activations and village demos",
           "Home Follow-Up: 72 household & learner closeout interviews completed in Napak",
           "Hotline Redress: 0 retaliation complaints logged on WFP hotline (0800)"
         ]
@@ -22627,7 +22853,7 @@
         "desc": "Radio broadcasts, local language, and including people with disabilities",
         "data_collected": [
           "Radio Broadcasts: Transmission logs pending broadcast collation",
-          "Disability Inclusion: 16248 persons with disabilities accommodated",
+          "Disability Inclusion: 21454 persons with disabilities accommodated",
           "Local Language: 100% of sessions delivered in Ngakarimojong dialects",
           "Saving Firewood: Fuel saving practices to be audited during community demos"
         ]
@@ -32460,7 +32686,7 @@
       "coordinator": "Lobur stephen",
       "reach": 67,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -32473,7 +32699,7 @@
       "coordinator": "Lobur stephen",
       "reach": 0,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -32486,7 +32712,7 @@
       "coordinator": "Amoo Sofia",
       "reach": 107,
       "pwd": 0,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -32499,7 +32725,7 @@
       "coordinator": "Opio John Fred",
       "reach": 64,
       "pwd": 2,
-      "is_new": true,
+      "is_new": false,
       "status": "Verified / Ingested"
     },
     {
@@ -32512,17 +32738,277 @@
       "coordinator": "Opio John Fred",
       "reach": 74,
       "pwd": 2,
+      "is_new": false,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 766,
+      "id": 900668955,
+      "date": "2026-10-25",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "OTALABAR P/S",
+      "coordinator": "Opio John Fred",
+      "reach": 83,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 767,
+      "id": 900689349,
+      "date": "2026-10-16",
+      "district": "Abim",
+      "activity": "Three visit contact",
+      "school": "MORULEM GIRLS' P/S",
+      "coordinator": "Okello Daniel Nimaro",
+      "reach": 2768,
+      "pwd": 2768,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 768,
+      "id": 900714016,
+      "date": "2026-10-16",
+      "district": "Abim",
+      "activity": "Three visit contact",
+      "school": "MORULEM BOYS P/S",
+      "coordinator": "Okello Daniel Nimaro",
+      "reach": 2380,
+      "pwd": 2407,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 769,
+      "id": 900743672,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 770,
+      "id": 900743686,
+      "date": "2026-10-24",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "LOCHOM P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 771,
+      "id": 900746486,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Nutriclub session",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 29,
+      "pwd": 1,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 772,
+      "id": 900773715,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 773,
+      "id": 900780328,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 5,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 774,
+      "id": 900782749,
+      "date": "2026-10-21",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "LORENGEDWAT P/S",
+      "coordinator": "Awas Francis",
+      "reach": 93,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 775,
+      "id": 900786763,
+      "date": "2026-10-22",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "LORENGEDWAT P/S",
+      "coordinator": "Awas Francis",
+      "reach": 91,
+      "pwd": 1,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 776,
+      "id": 900789949,
+      "date": "2026-10-21",
+      "district": "Nabilatuk",
+      "activity": "Community demonstration",
+      "school": "NABILATUK TOWNSHIP P/S",
+      "coordinator": "Awas Francis",
+      "reach": 90,
+      "pwd": 1,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 777,
+      "id": 900821391,
+      "date": "2026-10-20",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "OTALABAR P/S",
+      "coordinator": "Opio John Fred",
+      "reach": 126,
+      "pwd": 8,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 778,
+      "id": 900823435,
+      "date": "2026-10-22",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "OTALABAR P/S",
+      "coordinator": "Opio John Fred",
+      "reach": 100,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 779,
+      "id": 900825278,
+      "date": "2026-10-23",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "MORULEM GIRLS' P/S",
+      "coordinator": "Okello Daniel Nimaro",
+      "reach": 143,
+      "pwd": 4,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 780,
+      "id": 900834838,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 781,
+      "id": 900840448,
+      "date": "2026-10-25",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 782,
+      "id": 900856181,
+      "date": "2026-10-26",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KAMACHARIKOL P/S",
+      "coordinator": "Amoo Sofia",
+      "reach": 107,
+      "pwd": 1,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 783,
+      "id": 900927039,
+      "date": "2026-10-23",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "MORULEM GIRLS' P/S",
+      "coordinator": "Okello Daniel Nimaro",
+      "reach": 192,
+      "pwd": 6,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 784,
+      "id": 900937809,
+      "date": "2026-10-23",
+      "district": "Abim",
+      "activity": "Community demonstration",
+      "school": "MORULEM GIRLS' P/S",
+      "coordinator": "Okello Daniel Nimaro",
+      "reach": 166,
+      "pwd": 4,
+      "is_new": true,
+      "status": "Verified / Ingested"
+    },
+    {
+      "entry_index": 785,
+      "id": 900940367,
+      "date": "2026-10-26",
+      "district": "Kaabong",
+      "activity": "Community demonstration",
+      "school": "KACHIKOL P/S",
+      "coordinator": "Ngole Paula",
+      "reach": 80,
+      "pwd": 0,
       "is_new": true,
       "status": "Verified / Ingested"
     }
   ],
   "new_pillar_metrics": {
-    "tot_ofsp": 146,
-    "tot_iron_beans": 218,
-    "tot_lead_mothers": 212,
-    "tot_cost_dialogues": 233,
-    "tot_mhm_dialogues": 149,
+    "tot_ofsp": 149,
+    "tot_iron_beans": 224,
+    "tot_lead_mothers": 222,
+    "tot_cost_dialogues": 239,
+    "tot_mhm_dialogues": 152,
     "tot_theft_queries": 20,
-    "tot_hotline_210_promoted": 375
+    "tot_hotline_210_promoted": 389
   }
 }
